@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		563B6EB114B2FD5000004C6A /* base_application.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B6EA514B2FD5000004C6A /* base_application.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		563B6EB214B2FD5000004C6A /* base_application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 563B6EA614B2FD5000004C6A /* base_application.mm */; };
+		563B6EB314B2FD5000004C6A /* base_os_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B6EA714B2FD5000004C6A /* base_os_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		563B6EB414B2FD5000004C6A /* mac_os_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 563B6EA914B2FD5000004C6A /* mac_os_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		563B6EB514B2FD5000004C6A /* mac_os_interface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 563B6EAA14B2FD5000004C6A /* mac_os_interface.mm */; };
+		563B6EBB14B2FD6D00004C6A /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBA14B2FD6D00004C6A /* SDL.framework */; };
+		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
+		563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBE14B2FD7800004C6A /* Foundation.framework */; };
+		563B6EC114B2FD7E00004C6A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EC014B2FD7E00004C6A /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		563B6E9614B2FD2600004C6A /* libZGE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZGE.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		563B6EA514B2FD5000004C6A /* base_application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_application.h; sourceTree = "<group>"; };
+		563B6EA614B2FD5000004C6A /* base_application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = base_application.mm; sourceTree = "<group>"; };
+		563B6EA714B2FD5000004C6A /* base_os_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base_os_interface.h; sourceTree = "<group>"; };
+		563B6EA914B2FD5000004C6A /* mac_os_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mac_os_interface.h; sourceTree = "<group>"; };
+		563B6EAA14B2FD5000004C6A /* mac_os_interface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mac_os_interface.mm; sourceTree = "<group>"; };
+		563B6EBA14B2FD6D00004C6A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Library/Frameworks/SDL.framework; sourceTree = SDKROOT; };
+		563B6EBC14B2FD7300004C6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		563B6EBE14B2FD7800004C6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		563B6EC014B2FD7E00004C6A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		563B6E9314B2FD2600004C6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				563B6EC114B2FD7E00004C6A /* Cocoa.framework in Frameworks */,
+				563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */,
+				563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */,
+				563B6EBB14B2FD6D00004C6A /* SDL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		563B6E8B14B2FD2600004C6A = {
+			isa = PBXGroup;
+			children = (
+				563B6EA014B2FD5000004C6A /* zge */,
+				563B6EC214B2FD8500004C6A /* Frameworks */,
+				563B6E9714B2FD2600004C6A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		563B6E9714B2FD2600004C6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				563B6E9614B2FD2600004C6A /* libZGE.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		563B6EA014B2FD5000004C6A /* zge */ = {
+			isa = PBXGroup;
+			children = (
+				563B6EA114B2FD5000004C6A /* include */,
+				563B6EA214B2FD5000004C6A /* lib */,
+				563B6EA314B2FD5000004C6A /* src */,
+			);
+			path = zge;
+			sourceTree = "<group>";
+		};
+		563B6EA114B2FD5000004C6A /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		563B6EA214B2FD5000004C6A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		563B6EA314B2FD5000004C6A /* src */ = {
+			isa = PBXGroup;
+			children = (
+				563B6EA414B2FD5000004C6A /* system */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		563B6EA414B2FD5000004C6A /* system */ = {
+			isa = PBXGroup;
+			children = (
+				563B6EA514B2FD5000004C6A /* base_application.h */,
+				563B6EA614B2FD5000004C6A /* base_application.mm */,
+				563B6EA714B2FD5000004C6A /* base_os_interface.h */,
+				563B6EA814B2FD5000004C6A /* osx */,
+			);
+			path = system;
+			sourceTree = "<group>";
+		};
+		563B6EA814B2FD5000004C6A /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				563B6EA914B2FD5000004C6A /* mac_os_interface.h */,
+				563B6EAA14B2FD5000004C6A /* mac_os_interface.mm */,
+			);
+			path = osx;
+			sourceTree = "<group>";
+		};
+		563B6EC214B2FD8500004C6A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				563B6EC014B2FD7E00004C6A /* Cocoa.framework */,
+				563B6EBE14B2FD7800004C6A /* Foundation.framework */,
+				563B6EBC14B2FD7300004C6A /* OpenGL.framework */,
+				563B6EBA14B2FD6D00004C6A /* SDL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		563B6E9414B2FD2600004C6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				563B6EB114B2FD5000004C6A /* base_application.h in Headers */,
+				563B6EB314B2FD5000004C6A /* base_os_interface.h in Headers */,
+				563B6EB414B2FD5000004C6A /* mac_os_interface.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		563B6E9514B2FD2600004C6A /* ZGE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 563B6E9A14B2FD2600004C6A /* Build configuration list for PBXNativeTarget "ZGE" */;
+			buildPhases = (
+				563B6E9214B2FD2600004C6A /* Sources */,
+				563B6E9314B2FD2600004C6A /* Frameworks */,
+				563B6E9414B2FD2600004C6A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZGE;
+			productName = ZGE;
+			productReference = 563B6E9614B2FD2600004C6A /* libZGE.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		563B6E8D14B2FD2600004C6A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = omegaHern;
+			};
+			buildConfigurationList = 563B6E9014B2FD2600004C6A /* Build configuration list for PBXProject "ZGE" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 563B6E8B14B2FD2600004C6A;
+			productRefGroup = 563B6E9714B2FD2600004C6A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				563B6E9514B2FD2600004C6A /* ZGE */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		563B6E9214B2FD2600004C6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				563B6EB214B2FD5000004C6A /* base_application.mm in Sources */,
+				563B6EB514B2FD5000004C6A /* mac_os_interface.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		563B6E9814B2FD2600004C6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		563B6E9914B2FD2600004C6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		563B6E9B14B2FD2600004C6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = zge;
+			};
+			name = Debug;
+		};
+		563B6E9C14B2FD2600004C6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = zge;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		563B6E9014B2FD2600004C6A /* Build configuration list for PBXProject "ZGE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				563B6E9814B2FD2600004C6A /* Debug */,
+				563B6E9914B2FD2600004C6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		563B6E9A14B2FD2600004C6A /* Build configuration list for PBXNativeTarget "ZGE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				563B6E9B14B2FD2600004C6A /* Debug */,
+				563B6E9C14B2FD2600004C6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 563B6E8D14B2FD2600004C6A /* Project object */;
+}
