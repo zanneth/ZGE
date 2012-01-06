@@ -1,5 +1,5 @@
 //
-//  mac_os_interface.h
+//  osx_platform.h
 //  ZGE
 //
 //  Created by Charles Magahern on 1/3/12.
@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#ifndef _ZGE_MAC_OS_INTERFACE_H_
-#define _ZGE_MAC_OS_INTERFACE_H_
+#ifndef _ZGE_OSX_PLATFORM_H_
+#define _ZGE_OSX_PLATFORM_H_
 
-#include "base_os_interface.h"
+#include <zge/system/platform.h>
+
 
 namespace zge {
 
-class ZBaseApplication;
-
-class ZMacOSInterface : public ZBaseOSInterface {
+class ZApplication;
+class ZOSXPlatform : public ZPlatform {
 public:
     void initialize();
 
@@ -29,11 +29,11 @@ private:
 }
 
 @interface ZAppDelegate : NSObject <NSApplicationDelegate> {
-    zge::ZBaseApplication *application;
+    zge::ZApplication *application;
 }
 
-@property (nonatomic, assign) zge::ZBaseApplication *application;
+@property (nonatomic, assign) zge::ZApplication *application;
 
 @end
 
-#endif
+#endif // _ZGE_OSX_PLATFORM_H_

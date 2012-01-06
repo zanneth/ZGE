@@ -1,17 +1,19 @@
 //
-//  mac_os_interface.cpp
+//  osx_platform.cpp
 //  ZGE
 //
 //  Created by Charles Magahern on 1/3/12.
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "mac_os_interface.h"
+#include "osx_platform.h"
 #include <SDL/SDL.h>
+#include <zge/system/application.h>
+
 
 namespace zge {
 
-void ZMacOSInterface::initialize()
+void ZOSXPlatform::initialize()
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
@@ -34,7 +36,7 @@ void ZMacOSInterface::initialize()
     [pool release];
 }
 
-void ZMacOSInterface::_setupMainMenu()
+void ZOSXPlatform::_setupMainMenu()
 {
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     NSMenu *appMenu = [[NSMenu alloc] init];
@@ -87,6 +89,7 @@ void ZMacOSInterface::_setupMainMenu()
     
     if (_application != NULL) {
         _application->applicationReady();
+        _application->startMainRunLoop();
     }
 }
 
