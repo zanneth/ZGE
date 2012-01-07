@@ -12,19 +12,9 @@
 namespace zge {
 
 ZDisplay::ZDisplay() :
-    _isInitialized(false)
-{
-    ZDisplayMode mode;
-    mode.windowed = true;
-    mode.width = 800;
-    mode.height = 600;
-    mode.refreshRate = 1.0 / 60.0;
-    mode.windowTitle = "Application";
-    setDisplayMode(mode);
-    
-    ZCoordinateSystem defaultCoordSystem(1024, 768, 512);
-    setCoordinateSystem(defaultCoordSystem);
-}
+    _isInitialized(false),
+    _coordinateSystem(ZCoordinateSystem(1024, 768, 512))
+{}
 
 void ZDisplay::resize(int width, int height)
 {
@@ -41,13 +31,13 @@ void ZDisplay::resize(int width, int height)
 ZError ZDisplay::setDisplayMode(const ZDisplayMode &mode)
 {
     _displayMode = mode;
-    return ZErrorNone;
+    return ZError::ZErrorNone();
 }
 
 ZError ZDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
 {
     _coordinateSystem = coordSystem;
-    return ZErrorNone;
+    return ZError::ZErrorNone();
 }
 
 

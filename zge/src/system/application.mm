@@ -42,7 +42,7 @@ void ZApplication::setArguments(int argc, char **argv)
 
 void ZApplication::startMainRunLoop()
 {
-    if (!_mainRunLoop) {
+    if (_mainRunLoop.get() == NULL) {
         LOGGER->log("ERROR: Application's main run loop is not initialized. Could not start run loop.");
     } else {
         _mainRunLoop->run();
@@ -70,7 +70,7 @@ void runApplication(ZApplication *application)
     }
     
     // Create a new run loop for the application
-    boost::shared_ptr<ZRunLoop> runLoop(new ZRunLoop());
+    ZRunLoop *runLoop = new ZRunLoop();
     application->setMainRunLoop(runLoop);
     
     
@@ -82,6 +82,8 @@ void runApplication(ZApplication *application)
     
     platform->setApplication(application);
     platform->initialize();    // Does not return (OS should start its event loop)
+    
+    delete platform;
 }
 
 }

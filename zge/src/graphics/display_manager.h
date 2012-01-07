@@ -9,7 +9,7 @@
 #ifndef _ZGE_DISPLAY_MANAGER_H_
 #define _ZGE_DISPLAY_MANAGER_H_
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <zge/interfaces/runnable_interface.h>
 
 
@@ -18,12 +18,11 @@ namespace zge {
 class ZDisplay;
 
 class ZDisplayManager : public ZRunnableInterface {
-    boost::shared_ptr<ZDisplay> _currentDisplay;
+    std::auto_ptr<ZDisplay> _currentDisplay;
     
 public:
     /** Accessors **/
-    void setCurrentDisplay(boost::shared_ptr<ZDisplay> display)
-        { _currentDisplay = display; }
+    void setCurrentDisplay(ZDisplay *display) { _currentDisplay.reset(display); } // Claims ownership
     
     
     /** Runnable **/

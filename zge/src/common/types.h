@@ -29,8 +29,12 @@ struct ZError {
     ZError(int code_, std::string description_) :
         code(code_),
         description(description_) {}
+    
+    static ZError ZErrorNone()
+    {
+        return ZError(0, "No Error");
+    }
 };
-static const ZError ZErrorNone = ZError(0, "No Error");
 
 struct ZCoordinateSystem {
     float width;

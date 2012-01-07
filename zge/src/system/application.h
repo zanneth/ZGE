@@ -11,7 +11,7 @@
 
 #include <string>
 #include <list>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <zge/system/run_loop.h>
 
@@ -20,7 +20,7 @@ namespace zge {
 
 class ZApplication {
     std::list<std::string> _arguments;
-    boost::shared_ptr<ZRunLoop> _mainRunLoop;
+    std::auto_ptr<ZRunLoop> _mainRunLoop;
     
 public:
     ZApplication(int argc, char **argv);
@@ -29,8 +29,8 @@ public:
     /** Accessors **/
     std::list<std::string> getArguments() { return _arguments; }
     void setArguments(int argc, char **argv);
-    boost::shared_ptr<ZRunLoop> getMainRunLoop() { return _mainRunLoop; }
-    void setMainRunLoop(boost::shared_ptr<ZRunLoop> runLoop) { _mainRunLoop = runLoop; }
+    ZRunLoop* getMainRunLoop() { return _mainRunLoop.get(); }
+    void setMainRunLoop(ZRunLoop *runLoop) { _mainRunLoop.reset(runLoop); } // Claims ownership
     
     
     /** Convenience Method for Run Loop **/

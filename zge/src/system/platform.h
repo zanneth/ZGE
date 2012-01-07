@@ -22,7 +22,7 @@ public:
     virtual ~ZPlatform() {}
     virtual void initialize() = 0;
     
-    void setApplication(ZApplication *application) { _application = application; }
+    void setApplication(ZApplication *application) { _application = application; } // Weak Ptr
     ZApplication* getApplication() { return _application; }
 };
 

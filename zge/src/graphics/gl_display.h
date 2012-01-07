@@ -17,24 +17,22 @@ namespace zge {
 
 class ZGLDisplay : public ZDisplay {
     SDL_Surface *_surface;
+    unsigned _lastRender;
     
 public:
-    ~ZGLDisplay();
-    
-    /** Accessors **/
-    SDL_Surface* getSurface() { return _surface; }
-    void setSurface(SDL_Surface *surface) { _surface = surface; }
-    
+    ~ZGLDisplay();    
     
     /** Overrides **/
     void initialize();
-    void render();
+    void render(unsigned dtime);
     
     ZError setDisplayMode(const ZDisplayMode &mode);
     ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem);
     
 private:
     void _initOpenGL();
+    void _reloadViewport();
+    void _reloadCoordinateSystem();
 };
 
 }

@@ -14,8 +14,8 @@ namespace zge {
 
 void ZDisplayManager::update(unsigned dtime)
 {
-    if (_currentDisplay) {
-        _currentDisplay->render();
+    if (_currentDisplay.get() != NULL) {
+        _currentDisplay->render(dtime);
     }
 }
 

@@ -21,6 +21,14 @@ struct ZDisplayMode {
     int height;
     float refreshRate;
     std::string windowTitle;
+    
+    ZDisplayMode() :
+        windowed(true),
+        width(1024),
+        height(768),
+        refreshRate(1.0 / 60.0),
+        windowTitle("Application")
+    {}
 };
 
 class ZDisplay {
@@ -33,7 +41,7 @@ public:
     ZDisplay();
     virtual ~ZDisplay() {}
     virtual void initialize() = 0;
-    virtual void render() = 0;
+    virtual void render(unsigned dtime) = 0;
     
     // Convenience method for setting width/height values in the current display mode
     void resize(int width, int height);
