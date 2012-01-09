@@ -59,6 +59,7 @@ void ZGLDisplay::render(unsigned dtime)
     if (_lastRender >= _displayMode.refreshRate) {
         _lastRender = 0;
         SDL_GL_SwapBuffers();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 }
 
@@ -143,8 +144,7 @@ void ZGLDisplay::_loadCoordinateSystem()
 
 void ZGLDisplay::_initOpenGL()
 {
-    glClearColor(0.0, 0.0, 0.0, 1.0f);    
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.0, 0.0, 0.0, 1.0f);
 }
 
 void ZGLDisplay::_changeWindowTitle(string newTitle)
