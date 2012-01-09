@@ -38,15 +38,22 @@ void ZApplication::setArguments(int argc, char **argv)
 }
 
 
-#pragma mark - Controlling the Main Run Loop
+#pragma mark - Run Loop
+
+ZRunLoop* ZApplication::getMainRunLoop()
+{
+    if (_mainRunLoop.get() == NULL) {
+        ZRunLoop *runLoop = new ZRunLoop();
+        _mainRunLoop.reset(runLoop);
+    }
+    
+    return _mainRunLoop.get();
+}
 
 void ZApplication::startMainRunLoop()
 {
-    if (_mainRunLoop.get() == NULL) {
-        LOGGER->log("ERROR: Application's main run loop is not initialized. Could not start run loop.");
-    } else {
-        _mainRunLoop->run();
-    }
+    ZRunLoop *runLoop = getMainRunLoop();
+    runLoop->run();
 }
 
 
@@ -55,8 +62,8 @@ void ZApplication::startMainRunLoop()
 void runApplication(ZApplication *application)
 {
     if (application == NULL) {
-        std::cerr << "FATAL ERROR: Application pointer is NULL." << std::endl;
-        std::exit(1);
+        ZError err(ZGE_APPLICATION_ERROR, "Application pointer is NULL.");
+        util::fatalError(err);
     }
     
     // Initialize SDL engine
@@ -66,12 +73,8 @@ void runApplication(ZApplication *application)
         errorstr += SDL_GetError();
         
         ZError err(ZGE_SDL_ERROR, errorstr);
-        zge::util::fatalError(err);
+        util::fatalError(err);
     }
-    
-    // Create a new run loop for the application
-    ZRunLoop *runLoop = new ZRunLoop();
-    application->setMainRunLoop(runLoop);
     
     
     // Initialize the platform interface

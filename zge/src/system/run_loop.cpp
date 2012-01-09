@@ -31,7 +31,7 @@ ZRunLoop::~ZRunLoop()
 void ZRunLoop::run()
 {
     _running = true;
-    _startRunLoop();
+    _main();
 }
 
 
@@ -56,7 +56,7 @@ void ZRunLoop::unschedule(boost::shared_ptr<ZRunnableInterface> runnable)
 
 #pragma mark - Private Methods
 
-void ZRunLoop::_startRunLoop()
+void ZRunLoop::_main()
 {
     while (_running) {
         RunnableIterator itr;

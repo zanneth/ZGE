@@ -21,7 +21,7 @@ void ZOSXPlatform::initialize()
     
     // Create the App Delegate
     ZAppDelegate *appDelegate = [[ZAppDelegate alloc] init];
-    appDelegate.application = _application;
+    appDelegate.application = getApplication();
     [NSApp setDelegate:appDelegate];
     
     // Setup the Menu Bar

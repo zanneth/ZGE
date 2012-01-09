@@ -10,7 +10,11 @@
 #define _ZGE_GL_DISPLAY_H_
 
 #include <SDL/SDL.h>
+#include <string>
+
 #include <zge/graphics/display.h>
+
+using std::string;
 
 
 namespace zge {
@@ -20,6 +24,9 @@ class ZGLDisplay : public ZDisplay {
     unsigned _lastRender;
     
 public:
+    ZGLDisplay() : ZDisplay(),
+        _surface(NULL),
+        _lastRender(0) {}
     ~ZGLDisplay();    
     
     /** Overrides **/
@@ -30,9 +37,13 @@ public:
     ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem);
     
 private:
+    void _loadSurface();
+    void _loadViewport();
+    void _loadCoordinateSystem();
+    
     void _initOpenGL();
-    void _reloadViewport();
-    void _reloadCoordinateSystem();
+    
+    void _changeWindowTitle(string newTitle);
 };
 
 }

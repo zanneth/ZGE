@@ -12,15 +12,20 @@
 #include <string>
 
 #define ZGE_UNKNOWN_ERROR       -1
-#define ZGE_SDL_ERROR           1
-#define ZGE_DISPLAY_INIT_ERROR  2
+#define ZGE_NO_ERROR            0
+#define ZGE_APPLICATION_ERROR   1
+#define ZGE_SDL_ERROR           2
+#define ZGE_DISPLAY_INIT_ERROR  3
+
+using std::string;
 
 
 namespace zge {
 
 struct ZError {
     int code;
-    std::string description;
+    string description;
+    
     
     ZError() :
         code(ZGE_UNKNOWN_ERROR),
@@ -32,14 +37,22 @@ struct ZError {
     
     static ZError ZErrorNone()
     {
-        return ZError(0, "No Error");
+        return ZError(ZGE_NO_ERROR, "No Error");
     }
+    
+    bool operator==(const ZError &other)
+    {
+        return code == other.code && description == other.description;
+    }
+    
+    bool operator!=(const ZError &other) { return !operator==(other); }
 };
 
 struct ZCoordinateSystem {
     float width;
     float height;
     float depth;
+    
     
     ZCoordinateSystem() : 
         width(0.0),
@@ -51,6 +64,11 @@ struct ZCoordinateSystem {
         height(height_),
         depth(depth_) {}
     
+    bool isZero()
+    {
+        return width == 0.0 && height == 0.0 && depth == 0.0;
+    }
+    
     bool operator==(const ZCoordinateSystem &other)
     {
         return width == other.width
@@ -60,7 +78,6 @@ struct ZCoordinateSystem {
     
     bool operator!=(const ZCoordinateSystem &other) { return !operator==(other); }
 };
-static const ZCoordinateSystem ZCoordinateSystemZero = ZCoordinateSystem(0.0, 0.0, 0.0);
 
 }
 

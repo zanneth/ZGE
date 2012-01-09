@@ -43,7 +43,7 @@ public:
     void unschedule(boost::shared_ptr<ZRunnableInterface> runnable);
 
 private:
-    void _startRunLoop();
+    void _main();
 };
 
 }

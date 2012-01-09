@@ -23,7 +23,6 @@ ZGLDisplay::~ZGLDisplay()
 {
     if (_surface != NULL) {
         SDL_FreeSurface(_surface);
-        _surface = NULL;
     }
 }
 
@@ -33,30 +32,14 @@ ZGLDisplay::~ZGLDisplay()
 void ZGLDisplay::initialize()
 {
     if (!_isInitialized) {
-        SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
-        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
+        _loadSurface();
+        _loadViewport();
+        _loadCoordinateSystem();
+        _changeWindowTitle(_displayMode.windowTitle);
         
-        Uint32 sdlFlags = SDL_OPENGL;
-        
-        if (!_displayMode.windowed) {
-            sdlFlags |= SDL_FULLSCREEN;
-        }
-        
-        _surface = SDL_SetVideoMode(_displayMode.width, _displayMode.height, 0, sdlFlags);
-        if (!_surface) {
-            std::string errorStr = "The OpenGL display surface failed to initialize: ";
-            errorStr += SDL_GetError();
-            
-            ZError err(ZGE_DISPLAY_INIT_ERROR, errorStr);
-            util::fatalError(err);
-        }
-        
-        const char *windowName = _displayMode.windowTitle.c_str();
-        SDL_WM_SetCaption(windowName, windowName);
+        _initOpenGL();
         
         _isInitialized = true;
-        _reloadViewport();
-        _reloadCoordinateSystem();
     } else {
         LOGGER->debugLog("Warning: Display already initialized.");
     }
@@ -80,14 +63,13 @@ void ZGLDisplay::render(unsigned dtime)
 ZError ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
 {
     if (mode.windowTitle != _displayMode.windowTitle) {
-        const char *windowName = mode.windowTitle.c_str();
-        SDL_WM_SetCaption(windowName, windowName);
+        _changeWindowTitle(mode.windowTitle);
     }
     
     _displayMode = mode;
     
     if (_isInitialized) {
-        _reloadViewport();
+        _loadViewport();
     }
     
     return ZError::ZErrorNone();
@@ -95,9 +77,10 @@ ZError ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
 
 ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
 {
-    if (_coordinateSystem != coordSystem) {
-        _coordinateSystem = coordSystem;
-        _reloadCoordinateSystem();
+    _coordinateSystem = coordSystem;
+    
+    if (_isInitialized) {
+        _loadCoordinateSystem();
     }
         
     return ZError::ZErrorNone();
@@ -106,29 +89,40 @@ ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
 
 #pragma mark - Private Methods
 
-void ZGLDisplay::_initOpenGL()
+void ZGLDisplay::_loadSurface()
 {
-    glClearColor(0.0, 0.0, 0.0, 1.0f);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glDepthFunc(GL_LEQUAL);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
     
-    _reloadViewport();
-    _reloadCoordinateSystem();
+    Uint32 sdlFlags = SDL_OPENGL;
+    if (!_displayMode.windowed) {
+        sdlFlags |= SDL_FULLSCREEN;
+    }
+    
+    if (_surface != NULL) {
+        SDL_FreeSurface(_surface);
+    }
+    _surface = SDL_SetVideoMode(_displayMode.width, _displayMode.height, 0, sdlFlags);
+    if (!_surface) {
+        std::string errorStr = "The OpenGL display surface failed to initialize: ";
+        errorStr += SDL_GetError();
+        
+        ZError err(ZGE_DISPLAY_INIT_ERROR, errorStr);
+        util::fatalError(err);
+    }
 }
 
-void ZGLDisplay::_reloadViewport()
+void ZGLDisplay::_loadViewport()
 {
     glViewport(0, 0, _displayMode.width, _displayMode.height);
 }
 
-void ZGLDisplay::_reloadCoordinateSystem()
+void ZGLDisplay::_loadCoordinateSystem()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
-    if (_coordinateSystem == ZCoordinateSystemZero) {
+    if (_coordinateSystem.isZero()) {
         glOrtho(0, 1024, 0, 768, -512, 512);
     } else {
         glOrtho(0,
@@ -140,6 +134,21 @@ void ZGLDisplay::_reloadCoordinateSystem()
     }
     
     glMatrixMode(GL_MODELVIEW);
+}
+
+void ZGLDisplay::_initOpenGL()
+{
+    glClearColor(0.0, 0.0, 0.0, 1.0f);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glDepthFunc(GL_LEQUAL);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void ZGLDisplay::_changeWindowTitle(string newTitle)
+{
+    const char *windowTitle = newTitle.c_str();
+    SDL_WM_SetCaption(windowTitle, windowTitle);
 }
 
 }

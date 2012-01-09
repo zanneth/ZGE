@@ -28,11 +28,14 @@ private:
 
 }
 
+
+using zge::ZApplication;
+
 @interface ZAppDelegate : NSObject <NSApplicationDelegate> {
-    zge::ZApplication *application;
+    ZApplication *application;
 }
 
-@property (nonatomic, assign) zge::ZApplication *application;
+@property (nonatomic, assign) ZApplication *application;
 
 @end
 

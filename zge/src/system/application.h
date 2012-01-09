@@ -15,22 +15,25 @@
 
 #include <zge/system/run_loop.h>
 
+using std::string;
+using std::list;
+using std::auto_ptr;
+
 
 namespace zge {
 
 class ZApplication {
-    std::list<std::string> _arguments;
-    std::auto_ptr<ZRunLoop> _mainRunLoop;
+    list<string> _arguments;
+    auto_ptr<ZRunLoop> _mainRunLoop;
     
 public:
     ZApplication(int argc, char **argv);
     virtual ~ZApplication() {}
     
     /** Accessors **/
-    std::list<std::string> getArguments() { return _arguments; }
+    list<string> getArguments() const { return _arguments; }
     void setArguments(int argc, char **argv);
-    ZRunLoop* getMainRunLoop() { return _mainRunLoop.get(); }
-    void setMainRunLoop(ZRunLoop *runLoop) { _mainRunLoop.reset(runLoop); } // Claims ownership
+    ZRunLoop* getMainRunLoop();
     
     
     /** Convenience Method for Run Loop **/
