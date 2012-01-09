@@ -31,7 +31,7 @@ void ZLogger::log(const char *format, ...)
     vsprintf(buf, format, va);
     va_end(va);
     
-    printf("%s\r\n", buf);
+    std::cout << buf << std::endl;
 }
 
 void ZLogger::log(ZError error)
@@ -39,9 +39,8 @@ void ZLogger::log(ZError error)
     std::cerr << "ERROR (" << error.code << "): " << error.description << std::endl;
 }
 
-void ZLogger::debugLog(const char *format, ...)
+void ZLogger::warn(const char *format, ...)
 {
-#if Z_DEBUG_LOGGING_ENABLED
     char buf[1024];
     
     va_list va;
@@ -49,10 +48,7 @@ void ZLogger::debugLog(const char *format, ...)
     vsprintf(buf, format, va);
     va_end(va);
     
-    // Copied everything to the buffer, may as well just call printf instead
-    // of Log::log() when it'll be the same amount of code anyway.
-    printf("%s\r\n", buf);
-#endif
+    std::cout << "WARNING: " << buf << std::endl;
 }
 
 }

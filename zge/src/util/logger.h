@@ -22,7 +22,7 @@ public:
     
     void log(const char *format, ...);
     void log(ZError error);
-    void debugLog(const char *format, ...);
+    void warn(const char *format, ...);
 
 private:
     ZLogger() {}
