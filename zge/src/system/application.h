@@ -15,12 +15,11 @@
 
 #include <zge/system/run_loop.h>
 
+
+namespace zge {
 using std::string;
 using std::list;
 using std::auto_ptr;
-
-
-namespace zge {
 
 class ZApplication {
     list<string> _arguments;

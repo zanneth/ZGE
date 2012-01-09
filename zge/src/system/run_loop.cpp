@@ -37,15 +37,14 @@ void ZRunLoop::run()
 
 #pragma mark - Managing Runnables in the Run Loop
 
-void ZRunLoop::schedule(boost::shared_ptr<ZRunnableInterface> runnable)
+void ZRunLoop::schedule(shared_ptr<ZRunnableInterface> runnable)
 {
     _runnables.push_back(runnable);
 }
 
-void ZRunLoop::unschedule(boost::shared_ptr<ZRunnableInterface> runnable)
+void ZRunLoop::unschedule(shared_ptr<ZRunnableInterface> runnable)
 {
-    RunnableIterator itr;
-    for (itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
+    for (auto itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
         if (*itr == runnable) {
             _runnables.erase(itr);
             break;
@@ -59,8 +58,7 @@ void ZRunLoop::unschedule(boost::shared_ptr<ZRunnableInterface> runnable)
 void ZRunLoop::_main()
 {
     while (_running) {
-        RunnableIterator itr;
-        for (itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
+        for (auto itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
             unsigned time = SDL_GetTicks();
             unsigned lastUpdate = (*itr)->_lastUpdate;
             unsigned dtime;

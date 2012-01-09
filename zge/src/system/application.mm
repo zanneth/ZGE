@@ -32,7 +32,7 @@ ZApplication::ZApplication(int argc, char **argv)
 void ZApplication::setArguments(int argc, char **argv)
 {
     for (int i = 0; i < argc; ++i) {
-        std::string str = argv[i];
+        string str = argv[i];
         _arguments.push_back(str);
     }
 }
@@ -42,7 +42,7 @@ void ZApplication::setArguments(int argc, char **argv)
 
 ZRunLoop* ZApplication::getMainRunLoop()
 {
-    if (_mainRunLoop.get() == NULL) {
+    if (_mainRunLoop.get() == nullptr) {
         ZRunLoop *runLoop = new ZRunLoop();
         _mainRunLoop.reset(runLoop);
     }
@@ -69,7 +69,7 @@ void runApplication(ZApplication *application)
     // Initialize SDL engine
     int sdlStat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     if (sdlStat < 0) {
-        std::string errorstr = "SDL Failed to initialize: ";
+        string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
         ZError err(ZGE_SDL_ERROR, errorstr);

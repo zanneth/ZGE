@@ -9,21 +9,18 @@
 #ifndef _ZGE_RUN_LOOP_H_
 #define _ZGE_RUN_LOOP_H_
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <vector>
 
 #include <zge/interfaces/runnable_interface.h>
 
-using std::vector;
-using boost::shared_ptr;
-
 
 namespace zge {
-
-typedef vector< shared_ptr<ZRunnableInterface> >::iterator RunnableIterator;
+using std::vector;
+using std::shared_ptr;
 
 class ZRunLoop {
-    vector< shared_ptr<ZRunnableInterface> > _runnables;
+    vector<shared_ptr<ZRunnableInterface>> _runnables;
     bool _running;
     
 public:
@@ -39,8 +36,8 @@ public:
     
     
     /** Managing Runnables in the Run Loop **/
-    void schedule(boost::shared_ptr<ZRunnableInterface> runnable);
-    void unschedule(boost::shared_ptr<ZRunnableInterface> runnable);
+    void schedule(shared_ptr<ZRunnableInterface> runnable);
+    void unschedule(shared_ptr<ZRunnableInterface> runnable);
 
 private:
     void _main();

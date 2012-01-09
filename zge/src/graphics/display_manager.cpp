@@ -12,6 +12,12 @@
 
 namespace zge {
 
+void ZDisplayManager::setCurrentDisplay(shared_ptr<zge::ZDisplay> display)
+{
+    _currentDisplay = display;
+    _currentDisplay->initialize();
+}
+
 void ZDisplayManager::update(unsigned dtime)
 {
     if (_currentDisplay.get() != NULL) {

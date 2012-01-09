@@ -12,10 +12,9 @@
 #include <string>
 #include <zge/common/types.h>
 
-using std::string;
-
 
 namespace zge {
+using std::string;
 
 struct ZDisplayMode {
     bool windowed;
@@ -40,7 +39,8 @@ protected:
     ZCoordinateSystem _coordinateSystem;
     
 public:
-    ZDisplay();
+    ZDisplay() = default;
+    ZDisplay(const ZDisplayMode &displayMode);
     virtual ~ZDisplay() {}
     virtual void initialize() = 0;
     virtual void render(unsigned dtime) = 0;

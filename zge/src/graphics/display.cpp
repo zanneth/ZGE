@@ -7,14 +7,17 @@
 //
 
 #include "display.h"
+#include <iostream>
 
 
 namespace zge {
 
-ZDisplay::ZDisplay() :
-    _isInitialized(false),
-    _coordinateSystem(ZCoordinateSystem(1024, 768, 512))
+ZDisplay::ZDisplay(const ZDisplayMode &mode) :
+    _displayMode(mode)
 {}
+
+
+#pragma mark - Convenience Methods
 
 void ZDisplay::resize(int width, int height)
 {

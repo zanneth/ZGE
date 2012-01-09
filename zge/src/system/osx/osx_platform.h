@@ -20,7 +20,7 @@ namespace zge {
 class ZApplication;
 class ZOSXPlatform : public ZPlatform {
 public:
-    void initialize();
+    void initialize() override;
 
 private:
     void _setupMainMenu();

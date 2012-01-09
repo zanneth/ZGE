@@ -14,27 +14,25 @@
 
 #include <zge/graphics/display.h>
 
-using std::string;
-
 
 namespace zge {
+using std::string;
 
 class ZGLDisplay : public ZDisplay {
     SDL_Surface *_surface;
     unsigned _lastRender;
     
 public:
-    ZGLDisplay() : ZDisplay(),
-        _surface(NULL),
-        _lastRender(0) {}
-    ~ZGLDisplay();    
+    ZGLDisplay();
+    ZGLDisplay(const ZDisplayMode &mode);
+    ~ZGLDisplay();
     
     /** Overrides **/
-    void initialize();
-    void render(unsigned dtime);
+    void initialize() override;
+    void render(unsigned dtime) override;
     
-    ZError setDisplayMode(const ZDisplayMode &mode);
-    ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem);
+    ZError setDisplayMode(const ZDisplayMode &mode) override;
+    ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem) override;
     
 private:
     void _loadSurface();

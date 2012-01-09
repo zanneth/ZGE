@@ -19,6 +19,14 @@
 
 namespace zge {
 
+ZGLDisplay::ZGLDisplay() : ZDisplay(),
+    _surface(nullptr)
+{}
+
+ZGLDisplay::ZGLDisplay(const ZDisplayMode &mode) : ZDisplay(mode),
+    _surface(nullptr)
+{}
+
 ZGLDisplay::~ZGLDisplay()
 {
     if (_surface != NULL) {

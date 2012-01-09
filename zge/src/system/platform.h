@@ -12,10 +12,9 @@
 #include <memory>
 #include <zge/system/application.h>
 
-using std::auto_ptr;
-
 
 namespace zge {
+using std::auto_ptr;
 
 class ZPlatform {
 protected:
