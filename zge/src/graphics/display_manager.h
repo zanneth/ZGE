@@ -26,7 +26,7 @@ public:
     
     
     /** Runnable **/
-    void update(unsigned dtime) override;
+    void run(unsigned dtime) override;
 };
 
 }

@@ -12,8 +12,7 @@
 namespace zge {
 
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
-    _displayMode(mode)
-{}
+    _displayMode(mode) {}
 
 
 #pragma mark - Convenience Methods

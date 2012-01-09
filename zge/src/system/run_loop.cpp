@@ -14,8 +14,7 @@
 namespace zge {
 
 ZRunLoop::ZRunLoop() :
-    _running(false)
-{}
+    _running(false) {}
 
 ZRunLoop::~ZRunLoop()
 {
@@ -66,7 +65,7 @@ void ZRunLoop::_main()
                 dtime = time - lastUpdate;
             }
             
-            (*itr)->update(dtime);
+            (*itr)->run(dtime);
             (*itr)->_lastUpdate = time;
         }
     }

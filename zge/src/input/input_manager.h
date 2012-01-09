@@ -15,7 +15,7 @@ namespace zge {
 
 class ZInputManager : public ZRunnableInterface {
 public:    
-    void update(unsigned dtime) override;
+    void run(unsigned dtime) override;
 };
 
 }

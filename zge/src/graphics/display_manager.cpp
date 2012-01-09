@@ -17,9 +17,9 @@ void ZDisplayManager::setCurrentDisplay(shared_ptr<zge::ZDisplay> display)
     _currentDisplay->initialize();
 }
 
-void ZDisplayManager::update(unsigned dtime)
+void ZDisplayManager::run(unsigned dtime)
 {
-    if (_currentDisplay.get() != NULL) {
+    if (!_currentDisplay) {
         _currentDisplay->render(dtime);
     }
 }

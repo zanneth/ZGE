@@ -12,7 +12,7 @@
 
 namespace zge {
 
-void ZInputManager::update(unsigned dtime)
+void ZInputManager::run(unsigned dtime)
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {

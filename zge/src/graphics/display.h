@@ -28,8 +28,7 @@ public:
         width(1024),
         height(768),
         refreshRate(1.0 / 60.0),
-        windowTitle("Application")
-    {}
+        windowTitle("Application") {}
 };
 
 class ZDisplay {

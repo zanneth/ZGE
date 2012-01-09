@@ -16,7 +16,7 @@ class ZRunnableInterface {
     
 public:
     virtual ~ZRunnableInterface() {}
-    virtual void update(unsigned dtime) = 0;
+    virtual void run(unsigned dtime) = 0;
     
     friend class ZRunLoop;
 };
