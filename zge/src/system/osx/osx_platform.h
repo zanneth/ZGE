@@ -14,7 +14,6 @@
 
 #include <zge/system/platform.h>
 
-
 namespace zge {
 
 class ZApplication;

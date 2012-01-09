@@ -9,7 +9,6 @@
 #include "logger.h"
 #include <iostream>
 
-
 namespace zge {
 
 ZLogger *ZLogger::_instance = NULL;

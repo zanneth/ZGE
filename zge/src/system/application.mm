@@ -18,7 +18,6 @@
 #include <zge/util/logger.h>
 #include <zge/util/util.h>
 
-
 namespace zge {
 
 ZApplication::ZApplication(int argc, char **argv)

@@ -10,7 +10,6 @@
 #include <SDL/SDL.h>
 #include <zge/system/application.h>
 
-
 namespace zge {
 
 void ZOSXPlatform::initialize()

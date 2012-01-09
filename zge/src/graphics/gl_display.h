@@ -14,7 +14,6 @@
 
 #include <zge/graphics/display.h>
 
-
 namespace zge {
 using std::string;
 

@@ -10,7 +10,6 @@
 #include <SDL/SDL.h>
 #include <iostream>
 
-
 namespace zge {
 
 void ZInputManager::update(unsigned dtime)

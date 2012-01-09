@@ -14,7 +14,6 @@
 
 #include <zge/interfaces/runnable_interface.h>
 
-
 namespace zge {
 using std::vector;
 using std::shared_ptr;

@@ -11,7 +11,6 @@
 
 #include <zge/interfaces/runnable_interface.h>
 
-
 namespace zge {
 
 class ZInputManager : public ZRunnableInterface {

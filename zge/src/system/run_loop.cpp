@@ -11,9 +11,6 @@
 #include <iostream>
 #include <SDL/SDL.h>
 
-#include <zge/interfaces/runnable_interface.h>
-
-
 namespace zge {
 
 ZRunLoop::ZRunLoop() :

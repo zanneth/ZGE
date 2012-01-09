@@ -9,7 +9,6 @@
 #ifndef _ZGE_RUNNABLE_INTERFACE_H_
 #define _ZGE_RUNNABLE_INTERFACE_H_
 
-
 namespace zge {
 
 class ZRunnableInterface {

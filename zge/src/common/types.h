@@ -17,16 +17,14 @@
 #define ZGE_SDL_ERROR           2
 #define ZGE_DISPLAY_INIT_ERROR  3
 
-using std::string;
-
-
 namespace zge {
+using std::string;
 
 struct ZError {
     int code;
     string description;
     
-    
+public:
     ZError() :
         code(ZGE_UNKNOWN_ERROR),
         description("Unknown Error") {}
@@ -52,12 +50,9 @@ struct ZCoordinateSystem {
     float width;
     float height;
     float depth;
-    
-    
-    ZCoordinateSystem() : 
-        width(0.0),
-        height(0.0),
-        depth(0.0) {}
+
+public:
+    ZCoordinateSystem() = default;
     
     ZCoordinateSystem(float width_, float height_, float depth_) :
         width(width_),
@@ -77,6 +72,14 @@ struct ZCoordinateSystem {
     }
     
     bool operator!=(const ZCoordinateSystem &other) { return !operator==(other); }
+};
+
+struct ZVertex {
+    float x;
+    float y;
+    float z;
+    
+    
 };
 
 }

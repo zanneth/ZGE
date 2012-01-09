@@ -11,7 +11,6 @@
 
 #include <zge/common/types.h>
 
-
 namespace zge {
 
 class ZLogger {

@@ -9,7 +9,6 @@
 #include "display_manager.h"
 #include <zge/graphics/display.h>
 
-
 namespace zge {
 
 void ZDisplayManager::setCurrentDisplay(shared_ptr<zge::ZDisplay> display)

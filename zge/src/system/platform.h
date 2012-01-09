@@ -12,7 +12,6 @@
 #include <memory>
 #include <zge/system/application.h>
 
-
 namespace zge {
 using std::auto_ptr;
 

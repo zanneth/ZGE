@@ -16,7 +16,6 @@
 #include <zge/util/logger.h>
 #include <zge/util/util.h>
 
-
 namespace zge {
 
 ZGLDisplay::ZGLDisplay() : ZDisplay(),

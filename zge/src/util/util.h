@@ -11,10 +11,10 @@
 
 #include <zge/common/types.h>
 
-
 namespace zge {
 namespace util {
 
+/** Fatal Errors **/
 void fatalError();
 void fatalError(ZError error);
 

@@ -15,7 +15,6 @@
 
 #include <zge/system/run_loop.h>
 
-
 namespace zge {
 using std::string;
 using std::list;

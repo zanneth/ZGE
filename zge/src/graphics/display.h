@@ -12,7 +12,6 @@
 #include <string>
 #include <zge/common/types.h>
 
-
 namespace zge {
 using std::string;
 
@@ -23,6 +22,7 @@ struct ZDisplayMode {
     float refreshRate;
     string windowTitle;
     
+public:
     ZDisplayMode() :
         windowed(true),
         width(1024),

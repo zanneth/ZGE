@@ -9,9 +9,10 @@
 #include "util.h"
 #include <iostream>
 
-
 namespace zge {
 namespace util {
+
+#pragma mark - Fatal Errors
 
 void fatalError()
 {

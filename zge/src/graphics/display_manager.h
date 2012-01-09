@@ -12,7 +12,6 @@
 #include <memory>
 #include <zge/interfaces/runnable_interface.h>
 
-
 namespace zge {
 using std::shared_ptr;
 

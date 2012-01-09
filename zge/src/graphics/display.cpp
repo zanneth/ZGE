@@ -9,7 +9,6 @@
 #include "display.h"
 #include <iostream>
 
-
 namespace zge {
 
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
