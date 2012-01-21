@@ -16,16 +16,19 @@ namespace util {
 
 void fatalError()
 {
-    exit(ZGE_UNKNOWN_ERROR);
+    exit(kUnknownError);
 }
 
 void fatalError(ZError error)
 {
-    std::cerr << "FATAL ERROR(" << error.code << "): " << error.description << std::endl;
-    if (error.code != 0) {
-        exit(error.code);
+    int errorCode = error.getCode();
+    std::string errorDescription = error.getDescription();
+    
+    std::cerr << "FATAL ERROR(" << errorCode << "): " << errorDescription << std::endl;
+    if (errorCode != 0) {
+        exit(errorCode);
     } else {
-        exit(ZGE_UNKNOWN_ERROR);
+        exit(kUnknownError);
     }
 }
 

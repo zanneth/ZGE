@@ -9,7 +9,7 @@
 #ifndef _ZGE_UTIL_H_
 #define _ZGE_UTIL_H_
 
-#include <zge/common/types.h>
+#include <zge/common/error.h>
 
 namespace zge {
 namespace util {

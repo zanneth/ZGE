@@ -11,7 +11,7 @@
 
 #include <memory>
 #include <vector>
-#include <zge/common/types.h>
+#include <zge/common/geometry.h>
 
 namespace zge {
 using std::shared_ptr;

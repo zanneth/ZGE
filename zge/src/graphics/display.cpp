@@ -32,13 +32,13 @@ void ZDisplay::resize(int width, int height)
 ZError ZDisplay::setDisplayMode(const ZDisplayMode &mode)
 {
     _displayMode = mode;
-    return ZError::ZErrorNone();
+    return ZErrorNone;
 }
 
 ZError ZDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
 {
     _coordinateSystem = coordSystem;
-    return ZError::ZErrorNone();
+    return ZErrorNone;
 }
 
 

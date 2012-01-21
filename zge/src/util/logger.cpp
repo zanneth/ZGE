@@ -35,7 +35,7 @@ void ZLogger::log(const char *format, ...)
 
 void ZLogger::log(ZError error)
 {
-    std::cerr << "ERROR (" << error.code << "): " << error.description << std::endl;
+    std::cerr << "ERROR (" << error.getCode() << "): " << error.getDescription() << std::endl;
 }
 
 void ZLogger::warn(const char *format, ...)

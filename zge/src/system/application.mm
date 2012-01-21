@@ -12,7 +12,7 @@
 #include <string>
 #include <SDL/SDL.h>
 
-#include <zge/common/types.h>
+#include <zge/common/error.h>
 #include <zge/system/platform.h>
 #include <zge/system/osx/osx_platform.h>
 #include <zge/util/logger.h>
@@ -61,7 +61,7 @@ void ZApplication::startMainRunLoop()
 void runApplication(ZApplication *application)
 {
     if (application == NULL) {
-        ZError err(ZGE_APPLICATION_ERROR, "Application pointer is NULL.");
+        ZError err(kApplicationError, "Application pointer is NULL.");
         util::fatalError(err);
     }
     
@@ -71,7 +71,7 @@ void runApplication(ZApplication *application)
         string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
-        ZError err(ZGE_SDL_ERROR, errorstr);
+        ZError err(kSDLError, errorstr);
         util::fatalError(err);
     }
     

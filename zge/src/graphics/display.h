@@ -10,7 +10,8 @@
 #define _ZGE_DISPLAY_H_
 
 #include <string>
-#include <zge/common/types.h>
+#include <zge/common/geometry.h>
+#include <zge/common/error.h>
 
 namespace zge {
 using std::string;

@@ -78,7 +78,7 @@ ZError ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
         _loadViewport();
     }
     
-    return ZError::ZErrorNone();
+    return ZErrorNone;
 }
 
 ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
@@ -89,7 +89,7 @@ ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
         _loadCoordinateSystem();
     }
         
-    return ZError::ZErrorNone();
+    return ZErrorNone;
 }
 
 
@@ -113,7 +113,7 @@ void ZGLDisplay::_loadSurface()
         std::string errorStr = "The OpenGL display surface failed to initialize: ";
         errorStr += SDL_GetError();
         
-        ZError err(ZGE_DISPLAY_INIT_ERROR, errorStr);
+        ZError err(kDisplayInitError, errorStr);
         util::fatalError(err);
     }
 }
