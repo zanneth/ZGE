@@ -18,6 +18,11 @@ ZError::ZError(int code, string description) :
     _code(code),
     _description(description) {}
 
+ZError ZError::NoError()
+{
+    return ZError(kNoError, "No Error");
+}
+
 
 #pragma mark - Operators
 

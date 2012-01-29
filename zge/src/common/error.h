@@ -30,6 +30,9 @@ public:
     ZError();
     ZError(int code, string description);
     
+    static ZError NoError();
+    
+    
     /** Operators **/
     bool operator==(const ZError &other);
     bool operator!=(const ZError &other);
@@ -41,8 +44,6 @@ public:
     string getDescription() const { return _description; }
     void setDescription(const string description) { _description = description; }
 };
-
-const ZError ZErrorNone = ZError(kNoError, "No Error");
 
 }
 

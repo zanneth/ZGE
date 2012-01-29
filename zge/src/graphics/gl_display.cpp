@@ -78,7 +78,7 @@ ZError ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
         _loadViewport();
     }
     
-    return ZErrorNone;
+    return ZError::NoError();
 }
 
 ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
@@ -89,7 +89,7 @@ ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
         _loadCoordinateSystem();
     }
         
-    return ZErrorNone;
+    return ZError::NoError();
 }
 
 
