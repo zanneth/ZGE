@@ -9,22 +9,17 @@
 #ifndef _ZGE_PLATFORM_H_
 #define _ZGE_PLATFORM_H_
 
-#include <memory>
 #include <zge/system/application.h>
 
 namespace zge {
-using std::auto_ptr;
 
 class ZPlatform {
 protected:
-    auto_ptr<ZApplication> _application;
+    ZApplication *_application;
     
 public:
     virtual ~ZPlatform() {}
-    virtual void initialize() = 0;
-    
-    void setApplication(ZApplication *application) { _application.reset(application); } // Claims ownership
-    ZApplication* getApplication() { return _application.get(); }
+    virtual void runApplication(ZApplication *application) = 0;
 };
 
 }

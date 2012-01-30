@@ -82,9 +82,7 @@ void runApplication(ZApplication *application)
     platform = new ZOSXPlatform();
 #endif
     
-    platform->setApplication(application);
-    platform->initialize();    // Does not return (OS should start its event loop)
-    
+    platform->runApplication(application); // Does not return (OS should start its event loop)
     delete platform;
 }
 

@@ -32,7 +32,6 @@ public:
     
     static ZError NoError();
     
-    
     /** Operators **/
     bool operator==(const ZError &other);
     bool operator!=(const ZError &other);

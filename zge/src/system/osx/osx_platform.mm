@@ -12,15 +12,17 @@
 
 namespace zge {
 
-void ZOSXPlatform::initialize()
+void ZOSXPlatform::runApplication(ZApplication *application)
 {
+    _application = application;
+    
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     [NSApplication sharedApplication]; // Initialize the application if it hasn't been already
     
     // Create the App Delegate
     ZAppDelegate *appDelegate = [[ZAppDelegate alloc] init];
-    appDelegate.application = getApplication();
+    appDelegate.application = application;
     [NSApp setDelegate:appDelegate];
     
     // Setup the Menu Bar
@@ -97,6 +99,12 @@ void ZOSXPlatform::_setupMainMenu()
     SDL_Event event;
     event.type = SDL_QUIT;
     SDL_PushEvent(&event);
+}
+
+- (void)dealloc
+{
+    delete _application;
+    [super dealloc];
 }
 
 @end
