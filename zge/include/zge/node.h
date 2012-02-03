@@ -14,28 +14,31 @@
 #include <vector>
 
 namespace zge {
+
 using std::shared_ptr;
 using std::weak_ptr;
 using std::vector;
 
+typedef shared_ptr<class ZNode> ZNodeRef;
+
 class ZNode : public std::enable_shared_from_this<ZNode> {
-    ZPoint _position;
+    ZVecf _position;
     
-    vector<shared_ptr<ZNode>> _children;
+    vector<ZNodeRef> _children;
     weak_ptr<ZNode> _parent;
     
 public:
     ~ZNode();
     
     /** Accessors **/
-    ZPoint getPosition() const { return _position; }
-    void setPosition(const ZPoint &position) { _position = position; }
-    shared_ptr<ZNode> getParent() const { return _parent.lock(); }
+    ZVecf getPosition() const { return _position; }
+    void setPosition(const ZVecf &position) { _position = position; }
+    ZNodeRef getParent() const { return _parent.lock(); }
     
     
     /** Managing Sub-Nodes **/
-    void addChild(shared_ptr<ZNode> node);
-    bool removeChild(shared_ptr<ZNode> node);
+    void addChild(ZNodeRef node);
+    bool removeChild(ZNodeRef node);
     
     
     /** Updating **/

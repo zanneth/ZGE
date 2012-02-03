@@ -17,7 +17,7 @@ ZNode::~ZNode()
     std::cout << "Node 0x" << this << " destroyed" << std::endl;
 }
 
-void ZNode::addChild(shared_ptr<ZNode> node)
+void ZNode::addChild(ZNodeRef node)
 {
     try {
         node->_parent = shared_from_this();
@@ -28,7 +28,7 @@ void ZNode::addChild(shared_ptr<ZNode> node)
     _children.push_back(node);
 }
 
-bool ZNode::removeChild(shared_ptr<ZNode> node)
+bool ZNode::removeChild(ZNodeRef node)
 {
     for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
         if (*itr == node) {
@@ -40,4 +40,4 @@ bool ZNode::removeChild(shared_ptr<ZNode> node)
     return false;
 }
 
-}
+} // namespace zge

@@ -10,11 +10,16 @@
 
 #include "zge/geometry.h"
 #include "zge/error.h"
+#include "zge/exception.h"
 
 #include <string>
 
 namespace zge {
+
 using std::string;
+using std::shared_ptr;
+
+typedef shared_ptr<class ZDisplay> ZDisplayRef;
 
 struct ZDisplayMode {
     bool windowed;
@@ -32,11 +37,19 @@ public:
         windowTitle("Application") {}
 };
 
+class ZDisplayException : public ZException {
+public:
+    virtual const char* what() const throw()
+    {
+        return ("A display exception occurred: " + description).c_str();
+    }
+};
+
 class ZDisplay {
 protected:
     bool _isInitialized;
     ZDisplayMode _displayMode;
-    ZCoordinateSystem _coordinateSystem;
+    ZCoordinateSystem<float> _coordinateSystem;
     
 public:
     ZDisplay() = default;
@@ -52,10 +65,10 @@ public:
     bool isInitialized() { return _isInitialized; }
     
     ZDisplayMode getDisplayMode() const { return _displayMode; }
-    virtual ZError setDisplayMode(const ZDisplayMode &mode);
+    virtual void setDisplayMode(const ZDisplayMode &mode);
     
-    ZCoordinateSystem getCoordinateSystem() const { return _coordinateSystem; }
-    virtual ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem);
+    ZCoordinateSystem<float> getCoordinateSystem() const { return _coordinateSystem; }
+    virtual void setCoordinateSystem(const ZCoordinateSystem<float> &coordSystem);
 };
 
 } // namespace zge

@@ -10,21 +10,51 @@
 
 namespace zge {
 
+template <typename T>
+struct ZVec {
+public:
+    T x, y, z;
+    
+public:
+    ZVec() = default;
+    ZVec(T x_, T y_, T z_) :
+        x(x_),
+        y(y_),
+        z(z_) {}
+    ZVec(T x_, T y_) :
+        x(x_),
+        y(y_),
+        z(0) {}
+    
+    bool operator==(const ZVec &other)
+    {
+        return x == other.x
+            && y == other.y
+            && z == other.z;
+    }
+    
+    bool operator!=(const ZVec &other) { return !operator==(other); }
+};
+
+typedef ZVec<float> ZVecf;
+typedef ZVec<int> ZVeci;
+
+
+template <typename T>
 struct ZCoordinateSystem {
-    float width;
-    float height;
-    float depth;
+public:
+    T width, height, depth;
     
 public:
     ZCoordinateSystem() = default;
-    ZCoordinateSystem(float width_, float height_, float depth_) :
+    ZCoordinateSystem(T width_, T height_, T depth_) :
         width(width_),
         height(height_),
         depth(depth_) {}
     
     bool isZero()
     {
-        return width == 0.0 && height == 0.0 && depth == 0.0;
+        return width == 0 && height == 0 && depth == 0;
     }
     
     bool operator==(const ZCoordinateSystem &other)
@@ -37,31 +67,7 @@ public:
     bool operator!=(const ZCoordinateSystem &other) { return !operator==(other); }
 };
 
-
-struct ZPoint {
-    float x;
-    float y;
-    float z;
-    
-public:
-    ZPoint() = default;
-    ZPoint(float x_, float y_, float z_) :
-        x(x_),
-        y(y_),
-        z(z_) {}
-    ZPoint(float x_, float y_) :
-        x(x_),
-        y(y_),
-        z(0.0) {}
-    
-    bool operator==(const ZPoint &other)
-    {
-        return x == other.x
-            && y == other.y
-            && z == other.z;
-    }
-    
-    bool operator!=(const ZPoint &other) { return !operator==(other); }
-};
+typedef ZCoordinateSystem<float> ZCoordinateSystemf;
+typedef ZCoordinateSystem<int> ZCoordinateSystemi;
 
 } // namespace zge

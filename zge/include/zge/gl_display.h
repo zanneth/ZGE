@@ -14,6 +14,7 @@
 #include <string>
 
 namespace zge {
+
 using std::string;
 
 class ZGLDisplay : public ZDisplay {
@@ -29,8 +30,8 @@ public:
     void initialize() override;
     void render(unsigned dtime) override;
     
-    ZError setDisplayMode(const ZDisplayMode &mode) override;
-    ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem) override;
+    void setDisplayMode(const ZDisplayMode &mode) override;
+    void setCoordinateSystem(const ZCoordinateSystemf &coordSystem) override;
     
 private:
     void _loadSurface();

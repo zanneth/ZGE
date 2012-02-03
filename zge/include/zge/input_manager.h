@@ -9,8 +9,11 @@
 #pragma once
 
 #include "zge/runnable_interface.h"
+#include <memory>
 
 namespace zge {
+
+typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
 
 class ZInputManager : public ZRunnableInterface {
 public:    

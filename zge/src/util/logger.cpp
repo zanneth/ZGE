@@ -40,4 +40,4 @@ void ZLogger::warn(const char *format, ...)
     std::cout << "WARNING: " << buf << std::endl;
 }
 
-}
+} // namespace zge

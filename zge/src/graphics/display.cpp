@@ -29,17 +29,15 @@ void ZDisplay::resize(int width, int height)
 
 #pragma mark - Accessors
 
-ZError ZDisplay::setDisplayMode(const ZDisplayMode &mode)
+void ZDisplay::setDisplayMode(const ZDisplayMode &mode)
 {
     _displayMode = mode;
-    return ZError::NoError();
 }
 
-ZError ZDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
+void ZDisplay::setCoordinateSystem(const ZCoordinateSystemf &coordSystem)
 {
     _coordinateSystem = coordSystem;
-    return ZError::NoError();
 }
 
 
-}
+} // namespace zge

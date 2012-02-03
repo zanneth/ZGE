@@ -7,11 +7,10 @@
 //
 
 #include "zge/display_manager.h"
-#include "zge/display.h"
 
 namespace zge {
 
-void ZDisplayManager::setCurrentDisplay(shared_ptr<zge::ZDisplay> display)
+void ZDisplayManager::setCurrentDisplay(ZDisplayRef display)
 {
     _currentDisplay = display;
 }
@@ -27,4 +26,4 @@ void ZDisplayManager::run(unsigned dtime)
     }
 }
 
-}
+} // namespace zge

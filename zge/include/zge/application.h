@@ -9,15 +9,25 @@
 #pragma once
 
 #include "zge/run_loop.h"
+#include "zge/exception.h"
 
 #include <string>
 #include <list>
 #include <memory>
 
 namespace zge {
+
 using std::string;
 using std::list;
 using std::auto_ptr;
+
+class ZApplicationException : public ZException {
+public:
+    virtual const char* what() const throw()
+    {
+        return ("An application error occurred: " + description).c_str();
+    }
+};
 
 class ZApplication {
     list<string> _arguments;

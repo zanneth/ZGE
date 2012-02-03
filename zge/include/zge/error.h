@@ -11,15 +11,13 @@
 #include <string>
 
 namespace zge {
-using std::string;
 
 enum {
-    kUnknownError       = -1,
-    kNoError            = 0,
-    kApplicationError   = 1,
-    kSDLError           = 2,
-    kDisplayInitError   = 3
+    kUnknownError   = -1,
+    kNoError        = 0
 };
+
+using std::string;
 
 class ZError {
     int _code;
@@ -29,7 +27,7 @@ public:
     ZError();
     ZError(int code, string description);
     
-    static ZError NoError();
+    static ZError noError();
     
     /** Operators **/
     bool operator==(const ZError &other);

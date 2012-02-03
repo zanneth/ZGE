@@ -26,4 +26,4 @@ void ZInputManager::run(unsigned dtime)
     }
 }
 
-}
+} // namespace zge

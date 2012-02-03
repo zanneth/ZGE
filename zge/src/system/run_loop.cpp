@@ -33,12 +33,12 @@ void ZRunLoop::run()
 
 #pragma mark - Managing Runnables in the Run Loop
 
-void ZRunLoop::schedule(shared_ptr<ZRunnableInterface> runnable)
+void ZRunLoop::schedule(ZRunnableInterfaceRef runnable)
 {
     _runnables.push_back(runnable);
 }
 
-void ZRunLoop::unschedule(shared_ptr<ZRunnableInterface> runnable)
+void ZRunLoop::unschedule(ZRunnableInterfaceRef runnable)
 {
     for (auto itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
         if (*itr == runnable) {
@@ -71,4 +71,4 @@ void ZRunLoop::_main()
     }
 }
 
-}
+} // namespace zge

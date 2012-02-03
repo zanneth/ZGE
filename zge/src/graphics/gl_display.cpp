@@ -65,7 +65,7 @@ void ZGLDisplay::render(unsigned dtime)
 
 #pragma mark - Changing Properties
 
-ZError ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
+void ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
 {
     if (mode.windowTitle != _displayMode.windowTitle) {
         _changeWindowTitle(mode.windowTitle);
@@ -76,19 +76,15 @@ ZError ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
     if (_isInitialized) {
         _loadViewport();
     }
-    
-    return ZError::NoError();
 }
 
-ZError ZGLDisplay::setCoordinateSystem(const ZCoordinateSystem &coordSystem)
+void ZGLDisplay::setCoordinateSystem(const ZCoordinateSystemf &coordSystem)
 {
     _coordinateSystem = coordSystem;
     
     if (_isInitialized) {
         _loadCoordinateSystem();
     }
-        
-    return ZError::NoError();
 }
 
 
@@ -112,8 +108,9 @@ void ZGLDisplay::_loadSurface()
         std::string errorStr = "The OpenGL display surface failed to initialize: ";
         errorStr += SDL_GetError();
         
-        ZError err(kDisplayInitError, errorStr);
-        util::fatalError(err);
+        ZDisplayException expt;
+        expt.description = errorStr;
+        throw expt;
     }
 }
 
@@ -152,4 +149,4 @@ void ZGLDisplay::_changeWindowTitle(string newTitle)
     SDL_WM_SetCaption(windowTitle, windowTitle);
 }
 
-}
+} // namespace zge

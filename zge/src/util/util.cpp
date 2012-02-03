@@ -10,27 +10,5 @@
 #include <iostream>
 
 namespace zge {
-namespace util {
 
-#pragma mark - Fatal Errors
-
-void fatalError()
-{
-    exit(kUnknownError);
-}
-
-void fatalError(ZError error)
-{
-    int errorCode = error.getCode();
-    std::string errorDescription = error.getDescription();
-    
-    std::cerr << "FATAL ERROR(" << errorCode << "): " << errorDescription << std::endl;
-    if (errorCode != 0) {
-        exit(errorCode);
-    } else {
-        exit(kUnknownError);
-    }
-}
-
-}
-}
+} // namespace zge

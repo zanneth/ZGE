@@ -14,11 +14,11 @@
 #include <vector>
 
 namespace zge {
+
 using std::vector;
-using std::shared_ptr;
 
 class ZRunLoop {
-    vector<shared_ptr<ZRunnableInterface>> _runnables;
+    vector<ZRunnableInterfaceRef> _runnables;
     bool _running;
     
 public:
@@ -34,8 +34,8 @@ public:
     
     
     /** Managing Runnables in the Run Loop **/
-    void schedule(shared_ptr<ZRunnableInterface> runnable);
-    void unschedule(shared_ptr<ZRunnableInterface> runnable);
+    void schedule(ZRunnableInterfaceRef runnable);
+    void unschedule(ZRunnableInterfaceRef runnable);
 
 private:
     void _main();

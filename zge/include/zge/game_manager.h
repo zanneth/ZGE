@@ -13,6 +13,8 @@
 
 namespace zge {
 
+typedef std::shared_ptr<class ZGameManager> ZGameManagerRef;
+
 class ZGameManager : public ZRunnableInterface {
     
 public:

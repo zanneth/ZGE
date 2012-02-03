@@ -8,7 +8,13 @@
 
 #pragma once
 
+#include <memory>
+
 namespace zge {
+
+using std::shared_ptr;
+
+typedef shared_ptr<class ZRunnableInterface> ZRunnableInterfaceRef;
 
 class ZRunnableInterface {
     unsigned _lastUpdate;

@@ -60,8 +60,10 @@ void ZApplication::startMainRunLoop()
 void runApplication(ZApplication *application)
 {
     if (application == NULL) {
-        ZError err(kApplicationError, "Application pointer is NULL.");
-        util::fatalError(err);
+        ZApplicationException expt;
+        expt.description = "Application pointer is NULL.";
+        
+        throw expt;
     }
     
     // Initialize SDL engine
@@ -70,8 +72,10 @@ void runApplication(ZApplication *application)
         string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
-        ZError err(kSDLError, errorstr);
-        util::fatalError(err);
+        ZApplicationException expt;
+        expt.description = errorstr;
+        
+        throw expt;
     }
     
     
@@ -85,4 +89,4 @@ void runApplication(ZApplication *application)
     delete platform;
 }
 
-}
+} // namespace zge

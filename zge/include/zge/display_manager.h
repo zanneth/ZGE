@@ -9,19 +9,20 @@
 #pragma once
 
 #include "zge/runnable_interface.h"
+#include "zge/display.h"
 #include <memory>
 
 namespace zge {
-using std::shared_ptr;
 
-class ZDisplay;
+typedef std::shared_ptr<class ZDisplayManager> ZDisplayManagerRef;
+
 class ZDisplayManager : public ZRunnableInterface {
-    shared_ptr<ZDisplay> _currentDisplay;
+    ZDisplayRef _currentDisplay;
     
 public:
     /** Accessors **/
-    shared_ptr<ZDisplay> getCurrentDisplay() const { return _currentDisplay; }
-    void setCurrentDisplay(shared_ptr<ZDisplay> display);
+    ZDisplayRef getCurrentDisplay() const { return _currentDisplay; }
+    void setCurrentDisplay(ZDisplayRef display);
     
     
     /** Runnable **/

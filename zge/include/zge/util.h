@@ -11,11 +11,5 @@
 #include "zge/error.h"
 
 namespace zge {
-namespace util {
 
-/** Fatal Errors **/
-void fatalError();
-void fatalError(ZError error);
-
-} // namespace util
 } // namespace zge

@@ -7,3 +7,7 @@
 //
 
 #include "zge/platform.h"
+
+namespace zge {
+
+} // namespace zge

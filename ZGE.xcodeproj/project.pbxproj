@@ -41,6 +41,7 @@
 		568CB48714DC6E8F00BD42D2 /* runnable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47714DC6E8F00BD42D2 /* runnable_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48814DC6E8F00BD42D2 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47814DC6E8F00BD42D2 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48914DC6E8F00BD42D2 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47914DC6E8F00BD42D2 /* util.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		568CB48C14DC777600BD42D2 /* exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB48B14DC777500BD42D2 /* exception.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		568CB47714DC6E8F00BD42D2 /* runnable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = runnable_interface.h; sourceTree = "<group>"; };
 		568CB47814DC6E8F00BD42D2 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		568CB47914DC6E8F00BD42D2 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		568CB48B14DC777500BD42D2 /* exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exception.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 				568CB46B14DC6E8F00BD42D2 /* display.h */,
 				568CB46C14DC6E8F00BD42D2 /* display_manager.h */,
 				568CB46D14DC6E8F00BD42D2 /* error.h */,
+				568CB48B14DC777500BD42D2 /* exception.h */,
 				568CB46E14DC6E8F00BD42D2 /* game_manager.h */,
 				568CB46F14DC6E8F00BD42D2 /* geometry.h */,
 				568CB47014DC6E8F00BD42D2 /* gl_display.h */,
@@ -270,6 +273,7 @@
 				568CB48514DC6E8F00BD42D2 /* platform.h in Headers */,
 				568CB48614DC6E8F00BD42D2 /* run_loop.h in Headers */,
 				568CB48714DC6E8F00BD42D2 /* runnable_interface.h in Headers */,
+				568CB48C14DC777600BD42D2 /* exception.h in Headers */,
 				568CB48814DC6E8F00BD42D2 /* types.h in Headers */,
 				568CB48914DC6E8F00BD42D2 /* util.h in Headers */,
 			);

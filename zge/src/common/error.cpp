@@ -18,7 +18,7 @@ ZError::ZError(int code, string description) :
     _code(code),
     _description(description) {}
 
-ZError ZError::NoError()
+ZError ZError::noError()
 {
     return ZError(kNoError, "No Error");
 }
@@ -37,4 +37,4 @@ bool ZError::operator!=(const ZError &other)
     return !operator==(other);
 }
 
-}
+} // namespace zge
