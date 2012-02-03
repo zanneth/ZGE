@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "display_manager.h"
-#include <zge/graphics/display.h>
+#include "zge/display_manager.h"
+#include "zge/display.h"
 
 namespace zge {
 

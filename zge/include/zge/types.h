@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_TYPES_H_
-#define _ZGE_TYPES_H_
+#pragma once
 
 namespace zge {
 
@@ -16,6 +15,4 @@ struct ZNullDeleter {
     void operator()(void const *) const {}
 };
 
-}
-
-#endif // _ZGE_TYPES_H_
+} // namespace zge

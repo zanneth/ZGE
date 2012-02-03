@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_RUNNABLE_INTERFACE_H_
-#define _ZGE_RUNNABLE_INTERFACE_H_
+#pragma once
 
 namespace zge {
 
@@ -21,6 +20,4 @@ public:
     friend class ZRunLoop;
 };
 
-}
-
-#endif // _ZGE_RUNNABLE_INTERFACE_H_
+} // namespace zge

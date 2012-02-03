@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "display.h"
+#include "zge/display.h"
 #include <iostream>
 
 namespace zge {

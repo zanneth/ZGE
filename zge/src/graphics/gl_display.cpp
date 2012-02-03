@@ -6,15 +6,14 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "gl_display.h"
+#include "zge/gl_display.h"
+#include "zge/logger.h"
+#include "zge/util.h"
 
 #include <iostream>
 #include <string>
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/gl.h>
-
-#include <zge/util/logger.h>
-#include <zge/util/util.h>
 
 namespace zge {
 

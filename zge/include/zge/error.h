@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_ERROR_H_
-#define _ZGE_ERROR_H_
+#pragma once
 
 #include <string>
 
@@ -44,6 +43,4 @@ public:
     void setDescription(const string description) { _description = description; }
 };
 
-}
-
-#endif // _ZGE_ERROR_H_
+} // namespace zge

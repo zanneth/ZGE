@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "error.h"
+#include "zge/error.h"
 
 namespace zge {
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "logger.h"
+#include "zge/logger.h"
 #include <iostream>
 
 namespace zge {

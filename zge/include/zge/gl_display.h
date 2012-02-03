@@ -6,13 +6,12 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_GL_DISPLAY_H_
-#define _ZGE_GL_DISPLAY_H_
+#pragma once
+
+#include "zge/display.h"
 
 #include <SDL/SDL.h>
 #include <string>
-
-#include <zge/graphics/display.h>
 
 namespace zge {
 using std::string;
@@ -43,6 +42,4 @@ private:
     void _changeWindowTitle(string newTitle);
 };
 
-}
-
-#endif // _ZGE_GL_DISPLAY_H_
+} // namespace zge

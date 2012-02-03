@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_DISPLAY_H_
-#define _ZGE_DISPLAY_H_
+#pragma once
+
+#include "zge/geometry.h"
+#include "zge/error.h"
 
 #include <string>
-#include <zge/common/geometry.h>
-#include <zge/common/error.h>
 
 namespace zge {
 using std::string;
@@ -58,6 +58,4 @@ public:
     virtual ZError setCoordinateSystem(const ZCoordinateSystem &coordSystem);
 };
 
-}
-
-#endif // _ZGE_DISPLAY_H_
+} // namespace zge

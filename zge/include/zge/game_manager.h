@@ -6,11 +6,10 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_GAME_MANAGER_H_
-#define _ZGE_GAME_MANAGER_H_
+#pragma once
 
+#include "zge/runnable_interface.h"
 #include <memory>
-#include <zge/interfaces/runnable_interface.h>
 
 namespace zge {
 
@@ -20,6 +19,4 @@ public:
     // TODO
 };
 
-}
-
-#endif // _ZGE_GAME_MANAGER_H_
+} // namespace zge

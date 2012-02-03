@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_NODE_H_
-#define _ZGE_NODE_H_
+#pragma once
+
+#include "zge/geometry.h"
 
 #include <memory>
 #include <vector>
-#include <zge/common/geometry.h>
 
 namespace zge {
 using std::shared_ptr;
@@ -42,6 +42,4 @@ public:
     virtual void update(unsigned dtime) {}
 };
 
-}
-
-#endif // _ZGE_NODE_H_
+} // namespace zge

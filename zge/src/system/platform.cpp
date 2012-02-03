@@ -6,4 +6,4 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "platform.h"
+#include "zge/platform.h"

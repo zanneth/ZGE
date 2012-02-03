@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_LOGGER_H_
-#define _ZGE_LOGGER_H_
+#pragma once
 
-#include <zge/common/error.h>
+#include "zge/error.h"
 
 namespace zge {
 
@@ -31,6 +30,4 @@ private:
 
 extern ZLogger *LOGGER;
 
-}
-
-#endif // _ZGE_LOGGER_H_
+} // namespace zge

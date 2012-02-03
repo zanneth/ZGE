@@ -6,13 +6,12 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_RUN_LOOP_H_
-#define _ZGE_RUN_LOOP_H_
+#pragma once
+
+#include "zge/runnable_interface.h"
 
 #include <memory>
 #include <vector>
-
-#include <zge/interfaces/runnable_interface.h>
 
 namespace zge {
 using std::vector;
@@ -42,6 +41,4 @@ private:
     void _main();
 };
 
-}
-
-#endif // _ZGE_RUN_LOOP_H_
+} // namespace zge

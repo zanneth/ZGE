@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "osx_platform.h"
+#include "zge/osx_platform.h"
+#include "zge/application.h"
 #include <SDL/SDL.h>
-#include <zge/system/application.h>
 
 namespace zge {
 

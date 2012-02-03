@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#ifndef _ZGE_OSX_PLATFORM_H_
-#define _ZGE_OSX_PLATFORM_H_
+#pragma once
 
-#include <zge/system/platform.h>
+#include "zge/platform.h"
 
 namespace zge {
 
@@ -25,7 +24,7 @@ private:
     void _setupMainMenu();
 };
 
-}
+} // namespace zge
 
 
 using zge::ZApplication;
@@ -37,5 +36,3 @@ using zge::ZApplication;
 @property (nonatomic, assign) ZApplication *application;
 
 @end
-
-#endif // _ZGE_OSX_PLATFORM_H_

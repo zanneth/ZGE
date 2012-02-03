@@ -6,17 +6,16 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "application.h"
+#include "zge/application.h"
+#include "zge/error.h"
+#include "zge/platform.h"
+#include "zge/osx_platform.h"
+#include "zge/logger.h"
+#include "zge/util.h"
 
 #include <iostream>
 #include <string>
 #include <SDL/SDL.h>
-
-#include <zge/common/error.h>
-#include <zge/system/platform.h>
-#include <zge/system/osx/osx_platform.h>
-#include <zge/util/logger.h>
-#include <zge/util/util.h>
 
 namespace zge {
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "game_manager.h"
+#include "zge/game_manager.h"
 
 namespace zge {
     

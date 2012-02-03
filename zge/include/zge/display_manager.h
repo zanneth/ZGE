@@ -6,11 +6,10 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_DISPLAY_MANAGER_H_
-#define _ZGE_DISPLAY_MANAGER_H_
+#pragma once
 
+#include "zge/runnable_interface.h"
 #include <memory>
-#include <zge/interfaces/runnable_interface.h>
 
 namespace zge {
 using std::shared_ptr;
@@ -29,6 +28,4 @@ public:
     void run(unsigned dtime) override;
 };
 
-}
-
-#endif // _ZGE_DISPLAY_MANAGER_H_
+} // namespace zge

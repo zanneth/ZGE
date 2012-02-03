@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "geometry.h"
+#include "zge/geometry.h"
 
 namespace zge {
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "input_manager.h"
+#include "zge/input_manager.h"
 #include <SDL/SDL.h>
 #include <iostream>
 

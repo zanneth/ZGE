@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_GEOMETRY_H_
-#define _ZGE_GEOMETRY_H_
+#pragma once
 
 namespace zge {
 
@@ -65,6 +64,4 @@ public:
     bool operator!=(const ZPoint &other) { return !operator==(other); }
 };
 
-}
-
-#endif // _ZGE_GEOMETRY_H_
+} // namespace zge

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "node.h"
+#include "zge/node.h"
+#include "zge/logger.h"
 #include <iostream>
-#include <zge/util/logger.h>
 
 namespace zge {
 

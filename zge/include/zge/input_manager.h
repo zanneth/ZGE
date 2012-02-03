@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_INPUT_MANAGER_H_
-#define _ZGE_INPUT_MANAGER_H_
+#pragma once
 
-#include <zge/interfaces/runnable_interface.h>
+#include "zge/runnable_interface.h"
 
 namespace zge {
 
@@ -18,6 +17,4 @@ public:
     void run(unsigned dtime) override;
 };
 
-}
-
-#endif // _ZGE_INPUT_MANAGER_H_
+} // namespace zge

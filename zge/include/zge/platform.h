@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_PLATFORM_H_
-#define _ZGE_PLATFORM_H_
+#pragma once
 
-#include <zge/system/application.h>
+#include "zge/application.h"
 
 namespace zge {
 
@@ -22,6 +21,4 @@ public:
     virtual void runApplication(ZApplication *application) = 0;
 };
 
-}
-
-#endif // _ZGE_PLATFORM_H_
+} // namespace zge

@@ -6,14 +6,13 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_APPLICATION_H_
-#define _ZGE_APPLICATION_H_
+#pragma once
+
+#include "zge/run_loop.h"
 
 #include <string>
 #include <list>
 #include <memory>
-
-#include <zge/system/run_loop.h>
 
 namespace zge {
 using std::string;
@@ -44,6 +43,4 @@ public:
 
 void runApplication(ZApplication *application);
 
-}
-
-#endif // _ZGE_APPLICATION_H_
+} // namespace zge

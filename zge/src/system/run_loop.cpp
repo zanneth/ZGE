@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#include "run_loop.h"
+#include "zge/run_loop.h"
 
 #include <iostream>
 #include <SDL/SDL.h>

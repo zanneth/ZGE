@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 omegaHern. All rights reserved.
 //
 
-#ifndef _ZGE_UTIL_H_
-#define _ZGE_UTIL_H_
+#pragma once
 
-#include <zge/common/error.h>
+#include "zge/error.h"
 
 namespace zge {
 namespace util {
@@ -18,7 +17,5 @@ namespace util {
 void fatalError();
 void fatalError(ZError error);
 
-}
-}
-
-#endif // _ZGE_UTIL_H_
+} // namespace util
+} // namespace zge
