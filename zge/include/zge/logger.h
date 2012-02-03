@@ -13,21 +13,10 @@
 namespace zge {
 
 class ZLogger {
-    static ZLogger *_instance;
-    
 public:
-    static ZLogger* Instance();
-    
-    void log(const char *format, ...);
-    void log(ZError error);
-    void warn(const char *format, ...);
-
-private:
-    ZLogger() {}
-    ZLogger(const ZLogger&) {}
-    ~ZLogger() {}
+    static void log(const char *format, ...);
+    static void log(ZError error);
+    static void warn(const char *format, ...);
 };
-
-extern ZLogger *LOGGER;
 
 } // namespace zge

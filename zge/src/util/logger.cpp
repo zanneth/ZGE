@@ -11,16 +11,6 @@
 
 namespace zge {
 
-ZLogger *ZLogger::_instance = NULL;
-ZLogger *LOGGER = ZLogger::Instance();
-
-ZLogger* ZLogger::Instance()
-{
-    if (_instance == NULL)
-        _instance = new ZLogger();
-    return _instance;
-}
-
 void ZLogger::log(const char *format, ...)
 {
     char buf[1024];

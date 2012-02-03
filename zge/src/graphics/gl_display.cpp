@@ -45,7 +45,7 @@ void ZGLDisplay::initialize()
         
         _isInitialized = true;
     } else {
-        LOGGER->warn("Display already initialized.");
+        ZLogger::warn("Display already initialized.");
     }
 }
 
