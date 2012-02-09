@@ -9,6 +9,7 @@
 #pragma once
 
 #include "zge/display.h"
+#include "zge/noncopyable.h"
 
 #include <SDL/SDL.h>
 #include <string>
@@ -17,7 +18,7 @@ namespace zge {
 
 using std::string;
 
-class ZGLDisplay : public ZDisplay {
+class ZGLDisplay : public ZDisplay, private ZNonCopyable {
     SDL_Surface *_surface;
     unsigned _lastRender;
     

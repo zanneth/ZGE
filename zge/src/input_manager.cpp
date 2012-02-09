@@ -18,7 +18,7 @@ void ZInputManager::run(unsigned dtime)
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
-                exit(0); // FIXME: Temporary
+                //exit(0); // FIXME: Temporary
                 break;
             default:
                 break;

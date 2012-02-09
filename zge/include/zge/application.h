@@ -10,6 +10,7 @@
 
 #include "zge/run_loop.h"
 #include "zge/exception.h"
+#include "zge/noncopyable.h"
 
 #include <string>
 #include <list>
@@ -29,12 +30,12 @@ public:
     }
 };
 
-class ZApplication {
+class ZApplication : private ZNonCopyable {
     list<string> _arguments;
     
 public:
     ZApplication(int argc, char **argv);
-    virtual ~ZApplication() {}
+    virtual ~ZApplication() = default;
     
     /** Accessors **/
     list<string> getArguments() const { return _arguments; }

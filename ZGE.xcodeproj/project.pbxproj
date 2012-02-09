@@ -42,6 +42,7 @@
 		56E85DC514E4835700638CFD /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB714E4835700638CFD /* platform.cpp */; };
 		56E85DC614E4835700638CFD /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB814E4835700638CFD /* run_loop.cpp */; };
 		56E85DC714E4835700638CFD /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB914E4835700638CFD /* util.cpp */; };
+		56E85DC914E483FD00638CFD /* noncopyable.h in Headers */ = {isa = PBXBuildFile; fileRef = 56E85DC814E483FD00638CFD /* noncopyable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		56E85DB714E4835700638CFD /* platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		56E85DB814E4835700638CFD /* run_loop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = run_loop.cpp; sourceTree = "<group>"; };
 		56E85DB914E4835700638CFD /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		56E85DC814E483FD00638CFD /* noncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = noncopyable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				568CB47114DC6E8F00BD42D2 /* input_manager.h */,
 				568CB47214DC6E8F00BD42D2 /* logger.h */,
 				568CB47314DC6E8F00BD42D2 /* node.h */,
+				56E85DC814E483FD00638CFD /* noncopyable.h */,
 				568CB47414DC6E8F00BD42D2 /* osx_platform.h */,
 				568CB47514DC6E8F00BD42D2 /* platform.h */,
 				568CB47614DC6E8F00BD42D2 /* run_loop.h */,
@@ -215,6 +218,7 @@
 				568CB48314DC6E8F00BD42D2 /* node.h in Headers */,
 				568CB48414DC6E8F00BD42D2 /* osx_platform.h in Headers */,
 				568CB48514DC6E8F00BD42D2 /* platform.h in Headers */,
+				56E85DC914E483FD00638CFD /* noncopyable.h in Headers */,
 				568CB48614DC6E8F00BD42D2 /* run_loop.h in Headers */,
 				568CB48714DC6E8F00BD42D2 /* runnable_interface.h in Headers */,
 				568CB48C14DC777600BD42D2 /* exception.h in Headers */,

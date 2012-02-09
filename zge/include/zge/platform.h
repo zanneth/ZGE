@@ -9,10 +9,11 @@
 #pragma once
 
 #include "zge/application.h"
+#include "zge/noncopyable.h"
 
 namespace zge {
 
-class ZPlatform {
+class ZPlatform : private ZNonCopyable {
 protected:
     ZApplication *_application;
     

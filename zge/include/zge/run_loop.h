@@ -9,6 +9,7 @@
 #pragma once
 
 #include "zge/runnable_interface.h"
+#include "zge/noncopyable.h"
 
 #include <memory>
 #include <vector>
@@ -17,7 +18,7 @@ namespace zge {
 
 using std::vector;
 
-class ZRunLoop {
+class ZRunLoop : private ZNonCopyable {
     vector<ZRunnableInterfaceRef> _runnables;
     bool _running;
     
