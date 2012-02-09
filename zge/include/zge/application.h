@@ -31,7 +31,6 @@ public:
 
 class ZApplication {
     list<string> _arguments;
-    auto_ptr<ZRunLoop> _mainRunLoop;
     
 public:
     ZApplication(int argc, char **argv);
@@ -40,10 +39,10 @@ public:
     /** Accessors **/
     list<string> getArguments() const { return _arguments; }
     void setArguments(int argc, char **argv);
-    ZRunLoop* getMainRunLoop();
     
     
-    /** Convenience Method for Run Loop **/
+    /** Accessing the Main Run Loop **/
+    static ZRunLoop* getMainRunLoop();
     void startMainRunLoop();
     
     
