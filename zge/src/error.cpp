@@ -1,11 +1,10 @@
-//
-//  error.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 1/13/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * error.cpp
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #include "zge/error.h"
 
 namespace zge {
@@ -14,7 +13,7 @@ ZError::ZError() :
     _code(kUnknownError),
     _description("Unknown Error") {}
 
-ZError::ZError(int code, string description) :
+ZError::ZError(int code, std::string description) :
     _code(code),
     _description(description) {}
 

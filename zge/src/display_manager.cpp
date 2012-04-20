@@ -1,11 +1,10 @@
-//
-//  display_manager.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 1/4/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * display_manager.cpp
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #include "zge/display_manager.h"
 
 namespace zge {

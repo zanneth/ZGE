@@ -1,11 +1,10 @@
-//
-//  error.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/13/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * error.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #pragma once
 
 #include <string>
@@ -17,15 +16,13 @@ enum {
     kNoError        = 0
 };
 
-using std::string;
-
 class ZError {
     int _code;
-    string _description;
+    std::string _description;
     
 public:
     ZError();
-    ZError(int code, string description);
+    ZError(int code, std::string description);
     
     static ZError noError();
     
@@ -37,8 +34,8 @@ public:
     /** Accessors **/
     int getCode() const { return _code; }
     void setCode(const int code) { _code = code; }
-    string getDescription() const { return _description; }
-    void setDescription(const string description) { _description = description; }
+    std::string getDescription() const { return _description; }
+    void setDescription(const std::string description) { _description = description; }
 };
 
 } // namespace zge

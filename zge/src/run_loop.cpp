@@ -1,11 +1,10 @@
-//
-//  run_loop.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 1/5/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * run_loop.cpp
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #include "zge/run_loop.h"
 
 #include <iostream>

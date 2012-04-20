@@ -1,11 +1,10 @@
-//
-//  exception.h
-//  ZGE
-//
-//  Created by Charles Magahern on 2/3/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * exception.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #pragma once
 
 #include <exception>
@@ -13,15 +12,13 @@
 
 namespace zge {
 
-using std::string;
-
 class ZException : public std::exception {
 public:
-    string description;
+    std::string description;
     
     virtual const char* what() const throw()
     {
-        string err = "An exception occurred: " + description;
+        std::string err = "An exception occurred: " + description;
         return err.c_str();
     }
 };

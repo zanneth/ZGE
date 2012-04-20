@@ -1,11 +1,10 @@
-//
-//  noncopyable.h
-//  ZGE
-//
-//  Created by Charles Magahern on 2/9/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * noncopyable.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/09/2012
+ */
+ 
 #pragma once
 
 namespace zge {

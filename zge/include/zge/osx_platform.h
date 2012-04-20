@@ -1,11 +1,10 @@
-//
-//  osx_platform.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/3/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * osx_platform.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
@@ -27,12 +26,10 @@ private:
 } // namespace zge
 
 
-using zge::ZApplication;
-
 @interface ZAppDelegate : NSObject <NSApplicationDelegate> {
-    ZApplication *application;
+    zge::ZApplication *application;
 }
 
-@property (nonatomic, assign) ZApplication *application;
+@property (nonatomic, assign) zge::ZApplication *application;
 
 @end

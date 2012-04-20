@@ -1,11 +1,10 @@
-//
-//  gl_display.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/4/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * gl_display.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/09/2012
+ */
+ 
 #pragma once
 
 #include "zge/display.h"
@@ -15,8 +14,6 @@
 #include <string>
 
 namespace zge {
-
-using std::string;
 
 class ZGLDisplay : public ZDisplay, private ZNonCopyable {
     SDL_Surface *_surface;
@@ -41,7 +38,7 @@ private:
     
     void _initOpenGL();
     
-    void _changeWindowTitle(string newTitle);
+    void _changeWindowTitle(std::string newTitle);
 };
 
 } // namespace zge

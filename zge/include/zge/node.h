@@ -1,11 +1,10 @@
-//
-//  node.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/9/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * node.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #pragma once
 
 #include "zge/geometry.h"
@@ -15,17 +14,13 @@
 
 namespace zge {
 
-using std::shared_ptr;
-using std::weak_ptr;
-using std::vector;
-
-typedef shared_ptr<class ZNode> ZNodeRef;
+typedef std::shared_ptr<class ZNode> ZNodeRef;
 
 class ZNode : public std::enable_shared_from_this<ZNode> {
     ZVecf _position;
     
-    vector<ZNodeRef> _children;
-    weak_ptr<ZNode> _parent;
+    std::vector<ZNodeRef> _children;
+    std::weak_ptr<ZNode> _parent;
     
 public:
     ~ZNode();

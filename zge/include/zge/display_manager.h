@@ -1,11 +1,10 @@
-//
-//  display_manager.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/4/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * display_manager.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/09/2012
+ */
+ 
 #pragma once
 
 #include "zge/runnable_interface.h"

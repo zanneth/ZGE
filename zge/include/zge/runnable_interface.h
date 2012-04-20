@@ -1,20 +1,17 @@
-//
-//  runnable_interface.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/5/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * runnable_interface.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #pragma once
 
 #include <memory>
 
 namespace zge {
 
-using std::shared_ptr;
-
-typedef shared_ptr<class ZRunnableInterface> ZRunnableInterfaceRef;
+typedef std::shared_ptr<class ZRunnableInterface> ZRunnableInterfaceRef;
 
 class ZRunnableInterface {
     unsigned _lastUpdate;

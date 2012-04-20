@@ -1,11 +1,10 @@
-//
-//  gl_display.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 1/4/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * gl_display.cpp
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #include "zge/gl_display.h"
 #include "zge/logger.h"
 #include "zge/util.h"
@@ -143,7 +142,7 @@ void ZGLDisplay::_initOpenGL()
     glClearColor(0.0, 0.0, 0.0, 1.0f);
 }
 
-void ZGLDisplay::_changeWindowTitle(string newTitle)
+void ZGLDisplay::_changeWindowTitle(std::string newTitle)
 {
     const char *windowTitle = newTitle.c_str();
     SDL_WM_SetCaption(windowTitle, windowTitle);

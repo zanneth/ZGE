@@ -1,11 +1,10 @@
-//
-//  display.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/4/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * display.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #pragma once
 
 #include "zge/geometry.h"
@@ -16,17 +15,14 @@
 
 namespace zge {
 
-using std::string;
-using std::shared_ptr;
-
-typedef shared_ptr<class ZDisplay> ZDisplayRef;
+typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
 
 struct ZDisplayMode {
     bool windowed;
     int width;
     int height;
     float refreshRate;
-    string windowTitle;
+    std::string windowTitle;
     
 public:
     ZDisplayMode() :

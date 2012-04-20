@@ -1,11 +1,10 @@
-//
-//  osx_platform.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 1/3/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * osx_platform.mm
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/03/2012
+ */
+ 
 #include "zge/osx_platform.h"
 #include "zge/application.h"
 #include <SDL/SDL.h>

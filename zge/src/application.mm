@@ -1,11 +1,10 @@
-//
-//  application.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 1/3/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * application.mm
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/09/2012
+ */
+ 
 #include "zge/application.h"
 #include "zge/error.h"
 #include "zge/platform.h"
@@ -32,7 +31,7 @@ ZApplication::ZApplication(int argc, char **argv)
 void ZApplication::setArguments(int argc, char **argv)
 {
     for (int i = 0; i < argc; ++i) {
-        string str = argv[i];
+        std::string str = argv[i];
         _arguments.push_back(str);
     }
 }
@@ -70,7 +69,7 @@ void runApplication(ZApplication *application)
     // Initialize SDL engine
     int sdlStat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     if (sdlStat < 0) {
-        string errorstr = "SDL Failed to initialize: ";
+        std::string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
         ZApplicationException expt;

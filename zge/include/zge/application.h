@@ -1,11 +1,10 @@
-//
-//  application.h
-//  ZGE
-//
-//  Created by Charles Magahern on 1/3/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * application.h
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 02/09/2012
+ */
+ 
 #pragma once
 
 #include "zge/run_loop.h"
@@ -18,10 +17,6 @@
 
 namespace zge {
 
-using std::string;
-using std::list;
-using std::auto_ptr;
-
 class ZApplicationException : public ZException {
 public:
     virtual const char* what() const throw()
@@ -31,14 +26,14 @@ public:
 };
 
 class ZApplication : private ZNonCopyable {
-    list<string> _arguments;
+    std::list<std::string> _arguments;
     
 public:
     ZApplication(int argc, char **argv);
     virtual ~ZApplication() = default;
     
     /** Accessors **/
-    list<string> getArguments() const { return _arguments; }
+    std::list<std::string> getArguments() const { return _arguments; }
     void setArguments(int argc, char **argv);
     
     
