@@ -15,7 +15,7 @@
 
 namespace zge {
 
-class ZRunLoop : private ZNonCopyable {
+class ZRunLoop : ZNonCopyable {
     std::vector<ZRunnableInterfaceRef> _runnables;
     bool _running;
     

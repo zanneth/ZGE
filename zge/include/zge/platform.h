@@ -12,7 +12,7 @@
 
 namespace zge {
 
-class ZPlatform : private ZNonCopyable {
+class ZPlatform : ZNonCopyable {
 protected:
     ZApplication *_application;
     

@@ -13,7 +13,7 @@ namespace zge {
 
 ZNode::~ZNode()
 {
-    std::cout << "Node 0x" << this << " destroyed" << std::endl;
+    ZLogger::log("Node 0x%x destroyed", this);
 }
 
 void ZNode::addChild(ZNodeRef node)

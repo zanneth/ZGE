@@ -10,12 +10,11 @@
 #include "zge/geometry.h"
 #include "zge/error.h"
 #include "zge/exception.h"
+#include "zge/noncopyable.h"
 
 #include <string>
 
 namespace zge {
-
-typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
 
 struct ZDisplayMode {
     bool windowed;
@@ -41,30 +40,33 @@ public:
     }
 };
 
-class ZDisplay {
+class ZDisplay : ZNonCopyable {
 protected:
     bool _isInitialized;
     ZDisplayMode _displayMode;
-    ZCoordinateSystem<float> _coordinateSystem;
     
 public:
     ZDisplay() = default;
     ZDisplay(const ZDisplayMode &displayMode);
     virtual ~ZDisplay() {}
+    
+    /** Initialization **/
     virtual void initialize() = 0;
+    
+    
+    /** Rendering **/
     virtual void render(unsigned dtime) = 0;
+    
     
     // Convenience method for setting width/height values in the current display mode
     void resize(int width, int height);
+    
     
     /** Accessors **/
     bool isInitialized() { return _isInitialized; }
     
     ZDisplayMode getDisplayMode() const { return _displayMode; }
     virtual void setDisplayMode(const ZDisplayMode &mode);
-    
-    ZCoordinateSystem<float> getCoordinateSystem() const { return _coordinateSystem; }
-    virtual void setCoordinateSystem(const ZCoordinateSystem<float> &coordSystem);
 };
 
 } // namespace zge

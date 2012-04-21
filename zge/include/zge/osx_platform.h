@@ -11,11 +11,12 @@
 #pragma once
 
 #include "zge/platform.h"
+#include "zge/noncopyable.h"
 
 namespace zge {
 
 class ZApplication;
-class ZOSXPlatform : public ZPlatform {
+class ZOSXPlatform : public ZPlatform, ZNonCopyable {
 public:
     void runApplication(ZApplication *application) override;
 

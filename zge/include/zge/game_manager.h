@@ -8,13 +8,14 @@
 #pragma once
 
 #include "zge/runnable_interface.h"
+#include "zge/noncopyable.h"
 #include <memory>
 
 namespace zge {
 
 typedef std::shared_ptr<class ZGameManager> ZGameManagerRef;
 
-class ZGameManager : public ZRunnableInterface {
+class ZGameManager : public ZRunnableInterface, ZNonCopyable {
     
 public:
     // TODO

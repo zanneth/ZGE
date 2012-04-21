@@ -33,10 +33,4 @@ void ZDisplay::setDisplayMode(const ZDisplayMode &mode)
     _displayMode = mode;
 }
 
-void ZDisplay::setCoordinateSystem(const ZCoordinateSystemf &coordSystem)
-{
-    _coordinateSystem = coordSystem;
-}
-
-
 } // namespace zge
