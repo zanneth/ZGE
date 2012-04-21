@@ -22,12 +22,7 @@ ZNode::~ZNode()
 
 void ZNode::addChild(ZNodeRef node)
 {
-    try {
-        node->_parent = shared_from_this();
-    } catch (std::bad_weak_ptr exception) {
-        ZLogger::warn("(ZNode::addChild) No shared pointer for parent found.");
-    }
-    
+    node->_parent = this;
     _children.push_back(node);
 }
 

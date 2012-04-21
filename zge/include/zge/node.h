@@ -17,18 +17,19 @@ namespace zge {
 typedef std::shared_ptr<class ZNode> ZNodeRef;
 
 class ZNode : public std::enable_shared_from_this<ZNode> {
+protected:
     ZVecf _position;
     
+    ZNode *_parent;
     std::vector<ZNodeRef> _children;
-    std::weak_ptr<ZNode> _parent;
     
 public:
     ~ZNode();
     
     /** Accessors **/
+    ZNode* getParent() const { return _parent; }
     ZVecf getPosition() const { return _position; }
     void setPosition(const ZVecf &position) { _position = position; }
-    ZNodeRef getParent() const { return _parent.lock(); }
     
     
     /** Managing Sub-Nodes **/

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5623F45615423EB0008BE96D /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 5623F45515423EB0008BE96D /* scene.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5623F45915423F32008BE96D /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5623F45815423F32008BE96D /* scene.cpp */; };
 		563B6EBB14B2FD6D00004C6A /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBA14B2FD6D00004C6A /* SDL.framework */; };
 		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
 		563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBE14B2FD7800004C6A /* Foundation.framework */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5623F45515423EB0008BE96D /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
+		5623F45815423F32008BE96D /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
 		563B6E9614B2FD2600004C6A /* libZGE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZGE.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		563B6EBA14B2FD6D00004C6A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Library/Frameworks/SDL.framework; sourceTree = SDKROOT; };
 		563B6EBC14B2FD7300004C6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -139,8 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				56E85DAC14E4835700638CFD /* application.mm */,
-				56E85DAD14E4835700638CFD /* display_manager.cpp */,
 				56E85DAE14E4835700638CFD /* display.cpp */,
+				56E85DAD14E4835700638CFD /* display_manager.cpp */,
 				56E85DAF14E4835700638CFD /* error.cpp */,
 				56E85DB014E4835700638CFD /* game_manager.cpp */,
 				56E85DB114E4835700638CFD /* geometry.cpp */,
@@ -151,6 +155,7 @@
 				56E85DB614E4835700638CFD /* osx_platform.mm */,
 				56E85DB714E4835700638CFD /* platform.cpp */,
 				56E85DB814E4835700638CFD /* run_loop.cpp */,
+				5623F45815423F32008BE96D /* scene.cpp */,
 				56E85DB914E4835700638CFD /* util.cpp */,
 			);
 			path = src;
@@ -183,6 +188,7 @@
 				568CB47514DC6E8F00BD42D2 /* platform.h */,
 				568CB47614DC6E8F00BD42D2 /* run_loop.h */,
 				568CB47714DC6E8F00BD42D2 /* runnable_interface.h */,
+				5623F45515423EB0008BE96D /* scene.h */,
 				568CB47814DC6E8F00BD42D2 /* types.h */,
 				568CB47914DC6E8F00BD42D2 /* util.h */,
 			);
@@ -220,6 +226,7 @@
 				568CB48514DC6E8F00BD42D2 /* platform.h in Headers */,
 				56E85DC914E483FD00638CFD /* noncopyable.h in Headers */,
 				568CB48614DC6E8F00BD42D2 /* run_loop.h in Headers */,
+				5623F45615423EB0008BE96D /* scene.h in Headers */,
 				568CB48714DC6E8F00BD42D2 /* runnable_interface.h in Headers */,
 				568CB48C14DC777600BD42D2 /* exception.h in Headers */,
 				568CB48814DC6E8F00BD42D2 /* types.h in Headers */,
@@ -292,6 +299,7 @@
 				56E85DC514E4835700638CFD /* platform.cpp in Sources */,
 				56E85DC614E4835700638CFD /* run_loop.cpp in Sources */,
 				56E85DC714E4835700638CFD /* util.cpp in Sources */,
+				5623F45915423F32008BE96D /* scene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
