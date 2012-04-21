@@ -7,6 +7,7 @@
  
 #include "zge/display_manager.h"
 #include "zge/gl_display.h"
+#include <iostream>
 
 namespace zge {
 

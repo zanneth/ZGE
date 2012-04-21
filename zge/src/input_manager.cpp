@@ -19,6 +19,11 @@ void ZInputManager::run(unsigned dtime)
             case SDL_QUIT:
                 exit(0); // FIXME: Temporary
                 break;
+            case SDL_KEYDOWN:
+                if (event.key.keysym.sym == SDLK_q) {
+                    exit(0);
+                }
+                break;
             default:
                 break;
         }

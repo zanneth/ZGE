@@ -7,6 +7,7 @@
  
 #include "zge/run_loop.h"
 
+#include <algorithm>
 #include <iostream>
 #include <SDL/SDL.h>
 
@@ -39,11 +40,9 @@ void ZRunLoop::schedule(ZRunnableInterfaceRef runnable)
 
 void ZRunLoop::unschedule(ZRunnableInterfaceRef runnable)
 {
-    for (auto itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
-        if (*itr == runnable) {
-            _runnables.erase(itr);
-            break;
-        }
+    auto itr = std::find(_runnables.begin(), _runnables.end(), runnable);
+    if (itr != _runnables.end()) {
+        _runnables.erase(itr);
     }
 }
 
@@ -53,9 +52,9 @@ void ZRunLoop::unschedule(ZRunnableInterfaceRef runnable)
 void ZRunLoop::_main()
 {
     while (_running) {
-        for (auto itr = _runnables.begin(); itr != _runnables.end(); ++itr) {
+        for (ZRunnableInterfaceRef runnable : _runnables) { 
             unsigned time = SDL_GetTicks();
-            unsigned lastUpdate = (*itr)->_lastUpdate;
+            unsigned lastUpdate = runnable->_lastUpdate;
             unsigned dtime;
             
             if (lastUpdate == 0) {
@@ -64,8 +63,8 @@ void ZRunLoop::_main()
                 dtime = time - lastUpdate;
             }
             
-            (*itr)->run(dtime);
-            (*itr)->_lastUpdate = time;
+            runnable->run(dtime);
+            runnable->_lastUpdate = time;
         }
     }
 }
