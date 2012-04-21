@@ -1,11 +1,10 @@
-//
-//  scene.cpp
-//  ZGE
-//
-//  Created by Charles Magahern on 4/20/12.
-//  Copyright (c) 2012 omegaHern. All rights reserved.
-//
-
+/*
+ * scene.cpp
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 04/20/2012
+ */
+ 
 #include "scene.h"
 #include <memory>
 
@@ -17,3 +16,4 @@ ZScene::ZScene()
 }
 
 } // namespace zge
+
