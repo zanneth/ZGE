@@ -10,7 +10,7 @@
 
 namespace zge {
 
-ZScene::ZScene()
+ZScene::ZScene() : ZNode()
 {
     setPosition(ZVecf(0.0, 0.0, 0.0));
 }

@@ -7,8 +7,6 @@
  
 #pragma once
 
-#include "zge/error.h"
-
 namespace zge {
 
 } // namespace zge

@@ -6,7 +6,9 @@
  */
  
 #include "zge/display_manager.h"
+#include "zge/exception.h"
 #include "zge/gl_display.h"
+
 #include <iostream>
 
 namespace zge {
@@ -33,7 +35,7 @@ ZDisplay* ZDisplayManager::createDisplay(const ZDisplayMode &mode, ZRenderingAPI
         case kSoftware:
         case kDirectX:
         default:
-            throw "Not Yet Implemented";
+            throw ZNotImplementedException();
             break;
     }
     

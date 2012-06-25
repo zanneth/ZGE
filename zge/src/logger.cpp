@@ -22,9 +22,9 @@ void ZLogger::log(const char *format, ...)
     std::cout << buf << std::endl;
 }
 
-void ZLogger::log(ZError error)
+void ZLogger::log(const std::string str)
 {
-    std::cerr << "ERROR (" << error.getCode() << "): " << error.getDescription() << std::endl;
+    std::cout << str << std::endl;
 }
 
 void ZLogger::warn(const char *format, ...)

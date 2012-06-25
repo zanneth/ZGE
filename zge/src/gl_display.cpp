@@ -24,7 +24,7 @@ ZGLDisplay::ZGLDisplay(const ZDisplayMode &mode) : ZDisplay(mode),
 
 ZGLDisplay::~ZGLDisplay()
 {
-    if (_surface != NULL) {
+    if (_surface != nullptr) {
         SDL_FreeSurface(_surface);
     }
 }
@@ -55,6 +55,12 @@ void ZGLDisplay::render(unsigned dtime)
     _lastRender += dtime;
     if (_lastRender >= _displayMode.refreshRate) {
         _lastRender = 0;
+        
+        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        // TODO
+        
         SDL_GL_SwapBuffers();
     }
 }
@@ -91,13 +97,14 @@ void ZGLDisplay::_loadSurface()
     if (_surface != NULL) {
         SDL_FreeSurface(_surface);
     }
+    
     _surface = SDL_SetVideoMode(_displayMode.width, _displayMode.height, 0, sdlFlags);
     if (!_surface) {
         std::string errorStr = "The OpenGL display surface failed to initialize: ";
         errorStr += SDL_GetError();
         
         ZDisplayException expt;
-        expt.description = errorStr;
+        expt.extraInfo = errorStr;
         throw expt;
     }
 }

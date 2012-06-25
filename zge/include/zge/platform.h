@@ -7,17 +7,18 @@
  
 #pragma once
 
-#include "zge/application.h"
 #include "zge/noncopyable.h"
+#include <string>
 
 namespace zge {
 
+class ZApplication;
+
 class ZPlatform : ZNonCopyable {
-protected:
-    ZApplication *_application;
-    
 public:
     virtual ~ZPlatform() {}
+    
+    virtual std::string getDescription();
     virtual void runApplication(ZApplication *application) = 0;
 };
 

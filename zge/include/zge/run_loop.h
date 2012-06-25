@@ -26,10 +26,8 @@ public:
     /** Accessors **/
     bool isRunning() { return _running; }
     
-    
     /** Starting the Run Loop **/
     void run();
-    
     
     /** Managing Runnables in the Run Loop **/
     void schedule(ZRunnableInterfaceRef runnable);

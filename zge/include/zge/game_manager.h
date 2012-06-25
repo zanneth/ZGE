@@ -7,33 +7,26 @@
  
 #pragma once
 
-#include "zge/runnable_interface.h"
 #include "zge/noncopyable.h"
 #include "zge/node.h"
+#include "zge/runnable_interface.h"
 #include "zge/scene.h"
 
-#include <stack>
 #include <memory>
+#include <stack>
 
 namespace zge {
 
 typedef std::shared_ptr<class ZGameManager> ZGameManagerRef;
 
 class ZGameManager : public ZRunnableInterface, ZNonCopyable {
-    std::stack<ZScene*> _sceneStack;
+    std::stack<ZSceneRef> _sceneStack;
     
 public:
-    ~ZGameManager();
-    
-    /** Creating Scenes **/
-    ZScene* createAndPushScene();
-    
-    
     /** Scene Management **/
-    ZScene* getCurrentScene() const;
-    void pushScene(ZScene *scene);
-    ZScene* popScene();
-    
+    ZSceneRef getCurrentScene() const;
+    void pushScene(ZSceneRef scene);
+    ZSceneRef popScene();
     
     /** Runnable Overrides **/
     void run(unsigned dtime) override;

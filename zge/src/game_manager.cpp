@@ -9,31 +9,9 @@
 
 namespace zge {
 
-ZGameManager::~ZGameManager()
-{
-    while (!_sceneStack.empty()) {
-        ZScene *scene = _sceneStack.top();
-        delete scene;
-        
-        _sceneStack.pop();
-    }
-}
-
-
-#pragma mark - Creating Scenes
-
-ZScene* ZGameManager::createAndPushScene()
-{
-    ZScene *scene = new ZScene();
-    pushScene(scene);
-    
-    return scene;
-}
-
-
 #pragma mark - Managing Scenes
 
-ZScene* ZGameManager::getCurrentScene() const
+ZSceneRef ZGameManager::getCurrentScene() const
 {
     if (_sceneStack.empty()) {
         return nullptr;
@@ -42,14 +20,14 @@ ZScene* ZGameManager::getCurrentScene() const
     return _sceneStack.top();
 }
 
-void ZGameManager::pushScene(ZScene *scene)
+void ZGameManager::pushScene(ZSceneRef scene)
 {
     _sceneStack.push(scene);
 }
 
-ZScene* ZGameManager::popScene()
+ZSceneRef ZGameManager::popScene()
 {
-    ZScene *scene = nullptr;
+    ZSceneRef scene = nullptr;
     if (!_sceneStack.empty()) {
         scene = _sceneStack.top();
         _sceneStack.pop();
@@ -63,8 +41,8 @@ ZScene* ZGameManager::popScene()
 
 void ZGameManager::run(unsigned dtime)
 {
-    ZScene *scene = getCurrentScene();
-    if (scene != nullptr) {
+    ZSceneRef scene = getCurrentScene();
+    if (scene.get() != nullptr) {
         scene->update(dtime);
     }
 }

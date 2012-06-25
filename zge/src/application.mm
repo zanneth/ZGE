@@ -6,12 +6,14 @@
  */
  
 #include "zge/application.h"
-#include "zge/error.h"
+#include "zge/exception.h"
 #include "zge/platform.h"
 #include "zge/osx_platform.h"
 #include "zge/logger.h"
+#include "zge/run_loop.h"
 #include "zge/util.h"
 
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <SDL/SDL.h>
@@ -61,7 +63,7 @@ void runApplication(ZApplication *application)
 {
     if (application == NULL) {
         ZApplicationException expt;
-        expt.description = "Application pointer is NULL.";
+        expt.extraInfo = "Application pointer is NULL.";
         
         throw expt;
     }
@@ -73,19 +75,28 @@ void runApplication(ZApplication *application)
         errorstr += SDL_GetError();
         
         ZApplicationException expt;
-        expt.description = errorstr;
+        expt.extraInfo = errorstr;
         
         throw expt;
     }
     
+    // Initialize the RNG
+    srand(time(NULL));
     
     // Initialize the platform interface
-    ZPlatform *platform;
+    ZPlatform *platform = nullptr;
 #if __APPLE__
     platform = new ZOSXPlatform();
 #endif
     
-    platform->runApplication(application); // Does not return (OS should start its event loop)
+    // Check if the platform was able to be initialized.
+    if (platform == nullptr) {
+        ZApplicationException expt;
+        expt.extraInfo = "Platform not supported.";
+    }
+    
+    application->_currentPlatform = platform;
+    platform->runApplication(application); // Does not return (should start event loop)
     delete platform;
 }
 

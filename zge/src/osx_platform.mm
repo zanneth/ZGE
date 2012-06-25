@@ -7,14 +7,15 @@
  
 #include "zge/osx_platform.h"
 #include "zge/application.h"
+
+#include <string>
+#include <sstream>
 #include <SDL/SDL.h>
 
 namespace zge {
 
 void ZOSXPlatform::runApplication(ZApplication *application)
 {
-    _application = application;
-    
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     [NSApplication sharedApplication]; // Initialize the application if it hasn't been already
@@ -34,6 +35,17 @@ void ZOSXPlatform::runApplication(ZApplication *application)
     
     [appDelegate release];
     [pool release];
+}
+
+std::string ZOSXPlatform::getDescription()
+{
+    NSProcessInfo *pinfo = [NSProcessInfo processInfo];
+    NSString *version = [pinfo operatingSystemVersionString];
+    
+    std::ostringstream oss;
+    oss << "Mac OS X " << [version UTF8String];
+    
+    return oss.str();
 }
 
 void ZOSXPlatform::_setupMainMenu()
@@ -98,6 +110,11 @@ void ZOSXPlatform::_setupMainMenu()
     SDL_Event event;
     event.type = SDL_QUIT;
     SDL_PushEvent(&event);
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return YES;
 }
 
 - (void)dealloc

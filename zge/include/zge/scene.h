@@ -8,9 +8,10 @@
 #pragma once
 
 #include "zge/node.h"
-#include <memory>
 
 namespace zge {
+
+typedef ZNodeRef ZSceneRef;
 
 class ZScene : public ZNode {
 public:

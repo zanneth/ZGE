@@ -7,9 +7,10 @@
  
 #pragma once
 
-#include "zge/runnable_interface.h"
 #include "zge/display.h"
 #include "zge/noncopyable.h"
+#include "zge/runnable_interface.h"
+
 #include <memory>
 
 namespace zge {

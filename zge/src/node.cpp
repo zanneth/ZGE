@@ -7,14 +7,34 @@
  
 #include "zge/node.h"
 #include "zge/logger.h"
-#include <iostream>
+
 #include <algorithm>
+#include <cstdlib>
+#include <iostream>
 
 namespace zge {
+
+ZNode::ZNode() :
+    _uuid(rand()),
+    _transformMatrix(ZMatrixf::identityMatrix())
+{}
 
 ZNode::~ZNode()
 {
     ZLogger::log("Node 0x%x destroyed", this);
+}
+
+
+#pragma mark - Operators
+
+bool ZNode::operator==(const ZNode &other)
+{
+    return _uuid == other._uuid;
+}
+
+bool ZNode::operator!=(const ZNode &other)
+{
+    return !operator==(other);
 }
 
 
@@ -28,10 +48,11 @@ void ZNode::addChild(ZNodeRef node)
 
 bool ZNode::removeChild(ZNodeRef node)
 {
-    auto itr = std::find(_children.begin(), _children.end(), node);
-    if (itr != _children.end()) {
-        _children.erase(itr);
-        return true;
+    for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
+        if (**itr == *node) {
+            _children.erase(itr);
+            return true;
+        }
     }
     
     return false;

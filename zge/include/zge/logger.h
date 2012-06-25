@@ -7,14 +7,14 @@
  
 #pragma once
 
-#include "zge/error.h"
+#include <string>
 
 namespace zge {
 
 class ZLogger {
 public:
     static void log(const char *format, ...);
-    static void log(ZError error);
+    static void log(const std::string str);
     static void warn(const char *format, ...);
 };
 

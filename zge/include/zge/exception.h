@@ -14,13 +14,47 @@ namespace zge {
 
 class ZException : public std::exception {
 public:
+    int code;
     std::string description;
+    std::string extraInfo;
     
-    virtual const char* what() const throw()
+    ZException(int code_ = -1, std::string description_ = "Unknown Description");
+    
+    virtual const char* what() const throw();
+    
+    bool operator==(const ZException &other)
     {
-        std::string err = "An exception occurred: " + description;
-        return err.c_str();
+        return code == other.code;
     }
+    
+    bool operator!=(const ZException &other)
+    {
+        return !operator==(other);
+    }
+};
+
+class ZNotImplementedException : public ZException {
+public:
+    ZNotImplementedException() : ZException(
+        10,
+        "Functionality not yet implemented."
+    ) {}
+};
+
+class ZApplicationException : public ZException {
+public:
+    ZApplicationException() : ZException(
+        100,
+        "The application failed to initialize."
+    ) {}
+};
+
+class ZDisplayException : public ZException {
+public:
+    ZDisplayException() : ZException(
+        200,
+        "The display failed to initialize."
+    ) {}
 };
 
 } // namespace zge

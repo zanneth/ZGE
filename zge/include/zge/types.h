@@ -9,6 +9,8 @@
 
 namespace zge {
 
+typedef unsigned ZUUID;
+
 template <class T>
 struct ZNullDeleter {
     void operator()(void const *) const {}

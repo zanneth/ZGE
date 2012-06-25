@@ -7,26 +7,20 @@
  
 #pragma once
 
-#include "zge/run_loop.h"
-#include "zge/exception.h"
 #include "zge/noncopyable.h"
 
-#include <string>
 #include <list>
 #include <memory>
+#include <string>
 
 namespace zge {
 
-class ZApplicationException : public ZException {
-public:
-    virtual const char* what() const throw()
-    {
-        return ("An application error occurred: " + description).c_str();
-    }
-};
+class ZPlatform;
+class ZRunLoop;
 
-class ZApplication : private ZNonCopyable {
+class ZApplication : ZNonCopyable {
     std::list<std::string> _arguments;
+    ZPlatform *_currentPlatform;
     
 public:
     ZApplication(int argc, char **argv);
@@ -35,15 +29,17 @@ public:
     /** Accessors **/
     std::list<std::string> getArguments() const { return _arguments; }
     void setArguments(int argc, char **argv);
-    
+    ZPlatform* getCurrentPlatform() const { return _currentPlatform; }
     
     /** Accessing the Main Run Loop **/
     static ZRunLoop* getMainRunLoop();
     void startMainRunLoop();
     
-    
     /** Callbacks **/
     virtual void applicationReady() {}
+    
+    /** Running (external) **/
+    friend void runApplication(ZApplication*);
 };
 
 void runApplication(ZApplication *application);
