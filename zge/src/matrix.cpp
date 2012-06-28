@@ -8,6 +8,7 @@
 #include "zge/matrix.h"
 #include "zge/exception.h"
 #include "zge/util.h"
+#include "zge/vector.h"
 
 #include <complex>
 #include <cstring>

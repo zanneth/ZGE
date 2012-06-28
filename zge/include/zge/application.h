@@ -24,7 +24,7 @@ class ZApplication : ZNonCopyable {
     
 public:
     ZApplication(int argc, char **argv);
-    virtual ~ZApplication() = default;
+    virtual ~ZApplication();
     
     /** Accessors **/
     std::list<std::string> getArguments() { return _arguments; }

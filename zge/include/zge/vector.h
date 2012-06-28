@@ -42,8 +42,8 @@ public:
 
 class ZVec2 : public ZVec<2> {
 public:
-    float &x = vec[0];
-    float &y = vec[1];
+    float &x = this->vec[0];
+    float &y = this->vec[1];
     
     // FIXME: Inheriting constructors not supported in gcc at the time of writing
     // this code. Replace with inheriting syntax once support is added.
@@ -60,9 +60,9 @@ public:
 
 class ZVec3 : public ZVec<3> {
 public:
-    float &x = vec[0];
-    float &y = vec[1];
-    float &z = vec[2];
+    float &x = this->vec[0];
+    float &y = this->vec[1];
+    float &z = this->vec[2];
     
     // FIXME: Inheriting constructors not supported in gcc at the time of writing
     // this code. Replace with inheriting syntax once support is added.

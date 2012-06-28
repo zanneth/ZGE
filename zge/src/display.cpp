@@ -6,7 +6,7 @@
  */
  
 #include "zge/display.h"
-#include <iostream>
+#include "zge/exception.h"
 
 namespace zge {
 

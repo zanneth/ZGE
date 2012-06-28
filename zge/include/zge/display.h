@@ -7,9 +7,7 @@
  
 #pragma once
 
-#include "zge/exception.h"
 #include "zge/noncopyable.h"
-
 #include <string>
 
 namespace zge {
@@ -34,10 +32,12 @@ class ZDisplay : ZNonCopyable {
 protected:
     bool _isInitialized;
     ZDisplayMode _displayMode;
-    
-public:
+
+protected: // Only a display manager can create displays
     ZDisplay() = default;
     ZDisplay(const ZDisplayMode &displayMode);
+    
+public:
     virtual ~ZDisplay() {}
     
     /** Initialization **/
@@ -54,6 +54,9 @@ public:
     
     ZDisplayMode getDisplayMode() { return _displayMode; }
     virtual void setDisplayMode(const ZDisplayMode &mode);
+    
+    /** Friends **/
+    friend class ZDisplayManager;
 };
 
 } // namespace zge

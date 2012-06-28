@@ -27,6 +27,14 @@ ZApplication::ZApplication(int argc, char **argv)
     setArguments(argc, argv);
 }
 
+ZApplication::~ZApplication()
+{
+    if (_mainRunLoop != nullptr) {
+        _mainRunLoop->stop();
+        delete _mainRunLoop;
+    }
+}
+
 
 #pragma mark - Accessors
 
@@ -45,6 +53,7 @@ ZRunLoop* ZApplication::getMainRunLoop()
 {
     if (_mainRunLoop == nullptr) {
         _mainRunLoop = new ZRunLoop();
+        _mainRunLoop->_onMainThread = true;
     }
     
     return _mainRunLoop;

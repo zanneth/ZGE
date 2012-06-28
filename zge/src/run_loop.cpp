@@ -30,6 +30,11 @@ void ZRunLoop::run()
     _main();
 }
 
+void ZRunLoop::stop()
+{
+    _running = false;
+}
+
 
 #pragma mark - Managing Schedulables in the Run Loop
 
@@ -66,6 +71,8 @@ void ZRunLoop::_main()
             schedulable->run(dtime);
             schedulable->_lastUpdate = time;
         }
+        
+        SDL_Delay(1);
     }
 }
 

@@ -6,6 +6,7 @@
  */
  
 #include "zge/display_manager.h"
+#include "zge/display.h"
 #include "zge/exception.h"
 #include "zge/gl_display.h"
 
@@ -40,8 +41,12 @@ ZDisplay* ZDisplayManager::createDisplay(const ZDisplayMode &mode, ZRenderingAPI
     }
     
     display->initialize();
-    _currentDisplay = display;
     
+    if (_currentDisplay != nullptr) {
+        delete _currentDisplay;
+    }
+    
+    _currentDisplay = display;
     return display;
 }
 

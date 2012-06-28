@@ -7,13 +7,15 @@
  
 #pragma once
 
-#include "zge/display.h"
 #include "zge/noncopyable.h"
 #include "zge/schedulable_interface.h"
 
 #include <memory>
 
 namespace zge {
+
+class ZDisplay;
+struct ZDisplayMode;
 
 enum ZRenderingAPIType {
     kSoftware,
