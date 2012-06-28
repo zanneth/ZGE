@@ -7,6 +7,17 @@
  
 #pragma once
 
+#include <cmath>
+
 namespace zge {
+
+class ZUtil {
+public:
+    template <typename T>
+    static inline T degreesToRadians(T degrees)
+    {
+        return degrees * (M_PI / 180.0f);
+    }
+};
 
 } // namespace zge

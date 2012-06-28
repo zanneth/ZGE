@@ -9,7 +9,7 @@
 
 #include "zge/noncopyable.h"
 #include "zge/node.h"
-#include "zge/runnable_interface.h"
+#include "zge/schedulable_interface.h"
 #include "zge/scene.h"
 
 #include <memory>
@@ -19,16 +19,16 @@ namespace zge {
 
 typedef std::shared_ptr<class ZGameManager> ZGameManagerRef;
 
-class ZGameManager : public ZRunnableInterface, ZNonCopyable {
+class ZGameManager : public ZSchedulableInterface, ZNonCopyable {
     std::stack<ZSceneRef> _sceneStack;
     
 public:
     /** Scene Management **/
-    ZSceneRef getCurrentScene() const;
+    ZSceneRef getCurrentScene();
     void pushScene(ZSceneRef scene);
     ZSceneRef popScene();
     
-    /** Runnable Overrides **/
+    /** Schedulable **/
     void run(unsigned dtime) override;
 };
 

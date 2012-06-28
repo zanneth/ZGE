@@ -27,9 +27,9 @@ public:
     virtual ~ZApplication() = default;
     
     /** Accessors **/
-    std::list<std::string> getArguments() const { return _arguments; }
+    std::list<std::string> getArguments() { return _arguments; }
     void setArguments(int argc, char **argv);
-    ZPlatform* getCurrentPlatform() const { return _currentPlatform; }
+    ZPlatform* getCurrentPlatform() { return _currentPlatform; }
     
     /** Accessing the Main Run Loop **/
     static ZRunLoop* getMainRunLoop();

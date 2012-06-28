@@ -13,7 +13,7 @@ typedef unsigned ZUUID;
 
 template <class T>
 struct ZNullDeleter {
-    void operator()(void const *) const {}
+    void operator()(void const *) {}
 };
 
 } // namespace zge

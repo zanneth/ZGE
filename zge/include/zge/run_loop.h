@@ -7,7 +7,7 @@
  
 #pragma once
 
-#include "zge/runnable_interface.h"
+#include "zge/schedulable_interface.h"
 #include "zge/noncopyable.h"
 
 #include <memory>
@@ -16,7 +16,7 @@
 namespace zge {
 
 class ZRunLoop : ZNonCopyable {
-    std::vector<ZRunnableInterfaceRef> _runnables;
+    std::vector<ZSchedulableRef> _schedulables;
     bool _running;
     
 public:
@@ -29,9 +29,9 @@ public:
     /** Starting the Run Loop **/
     void run();
     
-    /** Managing Runnables in the Run Loop **/
-    void schedule(ZRunnableInterfaceRef runnable);
-    void unschedule(ZRunnableInterfaceRef runnable);
+    /** Managing schedulables in the Run Loop **/
+    void schedule(ZSchedulableRef schedulable);
+    void unschedule(ZSchedulableRef schedulable);
 
 private:
     void _main();

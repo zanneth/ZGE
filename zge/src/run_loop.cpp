@@ -31,18 +31,18 @@ void ZRunLoop::run()
 }
 
 
-#pragma mark - Managing Runnables in the Run Loop
+#pragma mark - Managing Schedulables in the Run Loop
 
-void ZRunLoop::schedule(ZRunnableInterfaceRef runnable)
+void ZRunLoop::schedule(ZSchedulableRef schedulable)
 {
-    _runnables.push_back(runnable);
+    _schedulables.push_back(schedulable);
 }
 
-void ZRunLoop::unschedule(ZRunnableInterfaceRef runnable)
+void ZRunLoop::unschedule(ZSchedulableRef schedulable)
 {
-    auto itr = std::find(_runnables.begin(), _runnables.end(), runnable);
-    if (itr != _runnables.end()) {
-        _runnables.erase(itr);
+    auto itr = std::find(_schedulables.begin(), _schedulables.end(), schedulable);
+    if (itr != _schedulables.end()) {
+        _schedulables.erase(itr);
     }
 }
 
@@ -52,9 +52,9 @@ void ZRunLoop::unschedule(ZRunnableInterfaceRef runnable)
 void ZRunLoop::_main()
 {
     while (_running) {
-        for (ZRunnableInterfaceRef runnable : _runnables) { 
+        for (ZSchedulableRef schedulable : _schedulables) { 
             unsigned time = SDL_GetTicks();
-            unsigned lastUpdate = runnable->_lastUpdate;
+            unsigned lastUpdate = schedulable->_lastUpdate;
             unsigned dtime;
             
             if (lastUpdate == 0) {
@@ -63,8 +63,8 @@ void ZRunLoop::_main()
                 dtime = time - lastUpdate;
             }
             
-            runnable->run(dtime);
-            runnable->_lastUpdate = time;
+            schedulable->run(dtime);
+            schedulable->_lastUpdate = time;
         }
     }
 }

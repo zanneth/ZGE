@@ -9,7 +9,7 @@
 
 #include "zge/display.h"
 #include "zge/noncopyable.h"
-#include "zge/runnable_interface.h"
+#include "zge/schedulable_interface.h"
 
 #include <memory>
 
@@ -23,7 +23,7 @@ enum ZRenderingAPIType {
 
 typedef std::shared_ptr<class ZDisplayManager> ZDisplayManagerRef;
 
-class ZDisplayManager : public ZRunnableInterface, ZNonCopyable {
+class ZDisplayManager : public ZSchedulableInterface, ZNonCopyable {
     ZDisplay *_currentDisplay;
     
 public:
@@ -32,9 +32,9 @@ public:
     
     /** Creating the Display **/
     ZDisplay* createDisplay(const ZDisplayMode &mode, ZRenderingAPIType api);
-    ZDisplay* getCurrentDisplay() const { return _currentDisplay; }
+    ZDisplay* getCurrentDisplay() { return _currentDisplay; }
     
-    /** Runnable **/
+    /** Schedulable **/
     void run(unsigned dtime) override;
 };
 

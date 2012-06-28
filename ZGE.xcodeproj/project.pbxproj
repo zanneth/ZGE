@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0AF587159BFA5500E607DE /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0AF585159BFA3D00E607DE /* matrix.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C0AF589159BFB0300E607DE /* gl_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0AF588159BFB0300E607DE /* gl_includes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C0AF58B159BFC0C00E607DE /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0AF58A159BFC0C00E607DE /* matrix.cpp */; };
+		0C0AF593159C1EC900E607DE /* libZGE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6E9614B2FD2600004C6A /* libZGE.a */; };
+		0C0AF596159C206400E607DE /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC9DEF3159820D0001B7348 /* vector.cpp */; };
+		0C0AF597159C206600E607DE /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0AF58A159BFC0C00E607DE /* matrix.cpp */; };
+		0C0AF599159C351100E607DE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C0AF598159C351100E607DE /* GLUT.framework */; };
+		0C0AF59B159C351D00E607DE /* libGLEW.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C0AF59A159C351D00E607DE /* libGLEW.dylib */; };
 		0CC9DEE11596A3A9001B7348 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC9DEE01596A3A9001B7348 /* SDL.framework */; };
 		0CC9DEE41597B78D001B7348 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC9DEE31597B78D001B7348 /* exception.cpp */; };
 		0CC9DEF215981E5D001B7348 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC9DEF115981E5C001B7348 /* vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,11 +35,10 @@
 		568CB48414DC6E8F00BD42D2 /* osx_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47414DC6E8F00BD42D2 /* osx_platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48514DC6E8F00BD42D2 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47514DC6E8F00BD42D2 /* platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48614DC6E8F00BD42D2 /* run_loop.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47614DC6E8F00BD42D2 /* run_loop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		568CB48714DC6E8F00BD42D2 /* runnable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47714DC6E8F00BD42D2 /* runnable_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		568CB48714DC6E8F00BD42D2 /* schedulable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47714DC6E8F00BD42D2 /* schedulable_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48814DC6E8F00BD42D2 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47814DC6E8F00BD42D2 /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48914DC6E8F00BD42D2 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47914DC6E8F00BD42D2 /* util.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48C14DC777600BD42D2 /* exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB48B14DC777500BD42D2 /* exception.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		56B3603D15426B220056D28B /* libZGE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6E9614B2FD2600004C6A /* libZGE.a */; };
 		56B3603E15426B570056D28B /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56B3602D15426A680056D28B /* test_main.cpp */; };
 		56E85DBA14E4835700638CFD /* application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DAC14E4835700638CFD /* application.mm */; };
 		56E85DBB14E4835700638CFD /* display_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DAD14E4835700638CFD /* display_manager.cpp */; };
@@ -48,6 +55,16 @@
 		56E85DC914E483FD00638CFD /* noncopyable.h in Headers */ = {isa = PBXBuildFile; fileRef = 56E85DC814E483FD00638CFD /* noncopyable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0C0AF594159C1ED200E607DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 563B6E8D14B2FD2600004C6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 563B6E9514B2FD2600004C6A;
+			remoteInfo = ZGE;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		56B3603115426AFF0056D28B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -61,6 +78,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C0AF585159BFA3D00E607DE /* matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		0C0AF588159BFB0300E607DE /* gl_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_includes.h; sourceTree = "<group>"; };
+		0C0AF58A159BFC0C00E607DE /* matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = matrix.cpp; sourceTree = "<group>"; };
+		0C0AF598159C351100E607DE /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		0C0AF59A159C351D00E607DE /* libGLEW.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.dylib; path = /usr/local/lib/libGLEW.dylib; sourceTree = "<absolute>"; };
 		0CC9DEE01596A3A9001B7348 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		0CC9DEE31597B78D001B7348 /* exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
 		0CC9DEF115981E5C001B7348 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
@@ -82,7 +104,7 @@
 		568CB47414DC6E8F00BD42D2 /* osx_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osx_platform.h; sourceTree = "<group>"; };
 		568CB47514DC6E8F00BD42D2 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
 		568CB47614DC6E8F00BD42D2 /* run_loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_loop.h; sourceTree = "<group>"; };
-		568CB47714DC6E8F00BD42D2 /* runnable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = runnable_interface.h; sourceTree = "<group>"; };
+		568CB47714DC6E8F00BD42D2 /* schedulable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schedulable_interface.h; sourceTree = "<group>"; };
 		568CB47814DC6E8F00BD42D2 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		568CB47914DC6E8F00BD42D2 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		568CB48B14DC777500BD42D2 /* exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exception.h; sourceTree = "<group>"; };
@@ -108,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0AF59B159C351D00E607DE /* libGLEW.dylib in Frameworks */,
+				0C0AF599159C351100E607DE /* GLUT.framework in Frameworks */,
 				0CC9DEE11596A3A9001B7348 /* SDL.framework in Frameworks */,
 				563B6EC114B2FD7E00004C6A /* Cocoa.framework in Frameworks */,
 				563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */,
@@ -119,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56B3603D15426B220056D28B /* libZGE.a in Frameworks */,
+				0C0AF593159C1EC900E607DE /* libZGE.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,10 +171,12 @@
 		563B6EC214B2FD8500004C6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0CC9DEE01596A3A9001B7348 /* SDL.framework */,
+				0C0AF59A159C351D00E607DE /* libGLEW.dylib */,
 				563B6EC014B2FD7E00004C6A /* Cocoa.framework */,
 				563B6EBE14B2FD7800004C6A /* Foundation.framework */,
+				0C0AF598159C351100E607DE /* GLUT.framework */,
 				563B6EBC14B2FD7300004C6A /* OpenGL.framework */,
+				0CC9DEE01596A3A9001B7348 /* SDL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +199,7 @@
 				56E85DB214E4835700638CFD /* gl_display.cpp */,
 				56E85DB314E4835700638CFD /* input_manager.cpp */,
 				56E85DB414E4835700638CFD /* logger.cpp */,
+				0C0AF58A159BFC0C00E607DE /* matrix.cpp */,
 				56E85DB514E4835700638CFD /* node.cpp */,
 				56E85DB614E4835700638CFD /* osx_platform.mm */,
 				56E85DB714E4835700638CFD /* platform.cpp */,
@@ -201,14 +228,16 @@
 				568CB48B14DC777500BD42D2 /* exception.h */,
 				568CB46E14DC6E8F00BD42D2 /* game_manager.h */,
 				568CB47014DC6E8F00BD42D2 /* gl_display.h */,
+				0C0AF588159BFB0300E607DE /* gl_includes.h */,
 				568CB47114DC6E8F00BD42D2 /* input_manager.h */,
 				568CB47214DC6E8F00BD42D2 /* logger.h */,
+				0C0AF585159BFA3D00E607DE /* matrix.h */,
 				568CB47314DC6E8F00BD42D2 /* node.h */,
 				56E85DC814E483FD00638CFD /* noncopyable.h */,
 				568CB47414DC6E8F00BD42D2 /* osx_platform.h */,
 				568CB47514DC6E8F00BD42D2 /* platform.h */,
 				568CB47614DC6E8F00BD42D2 /* run_loop.h */,
-				568CB47714DC6E8F00BD42D2 /* runnable_interface.h */,
+				568CB47714DC6E8F00BD42D2 /* schedulable_interface.h */,
 				5623F45515423EB0008BE96D /* scene.h */,
 				568CB47814DC6E8F00BD42D2 /* types.h */,
 				568CB47914DC6E8F00BD42D2 /* util.h */,
@@ -248,15 +277,17 @@
 				568CB47C14DC6E8F00BD42D2 /* display_manager.h in Headers */,
 				568CB47E14DC6E8F00BD42D2 /* game_manager.h in Headers */,
 				568CB48014DC6E8F00BD42D2 /* gl_display.h in Headers */,
+				0C0AF589159BFB0300E607DE /* gl_includes.h in Headers */,
 				568CB48114DC6E8F00BD42D2 /* input_manager.h in Headers */,
 				568CB48214DC6E8F00BD42D2 /* logger.h in Headers */,
+				0C0AF587159BFA5500E607DE /* matrix.h in Headers */,
 				568CB48314DC6E8F00BD42D2 /* node.h in Headers */,
 				568CB48414DC6E8F00BD42D2 /* osx_platform.h in Headers */,
 				568CB48514DC6E8F00BD42D2 /* platform.h in Headers */,
 				56E85DC914E483FD00638CFD /* noncopyable.h in Headers */,
 				568CB48614DC6E8F00BD42D2 /* run_loop.h in Headers */,
 				5623F45615423EB0008BE96D /* scene.h in Headers */,
-				568CB48714DC6E8F00BD42D2 /* runnable_interface.h in Headers */,
+				568CB48714DC6E8F00BD42D2 /* schedulable_interface.h in Headers */,
 				568CB48C14DC777600BD42D2 /* exception.h in Headers */,
 				568CB48814DC6E8F00BD42D2 /* types.h in Headers */,
 				568CB48914DC6E8F00BD42D2 /* util.h in Headers */,
@@ -295,6 +326,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0C0AF595159C1ED200E607DE /* PBXTargetDependency */,
 			);
 			name = ZGETest;
 			productName = ZGETest;
@@ -348,6 +380,7 @@
 				5623F45915423F32008BE96D /* scene.cpp in Sources */,
 				0CC9DEE41597B78D001B7348 /* exception.cpp in Sources */,
 				0CC9DEF4159820D0001B7348 /* vector.cpp in Sources */,
+				0C0AF58B159BFC0C00E607DE /* matrix.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,10 +389,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				56B3603E15426B570056D28B /* test_main.cpp in Sources */,
+				0C0AF596159C206400E607DE /* vector.cpp in Sources */,
+				0C0AF597159C206600E607DE /* matrix.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0C0AF595159C1ED200E607DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 563B6E9514B2FD2600004C6A /* ZGE */;
+			targetProxy = 0C0AF594159C1ED200E607DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		563B6E9814B2FD2600004C6A /* Debug */ = {
@@ -385,6 +428,7 @@
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = zge;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/zge/include";
 			};
 			name = Debug;
@@ -398,6 +442,7 @@
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = zge;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/zge/include";
 			};
 			name = Release;

@@ -11,7 +11,7 @@ namespace zge {
 
 #pragma mark - Managing Scenes
 
-ZSceneRef ZGameManager::getCurrentScene() const
+ZSceneRef ZGameManager::getCurrentScene()
 {
     if (_sceneStack.empty()) {
         return nullptr;
@@ -37,7 +37,7 @@ ZSceneRef ZGameManager::popScene()
 }
 
 
-#pragma mark - Runnable Overrides
+#pragma mark - Schedulable Overrides
 
 void ZGameManager::run(unsigned dtime)
 {

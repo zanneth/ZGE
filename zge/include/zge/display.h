@@ -52,7 +52,7 @@ public:
     /** Accessors **/
     bool isInitialized() { return _isInitialized; }
     
-    ZDisplayMode getDisplayMode() const { return _displayMode; }
+    ZDisplayMode getDisplayMode() { return _displayMode; }
     virtual void setDisplayMode(const ZDisplayMode &mode);
 };
 

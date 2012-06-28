@@ -33,7 +33,7 @@ public:
     bool operator!=(const ZNode &other);
     
     /** Accessors **/
-    ZNode* getParent() const { return _parent; }
+    ZNode* getParent() { return _parent; }
     
     /** Managing Sub-Nodes **/
     void addChild(ZNodeRef node);

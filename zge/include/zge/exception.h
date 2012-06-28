@@ -57,4 +57,12 @@ public:
     ) {}
 };
 
+class ZMathematicException : public ZException {
+public:
+    ZMathematicException() : ZException(
+        300,
+        "Mathematic exception."
+    ) {}
+};
+
 } // namespace zge

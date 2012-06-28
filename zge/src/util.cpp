@@ -6,7 +6,6 @@
  */
  
 #include "zge/util.h"
-#include <iostream>
 
 namespace zge {
 
