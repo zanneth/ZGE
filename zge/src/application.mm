@@ -93,8 +93,10 @@ void runApplication(ZApplication *application)
     if (platform == nullptr) {
         ZApplicationException expt;
         expt.extraInfo = "Platform not supported.";
+        throw expt;
     }
     
+    // Run the application
     application->_currentPlatform = platform;
     platform->runApplication(application); // Does not return (should start event loop)
     delete platform;

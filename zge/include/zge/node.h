@@ -7,7 +7,6 @@
  
 #pragma once
 
-#include "zge/geometry.h"
 #include "zge/types.h"
 
 #include <memory>
@@ -20,15 +19,13 @@ typedef std::shared_ptr<class ZNode> ZNodeRef;
 class ZNode {
 protected:
     ZUUID _uuid;
-    ZVecf _position;
-    ZMatrixf _transformMatrix;
     
     ZNode *_parent;
     std::vector<ZNodeRef> _children;
     
 public:
     ZNode();
-    ZNode(const ZNode &node) = default;
+    ZNode(const ZNode&) = default;
     ~ZNode();
     
     /** Operators **/
@@ -37,8 +34,6 @@ public:
     
     /** Accessors **/
     ZNode* getParent() const { return _parent; }
-    ZVecf getPosition() const { return _position; }
-    void setPosition(const ZVecf &position) { _position = position; }
     
     /** Managing Sub-Nodes **/
     void addChild(ZNodeRef node);

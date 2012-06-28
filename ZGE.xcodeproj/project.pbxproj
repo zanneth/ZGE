@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0CC9DEE11596A3A9001B7348 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC9DEE01596A3A9001B7348 /* SDL.framework */; };
 		0CC9DEE41597B78D001B7348 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC9DEE31597B78D001B7348 /* exception.cpp */; };
+		0CC9DEF215981E5D001B7348 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CC9DEF115981E5C001B7348 /* vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CC9DEF4159820D0001B7348 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CC9DEF3159820D0001B7348 /* vector.cpp */; };
 		5623F45615423EB0008BE96D /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 5623F45515423EB0008BE96D /* scene.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5623F45915423F32008BE96D /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5623F45815423F32008BE96D /* scene.cpp */; };
 		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
@@ -18,7 +20,6 @@
 		568CB47B14DC6E8F00BD42D2 /* display.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB46B14DC6E8F00BD42D2 /* display.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB47C14DC6E8F00BD42D2 /* display_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB46C14DC6E8F00BD42D2 /* display_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB47E14DC6E8F00BD42D2 /* game_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB46E14DC6E8F00BD42D2 /* game_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		568CB47F14DC6E8F00BD42D2 /* geometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB46F14DC6E8F00BD42D2 /* geometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48014DC6E8F00BD42D2 /* gl_display.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47014DC6E8F00BD42D2 /* gl_display.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48114DC6E8F00BD42D2 /* input_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47114DC6E8F00BD42D2 /* input_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		568CB48214DC6E8F00BD42D2 /* logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 568CB47214DC6E8F00BD42D2 /* logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,7 +37,6 @@
 		56E85DBB14E4835700638CFD /* display_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DAD14E4835700638CFD /* display_manager.cpp */; };
 		56E85DBC14E4835700638CFD /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DAE14E4835700638CFD /* display.cpp */; };
 		56E85DBE14E4835700638CFD /* game_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB014E4835700638CFD /* game_manager.cpp */; };
-		56E85DBF14E4835700638CFD /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB114E4835700638CFD /* geometry.cpp */; };
 		56E85DC014E4835700638CFD /* gl_display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB214E4835700638CFD /* gl_display.cpp */; };
 		56E85DC114E4835700638CFD /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB314E4835700638CFD /* input_manager.cpp */; };
 		56E85DC214E4835700638CFD /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 56E85DB414E4835700638CFD /* logger.cpp */; };
@@ -63,6 +63,8 @@
 /* Begin PBXFileReference section */
 		0CC9DEE01596A3A9001B7348 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		0CC9DEE31597B78D001B7348 /* exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
+		0CC9DEF115981E5C001B7348 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
+		0CC9DEF3159820D0001B7348 /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
 		5623F45515423EB0008BE96D /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		5623F45815423F32008BE96D /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
 		563B6E9614B2FD2600004C6A /* libZGE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZGE.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +75,6 @@
 		568CB46B14DC6E8F00BD42D2 /* display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = display.h; sourceTree = "<group>"; };
 		568CB46C14DC6E8F00BD42D2 /* display_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = display_manager.h; sourceTree = "<group>"; };
 		568CB46E14DC6E8F00BD42D2 /* game_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game_manager.h; sourceTree = "<group>"; };
-		568CB46F14DC6E8F00BD42D2 /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geometry.h; sourceTree = "<group>"; };
 		568CB47014DC6E8F00BD42D2 /* gl_display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_display.h; sourceTree = "<group>"; };
 		568CB47114DC6E8F00BD42D2 /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
 		568CB47214DC6E8F00BD42D2 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
@@ -91,7 +92,6 @@
 		56E85DAD14E4835700638CFD /* display_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = display_manager.cpp; sourceTree = "<group>"; };
 		56E85DAE14E4835700638CFD /* display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = display.cpp; sourceTree = "<group>"; };
 		56E85DB014E4835700638CFD /* game_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_manager.cpp; sourceTree = "<group>"; };
-		56E85DB114E4835700638CFD /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cpp; sourceTree = "<group>"; };
 		56E85DB214E4835700638CFD /* gl_display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gl_display.cpp; sourceTree = "<group>"; };
 		56E85DB314E4835700638CFD /* input_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_manager.cpp; sourceTree = "<group>"; };
 		56E85DB414E4835700638CFD /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
@@ -170,7 +170,6 @@
 				56E85DAD14E4835700638CFD /* display_manager.cpp */,
 				0CC9DEE31597B78D001B7348 /* exception.cpp */,
 				56E85DB014E4835700638CFD /* game_manager.cpp */,
-				56E85DB114E4835700638CFD /* geometry.cpp */,
 				56E85DB214E4835700638CFD /* gl_display.cpp */,
 				56E85DB314E4835700638CFD /* input_manager.cpp */,
 				56E85DB414E4835700638CFD /* logger.cpp */,
@@ -180,6 +179,7 @@
 				56E85DB814E4835700638CFD /* run_loop.cpp */,
 				5623F45815423F32008BE96D /* scene.cpp */,
 				56E85DB914E4835700638CFD /* util.cpp */,
+				0CC9DEF3159820D0001B7348 /* vector.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -200,7 +200,6 @@
 				568CB46C14DC6E8F00BD42D2 /* display_manager.h */,
 				568CB48B14DC777500BD42D2 /* exception.h */,
 				568CB46E14DC6E8F00BD42D2 /* game_manager.h */,
-				568CB46F14DC6E8F00BD42D2 /* geometry.h */,
 				568CB47014DC6E8F00BD42D2 /* gl_display.h */,
 				568CB47114DC6E8F00BD42D2 /* input_manager.h */,
 				568CB47214DC6E8F00BD42D2 /* logger.h */,
@@ -213,6 +212,7 @@
 				5623F45515423EB0008BE96D /* scene.h */,
 				568CB47814DC6E8F00BD42D2 /* types.h */,
 				568CB47914DC6E8F00BD42D2 /* util.h */,
+				0CC9DEF115981E5C001B7348 /* vector.h */,
 			);
 			path = zge;
 			sourceTree = "<group>";
@@ -247,7 +247,6 @@
 				568CB47B14DC6E8F00BD42D2 /* display.h in Headers */,
 				568CB47C14DC6E8F00BD42D2 /* display_manager.h in Headers */,
 				568CB47E14DC6E8F00BD42D2 /* game_manager.h in Headers */,
-				568CB47F14DC6E8F00BD42D2 /* geometry.h in Headers */,
 				568CB48014DC6E8F00BD42D2 /* gl_display.h in Headers */,
 				568CB48114DC6E8F00BD42D2 /* input_manager.h in Headers */,
 				568CB48214DC6E8F00BD42D2 /* logger.h in Headers */,
@@ -261,6 +260,7 @@
 				568CB48C14DC777600BD42D2 /* exception.h in Headers */,
 				568CB48814DC6E8F00BD42D2 /* types.h in Headers */,
 				568CB48914DC6E8F00BD42D2 /* util.h in Headers */,
+				0CC9DEF215981E5D001B7348 /* vector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +337,6 @@
 				56E85DBB14E4835700638CFD /* display_manager.cpp in Sources */,
 				56E85DBC14E4835700638CFD /* display.cpp in Sources */,
 				56E85DBE14E4835700638CFD /* game_manager.cpp in Sources */,
-				56E85DBF14E4835700638CFD /* geometry.cpp in Sources */,
 				56E85DC014E4835700638CFD /* gl_display.cpp in Sources */,
 				56E85DC114E4835700638CFD /* input_manager.cpp in Sources */,
 				56E85DC214E4835700638CFD /* logger.cpp in Sources */,
@@ -348,6 +347,7 @@
 				56E85DC714E4835700638CFD /* util.cpp in Sources */,
 				5623F45915423F32008BE96D /* scene.cpp in Sources */,
 				0CC9DEE41597B78D001B7348 /* exception.cpp in Sources */,
+				0CC9DEF4159820D0001B7348 /* vector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +405,7 @@
 		56B3603B15426AFF0056D28B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -415,8 +415,8 @@
 		56B3603C15426AFF0056D28B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

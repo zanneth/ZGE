@@ -15,8 +15,7 @@
 namespace zge {
 
 ZNode::ZNode() :
-    _uuid(rand()),
-    _transformMatrix(ZMatrixf::identityMatrix())
+    _uuid(rand())
 {}
 
 ZNode::~ZNode()

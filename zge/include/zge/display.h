@@ -8,7 +8,6 @@
 #pragma once
 
 #include "zge/exception.h"
-#include "zge/geometry.h"
 #include "zge/noncopyable.h"
 
 #include <string>
