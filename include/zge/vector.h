@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <initializer_list>
 #include <string>
 
 namespace zge {
@@ -17,8 +18,8 @@ public:
     float vec[S];
     
     /** Constructors **/
-    ZVec();
-    ZVec(float arr[]);
+    explicit ZVec(float arr[] = nullptr);
+    // ZVec(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
     ZVec(const ZVec &copy);
     
     /** Operators **/
@@ -45,17 +46,7 @@ public:
     float &x = this->vec[0];
     float &y = this->vec[1];
     
-    // FIXME: Inheriting constructors not supported in gcc at the time of writing
-    // this code. Replace with inheriting syntax once support is added.
-    ZVec2() : ZVec() {}
-    ZVec2(float arr[]) : ZVec(arr) {}
-    ZVec2(const ZVec &copy) : ZVec(copy) {}
-    
-    ZVec2(float x, float y)
-    {
-        vec[0] = x;
-        vec[1] = y;
-    }
+    using ZVec<2>::ZVec;
 };
 
 class ZVec3 : public ZVec<3> {
@@ -64,12 +55,12 @@ public:
     float &y = this->vec[1];
     float &z = this->vec[2];
     
-    // FIXME: Inheriting constructors not supported in gcc at the time of writing
-    // this code. Replace with inheriting syntax once support is added.
-    ZVec3() : ZVec() {}
-    ZVec3(float arr[]) : ZVec(arr) {}
+    // FIXME: These constructors are here so that I can initialize a 3D vector
+    // in one line without initializer_lists. As of writing this, clang++ doesn't
+    // support initializer_lists but this should be updated once it does.
+    // using ZVec<3>::ZVec;
+    ZVec3(float arr[] = nullptr) : ZVec(arr) {}
     ZVec3(const ZVec &copy) : ZVec(copy) {}
-    
     ZVec3(float x, float y, float z = 0.0)
     {
         vec[0] = x;

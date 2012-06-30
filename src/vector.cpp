@@ -15,18 +15,31 @@
 namespace zge {
 
 template <unsigned S>
-ZVec<S>::ZVec()
-{
-    memset(vec, 0, S * sizeof(float));
-}
-
-template <unsigned S>
 ZVec<S>::ZVec(float arr[])
 {
-    for (unsigned i = 0; i < S; ++i) {
-        vec[i] = arr[i];
+    if (arr != nullptr) {
+        for (unsigned i = 0; i < S; ++i) {
+            vec[i] = arr[i];
+        }
+    } else {
+        memset(vec, 0, S * sizeof(float));
     }
 }
+
+// Clang doesn't support initializer_lists yet.
+#if 0
+template <unsigned S>
+ZVec<S>::ZVec(std::initializer_list list)
+{
+    unsigned c = 0;
+    for (float n : list) {
+        vec[c++] = n;
+        if (c >= S) {
+            break;
+        }
+    }
+}
+#endif
 
 template <unsigned S>
 ZVec<S>::ZVec(const ZVec<S> &copy)
@@ -139,10 +152,10 @@ ZVec<S> ZVec<S>::negate()
 ZVec3 ZVec3::cross(const ZVec3 &other)
 {
     return ZVec3(
-                 y * other.z - z * other.y,
-                 z * other.x - x * other.z,
-                 x * other.y - y * other.x
-                 );
+        y * other.z - z * other.y,
+        z * other.x - x * other.z,
+        x * other.y - y * other.x
+    );
 }
 
 

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C0AF593159C1EC900E607DE /* libZGE.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6E9614B2FD2600004C6A /* libZGE.a */; };
 		0C0AF599159C351100E607DE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C0AF598159C351100E607DE /* GLUT.framework */; };
 		0C0AF59B159C351D00E607DE /* libGLEW.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C0AF59A159C351D00E607DE /* libGLEW.dylib */; };
 		0C5E3D8D159ED53B0062242E /* application.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D63159ED53B0062242E /* application.h */; };
@@ -32,66 +31,26 @@
 		0C5E3DA0159ED53B0062242E /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D76159ED53B0062242E /* util.h */; };
 		0C5E3DA1159ED53B0062242E /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D77159ED53B0062242E /* vector.h */; };
 		0C5E3DA2159ED53B0062242E /* application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7B159ED53B0062242E /* application.mm */; };
-		0C5E3DA3159ED53B0062242E /* application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7B159ED53B0062242E /* application.mm */; };
 		0C5E3DA4159ED53B0062242E /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7C159ED53B0062242E /* display.cpp */; };
-		0C5E3DA5159ED53B0062242E /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7C159ED53B0062242E /* display.cpp */; };
 		0C5E3DA6159ED53B0062242E /* display_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7D159ED53B0062242E /* display_manager.cpp */; };
-		0C5E3DA7159ED53B0062242E /* display_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7D159ED53B0062242E /* display_manager.cpp */; };
 		0C5E3DA8159ED53B0062242E /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7E159ED53B0062242E /* exception.cpp */; };
-		0C5E3DA9159ED53B0062242E /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7E159ED53B0062242E /* exception.cpp */; };
 		0C5E3DAA159ED53B0062242E /* game_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7F159ED53B0062242E /* game_manager.cpp */; };
-		0C5E3DAB159ED53B0062242E /* game_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D7F159ED53B0062242E /* game_manager.cpp */; };
 		0C5E3DAC159ED53B0062242E /* gl_display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D80159ED53B0062242E /* gl_display.cpp */; };
-		0C5E3DAD159ED53B0062242E /* gl_display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D80159ED53B0062242E /* gl_display.cpp */; };
 		0C5E3DAE159ED53B0062242E /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D81159ED53B0062242E /* input_manager.cpp */; };
-		0C5E3DAF159ED53B0062242E /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D81159ED53B0062242E /* input_manager.cpp */; };
 		0C5E3DB0159ED53B0062242E /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D82159ED53B0062242E /* logger.cpp */; };
-		0C5E3DB1159ED53B0062242E /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D82159ED53B0062242E /* logger.cpp */; };
 		0C5E3DB2159ED53B0062242E /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D83159ED53B0062242E /* matrix.cpp */; };
-		0C5E3DB3159ED53B0062242E /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D83159ED53B0062242E /* matrix.cpp */; };
 		0C5E3DB4159ED53B0062242E /* node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D84159ED53B0062242E /* node.cpp */; };
-		0C5E3DB5159ED53B0062242E /* node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D84159ED53B0062242E /* node.cpp */; };
 		0C5E3DB6159ED53B0062242E /* osx_platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D85159ED53B0062242E /* osx_platform.mm */; };
-		0C5E3DB7159ED53B0062242E /* osx_platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D85159ED53B0062242E /* osx_platform.mm */; };
 		0C5E3DB8159ED53B0062242E /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D86159ED53B0062242E /* platform.cpp */; };
-		0C5E3DB9159ED53B0062242E /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D86159ED53B0062242E /* platform.cpp */; };
 		0C5E3DBA159ED53B0062242E /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D87159ED53B0062242E /* run_loop.cpp */; };
-		0C5E3DBB159ED53B0062242E /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D87159ED53B0062242E /* run_loop.cpp */; };
 		0C5E3DBC159ED53B0062242E /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D88159ED53B0062242E /* scene.cpp */; };
-		0C5E3DBD159ED53B0062242E /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D88159ED53B0062242E /* scene.cpp */; };
 		0C5E3DBE159ED53B0062242E /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D89159ED53B0062242E /* util.cpp */; };
-		0C5E3DBF159ED53B0062242E /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D89159ED53B0062242E /* util.cpp */; };
 		0C5E3DC0159ED53B0062242E /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D8A159ED53B0062242E /* vector.cpp */; };
-		0C5E3DC1159ED53B0062242E /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D8A159ED53B0062242E /* vector.cpp */; };
-		0C5E3DC2159ED53B0062242E /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D8C159ED53B0062242E /* test_main.cpp */; };
-		0C5E3DC3159ED53B0062242E /* test_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D8C159ED53B0062242E /* test_main.cpp */; };
 		0CC9DEE11596A3A9001B7348 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC9DEE01596A3A9001B7348 /* SDL.framework */; };
 		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
 		563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBE14B2FD7800004C6A /* Foundation.framework */; };
 		563B6EC114B2FD7E00004C6A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EC014B2FD7E00004C6A /* Cocoa.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		0C0AF594159C1ED200E607DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 563B6E8D14B2FD2600004C6A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 563B6E9514B2FD2600004C6A;
-			remoteInfo = ZGE;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		56B3603115426AFF0056D28B /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C0AF598159C351100E607DE /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
@@ -134,13 +93,11 @@
 		0C5E3D88159ED53B0062242E /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
 		0C5E3D89159ED53B0062242E /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		0C5E3D8A159ED53B0062242E /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
-		0C5E3D8C159ED53B0062242E /* test_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test_main.cpp; sourceTree = "<group>"; };
 		0CC9DEE01596A3A9001B7348 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		563B6E9614B2FD2600004C6A /* libZGE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZGE.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		563B6EBC14B2FD7300004C6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		563B6EBE14B2FD7800004C6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		563B6EC014B2FD7E00004C6A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		56B3603315426AFF0056D28B /* ZGETest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ZGETest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,14 +111,6 @@
 				563B6EC114B2FD7E00004C6A /* Cocoa.framework in Frameworks */,
 				563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */,
 				563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		56B3603015426AFF0056D28B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C0AF593159C1EC900E607DE /* libZGE.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,14 +183,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		0C5E3D8B159ED53B0062242E /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				0C5E3D8C159ED53B0062242E /* test_main.cpp */,
-			);
-			path = tests;
-			sourceTree = "<group>";
-		};
 		563B6E8B14B2FD2600004C6A = {
 			isa = PBXGroup;
 			children = (
@@ -249,7 +190,6 @@
 				0C5E3D61159ED53B0062242E /* include */,
 				0C5E3D78159ED53B0062242E /* lib */,
 				0C5E3D7A159ED53B0062242E /* src */,
-				0C5E3D8B159ED53B0062242E /* tests */,
 				563B6EC214B2FD8500004C6A /* Frameworks */,
 				563B6E9714B2FD2600004C6A /* Products */,
 			);
@@ -259,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				563B6E9614B2FD2600004C6A /* libZGE.a */,
-				56B3603315426AFF0056D28B /* ZGETest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,24 +267,6 @@
 			productReference = 563B6E9614B2FD2600004C6A /* libZGE.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		56B3603215426AFF0056D28B /* ZGETest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 56B3603A15426AFF0056D28B /* Build configuration list for PBXNativeTarget "ZGETest" */;
-			buildPhases = (
-				56B3602F15426AFF0056D28B /* Sources */,
-				56B3603015426AFF0056D28B /* Frameworks */,
-				56B3603115426AFF0056D28B /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0C0AF595159C1ED200E607DE /* PBXTargetDependency */,
-			);
-			name = ZGETest;
-			productName = ZGETest;
-			productReference = 56B3603315426AFF0056D28B /* ZGETest */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -368,7 +289,6 @@
 			projectRoot = "";
 			targets = (
 				563B6E9514B2FD2600004C6A /* ZGE */,
-				56B3603215426AFF0056D28B /* ZGETest */,
 			);
 		};
 /* End PBXProject section */
@@ -394,43 +314,10 @@
 				0C5E3DBC159ED53B0062242E /* scene.cpp in Sources */,
 				0C5E3DBE159ED53B0062242E /* util.cpp in Sources */,
 				0C5E3DC0159ED53B0062242E /* vector.cpp in Sources */,
-				0C5E3DC2159ED53B0062242E /* test_main.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		56B3602F15426AFF0056D28B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C5E3DA3159ED53B0062242E /* application.mm in Sources */,
-				0C5E3DA5159ED53B0062242E /* display.cpp in Sources */,
-				0C5E3DA7159ED53B0062242E /* display_manager.cpp in Sources */,
-				0C5E3DA9159ED53B0062242E /* exception.cpp in Sources */,
-				0C5E3DAB159ED53B0062242E /* game_manager.cpp in Sources */,
-				0C5E3DAD159ED53B0062242E /* gl_display.cpp in Sources */,
-				0C5E3DAF159ED53B0062242E /* input_manager.cpp in Sources */,
-				0C5E3DB1159ED53B0062242E /* logger.cpp in Sources */,
-				0C5E3DB3159ED53B0062242E /* matrix.cpp in Sources */,
-				0C5E3DB5159ED53B0062242E /* node.cpp in Sources */,
-				0C5E3DB7159ED53B0062242E /* osx_platform.mm in Sources */,
-				0C5E3DB9159ED53B0062242E /* platform.cpp in Sources */,
-				0C5E3DBB159ED53B0062242E /* run_loop.cpp in Sources */,
-				0C5E3DBD159ED53B0062242E /* scene.cpp in Sources */,
-				0C5E3DBF159ED53B0062242E /* util.cpp in Sources */,
-				0C5E3DC1159ED53B0062242E /* vector.cpp in Sources */,
-				0C5E3DC3159ED53B0062242E /* test_main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0C0AF595159C1ED200E607DE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 563B6E9514B2FD2600004C6A /* ZGE */;
-			targetProxy = 0C0AF594159C1ED200E607DE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		563B6E9814B2FD2600004C6A /* Debug */ = {
@@ -475,27 +362,6 @@
 			};
 			name = Release;
 		};
-		56B3603B15426AFF0056D28B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		56B3603C15426AFF0056D28B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,15 +379,6 @@
 			buildConfigurations = (
 				563B6E9B14B2FD2600004C6A /* Debug */,
 				563B6E9C14B2FD2600004C6A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		56B3603A15426AFF0056D28B /* Build configuration list for PBXNativeTarget "ZGETest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				56B3603B15426AFF0056D28B /* Debug */,
-				56B3603C15426AFF0056D28B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

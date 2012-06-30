@@ -72,10 +72,9 @@ void ZGLDisplay::render(unsigned dtime)
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         
-        ZVec2 v;
         static float rot = 0.0;
         ZMatrix4 model = ZMatrix4::rotation((rot++), 1.0, 1.0, 1.0);
-//        model *= ZMatrix4::lookAt(ZVec3(0.0, 0.0, 5.0), ZVec3(), ZVec3(0.0, 1.0, 0.0));
+        model *= ZMatrix4::lookAt(ZVec3(0.0, 0.0, 5.0), ZVec3(), ZVec3(0.0, 1.0, 0.0));
         glMultMatrixf(model.matrix);
         glColor3f(1.0, 1.0, 1.0);
         glutWireCube(1.0);
