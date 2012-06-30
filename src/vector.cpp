@@ -4,7 +4,7 @@
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 06/24/2012
  */
- 
+
 #include "zge/vector.h"
 
 #include <cmath>
@@ -139,10 +139,10 @@ ZVec<S> ZVec<S>::negate()
 ZVec3 ZVec3::cross(const ZVec3 &other)
 {
     return ZVec3(
-        y * other.z - z * other.y,
-        z * other.x - x * other.z,
-        x * other.y - y * other.x
-    );
+                 y * other.z - z * other.y,
+                 z * other.x - x * other.z,
+                 x * other.y - y * other.x
+                 );
 }
 
 

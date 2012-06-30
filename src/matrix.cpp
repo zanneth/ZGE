@@ -184,7 +184,7 @@ ZMatrix4 ZMatrix4::perspective(float fovy, float aspect, float nearZ, float farZ
 
 ZMatrix4 ZMatrix4::lookAt(ZVec3 eye, ZVec3 center, ZVec3 up)
 {
-    ZVec3 n = (eye + center.negate()).normalize();
+    ZVec3 n = eye + center;//.negate();//).normalize();
     ZVec3 u = (up.cross(n)).normalize();
     ZVec3 v = n.cross(u);
     

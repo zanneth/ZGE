@@ -4,7 +4,7 @@
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 06/24/2012
  */
- 
+
 #pragma once
 
 #include <string>

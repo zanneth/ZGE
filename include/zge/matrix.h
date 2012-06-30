@@ -8,12 +8,11 @@
 #pragma once
 
 #include "zge/gl_includes.h"
+#include "zge/vector.h"
+
 #include <string>
 
 namespace zge {
-
-template <unsigned> class ZVec;
-class ZVec3;
 
 template <unsigned ROWS, unsigned COLS>
 class ZMatrix {
