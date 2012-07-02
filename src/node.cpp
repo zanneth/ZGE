@@ -8,19 +8,16 @@
 #include "zge/node.h"
 #include "zge/logger.h"
 
-#include <algorithm>
-#include <cstdlib>
-#include <iostream>
+#include <sstream>
 
 namespace zge {
 
-ZNode::ZNode() :
-    _uuid(rand())
+ZNode::ZNode()
 {}
 
 ZNode::~ZNode()
 {
-    ZLogger::log("Node 0x%x destroyed", this);
+    ZLogger::log("%s destroyed", getDescription().c_str());
 }
 
 
@@ -55,6 +52,17 @@ bool ZNode::removeChild(ZNodeRef node)
     }
     
     return false;
+}
+
+
+#pragma mark - Description
+
+std::string ZNode::getDescription()
+{
+    std::ostringstream oss;
+    oss << "ZNode (0x" << this << ") #" << _uuid.getDescription();
+    
+    return oss.str();
 }
 
 } // namespace zge

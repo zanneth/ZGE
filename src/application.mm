@@ -14,6 +14,7 @@
 #include "zge/util.h"
 
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <SDL/SDL.h>
@@ -22,7 +23,9 @@ namespace zge {
 
 static ZRunLoop *_mainRunLoop = nullptr;
 
-ZApplication::ZApplication(int argc, char **argv)
+ZApplication::ZApplication(int argc, char **argv) :
+    _currentPlatform(nullptr),
+    _timeBeganRunning(0)
 {
     setArguments(argc, argv);
 }
@@ -32,6 +35,10 @@ ZApplication::~ZApplication()
     if (_mainRunLoop != nullptr) {
         _mainRunLoop->stop();
         delete _mainRunLoop;
+    }
+    
+    if (_currentPlatform != nullptr) {
+        delete _currentPlatform;
     }
 }
 
@@ -66,6 +73,18 @@ void ZApplication::startMainRunLoop()
 }
 
 
+#pragma mark - Utility Functions
+
+unsigned ZApplication::getSecondsRunning()
+{
+    if (_timeBeganRunning == 0) {
+        return 0;
+    }
+    
+    return SDL_GetTicks() - _timeBeganRunning;
+}
+
+
 #pragma mark - Running the Application
 
 void runApplication(ZApplication *application)
@@ -90,7 +109,7 @@ void runApplication(ZApplication *application)
     }
     
     // Initialize the RNG
-    srand(time(NULL));
+    std::srand(time(NULL));
     
     // Initialize the platform interface
     ZPlatform *platform = nullptr;
@@ -106,9 +125,9 @@ void runApplication(ZApplication *application)
     }
     
     // Run the application
-    application->_currentPlatform = platform;
+    application->_currentPlatform  = platform;
+    application->_timeBeganRunning = SDL_GetTicks();
     platform->runApplication(application); // Does not return (should start event loop)
-    delete platform;
 }
 
 } // namespace zge

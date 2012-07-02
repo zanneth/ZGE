@@ -10,6 +10,7 @@
 #include "zge/types.h"
 
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace zge {
@@ -38,6 +39,9 @@ public:
     /** Managing Sub-Nodes **/
     void addChild(ZNodeRef node);
     bool removeChild(ZNodeRef node);
+    
+    /** Description **/
+    std::string getDescription();
     
     /** Updating **/
     virtual void update(unsigned dtime) {}

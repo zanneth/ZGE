@@ -21,6 +21,7 @@ class ZRunLoop;
 class ZApplication : ZNonCopyable {
     std::list<std::string> _arguments;
     ZPlatform *_currentPlatform;
+    unsigned _timeBeganRunning;
     
 public:
     ZApplication(int argc, char **argv);
@@ -34,6 +35,9 @@ public:
     /** Accessing the Main Run Loop **/
     static ZRunLoop* getMainRunLoop();
     void startMainRunLoop();
+    
+    /** Utility Functions **/
+    unsigned getSecondsRunning();
     
     /** Callbacks **/
     virtual void applicationReady() {}
