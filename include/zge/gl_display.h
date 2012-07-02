@@ -32,7 +32,6 @@ public:
     
 private:
     void _loadSurface();
-    void _loadViewport();
     void _initOpenGL();
     
     void _changeWindowTitle(std::string newTitle);

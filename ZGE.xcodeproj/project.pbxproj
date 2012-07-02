@@ -47,6 +47,8 @@
 		0C5E3DC0159ED53B0062242E /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D8A159ED53B0062242E /* vector.cpp */; };
 		0C5E3DE8159F08E10062242E /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3DE7159F08E10062242E /* camera.cpp */; };
 		0C5E3DE9159F12EA0062242E /* camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3DE5159F08D50062242E /* camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C5E3DFF15A140D90062242E /* viewport.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3DFE15A140D90062242E /* viewport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C5E3E0115A140E40062242E /* viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3E0015A140E40062242E /* viewport.cpp */; };
 		0CC9DEE11596A3A9001B7348 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC9DEE01596A3A9001B7348 /* SDL.framework */; };
 		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
 		563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBE14B2FD7800004C6A /* Foundation.framework */; };
@@ -95,6 +97,8 @@
 		0C5E3D8A159ED53B0062242E /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
 		0C5E3DE5159F08D50062242E /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		0C5E3DE7159F08E10062242E /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		0C5E3DFE15A140D90062242E /* viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewport.h; sourceTree = "<group>"; };
+		0C5E3E0015A140E40062242E /* viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewport.cpp; sourceTree = "<group>"; };
 		0CC9DEE01596A3A9001B7348 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		563B6E9614B2FD2600004C6A /* libZGE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZGE.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		563B6EBC14B2FD7300004C6A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -151,6 +155,7 @@
 				0C5E3D75159ED53B0062242E /* types.h */,
 				0C5E3D76159ED53B0062242E /* util.h */,
 				0C5E3D77159ED53B0062242E /* vector.h */,
+				0C5E3DFE15A140D90062242E /* viewport.h */,
 			);
 			path = zge;
 			sourceTree = "<group>";
@@ -182,6 +187,7 @@
 				0C5E3D88159ED53B0062242E /* scene.cpp */,
 				0C5E3D89159ED53B0062242E /* util.cpp */,
 				0C5E3D8A159ED53B0062242E /* vector.cpp */,
+				0C5E3E0015A140E40062242E /* viewport.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -247,6 +253,7 @@
 				0C5E3D9F159ED53B0062242E /* types.h in Headers */,
 				0C5E3DA0159ED53B0062242E /* util.h in Headers */,
 				0C5E3DA1159ED53B0062242E /* vector.h in Headers */,
+				0C5E3DFF15A140D90062242E /* viewport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +325,7 @@
 				0C5E3DBC159ED53B0062242E /* scene.cpp in Sources */,
 				0C5E3DBE159ED53B0062242E /* util.cpp in Sources */,
 				0C5E3DC0159ED53B0062242E /* vector.cpp in Sources */,
+				0C5E3E0115A140E40062242E /* viewport.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
