@@ -8,6 +8,7 @@
 #pragma once
 
 #include "zge/types.h"
+#include "zge/vector.h"
 
 #include <memory>
 #include <string>
@@ -16,12 +17,15 @@
 namespace zge {
 
 typedef std::shared_ptr<class ZNode> ZNodeRef;
+class ZScene;
 
 class ZNode {
 protected:
     ZUUID _uuid;
+    ZVec3 _position;
     
     ZNode *_parent;
+    ZScene *_scene;
     std::vector<ZNodeRef> _children;
     
 public:
@@ -35,16 +39,35 @@ public:
     
     /** Accessors **/
     ZNode* getParent() { return _parent; }
+    ZScene* getScene() { return _scene; }
+    ZVec3 getPosition() { return _position; }
+    void setPosition(const ZVec3 &position) { _position = position; }
     
     /** Managing Sub-Nodes **/
-    void addChild(ZNodeRef node);
-    bool removeChild(ZNodeRef node);
+    virtual void addChild(ZNodeRef node);
+    virtual bool removeChild(ZNodeRef node);
     
     /** Description **/
-    std::string getDescription();
+    virtual std::string getDescription();
     
     /** Updating **/
     virtual void update(unsigned dtime) {}
+    
+    /** Drawing **/
+    virtual void draw() {}
+    
+    /** Callbacks **/
+    virtual void onEnter() {}
+    virtual void onExit() {}
+    
+protected:
+    virtual void _updateInternal(unsigned dtime);
+    virtual void _drawInternal();
+    virtual void _onEnterInternal();
+    virtual void _onExitInternal();
+    
+public:
+    friend class ZGameManager;
 };
 
 } // namespace zge

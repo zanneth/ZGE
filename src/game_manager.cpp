@@ -43,7 +43,8 @@ void ZGameManager::run(unsigned dtime)
 {
     ZSceneRef scene = getCurrentScene();
     if (scene.get() != nullptr) {
-        scene->update(dtime);
+        scene->_updateInternal(dtime);
+        scene->_drawInternal();
     }
 }
     
