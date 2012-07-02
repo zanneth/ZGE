@@ -8,9 +8,14 @@
 #pragma once
 
 #include "zge/noncopyable.h"
+#include <tuple>
 #include <string>
 
 namespace zge {
+
+static const std::tuple<unsigned, unsigned> kDefaultDisplaySize(1024, 768);
+static const float kDefaultDisplayRefreshRate   = 1.0f / 60.0f;
+static const char *kDefaultWindowTitle          = "Application";
 
 struct ZDisplayMode {
     bool windowed;
@@ -22,10 +27,10 @@ struct ZDisplayMode {
 public:
     ZDisplayMode() :
         windowed(true),
-        width(1024),
-        height(768),
-        refreshRate(1.0 / 60.0),
-        windowTitle("Application") {}
+        width(std::get<0>(kDefaultDisplaySize)),
+        height(std::get<1>(kDefaultDisplaySize)),
+        refreshRate(kDefaultDisplayRefreshRate),
+        windowTitle(kDefaultWindowTitle) {}
 };
 
 class ZDisplay : ZNonCopyable {
