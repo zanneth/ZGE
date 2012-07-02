@@ -15,44 +15,60 @@
 namespace zge {
 
 template <unsigned ROWS, unsigned COLS>
-class ZMatrix {
+class ZMatrixBase {
 public:
     GLfloat matrix[ROWS * COLS];
     
-    ZMatrix();
-    ZMatrix(const ZMatrix &copy);
-    ZMatrix(GLfloat array[]);
+    explicit ZMatrixBase(GLfloat array[] = nullptr);
+    ZMatrixBase(const ZMatrixBase &copy);
+    ZMatrixBase(ZMatrixBase &&move);
+    ZMatrixBase& operator=(const ZMatrixBase &other);
+    ZMatrixBase& operator=(ZMatrixBase &&other);
     
     /** Operators **/
     GLfloat operator[](int index);
-    ZMatrix operator*(const ZMatrix &other);
-    ZMatrix& operator*=(const ZMatrix &other);
+    ZMatrixBase operator*(const ZMatrixBase &other);
+    ZMatrixBase& operator*=(const ZMatrixBase &other);
     // TODO: More arithmetic operators
     
+    /** Data **/
+    void copy(const ZMatrixBase &copy);
+    
+    /** Math **/
+    ZMatrixBase multiply(const ZMatrixBase &other);
+    
     /** Transforms **/
-    static ZMatrix identity();
+    static ZMatrixBase identity();
     
     /** Description **/
     std::string getDescription();
 };
+
+template <unsigned ROWS, unsigned COLS>
+class ZMatrix : public ZMatrixBase<ROWS, COLS> {
+public:
+    using ZMatrixBase<ROWS, COLS>::ZMatrixBase;
+};
 typedef ZMatrix<3, 3> ZMatrix3;
 
-class ZMatrix4 : public ZMatrix<4, 4> {
+template <>
+class ZMatrix<4, 4> : public ZMatrixBase<4, 4> {
 public:
-    ZMatrix4() : ZMatrix() {}
-    ZMatrix4(const ZMatrix &copy) : ZMatrix(copy) {}
-    ZMatrix4(GLfloat array[]) : ZMatrix(array) {}
+    ZMatrix<4, 4>(GLfloat array[] = nullptr) : ZMatrixBase(array) {}
+    ZMatrix<4, 4>(const ZMatrixBase &copy) : ZMatrixBase(copy) {}
+    ZMatrix<4, 4>(ZMatrixBase &&move) : ZMatrixBase(move) {}
     
     /** Transforms **/
-    static ZMatrix4 translation(float tx, float ty, float tz);
-    static ZMatrix4 rotation(float degrees, float x, float y, float z);
-    static ZMatrix4 scale(float sx, float sy, float sz);
+    static ZMatrix<4, 4> translation(float tx, float ty, float tz);
+    static ZMatrix<4, 4> rotation(float degrees, float x, float y, float z);
+    static ZMatrix<4, 4> scale(float sx, float sy, float sz);
     
     /** Geometry **/
-    static ZMatrix4 frustum(float left, float right, float bottom, float top,
+    static ZMatrix<4, 4> frustum(float left, float right, float bottom, float top,
                            float nearZ, float farZ);
-    static ZMatrix4 perspective(float fovy, float aspect, float nearZ, float farZ);
-    static ZMatrix4 lookAt(ZVec3 eye, ZVec3 center, ZVec3 up); 
+    static ZMatrix<4, 4> perspective(float fovy, float aspect, float nearZ, float farZ);
+    static ZMatrix<4, 4> lookAt(ZVec3 eye, ZVec3 center, ZVec3 up); 
 };
+typedef ZMatrix<4, 4> ZMatrix4;
 
 } // namespace zge

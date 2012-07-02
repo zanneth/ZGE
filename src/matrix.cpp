@@ -13,43 +13,92 @@
 #include <complex>
 #include <cstring>
 #include <cmath>
+#include <iostream>
 #include <sstream>
 
 namespace zge {
 
 template <unsigned R, unsigned C>
-ZMatrix<R, C>::ZMatrix()
+ZMatrixBase<R, C>::ZMatrixBase(GLfloat array[])
 {
-    memset(matrix, 0, R * C * sizeof(GLfloat));
-}
-
-template <unsigned R, unsigned C>
-ZMatrix<R, C>::ZMatrix(const ZMatrix &copy)
-{
-    for (unsigned i = 0; i < R * C; ++i) {
-        matrix[i] = copy.matrix[i];
+    if (array != nullptr) {
+        for (unsigned i = 0; i < R * C; ++i) {
+            matrix[i] = array[i];
+        }
+    } else {
+        memset(matrix, 0, R * C * sizeof(GLfloat));
     }
 }
 
 template <unsigned R, unsigned C>
-ZMatrix<R, C>::ZMatrix(GLfloat array[])
+ZMatrixBase<R, C>::ZMatrixBase(const ZMatrixBase &copy)
 {
-    for (unsigned i = 0; i < R * C; ++i) {
-        matrix[i] = array[i];
+    this->copy(copy);
+}
+
+template <unsigned R, unsigned C>
+ZMatrixBase<R, C>::ZMatrixBase(ZMatrixBase<R, C> &&move)
+{
+    std::swap(matrix, move.matrix);
+}
+
+template <unsigned R, unsigned C>
+ZMatrixBase<R, C>& ZMatrixBase<R, C>::operator=(const ZMatrixBase<R, C> &other)
+{
+    if (this != &other) {
+        copy(other);
     }
+    
+    return *this;
+}
+
+template <unsigned R, unsigned C>
+ZMatrixBase<R, C>& ZMatrixBase<R, C>::operator=(ZMatrixBase<R, C> &&other)
+{
+    if (this != &other) {
+        std::swap(matrix, other.matrix);
+    }
+    
+    return *this;
 }
 
 
 #pragma mark - Operators
 
 template <unsigned R, unsigned C>
-GLfloat ZMatrix<R, C>::operator[](int index)
+GLfloat ZMatrixBase<R, C>::operator[](int index)
 {
     return matrix[index];
 }
 
 template <unsigned R, unsigned C>
-ZMatrix<R, C> ZMatrix<R, C>::operator*(const ZMatrix<R, C> &other)
+ZMatrixBase<R, C> ZMatrixBase<R, C>::operator*(const ZMatrixBase<R, C> &other)
+{
+    return multiply(other);
+}
+
+template <unsigned R, unsigned C>
+ZMatrixBase<R, C>& ZMatrixBase<R, C>::operator*=(const ZMatrixBase<R, C> &other)
+{
+    return (*this = (*this * other));
+}
+
+
+#pragma mark - Data
+
+template <unsigned R, unsigned C>
+void ZMatrixBase<R, C>::copy(const ZMatrixBase<R, C> &copy)
+{
+    for (unsigned i = 0; i < R * C; ++i) {
+        matrix[i] = copy.matrix[i];
+    }
+}
+
+
+#pragma mark - Math
+
+template <unsigned R, unsigned C>
+ZMatrixBase<R, C> ZMatrixBase<R, C>::multiply(const ZMatrixBase<R, C> &other)
 {
     if (R != C) {
         ZNotImplementedException e;
@@ -58,7 +107,7 @@ ZMatrix<R, C> ZMatrix<R, C>::operator*(const ZMatrix<R, C> &other)
     }
     
     unsigned n = R;
-    ZMatrix<R, C> t;
+    ZMatrixBase<R, C> t;
     for (unsigned i = 0; i < n; ++i) {
         for (unsigned j = 0; j < n; ++j) {
             for (unsigned k = 0; k < n; ++k) {
@@ -70,23 +119,17 @@ ZMatrix<R, C> ZMatrix<R, C>::operator*(const ZMatrix<R, C> &other)
     return t;
 }
 
-template <unsigned R, unsigned C>
-ZMatrix<R, C>& ZMatrix<R, C>::operator*=(const ZMatrix<R, C> &other)
-{
-    return (*this = (*this * other));
-}
-
 
 #pragma mark - Transforms
 
 template <unsigned R, unsigned C>
-ZMatrix<R, C> ZMatrix<R, C>::identity()
+ZMatrixBase<R, C> ZMatrixBase<R, C>::identity()
 {
     if (R != C) {
         throw "Not a square matrix. Cannot create identity.";
     }
     
-    ZMatrix<R, C> matrix;
+    ZMatrixBase<R, C> matrix;
     for (unsigned row = 0, col = 0; row < R && col < C; ++row, ++col) {
         matrix.matrix[row * C + col] = 1.0;
     }
@@ -94,9 +137,9 @@ ZMatrix<R, C> ZMatrix<R, C>::identity()
     return matrix;
 }
 
-ZMatrix4 ZMatrix4::translation(float tx, float ty, float tz)
+ZMatrix<4, 4> ZMatrix<4, 4>::translation(float tx, float ty, float tz)
 {
-    ZMatrix4 mat = ZMatrix4::identity();
+    ZMatrix<4, 4> mat = ZMatrix<4, 4>::identity();
     mat.matrix[12] = tx;
     mat.matrix[13] = ty;
     mat.matrix[14] = tz;
@@ -104,7 +147,7 @@ ZMatrix4 ZMatrix4::translation(float tx, float ty, float tz)
     return mat;
 }
 
-ZMatrix4 ZMatrix4::rotation(float degrees, float x, float y, float z)
+ZMatrix<4, 4> ZMatrix<4, 4>::rotation(float degrees, float x, float y, float z)
 {
     float radians = ZUtil::degreesToRadians(degrees);
     
@@ -132,12 +175,12 @@ ZMatrix4 ZMatrix4::rotation(float degrees, float x, float y, float z)
         1.0f
     };
     
-    return ZMatrix4(m);
+    return ZMatrix<4, 4>(m);
 }
 
-ZMatrix4 ZMatrix4::scale(float sx, float sy, float sz)
+ZMatrix<4, 4> ZMatrix<4, 4>::scale(float sx, float sy, float sz)
 {
-    ZMatrix4 mat = ZMatrix4::identity();
+    ZMatrix<4, 4> mat = ZMatrix<4, 4>::identity();
     mat.matrix[0]   = sx;
     mat.matrix[5]   = sy;
     mat.matrix[10]  = sz;
@@ -148,10 +191,10 @@ ZMatrix4 ZMatrix4::scale(float sx, float sy, float sz)
 
 #pragma mark - Geometry
 
-ZMatrix4 ZMatrix4::frustum(float left, float right, float bottom, float top,
+ZMatrix<4, 4> ZMatrix<4, 4>::frustum(float left, float right, float bottom, float top,
                            float nearZ, float farZ)
 {
-    ZMatrix4 mat = ZMatrix4::identity();
+    ZMatrix<4, 4> mat = ZMatrix<4, 4>::identity();
     float deltaX = right - left;
     float deltaY = top - bottom;
     float deltaZ = farZ - nearZ;
@@ -173,16 +216,16 @@ ZMatrix4 ZMatrix4::frustum(float left, float right, float bottom, float top,
     return mat;
 }
 
-ZMatrix4 ZMatrix4::perspective(float fovy, float aspect, float nearZ, float farZ)
+ZMatrix<4, 4> ZMatrix<4, 4>::perspective(float fovy, float aspect, float nearZ, float farZ)
 {
     float fheight   = std::tan(fovy / 360.0 * M_PI) * nearZ;
     float fwidth    = fheight * aspect;
     
-    ZMatrix4 frust = ZMatrix4::frustum(-fwidth, fwidth, -fheight, fheight, nearZ, farZ);
+    ZMatrix<4, 4> frust = ZMatrix<4, 4>::frustum(-fwidth, fwidth, -fheight, fheight, nearZ, farZ);
     return frust;
 }
 
-ZMatrix4 ZMatrix4::lookAt(ZVec3 eye, ZVec3 center, ZVec3 up)
+ZMatrix<4, 4> ZMatrix<4, 4>::lookAt(ZVec3 eye, ZVec3 center, ZVec3 up)
 {
     ZVec3 n = (eye + center.negate()).normalize();
     ZVec3 u = (up.cross(n)).normalize();
@@ -195,14 +238,14 @@ ZMatrix4 ZMatrix4::lookAt(ZVec3 eye, ZVec3 center, ZVec3 up)
         u.negate() * eye, v.negate() * eye, n.negate() * eye, 1.0f
     };
     
-    return ZMatrix4(m);
+    return ZMatrix<4, 4>(m);
 }
 
 
 #pragma mark - Description
 
 template <unsigned R, unsigned C>
-std::string ZMatrix<R, C>::getDescription()
+std::string ZMatrixBase<R, C>::getDescription()
 {
     std::ostringstream oss;
     for (unsigned i = 0; i < R * C; ++i) {
@@ -220,41 +263,41 @@ std::string ZMatrix<R, C>::getDescription()
 
 
 // To avoid linker errors
-template class ZMatrix<1, 1>;
-template class ZMatrix<1, 2>;
-template class ZMatrix<1, 3>;
-template class ZMatrix<1, 4>;
-template class ZMatrix<1, 5>;
-template class ZMatrix<1, 6>;
-template class ZMatrix<2, 1>;
-template class ZMatrix<2, 2>;
-template class ZMatrix<2, 3>;
-template class ZMatrix<2, 4>;
-template class ZMatrix<2, 5>;
-template class ZMatrix<2, 6>;
-template class ZMatrix<3, 1>;
-template class ZMatrix<3, 2>;
-template class ZMatrix<3, 3>;
-template class ZMatrix<3, 4>;
-template class ZMatrix<3, 5>;
-template class ZMatrix<3, 6>;
-template class ZMatrix<4, 1>;
-template class ZMatrix<4, 2>;
-template class ZMatrix<4, 3>;
-template class ZMatrix<4, 4>;
-template class ZMatrix<4, 5>;
-template class ZMatrix<4, 6>;
-template class ZMatrix<5, 1>;
-template class ZMatrix<5, 2>;
-template class ZMatrix<5, 3>;
-template class ZMatrix<5, 4>;
-template class ZMatrix<5, 5>;
-template class ZMatrix<5, 6>;
-template class ZMatrix<6, 1>;
-template class ZMatrix<6, 2>;
-template class ZMatrix<6, 3>;
-template class ZMatrix<6, 4>;
-template class ZMatrix<6, 5>;
-template class ZMatrix<6, 6>;
+template class ZMatrixBase<1, 1>;
+template class ZMatrixBase<1, 2>;
+template class ZMatrixBase<1, 3>;
+template class ZMatrixBase<1, 4>;
+template class ZMatrixBase<1, 5>;
+template class ZMatrixBase<1, 6>;
+template class ZMatrixBase<2, 1>;
+template class ZMatrixBase<2, 2>;
+template class ZMatrixBase<2, 3>;
+template class ZMatrixBase<2, 4>;
+template class ZMatrixBase<2, 5>;
+template class ZMatrixBase<2, 6>;
+template class ZMatrixBase<3, 1>;
+template class ZMatrixBase<3, 2>;
+template class ZMatrixBase<3, 3>;
+template class ZMatrixBase<3, 4>;
+template class ZMatrixBase<3, 5>;
+template class ZMatrixBase<3, 6>;
+template class ZMatrixBase<4, 1>;
+template class ZMatrixBase<4, 2>;
+template class ZMatrixBase<4, 3>;
+template class ZMatrixBase<4, 4>;
+template class ZMatrixBase<4, 5>;
+template class ZMatrixBase<4, 6>;
+template class ZMatrixBase<5, 1>;
+template class ZMatrixBase<5, 2>;
+template class ZMatrixBase<5, 3>;
+template class ZMatrixBase<5, 4>;
+template class ZMatrixBase<5, 5>;
+template class ZMatrixBase<5, 6>;
+template class ZMatrixBase<6, 1>;
+template class ZMatrixBase<6, 2>;
+template class ZMatrixBase<6, 3>;
+template class ZMatrixBase<6, 4>;
+template class ZMatrixBase<6, 5>;
+template class ZMatrixBase<6, 6>;
 
 } // namespace zge

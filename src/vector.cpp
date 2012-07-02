@@ -15,7 +15,7 @@
 namespace zge {
 
 template <unsigned S>
-ZVec<S>::ZVec(float arr[])
+ZVecBase<S>::ZVecBase(float arr[])
 {
     if (arr != nullptr) {
         for (unsigned i = 0; i < S; ++i) {
@@ -29,7 +29,7 @@ ZVec<S>::ZVec(float arr[])
 // Clang doesn't support initializer_lists yet.
 #if 0
 template <unsigned S>
-ZVec<S>::ZVec(std::initializer_list list)
+ZVecBase<S>::ZVecBase(std::initializer_list list)
 {
     unsigned c = 0;
     for (float n : list) {
@@ -42,25 +42,49 @@ ZVec<S>::ZVec(std::initializer_list list)
 #endif
 
 template <unsigned S>
-ZVec<S>::ZVec(const ZVec<S> &copy)
+ZVecBase<S>::ZVecBase(const ZVecBase<S> &copy)
 {
-    for (unsigned i = 0; i < S; ++i) {
-        vec[i] = copy.vec[i];
+    this->copy(copy);
+}
+
+template <unsigned S>
+ZVecBase<S>::ZVecBase(ZVecBase<S> &&move)
+{
+    std::swap(vec, move.vec);
+}
+
+template <unsigned S>
+ZVecBase<S>& ZVecBase<S>::operator=(const ZVecBase<S> &other)
+{
+    if (this != &other) {
+        this->copy(other);
     }
+    
+    return *this;
+}
+
+template <unsigned S>
+ZVecBase<S>& ZVecBase<S>::operator=(ZVecBase<S> &&other)
+{
+    if (this != &other) {
+        std::swap(vec, other.vec);
+    }
+    
+    return *this;
 }
 
 #pragma mark - Operators
 
 template <unsigned S>
-float ZVec<S>::operator[](int index)
+float ZVecBase<S>::operator[](int index)
 {
     return vec[index];
 }
 
 template <unsigned S>
-ZVec<S> ZVec<S>::operator+(const ZVec<S> &other)
+ZVecBase<S> ZVecBase<S>::operator+(const ZVecBase<S> &other)
 {
-    ZVec<S> sum;
+    ZVecBase<S> sum;
     for (unsigned i = 0; i < S; ++i) {
         sum.vec[i] = vec[i] + other.vec[i];
     }
@@ -68,9 +92,9 @@ ZVec<S> ZVec<S>::operator+(const ZVec<S> &other)
 }
 
 template <unsigned S>
-ZVec<S> ZVec<S>::operator-(const ZVec<S> &other)
+ZVecBase<S> ZVecBase<S>::operator-(const ZVecBase<S> &other)
 {
-    ZVec<S> diff;
+    ZVecBase<S> diff;
     for (unsigned i = 0; i < S; ++i) {
         diff.vec[i] = vec[i] - other.vec[i];
     }
@@ -78,7 +102,7 @@ ZVec<S> ZVec<S>::operator-(const ZVec<S> &other)
 }
 
 template <unsigned S>
-float ZVec<S>::operator*(const ZVec &other)
+float ZVecBase<S>::operator*(const ZVecBase &other)
 {
     float dot;
     for (unsigned i = 0; i < S; ++i) {
@@ -88,9 +112,9 @@ float ZVec<S>::operator*(const ZVec &other)
 }
 
 template <unsigned S>
-ZVec<S> ZVec<S>::operator*(float scalar)
+ZVecBase<S> ZVecBase<S>::operator*(float scalar)
 {
-    ZVec<S> result;
+    ZVecBase<S> result;
     for (unsigned i = 0; i < S; ++i) {
         result.vec[i] = scalar * vec[i];
     }
@@ -98,22 +122,33 @@ ZVec<S> ZVec<S>::operator*(float scalar)
 }
 
 template <unsigned S>
-ZVec<S>& ZVec<S>::operator+=(const ZVec<S> &other)
+ZVecBase<S>& ZVecBase<S>::operator+=(const ZVecBase<S> &other)
 {
     return (*this = (*this + other));
 }
 
 template <unsigned S>
-ZVec<S>& ZVec<S>::operator-=(const ZVec<S> &other)
+ZVecBase<S>& ZVecBase<S>::operator-=(const ZVecBase<S> &other)
 {
     return (*this = (*this - other));
+}
+
+
+#pragma mark - Data
+
+template <unsigned S>
+void ZVecBase<S>::copy(const ZVecBase<S> &copy)
+{
+    for (unsigned i = 0; i < S; ++i) {
+        vec[i] = copy.vec[i];
+    }
 }
 
 
 #pragma mark - Math
 
 template <unsigned S>
-float ZVec<S>::length()
+float ZVecBase<S>::length()
 {
     float length = 0.0;
     for (unsigned i = 0; i < S; ++i) {
@@ -124,11 +159,11 @@ float ZVec<S>::length()
 }
 
 template <unsigned S>
-ZVec<S> ZVec<S>::normalize()
+ZVecBase<S> ZVecBase<S>::normalize()
 {
     float length = this->length();
     if (length == 0.0) {
-        return ZVec();
+        return ZVecBase();
     }
     
     float scale = 1.0 / length;
@@ -136,22 +171,22 @@ ZVec<S> ZVec<S>::normalize()
     for (unsigned i = 0; i < S; ++i) {
         arr[i] = vec[i] * scale;
     }
-    return ZVec(arr);
+    return ZVecBase(arr);
 }
 
 template <unsigned S>
-ZVec<S> ZVec<S>::negate()
+ZVecBase<S> ZVecBase<S>::negate()
 {
-    ZVec<S> negated;
+    ZVecBase<S> negated;
     for (unsigned i = 0; i < S; ++i) {
         negated.vec[i] = -vec[i];
     }
     return negated;
 }
 
-ZVec3 ZVec3::cross(const ZVec3 &other)
+ZVec<3> ZVec<3>::cross(const ZVec<3> &other)
 {
-    return ZVec3(
+    return ZVec<3>(
         y * other.z - z * other.y,
         z * other.x - x * other.z,
         x * other.y - y * other.x
@@ -162,7 +197,7 @@ ZVec3 ZVec3::cross(const ZVec3 &other)
 #pragma mark - Description
 
 template <unsigned S>
-std::string ZVec<S>::getDescription()
+std::string ZVecBase<S>::getDescription()
 {
     std::ostringstream oss;
     oss << "{ ";
@@ -178,10 +213,10 @@ std::string ZVec<S>::getDescription()
 
 
 // To avoid linker errors
-template class ZVec<2>;
-template class ZVec<3>;
-template class ZVec<4>;
-template class ZVec<5>;
-template class ZVec<6>;
+template class ZVecBase<2>;
+template class ZVecBase<3>;
+template class ZVecBase<4>;
+template class ZVecBase<5>;
+template class ZVecBase<6>;
 
 } // namespace zge
