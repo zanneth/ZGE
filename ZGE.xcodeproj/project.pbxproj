@@ -24,7 +24,6 @@
 		0C5E3D99159ED53B0062242E /* osx_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D6F159ED53B0062242E /* osx_platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3D9A159ED53B0062242E /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D70159ED53B0062242E /* platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3D9B159ED53B0062242E /* run_loop.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D71159ED53B0062242E /* run_loop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C5E3D9C159ED53B0062242E /* runnable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D72159ED53B0062242E /* runnable_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3D9D159ED53B0062242E /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D73159ED53B0062242E /* scene.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3D9E159ED53B0062242E /* schedulable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D74159ED53B0062242E /* schedulable_interface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3D9F159ED53B0062242E /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3D75159ED53B0062242E /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,7 +71,6 @@
 		0C5E3D6F159ED53B0062242E /* osx_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osx_platform.h; sourceTree = "<group>"; };
 		0C5E3D70159ED53B0062242E /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
 		0C5E3D71159ED53B0062242E /* run_loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_loop.h; sourceTree = "<group>"; };
-		0C5E3D72159ED53B0062242E /* runnable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = runnable_interface.h; sourceTree = "<group>"; };
 		0C5E3D73159ED53B0062242E /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		0C5E3D74159ED53B0062242E /* schedulable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schedulable_interface.h; sourceTree = "<group>"; };
 		0C5E3D75159ED53B0062242E /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				0C5E3D6F159ED53B0062242E /* osx_platform.h */,
 				0C5E3D70159ED53B0062242E /* platform.h */,
 				0C5E3D71159ED53B0062242E /* run_loop.h */,
-				0C5E3D72159ED53B0062242E /* runnable_interface.h */,
 				0C5E3D73159ED53B0062242E /* scene.h */,
 				0C5E3D74159ED53B0062242E /* schedulable_interface.h */,
 				0C5E3D75159ED53B0062242E /* types.h */,
@@ -245,7 +242,6 @@
 				0C5E3D99159ED53B0062242E /* osx_platform.h in Headers */,
 				0C5E3D9A159ED53B0062242E /* platform.h in Headers */,
 				0C5E3D9B159ED53B0062242E /* run_loop.h in Headers */,
-				0C5E3D9C159ED53B0062242E /* runnable_interface.h in Headers */,
 				0C5E3D9D159ED53B0062242E /* scene.h in Headers */,
 				0C5E3D9E159ED53B0062242E /* schedulable_interface.h in Headers */,
 				0C5E3D9F159ED53B0062242E /* types.h in Headers */,
