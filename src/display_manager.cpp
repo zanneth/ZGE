@@ -25,21 +25,9 @@ ZDisplayManager::~ZDisplayManager()
     }
 }
 
-ZDisplay* ZDisplayManager::createDisplay(const ZDisplayMode &mode, ZRenderingAPIType api)
+ZDisplay* ZDisplayManager::createDisplay(const ZDisplayMode &mode)
 {
-    ZDisplay *display = nullptr;
-    
-    switch (api) {
-        case kOpenGL:
-            display = new ZGLDisplay(mode);
-            break;
-        case kSoftware:
-        case kDirectX:
-        default:
-            throw ZNotImplementedException();
-            break;
-    }
-    
+    ZDisplay *display = new ZGLDisplay(mode);
     display->initialize();
     
     if (_currentDisplay != nullptr) {

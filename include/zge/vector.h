@@ -20,8 +20,8 @@ public:
     float vec[S];
     
     /** Constructors **/
-    explicit ZVecBase(float arr[] = nullptr);
-    // ZVec(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
+    ZVecBase(float arr[] = nullptr);
+//    ZVecBase(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
     ZVecBase(const ZVecBase &copy);
     ZVecBase(ZVecBase &&move);
     ZVecBase& operator=(const ZVecBase &other);
@@ -52,7 +52,9 @@ public:
 template <unsigned S>
 class ZVec : public ZVecBase<S> {
 public:
-    using ZVecBase<S>::ZVecBase;
+    ZVec(float arr[] = nullptr) : ZVecBase<S>(arr) {}
+    ZVec(const ZVec &copy) : ZVecBase<S>(copy) {}
+    ZVec(ZVec &&move) : ZVecBase<S>(move) {}
 };
 
 template <>

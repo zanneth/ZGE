@@ -13,10 +13,6 @@
 
 namespace zge {
 
-static const std::tuple<unsigned, unsigned> kDefaultDisplaySize(1024, 768);
-static const float kDefaultDisplayRefreshRate   = 1.0f / 60.0f;
-static const char *kDefaultWindowTitle          = "Application";
-
 struct ZDisplayMode {
     bool windowed;
     unsigned width;
@@ -27,10 +23,10 @@ struct ZDisplayMode {
 public:
     ZDisplayMode() :
         windowed(true),
-        width(std::get<0>(kDefaultDisplaySize)),
-        height(std::get<1>(kDefaultDisplaySize)),
-        refreshRate(kDefaultDisplayRefreshRate),
-        windowTitle(kDefaultWindowTitle) {}
+        width(1024),
+        height(768),
+        refreshRate(1.0f / 60.0f),
+        windowTitle("Application") {}
 };
 
 class ZDisplay : ZNonCopyable {

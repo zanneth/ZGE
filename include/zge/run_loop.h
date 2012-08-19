@@ -7,7 +7,7 @@
  
 #pragma once
 
-#include "zge/schedulable_interface.h"
+#include "zge/schedulable.h"
 #include "zge/noncopyable.h"
 
 #include <memory>
@@ -16,7 +16,7 @@
 namespace zge {
 
 class ZRunLoop : ZNonCopyable {
-    std::vector<ZSchedulableRef> _schedulables;
+    std::vector<ZSchedulableRef> _ZSchedulables;
     bool _running;
     bool _onMainThread;
     
@@ -32,9 +32,9 @@ public:
     void run();
     void stop();
     
-    /** Managing schedulables in the Run Loop **/
-    void schedule(ZSchedulableRef schedulable);
-    void unschedule(ZSchedulableRef schedulable);
+    /** Managing ZSchedulables in the Run Loop **/
+    void schedule(ZSchedulableRef ZSchedulable);
+    void unschedule(ZSchedulableRef ZSchedulable);
     
     /** Friends **/
     friend class ZApplication;

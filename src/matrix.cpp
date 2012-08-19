@@ -225,7 +225,7 @@ ZMatrix<4, 4> ZMatrix<4, 4>::perspective(float fovy, float aspect, float nearZ, 
     return frust;
 }
 
-ZMatrix<4, 4> ZMatrix<4, 4>::lookAt(ZVec3 eye, ZVec3 center, ZVec3 up)
+ZMatrix<4, 4> ZMatrix<4, 4>::lookat(ZVec3 eye, ZVec3 center, ZVec3 up)
 {
     ZVec3 n = (eye + center.negate()).normalize();
     ZVec3 u = (up.cross(n)).normalize();

@@ -37,7 +37,7 @@ ZSceneRef ZGameManager::popScene()
 }
 
 
-#pragma mark - Schedulable Overrides
+#pragma mark - ZSchedulable Overrides
 
 void ZGameManager::run(unsigned dtime)
 {

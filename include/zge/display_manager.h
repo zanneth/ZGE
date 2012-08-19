@@ -8,7 +8,7 @@
 #pragma once
 
 #include "zge/noncopyable.h"
-#include "zge/schedulable_interface.h"
+#include "zge/schedulable.h"
 
 #include <memory>
 
@@ -17,15 +17,9 @@ namespace zge {
 class ZDisplay;
 struct ZDisplayMode;
 
-enum ZRenderingAPIType {
-    kSoftware,
-    kOpenGL,
-    kDirectX
-};
-
 typedef std::shared_ptr<class ZDisplayManager> ZDisplayManagerRef;
 
-class ZDisplayManager : public ZSchedulableInterface, ZNonCopyable {
+class ZDisplayManager : public ZSchedulable, ZNonCopyable {
     ZDisplay *_currentDisplay;
     
 public:
@@ -33,10 +27,10 @@ public:
     ~ZDisplayManager();
     
     /** Creating the Display **/
-    ZDisplay* createDisplay(const ZDisplayMode &mode, ZRenderingAPIType api);
+    ZDisplay* createDisplay(const ZDisplayMode &mode);
     ZDisplay* getCurrentDisplay() { return _currentDisplay; }
     
-    /** Schedulable **/
+    /** ZSchedulable **/
     void run(unsigned dtime) override;
 };
 

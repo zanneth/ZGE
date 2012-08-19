@@ -89,14 +89,14 @@ unsigned ZApplication::getSecondsRunning()
 
 void runApplication(ZApplication *application)
 {
-    if (application == NULL) {
+    if (application == nullptr) {
         ZApplicationException expt;
         expt.extraInfo = "Application pointer is NULL.";
         
         throw expt;
     }
     
-    // Initialize SDL engine
+    // initialize SDL engine
     int sdlStat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     if (sdlStat < 0) {
         std::string errorstr = "SDL Failed to initialize: ";
@@ -108,26 +108,26 @@ void runApplication(ZApplication *application)
         throw expt;
     }
     
-    // Initialize the RNG
+    // initialize the RNG
     std::srand(time(NULL));
     
-    // Initialize the platform interface
+    // initialize the platform interface
     ZPlatform *platform = nullptr;
 #if __APPLE__
     platform = new ZOSXPlatform();
 #endif
     
-    // Check if the platform was able to be initialized.
+    // check if the platform was able to be initialized.
     if (platform == nullptr) {
         ZApplicationException expt;
         expt.extraInfo = "Platform not supported.";
         throw expt;
     }
     
-    // Run the application
+    // run the application
     application->_currentPlatform  = platform;
     application->_timeBeganRunning = SDL_GetTicks();
-    platform->runApplication(application); // Does not return (should start event loop)
+    platform->runApplication(application); // does not return (should start event loop)
 }
 
 } // namespace zge

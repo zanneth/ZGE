@@ -18,17 +18,13 @@ namespace zge {
 
 typedef std::shared_ptr<class ZCamera> ZCameraRef;
 
-static const GLfloat kDefaultFieldOfView            = 45.0f;
-static const GLfloat kDefaultNearClippingDistance   = 0.001f;
-static const GLfloat kDefaultFarClippingDistance    = 1000.0f;
-
 class ZCamera : public ZNode {
     GLfloat _fieldOfView;
     GLfloat _nearClippingDistance;
     GLfloat _farClippingDistance;
     
-    ZMatrix4 _projectionMatrix;
-    ZMatrix4 _modelViewMatrix;
+    ZMat4 _projectionMatrix;
+    ZMat4 _modelViewMatrix;
     ZVec3 _lookDirection;
     
     bool _projectionDirty;
@@ -45,7 +41,7 @@ public:
     GLfloat getFarClippingDistance() { return _farClippingDistance; }
     void setFarClippingDistance(GLfloat distance) { _farClippingDistance = distance; _projectionDirty = true; }
     
-    const ZMatrix4* getModelViewMatrix() { return &_modelViewMatrix; }
+    const ZMat4* getModelViewMatrix() { return &_modelViewMatrix; }
     const ZVec3* getLookDirection() { return &_lookDirection; }
     void setLookDirection(const ZVec3 &look) { _lookDirection = look; _modelViewDirty = true; }
     

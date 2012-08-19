@@ -12,12 +12,16 @@
 
 #include <algorithm>
 
+#define DEFAULT_FOV         45.0f
+#define DEFAULT_NEAR_CLIP   0.001f
+#define DEFAULT_FAR_CLIP    1000.0f
+
 namespace zge {
 
 ZCamera::ZCamera() :
-    _fieldOfView(kDefaultFieldOfView),
-    _nearClippingDistance(kDefaultNearClippingDistance),
-    _farClippingDistance(kDefaultFarClippingDistance),
+    _fieldOfView(DEFAULT_FOV),
+    _nearClippingDistance(DEFAULT_NEAR_CLIP),
+    _farClippingDistance(DEFAULT_FAR_CLIP),
     _projectionDirty(true),
     _modelViewDirty(true)
 {}
@@ -46,7 +50,7 @@ void ZCamera::_constructProjection()
         ZViewport viewport = _scene->getViewport();
         float aspect = std::max(viewport.width, viewport.height) / std::min(viewport.width, viewport.height);
         
-        _projectionMatrix = ZMatrix4::perspective(_fieldOfView,
+        _projectionMatrix = ZMat4::perspective(_fieldOfView,
                                                   aspect,
                                                   _nearClippingDistance,
                                                   _farClippingDistance);
@@ -70,7 +74,7 @@ void ZCamera::_closeProjection()
 void ZCamera::_constructModelView()
 {
     if (_modelViewDirty) {
-        _modelViewMatrix = ZMatrix4::lookAt(_position, _lookDirection, ZVec3(0.0, 1.0, 0.0));
+        _modelViewMatrix = ZMat4::lookat(_position, _lookDirection, ZVec3(0.0, 1.0, 0.0));
         _modelViewDirty = false;
     }
 }
