@@ -23,6 +23,8 @@ class ZScene : public ZNode {
     
 public:
     ZScene();
+    ZScene(const ZScene &) = default;
+    ~ZScene();
     
     /** Accessors **/
     ZCameraRef getActiveCamera() { return _activeCamera; }
@@ -34,6 +36,7 @@ public:
     
 private:
     void _drawInternal() override;
+    void _evictScene(ZNode *curnode);
     
 public:
     friend class ZGameManager;

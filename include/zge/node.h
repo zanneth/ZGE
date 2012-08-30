@@ -24,8 +24,8 @@ protected:
     ZUUID _uuid;
     ZVec3 _position;
     
-    ZNode *_parent;
-    ZScene *_scene;
+    ZNode *_parent; // weak
+    ZScene *_scene; // weak
     std::vector<ZNodeRef> _children;
     
 public:
@@ -46,6 +46,7 @@ public:
     /** Managing Sub-Nodes **/
     virtual void addChild(ZNodeRef node);
     virtual bool removeChild(ZNodeRef node);
+    virtual std::vector<ZNodeRef> getChildren() { return _children; }
     
     /** Description **/
     virtual std::string getDescription();
@@ -68,6 +69,7 @@ protected:
     
 public:
     friend class ZGameManager;
+    friend class ZScene;
 };
 
 } // namespace zge

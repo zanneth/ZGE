@@ -20,6 +20,11 @@ ZScene::ZScene() : ZNode(),
     setPosition(ZVec3(0.0, 0.0, 0.0));
 }
 
+ZScene::~ZScene()
+{
+    _evictScene(this);
+}
+
 
 #pragma mark - Node Overrides
 
@@ -49,6 +54,17 @@ void ZScene::_drawInternal()
     
     _activeCamera->close();
     _viewport.close();
+}
+
+
+#pragma mark - Private
+
+void ZScene::_evictScene(ZNode *curnode)
+{
+    curnode->_scene = nullptr;
+    for (ZNodeRef node : curnode->_children) {
+        _evictScene(node.get());
+    }
 }
 
 } // namespace zge

@@ -41,7 +41,7 @@ bool ZNode::operator!=(const ZNode &other)
 
 void ZNode::addChild(ZNodeRef node)
 {
-    node->_scene = _scene;
+    node->_scene  = _scene;
     node->_parent = this;
     
     _children.push_back(node);
@@ -52,7 +52,7 @@ bool ZNode::removeChild(ZNodeRef node)
 {
     for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
         if (**itr == *node) {
-            node->_scene = nullptr;
+            node->_scene  = nullptr;
             node->_parent = nullptr;
             
             _children.erase(itr);
