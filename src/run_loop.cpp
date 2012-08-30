@@ -38,16 +38,16 @@ void ZRunLoop::stop()
 
 #pragma mark - Managing ZSchedulables in the Run Loop
 
-void ZRunLoop::schedule(ZSchedulableRef ZSchedulable)
+void ZRunLoop::schedule(ZSchedulableRef schedulable)
 {
-    _ZSchedulables.push_back(ZSchedulable);
+    _schedulables.push_back(schedulable);
 }
 
-void ZRunLoop::unschedule(ZSchedulableRef ZSchedulable)
+void ZRunLoop::unschedule(ZSchedulableRef schedulable)
 {
-    auto itr = std::find(_ZSchedulables.begin(), _ZSchedulables.end(), ZSchedulable);
-    if (itr != _ZSchedulables.end()) {
-        _ZSchedulables.erase(itr);
+    auto itr = std::find(_schedulables.begin(), _schedulables.end(), schedulable);
+    if (itr != _schedulables.end()) {
+        _schedulables.erase(itr);
     }
 }
 
@@ -57,9 +57,9 @@ void ZRunLoop::unschedule(ZSchedulableRef ZSchedulable)
 void ZRunLoop::_main()
 {
     while (_running) {
-        for (ZSchedulableRef ZSchedulable : _ZSchedulables) { 
+        for (ZSchedulableRef schedulable : _schedulables) {
             unsigned time = SDL_GetTicks();
-            unsigned lastUpdate = ZSchedulable->_lastUpdate;
+            unsigned lastUpdate = schedulable->_lastUpdate;
             unsigned dtime;
             
             if (lastUpdate == 0) {
@@ -68,8 +68,8 @@ void ZRunLoop::_main()
                 dtime = time - lastUpdate;
             }
             
-            ZSchedulable->run(dtime);
-            ZSchedulable->_lastUpdate = time;
+            schedulable->run(dtime);
+            schedulable->_lastUpdate = time;
         }
         
         // very naive timing mechanism.
