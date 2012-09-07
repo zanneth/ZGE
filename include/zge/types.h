@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <sstream>
 #include <string>
 
 namespace zge {
@@ -20,21 +21,21 @@ public:
         _uuidnum(std::rand())
     {}
     
-    bool operator==(const ZUUID &other)
+    bool operator==(const ZUUID &other) const
     {
         return _uuidnum == other._uuidnum;
     }
     
-    bool operator!=(const ZUUID &other)
+    bool operator!=(const ZUUID &other) const
     {
         return !operator==(other);
     }
     
-    std::string getDescription()
+    std::string getDescription() const
     {
-        char str[11];
-        sprintf(str, "%010d", _uuidnum);
-        return str;
+        std::ostringstream oss;
+        oss << _uuidnum;
+        return oss.str();
     }
 };
 

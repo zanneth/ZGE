@@ -7,11 +7,12 @@
  
 #pragma once
 
+#include "zge/noncopyable.h"
 #include <string>
 
 namespace zge {
 
-class ZLogger {
+class ZLogger : ZNonCopyable {
 public:
     static void log(const char *format, ...);
     static void log(const std::string str);

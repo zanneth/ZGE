@@ -52,8 +52,8 @@ bool ZNode::removeChild(ZNodeRef node)
 {
     for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
         if (**itr == *node) {
-            node->_scene  = nullptr;
-            node->_parent = nullptr;
+            node->_scene    = nullptr;
+            node->_parent   = nullptr;
             
             _children.erase(itr);
             node->_onExitInternal();

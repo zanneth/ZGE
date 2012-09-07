@@ -23,6 +23,7 @@ ZSceneRef ZGameManager::getCurrentScene()
 void ZGameManager::pushScene(ZSceneRef scene)
 {
     _sceneStack.push(scene);
+    scene->onEnter();
 }
 
 ZSceneRef ZGameManager::popScene()
@@ -31,6 +32,7 @@ ZSceneRef ZGameManager::popScene()
     if (!_sceneStack.empty()) {
         scene = _sceneStack.top();
         _sceneStack.pop();
+        scene->onExit();
     }
     
     return scene;

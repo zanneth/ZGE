@@ -14,7 +14,7 @@ namespace zge {
 typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;
 
 class ZSchedulable {
-    unsigned _lastUpdate;
+    unsigned _lastUpdate = 0;
     
 public:
     virtual ~ZSchedulable() {}
