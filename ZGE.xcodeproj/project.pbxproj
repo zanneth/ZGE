@@ -49,6 +49,8 @@
 		0C5E3DE9159F12EA0062242E /* camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3DE5159F08D50062242E /* camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3DFF15A140D90062242E /* viewport.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5E3DFE15A140D90062242E /* viewport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5E3E0115A140E40062242E /* viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3E0015A140E40062242E /* viewport.cpp */; };
+		0C8CAEE815F9D3D90051C50F /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CAEE715F9D3D90051C50F /* engine.cpp */; };
+		0C8CAEE915F9D8520051C50F /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8CAEE515F9D3BC0051C50F /* engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CC9DEE11596A3A9001B7348 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC9DEE01596A3A9001B7348 /* SDL.framework */; };
 		0CCB612915EF1E24006A6351 /* notification_center.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB612715EF1E24006A6351 /* notification_center.cpp */; };
 		0CCB612B15EF1E52006A6351 /* notification_center.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCB612615EF1E10006A6351 /* notification_center.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -101,6 +103,8 @@
 		0C5E3DE7159F08E10062242E /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		0C5E3DFE15A140D90062242E /* viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewport.h; sourceTree = "<group>"; };
 		0C5E3E0015A140E40062242E /* viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewport.cpp; sourceTree = "<group>"; };
+		0C8CAEE515F9D3BC0051C50F /* engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
+		0C8CAEE715F9D3D90051C50F /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
 		0CC9DEE01596A3A9001B7348 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		0CCB612615EF1E10006A6351 /* notification_center.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = notification_center.h; sourceTree = "<group>"; };
 		0CCB612715EF1E24006A6351 /* notification_center.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = notification_center.cpp; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				0C5E3DE5159F08D50062242E /* camera.h */,
 				0C5E3D64159ED53B0062242E /* display.h */,
 				0C5E3D65159ED53B0062242E /* display_manager.h */,
+				0C8CAEE515F9D3BC0051C50F /* engine.h */,
 				0C5E3D66159ED53B0062242E /* exception.h */,
 				0C5E3D67159ED53B0062242E /* game_manager.h */,
 				0C5E3D68159ED53B0062242E /* gl_display.h */,
@@ -179,6 +184,7 @@
 				0C5E3DE7159F08E10062242E /* camera.cpp */,
 				0C5E3D7C159ED53B0062242E /* display.cpp */,
 				0C5E3D7D159ED53B0062242E /* display_manager.cpp */,
+				0C8CAEE715F9D3D90051C50F /* engine.cpp */,
 				0C5E3D7E159ED53B0062242E /* exception.cpp */,
 				0C5E3D7F159ED53B0062242E /* game_manager.cpp */,
 				0C5E3D80159ED53B0062242E /* gl_display.cpp */,
@@ -242,6 +248,7 @@
 				0C5E3DE9159F12EA0062242E /* camera.h in Headers */,
 				0C5E3D8E159ED53B0062242E /* display.h in Headers */,
 				0C5E3D8F159ED53B0062242E /* display_manager.h in Headers */,
+				0C8CAEE915F9D8520051C50F /* engine.h in Headers */,
 				0C5E3D90159ED53B0062242E /* exception.h in Headers */,
 				0C5E3D91159ED53B0062242E /* game_manager.h in Headers */,
 				0C5E3D92159ED53B0062242E /* gl_display.h in Headers */,
@@ -334,6 +341,7 @@
 				0C5E3DC0159ED53B0062242E /* vector.cpp in Sources */,
 				0C5E3E0115A140E40062242E /* viewport.cpp in Sources */,
 				0CCB612915EF1E24006A6351 /* notification_center.cpp in Sources */,
+				0C8CAEE815F9D3D90051C50F /* engine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

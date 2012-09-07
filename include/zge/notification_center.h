@@ -58,7 +58,6 @@ public:
 private:
     // singleton
     ZNotificationCenter() = default;
-    ZNotificationCenter(const ZNotificationCenter &) = delete;
 };
 
 } // namespace zge

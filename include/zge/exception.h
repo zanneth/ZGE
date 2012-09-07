@@ -57,10 +57,18 @@ public:
     ) {}
 };
 
+class ZEngineException : public ZException {
+public:
+    ZEngineException() : ZException(
+        300,
+        "The engine failed to initialize."
+    ) {}
+};
+
 class ZMathematicException : public ZException {
 public:
     ZMathematicException() : ZException(
-        300,
+        400,
         "Mathematic exception."
     ) {}
 };

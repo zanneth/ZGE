@@ -6,6 +6,9 @@
  */
  
 #include "zge/input_manager.h"
+#include "zge/application.h"
+#include "zge/run_loop.h"
+
 #include <SDL/SDL.h>
 #include <iostream>
 
@@ -16,10 +19,13 @@ void ZInputManager::run(unsigned dtime)
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
-            case SDL_QUIT:
-                exit(0); // FIXME: Temporary
+            case SDL_QUIT: {
+                ZRunLoop *mainLoop = ZApplication::getMainRunLoop();
+                mainLoop->stop();
                 break;
+            }
             case SDL_KEYDOWN:
+                // TODO
                 if (event.key.keysym.sym == SDLK_q) {
                     exit(0);
                 }
