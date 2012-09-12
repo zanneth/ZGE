@@ -13,6 +13,7 @@
 #include <memory>
 #include <sstream>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "zge/noncopyable.h"
@@ -39,17 +40,14 @@ struct ZNotification {
 typedef std::function<void(const ZNotification*)> ZObserverFunction;
 
 class ZNotificationCenter : ZNonCopyable {
-    struct _ZObserver {
-        ZUUID handle;
-        ZObserverFunction function;
-    };
-    std::map<std::string, std::vector<_ZObserver>> _observerMap;
+    typedef std::pair<ZUID, ZObserverFunction> ZObserverPair;
+    std::map<std::string, std::vector<ZObserverPair>> _observerMap;
 
 public:
     static ZNotificationCenter* instance();
 
-    ZUUID addObserver(std::string name, ZObserverFunction function);
-    void removeObserver(ZUUID handle);
+    ZUID addObserver(std::string name, ZObserverFunction function);
+    void removeObserver(ZUID handle);
     void removeObservers(std::string name);
     
     void postNotification(const ZNotification &notification);

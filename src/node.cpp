@@ -28,7 +28,7 @@ ZNode::~ZNode()
 
 bool ZNode::operator==(const ZNode &other)
 {
-    return _uuid == other._uuid;
+    return _id == other._id;
 }
 
 bool ZNode::operator!=(const ZNode &other)
@@ -71,7 +71,7 @@ bool ZNode::removeChild(ZNodeRef node)
 std::string ZNode::getDescription()
 {
     std::ostringstream oss;
-    oss << "Node (" << this << ") #" << _uuid.getDescription();
+    oss << "Node (" << this << ") #" << _id.getDescription();
     
     return oss.str();
 }

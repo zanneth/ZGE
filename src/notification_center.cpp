@@ -16,23 +16,20 @@ ZNotificationCenter* ZNotificationCenter::instance()
     return &center;
 }
 
-ZUUID ZNotificationCenter::addObserver(std::string name, ZObserverFunction function)
+ZUID ZNotificationCenter::addObserver(std::string name, ZObserverFunction function)
 {
-    _ZObserver obs;
-    obs.function = function;
-    _observerMap[name].push_back(obs);
-    
-    std::cout << obs.handle.getDescription() << std::endl;
-    return obs.handle;
+    auto pair = std::make_pair(ZUID(), function);
+    _observerMap[name].push_back(pair);
+    return pair.first;
 }
 
-void ZNotificationCenter::removeObserver(ZUUID handle)
+void ZNotificationCenter::removeObserver(ZUID handle)
 {
     // OPTIMIZE: this could be improved
     for (auto &itm : _observerMap) {
         auto &observers = itm.second;
-        auto result = std::find_if(observers.begin(), observers.end(), [handle](const _ZObserver &observer) -> bool {
-            return observer.handle == handle;
+        auto result = std::find_if(observers.begin(), observers.end(), [&handle](const ZObserverPair &pair) -> bool {
+            return pair.first == handle;
         });
         if (result != observers.end()) {
             observers.erase(result);
@@ -51,8 +48,8 @@ void ZNotificationCenter::postNotification(const ZNotification &notification)
 {
     if (_observerMap.count(notification.name)) {
         auto observers = _observerMap[notification.name];
-        for (_ZObserver &observer : observers) {
-            observer.function(&notification);
+        for (ZObserverPair &observer : observers) {
+            observer.second(&notification);
         }
     }
 }

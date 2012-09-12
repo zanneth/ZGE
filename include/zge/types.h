@@ -13,20 +13,20 @@
 
 namespace zge {
 
-class ZUUID {
-    unsigned _uuidnum;
+class ZUID {
+    unsigned _uidnum;
 
 public:
-    ZUUID() :
-        _uuidnum(std::rand())
+    ZUID() :
+        _uidnum(std::rand())
     {}
     
-    bool operator==(const ZUUID &other) const
+    bool operator==(const ZUID &other) const
     {
-        return _uuidnum == other._uuidnum;
+        return _uidnum == other._uidnum;
     }
     
-    bool operator!=(const ZUUID &other) const
+    bool operator!=(const ZUID &other) const
     {
         return !operator==(other);
     }
@@ -34,7 +34,7 @@ public:
     std::string getDescription() const
     {
         std::ostringstream oss;
-        oss << _uuidnum;
+        oss << _uidnum;
         return oss.str();
     }
 };

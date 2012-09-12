@@ -21,7 +21,7 @@ class ZScene;
 
 class ZNode {
 protected:
-    ZUUID _uuid;
+    ZUID _id;
     ZVec3 _position;
     
     ZNode *_parent; // weak
