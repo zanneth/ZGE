@@ -20,7 +20,7 @@ class ZRunLoop;
 
 class ZApplication : ZNonCopyable {
     std::list<std::string> _arguments;
-    ZPlatform *_currentPlatform;
+    ZPlatform *_currentPlatform; // weak
     unsigned _timeBeganRunning;
     
 public:

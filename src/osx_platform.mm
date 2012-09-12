@@ -101,7 +101,8 @@ void ZOSXPlatform::_setupMainMenu()
     
     if (_application != NULL) {
         _application->applicationReady();
-        _application->startMainRunLoop();
+        _application->startMainRunLoop(); // does not return until engine exits
+        [NSApp terminate:self];
     }
 }
 
