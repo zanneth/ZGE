@@ -25,10 +25,11 @@ ZUID ZNotificationCenter::addObserver(std::string name, ZObserverFunction functi
 
 void ZNotificationCenter::removeObserver(ZUID handle)
 {
-    // OPTIMIZE: this could be improved
     for (auto &itm : _observerMap) {
         auto &observers = itm.second;
-        auto result = std::find_if(observers.begin(), observers.end(), [&handle](const ZObserverPair &pair) -> bool {
+        auto result = std::find_if(observers.begin(),
+                                   observers.end(),
+                                   [&handle](const ZObserverPair &pair) -> bool {
             return pair.first == handle;
         });
         if (result != observers.end()) {
