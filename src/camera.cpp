@@ -51,7 +51,7 @@ void ZCamera::_construct_projection()
             ZViewport viewport = _scene->get_viewport();
             float aspect = std::max(viewport.width, viewport.height) / std::min(viewport.width, viewport.height);
             
-            _projection_matrix = mat4::perspective(_field_of_view,
+            _projection_matrix = ZMat4::perspective(_field_of_view,
                                                       aspect,
                                                       _near_clip,
                                                       _far_clip);
@@ -76,7 +76,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = mat4::lookat(_position, _look_direction, ZVec3(0.0, 1.0, 0.0));
+        _modelview_matrix = ZMat4::lookat(_position, _look_direction, ZVec3(0.0, 1.0, 0.0));
         _modelview_dirty = false;
     }
 }

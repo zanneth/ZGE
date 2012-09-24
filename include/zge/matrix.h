@@ -51,7 +51,7 @@ public:
     ZMatrix<ROWS, COLS>(const ZMatrix &copy) : ZMatrixBase<ROWS, COLS>(copy) {}
     ZMatrix<ROWS, COLS>(ZMatrix &&move) : ZMatrixBase<ROWS, COLS>(move) {}
 };
-typedef ZMatrix<3, 3> mat3;
+typedef ZMatrix<3, 3> ZMat3;
 
 template <>
 class ZMatrix<4, 4> : public ZMatrixBase<4, 4> {
@@ -71,6 +71,6 @@ public:
     static ZMatrix<4, 4> perspective(float fovy, float aspect, float nearZ, float farZ);
     static ZMatrix<4, 4> lookat(ZVec3 eye, ZVec3 center, ZVec3 up); 
 };
-typedef ZMatrix<4, 4> mat4;
+typedef ZMatrix<4, 4> ZMat4;
 
 } // namespace zge
