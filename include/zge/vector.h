@@ -17,7 +17,7 @@ namespace zge {
 template <unsigned S>
 class ZVecBase {
 public:
-    float vec[S];
+    float array[S];
     
     /** Constructors **/
     ZVecBase(float arr[] = nullptr);
@@ -60,15 +60,15 @@ public:
 template <>
 class ZVec<2> : public ZVecBase<2> {
 public:
-    float &x = this->vec[0];
-    float &y = this->vec[1];
+    float &x = this->array[0];
+    float &y = this->array[1];
     
     ZVec<2>(float arr[] = nullptr) : ZVecBase<2>(arr) {}
     ZVec<2>(const ZVecBase &copy) : ZVecBase<2>(copy) {}
     ZVec<2>(ZVecBase &&move) : ZVecBase<2>(move) {}
     ZVec<2>& operator=(const ZVec<2> &other)
     {
-        x = this->vec[0]; y = this->vec[1];
+        x = this->array[0]; y = this->array[1];
         if (this != &other) {
             copy(other);
         }
@@ -77,7 +77,7 @@ public:
     
     ZVec<2>(float x, float y)
     {
-        vec[0] = x; vec[1] = y;
+        array[0] = x; array[1] = y;
     }
 };
 typedef ZVec<2> ZVec2;
@@ -85,16 +85,16 @@ typedef ZVec<2> ZVec2;
 template <>
 class ZVec<3> : public ZVecBase<3> {
 public:
-    float &x = this->vec[0];
-    float &y = this->vec[1];
-    float &z = this->vec[2];
+    float &x = this->array[0];
+    float &y = this->array[1];
+    float &z = this->array[2];
     
     ZVec<3>(float arr[] = nullptr) : ZVecBase(arr) {}
     ZVec<3>(const ZVecBase &copy) : ZVecBase(copy) {}
     ZVec<3>(ZVecBase &&move) : ZVecBase(move) {}
     ZVec<3>& operator=(const ZVec<3> &other)
     {
-        x = this->vec[0]; y = this->vec[1]; z = this->vec[2];
+        x = this->array[0]; y = this->array[1]; z = this->array[2];
         if (this != &other) {
             copy(other);
         }
@@ -103,7 +103,7 @@ public:
     
     ZVec<3>(float x, float y, float z = 0.0)
     {
-        vec[0] = x; vec[1] = y; vec[2] = z;
+        array[0] = x; array[1] = y; array[2] = z;
     }
     
     /** Math **/

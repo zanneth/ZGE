@@ -19,14 +19,14 @@
 namespace zge {
 
 template <unsigned R, unsigned C>
-ZMatrixBase<R, C>::ZMatrixBase(GLfloat array[])
+ZMatrixBase<R, C>::ZMatrixBase(GLfloat arr[])
 {
-    if (array != nullptr) {
+    if (arr != nullptr) {
         for (unsigned i = 0; i < R * C; ++i) {
-            matrix[i] = array[i];
+            array[i] = arr[i];
         }
     } else {
-        memset(matrix, 0, R * C * sizeof(GLfloat));
+        memset(array, 0, R * C * sizeof(GLfloat));
     }
 }
 
@@ -39,7 +39,7 @@ ZMatrixBase<R, C>::ZMatrixBase(const ZMatrixBase &copy)
 template <unsigned R, unsigned C>
 ZMatrixBase<R, C>::ZMatrixBase(ZMatrixBase<R, C> &&move)
 {
-    std::swap(matrix, move.matrix);
+    std::swap(array, move.array);
 }
 
 template <unsigned R, unsigned C>
@@ -56,7 +56,7 @@ template <unsigned R, unsigned C>
 ZMatrixBase<R, C>& ZMatrixBase<R, C>::operator=(ZMatrixBase<R, C> &&other)
 {
     if (this != &other) {
-        std::swap(matrix, other.matrix);
+        std::swap(array, other.array);
     }
     
     return *this;
@@ -68,7 +68,7 @@ ZMatrixBase<R, C>& ZMatrixBase<R, C>::operator=(ZMatrixBase<R, C> &&other)
 template <unsigned R, unsigned C>
 GLfloat ZMatrixBase<R, C>::operator[](int index)
 {
-    return matrix[index];
+    return array[index];
 }
 
 template <unsigned R, unsigned C>
@@ -90,7 +90,7 @@ template <unsigned R, unsigned C>
 void ZMatrixBase<R, C>::copy(const ZMatrixBase<R, C> &copy)
 {
     for (unsigned i = 0; i < R * C; ++i) {
-        matrix[i] = copy.matrix[i];
+        array[i] = copy.array[i];
     }
 }
 
@@ -111,7 +111,7 @@ ZMatrixBase<R, C> ZMatrixBase<R, C>::multiply(const ZMatrixBase<R, C> &other)
     for (unsigned i = 0; i < n; ++i) {
         for (unsigned j = 0; j < n; ++j) {
             for (unsigned k = 0; k < n; ++k) {
-                t.matrix[i * n + j] += matrix[i * n + k] * other.matrix[k * n + j];
+                t.array[i * n + j] += array[i * n + k] * other.array[k * n + j];
             }
         }
     }
@@ -131,7 +131,7 @@ ZMatrixBase<R, C> ZMatrixBase<R, C>::identity()
     
     ZMatrixBase<R, C> matrix;
     for (unsigned row = 0, col = 0; row < R && col < C; ++row, ++col) {
-        matrix.matrix[row * C + col] = 1.0;
+        matrix.array[row * C + col] = 1.0;
     }
     
     return matrix;
@@ -140,9 +140,9 @@ ZMatrixBase<R, C> ZMatrixBase<R, C>::identity()
 ZMatrix<4, 4> ZMatrix<4, 4>::translation(float tx, float ty, float tz)
 {
     ZMatrix<4, 4> mat = ZMatrix<4, 4>::identity();
-    mat.matrix[12] = tx;
-    mat.matrix[13] = ty;
-    mat.matrix[14] = tz;
+    mat.array[12] = tx;
+    mat.array[13] = ty;
+    mat.array[14] = tz;
     
     return mat;
 }
@@ -181,9 +181,9 @@ ZMatrix<4, 4> ZMatrix<4, 4>::rotation(float degrees, float x, float y, float z)
 ZMatrix<4, 4> ZMatrix<4, 4>::scale(float sx, float sy, float sz)
 {
     ZMatrix<4, 4> mat = ZMatrix<4, 4>::identity();
-    mat.matrix[0]   = sx;
-    mat.matrix[5]   = sy;
-    mat.matrix[10]  = sz;
+    mat.array[0]   = sx;
+    mat.array[5]   = sy;
+    mat.array[10]  = sz;
     
     return mat;
 }
@@ -199,19 +199,19 @@ ZMatrix<4, 4> ZMatrix<4, 4>::frustum(float left, float right, float bottom, floa
     float deltaY = top - bottom;
     float deltaZ = farZ - nearZ;
     
-    mat.matrix[0] = 2.0f * nearZ / deltaX;
-    mat.matrix[1] = mat.matrix[2] = mat.matrix[3] = 0.0f;
+    mat.array[0] = 2.0f * nearZ / deltaX;
+    mat.array[1] = mat.array[2] = mat.array[3] = 0.0f;
     
-    mat.matrix[4] = mat.matrix[6] = mat.matrix[7] = 0.0f;
-    mat.matrix[5] = 2.0f * nearZ / deltaY;
+    mat.array[4] = mat.array[6] = mat.array[7] = 0.0f;
+    mat.array[5] = 2.0f * nearZ / deltaY;
     
-    mat.matrix[8] = (right + left) / deltaX;
-    mat.matrix[9] = (top + bottom) / deltaY;
-    mat.matrix[10] = -(nearZ + farZ) / deltaZ;
-    mat.matrix[11] = -1.0f;
+    mat.array[8] = (right + left) / deltaX;
+    mat.array[9] = (top + bottom) / deltaY;
+    mat.array[10] = -(nearZ + farZ) / deltaZ;
+    mat.array[11] = -1.0f;
     
-    mat.matrix[12] = mat.matrix[14] = mat.matrix[15] = 0.0f;
-    mat.matrix[14] = -2.0f * nearZ * farZ / deltaZ;
+    mat.array[12] = mat.array[14] = mat.array[15] = 0.0f;
+    mat.array[14] = -2.0f * nearZ * farZ / deltaZ;
     
     return mat;
 }
@@ -255,7 +255,7 @@ std::string ZMatrixBase<R, C>::getDescription()
             oss << '\t';
         }
         
-        oss << matrix[i];
+        oss << array[i];
     }
     
     return oss.str();

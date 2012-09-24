@@ -19,10 +19,10 @@ ZVecBase<S>::ZVecBase(float arr[])
 {
     if (arr != nullptr) {
         for (unsigned i = 0; i < S; ++i) {
-            vec[i] = arr[i];
+            array[i] = arr[i];
         }
     } else {
-        memset(vec, 0, S * sizeof(float));
+        memset(array, 0, S * sizeof(float));
     }
 }
 
@@ -33,7 +33,7 @@ ZVecBase<S>::ZVecBase(std::initializer_list list)
 {
     unsigned c = 0;
     for (float n : list) {
-        vec[c++] = n;
+        array[c++] = n;
         if (c >= S) {
             break;
         }
@@ -50,7 +50,7 @@ ZVecBase<S>::ZVecBase(const ZVecBase<S> &copy)
 template <unsigned S>
 ZVecBase<S>::ZVecBase(ZVecBase<S> &&move)
 {
-    std::swap(vec, move.vec);
+    std::swap(array, move.array);
 }
 
 template <unsigned S>
@@ -67,7 +67,7 @@ template <unsigned S>
 ZVecBase<S>& ZVecBase<S>::operator=(ZVecBase<S> &&other)
 {
     if (this != &other) {
-        std::swap(vec, other.vec);
+        std::swap(array, other.array);
     }
     
     return *this;
@@ -78,7 +78,7 @@ ZVecBase<S>& ZVecBase<S>::operator=(ZVecBase<S> &&other)
 template <unsigned S>
 float ZVecBase<S>::operator[](int index)
 {
-    return vec[index];
+    return array[index];
 }
 
 template <unsigned S>
@@ -86,7 +86,7 @@ ZVecBase<S> ZVecBase<S>::operator+(const ZVecBase<S> &other)
 {
     ZVecBase<S> sum;
     for (unsigned i = 0; i < S; ++i) {
-        sum.vec[i] = vec[i] + other.vec[i];
+        sum.array[i] = array[i] + other.array[i];
     }
     return sum;
 }
@@ -96,7 +96,7 @@ ZVecBase<S> ZVecBase<S>::operator-(const ZVecBase<S> &other)
 {
     ZVecBase<S> diff;
     for (unsigned i = 0; i < S; ++i) {
-        diff.vec[i] = vec[i] - other.vec[i];
+        diff.array[i] = array[i] - other.array[i];
     }
     return diff;
 }
@@ -106,7 +106,7 @@ float ZVecBase<S>::operator*(const ZVecBase &other)
 {
     float dot;
     for (unsigned i = 0; i < S; ++i) {
-        dot += vec[i] * other.vec[i];
+        dot += array[i] * other.array[i];
     }
     return dot;
 }
@@ -116,7 +116,7 @@ ZVecBase<S> ZVecBase<S>::operator*(float scalar)
 {
     ZVecBase<S> result;
     for (unsigned i = 0; i < S; ++i) {
-        result.vec[i] = scalar * vec[i];
+        result.array[i] = scalar * array[i];
     }
     return result;
 }
@@ -140,7 +140,7 @@ template <unsigned S>
 void ZVecBase<S>::copy(const ZVecBase<S> &copy)
 {
     for (unsigned i = 0; i < S; ++i) {
-        vec[i] = copy.vec[i];
+        array[i] = copy.array[i];
     }
 }
 
@@ -152,7 +152,7 @@ float ZVecBase<S>::length()
 {
     float length = 0.0;
     for (unsigned i = 0; i < S; ++i) {
-        length += (vec[i] * vec[i]);
+        length += (array[i] * array[i]);
     }
     
     return std::sqrt(length);
@@ -169,7 +169,7 @@ ZVecBase<S> ZVecBase<S>::normalize()
     float scale = 1.0 / length;
     float arr[S];
     for (unsigned i = 0; i < S; ++i) {
-        arr[i] = vec[i] * scale;
+        arr[i] = array[i] * scale;
     }
     return ZVecBase(arr);
 }
@@ -179,7 +179,7 @@ ZVecBase<S> ZVecBase<S>::negate()
 {
     ZVecBase<S> negated;
     for (unsigned i = 0; i < S; ++i) {
-        negated.vec[i] = -vec[i];
+        negated.array[i] = -array[i];
     }
     return negated;
 }
@@ -202,7 +202,7 @@ std::string ZVecBase<S>::getDescription()
     std::ostringstream oss;
     oss << "{ ";
     for (unsigned i = 0; i < S; ++i) {
-        oss << vec[i];
+        oss << array[i];
         if (i != S - 1) {
             oss << ", ";
         }

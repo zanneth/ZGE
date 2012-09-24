@@ -17,9 +17,9 @@ namespace zge {
 template <unsigned ROWS, unsigned COLS>
 class ZMatrixBase {
 public:
-    GLfloat matrix[ROWS * COLS];
+    GLfloat array[ROWS * COLS];
     
-    explicit ZMatrixBase(GLfloat array[] = nullptr);
+    explicit ZMatrixBase(GLfloat arr[] = nullptr);
     ZMatrixBase(const ZMatrixBase &copy);
     ZMatrixBase(ZMatrixBase &&move);
     ZMatrixBase& operator=(const ZMatrixBase &other);
@@ -47,7 +47,7 @@ public:
 template <unsigned ROWS, unsigned COLS>
 class ZMatrix : public ZMatrixBase<ROWS, COLS> {
 public:
-    ZMatrix<ROWS, COLS>(GLfloat array[] = nullptr) : ZMatrixBase<ROWS, COLS>(array) {}
+    ZMatrix<ROWS, COLS>(GLfloat arr[] = nullptr) : ZMatrixBase<ROWS, COLS>(arr) {}
     ZMatrix<ROWS, COLS>(const ZMatrix &copy) : ZMatrixBase<ROWS, COLS>(copy) {}
     ZMatrix<ROWS, COLS>(ZMatrix &&move) : ZMatrixBase<ROWS, COLS>(move) {}
 };
@@ -56,7 +56,7 @@ typedef ZMatrix<3, 3> ZMat3;
 template <>
 class ZMatrix<4, 4> : public ZMatrixBase<4, 4> {
 public:
-    ZMatrix<4, 4>(GLfloat array[] = nullptr) : ZMatrixBase(array) {}
+    ZMatrix<4, 4>(GLfloat arr[] = nullptr) : ZMatrixBase(arr) {}
     ZMatrix<4, 4>(const ZMatrixBase &copy) : ZMatrixBase(copy) {}
     ZMatrix<4, 4>(ZMatrixBase &&move) : ZMatrixBase(move) {}
     

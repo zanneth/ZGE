@@ -67,7 +67,7 @@ void ZCamera::_openProjection()
     }
     
     glMatrixMode(GL_PROJECTION);
-    glLoadMatrixf(_projectionMatrix.matrix);
+    glLoadMatrixf(_projectionMatrix.array);
 }
 
 void ZCamera::_closeProjection()
@@ -89,7 +89,7 @@ void ZCamera::_openModelView()
     
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glLoadMatrixf(_modelViewMatrix.matrix);
+    glLoadMatrixf(_modelViewMatrix.array);
 }
 
 void ZCamera::_closeModelView()
