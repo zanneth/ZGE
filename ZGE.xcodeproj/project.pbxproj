@@ -297,7 +297,7 @@
 		563B6E8D14B2FD2600004C6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = omegaHern;
 			};
 			buildConfigurationList = 563B6E9014B2FD2600004C6A /* Build configuration list for PBXProject "ZGE" */;
@@ -369,6 +369,7 @@
 		563B6E9B14B2FD2600004C6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = zge;
@@ -380,6 +381,7 @@
 		563B6E9C14B2FD2600004C6A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = zge;
