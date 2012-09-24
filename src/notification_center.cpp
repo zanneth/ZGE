@@ -10,20 +10,20 @@
 
 namespace zge {
 
-notification_center* notification_center::instance()
+ZNotificationCenter* ZNotificationCenter::instance()
 {
-    static notification_center center;
+    static ZNotificationCenter center;
     return &center;
 }
 
-uid notification_center::add_observer(std::string name, observer_function function)
+ZUID ZNotificationCenter::add_observer(std::string name, ZObserverFunction function)
 {
-    auto pair = std::make_pair(uid(), function);
+    auto pair = std::make_pair(ZUID(), function);
     _observer_map[name].push_back(pair);
     return pair.first;
 }
 
-void notification_center::remove_observer(uid handle)
+void ZNotificationCenter::remove_observer(ZUID handle)
 {
     for (auto &itm : _observer_map) {
         auto &observers = itm.second;
@@ -35,17 +35,17 @@ void notification_center::remove_observer(uid handle)
         if (result != observers.end()) {
             observers.erase(result);
         } else {
-            logger::log("Warning (%s): Observer not found--could not remove.", __func__);
+            ZLogger::log("Warning (%s): Observer not found--could not remove.", __func__);
         }
     }
 }
 
-void notification_center::remove_observers(std::string name)
+void ZNotificationCenter::remove_observers(std::string name)
 {
     _observer_map[name].clear();
 }
 
-void notification_center::post_notification(const notification &notification)
+void ZNotificationCenter::post_notification(const ZNotification &notification)
 {
     if (_observer_map.count(notification.name)) {
         auto observers = _observer_map[notification.name];
@@ -55,9 +55,9 @@ void notification_center::post_notification(const notification &notification)
     }
 }
 
-void notification_center::post_notification(std::string name, void *sender)
+void ZNotificationCenter::post_notification(std::string name, void *sender)
 {
-    notification n;
+    ZNotification n;
     n.name = name;
     n.sender = sender;
     

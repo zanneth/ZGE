@@ -12,62 +12,62 @@
 
 namespace zge {
 
-class exception : public std::exception {
+class ZException : public std::exception {
 public:
     int code;
     std::string description;
     std::string extra_info;
     
-    exception(int code_ = -1, std::string description_ = "Unknown Description");
+    ZException(int code_ = -1, std::string description_ = "Unknown Description");
     
     virtual const char* what() const throw();
     
-    bool operator==(const exception &other)
+    bool operator==(const ZException &other)
     {
         return code == other.code;
     }
     
-    bool operator!=(const exception &other)
+    bool operator!=(const ZException &other)
     {
         return !operator==(other);
     }
 };
 
-class not_implemented_exception : public exception {
+class ZNotImplementedException : public ZException {
 public:
-    not_implemented_exception() : exception(
+    ZNotImplementedException() : ZException(
         10,
         "Functionality not yet implemented."
     ) {}
 };
 
-class application_exception : public exception {
+class ZApplicationException : public ZException {
 public:
-    application_exception() : exception(
+    ZApplicationException() : ZException(
         100,
         "The application failed to initialize."
     ) {}
 };
 
-class display_exception : public exception {
+class ZDisplayException : public ZException {
 public:
-    display_exception() : exception(
+    ZDisplayException() : ZException(
         200,
         "The display failed to initialize."
     ) {}
 };
 
-class engine_exception : public exception {
+class ZEngineException : public ZException {
 public:
-    engine_exception() : exception(
+    ZEngineException() : ZException(
         300,
         "The engine failed to initialize."
     ) {}
 };
 
-class mathematic_exception : public exception {
+class ZMathematicException : public ZException {
 public:
-    mathematic_exception() : exception(
+    ZMathematicException() : ZException(
         400,
         "Mathematic exception."
     ) {}

@@ -14,21 +14,21 @@
 
 namespace zge {
 
-class display;
-struct display_mode;
+class ZDisplay;
+struct ZDisplayMode;
 
-typedef std::shared_ptr<class display_manager> display_manager_ref;
+typedef std::shared_ptr<class ZDisplayManager> ZDisplayManagerRef;
 
-class display_manager : public schedulable, noncopyable {
-    display *_current_display;
+class ZDisplayManager : public ZSchedulable, ZNoncopyable {
+    ZDisplay *_current_display;
     
 public:
-    display_manager();
-    ~display_manager();
+    ZDisplayManager();
+    ~ZDisplayManager();
     
     /** Creating the Display **/
-    display* create_display(const display_mode &mode);
-    display* get_current_display() { return _current_display; }
+    ZDisplay* create_display(const ZDisplayMode &mode);
+    ZDisplay* get_current_display() { return _current_display; }
     
     /** schedulable **/
     void run(unsigned dtime) override;

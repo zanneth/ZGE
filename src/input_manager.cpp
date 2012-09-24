@@ -14,13 +14,13 @@
 
 namespace zge {
 
-void input_manager::run(unsigned dtime)
+void ZInputManager::run(unsigned dtime)
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT: {
-                runloop *mainloop = application::get_main_runloop();
+                ZRunloop *mainloop = ZApplication::get_main_runloop();
                 mainloop->stop();
                 break;
             }

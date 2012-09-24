@@ -16,9 +16,9 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class camera> camera_ref;
+typedef std::shared_ptr<class ZCamera> ZCameraRef;
 
-class camera : public node {
+class ZCamera : public ZNode {
     GLfloat _field_of_view;
     GLfloat _near_clip;
     GLfloat _far_clip;
@@ -31,7 +31,7 @@ class camera : public node {
     bool _modelview_dirty;
     
 public:
-    camera();
+    ZCamera();
     
     /** Accessors **/
     GLfloat get_fov() { return _field_of_view; }

@@ -12,12 +12,12 @@
 
 namespace zge {
 
-exception::exception(int code_, std::string description_) :
+ZException::ZException(int code_, std::string description_) :
     code(code_),
     description(description_)
 {}
 
-const char* exception::what() const throw()
+const char* ZException::what() const throw()
 {
     std::ostringstream oss;
     oss << "ZGE ERROR (" << code << "): " << description;

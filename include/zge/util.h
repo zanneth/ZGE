@@ -11,7 +11,7 @@
 
 namespace zge {
 
-class util {
+class ZUtil {
 public:
     template <typename T>
     static inline T degrees_to_radians(T degrees)

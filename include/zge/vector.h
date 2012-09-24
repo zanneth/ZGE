@@ -15,58 +15,58 @@
 namespace zge {
 
 template <unsigned S>
-class vec_base {
+class ZVecBase {
 public:
     float array[S];
     
     /** Constructors **/
-    vec_base(float arr[] = nullptr);
-//    vec_base(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
-    vec_base(const vec_base &copy);
-    vec_base(vec_base &&move);
-    vec_base& operator=(const vec_base &other);
-    vec_base& operator=(vec_base &&other);
+    ZVecBase(float arr[] = nullptr);
+//    ZVecBase(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
+    ZVecBase(const ZVecBase &copy);
+    ZVecBase(ZVecBase &&move);
+    ZVecBase& operator=(const ZVecBase &other);
+    ZVecBase& operator=(ZVecBase &&other);
     
     /** Operators **/
     float operator[](int index);
-    vec_base operator+(const vec_base &other);
-    vec_base operator-(const vec_base &other);
-    float operator*(const vec_base &other);
-    vec_base operator*(float scalar);
+    ZVecBase operator+(const ZVecBase &other);
+    ZVecBase operator-(const ZVecBase &other);
+    float operator*(const ZVecBase &other);
+    ZVecBase operator*(float scalar);
     
-    vec_base& operator+=(const vec_base &other);
-    vec_base& operator-=(const vec_base &other);
+    ZVecBase& operator+=(const ZVecBase &other);
+    ZVecBase& operator-=(const ZVecBase &other);
     
     /** Data **/
-    void copy(const vec_base &copy);
+    void copy(const ZVecBase &copy);
     
     /** Math **/
     float length();
-    vec_base normalize();
-    vec_base negate();
+    ZVecBase normalize();
+    ZVecBase negate();
     
     /** Description **/
     std::string get_description();
 };
 
 template <unsigned S>
-class vec : public vec_base<S> {
+class ZVec : public ZVecBase<S> {
 public:
-    vec(float arr[] = nullptr) : vec_base<S>(arr) {}
-    vec(const vec &copy) : vec_base<S>(copy) {}
-    vec(vec &&move) : vec_base<S>(move) {}
+    ZVec(float arr[] = nullptr) : ZVecBase<S>(arr) {}
+    ZVec(const ZVec &copy) : ZVecBase<S>(copy) {}
+    ZVec(ZVec &&move) : ZVecBase<S>(move) {}
 };
 
 template <>
-class vec<2> : public vec_base<2> {
+class ZVec<2> : public ZVecBase<2> {
 public:
     float &x = this->array[0];
     float &y = this->array[1];
     
-    vec<2>(float arr[] = nullptr) : vec_base<2>(arr) {}
-    vec<2>(const vec_base &copy) : vec_base<2>(copy) {}
-    vec<2>(vec_base &&move) : vec_base<2>(move) {}
-    vec<2>& operator=(const vec<2> &other)
+    ZVec<2>(float arr[] = nullptr) : ZVecBase<2>(arr) {}
+    ZVec<2>(const ZVecBase &copy) : ZVecBase<2>(copy) {}
+    ZVec<2>(ZVecBase &&move) : ZVecBase<2>(move) {}
+    ZVec<2>& operator=(const ZVec<2> &other)
     {
         x = this->array[0]; y = this->array[1];
         if (this != &other) {
@@ -75,24 +75,24 @@ public:
         return *this;
     }
     
-    vec<2>(float x, float y)
+    ZVec<2>(float x, float y)
     {
         array[0] = x; array[1] = y;
     }
 };
-typedef vec<2> vec2;
+typedef ZVec<2> vec2;
 
 template <>
-class vec<3> : public vec_base<3> {
+class ZVec<3> : public ZVecBase<3> {
 public:
     float &x = this->array[0];
     float &y = this->array[1];
     float &z = this->array[2];
     
-    vec<3>(float arr[] = nullptr) : vec_base(arr) {}
-    vec<3>(const vec_base &copy) : vec_base(copy) {}
-    vec<3>(vec_base &&move) : vec_base(move) {}
-    vec<3>& operator=(const vec<3> &other)
+    ZVec<3>(float arr[] = nullptr) : ZVecBase(arr) {}
+    ZVec<3>(const ZVecBase &copy) : ZVecBase(copy) {}
+    ZVec<3>(ZVecBase &&move) : ZVecBase(move) {}
+    ZVec<3>& operator=(const ZVec<3> &other)
     {
         x = this->array[0]; y = this->array[1]; z = this->array[2];
         if (this != &other) {
@@ -101,14 +101,14 @@ public:
         return *this;
     }
     
-    vec<3>(float x, float y, float z = 0.0)
+    ZVec<3>(float x, float y, float z = 0.0)
     {
         array[0] = x; array[1] = y; array[2] = z;
     }
     
     /** Math **/
-    vec<3> cross(const vec<3> &other);
+    ZVec<3> cross(const ZVec<3> &other);
 };
-typedef vec<3> vec3;
+typedef ZVec<3> vec3;
 
 } // namespace zge

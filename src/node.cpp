@@ -13,25 +13,25 @@
 
 namespace zge {
 
-node::node() :
+ZNode::ZNode() :
     _parent(nullptr),
     _scene(nullptr)
 {}
 
-node::~node()
+ZNode::~ZNode()
 {
-    logger::log("%s destroyed", get_description().c_str());
+    ZLogger::log("%s destroyed", get_description().c_str());
 }
 
 
 #pragma mark - Operators
 
-bool node::operator==(const node &other)
+bool ZNode::operator==(const ZNode &other)
 {
     return _id == other._id;
 }
 
-bool node::operator!=(const node &other)
+bool ZNode::operator!=(const ZNode &other)
 {
     return !operator==(other);
 }
@@ -39,7 +39,7 @@ bool node::operator!=(const node &other)
 
 #pragma mark - Managing Children
 
-void node::add_child(node_ref node)
+void ZNode::add_child(ZNodeRef node)
 {
     node->_scene  = _scene;
     node->_parent = this;
@@ -48,7 +48,7 @@ void node::add_child(node_ref node)
     node->_on_enter_internal();
 }
 
-bool node::remove_child(node_ref node)
+bool ZNode::remove_child(ZNodeRef node)
 {
     for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
         if (**itr == *node) {
@@ -68,7 +68,7 @@ bool node::remove_child(node_ref node)
 
 #pragma mark - Description
 
-std::string node::get_description()
+std::string ZNode::get_description()
 {
     std::ostringstream oss;
     oss << "Node (" << this << ") #" << _id.get_description();
@@ -79,38 +79,38 @@ std::string node::get_description()
 
 #pragma mark - Private
 
-void node::_update_internal(unsigned dtime)
+void ZNode::_update_internal(unsigned dtime)
 {
     update(dtime);
     
-    for (node_ref child : _children) {
+    for (ZNodeRef child : _children) {
         child->_update_internal(dtime);
     }
 }
 
-void node::_draw_internal()
+void ZNode::_draw_internal()
 {
     draw();
     
-    for (node_ref child : _children) {
+    for (ZNodeRef child : _children) {
         child->_draw_internal();
     }
 }
 
-void node::_on_enter_internal()
+void ZNode::_on_enter_internal()
 {
     on_enter();
     
-    for (node_ref child : _children) {
+    for (ZNodeRef child : _children) {
         child->_on_enter_internal();
     }
 }
 
-void node::_on_exit_internal()
+void ZNode::_on_exit_internal()
 {
     on_exit();
     
-    for (node_ref child : _children) {
+    for (ZNodeRef child : _children) {
         child->_on_exit_internal();
     }
 }

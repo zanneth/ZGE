@@ -15,20 +15,20 @@
 
 namespace zge {
 
-class gldisplay : public display, noncopyable {
+class ZGLDisplay : public ZDisplay, ZNoncopyable {
     SDL_Surface *_surface;
     unsigned _last_render;
     
 public:
-    gldisplay();
-    gldisplay(const display_mode &mode);
-    ~gldisplay();
+    ZGLDisplay();
+    ZGLDisplay(const ZDisplayMode &mode);
+    ~ZGLDisplay();
     
     /** Overrides **/
     void initialize() override;
     void render(unsigned dtime) override;
     
-    void set_display_mode(const display_mode &mode) override;
+    void set_display_mode(const ZDisplayMode &mode) override;
     
 private:
     void _load_surface();

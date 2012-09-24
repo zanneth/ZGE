@@ -13,20 +13,20 @@
 
 namespace zge {
 
-class uid {
+class ZUID {
     unsigned _uidnum;
 
 public:
-    uid() :
+    ZUID() :
         _uidnum(std::rand())
     {}
     
-    bool operator==(const uid &other) const
+    bool operator==(const ZUID &other) const
     {
         return _uidnum == other._uidnum;
     }
     
-    bool operator!=(const uid &other) const
+    bool operator!=(const ZUID &other) const
     {
         return !operator==(other);
     }
@@ -37,11 +37,6 @@ public:
         oss << _uidnum;
         return oss.str();
     }
-};
-
-template <class T>
-struct nulldeleter {
-    void operator()(void const *) {}
 };
 
 } // namespace zge

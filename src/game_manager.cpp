@@ -11,7 +11,7 @@ namespace zge {
 
 #pragma mark - Managing Scenes
 
-scene_ref game_manager::get_current_scene()
+ZSceneRef ZGameManager::get_current_scene()
 {
     if (_scene_stack.empty()) {
         return nullptr;
@@ -20,15 +20,15 @@ scene_ref game_manager::get_current_scene()
     return _scene_stack.top();
 }
 
-void game_manager::push_scene(scene_ref scene)
+void ZGameManager::push_scene(ZSceneRef scene)
 {
     _scene_stack.push(scene);
     scene->on_enter();
 }
 
-scene_ref game_manager::pop_scene()
+ZSceneRef ZGameManager::pop_scene()
 {
-    scene_ref scene = nullptr;
+    ZSceneRef scene = nullptr;
     if (!_scene_stack.empty()) {
         scene = _scene_stack.top();
         _scene_stack.pop();
@@ -39,11 +39,11 @@ scene_ref game_manager::pop_scene()
 }
 
 
-#pragma mark - schedulable Overrides
+#pragma mark - ZSchedulable Overrides
 
-void game_manager::run(unsigned dtime)
+void ZGameManager::run(unsigned dtime)
 {
-    scene_ref scene = get_current_scene();
+    ZSceneRef scene = get_current_scene();
     if (scene.get() != nullptr) {
         scene->_update_internal(dtime);
         scene->_draw_internal();

@@ -15,62 +15,62 @@
 namespace zge {
 
 template <unsigned ROWS, unsigned COLS>
-class matrix_base {
+class ZMatrixBase {
 public:
     GLfloat array[ROWS * COLS];
     
-    explicit matrix_base(GLfloat arr[] = nullptr);
-    matrix_base(const matrix_base &copy);
-    matrix_base(matrix_base &&move);
-    matrix_base& operator=(const matrix_base &other);
-    matrix_base& operator=(matrix_base &&other);
+    explicit ZMatrixBase(GLfloat arr[] = nullptr);
+    ZMatrixBase(const ZMatrixBase &copy);
+    ZMatrixBase(ZMatrixBase &&move);
+    ZMatrixBase& operator=(const ZMatrixBase &other);
+    ZMatrixBase& operator=(ZMatrixBase &&other);
     
     /** Operators **/
     GLfloat operator[](int index);
-    matrix_base operator*(const matrix_base &other);
-    matrix_base& operator*=(const matrix_base &other);
+    ZMatrixBase operator*(const ZMatrixBase &other);
+    ZMatrixBase& operator*=(const ZMatrixBase &other);
     // TODO: More arithmetic operators
     
     /** Data **/
-    void copy(const matrix_base &copy);
+    void copy(const ZMatrixBase &copy);
     
     /** Math **/
-    matrix_base multiply(const matrix_base &other);
+    ZMatrixBase multiply(const ZMatrixBase &other);
     
     /** Transforms **/
-    static matrix_base identity();
+    static ZMatrixBase identity();
     
     /** Description **/
     std::string get_description();
 };
 
 template <unsigned ROWS, unsigned COLS>
-class matrix : public matrix_base<ROWS, COLS> {
+class ZMatrix : public ZMatrixBase<ROWS, COLS> {
 public:
-    matrix<ROWS, COLS>(GLfloat arr[] = nullptr) : matrix_base<ROWS, COLS>(arr) {}
-    matrix<ROWS, COLS>(const matrix &copy) : matrix_base<ROWS, COLS>(copy) {}
-    matrix<ROWS, COLS>(matrix &&move) : matrix_base<ROWS, COLS>(move) {}
+    ZMatrix<ROWS, COLS>(GLfloat arr[] = nullptr) : ZMatrixBase<ROWS, COLS>(arr) {}
+    ZMatrix<ROWS, COLS>(const ZMatrix &copy) : ZMatrixBase<ROWS, COLS>(copy) {}
+    ZMatrix<ROWS, COLS>(ZMatrix &&move) : ZMatrixBase<ROWS, COLS>(move) {}
 };
-typedef matrix<3, 3> mat3;
+typedef ZMatrix<3, 3> mat3;
 
 template <>
-class matrix<4, 4> : public matrix_base<4, 4> {
+class ZMatrix<4, 4> : public ZMatrixBase<4, 4> {
 public:
-    matrix<4, 4>(GLfloat arr[] = nullptr) : matrix_base(arr) {}
-    matrix<4, 4>(const matrix_base &copy) : matrix_base(copy) {}
-    matrix<4, 4>(matrix_base &&move) : matrix_base(move) {}
+    ZMatrix<4, 4>(GLfloat arr[] = nullptr) : ZMatrixBase(arr) {}
+    ZMatrix<4, 4>(const ZMatrixBase &copy) : ZMatrixBase(copy) {}
+    ZMatrix<4, 4>(ZMatrixBase &&move) : ZMatrixBase(move) {}
     
     /** Transforms **/
-    static matrix<4, 4> translation(float tx, float ty, float tz);
-    static matrix<4, 4> rotation(float degrees, float x, float y, float z);
-    static matrix<4, 4> scale(float sx, float sy, float sz);
+    static ZMatrix<4, 4> translation(float tx, float ty, float tz);
+    static ZMatrix<4, 4> rotation(float degrees, float x, float y, float z);
+    static ZMatrix<4, 4> scale(float sx, float sy, float sz);
     
     /** Geometry **/
-    static matrix<4, 4> frustum(float left, float right, float bottom, float top,
+    static ZMatrix<4, 4> frustum(float left, float right, float bottom, float top,
                            float nearZ, float farZ);
-    static matrix<4, 4> perspective(float fovy, float aspect, float nearZ, float farZ);
-    static matrix<4, 4> lookat(vec3 eye, vec3 center, vec3 up); 
+    static ZMatrix<4, 4> perspective(float fovy, float aspect, float nearZ, float farZ);
+    static ZMatrix<4, 4> lookat(vec3 eye, vec3 center, vec3 up); 
 };
-typedef matrix<4, 4> mat4;
+typedef ZMatrix<4, 4> mat4;
 
 } // namespace zge

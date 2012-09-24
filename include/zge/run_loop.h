@@ -15,14 +15,14 @@
 
 namespace zge {
 
-class runloop : noncopyable {
-    std::vector<schedulable_ref> _schedulables;
+class ZRunloop : ZNoncopyable {
+    std::vector<ZSchedulableRef> _schedulables;
     bool _running;
     bool _on_main_thread;
     
 public:
-    runloop();
-    ~runloop();
+    ZRunloop();
+    ~ZRunloop();
     
     /** Accessors **/
     bool is_running() { return _running; }
@@ -33,11 +33,11 @@ public:
     void stop();
     
     /** Managing schedulables in the Run Loop **/
-    void schedule(schedulable_ref schedulable);
-    void unschedule(schedulable_ref schedulable);
+    void schedule(ZSchedulableRef schedulable);
+    void unschedule(ZSchedulableRef schedulable);
     
     /** Friends **/
-    friend class application;
+    friend class ZApplication;
 
 private:
     void _main();

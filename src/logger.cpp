@@ -10,7 +10,7 @@
 
 namespace zge {
 
-void logger::log(const char *format, ...)
+void ZLogger::log(const char *format, ...)
 {
     char buf[1024];
     
@@ -22,12 +22,12 @@ void logger::log(const char *format, ...)
     std::cout << buf << std::endl;
 }
 
-void logger::log(const std::string str)
+void ZLogger::log(const std::string str)
 {
     std::cout << str << std::endl;
 }
 
-void logger::warn(const char *format, ...)
+void ZLogger::warn(const char *format, ...)
 {
     char buf[1024];
     

@@ -18,7 +18,7 @@
 
 namespace zge {
 
-camera::camera() :
+ZCamera::ZCamera() :
     _field_of_view(DEFAULT_FOV),
     _near_clip(DEFAULT_NEAR_CLIP),
     _far_clip(DEFAULT_FAR_CLIP),
@@ -29,13 +29,13 @@ camera::camera() :
 
 #pragma mark - Open/Close
 
-void camera::open()
+void ZCamera::open()
 {
     _open_projection();
     _open_modelview();
 }
 
-void camera::close()
+void ZCamera::close()
 {
     _close_projection();
     _close_modelview();
@@ -44,11 +44,11 @@ void camera::close()
 
 #pragma mark - Private
 
-void camera::_construct_projection()
+void ZCamera::_construct_projection()
 {
     if (_projection_dirty) {
         if (_scene) {
-            viewport viewport = _scene->get_viewport();
+            ZViewport viewport = _scene->get_viewport();
             float aspect = std::max(viewport.width, viewport.height) / std::min(viewport.width, viewport.height);
             
             _projection_matrix = mat4::perspective(_field_of_view,
@@ -60,7 +60,7 @@ void camera::_construct_projection()
     }
 }
 
-void camera::_open_projection()
+void ZCamera::_open_projection()
 {
     if (_projection_dirty) {
         _construct_projection();
@@ -70,10 +70,10 @@ void camera::_open_projection()
     glLoadMatrixf(_projection_matrix.array);
 }
 
-void camera::_close_projection()
+void ZCamera::_close_projection()
 {}
 
-void camera::_construct_modelview()
+void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
         _modelview_matrix = mat4::lookat(_position, _look_direction, vec3(0.0, 1.0, 0.0));
@@ -81,7 +81,7 @@ void camera::_construct_modelview()
     }
 }
 
-void camera::_open_modelview()
+void ZCamera::_open_modelview()
 {
     if (_modelview_dirty) {
         _construct_modelview();
@@ -92,7 +92,7 @@ void camera::_open_modelview()
     glLoadMatrixf(_modelview_matrix.array);
 }
 
-void camera::_close_modelview()
+void ZCamera::_close_modelview()
 {
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();

@@ -17,16 +17,16 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class game_manager> game_manager_ref;
+typedef std::shared_ptr<class ZGameManager> ZGameManagerRef;
 
-class game_manager : public schedulable, noncopyable {
-    std::stack<scene_ref> _scene_stack;
+class ZGameManager : public ZSchedulable, ZNoncopyable {
+    std::stack<ZSceneRef> _scene_stack;
     
 public:
     /** Scene Management **/
-    scene_ref get_current_scene();
-    void push_scene(scene_ref scene);
-    scene_ref pop_scene();
+    ZSceneRef get_current_scene();
+    void push_scene(ZSceneRef scene);
+    ZSceneRef pop_scene();
     
     /** schedulable **/
     void run(unsigned dtime) override;

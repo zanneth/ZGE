@@ -16,37 +16,38 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class node> node_ref;
-class scene;
+class ZScene;
 
-class node {
+typedef std::shared_ptr<class ZNode> ZNodeRef;
+
+class ZNode {
 protected:
-    uid _id;
+    ZUID _id;
     vec3 _position;
     
-    node *_parent; // weak
-    scene *_scene; // weak
-    std::vector<node_ref> _children;
+    ZNode *_parent; // weak
+    ZScene *_scene; // weak
+    std::vector<ZNodeRef> _children;
     
 public:
-    node();
-    node(const node&) = default;
-    ~node();
+    ZNode();
+    ZNode(const ZNode&) = default;
+    ~ZNode();
     
     /** Operators **/
-    bool operator==(const node &other);
-    bool operator!=(const node &other);
+    bool operator==(const ZNode &other);
+    bool operator!=(const ZNode &other);
     
     /** Accessors **/
-    node* get_parent() { return _parent; }
-    scene* get_scene() { return _scene; }
+    ZNode* get_parent() { return _parent; }
+    ZScene* get_scene() { return _scene; }
     vec3 get_position() { return _position; }
     void set_position(const vec3 &position) { _position = position; }
     
     /** Managing Sub-Nodes **/
-    virtual void add_child(node_ref node);
-    virtual bool remove_child(node_ref node);
-    virtual std::vector<node_ref> get_children() { return _children; }
+    virtual void add_child(ZNodeRef node);
+    virtual bool remove_child(ZNodeRef node);
+    virtual std::vector<ZNodeRef> get_children() { return _children; }
     
     /** Description **/
     virtual std::string get_description();
@@ -68,8 +69,8 @@ protected:
     virtual void _on_exit_internal();
     
 public:
-    friend class game_manager;
-    friend class scene;
+    friend class ZGameManager;
+    friend class ZScene;
 };
 
 } // namespace zge

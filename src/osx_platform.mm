@@ -14,14 +14,14 @@
 
 namespace zge {
 
-void osx_platform::run_application(application *application)
+void ZOSXPlatform::run_application(ZApplication *application)
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     [NSApplication sharedApplication]; // Initialize the application if it hasn't been already
     
     // Create the App Delegate
-    AppDelegate *delegate = [[AppDelegate alloc] init];
+    ZAppDelegate *delegate = [[ZAppDelegate alloc] init];
     delegate.application = application;
     [NSApp setDelegate:delegate];
     
@@ -37,7 +37,7 @@ void osx_platform::run_application(application *application)
     [pool release];
 }
 
-std::string osx_platform::get_description()
+std::string ZOSXPlatform::get_description()
 {
     NSProcessInfo *pinfo = [NSProcessInfo processInfo];
     NSString *version = [pinfo operatingSystemVersionString];
@@ -48,7 +48,7 @@ std::string osx_platform::get_description()
     return oss.str();
 }
 
-void osx_platform::_setup_main_menu()
+void ZOSXPlatform::_setup_main_menu()
 {
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     NSMenu *appMenu = [[NSMenu alloc] init];
@@ -80,7 +80,7 @@ void osx_platform::_setup_main_menu()
 }
 
 
-@implementation AppDelegate
+@implementation ZAppDelegate
 @synthesize application=_application;
 
 - (void)_changeWorkingDirectory

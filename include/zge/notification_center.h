@@ -21,7 +21,7 @@
 
 namespace zge {
 
-struct notification {
+struct ZNotification {
     std::string name;
     void *sender;   // weak
     void *info;     // weak
@@ -37,25 +37,25 @@ struct notification {
     }
 };
 
-typedef std::function<void(const notification*)> observer_function;
+typedef std::function<void(const ZNotification*)> ZObserverFunction;
 
-class notification_center : noncopyable {
-    typedef std::pair<uid, observer_function> observer_pair;
+class ZNotificationCenter : ZNoncopyable {
+    typedef std::pair<ZUID, ZObserverFunction> observer_pair;
     std::map<std::string, std::vector<observer_pair>> _observer_map;
 
 public:
-    static notification_center* instance();
+    static ZNotificationCenter* instance();
 
-    uid add_observer(std::string name, observer_function function);
-    void remove_observer(uid handle);
+    ZUID add_observer(std::string name, ZObserverFunction function);
+    void remove_observer(ZUID handle);
     void remove_observers(std::string name);
     
-    void post_notification(const notification &notification);
+    void post_notification(const ZNotification &notification);
     void post_notification(std::string name, void *sender = nullptr);
 
 private:
     // singleton
-    notification_center() = default;
+    ZNotificationCenter() = default;
 };
 
 } // namespace zge

@@ -18,13 +18,13 @@
 
 namespace zge {
 
-gldisplay::gldisplay() : display(),
+ZGLDisplay::ZGLDisplay() : ZDisplay(),
     _surface(nullptr) {}
 
-gldisplay::gldisplay(const display_mode &mode) : display(mode),
+ZGLDisplay::ZGLDisplay(const ZDisplayMode &mode) : ZDisplay(mode),
     _surface(nullptr) {}
 
-gldisplay::~gldisplay()
+ZGLDisplay::~ZGLDisplay()
 {
     if (_surface != nullptr) {
         SDL_FreeSurface(_surface);
@@ -34,7 +34,7 @@ gldisplay::~gldisplay()
 
 #pragma mark - Initialization
 
-void gldisplay::initialize()
+void ZGLDisplay::initialize()
 {
     if (!_is_initialized) {
         _load_surface();
@@ -43,14 +43,14 @@ void gldisplay::initialize()
         
         _is_initialized = true;
     } else {
-        logger::warn("Display already initialized.");
+        ZLogger::warn("Display already initialized.");
     }
 }
 
 
 #pragma mark - Rendering
 
-void gldisplay::render(unsigned dtime)
+void ZGLDisplay::render(unsigned dtime)
 {    
     _last_render += dtime;
     if (_last_render >= _display_mode.refresh_rate * 1000.0) {
@@ -62,7 +62,7 @@ void gldisplay::render(unsigned dtime)
 
 #pragma mark - Changing Properties
 
-void gldisplay::set_display_mode(const display_mode &mode)
+void ZGLDisplay::set_display_mode(const ZDisplayMode &mode)
 {
     if (mode.window_title != _display_mode.window_title) {
         _change_window_title(mode.window_title);
@@ -74,7 +74,7 @@ void gldisplay::set_display_mode(const display_mode &mode)
 
 #pragma mark - Private Methods
 
-void gldisplay::_load_surface()
+void ZGLDisplay::_load_surface()
 {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
@@ -93,18 +93,18 @@ void gldisplay::_load_surface()
         std::string errorstr = "The OpenGL display surface failed to initialize: ";
         errorstr += SDL_GetError();
         
-        display_exception expt;
+        ZDisplayException expt;
         expt.extra_info = errorstr;
         throw expt;
     }
 }
 
-void gldisplay::_init_opengl()
+void ZGLDisplay::_init_opengl()
 {
     glEnable(GL_DEPTH_TEST);
 }
 
-void gldisplay::_change_window_title(std::string new_title)
+void ZGLDisplay::_change_window_title(std::string new_title)
 {
     const char *window_title = new_title.c_str();
     SDL_WM_SetCaption(window_title, window_title);

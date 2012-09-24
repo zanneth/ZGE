@@ -13,10 +13,10 @@
 
 namespace zge {
 
-runloop::runloop() :
+ZRunloop::ZRunloop() :
     _running(false) {}
 
-runloop::~runloop()
+ZRunloop::~ZRunloop()
 {
     _running = false;
 }
@@ -24,13 +24,13 @@ runloop::~runloop()
 
 #pragma mark - Starting the Run Loop
 
-void runloop::run()
+void ZRunloop::run()
 {
     _running = true;
     _main();
 }
 
-void runloop::stop()
+void ZRunloop::stop()
 {
     _running = false;
 }
@@ -38,12 +38,12 @@ void runloop::stop()
 
 #pragma mark - Managing schedulables in the Run Loop
 
-void runloop::schedule(schedulable_ref schedulable)
+void ZRunloop::schedule(ZSchedulableRef schedulable)
 {
     _schedulables.push_back(schedulable);
 }
 
-void runloop::unschedule(schedulable_ref schedulable)
+void ZRunloop::unschedule(ZSchedulableRef schedulable)
 {
     auto itr = std::find(_schedulables.begin(), _schedulables.end(), schedulable);
     if (itr != _schedulables.end()) {
@@ -54,10 +54,10 @@ void runloop::unschedule(schedulable_ref schedulable)
 
 #pragma mark - Private Methods
 
-void runloop::_main()
+void ZRunloop::_main()
 {
     while (_running) {
-        for (schedulable_ref schedulable : _schedulables) {
+        for (ZSchedulableRef schedulable : _schedulables) {
             unsigned time = SDL_GetTicks();
             unsigned last_update = schedulable->_last_update;
             unsigned dtime;

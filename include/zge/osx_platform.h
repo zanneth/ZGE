@@ -17,10 +17,11 @@
 
 namespace zge {
 
-class application;
-class osx_platform : public platform, noncopyable {
+class ZApplication;
+
+class ZOSXPlatform : public ZPlatform, ZNoncopyable {
 public:
-    void run_application(application *application) override;
+    void run_application(ZApplication *application) override;
     std::string get_description() override;
 
 private:
@@ -30,10 +31,10 @@ private:
 } // namespace zge
 
 
-@interface AppDelegate : NSObject <NSApplicationDelegate> {
-    zge::application *_application;
+@interface ZAppDelegate : NSObject <NSApplicationDelegate> {
+    zge::ZApplication *_application;
 }
 
-@property (nonatomic, assign) zge::application *application;
+@property (nonatomic, assign) zge::ZApplication *application;
 
 @end

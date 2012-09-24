@@ -9,26 +9,26 @@
 
 namespace zge {
 
-viewport::viewport() :
+ZViewport::ZViewport() :
     x(0),
     y(0),
     width(0),
     height(0)
 {}
 
-viewport::viewport(GLint x_, GLint y_, GLsizei width_, GLsizei height_) :
+ZViewport::ZViewport(GLint x_, GLint y_, GLsizei width_, GLsizei height_) :
     x(x_),
     y(y_),
     width(width_),
     height(height_)
 {}
 
-void viewport::open()
+void ZViewport::open()
 {
     glViewport(x, y, width, height);
 }
 
-void viewport::close()
+void ZViewport::close()
 {}
 
 } // namespace zge

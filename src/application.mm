@@ -21,16 +21,16 @@
 
 namespace zge {
 
-static runloop *_main_runloop = nullptr;
+static ZRunloop *_main_runloop = nullptr;
 
-application::application(int argc, char **argv) :
+ZApplication::ZApplication(int argc, char **argv) :
     _current_platform(nullptr),
     _time_start(0)
 {
     set_arguments(argc, argv);
 }
 
-application::~application()
+ZApplication::~ZApplication()
 {
     if (_main_runloop != nullptr) {
         _main_runloop->stop();
@@ -45,7 +45,7 @@ application::~application()
 
 #pragma mark - Accessors
 
-void application::set_arguments(int argc, char **argv)
+void ZApplication::set_arguments(int argc, char **argv)
 {
     for (int i = 0; i < argc; ++i) {
         std::string str = argv[i];
@@ -56,26 +56,26 @@ void application::set_arguments(int argc, char **argv)
 
 #pragma mark - Run Loop
 
-runloop* application::get_main_runloop()
+ZRunloop* ZApplication::get_main_runloop()
 {
     if (_main_runloop == nullptr) {
-        _main_runloop = new runloop();
+        _main_runloop = new ZRunloop();
         _main_runloop->_on_main_thread = true;
     }
     
     return _main_runloop;
 }
 
-void application::start_main_runloop()
+void ZApplication::start_main_runloop()
 {
-    runloop *loop = get_main_runloop();
+    ZRunloop *loop = get_main_runloop();
     loop->run();
 }
 
 
 #pragma mark - Utility Functions
 
-unsigned application::get_secs_running()
+unsigned ZApplication::get_secs_running()
 {
     if (_time_start == 0) {
         return 0;
@@ -87,10 +87,10 @@ unsigned application::get_secs_running()
 
 #pragma mark - Running the Application
 
-void run_application(application *application)
+void run_application(ZApplication *application)
 {
     if (application == nullptr) {
-        application_exception expt;
+        ZApplicationException expt;
         expt.extra_info = "Application pointer is NULL.";
         
         throw expt;
@@ -102,7 +102,7 @@ void run_application(application *application)
         std::string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
-        application_exception expt;
+        ZApplicationException expt;
         expt.extra_info = errorstr;
         
         throw expt;
@@ -112,14 +112,14 @@ void run_application(application *application)
     std::srand(time(NULL));
     
     // initialize the platform interface
-    platform *platform = nullptr;
+    ZPlatform *platform = nullptr;
 #if __APPLE__
-    platform = new osx_platform();
+    platform = new ZOSXPlatform();
 #endif
     
     // check if the platform was able to be initialized.
     if (platform == nullptr) {
-        application_exception expt;
+        ZApplicationException expt;
         expt.extra_info = "Platform not supported.";
         throw expt;
     }
