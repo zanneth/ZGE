@@ -69,7 +69,7 @@ public:
     static ZMatrix<4, 4> frustum(float left, float right, float bottom, float top,
                            float nearZ, float farZ);
     static ZMatrix<4, 4> perspective(float fovy, float aspect, float nearZ, float farZ);
-    static ZMatrix<4, 4> lookat(vec3 eye, vec3 center, vec3 up); 
+    static ZMatrix<4, 4> lookat(ZVec3 eye, ZVec3 center, ZVec3 up); 
 };
 typedef ZMatrix<4, 4> mat4;
 

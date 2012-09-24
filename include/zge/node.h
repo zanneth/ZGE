@@ -23,7 +23,7 @@ typedef std::shared_ptr<class ZNode> ZNodeRef;
 class ZNode {
 protected:
     ZUID _id;
-    vec3 _position;
+    ZVec3 _position;
     
     ZNode *_parent; // weak
     ZScene *_scene; // weak
@@ -41,8 +41,8 @@ public:
     /** Accessors **/
     ZNode* get_parent() { return _parent; }
     ZScene* get_scene() { return _scene; }
-    vec3 get_position() { return _position; }
-    void set_position(const vec3 &position) { _position = position; }
+    ZVec3 get_position() { return _position; }
+    void set_position(const ZVec3 &position) { _position = position; }
     
     /** Managing Sub-Nodes **/
     virtual void add_child(ZNodeRef node);

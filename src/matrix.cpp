@@ -151,7 +151,7 @@ ZMatrix<4, 4> ZMatrix<4, 4>::rotation(float degrees, float x, float y, float z)
 {
     float radians = ZUtil::degrees_to_radians(degrees);
     
-    vec3 v = vec3(x, y, z).normalize();
+    ZVec3 v = ZVec3(x, y, z).normalize();
     float cos = std::cos(radians);
     float cosp = 1.0f - cos;
     float sin = std::sin(radians);
@@ -225,11 +225,11 @@ ZMatrix<4, 4> ZMatrix<4, 4>::perspective(float fovy, float aspect, float nearZ, 
     return frust;
 }
 
-ZMatrix<4, 4> ZMatrix<4, 4>::lookat(vec3 eye, vec3 center, vec3 up)
+ZMatrix<4, 4> ZMatrix<4, 4>::lookat(ZVec3 eye, ZVec3 center, ZVec3 up)
 {
-    vec3 n = (eye + center.negate()).normalize();
-    vec3 u = (up.cross(n)).normalize();
-    vec3 v = n.cross(u);
+    ZVec3 n = (eye + center.negate()).normalize();
+    ZVec3 u = (up.cross(n)).normalize();
+    ZVec3 v = n.cross(u);
     
     float m[16] = {
         u.x, v.x, n.x, 0.0f,
