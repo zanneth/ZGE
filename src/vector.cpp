@@ -26,10 +26,8 @@ ZVecBase<S>::ZVecBase(float arr[])
     }
 }
 
-// Clang doesn't support initializer_lists yet.
-#if 0
 template <unsigned S>
-ZVecBase<S>::ZVecBase(std::initializer_list list)
+ZVecBase<S>::ZVecBase(std::initializer_list<float> list)
 {
     unsigned c = 0;
     for (float n : list) {
@@ -39,7 +37,6 @@ ZVecBase<S>::ZVecBase(std::initializer_list list)
         }
     }
 }
-#endif
 
 template <unsigned S>
 ZVecBase<S>::ZVecBase(const ZVecBase<S> &copy)

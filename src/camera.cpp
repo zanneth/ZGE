@@ -76,7 +76,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = ZMat4::lookat(_position, _look_direction, ZVec3(0.0, 1.0, 0.0));
+        _modelview_matrix = ZMat4::lookat(_position, _look_direction, {0.0, 1.0, 0.0});
         _modelview_dirty = false;
     }
 }

@@ -21,7 +21,7 @@ public:
     
     /** Constructors **/
     ZVecBase(float arr[] = nullptr);
-//    ZVecBase(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
+    ZVecBase(std::initializer_list<float> list); // Initializer lists unsupported in clang, arg!!
     ZVecBase(const ZVecBase &copy);
     ZVecBase(ZVecBase &&move);
     ZVecBase& operator=(const ZVecBase &other);
