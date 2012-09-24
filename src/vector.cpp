@@ -183,11 +183,11 @@ ZVecBase<S> ZVecBase<S>::negate()
 
 ZVec<3> ZVec<3>::cross(const ZVec<3> &other)
 {
-    return ZVec<3>(
+    return {
         y * other.z - z * other.y,
         z * other.x - x * other.z,
         x * other.y - y * other.x
-    );
+    };
 }
 
 
