@@ -14,25 +14,25 @@
 
 namespace zge {
 
-class ZEngine : ZNonCopyable {
-    ZDisplayManagerRef  _displayManager;
-    ZGameManagerRef     _gameManager;
-    ZInputManagerRef    _inputManager;
+class engine : noncopyable {
+    display_manager_ref  _display_manager;
+    game_manager_ref     _game_manager;
+    input_manager_ref    _input_manager;
 
 public:
-    static ZEngine* instance();
+    static engine* instance();
     
     /** Accessors **/
-    ZDisplayManagerRef getDisplayManager() { return _displayManager; }
-    ZGameManagerRef getGameManager() { return _gameManager; }
-    ZInputManagerRef getInputManager() { return _inputManager; }
+    display_manager_ref get_display_manager() { return _display_manager; }
+    game_manager_ref get_game_manager() { return _game_manager; }
+    input_manager_ref get_input_manager() { return _input_manager; }
     
     /** Initialization **/
     void initialize();
     
 private:
     // singleton
-    ZEngine();
+    engine();
 };
 
 } // namespace zge

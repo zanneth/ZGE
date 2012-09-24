@@ -11,16 +11,16 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;
+typedef std::shared_ptr<class schedulable> schedulable_ref;
 
-class ZSchedulable {
-    unsigned _lastUpdate = 0;
+class schedulable {
+    unsigned _last_update = 0;
     
 public:
-    virtual ~ZSchedulable() {}
+    virtual ~schedulable() {}
     virtual void run(unsigned dtime) = 0;
     
-    friend class ZRunLoop;
+    friend class runloop;
 };
 
 } // namespace zge

@@ -9,7 +9,7 @@
 
 namespace zge {
 
-std::string ZPlatform::getDescription()
+std::string platform::get_description()
 {
     return "Unknown Platform";
 }

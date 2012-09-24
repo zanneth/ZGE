@@ -14,30 +14,30 @@
 
 namespace zge {
 
-void ZOSXPlatform::runApplication(ZApplication *application)
+void osx_platform::run_application(application *application)
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     [NSApplication sharedApplication]; // Initialize the application if it hasn't been already
     
     // Create the App Delegate
-    ZAppDelegate *appDelegate = [[ZAppDelegate alloc] init];
-    appDelegate.application = application;
-    [NSApp setDelegate:appDelegate];
+    AppDelegate *delegate = [[AppDelegate alloc] init];
+    delegate.application = application;
+    [NSApp setDelegate:delegate];
     
     // Setup the Menu Bar
     NSMenu *mainMenu = [[[NSMenu alloc] init] autorelease];
     [NSApp setMainMenu:mainMenu];
-    _setupMainMenu();
+    _setup_main_menu();
     
     // Start the Main Event Loop
     [NSApp run];
     
-    [appDelegate release];
+    [delegate release];
     [pool release];
 }
 
-std::string ZOSXPlatform::getDescription()
+std::string osx_platform::get_description()
 {
     NSProcessInfo *pinfo = [NSProcessInfo processInfo];
     NSString *version = [pinfo operatingSystemVersionString];
@@ -48,7 +48,7 @@ std::string ZOSXPlatform::getDescription()
     return oss.str();
 }
 
-void ZOSXPlatform::_setupMainMenu()
+void osx_platform::_setup_main_menu()
 {
     NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
     NSMenu *appMenu = [[NSMenu alloc] init];
@@ -80,7 +80,7 @@ void ZOSXPlatform::_setupMainMenu()
 }
 
 
-@implementation ZAppDelegate
+@implementation AppDelegate
 @synthesize application=_application;
 
 - (void)_changeWorkingDirectory
@@ -100,8 +100,8 @@ void ZOSXPlatform::_setupMainMenu()
     [self _changeWorkingDirectory];
     
     if (_application != NULL) {
-        _application->applicationReady();
-        _application->startMainRunLoop(); // does not return until engine exits
+        _application->application_ready();
+        _application->start_main_runloop(); // does not return until engine exits
         [NSApp terminate:self];
     }
 }

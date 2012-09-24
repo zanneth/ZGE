@@ -12,62 +12,62 @@
 
 namespace zge {
 
-class ZException : public std::exception {
+class exception : public std::exception {
 public:
     int code;
     std::string description;
-    std::string extraInfo;
+    std::string extra_info;
     
-    ZException(int code_ = -1, std::string description_ = "Unknown Description");
+    exception(int code_ = -1, std::string description_ = "Unknown Description");
     
     virtual const char* what() const throw();
     
-    bool operator==(const ZException &other)
+    bool operator==(const exception &other)
     {
         return code == other.code;
     }
     
-    bool operator!=(const ZException &other)
+    bool operator!=(const exception &other)
     {
         return !operator==(other);
     }
 };
 
-class ZNotImplementedException : public ZException {
+class not_implemented_exception : public exception {
 public:
-    ZNotImplementedException() : ZException(
+    not_implemented_exception() : exception(
         10,
         "Functionality not yet implemented."
     ) {}
 };
 
-class ZApplicationException : public ZException {
+class application_exception : public exception {
 public:
-    ZApplicationException() : ZException(
+    application_exception() : exception(
         100,
         "The application failed to initialize."
     ) {}
 };
 
-class ZDisplayException : public ZException {
+class display_exception : public exception {
 public:
-    ZDisplayException() : ZException(
+    display_exception() : exception(
         200,
         "The display failed to initialize."
     ) {}
 };
 
-class ZEngineException : public ZException {
+class engine_exception : public exception {
 public:
-    ZEngineException() : ZException(
+    engine_exception() : exception(
         300,
         "The engine failed to initialize."
     ) {}
 };
 
-class ZMathematicException : public ZException {
+class mathematic_exception : public exception {
 public:
-    ZMathematicException() : ZException(
+    mathematic_exception() : exception(
         400,
         "Mathematic exception."
     ) {}

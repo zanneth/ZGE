@@ -13,25 +13,25 @@
 
 namespace zge {
 
-class ZUID {
+class uid {
     unsigned _uidnum;
 
 public:
-    ZUID() :
+    uid() :
         _uidnum(std::rand())
     {}
     
-    bool operator==(const ZUID &other) const
+    bool operator==(const uid &other) const
     {
         return _uidnum == other._uidnum;
     }
     
-    bool operator!=(const ZUID &other) const
+    bool operator!=(const uid &other) const
     {
         return !operator==(other);
     }
     
-    std::string getDescription() const
+    std::string get_description() const
     {
         std::ostringstream oss;
         oss << _uidnum;
@@ -40,7 +40,7 @@ public:
 };
 
 template <class T>
-struct ZNullDeleter {
+struct nulldeleter {
     void operator()(void const *) {}
 };
 

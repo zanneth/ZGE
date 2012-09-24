@@ -12,7 +12,7 @@
 
 namespace zge {
 
-class ZLogger : ZNonCopyable {
+class logger : noncopyable {
 public:
     static void log(const char *format, ...);
     static void log(const std::string str);

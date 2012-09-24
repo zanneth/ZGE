@@ -15,31 +15,31 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class ZScene> ZSceneRef;
+typedef std::shared_ptr<class scene> scene_ref;
 
-class ZScene : public ZNode {
-    ZCameraRef _activeCamera;
-    ZViewport _viewport;
+class scene : public node {
+    camera_ref _active_camera;
+    viewport _viewport;
     
 public:
-    ZScene();
-    ZScene(const ZScene &) = default;
-    ~ZScene();
+    scene();
+    scene(const scene &) = default;
+    ~scene();
     
     /** Accessors **/
-    ZCameraRef getActiveCamera() { return _activeCamera; }
-    ZViewport getViewport() { return _viewport; }
-    void setViewport(const ZViewport &vp) { _viewport = vp; }
+    camera_ref get_active_camera() { return _active_camera; }
+    viewport get_viewport() { return _viewport; }
+    void set_viewport(const viewport &vp) { _viewport = vp; }
     
     /** Node Overrides **/
-    void addChild(ZNodeRef node) override;
+    void add_child(node_ref node) override;
     
 private:
-    void _drawInternal() override;
-    void _evictScene(ZNode *curnode);
+    void _draw_internal() override;
+    void _evict_scene(node *curnode);
     
 public:
-    friend class ZGameManager;
+    friend class game_manager;
 };
 
 } // namespace zge

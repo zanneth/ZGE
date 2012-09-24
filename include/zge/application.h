@@ -15,37 +15,37 @@
 
 namespace zge {
 
-class ZPlatform;
-class ZRunLoop;
+class platform;
+class runloop;
 
-class ZApplication : ZNonCopyable {
+class application : noncopyable {
     std::list<std::string> _arguments;
-    ZPlatform *_currentPlatform; // weak
-    unsigned _timeBeganRunning;
+    platform *_current_platform; // weak
+    unsigned _time_start;
     
 public:
-    ZApplication(int argc, char **argv);
-    virtual ~ZApplication();
+    application(int argc, char **argv);
+    virtual ~application();
     
     /** Accessors **/
-    std::list<std::string> getArguments() { return _arguments; }
-    void setArguments(int argc, char **argv);
-    ZPlatform* getCurrentPlatform() { return _currentPlatform; }
+    std::list<std::string> get_arguments() { return _arguments; }
+    void set_arguments(int argc, char **argv);
+    platform* get_current_platform() { return _current_platform; }
     
     /** Accessing the Main Run Loop **/
-    static ZRunLoop* getMainRunLoop();
-    void startMainRunLoop();
+    static runloop* get_main_runloop();
+    void start_main_runloop();
     
     /** Utility Functions **/
-    unsigned getSecondsRunning();
+    unsigned get_secs_running();
     
     /** Callbacks **/
-    virtual void applicationReady() {}
+    virtual void application_ready() {}
     
     /** Running (external) **/
-    friend void runApplication(ZApplication*);
+    friend void run_application(application*);
 };
 
-void runApplication(ZApplication *application);
+void run_application(application *application);
 
 } // namespace zge

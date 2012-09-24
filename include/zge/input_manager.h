@@ -13,9 +13,9 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
+typedef std::shared_ptr<class input_manager> input_manager_ref;
 
-class ZInputManager : public ZSchedulable, ZNonCopyable {
+class input_manager : public schedulable, noncopyable {
 public:    
     void run(unsigned dtime) override;
 };

@@ -18,81 +18,81 @@
 
 namespace zge {
 
-ZCamera::ZCamera() :
-    _fieldOfView(DEFAULT_FOV),
-    _nearClippingDistance(DEFAULT_NEAR_CLIP),
-    _farClippingDistance(DEFAULT_FAR_CLIP),
-    _projectionDirty(true),
-    _modelViewDirty(true)
+camera::camera() :
+    _field_of_view(DEFAULT_FOV),
+    _near_clip(DEFAULT_NEAR_CLIP),
+    _far_clip(DEFAULT_FAR_CLIP),
+    _projection_dirty(true),
+    _modelview_dirty(true)
 {}
 
 
 #pragma mark - Open/Close
 
-void ZCamera::open()
+void camera::open()
 {
-    _openProjection();
-    _openModelView();
+    _open_projection();
+    _open_modelview();
 }
 
-void ZCamera::close()
+void camera::close()
 {
-    _closeProjection();
-    _closeModelView();
+    _close_projection();
+    _close_modelview();
 }
 
 
 #pragma mark - Private
 
-void ZCamera::_constructProjection()
+void camera::_construct_projection()
 {
-    if (_projectionDirty) {
+    if (_projection_dirty) {
         if (_scene) {
-            ZViewport viewport = _scene->getViewport();
+            viewport viewport = _scene->get_viewport();
             float aspect = std::max(viewport.width, viewport.height) / std::min(viewport.width, viewport.height);
             
-            _projectionMatrix = ZMat4::perspective(_fieldOfView,
+            _projection_matrix = mat4::perspective(_field_of_view,
                                                       aspect,
-                                                      _nearClippingDistance,
-                                                      _farClippingDistance);
-            _projectionDirty = false;
+                                                      _near_clip,
+                                                      _far_clip);
+            _projection_dirty = false;
         }
     }
 }
 
-void ZCamera::_openProjection()
+void camera::_open_projection()
 {
-    if (_projectionDirty) {
-        _constructProjection();
+    if (_projection_dirty) {
+        _construct_projection();
     }
     
     glMatrixMode(GL_PROJECTION);
-    glLoadMatrixf(_projectionMatrix.matrix);
+    glLoadMatrixf(_projection_matrix.array);
 }
 
-void ZCamera::_closeProjection()
+void camera::_close_projection()
 {}
 
-void ZCamera::_constructModelView()
+void camera::_construct_modelview()
 {
-    if (_modelViewDirty) {
-        _modelViewMatrix = ZMat4::lookat(_position, _lookDirection, ZVec3(0.0, 1.0, 0.0));
-        _modelViewDirty = false;
+    if (_modelview_dirty) {
+        _modelview_matrix = mat4::lookat(_position, _look_direction, vec3(0.0, 1.0, 0.0));
+        _modelview_dirty = false;
     }
 }
 
-void ZCamera::_openModelView()
+void camera::_open_modelview()
 {
-    if (_modelViewDirty) {
-        _constructModelView();
+    if (_modelview_dirty) {
+        _construct_modelview();
     }
     
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glLoadMatrixf(_modelViewMatrix.matrix);
+    glLoadMatrixf(_modelview_matrix.array);
 }
 
-void ZCamera::_closeModelView()
+void camera::_close_modelview()
 {
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();

@@ -21,15 +21,15 @@
 
 namespace zge {
 
-struct ZNotification {
+struct notification {
     std::string name;
     void *sender;   // weak
     void *info;     // weak
     
-    std::string getDescription() const
+    std::string get_description() const
     {
         std::ostringstream oss;
-        oss << "ZNotification(0x" << this << ") { "
+        oss << "notification(0x" << this << ") { "
             "name: \"" << name << "\", "
             "sender: " << sender << ", "
             "info: " << &info << " }";
@@ -37,25 +37,25 @@ struct ZNotification {
     }
 };
 
-typedef std::function<void(const ZNotification*)> ZObserverFunction;
+typedef std::function<void(const notification*)> observer_function;
 
-class ZNotificationCenter : ZNonCopyable {
-    typedef std::pair<ZUID, ZObserverFunction> ZObserverPair;
-    std::map<std::string, std::vector<ZObserverPair>> _observerMap;
+class notification_center : noncopyable {
+    typedef std::pair<uid, observer_function> observer_pair;
+    std::map<std::string, std::vector<observer_pair>> _observer_map;
 
 public:
-    static ZNotificationCenter* instance();
+    static notification_center* instance();
 
-    ZUID addObserver(std::string name, ZObserverFunction function);
-    void removeObserver(ZUID handle);
-    void removeObservers(std::string name);
+    uid add_observer(std::string name, observer_function function);
+    void remove_observer(uid handle);
+    void remove_observers(std::string name);
     
-    void postNotification(const ZNotification &notification);
-    void postNotification(std::string name, void *sender = nullptr);
+    void post_notification(const notification &notification);
+    void post_notification(std::string name, void *sender = nullptr);
 
 private:
     // singleton
-    ZNotificationCenter() = default;
+    notification_center() = default;
 };
 
 } // namespace zge

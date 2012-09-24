@@ -14,38 +14,38 @@
 
 namespace zge {
 
-ZDisplayManager::ZDisplayManager() :
-    _currentDisplay(nullptr)
+display_manager::display_manager() :
+    _current_display(nullptr)
 {}
 
-ZDisplayManager::~ZDisplayManager()
+display_manager::~display_manager()
 {
-    if (_currentDisplay != nullptr) {
-        delete _currentDisplay;
+    if (_current_display != nullptr) {
+        delete _current_display;
     }
 }
 
-ZDisplay* ZDisplayManager::createDisplay(const ZDisplayMode &mode)
+display* display_manager::create_display(const display_mode &mode)
 {
-    ZDisplay *display = new ZGLDisplay(mode);
+    display *display = new gldisplay(mode);
     display->initialize();
     
-    if (_currentDisplay != nullptr) {
-        delete _currentDisplay;
+    if (_current_display != nullptr) {
+        delete _current_display;
     }
     
-    _currentDisplay = display;
+    _current_display = display;
     return display;
 }
 
-void ZDisplayManager::run(unsigned dtime)
+void display_manager::run(unsigned dtime)
 {
-    if (_currentDisplay != nullptr) {
-        if (!_currentDisplay->isInitialized()) {
-            _currentDisplay->initialize();
+    if (_current_display != nullptr) {
+        if (!_current_display->is_initialized()) {
+            _current_display->initialize();
         }
         
-        _currentDisplay->render(dtime);
+        _current_display->render(dtime);
     }
 }
 

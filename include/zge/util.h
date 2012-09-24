@@ -11,10 +11,10 @@
 
 namespace zge {
 
-class ZUtil {
+class util {
 public:
     template <typename T>
-    static inline T degreesToRadians(T degrees)
+    static inline T degrees_to_radians(T degrees)
     {
         return degrees * (M_PI / 180.0f);
     }

@@ -9,14 +9,14 @@
 
 namespace zge {
 
-class ZNonCopyable {
+class noncopyable {
 protected:
-    ZNonCopyable()  = default;
-    ~ZNonCopyable() = default;
+    noncopyable()  = default;
+    ~noncopyable() = default;
 
 private:
-    ZNonCopyable(const ZNonCopyable&)                   = delete;
-    const ZNonCopyable& operator=(const ZNonCopyable&)  = delete;
+    noncopyable(const noncopyable&)                   = delete;
+    const noncopyable& operator=(const noncopyable&)  = delete;
 };
 
 } // namespace zge

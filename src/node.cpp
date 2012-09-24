@@ -13,25 +13,25 @@
 
 namespace zge {
 
-ZNode::ZNode() :
+node::node() :
     _parent(nullptr),
     _scene(nullptr)
 {}
 
-ZNode::~ZNode()
+node::~node()
 {
-    ZLogger::log("%s destroyed", getDescription().c_str());
+    logger::log("%s destroyed", get_description().c_str());
 }
 
 
 #pragma mark - Operators
 
-bool ZNode::operator==(const ZNode &other)
+bool node::operator==(const node &other)
 {
     return _id == other._id;
 }
 
-bool ZNode::operator!=(const ZNode &other)
+bool node::operator!=(const node &other)
 {
     return !operator==(other);
 }
@@ -39,16 +39,16 @@ bool ZNode::operator!=(const ZNode &other)
 
 #pragma mark - Managing Children
 
-void ZNode::addChild(ZNodeRef node)
+void node::add_child(node_ref node)
 {
     node->_scene  = _scene;
     node->_parent = this;
     
     _children.push_back(node);
-    node->_onEnterInternal();
+    node->_on_enter_internal();
 }
 
-bool ZNode::removeChild(ZNodeRef node)
+bool node::remove_child(node_ref node)
 {
     for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
         if (**itr == *node) {
@@ -56,7 +56,7 @@ bool ZNode::removeChild(ZNodeRef node)
             node->_parent   = nullptr;
             
             _children.erase(itr);
-            node->_onExitInternal();
+            node->_on_exit_internal();
             
             return true;
         }
@@ -68,10 +68,10 @@ bool ZNode::removeChild(ZNodeRef node)
 
 #pragma mark - Description
 
-std::string ZNode::getDescription()
+std::string node::get_description()
 {
     std::ostringstream oss;
-    oss << "Node (" << this << ") #" << _id.getDescription();
+    oss << "Node (" << this << ") #" << _id.get_description();
     
     return oss.str();
 }
@@ -79,39 +79,39 @@ std::string ZNode::getDescription()
 
 #pragma mark - Private
 
-void ZNode::_updateInternal(unsigned dtime)
+void node::_update_internal(unsigned dtime)
 {
     update(dtime);
     
-    for (ZNodeRef child : _children) {
-        child->_updateInternal(dtime);
+    for (node_ref child : _children) {
+        child->_update_internal(dtime);
     }
 }
 
-void ZNode::_drawInternal()
+void node::_draw_internal()
 {
     draw();
     
-    for (ZNodeRef child : _children) {
-        child->_drawInternal();
+    for (node_ref child : _children) {
+        child->_draw_internal();
     }
 }
 
-void ZNode::_onEnterInternal()
+void node::_on_enter_internal()
 {
-    onEnter();
+    on_enter();
     
-    for (ZNodeRef child : _children) {
-        child->_onEnterInternal();
+    for (node_ref child : _children) {
+        child->_on_enter_internal();
     }
 }
 
-void ZNode::_onExitInternal()
+void node::_on_exit_internal()
 {
-    onExit();
+    on_exit();
     
-    for (ZNodeRef child : _children) {
-        child->_onExitInternal();
+    for (node_ref child : _children) {
+        child->_on_exit_internal();
     }
 }
 

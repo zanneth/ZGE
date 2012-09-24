@@ -12,7 +12,7 @@
 
 namespace zge {
 
-class ZViewport {
+class viewport {
 public:
     GLint x;
     GLint y;
@@ -20,8 +20,8 @@ public:
     GLsizei height;
     
 public:
-    ZViewport();
-    ZViewport(GLint x, GLint y, GLsizei width, GLsizei height);
+    viewport();
+    viewport(GLint x, GLint y, GLsizei width, GLsizei height);
     
     void open();
     void close();

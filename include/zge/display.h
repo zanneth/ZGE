@@ -12,33 +12,33 @@
 
 namespace zge {
 
-struct ZDisplayMode {
+struct display_mode {
     bool windowed;
     unsigned width;
     unsigned height;
-    float refreshRate;
-    std::string windowTitle;
+    float refresh_rate;
+    std::string window_title;
     
 public:
-    ZDisplayMode() :
+    display_mode() :
         windowed(true),
         width(1024),
         height(768),
-        refreshRate(1.0f / 60.0f),
-        windowTitle("Application") {}
+        refresh_rate(1.0f / 60.0f),
+        window_title("Application") {}
 };
 
-class ZDisplay : ZNonCopyable {
+class display : noncopyable {
 protected:
-    bool _isInitialized;
-    ZDisplayMode _displayMode;
+    bool _is_initialized;
+    display_mode _display_mode;
 
 protected: // Only a display manager can create displays
-    ZDisplay() = default;
-    ZDisplay(const ZDisplayMode &displayMode);
+    display() = default;
+    display(const display_mode &display_mode);
     
 public:
-    virtual ~ZDisplay() {}
+    virtual ~display() {}
     
     /** Initialization **/
     virtual void initialize() = 0;
@@ -50,13 +50,13 @@ public:
     void resize(int width, int height);
     
     /** Accessors **/
-    bool isInitialized() { return _isInitialized; }
+    bool is_initialized() { return _is_initialized; }
     
-    ZDisplayMode getDisplayMode() { return _displayMode; }
-    virtual void setDisplayMode(const ZDisplayMode &mode);
+    display_mode get_display_mode() { return _display_mode; }
+    virtual void set_display_mode(const display_mode &mode);
     
     /** Friends **/
-    friend class ZDisplayManager;
+    friend class display_manager;
 };
 
 } // namespace zge
