@@ -14,18 +14,18 @@
 
 namespace zge {
 
-class ZEngine : ZNonCopyable {
-    ZDisplayManagerRef  _displayManager;
-    ZGameManagerRef     _gameManager;
-    ZInputManagerRef    _inputManager;
+class ZEngine : ZNoncopyable {
+    ZDisplayManagerRef  _display_manager;
+    ZGameManagerRef     _game_manager;
+    ZInputManagerRef    _input_manager;
 
 public:
     static ZEngine* instance();
     
     /** Accessors **/
-    ZDisplayManagerRef getDisplayManager() { return _displayManager; }
-    ZGameManagerRef getGameManager() { return _gameManager; }
-    ZInputManagerRef getInputManager() { return _inputManager; }
+    ZDisplayManagerRef get_display_manager() { return _display_manager; }
+    ZGameManagerRef get_game_manager() { return _game_manager; }
+    ZInputManagerRef get_input_manager() { return _input_manager; }
     
     /** Initialization **/
     void initialize();

@@ -13,10 +13,10 @@
 
 namespace zge {
 
-ZRunLoop::ZRunLoop() :
+ZRunloop::ZRunloop() :
     _running(false) {}
 
-ZRunLoop::~ZRunLoop()
+ZRunloop::~ZRunloop()
 {
     _running = false;
 }
@@ -24,26 +24,26 @@ ZRunLoop::~ZRunLoop()
 
 #pragma mark - Starting the Run Loop
 
-void ZRunLoop::run()
+void ZRunloop::run()
 {
     _running = true;
     _main();
 }
 
-void ZRunLoop::stop()
+void ZRunloop::stop()
 {
     _running = false;
 }
 
 
-#pragma mark - Managing ZSchedulables in the Run Loop
+#pragma mark - Managing schedulables in the Run Loop
 
-void ZRunLoop::schedule(ZSchedulableRef schedulable)
+void ZRunloop::schedule(ZSchedulableRef schedulable)
 {
     _schedulables.push_back(schedulable);
 }
 
-void ZRunLoop::unschedule(ZSchedulableRef schedulable)
+void ZRunloop::unschedule(ZSchedulableRef schedulable)
 {
     auto itr = std::find(_schedulables.begin(), _schedulables.end(), schedulable);
     if (itr != _schedulables.end()) {
@@ -54,22 +54,22 @@ void ZRunLoop::unschedule(ZSchedulableRef schedulable)
 
 #pragma mark - Private Methods
 
-void ZRunLoop::_main()
+void ZRunloop::_main()
 {
     while (_running) {
         for (ZSchedulableRef schedulable : _schedulables) {
             unsigned time = SDL_GetTicks();
-            unsigned lastUpdate = schedulable->_lastUpdate;
+            unsigned last_update = schedulable->_last_update;
             unsigned dtime;
             
-            if (lastUpdate == 0) {
+            if (last_update == 0) {
                 dtime = 0;
             } else {
-                dtime = time - lastUpdate;
+                dtime = time - last_update;
             }
             
             schedulable->run(dtime);
-            schedulable->_lastUpdate = time;
+            schedulable->_last_update = time;
         }
         
         // very naive timing mechanism.

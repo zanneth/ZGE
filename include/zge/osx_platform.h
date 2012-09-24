@@ -18,13 +18,14 @@
 namespace zge {
 
 class ZApplication;
-class ZOSXPlatform : public ZPlatform, ZNonCopyable {
+
+class ZOSXPlatform : public ZPlatform, ZNoncopyable {
 public:
-    void runApplication(ZApplication *application) override;
-    std::string getDescription() override;
+    void run_application(ZApplication *application) override;
+    std::string get_description() override;
 
 private:
-    void _setupMainMenu();
+    void _setup_main_menu();
 };
 
 } // namespace zge

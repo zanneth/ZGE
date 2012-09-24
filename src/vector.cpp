@@ -197,7 +197,7 @@ ZVec<3> ZVec<3>::cross(const ZVec<3> &other)
 #pragma mark - Description
 
 template <unsigned S>
-std::string ZVecBase<S>::getDescription()
+std::string ZVecBase<S>::get_description()
 {
     std::ostringstream oss;
     oss << "{ ";

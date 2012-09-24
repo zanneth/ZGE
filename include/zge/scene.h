@@ -18,7 +18,7 @@ namespace zge {
 typedef std::shared_ptr<class ZScene> ZSceneRef;
 
 class ZScene : public ZNode {
-    ZCameraRef _activeCamera;
+    ZCameraRef _active_camera;
     ZViewport _viewport;
     
 public:
@@ -27,16 +27,16 @@ public:
     ~ZScene();
     
     /** Accessors **/
-    ZCameraRef getActiveCamera() { return _activeCamera; }
-    ZViewport getViewport() { return _viewport; }
-    void setViewport(const ZViewport &vp) { _viewport = vp; }
+    ZCameraRef get_active_camera() { return _active_camera; }
+    ZViewport get_viewport() { return _viewport; }
+    void set_viewport(const ZViewport &vp) { _viewport = vp; }
     
     /** Node Overrides **/
-    void addChild(ZNodeRef node) override;
+    void add_child(ZNodeRef node) override;
     
 private:
-    void _drawInternal() override;
-    void _evictScene(ZNode *curnode);
+    void _draw_internal() override;
+    void _evict_scene(ZNode *curnode);
     
 public:
     friend class ZGameManager;

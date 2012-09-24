@@ -19,9 +19,9 @@ ZEngine* ZEngine::instance()
 }
 
 ZEngine::ZEngine() :
-    _displayManager(new ZDisplayManager),
-    _gameManager(new ZGameManager),
-    _inputManager(new ZInputManager)
+    _display_manager(new ZDisplayManager),
+    _game_manager(new ZGameManager),
+    _input_manager(new ZInputManager)
 {}
 
 
@@ -29,16 +29,16 @@ ZEngine::ZEngine() :
 
 void ZEngine::initialize()
 {
-    ZRunLoop *mainLoop = ZApplication::getMainRunLoop();
-    if (!mainLoop) {
+    ZRunloop *loop = ZApplication::get_main_runloop();
+    if (!loop) {
         ZEngineException e;
-        e.extraInfo = "Main run loop not available. Engine initialization failed.";
+        e.extra_info = "Main run loop not available. Engine initialization failed.";
         throw e;
     }
     
-    mainLoop->schedule(_displayManager);
-    mainLoop->schedule(_gameManager);
-    mainLoop->schedule(_inputManager);
+    loop->schedule(_display_manager);
+    loop->schedule(_game_manager);
+    loop->schedule(_input_manager);
 }
 
 } // namespace zge

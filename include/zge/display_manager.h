@@ -19,18 +19,18 @@ struct ZDisplayMode;
 
 typedef std::shared_ptr<class ZDisplayManager> ZDisplayManagerRef;
 
-class ZDisplayManager : public ZSchedulable, ZNonCopyable {
-    ZDisplay *_currentDisplay;
+class ZDisplayManager : public ZSchedulable, ZNoncopyable {
+    ZDisplay *_current_display;
     
 public:
     ZDisplayManager();
     ~ZDisplayManager();
     
     /** Creating the Display **/
-    ZDisplay* createDisplay(const ZDisplayMode &mode);
-    ZDisplay* getCurrentDisplay() { return _currentDisplay; }
+    ZDisplay* create_display(const ZDisplayMode &mode);
+    ZDisplay* get_current_display() { return _current_display; }
     
-    /** ZSchedulable **/
+    /** schedulable **/
     void run(unsigned dtime) override;
 };
 

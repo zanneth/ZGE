@@ -41,7 +41,7 @@ public:
     static ZMatrixBase identity();
     
     /** Description **/
-    std::string getDescription();
+    std::string get_description();
 };
 
 template <unsigned ROWS, unsigned COLS>
@@ -51,7 +51,7 @@ public:
     ZMatrix<ROWS, COLS>(const ZMatrix &copy) : ZMatrixBase<ROWS, COLS>(copy) {}
     ZMatrix<ROWS, COLS>(ZMatrix &&move) : ZMatrixBase<ROWS, COLS>(move) {}
 };
-typedef ZMatrix<3, 3> ZMat3;
+typedef ZMatrix<3, 3> mat3;
 
 template <>
 class ZMatrix<4, 4> : public ZMatrixBase<4, 4> {
@@ -69,8 +69,8 @@ public:
     static ZMatrix<4, 4> frustum(float left, float right, float bottom, float top,
                            float nearZ, float farZ);
     static ZMatrix<4, 4> perspective(float fovy, float aspect, float nearZ, float farZ);
-    static ZMatrix<4, 4> lookat(ZVec3 eye, ZVec3 center, ZVec3 up); 
+    static ZMatrix<4, 4> lookat(vec3 eye, vec3 center, vec3 up); 
 };
-typedef ZMatrix<4, 4> ZMat4;
+typedef ZMatrix<4, 4> mat4;
 
 } // namespace zge

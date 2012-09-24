@@ -15,9 +15,9 @@
 
 namespace zge {
 
-class ZGLDisplay : public ZDisplay, ZNonCopyable {
+class ZGLDisplay : public ZDisplay, ZNoncopyable {
     SDL_Surface *_surface;
-    unsigned _lastRender;
+    unsigned _last_render;
     
 public:
     ZGLDisplay();
@@ -28,13 +28,13 @@ public:
     void initialize() override;
     void render(unsigned dtime) override;
     
-    void setDisplayMode(const ZDisplayMode &mode) override;
+    void set_display_mode(const ZDisplayMode &mode) override;
     
 private:
-    void _loadSurface();
-    void _initOpenGL();
+    void _load_surface();
+    void _init_opengl();
     
-    void _changeWindowTitle(std::string newTitle);
+    void _change_window_title(std::string new_title);
 };
 
 } // namespace zge

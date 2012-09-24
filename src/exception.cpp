@@ -21,8 +21,8 @@ const char* ZException::what() const throw()
 {
     std::ostringstream oss;
     oss << "ZGE ERROR (" << code << "): " << description;
-    if (extraInfo.length() > 0) {
-        oss << ' ' << extraInfo;
+    if (extra_info.length() > 0) {
+        oss << ' ' << extra_info;
     }
     
     return oss.str().c_str();

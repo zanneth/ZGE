@@ -21,31 +21,31 @@
 
 namespace zge {
 
-static ZRunLoop *_mainRunLoop = nullptr;
+static ZRunloop *_main_runloop = nullptr;
 
 ZApplication::ZApplication(int argc, char **argv) :
-    _currentPlatform(nullptr),
-    _timeBeganRunning(0)
+    _current_platform(nullptr),
+    _time_start(0)
 {
-    setArguments(argc, argv);
+    set_arguments(argc, argv);
 }
 
 ZApplication::~ZApplication()
 {
-    if (_mainRunLoop != nullptr) {
-        _mainRunLoop->stop();
-        delete _mainRunLoop;
+    if (_main_runloop != nullptr) {
+        _main_runloop->stop();
+        delete _main_runloop;
     }
     
-    if (_currentPlatform != nullptr) {
-        delete _currentPlatform;
+    if (_current_platform != nullptr) {
+        delete _current_platform;
     }
 }
 
 
 #pragma mark - Accessors
 
-void ZApplication::setArguments(int argc, char **argv)
+void ZApplication::set_arguments(int argc, char **argv)
 {
     for (int i = 0; i < argc; ++i) {
         std::string str = argv[i];
@@ -56,54 +56,54 @@ void ZApplication::setArguments(int argc, char **argv)
 
 #pragma mark - Run Loop
 
-ZRunLoop* ZApplication::getMainRunLoop()
+ZRunloop* ZApplication::get_main_runloop()
 {
-    if (_mainRunLoop == nullptr) {
-        _mainRunLoop = new ZRunLoop();
-        _mainRunLoop->_onMainThread = true;
+    if (_main_runloop == nullptr) {
+        _main_runloop = new ZRunloop();
+        _main_runloop->_on_main_thread = true;
     }
     
-    return _mainRunLoop;
+    return _main_runloop;
 }
 
-void ZApplication::startMainRunLoop()
+void ZApplication::start_main_runloop()
 {
-    ZRunLoop *runLoop = getMainRunLoop();
-    runLoop->run();
+    ZRunloop *loop = get_main_runloop();
+    loop->run();
 }
 
 
 #pragma mark - Utility Functions
 
-unsigned ZApplication::getSecondsRunning()
+unsigned ZApplication::get_secs_running()
 {
-    if (_timeBeganRunning == 0) {
+    if (_time_start == 0) {
         return 0;
     }
     
-    return SDL_GetTicks() - _timeBeganRunning;
+    return SDL_GetTicks() - _time_start;
 }
 
 
 #pragma mark - Running the Application
 
-void runApplication(ZApplication *application)
+void run_application(ZApplication *application)
 {
     if (application == nullptr) {
         ZApplicationException expt;
-        expt.extraInfo = "Application pointer is NULL.";
+        expt.extra_info = "Application pointer is NULL.";
         
         throw expt;
     }
     
     // initialize SDL engine
-    int sdlStat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-    if (sdlStat < 0) {
+    int sdl_stat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+    if (sdl_stat < 0) {
         std::string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
         ZApplicationException expt;
-        expt.extraInfo = errorstr;
+        expt.extra_info = errorstr;
         
         throw expt;
     }
@@ -120,14 +120,14 @@ void runApplication(ZApplication *application)
     // check if the platform was able to be initialized.
     if (platform == nullptr) {
         ZApplicationException expt;
-        expt.extraInfo = "Platform not supported.";
+        expt.extra_info = "Platform not supported.";
         throw expt;
     }
     
     // run the application
-    application->_currentPlatform  = platform;
-    application->_timeBeganRunning = SDL_GetTicks();
-    platform->runApplication(application); // does not return (should start event loop)
+    application->_current_platform  = platform;
+    application->_time_start = SDL_GetTicks();
+    platform->run_application(application); // does not return (should start event loop)
 }
 
 } // namespace zge

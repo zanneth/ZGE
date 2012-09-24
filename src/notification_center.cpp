@@ -16,20 +16,20 @@ ZNotificationCenter* ZNotificationCenter::instance()
     return &center;
 }
 
-ZUID ZNotificationCenter::addObserver(std::string name, ZObserverFunction function)
+ZUID ZNotificationCenter::add_observer(std::string name, ZObserverFunction function)
 {
     auto pair = std::make_pair(ZUID(), function);
-    _observerMap[name].push_back(pair);
+    _observer_map[name].push_back(pair);
     return pair.first;
 }
 
-void ZNotificationCenter::removeObserver(ZUID handle)
+void ZNotificationCenter::remove_observer(ZUID handle)
 {
-    for (auto &itm : _observerMap) {
+    for (auto &itm : _observer_map) {
         auto &observers = itm.second;
         auto result = std::find_if(observers.begin(),
                                    observers.end(),
-                                   [&handle](const ZObserverPair &pair) -> bool {
+                                   [&handle](const observer_pair &pair) -> bool {
             return pair.first == handle;
         });
         if (result != observers.end()) {
@@ -40,28 +40,28 @@ void ZNotificationCenter::removeObserver(ZUID handle)
     }
 }
 
-void ZNotificationCenter::removeObservers(std::string name)
+void ZNotificationCenter::remove_observers(std::string name)
 {
-    _observerMap[name].clear();
+    _observer_map[name].clear();
 }
 
-void ZNotificationCenter::postNotification(const ZNotification &notification)
+void ZNotificationCenter::post_notification(const ZNotification &notification)
 {
-    if (_observerMap.count(notification.name)) {
-        auto observers = _observerMap[notification.name];
-        for (ZObserverPair &observer : observers) {
+    if (_observer_map.count(notification.name)) {
+        auto observers = _observer_map[notification.name];
+        for (observer_pair &observer : observers) {
             observer.second(&notification);
         }
     }
 }
 
-void ZNotificationCenter::postNotification(std::string name, void *sender)
+void ZNotificationCenter::post_notification(std::string name, void *sender)
 {
     ZNotification n;
     n.name = name;
     n.sender = sender;
     
-    postNotification(n);
+    post_notification(n);
 }
 
 } // namespace zge

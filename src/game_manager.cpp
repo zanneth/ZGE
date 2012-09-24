@@ -11,28 +11,28 @@ namespace zge {
 
 #pragma mark - Managing Scenes
 
-ZSceneRef ZGameManager::getCurrentScene()
+ZSceneRef ZGameManager::get_current_scene()
 {
-    if (_sceneStack.empty()) {
+    if (_scene_stack.empty()) {
         return nullptr;
     }
     
-    return _sceneStack.top();
+    return _scene_stack.top();
 }
 
-void ZGameManager::pushScene(ZSceneRef scene)
+void ZGameManager::push_scene(ZSceneRef scene)
 {
-    _sceneStack.push(scene);
-    scene->onEnter();
+    _scene_stack.push(scene);
+    scene->on_enter();
 }
 
-ZSceneRef ZGameManager::popScene()
+ZSceneRef ZGameManager::pop_scene()
 {
     ZSceneRef scene = nullptr;
-    if (!_sceneStack.empty()) {
-        scene = _sceneStack.top();
-        _sceneStack.pop();
-        scene->onExit();
+    if (!_scene_stack.empty()) {
+        scene = _scene_stack.top();
+        _scene_stack.pop();
+        scene->on_exit();
     }
     
     return scene;
@@ -43,10 +43,10 @@ ZSceneRef ZGameManager::popScene()
 
 void ZGameManager::run(unsigned dtime)
 {
-    ZSceneRef scene = getCurrentScene();
+    ZSceneRef scene = get_current_scene();
     if (scene.get() != nullptr) {
-        scene->_updateInternal(dtime);
-        scene->_drawInternal();
+        scene->_update_internal(dtime);
+        scene->_draw_internal();
     }
 }
     

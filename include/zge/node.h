@@ -16,13 +16,14 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class ZNode> ZNodeRef;
 class ZScene;
+
+typedef std::shared_ptr<class ZNode> ZNodeRef;
 
 class ZNode {
 protected:
     ZUID _id;
-    ZVec3 _position;
+    vec3 _position;
     
     ZNode *_parent; // weak
     ZScene *_scene; // weak
@@ -38,18 +39,18 @@ public:
     bool operator!=(const ZNode &other);
     
     /** Accessors **/
-    ZNode* getParent() { return _parent; }
-    ZScene* getScene() { return _scene; }
-    ZVec3 getPosition() { return _position; }
-    void setPosition(const ZVec3 &position) { _position = position; }
+    ZNode* get_parent() { return _parent; }
+    ZScene* get_scene() { return _scene; }
+    vec3 get_position() { return _position; }
+    void set_position(const vec3 &position) { _position = position; }
     
     /** Managing Sub-Nodes **/
-    virtual void addChild(ZNodeRef node);
-    virtual bool removeChild(ZNodeRef node);
-    virtual std::vector<ZNodeRef> getChildren() { return _children; }
+    virtual void add_child(ZNodeRef node);
+    virtual bool remove_child(ZNodeRef node);
+    virtual std::vector<ZNodeRef> get_children() { return _children; }
     
     /** Description **/
-    virtual std::string getDescription();
+    virtual std::string get_description();
     
     /** Updating **/
     virtual void update(unsigned dtime) {}
@@ -58,14 +59,14 @@ public:
     virtual void draw() {}
     
     /** Callbacks **/
-    virtual void onEnter() {}
-    virtual void onExit() {}
+    virtual void on_enter() {}
+    virtual void on_exit() {}
     
 protected:
-    virtual void _updateInternal(unsigned dtime);
-    virtual void _drawInternal();
-    virtual void _onEnterInternal();
-    virtual void _onExitInternal();
+    virtual void _update_internal(unsigned dtime);
+    virtual void _draw_internal();
+    virtual void _on_enter_internal();
+    virtual void _on_exit_internal();
     
 public:
     friend class ZGameManager;

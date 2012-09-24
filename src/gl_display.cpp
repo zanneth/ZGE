@@ -36,12 +36,12 @@ ZGLDisplay::~ZGLDisplay()
 
 void ZGLDisplay::initialize()
 {
-    if (!_isInitialized) {
-        _loadSurface();
-        _changeWindowTitle(_displayMode.windowTitle);
-        _initOpenGL();
+    if (!_is_initialized) {
+        _load_surface();
+        _change_window_title(_display_mode.window_title);
+        _init_opengl();
         
-        _isInitialized = true;
+        _is_initialized = true;
     } else {
         ZLogger::warn("Display already initialized.");
     }
@@ -52,9 +52,9 @@ void ZGLDisplay::initialize()
 
 void ZGLDisplay::render(unsigned dtime)
 {    
-    _lastRender += dtime;
-    if (_lastRender >= _displayMode.refreshRate * 1000.0) {
-        _lastRender = 0;
+    _last_render += dtime;
+    if (_last_render >= _display_mode.refresh_rate * 1000.0) {
+        _last_render = 0;
         SDL_GL_SwapBuffers();
     }
 }
@@ -62,52 +62,52 @@ void ZGLDisplay::render(unsigned dtime)
 
 #pragma mark - Changing Properties
 
-void ZGLDisplay::setDisplayMode(const ZDisplayMode &mode)
+void ZGLDisplay::set_display_mode(const ZDisplayMode &mode)
 {
-    if (mode.windowTitle != _displayMode.windowTitle) {
-        _changeWindowTitle(mode.windowTitle);
+    if (mode.window_title != _display_mode.window_title) {
+        _change_window_title(mode.window_title);
     }
     
-    _displayMode = mode;
+    _display_mode = mode;
 }
 
 
 #pragma mark - Private Methods
 
-void ZGLDisplay::_loadSurface()
+void ZGLDisplay::_load_surface()
 {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
     
-    Uint32 sdlFlags = SDL_OPENGL;
-    if (!_displayMode.windowed) {
-        sdlFlags |= SDL_FULLSCREEN;
+    Uint32 sdl_flags = SDL_OPENGL;
+    if (!_display_mode.windowed) {
+        sdl_flags |= SDL_FULLSCREEN;
     }
     
     if (_surface != NULL) {
         SDL_FreeSurface(_surface);
     }
     
-    _surface = SDL_SetVideoMode(_displayMode.width, _displayMode.height, 0, sdlFlags);
+    _surface = SDL_SetVideoMode(_display_mode.width, _display_mode.height, 0, sdl_flags);
     if (!_surface) {
-        std::string errorStr = "The OpenGL display surface failed to initialize: ";
-        errorStr += SDL_GetError();
+        std::string errorstr = "The OpenGL display surface failed to initialize: ";
+        errorstr += SDL_GetError();
         
         ZDisplayException expt;
-        expt.extraInfo = errorStr;
+        expt.extra_info = errorstr;
         throw expt;
     }
 }
 
-void ZGLDisplay::_initOpenGL()
+void ZGLDisplay::_init_opengl()
 {
     glEnable(GL_DEPTH_TEST);
 }
 
-void ZGLDisplay::_changeWindowTitle(std::string newTitle)
+void ZGLDisplay::_change_window_title(std::string new_title)
 {
-    const char *windowTitle = newTitle.c_str();
-    SDL_WM_SetCaption(windowTitle, windowTitle);
+    const char *window_title = new_title.c_str();
+    SDL_WM_SetCaption(window_title, window_title);
 }
 
 } // namespace zge

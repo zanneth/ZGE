@@ -31,17 +31,12 @@ public:
         return !operator==(other);
     }
     
-    std::string getDescription() const
+    std::string get_description() const
     {
         std::ostringstream oss;
         oss << _uidnum;
         return oss.str();
     }
-};
-
-template <class T>
-struct ZNullDeleter {
-    void operator()(void const *) {}
 };
 
 } // namespace zge

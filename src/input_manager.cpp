@@ -20,8 +20,8 @@ void ZInputManager::run(unsigned dtime)
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT: {
-                ZRunLoop *mainLoop = ZApplication::getMainRunLoop();
-                mainLoop->stop();
+                ZRunloop *mainloop = ZApplication::get_main_runloop();
+                mainloop->stop();
                 break;
             }
             case SDL_KEYDOWN:

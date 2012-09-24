@@ -14,33 +14,33 @@
 namespace zge {
 
 ZScene::ZScene() : ZNode(),
-    _activeCamera(nullptr)
+    _active_camera(nullptr)
 {
     _scene = this;
-    setPosition(ZVec3(0.0, 0.0, 0.0));
+    set_position(vec3(0.0, 0.0, 0.0));
 }
 
 ZScene::~ZScene()
 {
-    _evictScene(this);
+    _evict_scene(this);
 }
 
 
 #pragma mark - Node Overrides
 
-void ZScene::addChild(ZNodeRef node)
+void ZScene::add_child(ZNodeRef node)
 {
     if (auto cam = std::dynamic_pointer_cast<ZCamera>(node)) {
-        _activeCamera = cam;
-        ZLogger::log("Camera 0x%x added to scene.", _activeCamera.get());
+        _active_camera = cam;
+        ZLogger::log("Camera 0x%x added to scene.", _active_camera.get());
     }
     
-    ZNode::addChild(node);
+    ZNode::add_child(node);
 }
 
-void ZScene::_drawInternal()
+void ZScene::_draw_internal()
 {
-    if (_activeCamera.get() == nullptr) {
+    if (_active_camera.get() == nullptr) {
         return;
     }
     
@@ -48,22 +48,22 @@ void ZScene::_drawInternal()
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     
     _viewport.open();
-    _activeCamera->open();
+    _active_camera->open();
     
-    ZNode::_drawInternal();
+    ZNode::_draw_internal();
     
-    _activeCamera->close();
+    _active_camera->close();
     _viewport.close();
 }
 
 
 #pragma mark - Private
 
-void ZScene::_evictScene(ZNode *curnode)
+void ZScene::_evict_scene(ZNode *curnode)
 {
     curnode->_scene = nullptr;
     for (ZNodeRef node : curnode->_children) {
-        _evictScene(node.get());
+        _evict_scene(node.get());
     }
 }
 

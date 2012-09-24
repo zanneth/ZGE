@@ -16,26 +16,26 @@ struct ZDisplayMode {
     bool windowed;
     unsigned width;
     unsigned height;
-    float refreshRate;
-    std::string windowTitle;
+    float refresh_rate;
+    std::string window_title;
     
 public:
     ZDisplayMode() :
         windowed(true),
         width(1024),
         height(768),
-        refreshRate(1.0f / 60.0f),
-        windowTitle("Application") {}
+        refresh_rate(1.0f / 60.0f),
+        window_title("Application") {}
 };
 
-class ZDisplay : ZNonCopyable {
+class ZDisplay : ZNoncopyable {
 protected:
-    bool _isInitialized;
-    ZDisplayMode _displayMode;
+    bool _is_initialized;
+    ZDisplayMode _display_mode;
 
 protected: // Only a display manager can create displays
     ZDisplay() = default;
-    ZDisplay(const ZDisplayMode &displayMode);
+    ZDisplay(const ZDisplayMode &display_mode);
     
 public:
     virtual ~ZDisplay() {}
@@ -50,10 +50,10 @@ public:
     void resize(int width, int height);
     
     /** Accessors **/
-    bool isInitialized() { return _isInitialized; }
+    bool is_initialized() { return _is_initialized; }
     
-    ZDisplayMode getDisplayMode() { return _displayMode; }
-    virtual void setDisplayMode(const ZDisplayMode &mode);
+    ZDisplayMode get_display_mode() { return _display_mode; }
+    virtual void set_display_mode(const ZDisplayMode &mode);
     
     /** Friends **/
     friend class ZDisplayManager;

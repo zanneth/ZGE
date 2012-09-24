@@ -14,12 +14,12 @@ namespace zge {
 
 class ZApplication;
 
-class ZPlatform : ZNonCopyable {
+class ZPlatform : ZNoncopyable {
 public:
     virtual ~ZPlatform() {}
     
-    virtual std::string getDescription();
-    virtual void runApplication(ZApplication *application) = 0;
+    virtual std::string get_description();
+    virtual void run_application(ZApplication *application) = 0;
 };
 
 } // namespace zge

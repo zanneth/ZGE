@@ -16,7 +16,7 @@ class ZException : public std::exception {
 public:
     int code;
     std::string description;
-    std::string extraInfo;
+    std::string extra_info;
     
     ZException(int code_ = -1, std::string description_ = "Unknown Description");
     

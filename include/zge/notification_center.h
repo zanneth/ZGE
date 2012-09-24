@@ -26,10 +26,10 @@ struct ZNotification {
     void *sender;   // weak
     void *info;     // weak
     
-    std::string getDescription() const
+    std::string get_description() const
     {
         std::ostringstream oss;
-        oss << "ZNotification(0x" << this << ") { "
+        oss << "notification(0x" << this << ") { "
             "name: \"" << name << "\", "
             "sender: " << sender << ", "
             "info: " << &info << " }";
@@ -39,19 +39,19 @@ struct ZNotification {
 
 typedef std::function<void(const ZNotification*)> ZObserverFunction;
 
-class ZNotificationCenter : ZNonCopyable {
-    typedef std::pair<ZUID, ZObserverFunction> ZObserverPair;
-    std::map<std::string, std::vector<ZObserverPair>> _observerMap;
+class ZNotificationCenter : ZNoncopyable {
+    typedef std::pair<ZUID, ZObserverFunction> observer_pair;
+    std::map<std::string, std::vector<observer_pair>> _observer_map;
 
 public:
     static ZNotificationCenter* instance();
 
-    ZUID addObserver(std::string name, ZObserverFunction function);
-    void removeObserver(ZUID handle);
-    void removeObservers(std::string name);
+    ZUID add_observer(std::string name, ZObserverFunction function);
+    void remove_observer(ZUID handle);
+    void remove_observers(std::string name);
     
-    void postNotification(const ZNotification &notification);
-    void postNotification(std::string name, void *sender = nullptr);
+    void post_notification(const ZNotification &notification);
+    void post_notification(std::string name, void *sender = nullptr);
 
 private:
     // singleton

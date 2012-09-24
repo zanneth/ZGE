@@ -46,7 +46,7 @@ public:
     ZVecBase negate();
     
     /** Description **/
-    std::string getDescription();
+    std::string get_description();
 };
 
 template <unsigned S>
@@ -80,7 +80,7 @@ public:
         array[0] = x; array[1] = y;
     }
 };
-typedef ZVec<2> ZVec2;
+typedef ZVec<2> vec2;
 
 template <>
 class ZVec<3> : public ZVecBase<3> {
@@ -109,6 +109,6 @@ public:
     /** Math **/
     ZVec<3> cross(const ZVec<3> &other);
 };
-typedef ZVec<3> ZVec3;
+typedef ZVec<3> vec3;
 
 } // namespace zge

@@ -1,5 +1,5 @@
 /*
- * noncopyable.h
+ * ZNoncopyable.h
  *
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 02/09/2012
@@ -9,14 +9,14 @@
 
 namespace zge {
 
-class ZNonCopyable {
+class ZNoncopyable {
 protected:
-    ZNonCopyable()  = default;
-    ~ZNonCopyable() = default;
+    ZNoncopyable()  = default;
+    ~ZNoncopyable() = default;
 
 private:
-    ZNonCopyable(const ZNonCopyable&)                   = delete;
-    const ZNonCopyable& operator=(const ZNonCopyable&)  = delete;
+    ZNoncopyable(const ZNoncopyable&)                   = delete;
+    const ZNoncopyable& operator=(const ZNoncopyable&)  = delete;
 };
 
 } // namespace zge
