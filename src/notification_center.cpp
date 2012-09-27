@@ -12,8 +12,8 @@ namespace zge {
 
 ZNotificationCenter* ZNotificationCenter::instance()
 {
-    static ZNotificationCenter center;
-    return &center;
+    static ZNotificationCenter __center;
+    return &__center;
 }
 
 ZUID ZNotificationCenter::add_observer(std::string name, ZObserverFunction function)

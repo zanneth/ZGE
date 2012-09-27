@@ -21,7 +21,7 @@
 
 namespace zge {
 
-static ZRunloop *_main_runloop = nullptr;
+static ZRunloop *__main_runloop = nullptr;
 
 ZApplication::ZApplication(int argc, char **argv) :
     _current_platform(nullptr),
@@ -32,11 +32,6 @@ ZApplication::ZApplication(int argc, char **argv) :
 
 ZApplication::~ZApplication()
 {
-    if (_main_runloop != nullptr) {
-        _main_runloop->stop();
-        delete _main_runloop;
-    }
-    
     if (_current_platform != nullptr) {
         delete _current_platform;
     }
@@ -58,12 +53,12 @@ void ZApplication::set_arguments(int argc, char **argv)
 
 ZRunloop* ZApplication::get_main_runloop()
 {
-    if (_main_runloop == nullptr) {
-        _main_runloop = new ZRunloop();
-        _main_runloop->_on_main_thread = true;
+    if (__main_runloop == nullptr) {
+        __main_runloop = new ZRunloop();
+        __main_runloop->_on_main_thread = true;
     }
     
-    return _main_runloop;
+    return __main_runloop;
 }
 
 void ZApplication::start_main_runloop()

@@ -14,8 +14,8 @@ namespace zge {
 
 ZEngine* ZEngine::instance()
 {
-    static ZEngine engine;
-    return &engine;
+    static ZEngine __engine;
+    return &__engine;
 }
 
 ZEngine::ZEngine() :
