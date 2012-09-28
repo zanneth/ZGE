@@ -8,6 +8,8 @@
 #include "zge/notification_center.h"
 #include "zge/logger.h"
 
+static unsigned __notificationcenter_global_uid_count = 1;
+
 namespace zge {
 
 ZNotificationCenter* ZNotificationCenter::instance()
@@ -16,14 +18,14 @@ ZNotificationCenter* ZNotificationCenter::instance()
     return &__center;
 }
 
-ZUID ZNotificationCenter::add_observer(std::string name, ZObserverFunction function)
+ZObserverHandle ZNotificationCenter::add_observer(std::string name, ZObserverFunction function)
 {
-    auto pair = std::make_pair(ZUID(), function);
+    auto pair = std::make_pair(__notificationcenter_global_uid_count++, function);
     _observer_map[name].push_back(pair);
     return pair.first;
 }
 
-void ZNotificationCenter::remove_observer(ZUID handle)
+void ZNotificationCenter::remove_observer(ZObserverHandle handle)
 {
     for (auto &itm : _observer_map) {
         auto &observers = itm.second;

@@ -11,11 +11,14 @@
 #include <sstream>
 #include <typeinfo>
 
+static unsigned __node_global_uid_count = 1;
+
 namespace zge {
 
 ZNode::ZNode() :
     _parent(nullptr),
-    _scene(nullptr)
+    _scene(nullptr),
+    _uid(__node_global_uid_count++)
 {}
 
 ZNode::~ZNode()
@@ -28,7 +31,7 @@ ZNode::~ZNode()
 
 bool ZNode::operator==(const ZNode &other)
 {
-    return _id == other._id;
+    return _uid == other._uid;
 }
 
 bool ZNode::operator!=(const ZNode &other)
@@ -71,7 +74,7 @@ bool ZNode::remove_child(ZNodeRef node)
 std::string ZNode::get_description()
 {
     std::ostringstream oss;
-    oss << "Node (" << this << ") #" << _id.get_description();
+    oss << "Node (" << this << ") #" << _uid;
     
     return oss.str();
 }

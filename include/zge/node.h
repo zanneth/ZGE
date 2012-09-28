@@ -7,7 +7,6 @@
  
 #pragma once
 
-#include "zge/types.h"
 #include "zge/vector.h"
 
 #include <memory>
@@ -22,7 +21,7 @@ typedef std::shared_ptr<class ZNode> ZNodeRef;
 
 class ZNode {
 protected:
-    ZUID _id;
+    unsigned _uid;
     ZVec3 _position;
     
     ZNode *_parent; // weak
