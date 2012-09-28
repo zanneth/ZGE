@@ -12,10 +12,32 @@
 
 namespace zge {
 
-ZException::ZException(int code_, std::string description_) :
-    code(code_),
-    description(description_)
-{}
+ZException::ZException(int code_) :
+    code(code_)
+{
+    switch (code_) {
+        case UNKNOWN_EXCEPTION_CODE:
+            description = "An unknown exception has occurred.";
+            break;
+        case NOT_IMPLEMENTED_EXCEPTION_CODE:
+            description = "The functionality is not implemented.";
+            break;
+        case APPLICATION_EXCEPTION_CODE:
+            description = "The application created an exception.";
+            break;
+        case DISPLAY_EXCEPTION_CODE:
+            description = "There was an exception in managing the display.";
+            break;
+        case ENGINE_EXCEPTION_CODE:
+            description = "General engine exception.";
+            break;
+        case MATHEMATIC_EXCEPTION_CODE:
+            description = "There was a mathematical exception.";
+            break;
+        default:
+            break;
+    }
+}
 
 const char* ZException::what() const throw()
 {
@@ -26,6 +48,16 @@ const char* ZException::what() const throw()
     }
     
     return oss.str().c_str();
+}
+
+bool ZException::operator==(const ZException &other)
+{
+    return code == other.code;
+}
+
+bool ZException::operator!=(const ZException &other)
+{
+    return !operator==(other);
 }
 
 } // namespace zge

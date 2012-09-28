@@ -85,7 +85,7 @@ unsigned ZApplication::get_secs_running()
 void run_application(ZApplication *application)
 {
     if (application == nullptr) {
-        ZApplicationException expt;
+        ZException expt(APPLICATION_EXCEPTION_CODE);
         expt.extra_info = "Application pointer is NULL.";
         
         throw expt;
@@ -97,7 +97,7 @@ void run_application(ZApplication *application)
         std::string errorstr = "SDL Failed to initialize: ";
         errorstr += SDL_GetError();
         
-        ZApplicationException expt;
+        ZException expt(APPLICATION_EXCEPTION_CODE);
         expt.extra_info = errorstr;
         
         throw expt;
@@ -114,7 +114,7 @@ void run_application(ZApplication *application)
     
     // check if the platform was able to be initialized.
     if (platform == nullptr) {
-        ZApplicationException expt;
+        ZException expt(APPLICATION_EXCEPTION_CODE);
         expt.extra_info = "Platform not supported.";
         throw expt;
     }

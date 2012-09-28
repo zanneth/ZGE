@@ -101,7 +101,7 @@ template <unsigned R, unsigned C>
 ZMatrixBase<R, C> ZMatrixBase<R, C>::multiply(const ZMatrixBase<R, C> &other)
 {
     if (R != C) {
-        ZNotImplementedException e;
+        ZException e(NOT_IMPLEMENTED_EXCEPTION_CODE);
         e.extra_info = "Only square matrices can be multiplied at the moment.";
         throw e;
     }

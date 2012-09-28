@@ -93,7 +93,7 @@ void ZGLDisplay::_load_surface()
         std::string errorstr = "The OpenGL display surface failed to initialize: ";
         errorstr += SDL_GetError();
         
-        ZDisplayException expt;
+        ZException expt(DISPLAY_EXCEPTION_CODE);
         expt.extra_info = errorstr;
         throw expt;
     }
