@@ -6,7 +6,36 @@
  */
  
 #include "zge/util.h"
+#include <cstdio>
 
 namespace zge {
+
+std::string ZUtil::format_string(const std::string &format, ...)
+{
+    char *final_string = nullptr;
+    unsigned size = 128;
+    va_list args_list;
+    bool string_formatted = false;
+    
+    while (!string_formatted) {
+        if (final_string != nullptr) {
+            delete[] final_string;
+        }
+        final_string = new char[size];
+        
+        va_start(args_list, format);
+        int n = std::vsnprintf(final_string, size, format.c_str(), args_list);
+        va_end(args_list);
+        
+        if (n != -1 && n < size) {
+            string_formatted = true;
+        } else {
+            size *= 2;
+        }
+    }
+    
+    std::string result(final_string);
+    return result;
+}
 
 } // namespace zge
