@@ -34,6 +34,9 @@ ZException::ZException(int code_) :
         case MATHEMATIC_EXCEPTION_CODE:
             description = "There was a mathematical exception.";
             break;
+        case FILE_EXCEPTION_CODE:
+            description = "There was a filesystem exception.";
+            break;
         default:
             break;
     }

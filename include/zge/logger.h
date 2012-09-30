@@ -8,6 +8,8 @@
 #pragma once
 
 #include "zge/noncopyable.h"
+
+#include <sstream>
 #include <string>
 
 namespace zge {
@@ -17,6 +19,22 @@ public:
     static void log(const char *format, ...);
     static void log(const std::string str);
     static void warn(const char *format, ...);
+    
+    template <typename T>
+    static void log_array(T *array, unsigned count)
+    {
+        std::ostringstream stream;
+        stream << "[";
+        for (unsigned i = 0; i < count; ++i) {
+            stream << array[i];
+            if (i < count - 1) {
+                stream << ", ";
+            }
+        }
+        stream << "]";
+        
+        ZLogger::log(stream.str());
+    }
 };
 
 } // namespace zge

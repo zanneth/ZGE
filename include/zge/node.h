@@ -7,6 +7,8 @@
  
 #pragma once
 
+#include "zge/matrix.h"
+#include "zge/model.h"
 #include "zge/vector.h"
 
 #include <memory>
@@ -23,10 +25,13 @@ class ZNode {
 protected:
     unsigned _uid;
     ZVec3 _position;
+    ZMat4 _transform;
     
     ZNode *_parent; // weak
     ZScene *_scene; // weak
     std::vector<ZNodeRef> _children;
+    
+    ZModelRef _model;
     
 public:
     ZNode();
@@ -42,6 +47,8 @@ public:
     ZScene* get_scene() { return _scene; }
     ZVec3 get_position() { return _position; }
     void set_position(const ZVec3 &position) { _position = position; }
+    ZModelRef get_model() { return _model; }
+    void set_model(ZModelRef model) { _model = model; }
     
     /** Managing Sub-Nodes **/
     virtual void add_child(ZNodeRef node);
@@ -55,7 +62,8 @@ public:
     virtual void update(unsigned dtime) {}
     
     /** Drawing **/
-    virtual void draw() {}
+    virtual void before_draw() {}
+    virtual void after_draw() {}
     
     /** Callbacks **/
     virtual void on_enter() {}

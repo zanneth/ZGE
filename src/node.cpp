@@ -16,6 +16,7 @@ static unsigned __node_global_uid_count = 1;
 namespace zge {
 
 ZNode::ZNode() :
+    _transform(ZMat4::identity()),
     _parent(nullptr),
     _scene(nullptr),
     _uid(__node_global_uid_count++)
@@ -93,7 +94,16 @@ void ZNode::_update_internal(unsigned dtime)
 
 void ZNode::_draw_internal()
 {
-    draw();
+    before_draw();
+    
+    if (_model) {
+        glPushMatrix();
+        glMultMatrixf(_transform.array);
+        _model->draw();
+        glPopMatrix();
+    }
+    
+    after_draw();
     
     for (ZNodeRef child : _children) {
         child->_draw_internal();

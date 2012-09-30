@@ -264,40 +264,10 @@ std::string ZMatrixBase<R, C>::get_description()
 
 // To avoid linker errors
 template class ZMatrixBase<1, 1>;
-template class ZMatrixBase<1, 2>;
-template class ZMatrixBase<1, 3>;
-template class ZMatrixBase<1, 4>;
-template class ZMatrixBase<1, 5>;
-template class ZMatrixBase<1, 6>;
-template class ZMatrixBase<2, 1>;
 template class ZMatrixBase<2, 2>;
-template class ZMatrixBase<2, 3>;
-template class ZMatrixBase<2, 4>;
-template class ZMatrixBase<2, 5>;
-template class ZMatrixBase<2, 6>;
-template class ZMatrixBase<3, 1>;
-template class ZMatrixBase<3, 2>;
 template class ZMatrixBase<3, 3>;
-template class ZMatrixBase<3, 4>;
-template class ZMatrixBase<3, 5>;
-template class ZMatrixBase<3, 6>;
-template class ZMatrixBase<4, 1>;
-template class ZMatrixBase<4, 2>;
-template class ZMatrixBase<4, 3>;
 template class ZMatrixBase<4, 4>;
-template class ZMatrixBase<4, 5>;
-template class ZMatrixBase<4, 6>;
-template class ZMatrixBase<5, 1>;
-template class ZMatrixBase<5, 2>;
-template class ZMatrixBase<5, 3>;
-template class ZMatrixBase<5, 4>;
 template class ZMatrixBase<5, 5>;
-template class ZMatrixBase<5, 6>;
-template class ZMatrixBase<6, 1>;
-template class ZMatrixBase<6, 2>;
-template class ZMatrixBase<6, 3>;
-template class ZMatrixBase<6, 4>;
-template class ZMatrixBase<6, 5>;
 template class ZMatrixBase<6, 6>;
 
 } // namespace zge

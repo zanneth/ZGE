@@ -8,11 +8,11 @@
 #pragma once
 
 #ifdef __APPLE__
-#	include <GL/glew.h>
+#   include <OpenGL/OpenGL.h>
 #	include <OpenGL/glu.h>
 #	include <GLUT/glut.h>
 #else
-#	include <GL/glew.h>
+#   include <OpenGL/gl.h>
 #	include <GL/glu.h>
 #	include <GL/glut.h>
 #endif
