@@ -23,19 +23,25 @@ ZGLBuffer::ZGLBuffer() :
 ZGLBuffer::ZGLBuffer(ZGLBuffer &&mv)
 {
     _buffer = mv._buffer;
+    _target = mv._target;
     mv._buffer = ZUNALLOCATED_BUFFER;
+    mv._target = ZUNBOUND_TARGET;
 }
 
 ZGLBuffer::~ZGLBuffer()
 {
-    ZLogger::log("Buffer %x deleted.", this);
-    glDeleteBuffers(1, &_buffer);
+    if (_buffer != ZUNALLOCATED_BUFFER) {
+        ZLogger::log("Buffer %x deleted.", this);
+        glDeleteBuffers(1, &_buffer);
+    }
 }
 
-ZGLBuffer& ZGLBuffer::operator=(ZGLBuffer &&cp)
+ZGLBuffer& ZGLBuffer::operator=(ZGLBuffer &&mv)
 {
-    _buffer = cp._buffer;
-    cp._buffer = ZUNALLOCATED_BUFFER;
+    _buffer = mv._buffer;
+    _target = mv._target;
+    mv._buffer = ZUNALLOCATED_BUFFER;
+    mv._target = ZUNBOUND_TARGET;
     return *this;
 }
 
