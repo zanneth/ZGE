@@ -14,28 +14,54 @@ namespace zge {
 void _copy_buffer(GLuint destination, GLuint source);
 
 ZGLBuffer::ZGLBuffer() :
-    name(ZUNALLOCATED_BUFFER)
+    _buffer(ZUNALLOCATED_BUFFER),
+    _target(ZUNBOUND_TARGET)
 {
-    glGenBuffers(1, &name);
+    glGenBuffers(1, &_buffer);
 }
 
 ZGLBuffer::ZGLBuffer(ZGLBuffer &&mv)
 {
-    name = mv.name;
-    mv.name = ZUNALLOCATED_BUFFER;
+    _buffer = mv._buffer;
+    mv._buffer = ZUNALLOCATED_BUFFER;
 }
 
 ZGLBuffer::~ZGLBuffer()
 {
     ZLogger::log("Buffer %x deleted.", this);
-    glDeleteBuffers(1, &name);
+    glDeleteBuffers(1, &_buffer);
 }
 
 ZGLBuffer& ZGLBuffer::operator=(ZGLBuffer &&cp)
 {
-    name = cp.name;
-    cp.name = ZUNALLOCATED_BUFFER;
+    _buffer = cp._buffer;
+    cp._buffer = ZUNALLOCATED_BUFFER;
     return *this;
+}
+
+
+#pragma mark - Loading Data
+
+void ZGLBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
+{
+    if (_target == ZUNBOUND_TARGET) {
+        ZException e(ENGINE_EXCEPTION_CODE);
+        e.extra_info = "Attempted to load data into a buffer with no target buffer object.";
+        throw e;
+    }
+    
+    glPushClientAttrib(GL_CLIENT_VERTEX_ARRAY_BIT);
+    bind();
+    glBufferData(_target, size, data, usage);
+    glPopClientAttrib();
+}
+
+
+#pragma mark - Actions
+
+void ZGLBuffer::bind()
+{
+    glBindBuffer(_target, _buffer);
 }
 
 } // namespace zge

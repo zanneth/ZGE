@@ -12,13 +12,15 @@
 #include <memory>
 
 #define ZUNALLOCATED_BUFFER 0
+#define ZUNBOUND_TARGET     0
 
 namespace zge {
 
 typedef std::shared_ptr<struct ZGLBuffer> ZGLBufferRef;
 
-struct ZGLBuffer : ZNoncopyable {
-    GLuint name;
+class ZGLBuffer : ZNoncopyable {
+    GLuint _buffer;
+    GLenum _target;
 
 public:
     ZGLBuffer();
@@ -26,6 +28,17 @@ public:
     ~ZGLBuffer();
     
     ZGLBuffer& operator=(ZGLBuffer&&);
+    
+    /** Accessors **/
+    GLuint get_buffer() { return _buffer; }
+    GLenum get_target() { return _target; }
+    void set_target(GLenum target) { _target = target; }
+    
+    /** Loading Data **/
+    void load_data(GLsizeiptr size, const GLvoid *data, GLenum usage);
+    
+    /** Actions **/
+    void bind();
 };
 
 } // namespace zge

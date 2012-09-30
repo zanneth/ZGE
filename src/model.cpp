@@ -27,6 +27,10 @@ ZModel::ZModel(std::string filename) :
     _vertex_vbo(new ZGLBuffer),
     _normal_vbo(new ZGLBuffer)
 {
+    _element_vbo->set_target(GL_ELEMENT_ARRAY_BUFFER);
+    _vertex_vbo->set_target(GL_ARRAY_BUFFER);
+    _normal_vbo->set_target(GL_ARRAY_BUFFER);
+    
     if (filename.length()) {
         load_file(filename);
     }
@@ -93,15 +97,10 @@ void ZModel::load_file(std::string filename)
         }
     }
     
-    // create VBOs for each type of data and copy
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _element_vbo->name);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, total_faces * 3 * sizeof(unsigned), elements, GL_STATIC_DRAW);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, _vertex_vbo->name);
-    glBufferData(GL_ARRAY_BUFFER, total_vertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, _normal_vbo->name);
-    glBufferData(GL_ARRAY_BUFFER, total_faces * 3 * sizeof(float), normals, GL_STATIC_DRAW);
+    // load data into each VBO
+    _element_vbo->load_data(total_faces * 3 * sizeof(unsigned), elements, GL_STATIC_DRAW);
+    _vertex_vbo->load_data(total_vertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
+    _normal_vbo->load_data(total_faces * 3 * sizeof(float), normals, GL_STATIC_DRAW);
     
 #if (DEBUG_LOG)
     ZLogger::log("Number of meshes: %u", model_file->nmeshes);
@@ -130,17 +129,22 @@ void ZModel::load_file(std::string filename)
 
 void ZModel::draw()
 {
+    glPushClientAttrib(GL_CLIENT_VERTEX_ARRAY_BIT);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
     
-    glBindBuffer(GL_ARRAY_BUFFER, _vertex_vbo->name);
+    _vertex_vbo->bind();
     glVertexPointer(3, GL_FLOAT, 0, NULL);
     
-    glBindBuffer(GL_ARRAY_BUFFER, _normal_vbo->name);
+    _normal_vbo->bind();
     glNormalPointer(GL_FLOAT, 0, NULL);
     
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _element_vbo->name);
+    _element_vbo->bind();
     glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, (void *)0);
+    
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glPopClientAttrib();
 }
 
 } // namespace zge
