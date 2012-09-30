@@ -32,6 +32,7 @@ public:
     
 private:
     void _load_surface();
+    void _init_glew();
     void _init_opengl();
     
     void _change_window_title(std::string new_title);

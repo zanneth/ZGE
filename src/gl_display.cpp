@@ -39,6 +39,7 @@ void ZGLDisplay::initialize()
     if (!_is_initialized) {
         _load_surface();
         _change_window_title(_display_mode.window_title);
+        _init_glew();
         _init_opengl();
         
         _is_initialized = true;
@@ -96,6 +97,15 @@ void ZGLDisplay::_load_surface()
         ZException expt(DISPLAY_EXCEPTION_CODE);
         expt.extra_info = errorstr;
         throw expt;
+    }
+}
+
+void ZGLDisplay::_init_glew()
+{
+    GLenum err = glewInit();
+    if (err != GLEW_OK) {
+        std::cerr << "Error while initializing GLEW: " << glewGetErrorString(err) << std::endl;
+        exit(err);
     }
 }
 

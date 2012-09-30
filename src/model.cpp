@@ -20,43 +20,16 @@
 
 namespace zge {
 
-template <typename T>
-void _create_vbo(GLenum target, GLenum usage, GLuint *buffer_name, T *data, unsigned count);
-
 ZModel::ZModel(std::string filename) :
     _num_faces(0),
-    _element_vbo(0),
-    _vertex_vbo(0),
-    _normal_vbo(0)
+    _num_vertices(0),
+    _element_vbo(new ZGLBuffer),
+    _vertex_vbo(new ZGLBuffer),
+    _normal_vbo(new ZGLBuffer)
 {
     if (filename.length()) {
         load_file(filename);
     }
-}
-
-ZModel::ZModel(const ZModel &cp)
-{
-    // TODO
-}
-
-ZModel::ZModel(const ZModel &&mv)
-{
-    // TODO
-}
-
-ZModel& ZModel::operator=(const ZModel &cp)
-{
-    // TODO
-}
-
-ZModel& ZModel::operator=(const ZModel &&mv)
-{
-    // TODO
-}
-
-ZModel::~ZModel()
-{
-    // TODO
 }
 
 
@@ -121,9 +94,14 @@ void ZModel::load_file(std::string filename)
     }
     
     // create VBOs for each type of data and copy
-    _create_vbo(GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW, &_element_vbo, elements, total_faces * 3);
-    _create_vbo(GL_ARRAY_BUFFER, GL_STATIC_DRAW, &_vertex_vbo, vertices, total_vertices * 3);
-    _create_vbo(GL_ARRAY_BUFFER, GL_STATIC_DRAW, &_normal_vbo, normals, total_vertices * 3);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _element_vbo->name);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, total_faces * 3 * sizeof(unsigned), elements, GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, _vertex_vbo->name);
+    glBufferData(GL_ARRAY_BUFFER, total_vertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, _normal_vbo->name);
+    glBufferData(GL_ARRAY_BUFFER, total_vertices * 3 * sizeof(float), normals, GL_STATIC_DRAW);
     
 #if (DEBUG_LOG)
     ZLogger::log("Number of meshes: %u", model_file->nmeshes);
@@ -152,58 +130,17 @@ void ZModel::load_file(std::string filename)
 
 void ZModel::draw()
 {
-    _check_buffers(); // throws
-    
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
     
-    glBindBuffer(GL_ARRAY_BUFFER, _vertex_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _vertex_vbo->name);
     glVertexPointer(3, GL_FLOAT, 0, NULL);
     
-    glBindBuffer(GL_ARRAY_BUFFER, _normal_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, _normal_vbo->name);
     glNormalPointer(GL_FLOAT, 0, NULL);
     
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _element_vbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _element_vbo->name);
     glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, (void *)0);
 }
 
-
-#pragma mark - Creating OpenGL Buffers
-
-template <typename T>
-void _create_vbo(GLenum target, GLenum usage, GLuint *buffer_name, T *data, unsigned count)
-{
-    if (*buffer_name != 0) {
-        glDeleteBuffers(1, buffer_name);
-    }
-    
-    GLuint new_buffer;
-    glGenBuffers(1, &new_buffer);
-    glBindBuffer(target, new_buffer);
-    glBufferData(target, sizeof(T) * count, data, usage);
-    
-    *buffer_name = new_buffer;
-}
-
-void ZModel::_check_buffers()
-{
-    std::string format = "The %s buffer was empty before trying to draw a model.";
-    std::string erroneous_buffer_name;
-    
-    if (_element_vbo == 0) {
-        erroneous_buffer_name = "element array";
-    } else if (_vertex_vbo == 0) {
-        erroneous_buffer_name = "vertex array";
-    } else if (_normal_vbo == 0) {
-        erroneous_buffer_name = "normals array";
-    }
-    
-    if (erroneous_buffer_name.length() > 0) {
-        ZException exception(ENGINE_EXCEPTION_CODE);
-        std::string info = ZUtil::format_string(format, erroneous_buffer_name.c_str());
-        exception.extra_info = info;
-        throw exception;
-    }
-}
-    
 } // namespace zge
