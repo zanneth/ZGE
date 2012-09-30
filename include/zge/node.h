@@ -47,8 +47,13 @@ public:
     ZScene* get_scene() { return _scene; }
     ZVec3 get_position() { return _position; }
     void set_position(const ZVec3 &position) { _position = position; }
+    ZMat4 get_transform() { return _transform; }
+    void set_transform(const ZMat4 &transform) { _transform = transform; }
     ZModelRef get_model() { return _model; }
     void set_model(ZModelRef model) { _model = model; }
+    
+    /** Manipulating Geometry **/
+    void append_transform(const ZMat4 &transform);
     
     /** Managing Sub-Nodes **/
     virtual void add_child(ZNodeRef node);

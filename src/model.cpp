@@ -16,7 +16,7 @@
 #include <iostream>
 #include <sstream>
 
-#define DEBUG_LOG 1
+#define DEBUG_LOG 0
 
 namespace zge {
 
@@ -67,7 +67,7 @@ void ZModel::load_file(std::string filename)
     // create our element, vertex, and normal arrays
     unsigned *elements  = new unsigned[total_faces * 3]; // 3 indices (elements) per face
     float *vertices     = new float[total_vertices * 3]; // 3 floats per vertex
-    float *normals      = new float[total_vertices * 3]; // 3 floats per vertex normal
+    float *normals      = new float[total_faces * 3]; // 3 floats per vertex normal per vertex
     
     // copy data for each mesh from model file
     unsigned faces_copied = 0;
@@ -75,8 +75,8 @@ void ZModel::load_file(std::string filename)
         Lib3dsMesh *mesh = model_file->meshes[i];
         
         // calculate normals and fill buffer
-        float (*cur_normals)[3] = (float(*)[3]) &normals[i * 3];
-        lib3ds_mesh_calculate_vertex_normals(mesh, cur_normals);
+        float (*cur_normals)[3] = (float(*)[3]) &normals[faces_copied * 3];
+        lib3ds_mesh_calculate_face_normals(mesh, cur_normals);
         
         // copy vertex data
         float (*cur_vertices)[3] = (float(*)[3]) &vertices[i * 3];
@@ -101,7 +101,7 @@ void ZModel::load_file(std::string filename)
     glBufferData(GL_ARRAY_BUFFER, total_vertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
     
     glBindBuffer(GL_ARRAY_BUFFER, _normal_vbo->name);
-    glBufferData(GL_ARRAY_BUFFER, total_vertices * 3 * sizeof(float), normals, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, total_faces * 3 * sizeof(float), normals, GL_STATIC_DRAW);
     
 #if (DEBUG_LOG)
     ZLogger::log("Number of meshes: %u", model_file->nmeshes);
@@ -115,7 +115,7 @@ void ZModel::load_file(std::string filename)
     ZLogger::log_array(vertices, total_vertices * 3);
     
     ZLogger::log("Normals array:");
-    ZLogger::log_array(normals, total_vertices * 3);
+    ZLogger::log_array(normals, total_faces * 3);
 #endif
 
     // cleanup

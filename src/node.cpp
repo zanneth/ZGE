@@ -41,6 +41,14 @@ bool ZNode::operator!=(const ZNode &other)
 }
 
 
+#pragma mark - Manipulating Geometry
+
+void ZNode::append_transform(const ZMat4 &transform)
+{
+    _transform *= transform;
+}
+
+
 #pragma mark - Managing Children
 
 void ZNode::add_child(ZNodeRef node)
