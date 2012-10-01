@@ -37,6 +37,9 @@ ZException::ZException(int code_) :
         case FILE_EXCEPTION_CODE:
             description = "There was a filesystem exception.";
             break;
+        case ASSERTION_EXCEPTION_CODE:
+            description = "Assertion failure.";
+            break;
         default:
             break;
     }

@@ -19,7 +19,8 @@ enum {
     DISPLAY_EXCEPTION_CODE              = 300,
     ENGINE_EXCEPTION_CODE               = 400,
     MATHEMATIC_EXCEPTION_CODE           = 500,
-    FILE_EXCEPTION_CODE                 = 600
+    FILE_EXCEPTION_CODE                 = 600,
+    ASSERTION_EXCEPTION_CODE            = 700
 };
 
 class ZException : public std::exception {

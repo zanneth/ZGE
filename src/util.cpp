@@ -4,8 +4,9 @@
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 02/03/2012
  */
- 
+
 #include "zge/util.h"
+#include "zge/exception.h"
 #include <cstdio>
 
 namespace zge {
@@ -36,6 +37,22 @@ std::string ZUtil::format_string(const std::string &format, ...)
     
     std::string result(final_string);
     return result;
+}
+
+void ZUtil::assert_true(bool expression, const char *format, ...) throw()
+{
+    if (!expression) {
+        char error_message[512];
+        va_list args_list;
+        
+        va_start(args_list, format);
+        std::vsnprintf(error_message, 512, format, args_list);
+        va_end(args_list);
+        
+        ZException exception(ASSERTION_EXCEPTION_CODE);
+        exception.extra_info = error_message;
+        throw exception;
+    }
 }
 
 } // namespace zge

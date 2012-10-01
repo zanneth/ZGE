@@ -4,11 +4,13 @@
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 02/03/2012
  */
- 
+
 #pragma once
 
 #include <cmath>
 #include <string>
+
+#define zassert(...)    ZUtil::assert_true(__VA_ARGS__)
 
 namespace zge {
 
@@ -21,6 +23,8 @@ public:
     }
     
     static std::string format_string(const std::string &format, ...);
+    
+    static void assert_true(bool expression, const char *format, ...) throw();
 };
 
 } // namespace zge
