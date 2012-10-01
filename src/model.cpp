@@ -71,7 +71,7 @@ void ZModel::load_file(std::string filename)
     // create our element, vertex, and normal arrays
     unsigned *elements  = new unsigned[total_faces * 3]; // 3 indices (elements) per face
     float *vertices     = new float[total_vertices * 3]; // 3 floats per vertex
-    float *normals      = new float[total_faces * 3]; // 3 floats per vertex normal per vertex
+    float *normals      = new float[total_faces * 3];    // 3 floats per vertex normal per face
     
     // copy data for each mesh from model file
     unsigned faces_copied = 0;
