@@ -8,9 +8,7 @@
 #include "zge/input_manager.h"
 #include "zge/application.h"
 #include "zge/run_loop.h"
-
 #include <SDL/SDL.h>
-#include <iostream>
 
 namespace zge {
 

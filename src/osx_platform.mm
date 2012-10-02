@@ -8,7 +8,6 @@
 #include "zge/osx_platform.h"
 #include "zge/application.h"
 
-#include <string>
 #include <sstream>
 #include <SDL/SDL.h>
 

@@ -1,0 +1,19 @@
+/*
+ * zge.pch
+ *
+ * Author: Charles Magahern <charles@magahern.com>
+ * Date Created: 10/01/2012
+ */
+
+#ifndef __ZGE_PCH__
+#define __ZGE_PCH__
+
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+
+#include "zge/gl_includes.h"
+#include "zge/math.h"
+
+#endif // __ZGE_PCH__

@@ -9,9 +9,7 @@
 
 #include "zge/display.h"
 #include "zge/noncopyable.h"
-
 #include <SDL/SDL.h>
-#include <string>
 
 namespace zge {
 

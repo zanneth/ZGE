@@ -7,8 +7,6 @@
  
 #pragma once
 
-#include <memory>
-
 namespace zge {
 
 typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;

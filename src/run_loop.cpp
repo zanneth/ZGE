@@ -8,7 +8,6 @@
 #include "zge/run_loop.h"
 
 #include <algorithm>
-#include <iostream>
 #include <SDL/SDL.h>
 
 namespace zge {

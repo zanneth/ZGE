@@ -11,8 +11,6 @@
 #include "zge/node.h"
 #include "zge/viewport.h"
 
-#include <memory>
-
 namespace zge {
 
 typedef std::shared_ptr<class ZScene> ZSceneRef;

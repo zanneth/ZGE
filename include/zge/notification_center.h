@@ -7,14 +7,10 @@
 
 #pragma once
 
-#include <iostream>
 #include <functional>
 #include <map>
-#include <memory>
 #include <sstream>
-#include <string>
 #include <utility>
-#include <vector>
 
 #include "zge/noncopyable.h"
 

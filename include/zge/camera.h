@@ -7,12 +7,9 @@
  
 #pragma once
 
-#include "zge/gl_includes.h"
 #include "zge/node.h"
 #include "zge/matrix.h"
 #include "zge/vector.h"
-
-#include <memory>
 
 namespace zge {
 

@@ -7,11 +7,7 @@
  
 #pragma once
 
-#include <memory>
-#include <string>
-
 #include "zge/gl_buffer.h"
-#include "zge/gl_includes.h"
 
 namespace zge {
 

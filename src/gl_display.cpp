@@ -7,14 +7,10 @@
  
 #include "zge/gl_display.h"
 #include "zge/exception.h"
-#include "zge/gl_includes.h"
 #include "zge/logger.h"
 #include "zge/matrix.h"
 #include "zge/util.h"
 #include "zge/vector.h"
-
-#include <iostream>
-#include <string>
 
 namespace zge {
 

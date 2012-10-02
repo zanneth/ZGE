@@ -6,14 +6,12 @@
  */
 
 #include "zge/exception.h"
-#include "zge/gl_includes.h"
 #include "zge/model.h"
 #include "zge/logger.h"
 #include "zge/util.h"
 
 #include <cassert>
 #include <lib3ds.h>
-#include <iostream>
 #include <sstream>
 
 #define DEBUG_LOG 0

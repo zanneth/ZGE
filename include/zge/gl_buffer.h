@@ -7,9 +7,7 @@
  
 #pragma once
 
-#include "zge/gl_includes.h"
 #include "zge/noncopyable.h"
-#include <memory>
 
 #define ZUNALLOCATED_BUFFER 0
 #define ZUNBOUND_TARGET     0

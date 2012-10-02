@@ -13,8 +13,6 @@
 #include "zge/platform.h"
 #include "zge/noncopyable.h"
 
-#include <string>
-
 namespace zge {
 
 class ZApplication;

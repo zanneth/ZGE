@@ -12,7 +12,6 @@
 #include "zge/schedulable.h"
 #include "zge/scene.h"
 
-#include <memory>
 #include <stack>
 
 namespace zge {

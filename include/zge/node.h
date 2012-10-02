@@ -11,10 +11,6 @@
 #include "zge/model.h"
 #include "zge/vector.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
 namespace zge {
 
 class ZScene;

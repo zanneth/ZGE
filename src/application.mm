@@ -7,7 +7,6 @@
  
 #include "zge/application.h"
 #include "zge/exception.h"
-#include "zge/gl_includes.h"
 #include "zge/platform.h"
 #include "zge/osx_platform.h"
 #include "zge/logger.h"
@@ -16,8 +15,6 @@
 
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
-#include <string>
 #include <SDL/SDL.h>
 
 namespace zge {

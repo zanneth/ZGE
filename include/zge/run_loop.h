@@ -10,9 +10,6 @@
 #include "zge/schedulable.h"
 #include "zge/noncopyable.h"
 
-#include <memory>
-#include <vector>
-
 namespace zge {
 
 class ZRunloop : ZNoncopyable {

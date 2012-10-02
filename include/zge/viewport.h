@@ -7,7 +7,6 @@
  
 #pragma once
 
-#include "zge/gl_includes.h"
 #include "zge/vector.h"
 
 namespace zge {
