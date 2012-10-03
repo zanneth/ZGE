@@ -10,6 +10,7 @@
 #include "zge/camera.h"
 #include "zge/node.h"
 #include "zge/viewport.h"
+#include <memory>
 
 namespace zge {
 

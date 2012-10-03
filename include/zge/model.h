@@ -8,6 +8,8 @@
 #pragma once
 
 #include "zge/gl_buffer.h"
+#include <memory>
+#include <string>
 
 namespace zge {
 

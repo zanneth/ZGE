@@ -9,6 +9,7 @@
 
 #include "zge/schedulable.h"
 #include "zge/noncopyable.h"
+#include <memory>
 
 namespace zge {
 

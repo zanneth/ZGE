@@ -8,12 +8,6 @@
 #ifndef __ZGE_PCH__
 #define __ZGE_PCH__
 
-#include <iostream>
-#include <memory>
-#include <string>
-#include <vector>
-
-#include "zge/gl_includes.h"
-#include "zge/math.h"
+#include <Eigen/Eigen>
 
 #endif // __ZGE_PCH__

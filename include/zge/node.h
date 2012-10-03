@@ -7,9 +7,12 @@
  
 #pragma once
 
-#include "zge/matrix.h"
+#include "zge/geometry.h"
 #include "zge/model.h"
-#include "zge/vector.h"
+
+#include <memory>
+#include <string>
+#include <vector>
 
 namespace zge {
 
@@ -21,7 +24,7 @@ class ZNode {
 protected:
     unsigned _uid;
     ZVec3 _position;
-    ZMat4 _transform;
+    ZAffine3 _transform;
     
     ZNode *_parent; // weak
     ZScene *_scene; // weak
@@ -43,13 +46,13 @@ public:
     ZScene* get_scene() { return _scene; }
     ZVec3 get_position() { return _position; }
     void set_position(const ZVec3 &position) { _position = position; }
-    ZMat4 get_transform() { return _transform; }
-    void set_transform(const ZMat4 &transform) { _transform = transform; }
+    ZAffine3 get_transform() { return _transform; }
+    void set_transform(const ZAffine3 &transform) { _transform = transform; }
     ZModelRef get_model() { return _model; }
     void set_model(ZModelRef model) { _model = model; }
     
     /** Manipulating Geometry **/
-    void append_transform(const ZMat4 &transform);
+    void append_transform(const ZAffine3 &transform);
     
     /** Managing Sub-Nodes **/
     virtual void add_child(ZNodeRef node);

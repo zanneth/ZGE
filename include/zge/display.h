@@ -8,6 +8,7 @@
 #pragma once
 
 #include "zge/noncopyable.h"
+#include <string>
 
 namespace zge {
 

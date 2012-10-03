@@ -10,8 +10,9 @@
 #include <cstdio>
 
 namespace zge {
+namespace util {
 
-std::string ZUtil::format_string(const std::string &format, ...)
+std::string format_string(const std::string &format, ...)
 {
     char *final_string = nullptr;
     unsigned size = 128;
@@ -39,7 +40,7 @@ std::string ZUtil::format_string(const std::string &format, ...)
     return result;
 }
 
-void ZUtil::assert_true(bool expression, const char *format, ...) throw()
+void assert_true(bool expression, const char *format, ...) throw()
 {
     if (!expression) {
         char error_message[512];
@@ -55,4 +56,5 @@ void ZUtil::assert_true(bool expression, const char *format, ...) throw()
     }
 }
 
+} // namespace util
 } // namespace zge

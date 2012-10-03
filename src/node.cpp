@@ -16,7 +16,7 @@ static unsigned __node_global_uid_count = 1;
 namespace zge {
 
 ZNode::ZNode() :
-    _transform(ZMat4::identity()),
+    _transform(ZAffine3::Identity()),
     _parent(nullptr),
     _scene(nullptr),
     _uid(__node_global_uid_count++)
@@ -43,9 +43,9 @@ bool ZNode::operator!=(const ZNode &other)
 
 #pragma mark - Manipulating Geometry
 
-void ZNode::append_transform(const ZMat4 &transform)
+void ZNode::append_transform(const ZAffine3 &transform)
 {
-    _transform *= transform;
+    _transform = _transform * transform;
 }
 
 
@@ -106,7 +106,7 @@ void ZNode::_draw_internal()
     
     if (_model) {
         glPushMatrix();
-        glMultMatrixf(_transform.array);
+        glMultMatrixf(_transform.data());
         _model->draw();
         glPopMatrix();
     }

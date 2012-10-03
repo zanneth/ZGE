@@ -8,6 +8,7 @@
 #pragma once
 
 #include "zge/noncopyable.h"
+#include <string>
 #include <sstream>
 
 namespace zge {
@@ -33,6 +34,10 @@ public:
         
         ZLogger::log(stream.str());
     }
+    
+private:
+    ZLogger();
+    ~ZLogger();
 };
 
 } // namespace zge

@@ -5,10 +5,10 @@
  * Date Created: 02/03/2012
  */
  
+#pragma once
+
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
-
-#pragma once
 
 #include "zge/platform.h"
 #include "zge/noncopyable.h"

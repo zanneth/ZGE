@@ -10,7 +10,9 @@
 #include <functional>
 #include <map>
 #include <sstream>
+#include <string>
 #include <utility>
+#include <vector>
 
 #include "zge/noncopyable.h"
 

@@ -8,8 +8,9 @@
 #pragma once
 
 #include "zge/node.h"
-#include "zge/matrix.h"
-#include "zge/vector.h"
+#include "zge/geometry.h"
+#include "zge/gl_includes.h"
+#include <memory>
 
 namespace zge {
 
