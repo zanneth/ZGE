@@ -32,6 +32,9 @@ protected:
     
     ZModelRef _model;
     
+private:
+    ZAffine3 _pos_transform;
+    
 public:
     ZNode();
     ZNode(const ZNode&) = default;
@@ -45,7 +48,7 @@ public:
     ZNode* get_parent() { return _parent; }
     ZScene* get_scene() { return _scene; }
     ZVec3 get_position() { return _position; }
-    void set_position(const ZVec3 &position) { _position = position; }
+    void set_position(const ZVec3 &position);
     ZAffine3 get_transform() { return _transform; }
     void set_transform(const ZAffine3 &transform) { _transform = transform; }
     ZModelRef get_model() { return _model; }

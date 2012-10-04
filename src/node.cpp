@@ -19,7 +19,8 @@ ZNode::ZNode() :
     _transform(ZAffine3::Identity()),
     _parent(nullptr),
     _scene(nullptr),
-    _uid(__node_global_uid_count++)
+    _uid(__node_global_uid_count++),
+    _pos_transform(ZAffine3::Identity())
 {}
 
 ZNode::~ZNode()
@@ -38,6 +39,15 @@ bool ZNode::operator==(const ZNode &other)
 bool ZNode::operator!=(const ZNode &other)
 {
     return !operator==(other);
+}
+
+
+#pragma mark - Accessors
+
+void ZNode::set_position(const ZVec3 &position)
+{
+    _position = position;
+    _pos_transform = Eigen::Translation3f(position);
 }
 
 
@@ -106,6 +116,7 @@ void ZNode::_draw_internal()
     
     if (_model) {
         glPushMatrix();
+        glMultMatrixf(_pos_transform.data());
         glMultMatrixf(_transform.data());
         _model->draw();
         glPopMatrix();
