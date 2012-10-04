@@ -11,8 +11,6 @@
 
 namespace zge {
 
-void _copy_buffer(GLuint destination, GLuint source);
-
 ZGLBuffer::ZGLBuffer() :
     _buffer(ZUNALLOCATED_BUFFER),
     _target(ZUNBOUND_TARGET)

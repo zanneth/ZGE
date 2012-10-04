@@ -17,7 +17,7 @@
 
 namespace zge {
 
-typedef std::shared_ptr<struct ZGLBuffer> ZGLBufferRef;
+typedef std::shared_ptr<class ZGLBuffer> ZGLBufferRef;
 
 class ZGLBuffer : ZNoncopyable {
     GLuint _buffer;

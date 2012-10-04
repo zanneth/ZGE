@@ -16,10 +16,10 @@ static unsigned __node_global_uid_count = 1;
 namespace zge {
 
 ZNode::ZNode() :
+    _uid(__node_global_uid_count++),
     _transform(ZAffine3::Identity()),
     _parent(nullptr),
     _scene(nullptr),
-    _uid(__node_global_uid_count++),
     _pos_transform(ZAffine3::Identity())
 {}
 

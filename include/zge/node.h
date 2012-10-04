@@ -38,7 +38,7 @@ private:
 public:
     ZNode();
     ZNode(const ZNode&) = default;
-    ~ZNode();
+    virtual ~ZNode();
     
     /** Operators **/
     bool operator==(const ZNode &other);

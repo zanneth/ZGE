@@ -91,7 +91,7 @@
 		0C5E3E0015A140E40062242E /* viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewport.cpp; sourceTree = "<group>"; };
 		0C707E85161D51C10068514A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/Library/Frameworks/SDL.framework; sourceTree = DEVELOPER_DIR; };
 		0C707E97161D5ED50068514A /* lib3ds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = lib3ds.a; sourceTree = "<group>"; };
-		0C707E98161D5ED50068514A /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = file; path = libGLEW.a; sourceTree = "<group>"; };
+		0C707E98161D5ED50068514A /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGLEW.a; sourceTree = "<group>"; };
 		0C7CC73816159BD5007741EF /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
 		0C7CC73A16159BDE007741EF /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
 		0C8B6E9E1618105300E57216 /* gl_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_buffer.h; sourceTree = "<group>"; };
@@ -1213,6 +1213,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/zge.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1234,6 +1238,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/zge.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
