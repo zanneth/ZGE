@@ -24,7 +24,6 @@ ZScene::~ZScene()
     _evict_scene(this);
 }
 
-
 #pragma mark - Node Overrides
 
 void ZScene::add_child(ZNodeRef node)
@@ -54,7 +53,6 @@ void ZScene::_draw_internal()
     _active_camera->close();
     _viewport.close();
 }
-
 
 #pragma mark - Private
 

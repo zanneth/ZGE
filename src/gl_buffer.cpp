@@ -45,7 +45,6 @@ ZGLBuffer& ZGLBuffer::operator=(ZGLBuffer &&mv)
     return *this;
 }
 
-
 #pragma mark - Loading Data
 
 void ZGLBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
@@ -61,7 +60,6 @@ void ZGLBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
     glBufferData(_target, size, data, usage);
     glPopClientAttrib();
 }
-
 
 #pragma mark - Actions
 

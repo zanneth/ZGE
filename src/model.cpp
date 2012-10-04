@@ -34,7 +34,6 @@ ZModel::ZModel(std::string filename) :
     }
 }
 
-
 #pragma mark - Loading from Files
 
 void ZModel::load_file(std::string filename)
@@ -121,7 +120,6 @@ void ZModel::load_file(std::string filename)
     delete[] normals;
     lib3ds_file_free(model_file);
 }
-
 
 #pragma mark - Drawing
 

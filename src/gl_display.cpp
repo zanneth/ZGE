@@ -27,7 +27,6 @@ ZGLDisplay::~ZGLDisplay()
     }
 }
 
-
 #pragma mark - Initialization
 
 void ZGLDisplay::initialize()
@@ -44,7 +43,6 @@ void ZGLDisplay::initialize()
     }
 }
 
-
 #pragma mark - Rendering
 
 void ZGLDisplay::render(unsigned dtime)
@@ -56,7 +54,6 @@ void ZGLDisplay::render(unsigned dtime)
     }
 }
 
-
 #pragma mark - Changing Properties
 
 void ZGLDisplay::set_display_mode(const ZDisplayMode &mode)
@@ -67,7 +64,6 @@ void ZGLDisplay::set_display_mode(const ZDisplayMode &mode)
     
     _display_mode = mode;
 }
-
 
 #pragma mark - Private Methods
 

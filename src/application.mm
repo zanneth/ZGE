@@ -35,7 +35,6 @@ ZApplication::~ZApplication()
     }
 }
 
-
 #pragma mark - Accessors
 
 void ZApplication::set_arguments(int argc, char **argv)
@@ -45,7 +44,6 @@ void ZApplication::set_arguments(int argc, char **argv)
         _arguments.push_back(str);
     }
 }
-
 
 #pragma mark - Run Loop
 
@@ -65,7 +63,6 @@ void ZApplication::start_main_runloop()
     loop->run();
 }
 
-
 #pragma mark - Utility Functions
 
 unsigned ZApplication::get_secs_running()
@@ -76,7 +73,6 @@ unsigned ZApplication::get_secs_running()
     
     return SDL_GetTicks() - _time_start;
 }
-
 
 #pragma mark - Running the Application
 

@@ -28,7 +28,6 @@ ZNode::~ZNode()
     ZLogger::log("%s destroyed", get_description().c_str());
 }
 
-
 #pragma mark - Operators
 
 bool ZNode::operator==(const ZNode &other)
@@ -41,7 +40,6 @@ bool ZNode::operator!=(const ZNode &other)
     return !operator==(other);
 }
 
-
 #pragma mark - Accessors
 
 void ZNode::set_position(const ZVec3 &position)
@@ -50,14 +48,12 @@ void ZNode::set_position(const ZVec3 &position)
     _pos_transform = Eigen::Translation3f(position);
 }
 
-
 #pragma mark - Manipulating Geometry
 
 void ZNode::append_transform(const ZAffine3 &transform)
 {
     _transform = _transform * transform;
 }
-
 
 #pragma mark - Managing Children
 
@@ -87,7 +83,6 @@ bool ZNode::remove_child(ZNodeRef node)
     return false;
 }
 
-
 #pragma mark - Description
 
 std::string ZNode::get_description()
@@ -97,7 +92,6 @@ std::string ZNode::get_description()
     
     return oss.str();
 }
-
 
 #pragma mark - Private
 

@@ -20,7 +20,6 @@ ZRunloop::~ZRunloop()
     _running = false;
 }
 
-
 #pragma mark - Starting the Run Loop
 
 void ZRunloop::run()
@@ -33,7 +32,6 @@ void ZRunloop::stop()
 {
     _running = false;
 }
-
 
 #pragma mark - Managing schedulables in the Run Loop
 
@@ -49,7 +47,6 @@ void ZRunloop::unschedule(ZSchedulableRef schedulable)
         _schedulables.erase(itr);
     }
 }
-
 
 #pragma mark - Private Methods
 

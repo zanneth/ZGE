@@ -13,7 +13,6 @@ namespace zge {
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
     _display_mode(mode) {}
 
-
 #pragma mark - Convenience Methods
 
 void ZDisplay::resize(int width, int height)
@@ -24,7 +23,6 @@ void ZDisplay::resize(int width, int height)
     
     set_display_mode(mode);
 }
-
 
 #pragma mark - Accessors
 

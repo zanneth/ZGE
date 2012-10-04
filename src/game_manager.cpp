@@ -8,7 +8,6 @@
 #include "zge/game_manager.h"
 
 namespace zge {
-
 #pragma mark - Managing Scenes
 
 ZSceneRef ZGameManager::get_current_scene()
@@ -37,7 +36,6 @@ ZSceneRef ZGameManager::pop_scene()
     
     return scene;
 }
-
 
 #pragma mark - ZSchedulable Overrides
 

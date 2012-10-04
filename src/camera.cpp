@@ -26,7 +26,6 @@ ZCamera::ZCamera() :
     _modelview_dirty(true)
 {}
 
-
 #pragma mark - Open/Close
 
 void ZCamera::open()
@@ -40,7 +39,6 @@ void ZCamera::close()
     _close_projection();
     _close_modelview();
 }
-
 
 #pragma mark - Private
 

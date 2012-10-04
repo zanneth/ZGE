@@ -24,7 +24,6 @@ ZEngine::ZEngine() :
     _input_manager(new ZInputManager)
 {}
 
-
 #pragma mark - Initialization
 
 void ZEngine::initialize()
