@@ -65,16 +65,20 @@ void ZCamera::_open_projection()
     }
     
     glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
     glLoadMatrixf(_projection_matrix.data());
 }
 
 void ZCamera::_close_projection()
-{}
+{
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+}
 
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = geometry::lookat(_position, _look_direction, ZVec3(0.0, 1.0, 0.0));
+        _modelview_matrix = geometry::lookat(_position, _look_direction, ZVec3::UnitY());
         _modelview_dirty = false;
     }
 }
