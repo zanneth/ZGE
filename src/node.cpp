@@ -83,6 +83,11 @@ bool ZNode::remove_child(ZNodeRef node)
     return false;
 }
 
+void ZNode::remove_from_parent()
+{
+    _parent->_remove_child_uid(_uid);
+}
+
 #pragma mark - Description
 
 std::string ZNode::get_description()
@@ -139,6 +144,17 @@ void ZNode::_on_exit_internal()
     for (ZNodeRef child : _children) {
         child->_on_exit_internal();
     }
+}
+
+void ZNode::_remove_child_uid(unsigned uid)
+{
+    auto child = std::find_if(_children.begin(), _children.end(), [uid](ZNodeRef child) { return child->_uid == uid; });
+    if (child != _children.end()) {
+        ZNodeRef node = *child;
+        node->_on_exit_internal();
+
+        _children.erase(child);
+   }
 }
 
 } // namespace zge

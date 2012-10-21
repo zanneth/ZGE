@@ -61,6 +61,7 @@ public:
     virtual void add_child(ZNodeRef node);
     virtual bool remove_child(ZNodeRef node);
     virtual std::vector<ZNodeRef> get_children() { return _children; }
+    void remove_from_parent();
     
     /** Description **/
     virtual std::string get_description();
@@ -81,6 +82,9 @@ protected:
     virtual void _draw_internal();
     virtual void _on_enter_internal();
     virtual void _on_exit_internal();
+
+private:
+    void _remove_child_uid(unsigned uid);
     
 public:
     friend class ZGameManager;
