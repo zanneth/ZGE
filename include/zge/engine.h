@@ -18,6 +18,8 @@ class ZEngine : ZNoncopyable {
     ZDisplayManagerRef  _display_manager;
     ZGameManagerRef     _game_manager;
     ZInputManagerRef    _input_manager;
+    
+    ZResponderRef       _engine_responder;
 
 public:
     static ZEngine* instance();
@@ -33,6 +35,8 @@ public:
 private:
     // singleton
     ZEngine();
+    
+    void _handle_application_event(ZApplicationEvent event);
 };
 
 } // namespace zge

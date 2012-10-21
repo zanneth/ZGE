@@ -7,6 +7,7 @@
  
 #include "zge/input_manager.h"
 #include "zge/application.h"
+#include "zge/logger.h"
 #include "zge/run_loop.h"
 
 #include <algorithm>
@@ -55,10 +56,7 @@ ZResponderRef ZInputManager::add_responder(ZResponderFunction func, bool swallow
 
 void ZInputManager::remove_responder(ZResponderRef responder)
 {
-    auto itr = std::find(_responder_chain.begin(), _responder_chain.end(), responder);
-    if (itr != _responder_chain.end()) {
-        _responder_chain.erase(itr);
-    }
+    _removal_queue.push(responder);
 }
 
 void ZInputManager::promote_first_responder(ZResponderRef responder)
@@ -94,6 +92,12 @@ void ZInputManager::run(uint32_t dtime)
         ZEvent event = _convert_sdl_event(sdl_event);
         push_event(event);
     }
+    
+    // remove responders
+    while (!_removal_queue.empty()) {
+        _remove_responder_internal(_removal_queue.front());
+        _removal_queue.pop();
+    }
 }
 
 #pragma mark - Sending Events through the System
@@ -109,6 +113,16 @@ void ZInputManager::push_event(const ZEvent &event)
 }
 
 #pragma mark - Internal
+
+void ZInputManager::_remove_responder_internal(ZResponderRef responder)
+{
+    auto itr = std::find(_responder_chain.begin(), _responder_chain.end(), responder);
+    if (itr != _responder_chain.end()) {
+        _responder_chain.erase(itr);
+    } else {
+        ZLogger::warn("Could not remove responder. Not found in responder chain.");
+    }
+}
 
 ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
 {

@@ -14,6 +14,7 @@
 #include <functional>
 #include <list>
 #include <memory>
+#include <queue>
 
 namespace zge {
 
@@ -21,7 +22,7 @@ typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
 typedef std::shared_ptr<class ZResponder> ZResponderRef;
 typedef std::function<void(const ZEvent&)> ZResponderFunction;
 
-class ZResponder {
+class ZResponder : ZNoncopyable {
     ZResponderFunction  _function;
     bool                _swallows_events;
     unsigned            _uid;
@@ -48,6 +49,7 @@ public:
 
 class ZInputManager : public ZSchedulable, ZNoncopyable {
     std::list<ZResponderRef> _responder_chain;
+    std::queue<ZResponderRef> _removal_queue;
     
 public:
     ZInputManager()     = default;
@@ -64,6 +66,9 @@ public:
     
     /** Sending Events through the System **/
     void push_event(const ZEvent &event);
+    
+private:
+    void _remove_responder_internal(ZResponderRef responder);
 };
 
 } // namespace zge
