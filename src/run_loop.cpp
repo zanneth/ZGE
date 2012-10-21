@@ -54,9 +54,9 @@ void ZRunloop::_main()
 {
     while (_running) {
         for (ZSchedulableRef schedulable : _schedulables) {
-            unsigned time = SDL_GetTicks();
-            unsigned last_update = schedulable->_last_update;
-            unsigned dtime;
+            uint32_t time = SDL_GetTicks();
+            uint32_t last_update = schedulable->_last_update;
+            uint32_t dtime;
             
             if (last_update == 0) {
                 dtime = 0;

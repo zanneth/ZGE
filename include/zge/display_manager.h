@@ -30,7 +30,7 @@ public:
     ZDisplay* get_current_display() { return _current_display; }
     
     /** schedulable **/
-    void run(unsigned dtime) override;
+    void run(uint32_t dtime) override;
 };
 
 } // namespace zge

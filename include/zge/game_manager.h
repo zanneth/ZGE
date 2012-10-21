@@ -29,7 +29,7 @@ public:
     ZSceneRef pop_scene();
     
     /** schedulable **/
-    void run(unsigned dtime) override;
+    void run(uint32_t dtime) override;
 };
 
 } // namespace zge

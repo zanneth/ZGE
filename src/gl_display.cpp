@@ -10,7 +10,6 @@
 #include "zge/exception.h"
 #include "zge/logger.h"
 #include "zge/util.h"
-#include <iostream>
 
 namespace zge {
 
@@ -45,7 +44,7 @@ void ZGLDisplay::initialize()
 
 #pragma mark - Rendering
 
-void ZGLDisplay::render(unsigned dtime)
+void ZGLDisplay::render(uint32_t dtime)
 {    
     _last_render += dtime;
     if (_last_render >= _display_mode.refresh_rate * 1000.0) {

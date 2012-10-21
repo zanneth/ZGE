@@ -14,6 +14,7 @@
 #include "zge/display.h"
 #include "zge/display_manager.h"
 #include "zge/engine.h"
+#include "zge/event.h"
 #include "zge/exception.h"
 #include "zge/game_manager.h"
 #include "zge/geometry.h"
@@ -30,6 +31,7 @@
 #include "zge/run_loop.h"
 #include "zge/scene.h"
 #include "zge/schedulable.h"
+#include "zge/types.h"
 #include "zge/util.h"
 #include "zge/viewport.h"
 

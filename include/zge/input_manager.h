@@ -7,17 +7,63 @@
  
 #pragma once
 
+#include "zge/event.h"
 #include "zge/schedulable.h"
 #include "zge/noncopyable.h"
+
+#include <functional>
+#include <list>
 #include <memory>
 
 namespace zge {
 
 typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
+typedef std::shared_ptr<class ZResponder> ZResponderRef;
+typedef std::function<void(const ZEvent&)> ZResponderFunction;
+
+class ZResponder {
+    ZResponderFunction  _function;
+    bool                _swallows_events;
+    unsigned            _uid;
+    
+public:
+    ZResponder(ZResponderFunction function, bool swallows_events);
+    ZResponder(const ZResponder&)   = default;
+    ZResponder(ZResponder&&)        = default;
+    ~ZResponder()                   = default;
+
+    /** Accessors **/
+    ZResponderFunction get_function() { return _function; }
+    void set_function(const ZResponderFunction &func) { _function = func; }
+    bool swallows_events() { return _swallows_events; }
+    void set_swallows_events(bool swallows) { _swallows_events = swallows; }
+
+    /** Event Sending Convenience **/
+    void send_event(const ZEvent &event);
+
+    /** Operators **/
+    bool operator==(const ZResponder&);
+    bool operator!=(const ZResponder&);
+};
 
 class ZInputManager : public ZSchedulable, ZNoncopyable {
-public:    
-    void run(unsigned dtime) override;
+    std::list<ZResponderRef> _responder_chain;
+    
+public:
+    ZInputManager()     = default;
+    ~ZInputManager()    = default;
+    
+    /** Adding/Removing Responders **/
+    ZResponderRef add_responder(ZResponderFunction func, bool swallow_events = false);
+    void remove_responder(ZResponderRef responder);
+    void promote_first_responder(ZResponderRef responder);
+    void demote_responder(ZResponderRef responder);
+    
+    /** Schedulable Overrides **/
+    void run(uint32_t dtime) override;
+    
+    /** Sending Events through the System **/
+    void push_event(const ZEvent &event);
 };
 
 } // namespace zge

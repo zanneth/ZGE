@@ -9,5 +9,7 @@
 #define __ZGE_PCH__
 
 #include <Eigen/Eigen>
+#include <cstdint>
+#include <iostream>
 
 #endif // __ZGE_PCH__

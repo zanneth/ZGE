@@ -8,7 +8,6 @@
 #include "zge/geometry.h"
 #include "zge/logger.h"
 
-    #include <iostream>
 namespace zge {
 namespace geometry {
 

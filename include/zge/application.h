@@ -20,7 +20,7 @@ class ZRunloop;
 class ZApplication : ZNoncopyable {
     std::list<std::string> _arguments;
     ZPlatform *_current_platform; // weak
-    unsigned _time_start;
+    uint32_t _time_start;
     
 public:
     ZApplication(int argc, char **argv);
@@ -36,7 +36,7 @@ public:
     void start_main_runloop();
     
     /** Utility Functions **/
-    unsigned get_secs_running();
+    uint32_t get_time_running(); // returns time in seconds
     
     /** Callbacks **/
     virtual void application_ready() {}

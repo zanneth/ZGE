@@ -44,7 +44,7 @@ public:
     virtual void initialize() = 0;
     
     /** Rendering **/
-    virtual void render(unsigned dtime) = 0;
+    virtual void render(uint32_t dtime) = 0;
     
     // Convenience method for setting width/height values in the current display mode
     void resize(int width, int height);

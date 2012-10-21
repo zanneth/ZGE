@@ -36,7 +36,7 @@ ZDisplay* ZDisplayManager::create_display(const ZDisplayMode &mode)
     return display;
 }
 
-void ZDisplayManager::run(unsigned dtime)
+void ZDisplayManager::run(uint32_t dtime)
 {
     if (_current_display != nullptr) {
         if (!_current_display->is_initialized()) {

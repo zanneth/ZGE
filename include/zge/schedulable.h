@@ -14,11 +14,11 @@ namespace zge {
 typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;
 
 class ZSchedulable {
-    unsigned _last_update = 0;
+    uint32_t _last_update = 0;
     
 public:
     virtual ~ZSchedulable() {}
-    virtual void run(unsigned dtime) = 0;
+    virtual void run(uint32_t dtime) = 0;
     
     friend class ZRunloop;
 };

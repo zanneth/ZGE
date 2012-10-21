@@ -65,7 +65,7 @@ void ZApplication::start_main_runloop()
 
 #pragma mark - Utility Functions
 
-unsigned ZApplication::get_secs_running()
+uint32_t ZApplication::get_time_running()
 {
     if (_time_start == 0) {
         return 0;

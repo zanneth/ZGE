@@ -6,7 +6,6 @@
  */
  
 #include "zge/logger.h"
-#include <iostream>
 
 namespace zge {
 

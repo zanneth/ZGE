@@ -39,7 +39,7 @@ ZSceneRef ZGameManager::pop_scene()
 
 #pragma mark - ZSchedulable Overrides
 
-void ZGameManager::run(unsigned dtime)
+void ZGameManager::run(uint32_t dtime)
 {
     ZSceneRef scene = get_current_scene();
     if (scene.get() != nullptr) {

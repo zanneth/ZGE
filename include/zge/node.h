@@ -66,7 +66,7 @@ public:
     virtual std::string get_description();
     
     /** Updating **/
-    virtual void update(unsigned dtime) {}
+    virtual void update(uint32_t dtime) {}
     
     /** Drawing **/
     virtual void before_draw() {}
@@ -77,7 +77,7 @@ public:
     virtual void on_exit() {}
     
 protected:
-    virtual void _update_internal(unsigned dtime);
+    virtual void _update_internal(uint32_t dtime);
     virtual void _draw_internal();
     virtual void _on_enter_internal();
     virtual void _on_exit_internal();

@@ -53,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		0C0AF598159C351100E607DE /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		0C45392A16337984007703A7 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		0C45392C1633BB05007703A7 /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
 		0C5E3D63159ED53B0062242E /* application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = application.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0C5E3D64159ED53B0062242E /* display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = display.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0C5E3D65159ED53B0062242E /* display_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = display_manager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -436,6 +438,7 @@
 				0C5E3D64159ED53B0062242E /* display.h */,
 				0C5E3D65159ED53B0062242E /* display_manager.h */,
 				0C8CAEE515F9D3BC0051C50F /* engine.h */,
+				0C45392C1633BB05007703A7 /* event.h */,
 				0C5E3D66159ED53B0062242E /* exception.h */,
 				0C5E3D67159ED53B0062242E /* game_manager.h */,
 				0CF7E215161BE95400105F7C /* geometry.h */,
@@ -453,6 +456,7 @@
 				0C5E3D71159ED53B0062242E /* run_loop.h */,
 				0C5E3D73159ED53B0062242E /* scene.h */,
 				0C5E3D74159ED53B0062242E /* schedulable.h */,
+				0C45392A16337984007703A7 /* types.h */,
 				0C5E3D76159ED53B0062242E /* util.h */,
 				0C5E3DFE15A140D90062242E /* viewport.h */,
 				0CF7E21C161C016400105F7C /* zge.h */,

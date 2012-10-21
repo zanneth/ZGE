@@ -95,7 +95,7 @@ std::string ZNode::get_description()
 
 #pragma mark - Private
 
-void ZNode::_update_internal(unsigned dtime)
+void ZNode::_update_internal(uint32_t dtime)
 {
     update(dtime);
     
