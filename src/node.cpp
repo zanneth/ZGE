@@ -151,9 +151,11 @@ void ZNode::_remove_child_uid(unsigned uid)
     auto child = std::find_if(_children.begin(), _children.end(), [uid](ZNodeRef child) { return child->_uid == uid; });
     if (child != _children.end()) {
         ZNodeRef node = *child;
-        node->_on_exit_internal();
+        node->_scene  = nullptr;
+        node->_parent = nullptr;
 
         _children.erase(child);
+        node->_on_exit_internal();
    }
 }
 
