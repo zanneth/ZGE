@@ -50,6 +50,12 @@ void ZEngine::initialize()
             }
         }
     });
+    
+    // push an "active" event through since SDL doesn't do it when the app launches
+    ZEvent event;
+    event.type = APPLICATION_EVENT;
+    event.event.application_event = APPLICATION_ACTIVE_EVENT;
+    _input_manager->push_event(event);
 }
 
 } // namespace zge

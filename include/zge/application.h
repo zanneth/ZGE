@@ -21,6 +21,7 @@ class ZPlatform;
 class ZApplication : ZNoncopyable {
     std::list<std::string> _arguments;
     bool _show_cursor;
+    bool _capture_input;
     
     ZRunloop _main_runloop;
     ZPlatform *_current_platform; // weak
@@ -38,6 +39,8 @@ public:
     void set_arguments(int argc, char **argv);
     bool shows_cursor() { return _show_cursor; }
     void set_shows_cursor(bool cursor) { _show_cursor = cursor; }
+    bool captures_input() { return _capture_input; }
+    void set_captures_input(bool capture) { _capture_input = capture; }
     ZPlatform* get_current_platform() { return _current_platform; }
     
     /** Accessing the Main Run Loop **/

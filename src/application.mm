@@ -22,7 +22,8 @@ namespace zge {
 static ZApplication *__current_application = nullptr;
 
 ZApplication::ZApplication(int argc, char **argv) :
-    _show_cursor(false),
+    _show_cursor(true),
+    _capture_input(false),
     _current_platform(nullptr),
     _time_start(0)
 {
@@ -91,14 +92,16 @@ void ZApplication::handle_application_event(ZApplicationEvent event)
             this->exit();
             break;
         case APPLICATION_ACTIVE_EVENT:
-            ZLogger::log("APPLICATION_ACTIVE_EVENT");
             if (!_show_cursor) {
                 SDL_ShowCursor(0);
             }
+            if (_capture_input) {
+                SDL_WM_GrabInput(SDL_GRAB_ON);
+            }
             break;
         case APPLICATION_INACTIVE_EVENT:
-            ZLogger::log("APPLICATION_INACTIVE_EVENT");
             SDL_ShowCursor(1);
+            SDL_WM_GrabInput(SDL_GRAB_OFF);
             break;
         default:
             break;
