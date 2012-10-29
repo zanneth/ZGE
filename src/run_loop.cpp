@@ -13,7 +13,8 @@
 namespace zge {
 
 ZRunloop::ZRunloop() :
-    _running(false) {}
+    _running(false)
+{}
 
 ZRunloop::~ZRunloop()
 {

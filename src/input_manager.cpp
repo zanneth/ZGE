@@ -157,6 +157,7 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
         case SDL_QUIT:
         case SDL_VIDEORESIZE:
         case SDL_VIDEOEXPOSE:
+        case SDL_ACTIVEEVENT:
             event.type = APPLICATION_EVENT;
             break;
         // TODO: Mouse Dragged
@@ -278,6 +279,13 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     // parse application event
     if (sdl_event.type == SDL_QUIT) {
         event.event.application_event = APPLICATION_QUIT_EVENT;
+    } else if (sdl_event.type == SDL_ACTIVEEVENT) {
+        SDL_ActiveEvent active_event = sdl_event.active;
+        if (active_event.gain == 0) {
+            event.event.application_event = APPLICATION_INACTIVE_EVENT;
+        } else if (active_event.gain == 1) {
+            event.event.application_event = APPLICATION_ACTIVE_EVENT;
+        }
     }
     
     return event;

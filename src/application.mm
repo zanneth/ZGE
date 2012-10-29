@@ -19,13 +19,15 @@
 
 namespace zge {
 
-static ZRunloop *__main_runloop = nullptr;
+static ZApplication *__current_application = nullptr;
 
 ZApplication::ZApplication(int argc, char **argv) :
+    _show_cursor(false),
     _current_platform(nullptr),
     _time_start(0)
 {
     set_arguments(argc, argv);
+    _main_runloop._on_main_thread = true;
 }
 
 ZApplication::~ZApplication()
@@ -33,6 +35,13 @@ ZApplication::~ZApplication()
     if (_current_platform != nullptr) {
         delete _current_platform;
     }
+}
+
+#pragma mark - Getting the Application Instance
+
+ZApplication* ZApplication::get_current_application()
+{
+    return __current_application;
 }
 
 #pragma mark - Accessors
@@ -49,18 +58,12 @@ void ZApplication::set_arguments(int argc, char **argv)
 
 ZRunloop* ZApplication::get_main_runloop()
 {
-    if (__main_runloop == nullptr) {
-        __main_runloop = new ZRunloop();
-        __main_runloop->_on_main_thread = true;
-    }
-    
-    return __main_runloop;
+    return &_main_runloop;
 }
 
 void ZApplication::start_main_runloop()
 {
-    ZRunloop *loop = get_main_runloop();
-    loop->run();
+    _main_runloop.run();
 }
 
 #pragma mark - Utility Functions
@@ -74,6 +77,34 @@ uint32_t ZApplication::get_time_running()
     return SDL_GetTicks() - _time_start;
 }
 
+void ZApplication::exit()
+{
+    _main_runloop.stop();
+}
+
+#pragma mark - Handling Events
+
+void ZApplication::handle_application_event(ZApplicationEvent event)
+{
+    switch (event) {
+        case APPLICATION_QUIT_EVENT:
+            this->exit();
+            break;
+        case APPLICATION_ACTIVE_EVENT:
+            ZLogger::log("APPLICATION_ACTIVE_EVENT");
+            if (!_show_cursor) {
+                SDL_ShowCursor(0);
+            }
+            break;
+        case APPLICATION_INACTIVE_EVENT:
+            ZLogger::log("APPLICATION_INACTIVE_EVENT");
+            SDL_ShowCursor(1);
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Running the Application
 
 void run_application(ZApplication *application)
@@ -84,6 +115,11 @@ void run_application(ZApplication *application)
         
         throw expt;
     }
+    
+    if (__current_application != nullptr) {
+        delete __current_application;
+    }
+    __current_application = application;
     
     // initialize SDL engine
     int sdl_stat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);

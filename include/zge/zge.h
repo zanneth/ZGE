@@ -16,6 +16,7 @@
 #include "zge/engine.h"
 #include "zge/event.h"
 #include "zge/exception.h"
+#include "zge/fp_responder.h"
 #include "zge/game_manager.h"
 #include "zge/geometry.h"
 #include "zge/gl_buffer.h"
@@ -35,6 +36,7 @@
 #include "zge/util.h"
 #include "zge/viewport.h"
 
+// SDL does this for some reason
 #ifdef main
 #undef main
 #endif

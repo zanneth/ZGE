@@ -61,7 +61,7 @@ public:
     virtual void add_child(ZNodeRef node);
     virtual bool remove_child(ZNodeRef node);
     virtual std::vector<ZNodeRef> get_children() { return _children; }
-    void remove_from_parent();
+    virtual void remove_from_parent();
     
     /** Description **/
     virtual std::string get_description();
