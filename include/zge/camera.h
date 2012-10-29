@@ -39,8 +39,8 @@ public:
     GLfloat get_far_clipping_distance() { return _far_clip; }
     void set_far_clipping_distance(GLfloat distance) { _far_clip = distance; _projection_dirty = true; }
     
-    const ZMat4* get_modelview_matrix() { return &_modelview_matrix; }
-    const ZVec3* get_look_direction() { return &_look_direction; }
+    ZMat4 get_modelview_matrix() { return _modelview_matrix; }
+    ZVec3 get_look_direction() { return _look_direction; }
     void set_look_direction(const ZVec3 &look) { _look_direction = look; _modelview_dirty = true; }
     
     /** Open/Close **/

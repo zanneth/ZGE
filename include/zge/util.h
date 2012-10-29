@@ -20,7 +20,7 @@ static inline T degrees_to_radians(T degrees)
 {
     return degrees * (M_PI / 180.0f);
 }
-static std::string format_string(const std::string &format, ...);
+static std::string format(const std::string &format, ...);
 static void assert_true(bool expression, const char *format, ...) throw();
 
 } // namespace util

@@ -57,7 +57,8 @@ public:
     ~ZInputManager()    = default;
     
     /** Adding/Removing Responders **/
-    ZResponderRef add_responder(ZResponderFunction func, bool swallow_events = false);
+    void add_responder(ZResponderRef responder);
+    ZResponderRef add_responder(ZResponderFunction func, bool swallow_events = false); // shorthand
     void remove_responder(ZResponderRef responder);
     void promote_first_responder(ZResponderRef responder);
     void demote_responder(ZResponderRef responder);

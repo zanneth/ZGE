@@ -17,6 +17,8 @@ typedef Eigen::Matrix3f ZMat3;
 typedef Eigen::Matrix4f ZMat4;
 typedef Eigen::Affine2f ZAffine2;
 typedef Eigen::Affine3f ZAffine3;
+typedef Eigen::AngleAxisf ZAngleAxis;
+typedef Eigen::Quaternionf ZQuaternion;
 
 namespace geometry {
 

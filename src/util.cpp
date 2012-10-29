@@ -12,7 +12,7 @@
 namespace zge {
 namespace util {
 
-std::string format_string(const std::string &format, ...)
+std::string format(const std::string &format, ...)
 {
     char *final_string = nullptr;
     unsigned size = 128;

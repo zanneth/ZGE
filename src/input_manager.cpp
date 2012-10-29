@@ -47,10 +47,15 @@ void ZResponder::send_event(const ZEvent &event)
 
 #pragma mark - Adding/Removing Responders
 
+void ZInputManager::add_responder(ZResponderRef responder)
+{
+    _responder_chain.push_back(responder);
+}
+
 ZResponderRef ZInputManager::add_responder(ZResponderFunction func, bool swallows_events)
 {
     ZResponderRef new_responder(new ZResponder(func, swallows_events));
-    _responder_chain.push_back(new_responder);
+    add_responder(new_responder);
     return new_responder;
 }
 
@@ -208,7 +213,9 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     // parse mouse motion event
     if (sdl_event.type == SDL_MOUSEMOTION) {
         ZVec2 location = ZVec2(sdl_event.motion.x, sdl_event.motion.y);
+        ZVec2 velocity = ZVec2(sdl_event.motion.xrel, sdl_event.motion.yrel);
         event.event.mouse_event.location = location;
+        event.event.mouse_event.velocity = velocity;
         
         unsigned pressed_buttons = NO_BUTTONS;
         uint8_t sdl_buttons = sdl_event.motion.state;
