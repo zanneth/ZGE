@@ -39,6 +39,24 @@ void ZCamera::close()
     _close_projection();
     _close_modelview();
 }
+    
+#pragma mark - Node Overrides
+
+void ZCamera::set_transform(const ZAffine3 &transform)
+{
+    ZVec3 position = get_position();
+    ZAffine3 translation = ZAffine3::Identity();
+    translation.translate(position);
+    
+    ZAffine3 final_transform = translation * transform;
+    final_transform.translate(-position);
+    
+    ZVec3 look = get_look_direction();
+    look = final_transform * look;
+    set_look_direction(look);
+    
+    ZNode::set_transform(transform);
+}
 
 #pragma mark - Private
 

@@ -24,6 +24,7 @@ class ZNode {
 protected:
     unsigned _uid;
     ZVec3 _position;
+    ZVec3 _velocity;
     ZAffine3 _transform;
     
     ZNode *_parent; // weak
@@ -49,10 +50,13 @@ public:
     ZScene* get_scene() { return _scene; }
     ZVec3 get_position() { return _position; }
     void set_position(const ZVec3 &position);
-    ZAffine3 get_transform() { return _transform; }
-    void set_transform(const ZAffine3 &transform) { _transform = transform; }
-    ZModelRef get_model() { return _model; }
-    void set_model(ZModelRef model) { _model = model; }
+    ZVec3 get_velocity() { return _velocity; }
+    void set_velocity(const ZVec3 &velocity) { _velocity = velocity; }
+    
+    virtual ZAffine3 get_transform() { return _transform; }
+    virtual void set_transform(const ZAffine3 &transform) { _transform = transform; }
+    virtual ZModelRef get_model() { return _model; }
+    virtual void set_model(ZModelRef model) { _model = model; }
     
     /** Manipulating Geometry **/
     void append_transform(const ZAffine3 &transform);

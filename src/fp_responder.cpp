@@ -35,17 +35,11 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             float dx = mouse_event.velocity.x() * _mouse_speed;
             float dy = mouse_event.velocity.y() * _mouse_speed;
             
-            ZAffine3 translation = ZAffine3::Identity();
-            translation.translate(position);
-            
-            ZAffine3 rotation = translation;
-            rotation = translation;
+            ZAffine3 rotation = ZAffine3::Identity();
             rotation.rotate(ZAngleAxis(-dx, ZVec3::UnitY()));
             rotation.rotate(ZAngleAxis(-dy, ZVec3::UnitX()));
-            rotation.translate(-position);
-            look = rotation * look;
             
-            camera->set_look_direction(look);
+            camera->set_transform(rotation);
         } else if (event.type == KEY_DOWN_EVENT) {
             ZKeyEvent key_event = event.event.key_event;
             ZVec3 movement_vector(0.0, 0.0, 0.0);

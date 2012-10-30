@@ -47,6 +47,9 @@ public:
     void open();
     void close();
     
+    /** Node Overrides **/
+    void set_transform(const ZAffine3 &transform) override;
+    
 private:
     void _construct_projection();
     void _open_projection();
