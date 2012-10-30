@@ -87,6 +87,7 @@ void ZApplication::exit()
 
 void ZApplication::handle_application_event(ZApplicationEvent event)
 {
+    ZLogger::log("Application event received: %x", &event);
     switch (event) {
         case APPLICATION_QUIT_EVENT:
             this->exit();

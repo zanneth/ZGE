@@ -93,11 +93,13 @@ void ZGLDisplay::_load_surface()
 
 void ZGLDisplay::_init_glew()
 {
+#if (Z_GLEW_ENABLED)
     GLenum err = glewInit();
     if (err != GLEW_OK) {
         std::cerr << "Error while initializing GLEW: " << glewGetErrorString(err) << std::endl;
         exit(err);
     }
+#endif
 }
 
 void ZGLDisplay::_init_opengl()

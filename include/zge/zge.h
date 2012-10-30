@@ -7,6 +7,8 @@
  
 #pragma once
 
+#define Z_GLEW_ENABLED  0
+
 #include <Eigen/Eigen>
 
 #include "zge/application.h"
