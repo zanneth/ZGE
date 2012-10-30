@@ -7,6 +7,7 @@
 
 #include "event.h"
 #include "util.h"
+#include <regex>
 
 namespace zge {
 
@@ -49,6 +50,9 @@ std::string ZEvent::get_description() const
             details_str = "N/A";
             break;
     }
+    
+    std::regex details_re("\n");
+    details_str = std::regex_replace(details_str, details_re, "\n\t\t");
     
     std::string description = util::format(format, this, timestamp, type_str.c_str(), context.get(), is_repeat_str, details_str.c_str());
     return description;
@@ -114,7 +118,7 @@ std::string ZEvent::_key_event_description() const
     std::string descr;
     ZKeyEvent key_event = event.key_event;
     
-    descr = util::format("KeyCode: %d\n", key_event.key);
+    descr = util::format("Keycode: %d\n", key_event.key);
     
     unsigned modifier_flags = static_cast<unsigned>(key_event.modifier_flags);
     std::vector<std::string> modifier_strings;
@@ -153,7 +157,7 @@ std::string ZEvent::_key_event_description() const
     if (modifier_strings.size() > 0) {
         modifiers_string = util::separate_components(modifier_strings, ", ");
     } else {
-        modifiers_string = "(no modifiers)\n";
+        modifiers_string = "(no modifiers)";
     }
     descr += util::format("Modifier Keys: %s\n", modifiers_string.c_str());
     
