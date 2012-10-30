@@ -17,8 +17,8 @@ static unsigned __responder_global_uid_count = 1;
 
 namespace zge {
 
-ZEvent  _convert_sdl_event(const SDL_Event &sdl_event);
-ZKey    _convert_sdl_key(SDLKey sdl_key);
+ZEvent _convert_sdl_event(const SDL_Event &sdl_event);
+ZKey _convert_sdl_key(SDLKey sdl_key);
 
 #pragma mark - ZResponder
 

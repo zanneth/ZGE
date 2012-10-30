@@ -7,7 +7,9 @@
 
 #include "zge/util.h"
 #include "zge/exception.h"
+
 #include <cstdio>
+#include <sstream>
 
 namespace zge {
 namespace util {
@@ -38,6 +40,22 @@ std::string format(const std::string &format, ...)
     
     std::string result(final_string);
     return result;
+}
+
+std::string separate_components(const std::vector<std::string> &vec, std::string delimiter)
+{
+    std::ostringstream oss;
+    unsigned idx = 0;
+    unsigned size = vec.size();
+    for (const auto &cmp : vec) {
+        oss << cmp;
+        if (idx != size - 1) {
+            oss << delimiter;
+        }
+        ++idx;
+    }
+    
+    return oss.str();
 }
 
 void assert_true(bool expression, const char *format, ...) throw()

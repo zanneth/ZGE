@@ -33,6 +33,7 @@
 		0C8B6EA21618107300E57216 /* gl_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B6EA11618107300E57216 /* gl_buffer.cpp */; };
 		0C8CAEE815F9D3D90051C50F /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CAEE715F9D3D90051C50F /* engine.cpp */; };
 		0CCB612915EF1E24006A6351 /* notification_center.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB612715EF1E24006A6351 /* notification_center.cpp */; };
+		0CE42D5E163F8940008E417F /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE42D5D163F8940008E417F /* event.cpp */; };
 		0CF7E219161BEF7E00105F7C /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF7E218161BEF7E00105F7C /* geometry.cpp */; };
 		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
 		563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBE14B2FD7800004C6A /* Foundation.framework */; };
@@ -396,6 +397,7 @@
 		0C9512C0161ABCB800E1F17E /* UmfPackSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UmfPackSupport.h; sourceTree = "<group>"; };
 		0CCB612615EF1E10006A6351 /* notification_center.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = notification_center.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0CCB612715EF1E24006A6351 /* notification_center.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = notification_center.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		0CE42D5D163F8940008E417F /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
 		0CF7E215161BE95400105F7C /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geometry.h; sourceTree = "<group>"; };
 		0CF7E218161BEF7E00105F7C /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cpp; sourceTree = "<group>"; };
 		0CF7E21A161C010F00105F7C /* zge.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zge.pch; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				0C5E3D7C159ED53B0062242E /* display.cpp */,
 				0C5E3D7D159ED53B0062242E /* display_manager.cpp */,
 				0C8CAEE715F9D3D90051C50F /* engine.cpp */,
+				0CE42D5D163F8940008E417F /* event.cpp */,
 				0C5E3D7E159ED53B0062242E /* exception.cpp */,
 				0C45392E163513CC007703A7 /* fp_responder.cpp */,
 				0C5E3D7F159ED53B0062242E /* game_manager.cpp */,
@@ -1192,6 +1195,7 @@
 				0C8B6EA21618107300E57216 /* gl_buffer.cpp in Sources */,
 				0CF7E219161BEF7E00105F7C /* geometry.cpp in Sources */,
 				0C45392F163513CC007703A7 /* fp_responder.cpp in Sources */,
+				0CE42D5E163F8940008E417F /* event.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

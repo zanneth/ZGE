@@ -9,6 +9,8 @@
 
 #include "zge/geometry.h"
 #include "zge/types.h"
+
+#include <string>
 #include <vector>
 
 namespace zge {
@@ -263,6 +265,15 @@ struct ZEvent {
         _ZConcreteEvent(const _ZConcreteEvent&) {}
         ~_ZConcreteEvent() {}
     } event;
+    
+    std::string get_description();
+    
+private:
+    std::string _type_description();
+    std::string _key_event_description();
+    std::string _mouse_event_description();
+    std::string _touch_event_description();
+    std::string _application_event_description();
 };
  
 } // namespace zge
