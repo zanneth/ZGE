@@ -96,6 +96,7 @@ void ZInputManager::run(uint32_t dtime)
     while (SDL_PollEvent(&sdl_event)) {
         ZEvent event = _convert_sdl_event(sdl_event);
         event.timestamp = SDL_GetTicks();
+        event.is_repeat = false;
         push_event(event);
     }
     

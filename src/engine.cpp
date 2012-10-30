@@ -43,10 +43,9 @@ void ZEngine::initialize()
     // engine always adds application as the first responder
     _application_responder = _input_manager->add_responder([](const ZEvent &event) {
         if (event.type == APPLICATION_EVENT) {
-            ZApplicationEvent app_event = event.event.application_event;
             ZApplication *app = ZApplication::get_current_application();
             if (app) {
-                app->handle_application_event(app_event);
+                app->handle_application_event(event);
             }
         }
     });

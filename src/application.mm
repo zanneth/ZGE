@@ -85,10 +85,11 @@ void ZApplication::exit()
 
 #pragma mark - Handling Events
 
-void ZApplication::handle_application_event(ZApplicationEvent event)
+void ZApplication::handle_application_event(const ZEvent &event)
 {
-    ZLogger::log("Application event received: %x", &event);
-    switch (event) {
+    ZApplicationEvent app_event = event.event.application_event;
+    ZLogger::log(event.get_description());
+    switch (app_event) {
         case APPLICATION_QUIT_EVENT:
             this->exit();
             break;

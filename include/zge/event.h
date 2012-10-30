@@ -10,6 +10,7 @@
 #include "zge/geometry.h"
 #include "zge/types.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -266,14 +267,14 @@ struct ZEvent {
         ~_ZConcreteEvent() {}
     } event;
     
-    std::string get_description();
+    std::string get_description() const;
     
 private:
-    std::string _type_description();
-    std::string _key_event_description();
-    std::string _mouse_event_description();
-    std::string _touch_event_description();
-    std::string _application_event_description();
+    std::string _type_description() const;
+    std::string _key_event_description() const;
+    std::string _mouse_event_description() const;
+    std::string _touch_event_description() const;
+    std::string _application_event_description() const;
 };
  
 } // namespace zge

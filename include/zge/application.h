@@ -54,7 +54,7 @@ public:
     /** Handling Events **/
     // the engine is responsible for pushing events to the application instance since
     // it is the owner of the input manager
-    virtual void handle_application_event(ZApplicationEvent event);
+    virtual void handle_application_event(const ZEvent &event);
     
     /** Callbacks **/
     virtual void application_ready() {}

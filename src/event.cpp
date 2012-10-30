@@ -12,7 +12,7 @@ namespace zge {
 
 std::string _mouse_buttons_description(ZMouseButtonFlags button_flags);
 
-std::string ZEvent::get_description()
+std::string ZEvent::get_description() const
 {
     const char *format = "[ZEvent 0x%x] {\n"
         "\tTimestamp: %d\n"
@@ -50,13 +50,13 @@ std::string ZEvent::get_description()
             break;
     }
     
-    std::string description = util::format(format, this, timestamp, type_str.c_str(), &context, is_repeat_str, details_str.c_str());
+    std::string description = util::format(format, this, timestamp, type_str.c_str(), context.get(), is_repeat_str, details_str.c_str());
     return description;
 }
 
 #pragma mark - Internal
 
-std::string ZEvent::_type_description()
+std::string ZEvent::_type_description() const
 {
     std::string descr;
     switch (type) {
@@ -109,7 +109,7 @@ std::string ZEvent::_type_description()
     return descr;
 }
 
-std::string ZEvent::_key_event_description()
+std::string ZEvent::_key_event_description() const
 {
     std::string descr;
     ZKeyEvent key_event = event.key_event;
@@ -162,7 +162,7 @@ std::string ZEvent::_key_event_description()
     return descr;
 }
 
-std::string ZEvent::_mouse_event_description()
+std::string ZEvent::_mouse_event_description() const
 {
     std::string descr;
     ZMouseEvent mouse_event = event.mouse_event;
@@ -179,7 +179,7 @@ std::string ZEvent::_mouse_event_description()
     return descr;
 }
 
-std::string ZEvent::_touch_event_description()
+std::string ZEvent::_touch_event_description() const
 {
     std::string descr;
     std::vector<ZTouchEvent> touch_events = event.touch_events;
@@ -196,7 +196,7 @@ std::string ZEvent::_touch_event_description()
     return descr;
 }
 
-std::string ZEvent::_application_event_description()
+std::string ZEvent::_application_event_description() const
 {
     std::string descr;
     ZApplicationEvent app_event = event.application_event;
