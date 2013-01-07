@@ -25,15 +25,13 @@
 		0C5E3DBE159ED53B0062242E /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3D89159ED53B0062242E /* util.cpp */; };
 		0C5E3DE8159F08E10062242E /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3DE7159F08E10062242E /* camera.cpp */; };
 		0C5E3E0115A140E40062242E /* viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C5E3E0015A140E40062242E /* viewport.cpp */; };
-		0C707E86161D51C10068514A /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C707E85161D51C10068514A /* SDL.framework */; };
-		0C707E88161D54610068514A /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C707E85161D51C10068514A /* SDL.framework */; };
 		0C707E99161D5ED50068514A /* lib3ds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C707E97161D5ED50068514A /* lib3ds.a */; };
-		0C707E9A161D5EE00068514A /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C707E98161D5ED50068514A /* libGLEW.a */; };
 		0C7CC73B16159BDE007741EF /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C7CC73A16159BDE007741EF /* model.cpp */; };
 		0C8B6EA21618107300E57216 /* gl_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C8B6EA11618107300E57216 /* gl_buffer.cpp */; };
 		0C8CAEE815F9D3D90051C50F /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C8CAEE715F9D3D90051C50F /* engine.cpp */; };
 		0CCB612915EF1E24006A6351 /* notification_center.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB612715EF1E24006A6351 /* notification_center.cpp */; };
 		0CE42D5E163F8940008E417F /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE42D5D163F8940008E417F /* event.cpp */; };
+		0CE4F929169A8DE600A953E7 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CE4F928169A8DE600A953E7 /* SDL.framework */; };
 		0CF7E219161BEF7E00105F7C /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF7E218161BEF7E00105F7C /* geometry.cpp */; };
 		563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBC14B2FD7300004C6A /* OpenGL.framework */; };
 		563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563B6EBE14B2FD7800004C6A /* Foundation.framework */; };
@@ -47,7 +45,6 @@
 			dstPath = Frameworks;
 			dstSubfolderSpec = 16;
 			files = (
-				0C707E88161D54610068514A /* SDL.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +92,6 @@
 		0C5E3DE7159F08E10062242E /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = camera.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		0C5E3DFE15A140D90062242E /* viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewport.h; sourceTree = "<group>"; };
 		0C5E3E0015A140E40062242E /* viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewport.cpp; sourceTree = "<group>"; };
-		0C707E85161D51C10068514A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/Library/Frameworks/SDL.framework; sourceTree = DEVELOPER_DIR; };
 		0C707E97161D5ED50068514A /* lib3ds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = lib3ds.a; sourceTree = "<group>"; };
 		0C707E98161D5ED50068514A /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGLEW.a; sourceTree = "<group>"; };
 		0C7CC73816159BD5007741EF /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
@@ -398,6 +394,7 @@
 		0CCB612615EF1E10006A6351 /* notification_center.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = notification_center.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0CCB612715EF1E24006A6351 /* notification_center.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = notification_center.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		0CE42D5D163F8940008E417F /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
+		0CE4F928169A8DE600A953E7 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		0CF7E215161BE95400105F7C /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geometry.h; sourceTree = "<group>"; };
 		0CF7E218161BEF7E00105F7C /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cpp; sourceTree = "<group>"; };
 		0CF7E21A161C010F00105F7C /* zge.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zge.pch; sourceTree = "<group>"; };
@@ -413,13 +410,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C707E86161D51C10068514A /* SDL.framework in Frameworks */,
+				0CE4F929169A8DE600A953E7 /* SDL.framework in Frameworks */,
 				0C0AF599159C351100E607DE /* GLUT.framework in Frameworks */,
 				563B6EC114B2FD7E00004C6A /* Cocoa.framework in Frameworks */,
 				563B6EBF14B2FD7800004C6A /* Foundation.framework in Frameworks */,
 				563B6EBD14B2FD7300004C6A /* OpenGL.framework in Frameworks */,
 				0C707E99161D5ED50068514A /* lib3ds.a in Frameworks */,
-				0C707E9A161D5EE00068514A /* libGLEW.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,7 +1095,7 @@
 				563B6EBE14B2FD7800004C6A /* Foundation.framework */,
 				0C0AF598159C351100E607DE /* GLUT.framework */,
 				563B6EBC14B2FD7300004C6A /* OpenGL.framework */,
-				0C707E85161D51C10068514A /* SDL.framework */,
+				0CE4F928169A8DE600A953E7 /* SDL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1225,16 +1221,17 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/zge.pch";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1250,16 +1247,17 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/zge.pch";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

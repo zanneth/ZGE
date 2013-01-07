@@ -17,6 +17,8 @@ namespace zge {
 
 ZNode::ZNode() :
     _uid(__node_global_uid_count++),
+    _position(0.0, 0.0, 0.0),
+    _velocity(0.0, 0.0, 0.0),
     _transform(ZAffine3::Identity()),
     _parent(nullptr),
     _scene(nullptr),
@@ -96,6 +98,18 @@ std::string ZNode::get_description()
     oss << "Node (" << this << ") #" << _uid;
     
     return oss.str();
+}
+
+#pragma mark - Updating
+
+void ZNode::update(uint32_t dtime)
+{
+    ZVec3 velocity = get_velocity();
+    if (velocity != ZVec3Zero) {
+        ZVec3 position = get_position();
+        position += velocity;
+        set_position(position);
+    }
 }
 
 #pragma mark - Private

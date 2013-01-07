@@ -20,6 +20,9 @@ typedef Eigen::Affine3f ZAffine3;
 typedef Eigen::AngleAxisf ZAngleAxis;
 typedef Eigen::Quaternionf ZQuaternion;
 
+const ZVec2 ZVec2Zero = ZVec2(0.0, 0.0);
+const ZVec3 ZVec3Zero = ZVec3(0.0, 0.0, 0.0);
+
 namespace geometry {
 
 ZMat4 frustum(float left, float right, float bottom, float top,

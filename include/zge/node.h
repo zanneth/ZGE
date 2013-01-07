@@ -71,7 +71,7 @@ public:
     virtual std::string get_description();
     
     /** Updating **/
-    virtual void update(uint32_t dtime) {}
+    virtual void update(uint32_t dtime);
     
     /** Drawing **/
     virtual void before_draw() {}

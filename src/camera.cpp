@@ -14,7 +14,7 @@
 
 #define DEFAULT_FOV         45.0f
 #define DEFAULT_NEAR_CLIP   0.001f
-#define DEFAULT_FAR_CLIP    1000.0f
+#define DEFAULT_FAR_CLIP    10000.0f
 
 namespace zge {
 
@@ -58,6 +58,24 @@ void ZCamera::set_transform(const ZAffine3 &transform)
     ZNode::set_transform(transform);
 }
 
+void ZCamera::update(uint32_t dtime)
+{
+    ZVec3 velocity = get_velocity();
+    
+    if (velocity != ZVec3Zero) {
+        ZVec3 position = get_position();
+        ZVec3 look = get_look_direction();
+        look += velocity;
+        set_look_direction(look);
+        
+        ZAffine3 translation(ZAffine3::Identity());
+        translation.translate(position);
+        ZVec3 look_relative = translation * look;
+        position += look_relative.normalized();
+        set_position(position);
+    }
+}
+    
 #pragma mark - Private
 
 void ZCamera::_construct_projection()

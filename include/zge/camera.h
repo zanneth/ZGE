@@ -49,6 +49,7 @@ public:
     
     /** Node Overrides **/
     void set_transform(const ZAffine3 &transform) override;
+    void update(uint32_t dtime) override;
     
 private:
     void _construct_projection();

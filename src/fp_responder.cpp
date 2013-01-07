@@ -12,7 +12,7 @@
 #include <cmath>
 #include <functional>
 
-#define DEFAULT_MOUSE_SPEED 0.0005f
+#define DEFAULT_MOUSE_SPEED 0.0005f // TODO: this shouldn't be so arbitrary
 
 namespace zge {
 
@@ -27,8 +27,6 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
     ZSceneRef scene = _scene.lock();
     if (scene.get() != nullptr) {
         ZCameraRef camera = scene->get_active_camera();
-        ZVec3 position = camera->get_position();
-        ZVec3 look = camera->get_look_direction();
         
         if (event.type == MOUSE_MOVED_EVENT) {
             ZMouseEvent mouse_event = event.event.mouse_event;
@@ -40,7 +38,7 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             rotation.rotate(ZAngleAxis(-dy, ZVec3::UnitX()));
             
             camera->set_transform(rotation);
-        } else if (event.type == KEY_DOWN_EVENT) {
+        } else if (event.type == KEY_DOWN_EVENT || event.type == KEY_UP_EVENT) {
             ZKeyEvent key_event = event.event.key_event;
             ZVec3 movement_vector(0.0, 0.0, 0.0);
             switch (key_event.key) {
@@ -59,13 +57,16 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
                 default:
                     break;
             }
-            const float scalar = 0.5f;
+            const float scalar = 0.05f;
             movement_vector = movement_vector * scalar;
             
-            position += movement_vector;
-            look += movement_vector;
-            camera->set_position(position);
-            camera->set_look_direction(look);
+            ZVec3 velocity = camera->get_velocity();
+            if (key_event.state == PRESSED) {
+                velocity += movement_vector;
+            } else {
+                velocity -= movement_vector;
+            }
+            camera->set_velocity(velocity);
         }
     }
 }
