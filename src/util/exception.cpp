@@ -5,7 +5,7 @@
  * Date Created: 06/24/2012
  */
  
-#include "zge/exception.h"
+#include <zge/exception.h>
 
 #include <cstdio>
 #include <sstream>

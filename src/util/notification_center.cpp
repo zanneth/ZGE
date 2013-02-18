@@ -5,8 +5,8 @@
  * Date Created: 08/29/2012
  */
  
-#include "zge/notification_center.h"
-#include "zge/logger.h"
+#include <zge/notification_center.h>
+#include <zge/logger.h>
 
 static unsigned __notificationcenter_global_uid_count = 1;
 

@@ -5,13 +5,13 @@
  * Date Created: 02/09/2012
  */
  
-#include "zge/application.h"
-#include "zge/exception.h"
-#include "zge/platform.h"
-#include "zge/osx_platform.h"
-#include "zge/logger.h"
-#include "zge/run_loop.h"
-#include "zge/util.h"
+#include <zge/application.h>
+#include <zge/exception.h>
+#include <zge/platform.h>
+#include <zge/osx_platform.h>
+#include <zge/logger.h>
+#include <zge/run_loop.h>
+#include <zge/util.h>
 
 #include <cstdlib>
 #include <ctime>

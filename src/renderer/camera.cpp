@@ -5,10 +5,10 @@
  * Date Created: 06/30/2012
  */
  
-#include "zge/camera.h"
-#include "zge/logger.h"
-#include "zge/scene.h"
-#include "zge/viewport.h"
+#include <zge/camera.h>
+#include <zge/logger.h>
+#include <zge/scene.h>
+#include <zge/viewport.h>
 
 #include <algorithm>
 

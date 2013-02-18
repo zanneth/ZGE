@@ -5,10 +5,10 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/display_manager.h"
-#include "zge/display.h"
-#include "zge/exception.h"
-#include "zge/gl_display.h"
+#include <zge/display_manager.h>
+#include <zge/display.h>
+#include <zge/exception.h>
+#include <zge/gl_display.h>
 
 namespace zge {
 

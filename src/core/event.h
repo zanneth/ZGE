@@ -7,8 +7,8 @@
  
 #pragma once
 
-#include "zge/geometry.h"
-#include "zge/types.h"
+#include <zge/geometry.h>
+#include <zge/types.h>
 
 #include <memory>
 #include <string>

@@ -7,10 +7,10 @@
  
 #pragma once
 
-#include "zge/noncopyable.h"
-#include "zge/node.h"
-#include "zge/schedulable.h"
-#include "zge/scene.h"
+#include <zge/noncopyable.h>
+#include <zge/node.h>
+#include <zge/schedulable.h>
+#include <zge/scene.h>
 
 #include <memory>
 #include <stack>

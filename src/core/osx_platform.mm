@@ -5,8 +5,8 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/osx_platform.h"
-#include "zge/application.h"
+#include <zge/osx_platform.h>
+#include <zge/application.h>
 
 #include <sstream>
 #include <SDL/SDL.h>

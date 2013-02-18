@@ -5,10 +5,10 @@
  * Date Created: 09/27/2012
  */
 
-#include "zge/exception.h"
-#include "zge/model.h"
-#include "zge/logger.h"
-#include "zge/util.h"
+#include <zge/exception.h>
+#include <zge/model.h>
+#include <zge/logger.h>
+#include <zge/util.h>
 
 #include <cassert>
 #include <lib3ds.h>

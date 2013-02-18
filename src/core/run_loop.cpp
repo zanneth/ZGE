@@ -5,7 +5,7 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/run_loop.h"
+#include <zge/run_loop.h>
 
 #include <algorithm>
 #include <SDL/SDL.h>

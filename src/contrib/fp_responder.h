@@ -7,9 +7,9 @@
  
 #pragma once
 
-#include "zge/noncopyable.h"
-#include "zge/input_manager.h"
-#include "zge/scene.h"
+#include <zge/noncopyable.h>
+#include <zge/input_manager.h>
+#include <zge/scene.h>
 #include <memory>
 
 namespace zge {

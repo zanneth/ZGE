@@ -5,8 +5,8 @@
  * Date Created: 04/20/2012
  */
  
-#include "zge/scene.h"
-#include "zge/logger.h"
+#include <zge/scene.h>
+#include <zge/logger.h>
 
 #include <typeinfo>
 

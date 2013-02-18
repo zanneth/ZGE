@@ -7,9 +7,9 @@
  
 #pragma once
 
-#include "zge/event.h"
-#include "zge/schedulable.h"
-#include "zge/noncopyable.h"
+#include <zge/event.h>
+#include <zge/schedulable.h>
+#include <zge/noncopyable.h>
 
 #include <functional>
 #include <list>

@@ -7,8 +7,8 @@
  
 #pragma once
 
-#include "zge/noncopyable.h"
-#include "zge/gl_includes.h"
+#include <zge/noncopyable.h>
+#include <zge/gl_includes.h>
 
 #include <memory>
 

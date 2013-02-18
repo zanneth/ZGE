@@ -5,9 +5,9 @@
  * Date Created: 09/29/2012
  */
 
-#include "zge/gl_buffer.h"
-#include "zge/exception.h"
-#include "zge/logger.h"
+#include <zge/gl_buffer.h>
+#include <zge/exception.h>
+#include <zge/logger.h>
 
 namespace zge {
 

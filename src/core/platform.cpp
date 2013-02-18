@@ -5,7 +5,7 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/platform.h"
+#include <zge/platform.h>
 
 namespace zge {
 

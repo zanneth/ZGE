@@ -7,10 +7,10 @@
  
 #pragma once
 
-#include "zge/noncopyable.h"
-#include "zge/display_manager.h"
-#include "zge/game_manager.h"
-#include "zge/input_manager.h"
+#include <zge/noncopyable.h>
+#include <zge/display_manager.h>
+#include <zge/game_manager.h>
+#include <zge/input_manager.h>
 
 namespace zge {
 

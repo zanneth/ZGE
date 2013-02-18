@@ -5,8 +5,8 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/display.h"
-#include "zge/exception.h"
+#include <zge/display.h>
+#include <zge/exception.h>
 
 namespace zge {
 

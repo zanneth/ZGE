@@ -10,8 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#include "zge/platform.h"
-#include "zge/noncopyable.h"
+#include <zge/platform.h>
+#include <zge/noncopyable.h>
 
 namespace zge {
 

@@ -5,10 +5,10 @@
  * Date Created: 04/20/2012
  */
  
-#include "zge/input_manager.h"
-#include "zge/application.h"
-#include "zge/logger.h"
-#include "zge/run_loop.h"
+#include <zge/input_manager.h>
+#include <zge/application.h>
+#include <zge/logger.h>
+#include <zge/run_loop.h>
 
 #include <algorithm>
 #include <SDL/SDL.h>

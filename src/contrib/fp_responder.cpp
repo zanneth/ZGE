@@ -5,9 +5,9 @@
  * Date Created: 10/21/2012
  */
  
-#include "zge/fp_responder.h"
-#include "zge/logger.h"
-#include "zge/scene.h"
+#include <zge/fp_responder.h>
+#include <zge/logger.h>
+#include <zge/scene.h>
 
 #include <cmath>
 #include <functional>

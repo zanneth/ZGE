@@ -5,10 +5,10 @@
  * Date Created: 09/07/2012
  */
  
-#include "zge/engine.h"
-#include "zge/application.h"
-#include "zge/exception.h"
-#include "zge/run_loop.h"
+#include <zge/engine.h>
+#include <zge/application.h>
+#include <zge/exception.h>
+#include <zge/run_loop.h>
 
 namespace zge {
 

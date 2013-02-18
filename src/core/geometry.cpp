@@ -5,8 +5,8 @@
  * Date Created: 10/02/2012
  */
 
-#include "zge/geometry.h"
-#include "zge/logger.h"
+#include <zge/geometry.h>
+#include <zge/logger.h>
 
 namespace zge {
 namespace geometry {

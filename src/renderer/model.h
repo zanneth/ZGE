@@ -7,7 +7,7 @@
  
 #pragma once
 
-#include "zge/gl_buffer.h"
+#include <zge/gl_buffer.h>
 #include <memory>
 #include <string>
 

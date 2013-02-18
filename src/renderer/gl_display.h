@@ -7,8 +7,8 @@
  
 #pragma once
 
-#include "zge/display.h"
-#include "zge/noncopyable.h"
+#include <zge/display.h>
+#include <zge/noncopyable.h>
 
 #include <SDL/SDL.h>
 #include <string>

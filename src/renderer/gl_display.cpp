@@ -5,11 +5,11 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/gl_display.h"
-#include "zge/gl_includes.h"
-#include "zge/exception.h"
-#include "zge/logger.h"
-#include "zge/util.h"
+#include <zge/gl_display.h>
+#include <zge/gl_includes.h>
+#include <zge/exception.h>
+#include <zge/logger.h>
+#include <zge/util.h>
 
 namespace zge {
 

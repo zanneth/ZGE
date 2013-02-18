@@ -7,9 +7,9 @@
  
 #pragma once
 
-#include "zge/node.h"
-#include "zge/geometry.h"
-#include "zge/gl_includes.h"
+#include <zge/node.h>
+#include <zge/geometry.h>
+#include <zge/gl_includes.h>
 #include <memory>
 
 namespace zge {

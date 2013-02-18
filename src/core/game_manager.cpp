@@ -5,7 +5,7 @@
  * Date Created: 02/03/2012
  */
  
-#include "zge/game_manager.h"
+#include <zge/game_manager.h>
 
 namespace zge {
 #pragma mark - Managing Scenes
