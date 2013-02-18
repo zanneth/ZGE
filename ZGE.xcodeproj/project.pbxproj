@@ -58,7 +58,7 @@
 		0C50D40B16D2096E00E43D7B /* logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D516D208A900E43D7B /* logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C50D40C16D2096E00E43D7B /* notification_center.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D716D208A900E43D7B /* notification_center.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C50D40D16D2096E00E43D7B /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D916D208A900E43D7B /* util.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0CAB6486169BB72C009E4A29 /* lib3ds-2.0.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAB6485169BB72C009E4A29 /* lib3ds-2.0.0.0.dylib */; };
+		0C5A3C8E16D2156800FCB175 /* lib3ds.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C5A3C8D16D2156800FCB175 /* lib3ds.dylib */; };
 		0CAB6488169BB8C0009E4A29 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAB647E169BB6D9009E4A29 /* Cocoa.framework */; };
 		0CAB6489169BB8C5009E4A29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAB6483169BB6F6009E4A29 /* Foundation.framework */; };
 		0CAB648A169BB8C9009E4A29 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CAB6481169BB6EC009E4A29 /* OpenGL.framework */; };
@@ -408,11 +408,11 @@
 		0C50D3D716D208A900E43D7B /* notification_center.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notification_center.h; sourceTree = "<group>"; };
 		0C50D3D816D208A900E43D7B /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		0C50D3D916D208A900E43D7B /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		0C5A3C8D16D2156800FCB175 /* lib3ds.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = lib3ds.dylib; path = /usr/local/lib/lib3ds.dylib; sourceTree = "<absolute>"; };
 		0C5E3D79159ED53B0062242E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = README; sourceTree = "<group>"; };
 		0CAB647E169BB6D9009E4A29 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		0CAB6481169BB6EC009E4A29 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		0CAB6483169BB6F6009E4A29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		0CAB6485169BB72C009E4A29 /* lib3ds-2.0.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "lib3ds-2.0.0.0.dylib"; path = "/usr/local/lib/lib3ds-2.0.0.0.dylib"; sourceTree = "<absolute>"; };
 		0CE4F928169A8DE600A953E7 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		0CF7E21A161C010F00105F7C /* zge.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zge.pch; sourceTree = "<group>"; };
 		563B6E9614B2FD2600004C6A /* libZGE.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZGE.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -423,10 +423,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C5A3C8E16D2156800FCB175 /* lib3ds.dylib in Frameworks */,
 				0CAB648A169BB8C9009E4A29 /* OpenGL.framework in Frameworks */,
 				0CAB6489169BB8C5009E4A29 /* Foundation.framework in Frameworks */,
 				0CAB6488169BB8C0009E4A29 /* Cocoa.framework in Frameworks */,
-				0CAB6486169BB72C009E4A29 /* lib3ds-2.0.0.0.dylib in Frameworks */,
 				0CE4F929169A8DE600A953E7 /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1108,6 +1108,14 @@
 			path = util;
 			sourceTree = "<group>";
 		};
+		0C5A3C8F16D2157500FCB175 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				0C5A3C8D16D2156800FCB175 /* lib3ds.dylib */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		563B6E8B14B2FD2600004C6A = {
 			isa = PBXGroup;
 			children = (
@@ -1117,6 +1125,7 @@
 				0C50D25B16D208A900E43D7B /* include */,
 				0C50D3A116D208A900E43D7B /* lib */,
 				0C50D3A216D208A900E43D7B /* src */,
+				0C5A3C8F16D2157500FCB175 /* Libraries */,
 				563B6EC214B2FD8500004C6A /* Frameworks */,
 				563B6E9714B2FD2600004C6A /* Products */,
 			);
@@ -1133,7 +1142,6 @@
 		563B6EC214B2FD8500004C6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0CAB6485169BB72C009E4A29 /* lib3ds-2.0.0.0.dylib */,
 				0CAB6483169BB6F6009E4A29 /* Foundation.framework */,
 				0CAB6481169BB6EC009E4A29 /* OpenGL.framework */,
 				0CAB647E169BB6D9009E4A29 /* Cocoa.framework */,
@@ -1189,6 +1197,7 @@
 			buildPhases = (
 				563B6E9214B2FD2600004C6A /* Sources */,
 				0C50D3F116D208CA00E43D7B /* Headers */,
+				0C5A3C7916D2131500FCB175 /* Copy Eigen Headers */,
 				563B6E9314B2FD2600004C6A /* Frameworks */,
 			);
 			buildRules = (
@@ -1225,6 +1234,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C5A3C7916D2131500FCB175 /* Copy Eigen Headers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Eigen Headers";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp -r ${SRCROOT}/include ${BUILT_PRODUCTS_DIR}";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		563B6E9214B2FD2600004C6A /* Sources */ = {
@@ -1305,6 +1331,7 @@
 		563B6E9B14B2FD2600004C6A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				PRODUCT_NAME = ZGE;
 			};
 			name = Debug;
@@ -1312,6 +1339,7 @@
 		563B6E9C14B2FD2600004C6A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				PRODUCT_NAME = ZGE;
 			};
 			name = Release;
