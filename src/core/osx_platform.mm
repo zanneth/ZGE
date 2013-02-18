@@ -76,8 +76,7 @@ void ZOSXPlatform::_setup_main_menu()
     [appMenu release];
 }
 
-}
-
+} // namespace zge
 
 @implementation ZAppDelegate
 @synthesize application=_application;
