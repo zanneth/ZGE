@@ -17,65 +17,65 @@
 namespace zge {
 
 enum ZEventType {
-    UNKNOWN_EVENT = 0,
+    ZUNKNOWN_EVENT = 0,
     
     // mouse events
-    MOUSE_DOWN_EVENT,
-    MOUSE_UP_EVENT,
-    MOUSE_MOVED_EVENT,
-    MOUSE_DRAGGED_EVENT,
-    SCROLL_WHEEL_EVENT,
+    ZMOUSE_DOWN_EVENT,
+    ZMOUSE_UP_EVENT,
+    ZMOUSE_MOVED_EVENT,
+    ZMOUSE_DRAGGED_EVENT,
+    ZSCROLL_WHEEL_EVENT,
     
     // touch events
-    TOUCH_DOWN_EVENT,
-    TOUCH_UP_EVENT,
+    ZTOUCH_DOWN_EVENT,
+    ZTOUCH_UP_EVENT,
     
     // key events
-    KEY_DOWN_EVENT,
-    KEY_UP_EVENT,
+    ZKEY_DOWN_EVENT,
+    ZKEY_UP_EVENT,
     
     // other events
-    USER_EVENT,
-    APPLICATION_EVENT,
-    SYSTEM_EVENT,
-    PERIODIC_EVENT,
-    OTHER_EVENT
+    ZUSER_EVENT,
+    ZAPPLICATION_EVENT,
+    ZSYSTEM_EVENT,
+    ZPERIODIC_EVENT,
+    ZOTHER_EVENT
 };
 
 enum ZKeyModifierFlags : unsigned {
-    NO_MODIFIERS      = 0,
-    LEFT_SHIFT_KEY    = 1 << 0,
-    RIGHT_SHIFT_KEY   = 1 << 1,
-    LEFT_CONTROL_KEY  = 1 << 2,
-    RIGHT_CONTROL_KEY = 1 << 3,
-    LEFT_ALT_KEY      = 1 << 4,
-    RIGHT_ALT_KEY     = 1 << 5,
-    LEFT_META_KEY     = 1 << 6,
-    RIGHT_META_KEY    = 1 << 7,
-    NUM_LOCK_KEY      = 1 << 8,
-    CAPS_LOCK_KEY     = 1 << 9
+    ZNO_MODIFIERS      = 0,
+    ZLEFT_SHIFT_KEY    = 1 << 0,
+    ZRIGHT_SHIFT_KEY   = 1 << 1,
+    ZLEFT_CONTROL_KEY  = 1 << 2,
+    ZRIGHT_CONTROL_KEY = 1 << 3,
+    ZLEFT_ALT_KEY      = 1 << 4,
+    ZRIGHT_ALT_KEY     = 1 << 5,
+    ZLEFT_META_KEY     = 1 << 6,
+    ZRIGHT_META_KEY    = 1 << 7,
+    ZNUM_LOCK_KEY      = 1 << 8,
+    ZCAPS_LOCK_KEY     = 1 << 9
 };
 // for all my Mac homeboys
-#define LEFT_COMMAND_KEY  LEFT_META_KEY
-#define RIGHT_COMMAND_KEY RIGHT_META_KEY
-#define LEFT_OPTION_KEY   LEFT_ALT_KEY
-#define RIGHT_OPTION_KEY  RIGHT_ALT_KEY
+#define ZLEFT_COMMAND_KEY  ZLEFT_META_KEY
+#define ZRIGHT_COMMAND_KEY ZRIGHT_META_KEY
+#define ZLEFT_OPTION_KEY   ZLEFT_ALT_KEY
+#define ZRIGHT_OPTION_KEY  ZRIGHT_ALT_KEY
 
 enum ZMouseButtonFlags : unsigned {
-    NO_BUTTONS              = 0,
-    LEFT_MOUSE_BUTTON       = 1 << 0,
-    MIDDLE_MOUSE_BUTTON     = 1 << 1,
-    RIGHT_MOUSE_BUTTON      = 1 << 2,
-    WHEEL_DOWN              = 1 << 3,
-    WHEEL_UP                = 1 << 4,
-    MOUSE_BUTTON_1          = 1 << 5,
-    MOUSE_BUTTON_2          = 1 << 6,
-    MOUSE_BUTTON_3          = 1 << 7,
-    MOUSE_BUTTON_4          = 1 << 8,
-    MOUSE_BUTTON_5          = 1 << 9,
-    MOUSE_BUTTON_6          = 1 << 10,
-    MOUSE_BUTTON_7          = 1 << 11,
-    MOUSE_BUTTON_8          = 1 << 12
+    ZNO_BUTTONS              = 0,
+    ZLEFT_MOUSE_BUTTON       = 1 << 0,
+    ZMIDDLE_MOUSE_BUTTON     = 1 << 1,
+    ZRIGHT_MOUSE_BUTTON      = 1 << 2,
+    ZWHEEL_DOWN              = 1 << 3,
+    ZWHEEL_UP                = 1 << 4,
+    ZMOUSE_BUTTON_1          = 1 << 5,
+    ZMOUSE_BUTTON_2          = 1 << 6,
+    ZMOUSE_BUTTON_3          = 1 << 7,
+    ZMOUSE_BUTTON_4          = 1 << 8,
+    ZMOUSE_BUTTON_5          = 1 << 9,
+    ZMOUSE_BUTTON_6          = 1 << 10,
+    ZMOUSE_BUTTON_7          = 1 << 11,
+    ZMOUSE_BUTTON_8          = 1 << 12
 };
 
 enum ZKey {
@@ -203,24 +203,18 @@ enum ZKey {
     ZKEY_LALT,
     ZKEY_RMETA,
     ZKEY_LMETA,
-    ZKEY_LSUPER,
-    ZKEY_RSUPER,
     ZKEY_MODE,
-    ZKEY_COMPOSE,
     ZKEY_HELP,
-    ZKEY_PRINT,
     ZKEY_SYSREQ,
-    ZKEY_BREAK,
     ZKEY_MENU,
     ZKEY_POWER,
-    ZKEY_EURO,
     ZKEY_UNDO
 };
 
 enum ZButtonState {
-    UNKNOWN_BUTTON_STATE = 0,
-    PRESSED,
-    RELEASED
+    ZUNKNOWN_BUTTON_STATE = 0,
+    ZPRESSED,
+    ZRELEASED
 };
 
 struct ZKeyEvent {
@@ -243,11 +237,11 @@ struct ZTouchEvent {
 };
 
 enum ZApplicationEvent {
-    UNKNOWN_APPLICATION_EVENT = 0,
-    APPLICATION_QUIT_EVENT,
-    APPLICATION_SUSPENDED_EVENT,
-    APPLICATION_ACTIVE_EVENT,
-    APPLICATION_INACTIVE_EVENT
+    ZUNKNOWN_APPLICATION_EVENT = 0,
+    ZAPPLICATION_QUIT_EVENT,
+    ZAPPLICATION_SUSPENDED_EVENT,
+    ZAPPLICATION_ACTIVE_EVENT,
+    ZAPPLICATION_INACTIVE_EVENT
 };
 
 struct ZEvent {

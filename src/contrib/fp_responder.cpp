@@ -28,7 +28,7 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
     if (scene.get() != nullptr) {
         ZCameraRef camera = scene->get_active_camera();
         
-        if (event.type == MOUSE_MOVED_EVENT) {
+        if (event.type == ZMOUSE_MOVED_EVENT) {
             ZMouseEvent mouse_event = event.event.mouse_event;
             float dx = mouse_event.velocity.x() * _mouse_speed;
             float dy = mouse_event.velocity.y() * _mouse_speed;
@@ -38,7 +38,7 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             rotation.rotate(ZAngleAxis(-dy, ZVec3::UnitX()));
             
             camera->set_transform(rotation);
-        } else if (event.type == KEY_DOWN_EVENT || event.type == KEY_UP_EVENT) {
+        } else if (event.type == ZKEY_DOWN_EVENT || event.type == ZKEY_UP_EVENT) {
             ZKeyEvent key_event = event.event.key_event;
             ZVec3 movement_vector(0.0, 0.0, 0.0);
             switch (key_event.key) {
@@ -61,7 +61,7 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             movement_vector = movement_vector * scalar;
             
             ZVec3 velocity = camera->get_velocity();
-            if (key_event.state == PRESSED) {
+            if (key_event.state == ZPRESSED) {
                 velocity += movement_vector;
             } else {
                 velocity -= movement_vector;

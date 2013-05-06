@@ -8,7 +8,6 @@
 #include <zge/display_manager.h>
 #include <zge/display.h>
 #include <zge/exception.h>
-#include <zge/gl_display.h>
 
 namespace zge {
 
@@ -25,7 +24,7 @@ ZDisplayManager::~ZDisplayManager()
 
 ZDisplay* ZDisplayManager::create_display(const ZDisplayMode &mode)
 {
-    ZDisplay *display = new ZGLDisplay(mode);
+    ZDisplay *display = new ZDisplay(mode);
     display->initialize();
     
     if (_current_display != nullptr) {
@@ -43,7 +42,7 @@ void ZDisplayManager::run(uint32_t dtime)
             _current_display->initialize();
         }
         
-        _current_display->render(dtime);
+        _current_display->update(dtime);
     }
 }
 

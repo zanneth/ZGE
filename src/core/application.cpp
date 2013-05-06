@@ -7,15 +7,19 @@
  
 #include <zge/application.h>
 #include <zge/exception.h>
-#include <zge/platform.h>
-#include <zge/osx_platform.h>
 #include <zge/logger.h>
 #include <zge/run_loop.h>
 #include <zge/util.h>
 
 #include <cstdlib>
 #include <ctime>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
+
+#ifdef __APPLE__
+extern "C" {
+#include <CoreFoundation/CoreFoundation.h>
+}
+#endif
 
 namespace zge {
 
@@ -24,7 +28,6 @@ static ZApplication *__current_application = nullptr;
 ZApplication::ZApplication(int argc, char **argv) :
     _show_cursor(true),
     _capture_input(false),
-    _current_platform(nullptr),
     _time_start(0)
 {
     set_arguments(argc, argv);
@@ -32,17 +35,34 @@ ZApplication::ZApplication(int argc, char **argv) :
 }
 
 ZApplication::~ZApplication()
-{
-    if (_current_platform != nullptr) {
-        delete _current_platform;
-    }
-}
+{}
 
 #pragma mark - Getting the Application Instance
 
 ZApplication* ZApplication::get_current_application()
 {
     return __current_application;
+}
+
+#pragma mark - Running
+
+void ZApplication::run()
+{
+    if (__current_application != nullptr) {
+        delete __current_application;
+    }
+    __current_application = this;
+    
+    // initialize SDL
+    int sdl_result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
+    if (sdl_result < 0) {
+        ZException ex(APPLICATION_EXCEPTION_CODE);
+        ex.extra_info = util::format("SDL failed to initialize: %s", SDL_GetError());
+        throw ex;
+    }
+    
+    // initialize random number generator
+    std::srand((unsigned)std::time(NULL));
 }
 
 #pragma mark - Accessors
@@ -90,74 +110,40 @@ void ZApplication::handle_application_event(const ZEvent &event)
     ZApplicationEvent app_event = event.event.application_event;
     ZLogger::log(event.get_description());
     switch (app_event) {
-        case APPLICATION_QUIT_EVENT:
+        case ZAPPLICATION_QUIT_EVENT:
             this->exit();
             break;
-        case APPLICATION_ACTIVE_EVENT:
+        case ZAPPLICATION_ACTIVE_EVENT:
             if (!_show_cursor) {
                 SDL_ShowCursor(0);
             }
             if (_capture_input) {
-                SDL_WM_GrabInput(SDL_GRAB_ON);
+                // TODO: fallout from switching to SDL 2.0
+//                SDL_WM_GrabInput(SDL_GRAB_ON);
             }
             break;
-        case APPLICATION_INACTIVE_EVENT:
+        case ZAPPLICATION_INACTIVE_EVENT:
             SDL_ShowCursor(1);
-            SDL_WM_GrabInput(SDL_GRAB_OFF);
+            // TODO: fallout from switching to SDL 2.0
+//            SDL_WM_GrabInput(SDL_GRAB_OFF);
             break;
         default:
             break;
     }
 }
 
-#pragma mark - Running the Application
+#pragma mark - Internal
 
-void run_application(ZApplication *application)
+void ZApplication::_change_resources_directory()
 {
-    if (application == nullptr) {
-        ZException expt(APPLICATION_EXCEPTION_CODE);
-        expt.extra_info = "Application pointer is NULL.";
-        
-        throw expt;
-    }
-    
-    if (__current_application != nullptr) {
-        delete __current_application;
-    }
-    __current_application = application;
-    
-    // initialize SDL engine
-    int sdl_stat = SDL_Init(SDL_INIT_TIMER  | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
-    if (sdl_stat < 0) {
-        std::string errorstr = "SDL Failed to initialize: ";
-        errorstr += SDL_GetError();
-        
-        ZException expt(APPLICATION_EXCEPTION_CODE);
-        expt.extra_info = errorstr;
-        
-        throw expt;
-    }
-    
-    // initialize the RNG
-    std::srand(time(NULL));
-    
-    // initialize the platform interface
-    ZPlatform *platform = nullptr;
-#if __APPLE__
-    platform = new ZOSXPlatform();
+#ifdef __APPLE__
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char path[PATH_MAX];
+    CFURLGetFileSystemRepresentation(resourcesURL, true, (UInt8 *)path, PATH_MAX);
+    CFRelease(resourcesURL);
+    chdir(path);
 #endif
-    
-    // check if the platform was able to be initialized.
-    if (platform == nullptr) {
-        ZException expt(APPLICATION_EXCEPTION_CODE);
-        expt.extra_info = "Platform not supported.";
-        throw expt;
-    }
-    
-    // run the application
-    application->_current_platform  = platform;
-    application->_time_start = SDL_GetTicks();
-    platform->run_application(application); // does not return (should start event loop)
 }
 
 } // namespace zge

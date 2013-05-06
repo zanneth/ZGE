@@ -22,7 +22,6 @@
 #include <zge/game_manager.h>
 #include <zge/geometry.h>
 #include <zge/gl_buffer.h>
-#include <zge/gl_display.h>
 #include <zge/gl_includes.h>
 #include <zge/input_manager.h>
 #include <zge/logger.h>
@@ -30,7 +29,6 @@
 #include <zge/node.h>
 #include <zge/noncopyable.h>
 #include <zge/notification_center.h>
-#include <zge/platform.h>
 #include <zge/run_loop.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>

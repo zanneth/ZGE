@@ -11,14 +11,14 @@
 #include <zge/run_loop.h>
 
 #include <algorithm>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 static unsigned __responder_global_uid_count = 1;
 
 namespace zge {
 
 ZEvent _convert_sdl_event(const SDL_Event &sdl_event);
-ZKey _convert_sdl_key(SDLKey sdl_key);
+ZKey _convert_sdl_key(SDL_Keycode sdl_keycode);
 
 #pragma mark - ZResponder
 
@@ -127,7 +127,7 @@ void ZInputManager::_remove_responder_internal(ZResponderRef responder)
     if (itr != _responder_chain.end()) {
         _responder_chain.erase(itr);
     } else {
-        ZLogger::warn("Could not remove responder. Not found in responder chain.");
+        ZLogger::log_error("Could not remove responder. Not found in responder chain.");
     }
 }
 
@@ -137,34 +137,31 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     
     // get event type
     switch (sdl_event.type) {
+        case SDL_MOUSEWHEEL:
+            event.type = ZSCROLL_WHEEL_EVENT;
+            break;
         case SDL_MOUSEBUTTONDOWN:
-            if (sdl_event.button.button == SDL_BUTTON_WHEELDOWN || sdl_event.button.button == SDL_BUTTON_WHEELUP) {
-                event.type = SCROLL_WHEEL_EVENT;
-            } else {
-                event.type = MOUSE_DOWN_EVENT;
-            }
+            event.type = ZMOUSE_DOWN_EVENT;
             break;
         case SDL_MOUSEBUTTONUP:
-            event.type = MOUSE_UP_EVENT;
+            event.type = ZMOUSE_UP_EVENT;
             break;
         case SDL_MOUSEMOTION:
-            event.type = MOUSE_MOVED_EVENT;
+            event.type = ZMOUSE_MOVED_EVENT;
             break;
         case SDL_KEYDOWN:
-            event.type = KEY_DOWN_EVENT;
+            event.type = ZKEY_DOWN_EVENT;
             break;
         case SDL_KEYUP:
-            event.type = KEY_UP_EVENT;
+            event.type = ZKEY_UP_EVENT;
             break;
         case SDL_USEREVENT:
-            event.type = USER_EVENT;
+            event.type = ZUSER_EVENT;
             break;
         case SDL_SYSWMEVENT:
         case SDL_QUIT:
-        case SDL_VIDEORESIZE:
-        case SDL_VIDEOEXPOSE:
-        case SDL_ACTIVEEVENT:
-            event.type = APPLICATION_EVENT;
+        case SDL_WINDOWEVENT:
+            event.type = ZAPPLICATION_EVENT;
             break;
         // TODO: Mouse Dragged
         // TODO: Touch Events
@@ -178,28 +175,22 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
         ZMouseButtonFlags button;
         switch (sdl_event.button.button) {
             case SDL_BUTTON_LEFT:
-                button = LEFT_MOUSE_BUTTON;
+                button = ZLEFT_MOUSE_BUTTON;
                 break;
             case SDL_BUTTON_MIDDLE:
-                button = MIDDLE_MOUSE_BUTTON;
+                button = ZMIDDLE_MOUSE_BUTTON;
                 break;
             case SDL_BUTTON_RIGHT:
-                button = RIGHT_MOUSE_BUTTON;
-                break;
-            case SDL_BUTTON_WHEELDOWN:
-                button = WHEEL_DOWN;
-                break;
-            case SDL_BUTTON_WHEELUP:
-                button = WHEEL_UP;
+                button = ZRIGHT_MOUSE_BUTTON;
                 break;
             case SDL_BUTTON_X1:
-                button = MOUSE_BUTTON_1;
+                button = ZMOUSE_BUTTON_1;
                 break;
             case SDL_BUTTON_X2:
-                button = MOUSE_BUTTON_2;
+                button = ZMOUSE_BUTTON_2;
                 break;
             default: // this should be impossible but what the hell
-                button = NO_BUTTONS;
+                button = ZNO_BUTTONS;
                 break;
         }
         
@@ -211,6 +202,19 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
         event.event.mouse_event.click_count = 1;
     }
     
+    // parse mouse wheel event
+    if (sdl_event.type == SDL_MOUSEWHEEL) {
+        ZMouseButtonFlags button;
+        if (sdl_event.wheel.y < 0) {
+            button = ZWHEEL_UP;
+        } else {
+            button = ZWHEEL_DOWN;
+        }
+        
+        event.event.mouse_event.pressed_buttons = button;
+        event.event.mouse_event.click_count = 1;
+    }
+    
     // parse mouse motion event
     if (sdl_event.type == SDL_MOUSEMOTION) {
         ZVec2 location = ZVec2(sdl_event.motion.x, sdl_event.motion.y);
@@ -218,23 +222,23 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
         event.event.mouse_event.location = location;
         event.event.mouse_event.velocity = velocity;
         
-        unsigned pressed_buttons = NO_BUTTONS;
+        unsigned pressed_buttons = ZNO_BUTTONS;
         uint8_t sdl_buttons = sdl_event.motion.state;
         if (sdl_buttons != 0) {
             if (sdl_buttons & SDL_BUTTON_LMASK) {
-                pressed_buttons |= LEFT_MOUSE_BUTTON;
+                pressed_buttons |= ZLEFT_MOUSE_BUTTON;
             }
             if (sdl_buttons & SDL_BUTTON_RMASK) {
-                pressed_buttons |= RIGHT_MOUSE_BUTTON;
+                pressed_buttons |= ZRIGHT_MOUSE_BUTTON;
             }
             if (sdl_buttons & SDL_BUTTON_MMASK) {
-                pressed_buttons |= MIDDLE_MOUSE_BUTTON;
+                pressed_buttons |= ZMIDDLE_MOUSE_BUTTON;
             }
             if (sdl_buttons & SDL_BUTTON_X1MASK) {
-                pressed_buttons |= MOUSE_BUTTON_1;
+                pressed_buttons |= ZMOUSE_BUTTON_1;
             }
             if (sdl_buttons & SDL_BUTTON_X2MASK) {
-                pressed_buttons |= MOUSE_BUTTON_2;
+                pressed_buttons |= ZMOUSE_BUTTON_2;
             }
         }
         event.event.mouse_event.pressed_buttons = static_cast<ZMouseButtonFlags>(pressed_buttons);
@@ -242,68 +246,63 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     
     // parse key event
     if (sdl_event.type == SDL_KEYDOWN || sdl_event.type == SDL_KEYUP) {
-        SDL_keysym sdl_key = sdl_event.key.keysym;
+        SDL_Keysym sdl_key = sdl_event.key.keysym;
         ZKey key = _convert_sdl_key(sdl_key.sym);
         event.event.key_event.key = key;
         
-        SDLMod sdl_mods = sdl_key.mod;
-        unsigned mods = NO_MODIFIERS;
+        uint16_t sdl_mods = sdl_key.mod;
+        unsigned mods = ZNO_MODIFIERS;
         if (sdl_mods != KMOD_NONE) {
             if (sdl_mods & KMOD_LSHIFT) {
-                mods |= LEFT_SHIFT_KEY;
+                mods |= ZLEFT_SHIFT_KEY;
             }
             if (sdl_mods & KMOD_RSHIFT) {
-                mods |= RIGHT_SHIFT_KEY;
+                mods |= ZRIGHT_SHIFT_KEY;
             }
             if (sdl_mods & KMOD_LCTRL) {
-                mods |= LEFT_CONTROL_KEY;
+                mods |= ZLEFT_CONTROL_KEY;
             }
             if (sdl_mods & KMOD_RCTRL) {
-                mods |= RIGHT_CONTROL_KEY;
+                mods |= ZRIGHT_CONTROL_KEY;
             }
             if (sdl_mods & KMOD_LALT) {
-                mods |= LEFT_ALT_KEY;
+                mods |= ZLEFT_ALT_KEY;
             }
             if (sdl_mods & KMOD_RALT) {
-                mods |= RIGHT_ALT_KEY;
+                mods |= ZRIGHT_ALT_KEY;
             }
-            if (sdl_mods & KMOD_LMETA) {
-                mods |= LEFT_META_KEY;
+            if (sdl_mods & KMOD_LGUI) {
+                mods |= ZLEFT_META_KEY;
             }
-            if (sdl_mods & KMOD_RMETA) {
-                mods |= RIGHT_META_KEY;
+            if (sdl_mods & KMOD_RGUI) {
+                mods |= ZRIGHT_META_KEY;
             }
             if (sdl_mods & KMOD_NUM) {
-                mods |= NUM_LOCK_KEY;
+                mods |= ZNUM_LOCK_KEY;
             }
             if (sdl_mods & KMOD_CAPS) {
-                mods |= CAPS_LOCK_KEY;
+                mods |= ZCAPS_LOCK_KEY;
             }
         }
         event.event.key_event.modifier_flags = static_cast<ZKeyModifierFlags>(mods);
-        event.event.key_event.state = (sdl_event.key.state == SDL_PRESSED ? PRESSED : RELEASED);
+        event.event.key_event.state = (sdl_event.key.state == SDL_PRESSED ? ZPRESSED : ZRELEASED);
     }
     
     // parse application event
     if (sdl_event.type == SDL_QUIT) {
-        event.event.application_event = APPLICATION_QUIT_EVENT;
-    } else if (sdl_event.type == SDL_ACTIVEEVENT) {
-        SDL_ActiveEvent active_event = sdl_event.active;
-        if (active_event.gain == 0) {
-            event.event.application_event = APPLICATION_INACTIVE_EVENT;
-        } else if (active_event.gain == 1) {
-            event.event.application_event = APPLICATION_ACTIVE_EVENT;
-        }
+        event.event.application_event = ZAPPLICATION_QUIT_EVENT;
+    } else if (sdl_event.type == SDL_WINDOWEVENT) {
+        // TODO: application event
     }
     
     return event;
 }
 
 // long function is looong
-ZKey _convert_sdl_key(SDLKey sdl_key)
+ZKey _convert_sdl_key(SDL_Keycode sdl_keycode)
 {
     ZKey key = ZKEY_UNKNOWN;
-    switch (sdl_key) {
+    switch (sdl_keycode) {
         case SDLK_BACKSPACE:
             key = ZKEY_BACKSPACE;
             break;
@@ -517,34 +516,34 @@ ZKey _convert_sdl_key(SDLKey sdl_key)
         case SDLK_DELETE:
             key = ZKEY_DELETE;
             break;
-        case SDLK_KP0:
+        case SDLK_KP_0:
             key = ZKEY_KP0;
             break;
-        case SDLK_KP1:
+        case SDLK_KP_1:
             key = ZKEY_KP1;
             break;
-        case SDLK_KP2:
+        case SDLK_KP_2:
             key = ZKEY_KP2;
             break;
-        case SDLK_KP3:
+        case SDLK_KP_3:
             key = ZKEY_KP3;
             break;
-        case SDLK_KP4:
+        case SDLK_KP_4:
             key = ZKEY_KP4;
             break;
-        case SDLK_KP5:
+        case SDLK_KP_5:
             key = ZKEY_KP5;
             break;
-        case SDLK_KP6:
+        case SDLK_KP_6:
             key = ZKEY_KP6;
             break;
-        case SDLK_KP7:
+        case SDLK_KP_7:
             key = ZKEY_KP7;
             break;
-        case SDLK_KP8:
+        case SDLK_KP_8:
             key = ZKEY_KP8;
             break;
-        case SDLK_KP9:
+        case SDLK_KP_9:
             key = ZKEY_KP9;
             break;
         case SDLK_KP_PERIOD:
@@ -640,13 +639,13 @@ ZKey _convert_sdl_key(SDLKey sdl_key)
         case SDLK_F15:
             key = ZKEY_F15;
             break;
-        case SDLK_NUMLOCK:
+        case SDLK_NUMLOCKCLEAR:
             key = ZKEY_NUMLOCK;
             break;
         case SDLK_CAPSLOCK:
             key = ZKEY_CAPSLOCK;
             break;
-        case SDLK_SCROLLOCK:
+        case SDLK_SCROLLLOCK:
             key = ZKEY_SCROLLOCK;
             break;
         case SDLK_RSHIFT:
@@ -667,44 +666,26 @@ ZKey _convert_sdl_key(SDLKey sdl_key)
         case SDLK_LALT:
             key = ZKEY_LALT;
             break;
-        case SDLK_RMETA:
+        case SDLK_RGUI:
             key = ZKEY_RMETA;
             break;
-        case SDLK_LMETA:
+        case SDLK_LGUI:
             key = ZKEY_LMETA;
-            break;
-        case SDLK_LSUPER:
-            key = ZKEY_LSUPER;
-            break;
-        case SDLK_RSUPER:
-            key = ZKEY_RSUPER;
             break;
         case SDLK_MODE:
             key = ZKEY_MODE;
             break;
-        case SDLK_COMPOSE:
-            key = ZKEY_COMPOSE;
-            break;
         case SDLK_HELP:
             key = ZKEY_HELP;
             break;
-        case SDLK_PRINT:
-            key = ZKEY_PRINT;
-            break;
         case SDLK_SYSREQ:
             key = ZKEY_SYSREQ;
-            break;
-        case SDLK_BREAK:
-            key = ZKEY_BREAK;
             break;
         case SDLK_MENU:
             key = ZKEY_MENU;
             break;
         case SDLK_POWER:
             key = ZKEY_POWER;
-            break;
-        case SDLK_EURO:
-            key = ZKEY_EURO;
             break;
         case SDLK_UNDO:
             key = ZKEY_UNDO;

@@ -46,7 +46,7 @@ std::string separate_components(const std::vector<std::string> &vec, std::string
 {
     std::ostringstream oss;
     unsigned idx = 0;
-    unsigned size = vec.size();
+    size_t size = vec.size();
     for (const auto &cmp : vec) {
         oss << cmp;
         if (idx != size - 1) {

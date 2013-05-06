@@ -6,36 +6,48 @@
  */
  
 #include <zge/logger.h>
+#include <iostream>
 
 namespace zge {
 
 void ZLogger::log(const char *format, ...)
 {
-    char buf[1024];
-    
     va_list va;
     va_start(va, format);
-    vsprintf(buf, format, va);
+    _logv(format, va);
     va_end(va);
-    
-    std::cout << buf << std::endl;
 }
 
 void ZLogger::log(const std::string str)
 {
-    std::cout << str << std::endl;
+    _logv(str);
 }
 
-void ZLogger::warn(const char *format, ...)
+void ZLogger::log_error(const char *format, ...)
 {
-    char buf[1024];
-    
     va_list va;
     va_start(va, format);
-    vsprintf(buf, format, va);
+    _logv(format, va, std::cerr);
     va_end(va);
-    
-    std::cout << "WARNING: " << buf << std::endl;
+}
+
+void ZLogger::log_error(const std::string str)
+{
+    _logv(str, std::cerr);
+}
+
+#pragma mark - Internal
+
+void ZLogger::_logv(const char *format, va_list args, std::ostream &output_stream)
+{
+    char buf[1024];
+    vsprintf(buf, format, args);
+    output_stream << buf << std::endl;
+}
+
+void ZLogger::_logv(const std::string str, std::ostream &output_stream)
+{
+    output_stream << str << std::endl;
 }
 
 } // namespace zge

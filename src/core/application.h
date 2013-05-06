@@ -16,15 +16,12 @@
 
 namespace zge {
 
-class ZPlatform;
-
 class ZApplication : ZNoncopyable {
     std::list<std::string> _arguments;
     bool _show_cursor;
     bool _capture_input;
     
     ZRunloop _main_runloop;
-    ZPlatform *_current_platform; // weak
     uint32_t _time_start;
     
 public:
@@ -34,6 +31,9 @@ public:
     /** Getting the Application Instance **/
     static ZApplication* get_current_application();
     
+    /** Running **/
+    void run();
+    
     /** Accessors **/
     std::list<std::string> get_arguments() { return _arguments; }
     void set_arguments(int argc, char **argv);
@@ -41,7 +41,6 @@ public:
     void set_shows_cursor(bool cursor) { _show_cursor = cursor; }
     bool captures_input() { return _capture_input; }
     void set_captures_input(bool capture) { _capture_input = capture; }
-    ZPlatform* get_current_platform() { return _current_platform; }
     
     /** Accessing the Main Run Loop **/
     ZRunloop* get_main_runloop();
@@ -58,11 +57,9 @@ public:
     
     /** Callbacks **/
     virtual void application_ready() {}
-    
-    /** Running (external) **/
-    friend void run_application(ZApplication*);
-};
 
-void run_application(ZApplication *application);
+private:
+    void _change_resources_directory();
+};
 
 } // namespace zge

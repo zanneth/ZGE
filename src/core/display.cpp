@@ -7,13 +7,32 @@
  
 #include <zge/display.h>
 #include <zge/exception.h>
+#include <zge/logger.h>
+#include <zge/util.h>
+#include <SDL2/SDL_opengl.h>
 
 namespace zge {
 
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
-    _display_mode(mode) {}
+    _display_mode(mode)
+{}
 
-#pragma mark - Convenience Methods
+void ZDisplay::initialize()
+{
+    _init_window();
+    _init_opengl();
+}
+
+void ZDisplay::update(uint32_t dtime)
+{
+    SDL_GL_MakeCurrent(_window, _context);
+    
+    _last_render += dtime;
+    if (_last_render >= _display_mode.refresh_rate * 1000.0) {
+        _last_render = 0;
+        SDL_GL_SwapWindow(_window);
+    }
+}
 
 void ZDisplay::resize(int width, int height)
 {
@@ -29,6 +48,46 @@ void ZDisplay::resize(int width, int height)
 void ZDisplay::set_display_mode(const ZDisplayMode &mode)
 {
     _display_mode = mode;
+    
+    SDL_SetWindowSize(_window, _display_mode.width, _display_mode.height);
+    SDL_SetWindowTitle(_window, _display_mode.window_title.c_str());
+    
+    if (_initialized) {
+        glViewport(0, 0, _display_mode.width, _display_mode.height);
+    }
+}
+
+#pragma mark - Internal
+
+void ZDisplay::_init_window()
+{
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
+    
+    _window = SDL_CreateWindow(_display_mode.window_title.c_str(),
+                               SDL_WINDOWPOS_UNDEFINED,
+                               SDL_WINDOWPOS_UNDEFINED,
+                               _display_mode.width,
+                               _display_mode.height,
+                               SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+    if (_window == nullptr) {
+        ZLogger::log_error("Could not create SDL window.");
+    }
+}
+
+void ZDisplay::_init_opengl()
+{
+    zassert(_window != nullptr, "Window failed to initialize.");
+    
+    _context = SDL_GL_CreateContext(_window);
+    SDL_GL_MakeCurrent(_window, _context);
+    
+    glClearColor(0.f, 0.f, 0.f, 1.f);
+    glViewport(0, 0, _display_mode.width, _display_mode.height);
+    
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 } // namespace zge

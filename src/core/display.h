@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <SDL2/SDL.h>
 #include <zge/noncopyable.h>
 #include <string>
 
@@ -30,33 +31,36 @@ public:
 
 class ZDisplay : ZNoncopyable {
 protected:
-    bool _is_initialized;
+    bool _initialized;
     ZDisplayMode _display_mode;
-
+    
+    SDL_Window *_window;
+    SDL_GLContext _context;
+    uint32_t _last_render;
+    
 protected: // Only a display manager can create displays
     ZDisplay() = default;
     ZDisplay(const ZDisplayMode &display_mode);
     
 public:
-    virtual ~ZDisplay() {}
-    
-    /** Initialization **/
-    virtual void initialize() = 0;
-    
-    /** Rendering **/
-    virtual void render(uint32_t dtime) = 0;
+    void initialize();
+    void update(uint32_t dtime);
     
     // Convenience method for setting width/height values in the current display mode
     void resize(int width, int height);
     
     /** Accessors **/
-    bool is_initialized() { return _is_initialized; }
+    bool is_initialized() { return _initialized; }
     
     ZDisplayMode get_display_mode() { return _display_mode; }
-    virtual void set_display_mode(const ZDisplayMode &mode);
+    void set_display_mode(const ZDisplayMode &mode);
     
     /** Friends **/
     friend class ZDisplayManager;
+    
+protected:
+    void _init_window();
+    void _init_opengl();
 };
 
 } // namespace zge

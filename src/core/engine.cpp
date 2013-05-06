@@ -42,7 +42,7 @@ void ZEngine::initialize()
     
     // engine always adds application as the first responder
     _application_responder = _input_manager->add_responder([](const ZEvent &event) {
-        if (event.type == APPLICATION_EVENT) {
+        if (event.type == ZAPPLICATION_EVENT) {
             ZApplication *app = ZApplication::get_current_application();
             if (app) {
                 app->handle_application_event(event);
@@ -52,8 +52,8 @@ void ZEngine::initialize()
     
     // push an "active" event through since SDL doesn't do it when the app launches
     ZEvent event;
-    event.type = APPLICATION_EVENT;
-    event.event.application_event = APPLICATION_ACTIVE_EVENT;
+    event.type = ZAPPLICATION_EVENT;
+    event.event.application_event = ZAPPLICATION_ACTIVE_EVENT;
     _input_manager->push_event(event);
 }
 

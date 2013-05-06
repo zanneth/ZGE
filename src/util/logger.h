@@ -8,6 +8,7 @@
 #pragma once
 
 #include <zge/noncopyable.h>
+#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -17,7 +18,8 @@ class ZLogger : ZNoncopyable {
 public:
     static void log(const char *format, ...);
     static void log(const std::string str);
-    static void warn(const char *format, ...);
+    static void log_error(const char *format, ...);
+    static void log_error(const std::string str);
     
     template <typename T>
     static void log_array(T *array, unsigned count)
@@ -34,6 +36,10 @@ public:
         
         ZLogger::log(stream.str());
     }
+
+protected:
+    static void _logv(const char *format, va_list args, std::ostream &output_stream = std::cout);
+    static void _logv(const std::string str, std::ostream &output_stream = std::cout);
     
 private:
     ZLogger();

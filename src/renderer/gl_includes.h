@@ -7,6 +7,10 @@
  
 #pragma once
 
+#include <SDL2/SDL_opengl.h>
+
+// legacy includes
+#if 0
 #ifdef __APPLE__
 #if (Z_GLEW_ENABLED)
 #   include <GL/glew.h>
@@ -21,4 +25,5 @@
 #   include <GL/gl.h>
 #	include <GL/glu.h>
 #	include <GL/glut.h>
+#endif
 #endif
