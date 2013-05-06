@@ -269,6 +269,7 @@ private:
     std::string _mouse_event_description() const;
     std::string _touch_event_description() const;
     std::string _application_event_description() const;
+    std::string _mouse_buttons_description(ZMouseButtonFlags button_flags) const;
 };
  
 } // namespace zge

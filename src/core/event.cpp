@@ -11,8 +11,6 @@
 
 namespace zge {
 
-std::string _mouse_buttons_description(ZMouseButtonFlags button_flags);
-
 std::string ZEvent::get_description() const
 {
     const char *format = "[ZEvent 0x%x] {\n"
@@ -54,7 +52,7 @@ std::string ZEvent::get_description() const
     std::regex details_re("\n");
     details_str = std::regex_replace(details_str, details_re, "\n\t\t");
     
-    std::string description = util::format(format, this, timestamp, type_str.c_str(), context.get(), is_repeat_str, details_str.c_str());
+    std::string description = ZUtil::format(format, this, timestamp, type_str.c_str(), context.get(), is_repeat_str, details_str.c_str());
     return description;
 }
 
@@ -118,7 +116,7 @@ std::string ZEvent::_key_event_description() const
     std::string descr;
     ZKeyEvent key_event = event.key_event;
     
-    descr = util::format("Keycode: %d\n", key_event.key);
+    descr = ZUtil::format("Keycode: %d\n", key_event.key);
     
     unsigned modifier_flags = static_cast<unsigned>(key_event.modifier_flags);
     std::vector<std::string> modifier_strings;
@@ -155,13 +153,13 @@ std::string ZEvent::_key_event_description() const
     
     std::string modifiers_string;
     if (modifier_strings.size() > 0) {
-        modifiers_string = util::separate_components(modifier_strings, ", ");
+        modifiers_string = ZUtil::separate_components(modifier_strings, ", ");
     } else {
         modifiers_string = "(no modifiers)";
     }
-    descr += util::format("Modifier Keys: %s\n", modifiers_string.c_str());
+    descr += ZUtil::format("Modifier Keys: %s\n", modifiers_string.c_str());
     
-    descr += util::format("Button State: %s", key_event.state == ZPRESSED ? "Pressed" : "Not Pressed");
+    descr += ZUtil::format("Button State: %s", key_event.state == ZPRESSED ? "Pressed" : "Not Pressed");
     
     return descr;
 }
@@ -170,15 +168,15 @@ std::string ZEvent::_mouse_event_description() const
 {
     std::string descr;
     ZMouseEvent mouse_event = event.mouse_event;
-    descr = util::format("Location: (%f, %f)\n", mouse_event.location.x(), mouse_event.location.y());
-    descr += util::format("Velocity: (%f, %f)\n", mouse_event.velocity.x(), mouse_event.velocity.y());
+    descr = ZUtil::format("Location: (%f, %f)\n", mouse_event.location.x(), mouse_event.location.y());
+    descr += ZUtil::format("Velocity: (%f, %f)\n", mouse_event.velocity.x(), mouse_event.velocity.y());
     
     std::string pressed_str = _mouse_buttons_description(mouse_event.pressed_buttons);
     std::string released_str = _mouse_buttons_description(mouse_event.released_buttons);
-    descr += util::format("Pressed: %s\n", pressed_str.c_str());
-    descr += util::format("Released: %s\n", released_str.c_str());
+    descr += ZUtil::format("Pressed: %s\n", pressed_str.c_str());
+    descr += ZUtil::format("Released: %s\n", released_str.c_str());
     
-    descr += util::format("Click Count: %d", mouse_event.click_count);
+    descr += ZUtil::format("Click Count: %d", mouse_event.click_count);
     
     return descr;
 }
@@ -187,13 +185,13 @@ std::string ZEvent::_touch_event_description() const
 {
     std::string descr;
     std::vector<ZTouchEvent> touch_events = event.touch_events;
-    descr = util::format("Number of Touches: %d\n", touch_events.size());
+    descr = ZUtil::format("Number of Touches: %d\n", touch_events.size());
     
     unsigned idx = 1;
     for (const auto &touch : touch_events) {
-        descr += util::format("\tTouch %d:\n", idx);
-        descr += util::format("\t\tLocation: (%f, %f)\n", touch.location.x(), touch.location.y());
-        descr += util::format("\t\tTaps: %d\n", touch.tap_count);
+        descr += ZUtil::format("\tTouch %d:\n", idx);
+        descr += ZUtil::format("\t\tLocation: (%f, %f)\n", touch.location.x(), touch.location.y());
+        descr += ZUtil::format("\t\tTaps: %d\n", touch.tap_count);
         ++idx;
     }
     
@@ -226,7 +224,7 @@ std::string ZEvent::_application_event_description() const
     return descr;
 }
 
-std::string _mouse_buttons_description(ZMouseButtonFlags button_flags)
+std::string ZEvent::_mouse_buttons_description(ZMouseButtonFlags button_flags) const
 {
     unsigned buttons = static_cast<unsigned>(button_flags);
     std::vector<std::string> button_strings;
@@ -272,7 +270,7 @@ std::string _mouse_buttons_description(ZMouseButtonFlags button_flags)
     
     std::string buttons_string;
     if (button_strings.size() > 0) {
-        buttons_string = util::separate_components(button_strings, ", ");
+        buttons_string = ZUtil::separate_components(button_strings, ", ");
     } else {
         buttons_string = "(no buttons)";
     }

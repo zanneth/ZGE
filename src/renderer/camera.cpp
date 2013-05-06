@@ -6,9 +6,9 @@
  */
  
 #include <zge/camera.h>
+#include <zge/engine.h>
 #include <zge/logger.h>
 #include <zge/scene.h>
-#include <zge/viewport.h>
 
 #include <algorithm>
 
@@ -82,10 +82,12 @@ void ZCamera::_construct_projection()
 {
     if (_projection_dirty) {
         if (_scene) {
-            ZViewport viewport = _scene->get_viewport();
-            float aspect = std::max(viewport.width, viewport.height) / std::min(viewport.width, viewport.height);
+            ZRect viewport_rect = ZEngine::instance()->get_viewport_rect();
+            float viewport_width = viewport_rect.max().x();
+            float viewport_height = viewport_rect.max().y();
+            float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
             
-            _projection_matrix = geometry::perspective(_field_of_view,
+            _projection_matrix = ZGeometry::perspective(_field_of_view,
                                                        aspect,
                                                        _near_clip,
                                                        _far_clip);
@@ -114,7 +116,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = geometry::lookat(_position, _look_direction, ZVec3::UnitY());
+        _modelview_matrix = ZGeometry::lookat(_position, _look_direction, ZVec3::UnitY());
         _modelview_dirty = false;
     }
 }

@@ -7,6 +7,7 @@
  
 #include <zge/engine.h>
 #include <zge/application.h>
+#include <zge/display.h>
 #include <zge/exception.h>
 #include <zge/run_loop.h>
 
@@ -49,12 +50,22 @@ void ZEngine::initialize()
             }
         }
     });
+}
+
+#pragma mark - Utility
+
+ZRect ZEngine::get_viewport_rect() const
+{
+    ZRect viewport_rect;
+    ZDisplay *cur_display = _display_manager->get_current_display();
+    if (cur_display != nullptr) {
+        ZDisplayMode disp_mode = cur_display->get_display_mode();
+        ZVec2 min(0.f, 0.f);
+        ZVec2 max(disp_mode.width, disp_mode.height);
+        viewport_rect = ZRect(min, max);
+    }
     
-    // push an "active" event through since SDL doesn't do it when the app launches
-    ZEvent event;
-    event.type = ZAPPLICATION_EVENT;
-    event.event.application_event = ZAPPLICATION_ACTIVE_EVENT;
-    _input_manager->push_event(event);
+    return viewport_rect;
 }
 
 } // namespace zge

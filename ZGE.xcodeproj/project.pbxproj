@@ -22,7 +22,6 @@
 		0C977F701737510C0071E8E6 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3C616D208A900E43D7B /* camera.cpp */; };
 		0C977F721737510C0071E8E6 /* gl_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3C816D208A900E43D7B /* gl_buffer.cpp */; };
 		0C977F751737510C0071E8E6 /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3CD16D208A900E43D7B /* model.cpp */; };
-		0C977F771737510C0071E8E6 /* viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3CF16D208A900E43D7B /* viewport.cpp */; };
 		0C977F791737510C0071E8E6 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D216D208A900E43D7B /* exception.cpp */; };
 		0C977F7B1737510C0071E8E6 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D416D208A900E43D7B /* logger.cpp */; };
 		0C977F7D1737510C0071E8E6 /* notification_center.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D616D208A900E43D7B /* notification_center.cpp */; };
@@ -47,7 +46,6 @@
 		0C977F9E1737512D0071E8E6 /* gl_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3C916D208A900E43D7B /* gl_buffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977FA01737512D0071E8E6 /* gl_includes.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3CC16D208A900E43D7B /* gl_includes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977FA11737512D0071E8E6 /* model.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3CE16D208A900E43D7B /* model.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C977FA31737512D0071E8E6 /* viewport.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D016D208A900E43D7B /* viewport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977FA51737512D0071E8E6 /* exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D316D208A900E43D7B /* exception.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977FA71737512D0071E8E6 /* logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D516D208A900E43D7B /* logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977FA91737512D0071E8E6 /* notification_center.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3D716D208A900E43D7B /* notification_center.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -385,8 +383,6 @@
 		0C50D3CC16D208A900E43D7B /* gl_includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_includes.h; sourceTree = "<group>"; };
 		0C50D3CD16D208A900E43D7B /* model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
 		0C50D3CE16D208A900E43D7B /* model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = model.h; sourceTree = "<group>"; };
-		0C50D3CF16D208A900E43D7B /* viewport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viewport.cpp; sourceTree = "<group>"; };
-		0C50D3D016D208A900E43D7B /* viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewport.h; sourceTree = "<group>"; };
 		0C50D3D216D208A900E43D7B /* exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
 		0C50D3D316D208A900E43D7B /* exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exception.h; sourceTree = "<group>"; };
 		0C50D3D416D208A900E43D7B /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
@@ -1066,8 +1062,6 @@
 				0C50D3CC16D208A900E43D7B /* gl_includes.h */,
 				0C50D3CE16D208A900E43D7B /* model.h */,
 				0C50D3CD16D208A900E43D7B /* model.cpp */,
-				0C50D3D016D208A900E43D7B /* viewport.h */,
-				0C50D3CF16D208A900E43D7B /* viewport.cpp */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -1155,7 +1149,6 @@
 				0C977F9E1737512D0071E8E6 /* gl_buffer.h in Headers */,
 				0C977FA01737512D0071E8E6 /* gl_includes.h in Headers */,
 				0C977FA11737512D0071E8E6 /* model.h in Headers */,
-				0C977FA31737512D0071E8E6 /* viewport.h in Headers */,
 				0C977FA51737512D0071E8E6 /* exception.h in Headers */,
 				0C977FA71737512D0071E8E6 /* logger.h in Headers */,
 				0C977FA91737512D0071E8E6 /* notification_center.h in Headers */,
@@ -1247,7 +1240,6 @@
 				0C977F701737510C0071E8E6 /* camera.cpp in Sources */,
 				0C977F721737510C0071E8E6 /* gl_buffer.cpp in Sources */,
 				0C977F751737510C0071E8E6 /* model.cpp in Sources */,
-				0C977F771737510C0071E8E6 /* viewport.cpp in Sources */,
 				0C977F791737510C0071E8E6 /* exception.cpp in Sources */,
 				0C977F7B1737510C0071E8E6 /* logger.cpp in Sources */,
 				0C977F7D1737510C0071E8E6 /* notification_center.cpp in Sources */,

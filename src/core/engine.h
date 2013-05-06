@@ -7,10 +7,11 @@
  
 #pragma once
 
-#include <zge/noncopyable.h>
 #include <zge/display_manager.h>
 #include <zge/game_manager.h>
+#include <zge/geometry.h>
 #include <zge/input_manager.h>
+#include <zge/noncopyable.h>
 
 namespace zge {
 
@@ -28,6 +29,9 @@ public:
     ZDisplayManagerRef get_display_manager() { return _display_manager; }
     ZGameManagerRef get_game_manager() { return _game_manager; }
     ZInputManagerRef get_input_manager() { return _input_manager; }
+    
+    /** Utility **/
+    ZRect get_viewport_rect() const;
     
     /** Initialization **/
     void initialize();

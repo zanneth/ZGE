@@ -9,7 +9,6 @@
 
 #include <zge/camera.h>
 #include <zge/node.h>
-#include <zge/viewport.h>
 #include <memory>
 
 namespace zge {
@@ -18,7 +17,6 @@ typedef std::shared_ptr<class ZScene> ZSceneRef;
 
 class ZScene : public ZNode {
     ZCameraRef _active_camera;
-    ZViewport _viewport;
     
 public:
     ZScene();
@@ -27,8 +25,6 @@ public:
     
     /** Accessors **/
     ZCameraRef get_active_camera() { return _active_camera; }
-    ZViewport get_viewport() { return _viewport; }
-    void set_viewport(const ZViewport &vp) { _viewport = vp; }
     
     /** Node Overrides **/
     void add_child(ZNodeRef node) override;

@@ -21,11 +21,14 @@ void ZDisplay::initialize()
 {
     _init_window();
     _init_opengl();
+    _initialized = true;
 }
 
 void ZDisplay::update(uint32_t dtime)
 {
     SDL_GL_MakeCurrent(_window, _context);
+    
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     
     _last_render += dtime;
     if (_last_render >= _display_mode.refresh_rate * 1000.0) {

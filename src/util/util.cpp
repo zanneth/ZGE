@@ -12,9 +12,8 @@
 #include <sstream>
 
 namespace zge {
-namespace util {
 
-std::string format(const std::string &format, ...)
+std::string ZUtil::format(const std::string &format, ...)
 {
     char *final_string = nullptr;
     unsigned size = 128;
@@ -42,7 +41,7 @@ std::string format(const std::string &format, ...)
     return result;
 }
 
-std::string separate_components(const std::vector<std::string> &vec, std::string delimiter)
+std::string ZUtil::separate_components(const std::vector<std::string> &vec, std::string delimiter)
 {
     std::ostringstream oss;
     unsigned idx = 0;
@@ -58,7 +57,7 @@ std::string separate_components(const std::vector<std::string> &vec, std::string
     return oss.str();
 }
 
-void assert_true(bool expression, const char *format, ...) throw()
+void ZUtil::assert_true(bool expression, const char *format, ...) throw()
 {
     if (!expression) {
         char error_message[512];
@@ -74,5 +73,4 @@ void assert_true(bool expression, const char *format, ...) throw()
     }
 }
 
-} // namespace util
 } // namespace zge

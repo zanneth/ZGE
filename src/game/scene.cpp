@@ -41,17 +41,10 @@ void ZScene::_draw_internal()
     if (_active_camera.get() == nullptr) {
         return;
     }
-    
-    glClearColor(0.0, 0.0, 0.0, 1.0);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    
-    _viewport.open();
+        
     _active_camera->open();
-    
     ZNode::_draw_internal();
-    
     _active_camera->close();
-    _viewport.close();
 }
 
 #pragma mark - Private

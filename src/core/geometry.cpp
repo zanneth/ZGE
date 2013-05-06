@@ -9,10 +9,8 @@
 #include <zge/logger.h>
 
 namespace zge {
-namespace geometry {
 
-ZMat4 frustum(float left, float right, float bottom, float top,
-              float nearZ, float farZ)
+ZMat4 ZGeometry::frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
     ZMat4 mat(ZMat4::Identity());
     float deltaX = right - left;
@@ -36,7 +34,7 @@ ZMat4 frustum(float left, float right, float bottom, float top,
     return mat;
 }
 
-ZMat4 perspective(float fovy, float aspect, float nearZ, float farZ)
+ZMat4 ZGeometry::perspective(float fovy, float aspect, float nearZ, float farZ)
 {
     float fheight   = std::tan(fovy / 360.0 * M_PI) * nearZ;
     float fwidth    = fheight * aspect;
@@ -44,7 +42,7 @@ ZMat4 perspective(float fovy, float aspect, float nearZ, float farZ)
     return frustum(-fwidth, fwidth, -fheight, fheight, nearZ, farZ);
 }
 
-ZMat4 lookat(const ZVec3 &eye, const ZVec3 &center, const ZVec3 &up)
+ZMat4 ZGeometry::lookat(const ZVec3 &eye, const ZVec3 &center, const ZVec3 &up)
 {
     ZVec3 n = (eye + -center).normalized();
     ZVec3 u = (up.cross(n)).normalized();
@@ -59,5 +57,4 @@ ZMat4 lookat(const ZVec3 &eye, const ZVec3 &center, const ZVec3 &up)
     return mat;
 }
 
-} // namespace geometry
 } // namespace zge

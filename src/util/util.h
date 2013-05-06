@@ -11,19 +11,21 @@
 #include <string>
 #include <vector>
 
-#define zassert(...)    util::assert_true(__VA_ARGS__)
+#define zassert(...)    ZUtil::assert_true(__VA_ARGS__)
 
 namespace zge {
-namespace util {
 
-template <typename T>
-inline T degrees_to_radians(T degrees)
-{
-    return degrees * (M_PI / 180.0f);
-}
-std::string format(const std::string &format, ...);
-std::string separate_components(const std::vector<std::string> &vec, std::string delimiter);
-void assert_true(bool expression, const char *format, ...) throw();
+class ZUtil {
+public:
+    template <typename T>
+    static inline T degrees_to_radians(T degrees)
+    {
+        return degrees * (M_PI / 180.0f);
+    }
 
-} // namespace util
+    static std::string format(const std::string &format, ...);
+    static std::string separate_components(const std::vector<std::string> &vec, std::string delimiter);
+    static void assert_true(bool expression, const char *format, ...) throw();
+};
+
 } // namespace zge

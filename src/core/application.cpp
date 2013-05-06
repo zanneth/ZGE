@@ -57,12 +57,20 @@ void ZApplication::run()
     int sdl_result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
     if (sdl_result < 0) {
         ZException ex(APPLICATION_EXCEPTION_CODE);
-        ex.extra_info = util::format("SDL failed to initialize: %s", SDL_GetError());
+        ex.extra_info = ZUtil::format("SDL failed to initialize: %s", SDL_GetError());
         throw ex;
     }
     
     // initialize random number generator
     std::srand((unsigned)std::time(NULL));
+    
+    // perform any remaining initializations
+    _time_start = SDL_GetTicks();
+    _change_resources_directory();
+    application_ready();
+    
+    // start main run loop (doesn't return)
+    start_main_runloop();
 }
 
 #pragma mark - Accessors
