@@ -116,7 +116,6 @@ void ZApplication::exit()
 void ZApplication::handle_application_event(const ZEvent &event)
 {
     ZApplicationEvent app_event = event.event.application_event;
-    ZLogger::log(event.get_description());
     switch (app_event) {
         case ZAPPLICATION_QUIT_EVENT:
             this->exit();

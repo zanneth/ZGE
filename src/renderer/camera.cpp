@@ -63,18 +63,16 @@ void ZCamera::set_transform(const Affine3f &transform)
 void ZCamera::_construct_projection()
 {
     if (_projection_dirty) {
-        if (_scene) {
-            AlignedBox2f viewport_rect = ZEngine::instance()->get_viewport_rect();
-            float viewport_width = viewport_rect.max().x();
-            float viewport_height = viewport_rect.max().y();
-            float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
-            
-            _projection_matrix = ZGeometry::perspective(_field_of_view,
-                                                       aspect,
-                                                       _near_clip,
-                                                       _far_clip);
-            _projection_dirty = false;
-        }
+        AlignedBox2f viewport_rect = ZEngine::instance()->get_viewport_rect();
+        float viewport_width = viewport_rect.max().x();
+        float viewport_height = viewport_rect.max().y();
+        float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
+        
+        _projection_matrix = ZGeometry::perspective(_field_of_view,
+                                                   aspect,
+                                                   _near_clip,
+                                                   _far_clip);
+        _projection_dirty = false;
     }
 }
 

@@ -98,12 +98,12 @@ void ZInputManager::run(uint32_t dtime)
         event.timestamp = SDL_GetTicks();
         event.is_repeat = false;
         push_event(event);
-    }
-    
-    // remove responders
-    while (!_removal_queue.empty()) {
-        _remove_responder_internal(_removal_queue.front());
-        _removal_queue.pop();
+        
+        // remove responders
+        while (!_removal_queue.empty()) {
+            _remove_responder_internal(_removal_queue.front());
+            _removal_queue.pop();
+        }
     }
 }
 
