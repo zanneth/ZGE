@@ -58,24 +58,6 @@ void ZCamera::set_transform(const Affine3f &transform)
     ZNode::set_transform(transform);
 }
 
-void ZCamera::update(uint32_t dtime)
-{
-    Vector3f velocity = get_velocity();
-    
-    if (velocity != ZVec3Zero) {
-        Vector3f position = get_position();
-        Vector3f look = get_look_direction();
-        look += velocity;
-        set_look_direction(look);
-        
-        Affine3f translation(Affine3f::Identity());
-        translation.translate(position);
-        Vector3f look_relative = translation * look;
-        position += look_relative.normalized();
-        set_position(position);
-    }
-}
-    
 #pragma mark - Private
 
 void ZCamera::_construct_projection()

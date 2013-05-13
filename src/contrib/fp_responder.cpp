@@ -59,14 +59,6 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             }
             const float scalar = 0.05f;
             movement_vector = movement_vector * scalar;
-            
-            Vector3f velocity = camera->get_velocity();
-            if (key_event.state == ZPRESSED) {
-                velocity += movement_vector;
-            } else {
-                velocity -= movement_vector;
-            }
-            camera->set_velocity(velocity);
         }
     }
 }

@@ -24,7 +24,6 @@ class ZNode {
 protected:
     unsigned _uid;
     Vector3f _position;
-    Vector3f _velocity;
     Affine3f _transform;
     
     ZNode *_parent; // weak
@@ -50,8 +49,6 @@ public:
     ZScene* get_scene() { return _scene; }
     Vector3f get_position() { return _position; }
     void set_position(const Vector3f &position);
-    Vector3f get_velocity() { return _velocity; }
-    void set_velocity(const Vector3f &velocity) { _velocity = velocity; }
     
     virtual Affine3f get_transform() { return _transform; }
     virtual void set_transform(const Affine3f &transform) { _transform = transform; }
@@ -71,7 +68,7 @@ public:
     virtual std::string get_description();
     
     /* Updating */
-    virtual void update(uint32_t dtime);
+    virtual void update(uint32_t dtime) {}
     
     /* Drawing */
     virtual void before_draw() {}

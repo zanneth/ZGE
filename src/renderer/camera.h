@@ -49,7 +49,6 @@ public:
     
     /* Node Overrides */
     void set_transform(const Affine3f &transform) override;
-    void update(uint32_t dtime) override;
     
 private:
     void _construct_projection();

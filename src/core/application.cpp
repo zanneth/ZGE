@@ -127,13 +127,13 @@ void ZApplication::handle_application_event(const ZEvent &event)
             }
             if (_capture_input) {
                 // TODO: fallout from switching to SDL 2.0
-//                SDL_WM_GrabInput(SDL_GRAB_ON);
+                // SDL_WM_GrabInput(SDL_GRAB_ON);
             }
             break;
         case ZAPPLICATION_INACTIVE_EVENT:
             SDL_ShowCursor(1);
             // TODO: fallout from switching to SDL 2.0
-//            SDL_WM_GrabInput(SDL_GRAB_OFF);
+            // SDL_WM_GrabInput(SDL_GRAB_OFF);
             break;
         default:
             break;
