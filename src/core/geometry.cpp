@@ -10,9 +10,9 @@
 
 namespace zge {
 
-ZMat4 ZGeometry::frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
+Matrix4f ZGeometry::frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
-    ZMat4 mat(ZMat4::Identity());
+    Matrix4f mat(Matrix4f::Identity());
     float deltaX = right - left;
     float deltaY = top - bottom;
     float deltaZ = farZ - nearZ;
@@ -34,7 +34,7 @@ ZMat4 ZGeometry::frustum(float left, float right, float bottom, float top, float
     return mat;
 }
 
-ZMat4 ZGeometry::perspective(float fovy, float aspect, float nearZ, float farZ)
+Matrix4f ZGeometry::perspective(float fovy, float aspect, float nearZ, float farZ)
 {
     float fheight   = std::tan(fovy / 360.0 * M_PI) * nearZ;
     float fwidth    = fheight * aspect;
@@ -42,13 +42,13 @@ ZMat4 ZGeometry::perspective(float fovy, float aspect, float nearZ, float farZ)
     return frustum(-fwidth, fwidth, -fheight, fheight, nearZ, farZ);
 }
 
-ZMat4 ZGeometry::lookat(const ZVec3 &eye, const ZVec3 &center, const ZVec3 &up)
+Matrix4f ZGeometry::lookat(const Vector3f &eye, const Vector3f &center, const Vector3f &up)
 {
-    ZVec3 n = (eye + -center).normalized();
-    ZVec3 u = (up.cross(n)).normalized();
-    ZVec3 v = n.cross(u);
+    Vector3f n = (eye + -center).normalized();
+    Vector3f u = (up.cross(n)).normalized();
+    Vector3f v = n.cross(u);
     
-    ZMat4 mat;
+    Matrix4f mat;
     mat <<
         u.x(), u.y(), u.z(), -u.dot(eye),
         v.x(), v.y(), v.z(), -v.dot(eye),

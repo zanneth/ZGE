@@ -16,7 +16,7 @@ ZScene::ZScene() : ZNode(),
     _active_camera(nullptr)
 {
     _scene = this;
-    set_position(ZVec3(0.0, 0.0, 0.0));
+    set_position({0.0, 0.0, 0.0});
 }
 
 ZScene::~ZScene()

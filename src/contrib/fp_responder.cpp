@@ -33,14 +33,14 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             float dx = mouse_event.velocity.x() * _mouse_speed;
             float dy = mouse_event.velocity.y() * _mouse_speed;
             
-            ZAffine3 rotation = ZAffine3::Identity();
-            rotation.rotate(ZAngleAxis(-dx, ZVec3::UnitY()));
-            rotation.rotate(ZAngleAxis(-dy, ZVec3::UnitX()));
+            Affine3f rotation = Affine3f::Identity();
+            rotation.rotate(AngleAxisf(-dx, Vector3f::UnitY()));
+            rotation.rotate(AngleAxisf(-dy, Vector3f::UnitX()));
             
             camera->set_transform(rotation);
         } else if (event.type == ZKEY_DOWN_EVENT || event.type == ZKEY_UP_EVENT) {
             ZKeyEvent key_event = event.event.key_event;
-            ZVec3 movement_vector(0.0, 0.0, 0.0);
+            Vector3f movement_vector(0.0, 0.0, 0.0);
             switch (key_event.key) {
                 case ZKEY_W:
                     movement_vector = { 0.0, 0.0, -1.0 };
@@ -60,7 +60,7 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
             const float scalar = 0.05f;
             movement_vector = movement_vector * scalar;
             
-            ZVec3 velocity = camera->get_velocity();
+            Vector3f velocity = camera->get_velocity();
             if (key_event.state == ZPRESSED) {
                 velocity += movement_vector;
             } else {

@@ -25,11 +25,11 @@ public:
     ZDisplayManager();
     ~ZDisplayManager();
     
-    /** Creating the Display **/
+    /* Creating the Display */
     ZDisplay* create_display(const ZDisplayMode &mode);
     ZDisplay* get_current_display() { return _current_display; }
     
-    /** schedulable **/
+    /* schedulable */
     void run(uint32_t dtime) override;
 };
 

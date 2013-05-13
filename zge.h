@@ -34,7 +34,6 @@
 #include <zge/schedulable.h>
 #include <zge/types.h>
 #include <zge/util.h>
-#include <zge/viewport.h>
 
 // SDL does this for some reason
 #ifdef main

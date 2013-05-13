@@ -24,10 +24,10 @@ public:
     ZFirstPersonResponder();
     ~ZFirstPersonResponder() {}
     
-    /** Responder Overrides **/
+    /* Responder Overrides */
     void set_function(const ZResponderFunction&) override {}
     
-    /** Accessors **/
+    /* Accessors */
     ZSceneRef get_scene() { return _scene.lock(); }
     void set_scene(ZSceneRef scene) { _scene = scene; }
     float get_mouse_speed() { return _mouse_speed; }

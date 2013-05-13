@@ -28,13 +28,13 @@ public:
     ZApplication(int argc, char **argv);
     virtual ~ZApplication();
     
-    /** Getting the Application Instance **/
+    /* Getting the Application Instance */
     static ZApplication* get_current_application();
     
-    /** Running **/
+    /* Running */
     void run();
     
-    /** Accessors **/
+    /* Accessors */
     std::list<std::string> get_arguments() { return _arguments; }
     void set_arguments(int argc, char **argv);
     bool shows_cursor() { return _show_cursor; }
@@ -42,20 +42,20 @@ public:
     bool captures_input() { return _capture_input; }
     void set_captures_input(bool capture) { _capture_input = capture; }
     
-    /** Accessing the Main Run Loop **/
+    /* Accessing the Main Run Loop */
     ZRunloop* get_main_runloop();
     void start_main_runloop();
     
-    /** Utility Functions **/
+    /* Utility Functions */
     uint32_t get_time_running(); // returns time in seconds
     void exit();
     
-    /** Handling Events **/
+    /* Handling Events */
     // the engine is responsible for pushing events to the application instance since
     // it is the owner of the input manager
     virtual void handle_application_event(const ZEvent &event);
     
-    /** Callbacks **/
+    /* Callbacks */
     virtual void application_ready() {}
 
 private:

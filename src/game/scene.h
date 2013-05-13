@@ -23,10 +23,10 @@ public:
     ZScene(const ZScene &) = default;
     ~ZScene();
     
-    /** Accessors **/
+    /* Accessors */
     ZCameraRef get_active_camera() { return _active_camera; }
     
-    /** Node Overrides **/
+    /* Node Overrides */
     void add_child(ZNodeRef node) override;
     
 private:

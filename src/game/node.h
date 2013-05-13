@@ -23,9 +23,9 @@ typedef std::shared_ptr<class ZNode> ZNodeRef;
 class ZNode {
 protected:
     unsigned _uid;
-    ZVec3 _position;
-    ZVec3 _velocity;
-    ZAffine3 _transform;
+    Vector3f _position;
+    Vector3f _velocity;
+    Affine3f _transform;
     
     ZNode *_parent; // weak
     ZScene *_scene; // weak
@@ -34,50 +34,50 @@ protected:
     ZModelRef _model;
     
 private:
-    ZAffine3 _pos_transform;
+    Affine3f _pos_transform;
     
 public:
     ZNode();
     ZNode(const ZNode&) = default;
     virtual ~ZNode();
     
-    /** Operators **/
+    /* Operators */
     bool operator==(const ZNode &other);
     bool operator!=(const ZNode &other);
     
-    /** Accessors **/
+    /* Accessors */
     ZNode* get_parent() { return _parent; }
     ZScene* get_scene() { return _scene; }
-    ZVec3 get_position() { return _position; }
-    void set_position(const ZVec3 &position);
-    ZVec3 get_velocity() { return _velocity; }
-    void set_velocity(const ZVec3 &velocity) { _velocity = velocity; }
+    Vector3f get_position() { return _position; }
+    void set_position(const Vector3f &position);
+    Vector3f get_velocity() { return _velocity; }
+    void set_velocity(const Vector3f &velocity) { _velocity = velocity; }
     
-    virtual ZAffine3 get_transform() { return _transform; }
-    virtual void set_transform(const ZAffine3 &transform) { _transform = transform; }
+    virtual Affine3f get_transform() { return _transform; }
+    virtual void set_transform(const Affine3f &transform) { _transform = transform; }
     virtual ZModelRef get_model() { return _model; }
     virtual void set_model(ZModelRef model) { _model = model; }
     
-    /** Manipulating Geometry **/
-    void append_transform(const ZAffine3 &transform);
+    /* Manipulating Geometry */
+    void append_transform(const Affine3f &transform);
     
-    /** Managing Sub-Nodes **/
+    /* Managing Sub-Nodes */
     virtual void add_child(ZNodeRef node);
     virtual bool remove_child(ZNodeRef node);
     virtual std::vector<ZNodeRef> get_children() { return _children; }
     virtual void remove_from_parent();
     
-    /** Description **/
+    /* Description */
     virtual std::string get_description();
     
-    /** Updating **/
+    /* Updating */
     virtual void update(uint32_t dtime);
     
-    /** Drawing **/
+    /* Drawing */
     virtual void before_draw() {}
     virtual void after_draw() {}
     
-    /** Callbacks **/
+    /* Callbacks */
     virtual void on_enter() {}
     virtual void on_exit() {}
     

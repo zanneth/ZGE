@@ -21,9 +21,9 @@ class ZCamera : public ZNode {
     GLfloat _near_clip;
     GLfloat _far_clip;
     
-    ZMat4 _projection_matrix;
-    ZMat4 _modelview_matrix;
-    ZVec3 _look_direction;
+    Matrix4f _projection_matrix;
+    Matrix4f _modelview_matrix;
+    Vector3f _look_direction;
     
     bool _projection_dirty;
     bool _modelview_dirty;
@@ -31,7 +31,7 @@ class ZCamera : public ZNode {
 public:
     ZCamera();
     
-    /** Accessors **/
+    /* Accessors */
     GLfloat get_fov() { return _field_of_view; }
     void set_fov(GLfloat degrees) { _field_of_view = degrees; _projection_dirty = true; }
     GLfloat get_near_clipping_distance() { return _near_clip; }
@@ -39,16 +39,16 @@ public:
     GLfloat get_far_clipping_distance() { return _far_clip; }
     void set_far_clipping_distance(GLfloat distance) { _far_clip = distance; _projection_dirty = true; }
     
-    ZMat4 get_modelview_matrix() { return _modelview_matrix; }
-    ZVec3 get_look_direction() { return _look_direction; }
-    void set_look_direction(const ZVec3 &look) { _look_direction = look; _modelview_dirty = true; }
+    Matrix4f get_modelview_matrix() { return _modelview_matrix; }
+    Vector3f get_look_direction() { return _look_direction; }
+    void set_look_direction(const Vector3f &look) { _look_direction = look; _modelview_dirty = true; }
     
-    /** Open/Close **/
+    /* Open/Close */
     void open();
     void close();
     
-    /** Node Overrides **/
-    void set_transform(const ZAffine3 &transform) override;
+    /* Node Overrides */
+    void set_transform(const Affine3f &transform) override;
     void update(uint32_t dtime) override;
     
 private:

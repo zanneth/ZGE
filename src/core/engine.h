@@ -25,15 +25,15 @@ class ZEngine : ZNoncopyable {
 public:
     static ZEngine* instance();
     
-    /** Accessors **/
+    /* Accessors */
     ZDisplayManagerRef get_display_manager() { return _display_manager; }
     ZGameManagerRef get_game_manager() { return _game_manager; }
     ZInputManagerRef get_input_manager() { return _input_manager; }
     
-    /** Utility **/
-    ZRect get_viewport_rect() const;
+    /* Utility */
+    AlignedBox2f get_viewport_rect() const;
     
-    /** Initialization **/
+    /* Initialization */
     void initialize();
     
 private:

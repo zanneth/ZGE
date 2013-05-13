@@ -30,15 +30,15 @@ public:
     
     ZGLBuffer& operator=(ZGLBuffer&&);
     
-    /** Accessors **/
+    /* Accessors */
     GLuint get_buffer() { return _buffer; }
     GLenum get_target() { return _target; }
     void set_target(GLenum target) { _target = target; }
     
-    /** Loading Data **/
+    /* Loading Data */
     void load_data(GLsizeiptr size, const GLvoid *data, GLenum usage);
     
-    /** Actions **/
+    /* Actions */
     void bind();
 };
 

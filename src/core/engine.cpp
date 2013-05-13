@@ -54,15 +54,15 @@ void ZEngine::initialize()
 
 #pragma mark - Utility
 
-ZRect ZEngine::get_viewport_rect() const
+AlignedBox2f ZEngine::get_viewport_rect() const
 {
-    ZRect viewport_rect;
+    AlignedBox2f viewport_rect;
     ZDisplay *cur_display = _display_manager->get_current_display();
     if (cur_display != nullptr) {
         ZDisplayMode disp_mode = cur_display->get_display_mode();
-        ZVec2 min(0.f, 0.f);
-        ZVec2 max(disp_mode.width, disp_mode.height);
-        viewport_rect = ZRect(min, max);
+        Vector2f min(0.f, 0.f);
+        Vector2f max(disp_mode.width, disp_mode.height);
+        viewport_rect = AlignedBox2f(min, max);
     }
     
     return viewport_rect;

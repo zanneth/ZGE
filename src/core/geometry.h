@@ -7,29 +7,20 @@
  
 #pragma once
 
+#include <Eigen/Eigen>
+
+using namespace Eigen;
+
 namespace zge {
 
-/** Shorthands **/
-typedef Eigen::Vector2f ZVec2;
-typedef Eigen::Vector3f ZVec3;
-typedef Eigen::Vector4f ZVec4;
-typedef Eigen::Matrix2f ZMat2;
-typedef Eigen::Matrix3f ZMat3;
-typedef Eigen::Matrix4f ZMat4;
-typedef Eigen::AlignedBox2f ZRect;
-typedef Eigen::Affine2f ZAffine2;
-typedef Eigen::Affine3f ZAffine3;
-typedef Eigen::AngleAxisf ZAngleAxis;
-typedef Eigen::Quaternionf ZQuaternion;
-
-const ZVec2 ZVec2Zero = ZVec2(0.0, 0.0);
-const ZVec3 ZVec3Zero = ZVec3(0.0, 0.0, 0.0);
+const Vector2f Vector2fZero = { 0.f, 0.f };
+const Vector3f ZVec3Zero = { 0.f, 0.f, 0.f };
 
 class ZGeometry {
 public:
-    static ZMat4 frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
-    static ZMat4 perspective(float fovy, float aspect, float nearZ, float farZ);
-    static ZMat4 lookat(const ZVec3 &eye, const ZVec3 &center, const ZVec3 &up);
+    static Matrix4f frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
+    static Matrix4f perspective(float fovy, float aspect, float nearZ, float farZ);
+    static Matrix4f lookat(const Vector3f &eye, const Vector3f &center, const Vector3f &up);
 };
 
 } // namespace zge

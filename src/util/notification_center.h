@@ -35,7 +35,7 @@ struct ZNotification {
 };
 
 typedef std::function<void(const ZNotification*)> ZObserverFunction;
-typedef unsigned ZObserverHandle;
+typedef uint32_t ZObserverHandle;
 
 class ZNotificationCenter : ZNoncopyable {
     typedef std::pair<ZObserverHandle, ZObserverFunction> observer_pair;

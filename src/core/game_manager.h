@@ -23,12 +23,12 @@ class ZGameManager : public ZSchedulable, ZNoncopyable {
     std::stack<ZSceneRef> _scene_stack;
     
 public:
-    /** Scene Management **/
+    /* Scene Management */
     ZSceneRef get_current_scene();
     void push_scene(ZSceneRef scene);
     ZSceneRef pop_scene();
     
-    /** schedulable **/
+    /* schedulable */
     void run(uint32_t dtime) override;
 };
 

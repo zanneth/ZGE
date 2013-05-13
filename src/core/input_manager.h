@@ -34,16 +34,16 @@ public:
     ZResponder(ZResponder&&)        = default;
     virtual ~ZResponder()           = default;
 
-    /** Accessors **/
+    /* Accessors */
     ZResponderFunction get_function() { return _function; }
     virtual void set_function(const ZResponderFunction &func) { _function = func; }
     bool swallows_events() { return _swallows_events; }
     virtual void set_swallows_events(bool swallows) { _swallows_events = swallows; }
 
-    /** Event Sending Convenience **/
+    /* Event Sending Convenience */
     void send_event(const ZEvent &event);
 
-    /** Operators **/
+    /* Operators */
     bool operator==(const ZResponder&);
     bool operator!=(const ZResponder&);
 };
@@ -56,17 +56,17 @@ public:
     ZInputManager()     = default;
     ~ZInputManager()    = default;
     
-    /** Adding/Removing Responders **/
+    /* Adding/Removing Responders */
     void add_responder(ZResponderRef responder);
     ZResponderRef add_responder(ZResponderFunction func, bool swallow_events = false); // shorthand
     void remove_responder(ZResponderRef responder);
     void promote_first_responder(ZResponderRef responder);
     void demote_responder(ZResponderRef responder);
     
-    /** Schedulable Overrides **/
+    /* Schedulable Overrides */
     void run(uint32_t dtime) override;
     
-    /** Sending Events through the System **/
+    /* Sending Events through the System */
     void push_event(const ZEvent &event);
     
 private:

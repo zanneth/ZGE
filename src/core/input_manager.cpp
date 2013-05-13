@@ -169,7 +169,7 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     
     // parse mouse button event
     if (sdl_event.type == SDL_MOUSEBUTTONDOWN || sdl_event.type == SDL_MOUSEBUTTONUP) {
-        ZVec2 location = ZVec2(sdl_event.button.x, sdl_event.button.y);
+        Vector2f location = Vector2f(sdl_event.button.x, sdl_event.button.y);
         event.event.mouse_event.location = location;
         
         ZMouseButtonFlags button;
@@ -217,8 +217,8 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     
     // parse mouse motion event
     if (sdl_event.type == SDL_MOUSEMOTION) {
-        ZVec2 location = ZVec2(sdl_event.motion.x, sdl_event.motion.y);
-        ZVec2 velocity = ZVec2(sdl_event.motion.xrel, sdl_event.motion.yrel);
+        Vector2f location = Vector2f(sdl_event.motion.x, sdl_event.motion.y);
+        Vector2f velocity = Vector2f(sdl_event.motion.xrel, sdl_event.motion.yrel);
         event.event.mouse_event.location = location;
         event.event.mouse_event.velocity = velocity;
         

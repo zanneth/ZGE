@@ -42,16 +42,16 @@ void ZCamera::close()
     
 #pragma mark - Node Overrides
 
-void ZCamera::set_transform(const ZAffine3 &transform)
+void ZCamera::set_transform(const Affine3f &transform)
 {
-    ZVec3 position = get_position();
-    ZAffine3 translation = ZAffine3::Identity();
+    Vector3f position = get_position();
+    Affine3f translation = Affine3f::Identity();
     translation.translate(position);
     
-    ZAffine3 final_transform = translation * transform;
+    Affine3f final_transform = translation * transform;
     final_transform.translate(-position);
     
-    ZVec3 look = get_look_direction();
+    Vector3f look = get_look_direction();
     look = final_transform * look;
     set_look_direction(look);
     
@@ -60,17 +60,17 @@ void ZCamera::set_transform(const ZAffine3 &transform)
 
 void ZCamera::update(uint32_t dtime)
 {
-    ZVec3 velocity = get_velocity();
+    Vector3f velocity = get_velocity();
     
     if (velocity != ZVec3Zero) {
-        ZVec3 position = get_position();
-        ZVec3 look = get_look_direction();
+        Vector3f position = get_position();
+        Vector3f look = get_look_direction();
         look += velocity;
         set_look_direction(look);
         
-        ZAffine3 translation(ZAffine3::Identity());
+        Affine3f translation(Affine3f::Identity());
         translation.translate(position);
-        ZVec3 look_relative = translation * look;
+        Vector3f look_relative = translation * look;
         position += look_relative.normalized();
         set_position(position);
     }
@@ -82,7 +82,7 @@ void ZCamera::_construct_projection()
 {
     if (_projection_dirty) {
         if (_scene) {
-            ZRect viewport_rect = ZEngine::instance()->get_viewport_rect();
+            AlignedBox2f viewport_rect = ZEngine::instance()->get_viewport_rect();
             float viewport_width = viewport_rect.max().x();
             float viewport_height = viewport_rect.max().y();
             float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
@@ -116,7 +116,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = ZGeometry::lookat(_position, _look_direction, ZVec3::UnitY());
+        _modelview_matrix = ZGeometry::lookat(_position, _look_direction, Vector3f::UnitY());
         _modelview_dirty = false;
     }
 }

@@ -1183,7 +1183,7 @@
 		563B6E8D14B2FD2600004C6A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = omegaHern;
 			};
 			buildConfigurationList = 563B6E9014B2FD2600004C6A /* Build configuration list for PBXProject "ZGE" */;
@@ -1253,8 +1253,6 @@
 		0C977F52173750B90071E8E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1281,8 +1279,6 @@
 		0C977F53173750B90071E8E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1319,6 +1315,7 @@
 					"$(SRCROOT)/include",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
 				PUBLIC_HEADERS_FOLDER_PATH = zge;
 			};
 			name = Debug;
@@ -1356,6 +1353,7 @@
 				0C977F53173750B90071E8E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		563B6E9014B2FD2600004C6A /* Build configuration list for PBXProject "ZGE" */ = {
 			isa = XCConfigurationList;

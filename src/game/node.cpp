@@ -19,10 +19,10 @@ ZNode::ZNode() :
     _uid(__node_global_uid_count++),
     _position(0.0, 0.0, 0.0),
     _velocity(0.0, 0.0, 0.0),
-    _transform(ZAffine3::Identity()),
+    _transform(Affine3f::Identity()),
     _parent(nullptr),
     _scene(nullptr),
-    _pos_transform(ZAffine3::Identity())
+    _pos_transform(Affine3f::Identity())
 {}
 
 ZNode::~ZNode()
@@ -44,7 +44,7 @@ bool ZNode::operator!=(const ZNode &other)
 
 #pragma mark - Accessors
 
-void ZNode::set_position(const ZVec3 &position)
+void ZNode::set_position(const Vector3f &position)
 {
     _position = position;
     _pos_transform = Eigen::Translation3f(position);
@@ -52,7 +52,7 @@ void ZNode::set_position(const ZVec3 &position)
 
 #pragma mark - Manipulating Geometry
 
-void ZNode::append_transform(const ZAffine3 &transform)
+void ZNode::append_transform(const Affine3f &transform)
 {
     _transform = _transform * transform;
 }
@@ -104,9 +104,9 @@ std::string ZNode::get_description()
 
 void ZNode::update(uint32_t dtime)
 {
-    ZVec3 velocity = get_velocity();
+    Vector3f velocity = get_velocity();
     if (velocity != ZVec3Zero) {
-        ZVec3 position = get_position();
+        Vector3f position = get_position();
         position += velocity;
         set_position(position);
     }

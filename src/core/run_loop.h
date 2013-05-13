@@ -22,19 +22,19 @@ public:
     ZRunloop();
     ~ZRunloop();
     
-    /** Accessors **/
+    /* Accessors */
     bool is_running() { return _running; }
     bool is_on_main_thread() { return _on_main_thread; }
     
-    /** Starting/Stopping the Run Loop **/
+    /* Starting/Stopping the Run Loop */
     void run();
     void stop();
     
-    /** Managing schedulables in the Run Loop **/
+    /* Managing schedulables in the Run Loop */
     void schedule(ZSchedulableRef schedulable);
     void unschedule(ZSchedulableRef schedulable);
     
-    /** Friends **/
+    /* Friends */
     friend class ZApplication;
 
 private:

@@ -28,13 +28,13 @@ public:
     ZModel(std::string filename = std::string());
     ZModel(const ZModel&) = default;
     
-    /** Loading from 3DS Files **/
+    /* Loading from 3DS Files */
     void load_file(std::string filename);
     
-    /** Accessors **/
+    /* Accessors */
     std::string get_name() { return _name; }
     
-    /** Drawing **/
+    /* Drawing */
     void draw();
 };
 

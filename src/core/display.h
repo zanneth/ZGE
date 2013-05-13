@@ -49,13 +49,13 @@ public:
     // Convenience method for setting width/height values in the current display mode
     void resize(int width, int height);
     
-    /** Accessors **/
+    /* Accessors */
     bool is_initialized() { return _initialized; }
     
     ZDisplayMode get_display_mode() { return _display_mode; }
     void set_display_mode(const ZDisplayMode &mode);
     
-    /** Friends **/
+    /* Friends */
     friend class ZDisplayManager;
     
 protected:
