@@ -20,9 +20,10 @@ ZEngine* ZEngine::instance()
 }
 
 ZEngine::ZEngine() :
-    _display_manager(new ZDisplayManager),
+    _input_manager(new ZInputManager),
     _game_manager(new ZGameManager),
-    _input_manager(new ZInputManager)
+    _render_manager(new ZRenderManager),
+    _display_manager(new ZDisplayManager)
 {}
 
 #pragma mark - Initialization
@@ -37,9 +38,10 @@ void ZEngine::initialize()
     }
     
     ZRunloop *loop = app->get_main_runloop();
-    loop->schedule(_display_manager);
-    loop->schedule(_game_manager);
     loop->schedule(_input_manager);
+    loop->schedule(_game_manager);
+    loop->schedule(_render_manager);
+    loop->schedule(_display_manager);
     
     // engine always adds application as the first responder
     _application_responder = _input_manager->add_responder([](const ZEvent &event) {

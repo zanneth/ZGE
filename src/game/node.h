@@ -9,6 +9,7 @@
 
 #include <zge/geometry.h>
 #include <zge/model.h>
+#include <zge/render_context.h>
 
 #include <memory>
 #include <string>
@@ -30,8 +31,6 @@ protected:
     ZScene *_scene; // weak
     std::vector<ZNodeRef> _children;
     
-    ZModelRef _model;
-    
 private:
     Affine3f _pos_transform;
     
@@ -52,8 +51,6 @@ public:
     
     virtual Affine3f get_transform() { return _transform; }
     virtual void set_transform(const Affine3f &transform) { _transform = transform; }
-    virtual ZModelRef get_model() { return _model; }
-    virtual void set_model(ZModelRef model) { _model = model; }
     
     /* Manipulating Geometry */
     void append_transform(const Affine3f &transform);
@@ -71,8 +68,9 @@ public:
     virtual void update(uint32_t dtime) {}
     
     /* Drawing */
-    virtual void before_draw() {}
-    virtual void after_draw() {}
+    virtual void before_draw(ZRenderContextRef context) {}
+    virtual void draw(ZRenderContextRef context) {}
+    virtual void after_draw(ZRenderContextRef context) {}
     
     /* Callbacks */
     virtual void on_enter() {}
@@ -80,7 +78,7 @@ public:
     
 protected:
     virtual void _update_internal(uint32_t dtime);
-    virtual void _draw_internal();
+    virtual void _draw_internal(ZRenderContextRef context);
     virtual void _on_enter_internal();
     virtual void _on_exit_internal();
 

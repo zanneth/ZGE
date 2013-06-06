@@ -8,6 +8,7 @@
 #include <zge/game_manager.h>
 
 namespace zge {
+
 #pragma mark - Managing Scenes
 
 ZSceneRef ZGameManager::get_current_scene()
@@ -44,7 +45,6 @@ void ZGameManager::run(uint32_t dtime)
     ZSceneRef scene = get_current_scene();
     if (scene.get() != nullptr) {
         scene->_update_internal(dtime);
-        scene->_draw_internal();
     }
 }
     

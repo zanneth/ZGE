@@ -7,6 +7,7 @@
 
 #include <zge/geometry.h>
 #include <zge/logger.h>
+#include <zge/util.h>
 
 namespace zge {
 
@@ -36,8 +37,8 @@ Matrix4f ZGeometry::frustum(float left, float right, float bottom, float top, fl
 
 Matrix4f ZGeometry::perspective(float fovy, float aspect, float nearZ, float farZ)
 {
-    float fheight   = std::tan(fovy / 360.0 * M_PI) * nearZ;
-    float fwidth    = fheight * aspect;
+    float fheight = std::tan(fovy / 360.0 * M_PI) * nearZ;
+    float fwidth  = fheight * aspect;
     
     return frustum(-fwidth, fwidth, -fheight, fheight, nearZ, farZ);
 }
@@ -55,6 +56,11 @@ Matrix4f ZGeometry::lookat(const Vector3f &eye, const Vector3f &center, const Ve
         n.x(), n.y(), n.z(), -n.dot(eye),
         0.0, 0.0, 0.0, 1.0;
     return mat;
+}
+
+std::string ZGeometry::description(const AlignedBox2f &rect)
+{
+    return ZUtil::format("{%s, %s}", description(rect.min()).c_str(), description(rect.max()).c_str());
 }
 
 } // namespace zge

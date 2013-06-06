@@ -13,6 +13,11 @@
 
 namespace zge {
 
+inline float ZUtil::degrees_to_radians(float degrees)
+{
+    return degrees * (M_PI / 180.0f);
+}
+
 std::string ZUtil::format(const std::string &format, ...)
 {
     char *final_string = nullptr;

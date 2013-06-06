@@ -14,8 +14,6 @@
 #include <lib3ds.h>
 #include <sstream>
 
-#define DEBUG_LOG 0
-
 namespace zge {
 
 ZModel::ZModel(std::string filename) :
@@ -99,7 +97,7 @@ void ZModel::load_file(std::string filename)
     _vertex_vbo->load_data(total_vertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
     _normal_vbo->load_data(total_faces * 3 * sizeof(float), normals, GL_STATIC_DRAW);
     
-#if (DEBUG_LOG)
+#if (ZDEBUG)
     ZLogger::log("Number of meshes: %u", model_file->nmeshes);
     ZLogger::log("Number of faces (polygons): %u", total_faces);
     ZLogger::log("Number of vertices: %u", total_vertices);

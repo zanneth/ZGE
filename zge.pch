@@ -11,4 +11,6 @@
 #include <cstdint>
 #include <iostream>
 
+#define ZDEBUG 0
+
 #endif // __ZGE_PCH__

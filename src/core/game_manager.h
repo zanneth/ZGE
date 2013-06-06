@@ -17,8 +17,6 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class ZGameManager> ZGameManagerRef;
-
 class ZGameManager : public ZSchedulable, ZNoncopyable {
     std::stack<ZSceneRef> _scene_stack;
     
@@ -31,5 +29,7 @@ public:
     /* schedulable */
     void run(uint32_t dtime) override;
 };
+
+typedef std::shared_ptr<ZGameManager> ZGameManagerRef;
 
 } // namespace zge

@@ -12,13 +12,15 @@
 #include <zge/geometry.h>
 #include <zge/input_manager.h>
 #include <zge/noncopyable.h>
+#include <zge/render_manager.h>
 
 namespace zge {
 
 class ZEngine : ZNoncopyable {
-    ZDisplayManagerRef  _display_manager;
-    ZGameManagerRef     _game_manager;
     ZInputManagerRef    _input_manager;
+    ZGameManagerRef     _game_manager;
+    ZRenderManagerRef   _render_manager;
+    ZDisplayManagerRef  _display_manager;
     
     ZResponderRef       _application_responder;
 
@@ -26,9 +28,10 @@ public:
     static ZEngine* instance();
     
     /* Accessors */
-    ZDisplayManagerRef get_display_manager() { return _display_manager; }
-    ZGameManagerRef get_game_manager() { return _game_manager; }
-    ZInputManagerRef get_input_manager() { return _input_manager; }
+    ZInputManagerRef    get_input_manager()     { return _input_manager; }
+    ZGameManagerRef     get_game_manager()      { return _game_manager; }
+    ZRenderManagerRef   get_render_manager()    { return _render_manager; }
+    ZDisplayManagerRef  get_display_manager()   { return _display_manager; }
     
     /* Utility */
     AlignedBox2f get_viewport_rect() const;

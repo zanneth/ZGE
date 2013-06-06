@@ -1,0 +1,2 @@
+#define SDL_REVISION "hg-6906:85ac6fbdf171"
+#define SDL_REVISION_NUMBER 6906

@@ -25,13 +25,17 @@
 #include <zge/gl_includes.h>
 #include <zge/input_manager.h>
 #include <zge/logger.h>
+#include <zge/mesh_node.h>
 #include <zge/model.h>
 #include <zge/node.h>
 #include <zge/noncopyable.h>
 #include <zge/notification_center.h>
+#include <zge/render_context.h>
+#include <zge/render_manager.h>
 #include <zge/run_loop.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>
+#include <zge/shader_program.h>
 #include <zge/types.h>
 #include <zge/util.h>
 

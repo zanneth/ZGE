@@ -26,7 +26,9 @@ ZNode::ZNode() :
 
 ZNode::~ZNode()
 {
+#if (ZDEBUG)
     ZLogger::log("%s destroyed", get_description().c_str());
+#endif
 }
 
 #pragma mark - Operators
@@ -110,23 +112,21 @@ void ZNode::_update_internal(uint32_t dtime)
     }
 }
 
-void ZNode::_draw_internal()
+void ZNode::_draw_internal(ZRenderContextRef context)
 {
-    before_draw();
+    before_draw(context);
     
-    if (_model) {
-        glPushMatrix();
-        glMultMatrixf(_pos_transform.data());
-        glMultMatrixf(_transform.data());
-        _model->draw();
-        glPopMatrix();
-    }
-    
-    after_draw();
+    glPushMatrix();
+    glMultMatrixf(_pos_transform.data());
+    glMultMatrixf(_transform.data());
+    draw(context);
+    glPopMatrix();
     
     for (ZNodeRef child : _children) {
-        child->_draw_internal();
+        child->_draw_internal(context);
     }
+    
+    after_draw(context);
 }
 
 void ZNode::_on_enter_internal()

@@ -16,8 +16,6 @@ namespace zge {
 class ZDisplay;
 struct ZDisplayMode;
 
-typedef std::shared_ptr<class ZDisplayManager> ZDisplayManagerRef;
-
 class ZDisplayManager : public ZSchedulable, ZNoncopyable {
     ZDisplay *_current_display;
     
@@ -32,5 +30,7 @@ public:
     /* schedulable */
     void run(uint32_t dtime) override;
 };
+
+typedef std::shared_ptr<ZDisplayManager> ZDisplayManagerRef;
 
 } // namespace zge

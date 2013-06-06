@@ -67,6 +67,8 @@ void ZApplication::run()
     // perform any remaining initializations
     _time_start = SDL_GetTicks();
     _change_resources_directory();
+    
+    // callback to client to notify application is ready to run
     application_ready();
     
     // start main run loop (doesn't return)

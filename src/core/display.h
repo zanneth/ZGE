@@ -8,8 +8,9 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <zge/noncopyable.h>
+#include <memory>
 #include <string>
+#include <zge/noncopyable.h>
 
 namespace zge {
 
@@ -35,7 +36,7 @@ protected:
     ZDisplayMode _display_mode;
     
     SDL_Window *_window;
-    SDL_GLContext _context;
+    SDL_GLContext _gl_context;
     uint32_t _last_render;
     
 protected: // Only a display manager can create displays
@@ -43,6 +44,8 @@ protected: // Only a display manager can create displays
     ZDisplay(const ZDisplayMode &display_mode);
     
 public:
+    virtual ~ZDisplay();
+    
     void initialize();
     void update(uint32_t dtime);
     
