@@ -38,6 +38,9 @@ void ZRunloop::stop()
 
 void ZRunloop::schedule(ZSchedulableRef schedulable)
 {
+    schedulable->_run_loop = this;
+    schedulable->on_schedule();
+    
     _schedulables.push_back(schedulable);
 }
 
@@ -45,6 +48,9 @@ void ZRunloop::unschedule(ZSchedulableRef schedulable)
 {
     auto itr = std::find(_schedulables.begin(), _schedulables.end(), schedulable);
     if (itr != _schedulables.end()) {
+        schedulable->on_unschedule();
+        
+        schedulable->_run_loop = nullptr;
         _schedulables.erase(itr);
     }
 }

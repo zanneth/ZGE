@@ -129,6 +129,8 @@
 		0CC5B043176107BA00B7C2BD /* libSDL2-2.0.0.dylib in Copy Library Dependencies */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; };
 		0CC5B044176107ED00B7C2BD /* lib3ds-2.0.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.0.0.dylib */; };
 		0CC5B045176107F000B7C2BD /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; };
+		0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCD2F59176128AC00F497CF /* timer.cpp */; };
+		0CCD2F5C176128AC00F497CF /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCD2F5A176128AC00F497CF /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -562,6 +564,8 @@
 		0C977FB2173752CD0071E8E6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		0C9DCA061749B32900A2ED2E /* render_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_manager.cpp; sourceTree = "<group>"; };
 		0C9DCA071749B32900A2ED2E /* render_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_manager.h; sourceTree = "<group>"; };
+		0CCD2F59176128AC00F497CF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
+		0CCD2F5A176128AC00F497CF /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		0CF7E21A161C010F00105F7C /* zge.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zge.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1286,6 +1290,8 @@
 				0C50D3BD16D208A900E43D7B /* run_loop.h */,
 				0C50D3BC16D208A900E43D7B /* run_loop.cpp */,
 				0C50D3BE16D208A900E43D7B /* schedulable.h */,
+				0CCD2F5A176128AC00F497CF /* timer.h */,
+				0CCD2F59176128AC00F497CF /* timer.cpp */,
 				0C50D3BF16D208A900E43D7B /* types.h */,
 			);
 			path = core;
@@ -1423,6 +1429,7 @@
 				0C46F5C4175F00E800BF6EC9 /* SDL_test_crc32.h in Headers */,
 				0C46F5A8175F00E800BF6EC9 /* SDL_loadso.h in Headers */,
 				0C46F5AE175F00E800BF6EC9 /* SDL_name.h in Headers */,
+				0CCD2F5C176128AC00F497CF /* timer.h in Headers */,
 				0C46F5C3175F00E800BF6EC9 /* SDL_test_compare.h in Headers */,
 				0C46F5CD175F00E800BF6EC9 /* SDL_timer.h in Headers */,
 				0C46F5B1175F00E800BF6EC9 /* SDL_opengles2.h in Headers */,
@@ -1554,6 +1561,7 @@
 				0C977F611737510C0071E8E6 /* game_manager.cpp in Sources */,
 				0C977F631737510C0071E8E6 /* geometry.cpp in Sources */,
 				0C9DCA081749B32900A2ED2E /* render_manager.cpp in Sources */,
+				0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */,
 				0C977F651737510C0071E8E6 /* input_manager.cpp in Sources */,
 				0C4B4AF11749A52700FD4B53 /* shader_program.cpp in Sources */,
 				0C977F681737510C0071E8E6 /* run_loop.cpp in Sources */,
