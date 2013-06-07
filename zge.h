@@ -35,6 +35,7 @@
 #include <zge/run_loop.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>
+#include <zge/shader.h>
 #include <zge/shader_program.h>
 #include <zge/timer.h>
 #include <zge/types.h>

@@ -6,18 +6,22 @@
  */
 
 #include <zge/render_context.h>
+#include <zge/fragment_shader.h>
+#include <zge/vertex_shader.h>
 
 namespace zge {
 
 ZRenderContext::ZRenderContext(ZDisplayRef display) :
     _gl_context(nullptr),
-    _display(display)
+    _display(display),
+    _shaders_loaded(false)
 {
     SDL_Window *sdl_window = _display->_get_sdl_window();
     _gl_context = SDL_GL_CreateContext(sdl_window);
     SDL_GL_MakeCurrent(sdl_window, _gl_context);
     
     _shader_program = ZShaderProgramRef(new ZShaderProgram);
+    _load_shaders();
     
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
         _matrix_stacks[i].push(Matrix4f::Identity());
@@ -64,6 +68,18 @@ void ZRenderContext::load_identity(ZRenderMatrixType type)
 void ZRenderContext::pop_matrix(ZRenderMatrixType type)
 {
     _matrix_stacks[type].pop();
+}
+
+#pragma mark - Internal
+
+void ZRenderContext::_load_shaders()
+{
+    if (_shader_program != nullptr && !_shaders_loaded) {
+        _shader_program->load_shader_source(ZVertexShaderSource, ZVERTEX_SHADER);
+        _shader_program->load_shader_source(ZFragmentShaderSource, ZFRAGMENT_SHADER);
+        _shader_program->bind_attribute(ZVERTEX_ATTRIB_POSITION, "position");
+        _shader_program->link_program();
+    }
 }
 
 } // namespace zge

@@ -29,6 +29,7 @@ class ZRenderContext : ZNoncopyable {
     SDL_GLContext        _gl_context;
     ZDisplayRef          _display;
     ZShaderProgramRef    _shader_program;
+    bool                 _shaders_loaded;
     std::stack<Matrix4f> _matrix_stacks[_ZRENDER_MATRIX_COUNT];
     
 public:
@@ -47,6 +48,9 @@ public:
     void multiply_matrix(ZRenderMatrixType type, const Matrix4f &matrix);
     void load_identity(ZRenderMatrixType type);
     void pop_matrix(ZRenderMatrixType type);
+    
+protected:
+    void _load_shaders();
 };
 
 typedef std::shared_ptr<ZRenderContext> ZRenderContextRef;

@@ -6,86 +6,72 @@
  */
  
 #include <zge/shader_program.h>
-#include <iostream>
-#include <fstream>
+#include <zge/logger.h>
 
 namespace zge {
 
 ZShaderProgram::ZShaderProgram() :
     _linked(false)
 {
-    _program = glCreateProgram();
+    _program_handle = glCreateProgram();
 }
 
 ZShaderProgram::~ZShaderProgram()
 {
-    for (auto shader : _shaders) {
-        glDeleteShader(shader);
-    }
-    
-    glDeleteProgram(_program);
+    glDeleteProgram(_program_handle);
 }
 
-GLuint ZShaderProgram::compile_shader(const char *filename, GLenum type)
+bool ZShaderProgram::attach_shader(ZShaderRef shader)
 {
-    using namespace std;
-    string shader_src;
+    bool success = false;
     
-    // read the shader source from the filename
-    ifstream file(filename, ifstream::in);
-    string line;
-    while (file.good()) {
-        getline(file, line);
-        shader_src += line + '\n';
-    }
-    
-    // create the shader
-    GLuint shader = glCreateShader(type);
-    
-    // load source and compile
-    const char *shader_cstr = shader_src.c_str();
-    glShaderSource(shader, 1, &shader_cstr, NULL);
-    glCompileShader(shader);
-    
-    // check if there's an error and log it
-    GLint status = GL_FALSE;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-    if (status == GL_FALSE) {
-        GLint errlen;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &errlen);
+    if (shader != nullptr && shader->is_compiled()) {
+        glAttachShader(_program_handle, shader->get_shader_handle());
+        _shaders.push_back(shader);
         
-        char *errstr = new char[errlen];
-        glGetShaderInfoLog(shader, errlen, 0, errstr);
-        std::cerr << errstr << std::endl;
-        delete[] errstr;
-        
-        return 0;
+        success = true;
+    } else {
+        ZLogger::log_error("Could not attach shader. Shader is invalid or not yet compiled.");
+        success = false;
     }
     
-    return shader;
+    return success;
 }
 
-bool ZShaderProgram::attach_shader(GLuint shader)
+bool ZShaderProgram::detach_shader(ZShaderRef shader)
 {
-    if (shader == 0) { return false; }
+    bool success = false;
     
-    glAttachShader(_program, shader);
-    _shaders.push_back(shader);
-    return true;
-}
-
-bool ZShaderProgram::detach_shader(GLuint shader)
-{
-    if (shader == 0) { return false; }
+    if (shader != nullptr) {
+        glDetachShader(_program_handle, shader->get_shader_handle());
+        _shaders.erase(std::remove(_shaders.begin(), _shaders.end(), shader), _shaders.end());
+        success = true;
+    } else {
+        ZLogger::log_error("Could not detach shader. Invalid shader object provided.");
+    }
     
-    glDetachShader(_program, shader);
-    _shaders.erase(std::remove(_shaders.begin(), _shaders.end(), shader), _shaders.end());
-    return true;
+    return success;
 }
 
-bool ZShaderProgram::load_shader(const char *filename, GLenum type)
+bool ZShaderProgram::load_shader(const std::string &path, ZShaderType type)
 {
-    GLuint shader = compile_shader(filename, type);
+    bool success = true;
+    
+    ZShaderRef shader = ZShaderRef(new ZShader(type));
+    success &= shader->load_source_file(path);
+    success &= shader->compile();
+    
+    return attach_shader(shader);
+}
+
+bool ZShaderProgram::load_shader_source(const std::string &source, ZShaderType type)
+{
+    bool success = true;
+    
+    ZShaderRef shader = ZShaderRef(new ZShader(type));
+    success &= shader->load_source(source);
+    success &= shader->compile();
+    
     return attach_shader(shader);
 }
 
@@ -93,7 +79,7 @@ bool ZShaderProgram::bind_attribute(ZVertexAttribute attrib, std::string name)
 {
     bool success = false;
     if (_attrib_map.find(attrib) == _attrib_map.end()) {
-        glBindAttribLocation(_program, attrib, name.c_str());
+        glBindAttribLocation(_program_handle, attrib, name.c_str());
         _attrib_map[attrib] = name;
         success = true;
     }
@@ -106,18 +92,18 @@ bool ZShaderProgram::link_program()
     GLint status = GL_FALSE;
     
     if (!_linked) {
-        glLinkProgram(_program);
+        glLinkProgram(_program_handle);
         
         // log the error if there is one
-        glGetProgramiv(_program, GL_LINK_STATUS, &status);
+        glGetProgramiv(_program_handle, GL_LINK_STATUS, &status);
         if (!status) {
             // print the error
             GLint errlen;
-            glGetProgramiv(_program, GL_INFO_LOG_LENGTH, &errlen);
+            glGetProgramiv(_program_handle, GL_INFO_LOG_LENGTH, &errlen);
             
             char *errstr = new char[errlen];
-            glGetProgramInfoLog(_program, errlen, 0, errstr);
-            std::cerr << errstr << std::endl;
+            glGetProgramInfoLog(_program_handle, errlen, 0, errstr);
+            ZLogger::log_error(errstr);
             delete[] errstr;
             
             _linked = false;
@@ -132,8 +118,8 @@ bool ZShaderProgram::link_program()
 bool ZShaderProgram::use_program()
 {
     bool result = false;
-    if (_linked && _program != 0) {
-        glUseProgram(_program);
+    if (_linked && _program_handle != 0) {
+        glUseProgram(_program_handle);
     }
     return result;
 }
@@ -147,7 +133,7 @@ GLint ZShaderProgram::get_uniform(std::string name)
         if (uniform_itr != _uniform_map.end()) {
             uniform = uniform_itr->second;
         } else {
-            uniform = glGetUniformLocation(_program, name.c_str());
+            uniform = glGetUniformLocation(_program_handle, name.c_str());
             if (uniform != -1) {
                 _uniform_map[name] = uniform;
             }
