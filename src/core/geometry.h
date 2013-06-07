@@ -23,7 +23,8 @@ public:
     static Matrix4f frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
     static Matrix4f perspective(float fovy, float aspect, float nearZ, float farZ);
     static Matrix4f lookat(const Vector3f &eye, const Vector3f &center, const Vector3f &up);
-    
+    static Matrix4f ortho(float left, float right, float bottom, float top, float nearZ, float farZ);
+
     // string representations of mathematical structures
     template <typename Derived>
     static std::string description(const MatrixBase<Derived> &matrix);

@@ -39,7 +39,7 @@ public:
     void     set_interval(const uint32_t interval);
     
     // Whether the timer should repeat or not (default is true).
-    bool get_repeats() const;
+    bool repeats() const;
     void set_repeats(bool repeats);
     
     // Fires the timer.

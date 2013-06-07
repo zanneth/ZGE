@@ -23,30 +23,13 @@ ZTimer::~ZTimer()
 
 #pragma mark - Accessors
 
-void ZTimer::set_function(const ZTimerFunction &function)
-{
-    _function = function;
-}
+void ZTimer::set_function(const ZTimerFunction &function) { _function = function; }
 
-uint32_t ZTimer::get_interval() const
-{
-    return _interval;
-}
+uint32_t ZTimer::get_interval() const { return _interval; }
+void ZTimer::set_interval(const uint32_t interval) { _interval = interval; }
 
-void ZTimer::set_interval(const uint32_t interval)
-{
-    _interval = interval;
-}
-
-bool ZTimer::get_repeats() const
-{
-    return _repeats;
-}
-    
-void ZTimer::set_repeats(bool repeats)
-{
-    _repeats = repeats;
-}
+bool ZTimer::repeats() const { return _repeats; }
+void ZTimer::set_repeats(bool repeats) { _repeats = repeats; }
 
 #pragma mark - Overrides
 

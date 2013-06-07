@@ -58,6 +58,25 @@ Matrix4f ZGeometry::lookat(const Vector3f &eye, const Vector3f &center, const Ve
     return mat;
 }
 
+Matrix4f ZGeometry::ortho(float left, float right, float bottom, float top, float nearZ, float farZ)
+{
+    float ral = right + left;
+    float rsl = right - left;
+    float tab = top + bottom;
+    float tsb = top - bottom;
+    float fan = farZ + nearZ;
+    float fsn = farZ - nearZ;
+    
+    Matrix4f mat;
+    mat <<
+        2.0f / rsl, 0.0f, 0.0f, 0.0f,
+        0.0f, 2.0f / tsb, 0.0f, 0.0f,
+        0.0f, 0.0f, -2.0f / fsn, 0.0f,
+        -ral / rsl, -tab / tsb, -fan / fsn, 1.0f;
+    
+    return mat;
+}
+
 std::string ZGeometry::description(const AlignedBox2f &rect)
 {
     return ZUtil::format("{%s, %s}", description(rect.min()).c_str(), description(rect.max()).c_str());

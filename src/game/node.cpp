@@ -116,11 +116,7 @@ void ZNode::_draw_internal(ZRenderContextRef context)
 {
     before_draw(context);
     
-    glPushMatrix();
-    glMultMatrixf(_pos_transform.data());
-    glMultMatrixf(_transform.data());
     draw(context);
-    glPopMatrix();
     
     for (ZNodeRef child : _children) {
         child->_draw_internal(context);

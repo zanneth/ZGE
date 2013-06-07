@@ -21,7 +21,7 @@ namespace zge {
 struct ZNotification {
     std::string name;
     void *sender;   // weak
-    void *info;     // weak
+    void *user_data;     // weak
     
     std::string get_description() const
     {
@@ -29,7 +29,7 @@ struct ZNotification {
         oss << "notification(0x" << this << ") { "
             "name: \"" << name << "\", "
             "sender: " << sender << ", "
-            "info: " << &info << " }";
+            "user data: " << &user_data << " }";
         return oss.str();
     }
 };

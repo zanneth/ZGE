@@ -7,25 +7,25 @@
  
 #pragma once
 
+#include <zge/display.h>
 #include <zge/noncopyable.h>
 #include <zge/schedulable.h>
 #include <memory>
 
 namespace zge {
 
-class ZDisplay;
-struct ZDisplayMode;
+extern const std::string ZDisplayManagerDidCreateDisplayNotification;
 
 class ZDisplayManager : public ZSchedulable, ZNoncopyable {
-    ZDisplay *_current_display;
+    ZDisplayRef _current_display;
     
 public:
     ZDisplayManager();
     ~ZDisplayManager();
     
     /* Creating the Display */
-    ZDisplay* create_display(const ZDisplayMode &mode);
-    ZDisplay* get_current_display() { return _current_display; }
+    ZDisplayRef create_display(const ZDisplayMode &mode);
+    ZDisplayRef get_current_display() { return _current_display; }
     
     /* schedulable */
     void run(uint32_t dtime) override;

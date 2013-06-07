@@ -30,13 +30,14 @@ public:
         window_title("Application") {}
 };
 
+typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
+
 class ZDisplay : ZNoncopyable {
 protected:
     bool _initialized;
     ZDisplayMode _display_mode;
     
     SDL_Window *_window;
-    SDL_GLContext _gl_context;
     uint32_t _last_render;
     
 protected: // Only a display manager can create displays
@@ -58,12 +59,16 @@ public:
     ZDisplayMode get_display_mode() { return _display_mode; }
     void set_display_mode(const ZDisplayMode &mode);
     
+    /* Swapping the OpenGL Buffer */
+    void swap_buffer();
+    
     /* Friends */
     friend class ZDisplayManager;
+    friend class ZRenderContext;
     
 protected:
     void _init_window();
-    void _init_opengl();
+    SDL_Window* _get_sdl_window();
 };
 
 } // namespace zge

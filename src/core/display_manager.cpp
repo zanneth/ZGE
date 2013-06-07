@@ -8,31 +8,32 @@
 #include <zge/display_manager.h>
 #include <zge/display.h>
 #include <zge/exception.h>
+#include <zge/notification_center.h>
 
 namespace zge {
+
+const std::string ZDisplayManagerDidCreateDisplayNotification = "ZDisplayManagerDidCreateDisplayNotification";
 
 ZDisplayManager::ZDisplayManager() :
     _current_display(nullptr)
 {}
 
 ZDisplayManager::~ZDisplayManager()
-{
-    if (_current_display != nullptr) {
-        delete _current_display;
-    }
-}
+{}
 
-ZDisplay* ZDisplayManager::create_display(const ZDisplayMode &mode)
+ZDisplayRef ZDisplayManager::create_display(const ZDisplayMode &mode)
 {
-    ZDisplay *display = new ZDisplay(mode);
+    ZDisplayRef display = ZDisplayRef(new ZDisplay(mode));
     display->initialize();
     
-    if (_current_display != nullptr) {
-        delete _current_display;
-    }
-    
     _current_display = display;
-    return display;
+    
+    ZNotification notification;
+    notification.name = ZDisplayManagerDidCreateDisplayNotification;
+    notification.sender = this;
+    ZNotificationCenter::instance()->post_notification(notification);
+    
+    return _current_display;
 }
 
 void ZDisplayManager::run(uint32_t dtime)

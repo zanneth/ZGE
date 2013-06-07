@@ -9,19 +9,39 @@
 
 namespace zge {
 
-ZRenderContext::ZRenderContext() :
-    _shader_program(new ZShaderProgram)
+ZRenderContext::ZRenderContext(ZDisplayRef display) :
+    _gl_context(nullptr),
+    _display(display)
 {
+    SDL_Window *sdl_window = _display->_get_sdl_window();
+    _gl_context = SDL_GL_CreateContext(sdl_window);
+    SDL_GL_MakeCurrent(sdl_window, _gl_context);
+    
+    _shader_program = ZShaderProgramRef(new ZShaderProgram);
+    
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
         _matrix_stacks[i].push(Matrix4f::Identity());
     }
 }
 
 ZRenderContext::~ZRenderContext()
-{}
+{
+    if (_gl_context != nullptr) {
+        SDL_GL_DeleteContext(_gl_context);
+    }
+}
+
+#pragma mark - Accessors
+
+ZDisplayRef ZRenderContext::get_display() const { return _display; }
+
+ZShaderProgramRef ZRenderContext::get_shader_program() const { return _shader_program; }
+
+#pragma mark - API
 
 void ZRenderContext::make_current()
 {
+    SDL_GL_MakeCurrent(_display->_get_sdl_window(), _gl_context);
     _shader_program->use_program();
 }
 
