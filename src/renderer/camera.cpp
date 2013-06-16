@@ -9,6 +9,7 @@
 #include <zge/engine.h>
 #include <zge/logger.h>
 #include <zge/scene.h>
+#include <zge/util.h>
 
 #include <algorithm>
 
@@ -28,8 +29,11 @@ ZCamera::ZCamera() :
 
 #pragma mark - Open/Close
 
-void ZCamera::open()
+void ZCamera::open(ZRenderContextRef context)
 {
+    zassert(_current_context == nullptr, "Attempted to open a camera on a new context before closing with an existing context.");
+    _current_context = context;
+    
     _open_projection();
     _open_modelview();
 }
@@ -38,6 +42,8 @@ void ZCamera::close()
 {
     _close_projection();
     _close_modelview();
+    
+    _current_context = nullptr;
 }
     
 #pragma mark - Node Overrides
@@ -82,15 +88,12 @@ void ZCamera::_open_projection()
         _construct_projection();
     }
     
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadMatrixf(_projection_matrix.data());
+    _current_context->push_matrix(ZRENDER_MATRIX_PROJECTION, _projection_matrix);
 }
 
 void ZCamera::_close_projection()
 {
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
+    _current_context->pop_matrix(ZRENDER_MATRIX_PROJECTION);
 }
 
 void ZCamera::_construct_modelview()
@@ -107,15 +110,12 @@ void ZCamera::_open_modelview()
         _construct_modelview();
     }
     
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadMatrixf(_modelview_matrix.data());
+    _current_context->push_matrix(ZRENDER_MATRIX_MODELVIEW, _modelview_matrix);
 }
 
 void ZCamera::_close_modelview()
 {
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
+    _current_context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
 }
 
 } // namespace zge

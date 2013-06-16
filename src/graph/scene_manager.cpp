@@ -1,17 +1,17 @@
 /*
- * game_manager.cpp
+ * scene_manager.cpp
  *
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 02/03/2012
  */
  
-#include <zge/game_manager.h>
+#include <zge/scene_manager.h>
 
 namespace zge {
 
 #pragma mark - Managing Scenes
 
-ZSceneRef ZGameManager::get_current_scene()
+ZSceneRef ZSceneManager::get_current_scene()
 {
     if (_scene_stack.empty()) {
         return nullptr;
@@ -20,13 +20,13 @@ ZSceneRef ZGameManager::get_current_scene()
     return _scene_stack.top();
 }
 
-void ZGameManager::push_scene(ZSceneRef scene)
+void ZSceneManager::push_scene(ZSceneRef scene)
 {
     _scene_stack.push(scene);
     scene->on_enter();
 }
 
-ZSceneRef ZGameManager::pop_scene()
+ZSceneRef ZSceneManager::pop_scene()
 {
     ZSceneRef scene = nullptr;
     if (!_scene_stack.empty()) {
@@ -40,7 +40,7 @@ ZSceneRef ZGameManager::pop_scene()
 
 #pragma mark - ZSchedulable Overrides
 
-void ZGameManager::run(uint32_t dtime)
+void ZSceneManager::run(uint32_t dtime)
 {
     ZSceneRef scene = get_current_scene();
     if (scene.get() != nullptr) {

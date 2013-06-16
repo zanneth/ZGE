@@ -66,4 +66,9 @@ void ZGLBuffer::bind()
     glBindBuffer(_target, _buffer);
 }
 
+void ZGLBuffer::unbind()
+{
+    glBindBuffer(_target, 0);
+}
+
 } // namespace zge

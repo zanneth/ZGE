@@ -39,7 +39,7 @@ void ZScene::add_child(ZNodeRef node)
 void ZScene::before_draw(ZRenderContextRef context)
 {
     if (_active_camera.get() != nullptr) {
-        _active_camera->open();
+        _active_camera->open(context);
     }
 }
 

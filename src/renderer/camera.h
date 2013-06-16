@@ -10,6 +10,7 @@
 #include <zge/node.h>
 #include <zge/geometry.h>
 #include <zge/gl_includes.h>
+#include <zge/render_context.h>
 #include <memory>
 
 namespace zge {
@@ -24,6 +25,8 @@ class ZCamera : public ZNode {
     Matrix4f _projection_matrix;
     Matrix4f _modelview_matrix;
     Vector3f _look_direction;
+    
+    ZRenderContextRef _current_context;
     
     bool _projection_dirty;
     bool _modelview_dirty;
@@ -44,7 +47,7 @@ public:
     void set_look_direction(const Vector3f &look) { _look_direction = look; _modelview_dirty = true; }
     
     /* Open/Close */
-    void open();
+    void open(ZRenderContextRef context);
     void close();
     
     /* Node Overrides */

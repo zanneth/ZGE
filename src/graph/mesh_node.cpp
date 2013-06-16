@@ -18,7 +18,7 @@ ZMeshNode::~ZMeshNode()
 
 void ZMeshNode::draw(ZRenderContextRef context)
 {
-    if (_model.get() != nullptr) {
+    if (_model != nullptr) {
         _model->draw();
     }
 }

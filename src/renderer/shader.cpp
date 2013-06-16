@@ -105,11 +105,13 @@ bool ZShader::compile()
 
 #pragma mark - Accessors
 
+ZShaderType ZShader::get_type() const { return _type; }
+
+GLuint ZShader::get_shader_handle() const { return _shader_handle; }
+
 bool ZShader::has_source() const { return _has_source; }
 
 bool ZShader::is_compiled() const { return _compiled; }
-
-GLuint ZShader::get_shader_handle() const { return _shader_handle; }
 
 #pragma mark - Internal
 

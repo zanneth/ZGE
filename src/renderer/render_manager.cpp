@@ -9,7 +9,7 @@
 #include <zge/render_manager.h>
 #include <zge/display_manager.h>
 #include <zge/engine.h>
-#include <zge/game_manager.h>
+#include <zge/scene_manager.h>
 #include <zge/node.h>
 #include <zge/scene.h>
 
@@ -43,8 +43,8 @@ void ZRenderManager::run(uint32_t dtime)
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    ZGameManagerRef game_manager = ZEngine::instance()->get_game_manager();
-    ZSceneRef cur_scene = game_manager->get_current_scene();
+    ZSceneManagerRef scene_manager = ZEngine::instance()->get_scene_manager();
+    ZSceneRef cur_scene = scene_manager->get_current_scene();
     if (cur_scene.get() != nullptr) {
         cur_scene->_draw_internal(_context);
     }

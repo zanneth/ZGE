@@ -19,7 +19,6 @@
 #include <zge/event.h>
 #include <zge/exception.h>
 #include <zge/fp_responder.h>
-#include <zge/game_manager.h>
 #include <zge/geometry.h>
 #include <zge/gl_buffer.h>
 #include <zge/gl_includes.h>
@@ -34,6 +33,7 @@
 #include <zge/render_manager.h>
 #include <zge/run_loop.h>
 #include <zge/scene.h>
+#include <zge/scene_manager.h>
 #include <zge/schedulable.h>
 #include <zge/shader.h>
 #include <zge/shader_program.h>

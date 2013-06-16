@@ -43,10 +43,11 @@ public:
     bool compile();
     
     /* Accessors */
+    ZShaderType get_type() const;
+    GLuint      get_shader_handle() const;
+    
     bool has_source() const;
     bool is_compiled() const;
-    
-    GLuint get_shader_handle() const;
     
 protected:
     static GLenum _get_opengl_shader_type(const ZShaderType &type);

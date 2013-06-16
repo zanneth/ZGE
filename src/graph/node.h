@@ -27,8 +27,8 @@ protected:
     Vector3f _position;
     Affine3f _transform;
     
-    ZNode *_parent; // weak
-    ZScene *_scene; // weak
+    ZNode   *_parent; // weak
+    ZScene  *_scene; // weak
     std::vector<ZNodeRef> _children;
     
 private:
@@ -77,16 +77,16 @@ public:
     virtual void on_exit() {}
     
 protected:
-    virtual void _update_internal(uint32_t dtime);
-    virtual void _draw_internal(ZRenderContextRef context);
-    virtual void _on_enter_internal();
-    virtual void _on_exit_internal();
+    void _update_internal(uint32_t dtime);
+    void _draw_internal(ZRenderContextRef context);
+    void _on_enter_internal();
+    void _on_exit_internal();
 
 private:
     void _remove_child_uid(unsigned uid);
     
 public:
-    friend class ZGameManager;
+    friend class ZSceneManager;
     friend class ZScene;
 };
 

@@ -34,7 +34,6 @@ public:
     
 private:
     void _initialize();
-    void _load_shaders();
     void _display_notification(const ZNotification *notification);
 };
 

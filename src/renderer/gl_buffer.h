@@ -40,6 +40,7 @@ public:
     
     /* Actions */
     void bind();
+    void unbind();
 };
 
 } // namespace zge

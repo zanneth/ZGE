@@ -8,7 +8,7 @@
 #pragma once
 
 #include <zge/display_manager.h>
-#include <zge/game_manager.h>
+#include <zge/scene_manager.h>
 #include <zge/geometry.h>
 #include <zge/input_manager.h>
 #include <zge/noncopyable.h>
@@ -18,7 +18,7 @@ namespace zge {
 
 class ZEngine : ZNoncopyable {
     ZInputManagerRef    _input_manager;
-    ZGameManagerRef     _game_manager;
+    ZSceneManagerRef    _scene_manager;
     ZRenderManagerRef   _render_manager;
     ZDisplayManagerRef  _display_manager;
     
@@ -28,10 +28,10 @@ public:
     static ZEngine* instance();
     
     /* Accessors */
-    ZInputManagerRef    get_input_manager()     { return _input_manager; }
-    ZGameManagerRef     get_game_manager()      { return _game_manager; }
-    ZRenderManagerRef   get_render_manager()    { return _render_manager; }
-    ZDisplayManagerRef  get_display_manager()   { return _display_manager; }
+    ZInputManagerRef    get_input_manager()   { return _input_manager; }
+    ZSceneManagerRef    get_scene_manager()   { return _scene_manager; }
+    ZRenderManagerRef   get_render_manager()  { return _render_manager; }
+    ZDisplayManagerRef  get_display_manager() { return _display_manager; }
     
     /* Utility */
     AlignedBox2f get_viewport_rect() const;

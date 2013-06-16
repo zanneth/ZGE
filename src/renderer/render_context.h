@@ -44,13 +44,15 @@ public:
     void make_current();
     
     /* Managing Matrices */
-    void push_matrix(ZRenderMatrixType type);
+    void push_matrix(ZRenderMatrixType type, const Matrix4f &matrix);
     void multiply_matrix(ZRenderMatrixType type, const Matrix4f &matrix);
     void load_identity(ZRenderMatrixType type);
     void pop_matrix(ZRenderMatrixType type);
     
 protected:
-    void _load_shaders();
+    void    _load_shaders();
+    GLint   _get_matrix_uniform(ZRenderMatrixType type);
+    void    _update_uniforms(ZRenderMatrixType type);
 };
 
 typedef std::shared_ptr<ZRenderContext> ZRenderContextRef;
