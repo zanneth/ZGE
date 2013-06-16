@@ -105,22 +105,27 @@ std::string ZNode::get_description()
 
 void ZNode::_update_internal(uint32_t dtime)
 {
-    update(dtime);
-    
     for (ZNodeRef child : _children) {
         child->_update_internal(dtime);
     }
+    
+    update(dtime);
 }
 
 void ZNode::_draw_internal(ZRenderContextRef context)
 {
     before_draw(context);
     
-    draw(context);
+    context->push_matrix(ZRENDER_MATRIX_MODELVIEW);
+    context->multiply_matrix(ZRENDER_MATRIX_MODELVIEW, (_transform * _pos_transform).matrix());
     
     for (ZNodeRef child : _children) {
         child->_draw_internal(context);
     }
+    
+    draw(context);
+    
+    context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
     
     after_draw(context);
 }

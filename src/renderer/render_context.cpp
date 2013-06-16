@@ -54,10 +54,16 @@ void ZRenderContext::make_current()
     }
 }
 
+void ZRenderContext::push_matrix(ZRenderMatrixType type)
+{
+    const Matrix4f &top = _matrix_stacks[type].top();
+    _matrix_stacks[type].push(top);
+}
+
 void ZRenderContext::push_matrix(ZRenderMatrixType type, const Matrix4f &matrix)
 {
-    _matrix_stacks[type].push(matrix);
-    _update_uniforms(type);
+    push_matrix(type);
+    multiply_matrix(type, matrix);
 }
 
 void ZRenderContext::multiply_matrix(ZRenderMatrixType type, const Matrix4f &matrix)
@@ -74,8 +80,12 @@ void ZRenderContext::load_identity(ZRenderMatrixType type)
 
 void ZRenderContext::pop_matrix(ZRenderMatrixType type)
 {
-    _matrix_stacks[type].pop();
-    _update_uniforms(type);
+    if (_matrix_stacks[type].size() > 1) {
+        _matrix_stacks[type].pop();
+        _update_uniforms(type);
+    } else {
+        load_identity(type);
+    }
 }
 
 #pragma mark - Internal
@@ -114,9 +124,6 @@ void ZRenderContext::_update_uniforms(ZRenderMatrixType type)
     if (uniform != -1) {
         Matrix4f matrix = _matrix_stacks[type].top();
         glUniformMatrix4fv(uniform, 1, GL_FALSE, matrix.data());
-        
-        std::string matrix_descr = ZGeometry::description(matrix);
-        ZLogger::log("Updating matrix type %d for uniform %d with matrix %s", type, uniform, matrix_descr.c_str());
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
     }

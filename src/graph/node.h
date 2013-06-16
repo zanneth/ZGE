@@ -44,13 +44,13 @@ public:
     bool operator!=(const ZNode &other);
     
     /* Accessors */
-    ZNode* get_parent() { return _parent; }
-    ZScene* get_scene() { return _scene; }
+    ZNode*   get_parent() { return _parent; }
+    ZScene*  get_scene() { return _scene; }
     Vector3f get_position() { return _position; }
-    void set_position(const Vector3f &position);
+    void     set_position(const Vector3f &position);
     
     virtual Affine3f get_transform() { return _transform; }
-    virtual void set_transform(const Affine3f &transform) { _transform = transform; }
+    virtual void     set_transform(const Affine3f &transform) { _transform = transform; }
     
     /* Manipulating Geometry */
     void append_transform(const Affine3f &transform);
@@ -58,8 +58,9 @@ public:
     /* Managing Sub-Nodes */
     virtual void add_child(ZNodeRef node);
     virtual bool remove_child(ZNodeRef node);
-    virtual std::vector<ZNodeRef> get_children() { return _children; }
-    virtual void remove_from_parent();
+    
+    void remove_from_parent();
+    std::vector<ZNodeRef> get_children() { return _children; }
     
     /* Description */
     virtual std::string get_description();

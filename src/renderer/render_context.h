@@ -44,7 +44,8 @@ public:
     void make_current();
     
     /* Managing Matrices */
-    void push_matrix(ZRenderMatrixType type, const Matrix4f &matrix);
+    void push_matrix(ZRenderMatrixType type);
+    void push_matrix(ZRenderMatrixType type, const Matrix4f &matrix); // convenience: pushes then multiplies
     void multiply_matrix(ZRenderMatrixType type, const Matrix4f &matrix);
     void load_identity(ZRenderMatrixType type);
     void pop_matrix(ZRenderMatrixType type);

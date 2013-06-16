@@ -41,6 +41,7 @@ void ZRenderManager::run(uint32_t dtime)
         _initialize();
     }
     
+    _context->make_current();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     ZSceneManagerRef scene_manager = ZEngine::instance()->get_scene_manager();
