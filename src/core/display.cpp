@@ -70,12 +70,16 @@ void ZDisplay::_init_window()
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
     
+    uint32_t sdlflags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+    if (!_display_mode.windowed) {
+        sdlflags |= SDL_WINDOW_FULLSCREEN;
+    }
     _window = SDL_CreateWindow(_display_mode.window_title.c_str(),
                                SDL_WINDOWPOS_UNDEFINED,
                                SDL_WINDOWPOS_UNDEFINED,
                                _display_mode.width,
                                _display_mode.height,
-                               SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+                               sdlflags);
     if (_window == nullptr) {
         ZLogger::log_error("Could not create SDL window.");
     }
