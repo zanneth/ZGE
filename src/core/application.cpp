@@ -52,7 +52,7 @@ void ZApplication::run()
         delete __current_application;
     }
     __current_application = this;
-    
+        
     // initialize SDL
     int sdl_result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
     if (sdl_result < 0) {

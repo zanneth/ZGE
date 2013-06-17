@@ -20,6 +20,7 @@ ZRenderContext::ZRenderContext(ZDisplayRef display) :
     SDL_Window *sdl_window = _display->_get_sdl_window();
     _gl_context = SDL_GL_CreateContext(sdl_window);
     SDL_GL_MakeCurrent(sdl_window, _gl_context);
+    SDL_GL_SetSwapInterval(1); // tell SDL to synchronize the buffer swap with the monitor's refresh rate.
     
     _shader_program = ZShaderProgramRef(new ZShaderProgram);
     _load_shaders();

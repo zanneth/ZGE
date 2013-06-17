@@ -67,13 +67,17 @@ void ZDisplay::swap_buffer()
 
 void ZDisplay::_init_window()
 {
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);     // Request 16-bit depth
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);    // Request double-buffering
-    
-    uint32_t sdlflags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+    uint32_t sdlflags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
     if (!_display_mode.windowed) {
         sdlflags |= SDL_WINDOW_FULLSCREEN;
     }
+    
+    // setup some parameters required for using OpenGL with SDL
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);             // request 24-bit depth buffer
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);            // request double-buffering
+    SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);      // request hardware acceleration
+    
+    // create the window
     _window = SDL_CreateWindow(_display_mode.window_title.c_str(),
                                SDL_WINDOWPOS_UNDEFINED,
                                SDL_WINDOWPOS_UNDEFINED,

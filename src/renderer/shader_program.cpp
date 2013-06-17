@@ -60,8 +60,9 @@ bool ZShaderProgram::load_shader(const std::string &path, ZShaderType type)
     ZShaderRef shader = ZShaderRef(new ZShader(type));
     success &= shader->load_source_file(path);
     success &= shader->compile();
+    success &= attach_shader(shader);
     
-    return attach_shader(shader);
+    return success;
 }
 
 bool ZShaderProgram::load_shader_source(const std::string &source, ZShaderType type)
@@ -71,8 +72,9 @@ bool ZShaderProgram::load_shader_source(const std::string &source, ZShaderType t
     ZShaderRef shader = ZShaderRef(new ZShader(type));
     success &= shader->load_source(source);
     success &= shader->compile();
+    success &= attach_shader(shader);
     
-    return attach_shader(shader);
+    return success;
 }
 
 bool ZShaderProgram::bind_attribute(ZVertexAttribute attrib, std::string name)

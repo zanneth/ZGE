@@ -7,6 +7,8 @@
 
 #include <string>
 
+namespace zge {
+    
 const std::string ZFragmentShaderSource = HEREDOC(
 
 void main()
@@ -15,3 +17,5 @@ void main()
 }
 
 );
+
+} // namespace zge

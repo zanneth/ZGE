@@ -7,6 +7,8 @@
 
 #include <string>
 
+namespace zge {
+    
 const std::string ZVertexShaderSource = HEREDOC(
 
 uniform mat4 projection;
@@ -19,3 +21,5 @@ void main()
 }
 
 );
+
+} // namespace zge
