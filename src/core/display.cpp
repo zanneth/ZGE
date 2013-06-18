@@ -9,17 +9,22 @@
 #include <zge/exception.h>
 #include <zge/logger.h>
 #include <zge/util.h>
-#include <SDL2/SDL_opengl.h>
+#include <SDL2/SDL.h>
 
 namespace zge {
 
+struct ZDisplayImpl {
+    SDL_Window *window;
+};
+
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
+    _impl(new ZDisplayImpl),
     _display_mode(mode)
 {}
 
 ZDisplay::~ZDisplay()
 {
-    SDL_DestroyWindow(_window);
+    SDL_DestroyWindow(_impl->window);
 }
 
 void ZDisplay::initialize()
@@ -52,15 +57,15 @@ void ZDisplay::set_display_mode(const ZDisplayMode &mode)
 {
     _display_mode = mode;
     
-    SDL_SetWindowSize(_window, _display_mode.width, _display_mode.height);
-    SDL_SetWindowTitle(_window, _display_mode.window_title.c_str());
+    SDL_SetWindowSize(_impl->window, _display_mode.width, _display_mode.height);
+    SDL_SetWindowTitle(_impl->window, _display_mode.window_title.c_str());
 }
 
 #pragma mark - API
 
 void ZDisplay::swap_buffer()
 {
-    SDL_GL_SwapWindow(_window);
+    SDL_GL_SwapWindow(_impl->window);
 }
 
 #pragma mark - Internal
@@ -78,20 +83,20 @@ void ZDisplay::_init_window()
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);      // request hardware acceleration
     
     // create the window
-    _window = SDL_CreateWindow(_display_mode.window_title.c_str(),
+    _impl->window = SDL_CreateWindow(_display_mode.window_title.c_str(),
                                SDL_WINDOWPOS_UNDEFINED,
                                SDL_WINDOWPOS_UNDEFINED,
                                _display_mode.width,
                                _display_mode.height,
                                sdlflags);
-    if (_window == nullptr) {
+    if (_impl->window == nullptr) {
         ZLogger::log_error("Could not create SDL window.");
     }
 }
 
-SDL_Window* ZDisplay::_get_sdl_window()
+void* ZDisplay::_get_sdl_window()
 {
-    return _window;
+    return static_cast<void *>(_impl->window);
 }
 
 } // namespace zge

@@ -7,7 +7,6 @@
  
 #pragma once
 
-#include <SDL2/SDL.h>
 #include <memory>
 #include <string>
 #include <zge/noncopyable.h>
@@ -33,11 +32,11 @@ public:
 typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
 
 class ZDisplay : ZNoncopyable {
+    std::auto_ptr<struct ZDisplayImpl> _impl;
+    
 protected:
     bool _initialized;
     ZDisplayMode _display_mode;
-    
-    SDL_Window *_window;
     uint32_t _last_render;
     
 protected: // Only a display manager can create displays
@@ -67,8 +66,8 @@ public:
     friend class ZRenderContext;
     
 protected:
-    void _init_window();
-    SDL_Window* _get_sdl_window();
+    void  _init_window();
+    void* _get_sdl_window();
 };
 
 } // namespace zge

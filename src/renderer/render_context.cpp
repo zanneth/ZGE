@@ -9,17 +9,22 @@
 #include <zge/fragment_shader.h>
 #include <zge/logger.h>
 #include <zge/vertex_shader.h>
+#include <SDL2/SDL.h>
 
 namespace zge {
 
+struct ZRenderContextImpl {
+    SDL_GLContext gl_context;
+};
+
 ZRenderContext::ZRenderContext(ZDisplayRef display) :
-    _gl_context(nullptr),
     _display(display),
-    _shaders_loaded(false)
+    _shaders_loaded(false),
+    _impl(new ZRenderContextImpl)
 {
-    SDL_Window *sdl_window = _display->_get_sdl_window();
-    _gl_context = SDL_GL_CreateContext(sdl_window);
-    SDL_GL_MakeCurrent(sdl_window, _gl_context);
+    SDL_Window *sdl_window = static_cast<SDL_Window *>(_display->_get_sdl_window());
+    _impl->gl_context = SDL_GL_CreateContext(sdl_window);
+    SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
     SDL_GL_SetSwapInterval(1); // tell SDL to synchronize the buffer swap with the monitor's refresh rate.
     
     _shader_program = ZShaderProgramRef(new ZShaderProgram);
@@ -34,8 +39,8 @@ ZRenderContext::ZRenderContext(ZDisplayRef display) :
 
 ZRenderContext::~ZRenderContext()
 {
-    if (_gl_context != nullptr) {
-        SDL_GL_DeleteContext(_gl_context);
+    if (_impl->gl_context != nullptr) {
+        SDL_GL_DeleteContext(_impl->gl_context);
     }
 }
 
@@ -49,7 +54,8 @@ ZShaderProgramRef ZRenderContext::get_shader_program() const { return _shader_pr
 
 void ZRenderContext::make_current()
 {
-    SDL_GL_MakeCurrent(_display->_get_sdl_window(), _gl_context);
+    SDL_Window *sdl_window = static_cast<SDL_Window *>(_display->_get_sdl_window());
+    SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
     if (_shaders_loaded) {
         _shader_program->use_program();
     }

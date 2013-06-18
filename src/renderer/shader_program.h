@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include <zge/gl_includes.h>
+#include <zge/opengl.h>
 #include <zge/shader.h>
 
 namespace zge {

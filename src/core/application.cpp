@@ -1,5 +1,5 @@
 /*
- * application.mm
+ * application.cpp
  *
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 02/09/2012

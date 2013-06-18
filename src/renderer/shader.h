@@ -9,15 +9,14 @@
 
 #include <memory>
 #include <string>
-#include <zge/gl_includes.h>
+#include <zge/opengl.h>
 #include <zge/noncopyable.h>
 
 namespace zge {
 
 enum ZShaderType {
     ZVERTEX_SHADER,
-    ZFRAGMENT_SHADER,
-    ZGEOMETRY_SHADER
+    ZFRAGMENT_SHADER
 };
 
 typedef std::shared_ptr<class ZShader> ZShaderRef;

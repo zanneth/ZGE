@@ -8,7 +8,6 @@
 #pragma once
 
 #include <memory>
-#include <SDL2/SDL.h>
 #include <stack>
 #include <zge/display.h>
 #include <zge/geometry.h>
@@ -26,11 +25,12 @@ enum ZRenderMatrixType {
 };
 
 class ZRenderContext : ZNoncopyable {
-    SDL_GLContext        _gl_context;
     ZDisplayRef          _display;
     ZShaderProgramRef    _shader_program;
     bool                 _shaders_loaded;
     std::stack<Matrix4f> _matrix_stacks[_ZRENDER_MATRIX_COUNT];
+    
+    std::auto_ptr<struct ZRenderContextImpl> _impl;
     
 public:
     ZRenderContext(ZDisplayRef display);

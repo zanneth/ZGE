@@ -125,9 +125,6 @@ GLenum ZShader::_get_opengl_shader_type(const ZShaderType &type)
         case ZFRAGMENT_SHADER:
             gltype = GL_FRAGMENT_SHADER;
             break;
-        case ZGEOMETRY_SHADER:
-            gltype = GL_GEOMETRY_SHADER;
-            break;
         default:
             break;
     }

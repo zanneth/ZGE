@@ -9,7 +9,7 @@
 
 #include <zge/node.h>
 #include <zge/geometry.h>
-#include <zge/gl_includes.h>
+#include <zge/opengl.h>
 #include <zge/render_context.h>
 #include <memory>
 

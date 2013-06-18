@@ -9,8 +9,6 @@
 
 #define Z_GLEW_ENABLED  0
 
-#include <Eigen/Eigen>
-
 #include <zge/application.h>
 #include <zge/camera.h>
 #include <zge/display.h>
@@ -21,7 +19,7 @@
 #include <zge/fp_responder.h>
 #include <zge/geometry.h>
 #include <zge/gl_buffer.h>
-#include <zge/gl_includes.h>
+#include <zge/opengl.h>
 #include <zge/input_manager.h>
 #include <zge/logger.h>
 #include <zge/mesh_node.h>
@@ -29,6 +27,7 @@
 #include <zge/node.h>
 #include <zge/noncopyable.h>
 #include <zge/notification_center.h>
+#include <zge/opengl.h>
 #include <zge/render_context.h>
 #include <zge/render_manager.h>
 #include <zge/run_loop.h>

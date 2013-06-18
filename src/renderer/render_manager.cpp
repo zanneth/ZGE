@@ -37,17 +37,19 @@ ZRenderContextRef ZRenderManager::get_context() const { return _context; }
 
 void ZRenderManager::run(uint32_t dtime)
 {
-    if (!_initialized) {
-        _initialize();
-    }
-    
-    _context->make_current();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    ZSceneManagerRef scene_manager = ZEngine::instance()->get_scene_manager();
-    ZSceneRef cur_scene = scene_manager->get_current_scene();
-    if (cur_scene.get() != nullptr) {
-        cur_scene->_draw_internal(_context);
+    if (_context != nullptr) {
+        if (!_initialized) {
+            _initialize();
+        }
+        
+        _context->make_current();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        ZSceneManagerRef scene_manager = ZEngine::instance()->get_scene_manager();
+        ZSceneRef cur_scene = scene_manager->get_current_scene();
+        if (cur_scene.get() != nullptr) {
+            cur_scene->_draw_internal(_context);
+        }
     }
 }
 
