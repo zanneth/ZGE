@@ -20,7 +20,7 @@ namespace zge {
 
 typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
 typedef std::shared_ptr<class ZResponder> ZResponderRef;
-typedef std::function<void(const ZEvent&)> ZResponderFunction;
+typedef std::function<void(const ZEvent &event)> ZResponderFunction;
 
 class ZResponder : ZNoncopyable {
 protected:

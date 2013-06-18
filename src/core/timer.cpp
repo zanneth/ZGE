@@ -13,7 +13,7 @@ namespace zge {
 
 ZTimer::ZTimer(const ZTimerFunction &func) :
     _function(func),
-    _repeats(true),
+    _repeats(false),
     _time_scheduled(0),
     _time_last_fired(0)
 {}

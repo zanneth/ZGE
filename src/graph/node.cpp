@@ -88,7 +88,9 @@ bool ZNode::remove_child(ZNodeRef node)
 
 void ZNode::remove_from_parent()
 {
-    _parent->_remove_child_uid(_uid);
+    if (_parent != nullptr) {
+        _parent->_remove_child_uid(_uid);
+    }
 }
 
 #pragma mark - Description
@@ -117,7 +119,7 @@ void ZNode::_draw_internal(ZRenderContextRef context)
     before_draw(context);
     
     context->push_matrix(ZRENDER_MATRIX_MODELVIEW);
-    context->multiply_matrix(ZRENDER_MATRIX_MODELVIEW, (_transform * _pos_transform).matrix());
+    context->multiply_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform).matrix());
     
     for (ZNodeRef child : _children) {
         child->_draw_internal(context);

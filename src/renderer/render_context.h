@@ -50,6 +50,8 @@ public:
     void load_identity(ZRenderMatrixType type);
     void pop_matrix(ZRenderMatrixType type);
     
+    Matrix4f get_matrix(ZRenderMatrixType type) const;
+    
 protected:
     void    _load_shaders();
     GLint   _get_matrix_uniform(ZRenderMatrixType type);

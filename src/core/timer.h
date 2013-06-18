@@ -38,7 +38,7 @@ public:
     uint32_t get_interval() const;
     void     set_interval(const uint32_t interval);
     
-    // Whether the timer should repeat or not (default is true).
+    // Whether the timer should repeat or not (default is false).
     bool repeats() const;
     void set_repeats(bool repeats);
     

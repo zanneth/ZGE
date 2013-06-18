@@ -63,7 +63,7 @@ void ZRenderContext::make_current()
 
 void ZRenderContext::push_matrix(ZRenderMatrixType type)
 {
-    const Matrix4f &top = _matrix_stacks[type].top();
+    Matrix4f top = _matrix_stacks[type].top();
     _matrix_stacks[type].push(top);
 }
 
@@ -93,6 +93,11 @@ void ZRenderContext::pop_matrix(ZRenderMatrixType type)
     } else {
         load_identity(type);
     }
+}
+
+Matrix4f ZRenderContext::get_matrix(ZRenderMatrixType type) const
+{
+    return _matrix_stacks[type].top();
 }
 
 #pragma mark - Internal
@@ -129,7 +134,7 @@ void ZRenderContext::_update_uniforms(ZRenderMatrixType type)
 {
     GLint uniform = _get_matrix_uniform(type);
     if (uniform != -1) {
-        Matrix4f matrix = _matrix_stacks[type].top();
+        const Matrix4f &matrix = _matrix_stacks[type].top();
         glUniformMatrix4fv(uniform, 1, GL_FALSE, matrix.data());
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
