@@ -7,8 +7,6 @@
  
 #pragma once
 
-#define Z_GLEW_ENABLED  0
-
 #include <zge/application.h>
 #include <zge/camera.h>
 #include <zge/display.h>
@@ -39,8 +37,3 @@
 #include <zge/timer.h>
 #include <zge/types.h>
 #include <zge/util.h>
-
-// SDL does this for some reason
-#ifdef main
-#undef main
-#endif
