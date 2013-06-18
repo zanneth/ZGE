@@ -250,17 +250,15 @@ struct ZEvent {
     std::shared_ptr<void>   context;        // an arbitrary context. if the event was spawned by the input manager, this would be a pointer to the responder
     bool                    is_repeat;      // a repeat of a previous event (e.g. key held down)
     
-    union _ZConcreteEvent {
-        ZKeyEvent                   key_event;
-        ZMouseEvent                 mouse_event;
-        std::vector<ZTouchEvent>    touch_events;
-        ZApplicationEvent           application_event;
-        
-        _ZConcreteEvent()  {}
-        _ZConcreteEvent(const _ZConcreteEvent&) {}
-        ~_ZConcreteEvent() {}
-    } event;
+    union {
+        ZKeyEvent           key_event;
+        ZMouseEvent         mouse_event;
+        ZTouchEvent         touch_event;
+        ZApplicationEvent   application_event;
+    };
     
+    ZEvent();
+    ZEvent(const ZEvent&);
     std::string get_description() const;
     
 private:

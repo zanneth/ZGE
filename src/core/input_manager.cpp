@@ -170,7 +170,7 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     // parse mouse button event
     if (sdl_event.type == SDL_MOUSEBUTTONDOWN || sdl_event.type == SDL_MOUSEBUTTONUP) {
         Vector2f location = Vector2f(sdl_event.button.x, sdl_event.button.y);
-        event.event.mouse_event.location = location;
+        event.mouse_event.location = location;
         
         ZMouseButtonFlags button;
         switch (sdl_event.button.button) {
@@ -195,11 +195,11 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
         }
         
         if (sdl_event.button.state == SDL_PRESSED) {
-            event.event.mouse_event.pressed_buttons = button;
+            event.mouse_event.pressed_buttons = button;
         } else if (sdl_event.button.state == SDL_RELEASED) {
-            event.event.mouse_event.released_buttons = button;
+            event.mouse_event.released_buttons = button;
         }
-        event.event.mouse_event.click_count = 1;
+        event.mouse_event.click_count = 1;
     }
     
     // parse mouse wheel event
@@ -211,16 +211,16 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
             button = ZWHEEL_DOWN;
         }
         
-        event.event.mouse_event.pressed_buttons = button;
-        event.event.mouse_event.click_count = 1;
+        event.mouse_event.pressed_buttons = button;
+        event.mouse_event.click_count = 1;
     }
     
     // parse mouse motion event
     if (sdl_event.type == SDL_MOUSEMOTION) {
         Vector2f location = Vector2f(sdl_event.motion.x, sdl_event.motion.y);
         Vector2f velocity = Vector2f(sdl_event.motion.xrel, sdl_event.motion.yrel);
-        event.event.mouse_event.location = location;
-        event.event.mouse_event.velocity = velocity;
+        event.mouse_event.location = location;
+        event.mouse_event.velocity = velocity;
         
         unsigned pressed_buttons = ZNO_BUTTONS;
         uint8_t sdl_buttons = sdl_event.motion.state;
@@ -241,14 +241,14 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
                 pressed_buttons |= ZMOUSE_BUTTON_2;
             }
         }
-        event.event.mouse_event.pressed_buttons = static_cast<ZMouseButtonFlags>(pressed_buttons);
+        event.mouse_event.pressed_buttons = static_cast<ZMouseButtonFlags>(pressed_buttons);
     }
     
     // parse key event
     if (sdl_event.type == SDL_KEYDOWN || sdl_event.type == SDL_KEYUP) {
         SDL_Keysym sdl_key = sdl_event.key.keysym;
         ZKey key = _convert_sdl_key(sdl_key.sym);
-        event.event.key_event.key = key;
+        event.key_event.key = key;
         
         uint16_t sdl_mods = sdl_key.mod;
         unsigned mods = ZNO_MODIFIERS;
@@ -284,13 +284,13 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
                 mods |= ZCAPS_LOCK_KEY;
             }
         }
-        event.event.key_event.modifier_flags = static_cast<ZKeyModifierFlags>(mods);
-        event.event.key_event.state = (sdl_event.key.state == SDL_PRESSED ? ZPRESSED : ZRELEASED);
+        event.key_event.modifier_flags = static_cast<ZKeyModifierFlags>(mods);
+        event.key_event.state = (sdl_event.key.state == SDL_PRESSED ? ZPRESSED : ZRELEASED);
     }
     
     // parse application event
     if (sdl_event.type == SDL_QUIT) {
-        event.event.application_event = ZAPPLICATION_QUIT_EVENT;
+        event.application_event = ZAPPLICATION_QUIT_EVENT;
     } else if (sdl_event.type == SDL_WINDOWEVENT) {
         // TODO: application event
     }

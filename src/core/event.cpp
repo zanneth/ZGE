@@ -11,6 +11,44 @@
 
 namespace zge {
 
+ZEvent::ZEvent() :
+    timestamp(0),
+    type(ZUNKNOWN_EVENT),
+    context(nullptr),
+    is_repeat(false)
+{}
+
+ZEvent::ZEvent(const ZEvent &copy)
+{
+    timestamp = copy.timestamp;
+    type = copy.type;
+    context = copy.context;
+    is_repeat = copy.is_repeat;
+    
+    switch (type) {
+        case ZMOUSE_DOWN_EVENT:
+        case ZMOUSE_UP_EVENT:
+        case ZMOUSE_MOVED_EVENT:
+        case ZMOUSE_DRAGGED_EVENT:
+        case ZSCROLL_WHEEL_EVENT:
+            mouse_event = copy.mouse_event;
+            break;
+        case ZTOUCH_DOWN_EVENT:
+        case ZTOUCH_UP_EVENT:
+            touch_event = copy.touch_event;
+            break;
+        case ZKEY_DOWN_EVENT:
+        case ZKEY_UP_EVENT:
+            key_event = copy.key_event;
+            break;
+        case ZAPPLICATION_EVENT:
+            application_event = copy.application_event;
+            break;
+        default:
+            break;
+    }
+}
+
 std::string ZEvent::get_description() const
 {
     const char *format = "[ZEvent 0x%x] {\n"
@@ -114,7 +152,7 @@ std::string ZEvent::_type_description() const
 std::string ZEvent::_key_event_description() const
 {
     std::string descr;
-    ZKeyEvent key_event = event.key_event;
+    ZKeyEvent key_event = this->key_event;
     
     descr = ZUtil::format("Keycode: %d\n", key_event.key);
     
@@ -167,7 +205,7 @@ std::string ZEvent::_key_event_description() const
 std::string ZEvent::_mouse_event_description() const
 {
     std::string descr;
-    ZMouseEvent mouse_event = event.mouse_event;
+    ZMouseEvent mouse_event = this->mouse_event;
     descr = ZUtil::format("Location: (%f, %f)\n", mouse_event.location.x(), mouse_event.location.y());
     descr += ZUtil::format("Velocity: (%f, %f)\n", mouse_event.velocity.x(), mouse_event.velocity.y());
     
@@ -184,16 +222,10 @@ std::string ZEvent::_mouse_event_description() const
 std::string ZEvent::_touch_event_description() const
 {
     std::string descr;
-    std::vector<ZTouchEvent> touch_events = event.touch_events;
-    descr = ZUtil::format("Number of Touches: %d\n", touch_events.size());
+    ZTouchEvent touch = this->touch_event;
     
-    unsigned idx = 1;
-    for (const auto &touch : touch_events) {
-        descr += ZUtil::format("\tTouch %d:\n", idx);
-        descr += ZUtil::format("\t\tLocation: (%f, %f)\n", touch.location.x(), touch.location.y());
-        descr += ZUtil::format("\t\tTaps: %d\n", touch.tap_count);
-        ++idx;
-    }
+    descr += ZUtil::format("\tLocation: (%f, %f)\n", touch.location.x(), touch.location.y());
+    descr += ZUtil::format("\tTaps: %d\n", touch.tap_count);
     
     return descr;
 }
@@ -201,7 +233,7 @@ std::string ZEvent::_touch_event_description() const
 std::string ZEvent::_application_event_description() const
 {
     std::string descr;
-    ZApplicationEvent app_event = event.application_event;
+    ZApplicationEvent app_event = this->application_event;
     switch (app_event) {
         case ZAPPLICATION_QUIT_EVENT:
             descr = "Application Quit Event";
