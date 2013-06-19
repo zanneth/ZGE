@@ -20,7 +20,6 @@ class ZRenderManager : public ZSchedulable, ZNoncopyable {
     ZRenderContextRef _context;
     ZObserverHandle _display_observer;
     bool _initialized;
-    bool _shaders_loaded;
     
 public:
     ZRenderManager();

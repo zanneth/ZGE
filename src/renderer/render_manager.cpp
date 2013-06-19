@@ -17,8 +17,7 @@ namespace zge {
 
 ZRenderManager::ZRenderManager() :
     _context(nullptr),
-    _initialized(false),
-    _shaders_loaded(false)
+    _initialized(false)
 {
     auto func = std::bind(&ZRenderManager::_display_notification, this, std::placeholders::_1);
     _display_observer = ZNotificationCenter::instance()->add_observer(ZDisplayManagerDidCreateDisplayNotification, func);

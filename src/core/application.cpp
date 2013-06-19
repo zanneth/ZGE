@@ -54,7 +54,7 @@ void ZApplication::run()
     __current_application = this;
         
     // initialize SDL
-    int sdl_result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER);
+    int sdl_result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     if (sdl_result < 0) {
         ZException ex(APPLICATION_EXCEPTION_CODE);
         ex.extra_info = ZUtil::format("SDL failed to initialize: %s", SDL_GetError());

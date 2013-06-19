@@ -48,6 +48,12 @@ void ZCamera::close()
     
 #pragma mark - Node Overrides
 
+void ZCamera::set_position(const Vector3f &position)
+{
+    ZNode::set_position(position);
+    _modelview_dirty = true;
+}
+
 void ZCamera::set_transform(const Affine3f &transform)
 {
     Vector3f position = get_position();

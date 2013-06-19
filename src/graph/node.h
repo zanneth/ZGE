@@ -46,8 +46,9 @@ public:
     /* Accessors */
     ZNode*   get_parent() { return _parent; }
     ZScene*  get_scene() { return _scene; }
-    Vector3f get_position() { return _position; }
-    void     set_position(const Vector3f &position);
+    
+    virtual Vector3f get_position() { return _position; }
+    virtual void     set_position(const Vector3f &position);
     
     virtual Affine3f get_transform() { return _transform; }
     virtual void     set_transform(const Affine3f &transform) { _transform = transform; }

@@ -11,13 +11,13 @@
 #include <zge/noncopyable.h>
 #include <zge/run_loop.h>
 
-#include <list>
 #include <string>
+#include <vector>
 
 namespace zge {
 
 class ZApplication : ZNoncopyable {
-    std::list<std::string> _arguments;
+    std::vector<std::string> _arguments;
     bool _show_cursor;
     bool _capture_input;
     
@@ -35,7 +35,7 @@ public:
     void run();
     
     /* Accessors */
-    std::list<std::string> get_arguments() { return _arguments; }
+    std::vector<std::string> get_arguments() { return _arguments; }
     void set_arguments(int argc, char **argv);
     bool shows_cursor() { return _show_cursor; }
     void set_shows_cursor(bool cursor) { _show_cursor = cursor; }

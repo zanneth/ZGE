@@ -51,6 +51,7 @@ public:
     void close();
     
     /* Node Overrides */
+    void set_position(const Vector3f &position) override;
     void set_transform(const Affine3f &transform) override;
     
 private:

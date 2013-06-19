@@ -8,6 +8,7 @@
 #include <zge/exception.h>
 #include <zge/model.h>
 #include <zge/logger.h>
+#include <zge/shader_program.h>
 #include <zge/util.h>
 
 #include <cassert>
@@ -124,20 +125,18 @@ void ZModel::load_file(std::string filename)
 void ZModel::draw()
 {
     glPushClientAttrib(GL_CLIENT_VERTEX_ARRAY_BIT);
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
     
     _vertex_vbo->bind();
-    glVertexPointer(3, GL_FLOAT, 0, NULL);
+    glVertexAttribPointer(ZVERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(ZVERTEX_ATTRIB_POSITION);
     
     _normal_vbo->bind();
-    glNormalPointer(GL_FLOAT, 0, NULL);
+    glVertexAttribPointer(ZVERTEX_ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(ZVERTEX_ATTRIB_NORMAL);
     
     _element_vbo->bind();
-    glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, (void *)0);
+    glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, nullptr);
     
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_NORMAL_ARRAY);
     glPopClientAttrib();
 }
 

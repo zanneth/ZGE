@@ -24,7 +24,9 @@ ZDisplay::ZDisplay(const ZDisplayMode &mode) :
 
 ZDisplay::~ZDisplay()
 {
-    SDL_DestroyWindow(_impl->window);
+    if (_impl->window != nullptr) {
+        SDL_DestroyWindow(_impl->window);
+    }
 }
 
 void ZDisplay::initialize()
