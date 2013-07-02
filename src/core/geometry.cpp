@@ -69,10 +69,10 @@ Matrix4f ZGeometry::ortho(float left, float right, float bottom, float top, floa
     
     Matrix4f mat;
     mat <<
-        2.0f / rsl, 0.0f, 0.0f, 0.0f,
-        0.0f, 2.0f / tsb, 0.0f, 0.0f,
-        0.0f, 0.0f, -2.0f / fsn, 0.0f,
-        -ral / rsl, -tab / tsb, -fan / fsn, 1.0f;
+        2.0f / rsl, 0.0f, 0.0f, -ral / rsl,
+        0.0f, 2.0f / tsb, 0.0f, -tab / tsb,
+        0.0f, 0.0f, -2.0f / fsn, -fan / fsn,
+        0.0f, 0.0f, 0.0f, 1.0f;
     
     return mat;
 }

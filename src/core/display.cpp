@@ -8,6 +8,7 @@
 #include <zge/display.h>
 #include <zge/exception.h>
 #include <zge/logger.h>
+#include <zge/opengl.h>
 #include <zge/util.h>
 #include <SDL2/SDL.h>
 
@@ -61,6 +62,7 @@ void ZDisplay::set_display_mode(const ZDisplayMode &mode)
     
     SDL_SetWindowSize(_impl->window, _display_mode.width, _display_mode.height);
     SDL_SetWindowTitle(_impl->window, _display_mode.window_title.c_str());
+    glViewport(0, 0, _display_mode.width, _display_mode.height);
 }
 
 #pragma mark - API
