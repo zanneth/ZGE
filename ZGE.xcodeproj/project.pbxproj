@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0C06448A177029CC004AAA20 /* opengl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C064489177029CC004AAA20 /* opengl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C07BD7117C0481900C38084 /* shape_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C07BD6F17C0481900C38084 /* shape_node.cpp */; };
+		0C07BD7217C0481900C38084 /* shape_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C07BD7017C0481900C38084 /* shape_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C07BD7517C0496A00C38084 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C07BD7317C0496A00C38084 /* color.cpp */; };
+		0C07BD7617C0496A00C38084 /* color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C07BD7417C0496A00C38084 /* color.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C1F28BA17C1C3FF00CA03C4 /* gl_vertexarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1F28B817C1C3FF00CA03C4 /* gl_vertexarray.cpp */; };
+		0C1F28BB17C1C3FF00CA03C4 /* gl_vertexarray.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1F28B917C1C3FF00CA03C4 /* gl_vertexarray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C2B01AB176D5FE300522671 /* render_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B01A9176D5FE300522671 /* render_manager.cpp */; };
 		0C2B01AC176D5FE300522671 /* render_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C2B01AA176D5FE300522671 /* render_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C2B01AF176D600600522671 /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B01AD176D600600522671 /* scene_manager.cpp */; };
@@ -129,8 +135,8 @@
 		0CC5B045176107F000B7C2BD /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; };
 		0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCD2F59176128AC00F497CF /* timer.cpp */; };
 		0CCD2F5C176128AC00F497CF /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCD2F5A176128AC00F497CF /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0CEC024F176D5DF90029DE82 /* mesh_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC0249176D5DF90029DE82 /* mesh_node.cpp */; };
-		0CEC0250176D5DF90029DE82 /* mesh_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEC024A176D5DF90029DE82 /* mesh_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE2AD0617C04CC2003C1CE1 /* mesh_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE2AD0417C04CC2003C1CE1 /* mesh_node.cpp */; };
+		0CE2AD0717C04CC2003C1CE1 /* mesh_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE2AD0517C04CC2003C1CE1 /* mesh_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CEC0251176D5DF90029DE82 /* node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC024B176D5DF90029DE82 /* node.cpp */; };
 		0CEC0252176D5DF90029DE82 /* node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEC024C176D5DF90029DE82 /* node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CEC0253176D5DF90029DE82 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC024D176D5DF90029DE82 /* scene.cpp */; };
@@ -154,6 +160,12 @@
 
 /* Begin PBXFileReference section */
 		0C064489177029CC004AAA20 /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
+		0C07BD6F17C0481900C38084 /* shape_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shape_node.cpp; sourceTree = "<group>"; };
+		0C07BD7017C0481900C38084 /* shape_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shape_node.h; sourceTree = "<group>"; };
+		0C07BD7317C0496A00C38084 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
+		0C07BD7417C0496A00C38084 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
+		0C1F28B817C1C3FF00CA03C4 /* gl_vertexarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gl_vertexarray.cpp; sourceTree = "<group>"; };
+		0C1F28B917C1C3FF00CA03C4 /* gl_vertexarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl_vertexarray.h; sourceTree = "<group>"; };
 		0C2B01A9176D5FE300522671 /* render_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_manager.cpp; sourceTree = "<group>"; };
 		0C2B01AA176D5FE300522671 /* render_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_manager.h; sourceTree = "<group>"; };
 		0C2B01AD176D600600522671 /* scene_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene_manager.cpp; path = src/graph/scene_manager.cpp; sourceTree = SOURCE_ROOT; };
@@ -568,8 +580,8 @@
 		0C977FB2173752CD0071E8E6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		0CCD2F59176128AC00F497CF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		0CCD2F5A176128AC00F497CF /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
-		0CEC0249176D5DF90029DE82 /* mesh_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mesh_node.cpp; path = src/graph/mesh_node.cpp; sourceTree = SOURCE_ROOT; };
-		0CEC024A176D5DF90029DE82 /* mesh_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mesh_node.h; path = src/graph/mesh_node.h; sourceTree = SOURCE_ROOT; };
+		0CE2AD0417C04CC2003C1CE1 /* mesh_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh_node.cpp; sourceTree = "<group>"; };
+		0CE2AD0517C04CC2003C1CE1 /* mesh_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mesh_node.h; sourceTree = "<group>"; };
 		0CEC024B176D5DF90029DE82 /* node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node.cpp; path = src/graph/node.cpp; sourceTree = SOURCE_ROOT; };
 		0CEC024C176D5DF90029DE82 /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = src/graph/node.h; sourceTree = SOURCE_ROOT; };
 		0CEC024D176D5DF90029DE82 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene.cpp; path = src/graph/scene.cpp; sourceTree = SOURCE_ROOT; };
@@ -1269,6 +1281,10 @@
 			children = (
 				0C50D3A516D208A900E43D7B /* fp_responder.h */,
 				0C50D3A416D208A900E43D7B /* fp_responder.cpp */,
+				0CE2AD0517C04CC2003C1CE1 /* mesh_node.h */,
+				0CE2AD0417C04CC2003C1CE1 /* mesh_node.cpp */,
+				0C07BD7017C0481900C38084 /* shape_node.h */,
+				0C07BD6F17C0481900C38084 /* shape_node.cpp */,
 			);
 			path = contrib;
 			sourceTree = "<group>";
@@ -1278,6 +1294,8 @@
 			children = (
 				0C50D3A716D208A900E43D7B /* application.h */,
 				0C50D3A816D208A900E43D7B /* application.cpp */,
+				0C07BD7417C0496A00C38084 /* color.h */,
+				0C07BD7317C0496A00C38084 /* color.cpp */,
 				0C50D3AA16D208A900E43D7B /* display.h */,
 				0C50D3A916D208A900E43D7B /* display.cpp */,
 				0C50D3AC16D208A900E43D7B /* display_manager.h */,
@@ -1305,8 +1323,6 @@
 		0C50D3C016D208A900E43D7B /* graph */ = {
 			isa = PBXGroup;
 			children = (
-				0CEC024A176D5DF90029DE82 /* mesh_node.h */,
-				0CEC0249176D5DF90029DE82 /* mesh_node.cpp */,
 				0CEC024C176D5DF90029DE82 /* node.h */,
 				0CEC024B176D5DF90029DE82 /* node.cpp */,
 				0CEC024E176D5DF90029DE82 /* scene.h */,
@@ -1325,6 +1341,8 @@
 				0C50D3C616D208A900E43D7B /* camera.cpp */,
 				0C50D3C916D208A900E43D7B /* gl_buffer.h */,
 				0C50D3C816D208A900E43D7B /* gl_buffer.cpp */,
+				0C1F28B917C1C3FF00CA03C4 /* gl_vertexarray.h */,
+				0C1F28B817C1C3FF00CA03C4 /* gl_vertexarray.cpp */,
 				0C064489177029CC004AAA20 /* opengl.h */,
 				0C50D3CE16D208A900E43D7B /* model.h */,
 				0C50D3CD16D208A900E43D7B /* model.cpp */,
@@ -1416,6 +1434,8 @@
 				0C977F8F1737512D0071E8E6 /* geometry.h in Headers */,
 				0C4B4AED17499A9200FD4B53 /* geometry.hpp in Headers */,
 				0C977F911737512D0071E8E6 /* input_manager.h in Headers */,
+				0C07BD7617C0496A00C38084 /* color.h in Headers */,
+				0C07BD7217C0481900C38084 /* shape_node.h in Headers */,
 				0C977F931737512D0071E8E6 /* noncopyable.h in Headers */,
 				0C2B01B0176D600600522671 /* scene_manager.h in Headers */,
 				0C977F941737512D0071E8E6 /* run_loop.h in Headers */,
@@ -1432,7 +1452,6 @@
 				0C4B4AF61749A83500FD4B53 /* render_context.h in Headers */,
 				0C977FA91737512D0071E8E6 /* notification_center.h in Headers */,
 				0CEC0254176D5DF90029DE82 /* scene.h in Headers */,
-				0CEC0250176D5DF90029DE82 /* mesh_node.h in Headers */,
 				0CCD2F5C176128AC00F497CF /* timer.h in Headers */,
 				0CEC0252176D5DF90029DE82 /* node.h in Headers */,
 				0C977FAB1737512D0071E8E6 /* util.h in Headers */,
@@ -1458,6 +1477,7 @@
 				0C46F5C3175F00E800BF6EC9 /* SDL_test_compare.h in Headers */,
 				0C46F5CD175F00E800BF6EC9 /* SDL_timer.h in Headers */,
 				0C46F5B1175F00E800BF6EC9 /* SDL_opengles2.h in Headers */,
+				0CE2AD0717C04CC2003C1CE1 /* mesh_node.h in Headers */,
 				0C46F5B8175F00E800BF6EC9 /* SDL_revision.h in Headers */,
 				0C46F598175F00E800BF6EC9 /* SDL_audio.h in Headers */,
 				0C46F5C5175F00E800BF6EC9 /* SDL_test_font.h in Headers */,
@@ -1483,6 +1503,7 @@
 				0C46F593175F00E800BF6EC9 /* begin_code.h in Headers */,
 				0C46F5B2175F00E800BF6EC9 /* SDL_pixels.h in Headers */,
 				0C46F5C2175F00E800BF6EC9 /* SDL_test_common.h in Headers */,
+				0C1F28BB17C1C3FF00CA03C4 /* gl_vertexarray.h in Headers */,
 				0C46F5B7175F00E800BF6EC9 /* SDL_render.h in Headers */,
 				0C46F5C6175F00E800BF6EC9 /* SDL_test_fuzzer.h in Headers */,
 				0C46F5C8175F00E800BF6EC9 /* SDL_test_images.h in Headers */,
@@ -1574,12 +1595,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C07BD7517C0496A00C38084 /* color.cpp in Sources */,
 				0C977F551737510C0071E8E6 /* fp_responder.cpp in Sources */,
+				0C1F28BA17C1C3FF00CA03C4 /* gl_vertexarray.cpp in Sources */,
 				0C977F571737510C0071E8E6 /* application.cpp in Sources */,
 				0C977F591737510C0071E8E6 /* display.cpp in Sources */,
 				0C977F5B1737510C0071E8E6 /* display_manager.cpp in Sources */,
 				0C4B4AF51749A83500FD4B53 /* render_context.cpp in Sources */,
-				0CEC024F176D5DF90029DE82 /* mesh_node.cpp in Sources */,
 				0C977F5D1737510C0071E8E6 /* engine.cpp in Sources */,
 				0C977F5F1737510C0071E8E6 /* event.cpp in Sources */,
 				0C977F631737510C0071E8E6 /* geometry.cpp in Sources */,
@@ -1587,6 +1609,7 @@
 				0C977F651737510C0071E8E6 /* input_manager.cpp in Sources */,
 				0C4B4AF11749A52700FD4B53 /* shader_program.cpp in Sources */,
 				0C977F681737510C0071E8E6 /* run_loop.cpp in Sources */,
+				0C07BD7117C0481900C38084 /* shape_node.cpp in Sources */,
 				0C977F701737510C0071E8E6 /* camera.cpp in Sources */,
 				0C977F721737510C0071E8E6 /* gl_buffer.cpp in Sources */,
 				0C2B01AF176D600600522671 /* scene_manager.cpp in Sources */,
@@ -1599,6 +1622,7 @@
 				0C977F7D1737510C0071E8E6 /* notification_center.cpp in Sources */,
 				0C977F7F1737510C0071E8E6 /* util.cpp in Sources */,
 				0CEC0251176D5DF90029DE82 /* node.cpp in Sources */,
+				0CE2AD0617C04CC2003C1CE1 /* mesh_node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

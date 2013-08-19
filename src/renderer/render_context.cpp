@@ -107,7 +107,8 @@ void ZRenderContext::_load_shaders()
     if (_shader_program != nullptr && !_shaders_loaded) {
         _shader_program->load_shader_source(ZVertexShaderSource, ZVERTEX_SHADER);
         _shader_program->load_shader_source(ZFragmentShaderSource, ZFRAGMENT_SHADER);
-        _shader_program->bind_attribute(ZVERTEX_ATTRIB_POSITION, "position");
+        _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_POSITION, "position");
+        _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_COLOR, "color");
         _shader_program->link_program();
         
         _shaders_loaded = true;

@@ -47,3 +47,5 @@ private:
 };
 
 } // namespace zge
+
+#define zlog(...) zge::ZLogger::log(__VA_ARGS__)

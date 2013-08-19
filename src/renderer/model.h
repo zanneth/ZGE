@@ -8,6 +8,7 @@
 #pragma once
 
 #include <zge/gl_buffer.h>
+#include <zge/gl_vertexarray.h>
 #include <memory>
 #include <string>
 
@@ -20,6 +21,7 @@ protected:
     std::string     _name;
     unsigned        _num_faces;
     unsigned        _num_vertices;
+    ZGLVertexArrayRef _vertex_array;
     ZGLBufferRef    _element_vbo;
     ZGLBufferRef    _vertex_vbo;
     ZGLBufferRef    _normal_vbo;

@@ -9,14 +9,19 @@
 
 namespace zge {
     
-const std::string ZVertexShaderSource = HEREDOC(
+const std::string ZVertexShaderSource = "#version 150\n" + HEREDOC(
+
+in vec4 position;
+in vec4 color;
 
 uniform mat4 projection;
 uniform mat4 modelview;
-attribute vec4 position;
+
+smooth out vec4 fragColor;
 
 void main()
 {
+    fragColor = color;
     gl_Position = projection * modelview * position;
 }
 

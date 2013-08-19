@@ -9,6 +9,7 @@
 
 #include <zge/application.h>
 #include <zge/camera.h>
+#include <zge/color.h>
 #include <zge/display.h>
 #include <zge/display_manager.h>
 #include <zge/engine.h>
@@ -17,7 +18,7 @@
 #include <zge/fp_responder.h>
 #include <zge/geometry.h>
 #include <zge/gl_buffer.h>
-#include <zge/opengl.h>
+#include <zge/gl_vertexarray.h>
 #include <zge/input_manager.h>
 #include <zge/logger.h>
 #include <zge/mesh_node.h>
@@ -34,6 +35,7 @@
 #include <zge/schedulable.h>
 #include <zge/shader.h>
 #include <zge/shader_program.h>
+#include <zge/shape_node.h>
 #include <zge/timer.h>
 #include <zge/types.h>
 #include <zge/util.h>

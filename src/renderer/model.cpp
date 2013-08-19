@@ -20,13 +20,39 @@ namespace zge {
 ZModel::ZModel(std::string filename) :
     _num_faces(0),
     _num_vertices(0),
+    _vertex_array(new ZGLVertexArray),
     _element_vbo(new ZGLBuffer),
     _vertex_vbo(new ZGLBuffer),
     _normal_vbo(new ZGLBuffer)
 {
+    // setup element buffer
     _element_vbo->set_target(GL_ELEMENT_ARRAY_BUFFER);
+    
+    // setup vertex buffer
     _vertex_vbo->set_target(GL_ARRAY_BUFFER);
+    ZBufferAttribute vertex_attrib;
+    vertex_attrib.index = ZVERTEX_ATTRIB_POSITION;
+    vertex_attrib.components_per_vertex = 3;
+    vertex_attrib.component_type = ZBUFFER_COMPONENT_TYPE_FLOAT;
+    vertex_attrib.normalized = false;
+    vertex_attrib.stride = 0;
+    vertex_attrib.offset = 0;
+    _vertex_vbo->add_attribute(vertex_attrib);
+    
+    // setup normal buffer
     _normal_vbo->set_target(GL_ARRAY_BUFFER);
+    ZBufferAttribute normal_attrib;
+    normal_attrib.index = ZVERTEX_ATTRIB_NORMAL;
+    normal_attrib.components_per_vertex = 3;
+    normal_attrib.component_type = ZBUFFER_COMPONENT_TYPE_FLOAT;
+    normal_attrib.normalized = false;
+    normal_attrib.stride = 0;
+    normal_attrib.offset = 0;
+    _normal_vbo->add_attribute(normal_attrib);
+    
+    _vertex_array->add_buffer(_vertex_vbo);
+    _vertex_array->add_buffer(_normal_vbo);
+    _vertex_array->add_buffer(_element_vbo);
     
     if (filename.length()) {
         load_file(filename);
@@ -124,20 +150,9 @@ void ZModel::load_file(std::string filename)
 
 void ZModel::draw()
 {
-    glPushClientAttrib(GL_CLIENT_VERTEX_ARRAY_BIT);
-    
-    _vertex_vbo->bind();
-    glVertexAttribPointer(ZVERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-    glEnableVertexAttribArray(ZVERTEX_ATTRIB_POSITION);
-    
-    _normal_vbo->bind();
-    glVertexAttribPointer(ZVERTEX_ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-    glEnableVertexAttribArray(ZVERTEX_ATTRIB_NORMAL);
-    
-    _element_vbo->bind();
+    _vertex_array->bind();
     glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, nullptr);
-    
-    glPopClientAttrib();
+    _vertex_array->unbind();
 }
 
 } // namespace zge

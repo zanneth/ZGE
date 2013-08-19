@@ -77,7 +77,7 @@ bool ZShaderProgram::load_shader_source(const std::string &source, ZShaderType t
     return success;
 }
 
-bool ZShaderProgram::bind_attribute(ZVertexAttribute attrib, std::string name)
+bool ZShaderProgram::bind_attribute_index(ZVertexAttributeIndex attrib, std::string name)
 {
     bool success = false;
     if (_attrib_map.find(attrib) == _attrib_map.end()) {

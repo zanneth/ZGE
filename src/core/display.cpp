@@ -85,6 +85,9 @@ void ZDisplay::_init_window()
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);             // request 24-bit depth buffer
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);            // request double-buffering
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);      // request hardware acceleration
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);   // request OpenGL version 3.2
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     
     // create the window
     _impl->window = SDL_CreateWindow(_display_mode.window_title.c_str(),

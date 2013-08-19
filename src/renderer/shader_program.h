@@ -13,17 +13,9 @@
 #include <vector>
 #include <zge/opengl.h>
 #include <zge/shader.h>
+#include <zge/types.h>
 
 namespace zge {
-
-enum ZVertexAttribute {
-    ZVERTEX_ATTRIB_POSITION,
-    ZVERTEX_ATTRIB_NORMAL,
-    ZVERTEX_ATTRIB_COLOR,
-    ZVERTEX_ATTRIB_TEXCOORD0,
-    ZVERTEX_ATTRIB_TEXCOORD1,
-    ZVERTEX_ATTRIB_COUNT
-};
 
 typedef std::shared_ptr<class ZShaderProgram> ZShaderProgramRef;
 
@@ -49,7 +41,7 @@ public:
     bool load_shader(const std::string &path, ZShaderType type); // convenience -- compiles and attaches a shader
     bool load_shader_source(const std::string &source, ZShaderType type); // convenience (as above)
     
-    bool bind_attribute(ZVertexAttribute attrib, std::string name);
+    bool bind_attribute_index(ZVertexAttributeIndex attrib, std::string name);
     bool link_program();
     bool use_program();
     
