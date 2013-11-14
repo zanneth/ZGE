@@ -63,9 +63,9 @@ void ZCamera::set_transform(const Affine3f &transform)
     Affine3f final_transform = translation * transform;
     final_transform.translate(-position);
     
-    Vector3f look = get_look_direction();
+    Vector3f look = get_look();
     look = final_transform * look;
-    set_look_direction(look);
+    set_look(look);
     
     ZNode::set_transform(transform);
 }
@@ -105,7 +105,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = ZGeometry::lookat(_position, _look_direction, Vector3f::UnitY());
+        _modelview_matrix = ZGeometry::lookat(_position, _look, Vector3f::UnitY());
         _modelview_dirty = false;
     }
 }

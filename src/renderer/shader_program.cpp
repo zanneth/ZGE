@@ -122,6 +122,7 @@ bool ZShaderProgram::use_program()
     bool result = false;
     if (_linked && _program_handle != 0) {
         glUseProgram(_program_handle);
+        result = true;
     }
     return result;
 }

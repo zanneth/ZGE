@@ -162,6 +162,7 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
         case SDL_QUIT:
         case SDL_WINDOWEVENT:
             event.type = ZAPPLICATION_EVENT;
+            event.application_event = ZUNKNOWN_APPLICATION_EVENT;
             break;
         // TODO: Mouse Dragged
         // TODO: Touch Events

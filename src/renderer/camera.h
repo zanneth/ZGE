@@ -24,7 +24,7 @@ class ZCamera : public ZNode {
     
     Matrix4f _projection_matrix;
     Matrix4f _modelview_matrix;
-    Vector3f _look_direction;
+    Vector3f _look;
     
     ZRenderContextRef _current_context;
     
@@ -43,8 +43,8 @@ public:
     void set_far_clipping_distance(GLfloat distance) { _far_clip = distance; _projection_dirty = true; }
     
     Matrix4f get_modelview_matrix() { return _modelview_matrix; }
-    Vector3f get_look_direction() { return _look_direction; }
-    void set_look_direction(const Vector3f &look) { _look_direction = look; _modelview_dirty = true; }
+    Vector3f get_look() { return _look; }
+    void set_look(const Vector3f &look) { _look = look; _modelview_dirty = true; }
     
     /* Open/Close */
     void open(ZRenderContextRef context);
