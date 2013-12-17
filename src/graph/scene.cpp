@@ -30,7 +30,7 @@ void ZScene::add_child(ZNodeRef node)
 {
     if (auto cam = std::dynamic_pointer_cast<ZCamera>(node)) {
         _active_camera = cam;
-        ZLogger::log("Camera 0x%x added to scene.", _active_camera.get());
+        ZLogger::log("Camera %p added to scene.", _active_camera.get());
     }
     
     ZNode::add_child(node);

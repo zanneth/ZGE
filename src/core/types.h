@@ -7,6 +7,8 @@
  
 #pragma once
 
+#include <stdint.h>
+
 namespace zge {
 
 typedef uint32_t ZTimeInterval;

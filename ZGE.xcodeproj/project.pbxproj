@@ -1266,8 +1266,11 @@
 		0C50D3A216D208A900E43D7B /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0C50D25A16D2089C00E43D7B /* zge.h */,
+				0CF7E21A161C010F00105F7C /* zge.pch */,
 				0C50D3A316D208A900E43D7B /* contrib */,
 				0C50D3A616D208A900E43D7B /* core */,
+				0CC464B6186109B400C6AF22 /* math */,
 				0C50D3C016D208A900E43D7B /* graph */,
 				0C50D3C516D208A900E43D7B /* renderer */,
 				0C5D32451761C38B0013ACFF /* shaders */,
@@ -1304,9 +1307,6 @@
 				0C50D3AD16D208A900E43D7B /* engine.cpp */,
 				0C50D3B016D208A900E43D7B /* event.h */,
 				0C50D3AF16D208A900E43D7B /* event.cpp */,
-				0C50D3B416D208A900E43D7B /* geometry.h */,
-				0C4B4AEC17499A9200FD4B53 /* geometry.hpp */,
-				0C50D3B316D208A900E43D7B /* geometry.cpp */,
 				0C50D3B616D208A900E43D7B /* input_manager.h */,
 				0C50D3B516D208A900E43D7B /* input_manager.cpp */,
 				0C50D3B716D208A900E43D7B /* noncopyable.h */,
@@ -1382,12 +1382,20 @@
 			path = shaders;
 			sourceTree = "<group>";
 		};
+		0CC464B6186109B400C6AF22 /* math */ = {
+			isa = PBXGroup;
+			children = (
+				0C50D3B416D208A900E43D7B /* geometry.h */,
+				0C4B4AEC17499A9200FD4B53 /* geometry.hpp */,
+				0C50D3B316D208A900E43D7B /* geometry.cpp */,
+			);
+			path = math;
+			sourceTree = "<group>";
+		};
 		563B6E8B14B2FD2600004C6A = {
 			isa = PBXGroup;
 			children = (
 				0C5E3D79159ED53B0062242E /* README */,
-				0C50D25A16D2089C00E43D7B /* zge.h */,
-				0CF7E21A161C010F00105F7C /* zge.pch */,
 				0C50D25B16D208A900E43D7B /* include */,
 				0C50D3A116D208A900E43D7B /* lib */,
 				0C50D3A216D208A900E43D7B /* src */,
@@ -1634,6 +1642,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/src/zge.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1645,6 +1654,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/src/zge.pch";
 				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
