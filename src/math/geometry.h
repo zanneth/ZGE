@@ -7,30 +7,34 @@
  
 #pragma once
 
-#include "Eigen/Eigen"
 #include <string>
-
-using namespace Eigen;
+#include <zge/matrix.h>
+#include <zge/vector.h>
 
 namespace zge {
 
-const Vector2f Vector2fZero = { 0.f, 0.f };
-const Vector3f ZVec3Zero = { 0.f, 0.f, 0.f };
+struct ZPoint2D {
+    float x;
+    float y;
+};
+
+struct ZSize2D {
+    float width;
+    float height;
+};
+
+struct ZRect {
+    ZPoint2D origin;
+    ZSize2D size;
+};
 
 class ZGeometry {
 public:
     // factory methods for specific types of matrices
-    static Matrix4f frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
-    static Matrix4f perspective(float fovy, float aspect, float nearZ, float farZ);
-    static Matrix4f lookat(const Vector3f &eye, const Vector3f &center, const Vector3f &up);
-    static Matrix4f ortho(float left, float right, float bottom, float top, float nearZ, float farZ);
-
-    // string representations of mathematical structures
-    template <typename Derived>
-    static std::string description(const MatrixBase<Derived> &matrix);
-    static std::string description(const AlignedBox2f &rect);
+    static ZMatrix frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
+    static ZMatrix perspective(float fovy, float aspect, float nearZ, float farZ);
+    static ZMatrix lookat(const ZVector &eye, const ZVector &center, const ZVector &up);
+    static ZMatrix ortho(float left, float right, float bottom, float top, float nearZ, float farZ);
 };
 
 } // namespace zge
-
-#include <zge/geometry.hpp>

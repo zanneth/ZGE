@@ -21,6 +21,7 @@
 #include <zge/gl_vertexarray.h>
 #include <zge/input_manager.h>
 #include <zge/logger.h>
+#include <zge/matrix.h>
 #include <zge/mesh_node.h>
 #include <zge/model.h>
 #include <zge/node.h>
@@ -39,3 +40,4 @@
 #include <zge/timer.h>
 #include <zge/types.h>
 #include <zge/util.h>
+#include <zge/vector.h>

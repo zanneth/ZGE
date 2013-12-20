@@ -24,15 +24,15 @@ typedef std::shared_ptr<class ZNode> ZNodeRef;
 class ZNode {
 protected:
     unsigned _uid;
-    Vector3f _position;
-    Affine3f _transform;
+    ZVector  _position;
+    ZMatrix  _transform;
     
     ZNode   *_parent; // weak
     ZScene  *_scene; // weak
     std::vector<ZNodeRef> _children;
     
 private:
-    Affine3f _pos_transform;
+    ZMatrix _pos_transform;
     
 public:
     ZNode();
@@ -47,14 +47,14 @@ public:
     ZNode*   get_parent() { return _parent; }
     ZScene*  get_scene() { return _scene; }
     
-    virtual Vector3f get_position() { return _position; }
-    virtual void     set_position(const Vector3f &position);
+    virtual ZVector  get_position() { return _position; }
+    virtual void     set_position(const ZVector &position);
     
-    virtual Affine3f get_transform() { return _transform; }
-    virtual void     set_transform(const Affine3f &transform) { _transform = transform; }
+    virtual ZMatrix  get_transform() { return _transform; }
+    virtual void     set_transform(const ZMatrix &transform) { _transform = transform; }
     
     /* Manipulating Geometry */
-    void append_transform(const Affine3f &transform);
+    void append_transform(const ZMatrix &transform);
     
     /* Managing Sub-Nodes */
     virtual void add_child(ZNodeRef node);

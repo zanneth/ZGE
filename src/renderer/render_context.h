@@ -28,7 +28,7 @@ class ZRenderContext : ZNoncopyable {
     ZDisplayRef          _display;
     ZShaderProgramRef    _shader_program;
     bool                 _shaders_loaded;
-    std::stack<Matrix4f> _matrix_stacks[_ZRENDER_MATRIX_COUNT];
+    std::stack<ZMatrix>  _matrix_stacks[_ZRENDER_MATRIX_COUNT];
     
     std::auto_ptr<struct ZRenderContextImpl> _impl;
     
@@ -45,12 +45,12 @@ public:
     
     /* Managing Matrices */
     void push_matrix(ZRenderMatrixType type);
-    void push_matrix(ZRenderMatrixType type, const Matrix4f &matrix); // convenience: pushes then multiplies
-    void multiply_matrix(ZRenderMatrixType type, const Matrix4f &matrix);
+    void push_matrix(ZRenderMatrixType type, const ZMatrix &matrix); // convenience: pushes then multiplies
+    void multiply_matrix(ZRenderMatrixType type, const ZMatrix &matrix);
     void load_identity(ZRenderMatrixType type);
     void pop_matrix(ZRenderMatrixType type);
     
-    Matrix4f get_matrix(ZRenderMatrixType type) const;
+    ZMatrix get_matrix(ZRenderMatrixType type) const;
     
 protected:
     void    _load_shaders();

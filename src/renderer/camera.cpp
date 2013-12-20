@@ -48,22 +48,22 @@ void ZCamera::close()
     
 #pragma mark - Node Overrides
 
-void ZCamera::set_position(const Vector3f &position)
+void ZCamera::set_position(const ZVector &position)
 {
     ZNode::set_position(position);
     _modelview_dirty = true;
 }
 
-void ZCamera::set_transform(const Affine3f &transform)
+void ZCamera::set_transform(const ZMatrix &transform)
 {
-    Vector3f position = get_position();
-    Affine3f translation = Affine3f::Identity();
+    ZVector position = get_position();
+    ZMatrix translation = ZMatrix::identity();
     translation.translate(position);
     
-    Affine3f final_transform = translation * transform;
+    ZMatrix final_transform = translation * transform;
     final_transform.translate(-position);
     
-    Vector3f look = get_look();
+    ZVector look = get_look();
     look = final_transform * look;
     set_look(look);
     
@@ -75,9 +75,9 @@ void ZCamera::set_transform(const Affine3f &transform)
 void ZCamera::_construct_projection()
 {
     if (_projection_dirty) {
-        AlignedBox2f viewport_rect = ZEngine::instance()->get_viewport_rect();
-        float viewport_width = viewport_rect.max().x();
-        float viewport_height = viewport_rect.max().y();
+        ZRect viewport_rect = ZEngine::instance()->get_viewport_rect();
+        float viewport_width = viewport_rect.size.width;
+        float viewport_height = viewport_rect.size.height;
         float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
         
         _projection_matrix = ZGeometry::perspective(_field_of_view,
@@ -105,7 +105,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = ZGeometry::lookat(_position, _look, Vector3f::UnitY());
+        _modelview_matrix = ZGeometry::lookat(_position, _look, ZVector::unit_y());
         _modelview_dirty = false;
     }
 }

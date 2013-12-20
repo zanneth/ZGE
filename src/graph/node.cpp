@@ -17,11 +17,11 @@ namespace zge {
 
 ZNode::ZNode() :
     _uid(__node_global_uid_count++),
-    _position(0.0, 0.0, 0.0),
-    _transform(Affine3f::Identity()),
+    _position({ 0.0, 0.0, 0.0 }),
+    _transform(ZMatrix::identity()),
     _parent(nullptr),
     _scene(nullptr),
-    _pos_transform(Affine3f::Identity())
+    _pos_transform(ZMatrix::identity())
 {}
 
 ZNode::~ZNode()
@@ -45,17 +45,17 @@ bool ZNode::operator!=(const ZNode &other)
 
 #pragma mark - Accessors
 
-void ZNode::set_position(const Vector3f &position)
+void ZNode::set_position(const ZVector &position)
 {
     _position = position;
-    _pos_transform = Eigen::Translation3f(position);
+    _pos_transform = ZMatrix::translation(position.get_x(), position.get_y(), position.get_z());
 }
 
 #pragma mark - Manipulating Geometry
 
-void ZNode::append_transform(const Affine3f &transform)
+void ZNode::append_transform(const ZMatrix &transform)
 {
-    _transform = _transform * transform;
+    _transform *= transform;
 }
 
 #pragma mark - Managing Children
@@ -119,7 +119,7 @@ void ZNode::_draw_internal(ZRenderContextRef context)
     before_draw(context);
     
     context->push_matrix(ZRENDER_MATRIX_MODELVIEW);
-    context->multiply_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform).matrix());
+    context->multiply_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
     
     for (ZNodeRef child : _children) {
         child->_draw_internal(context);

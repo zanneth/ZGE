@@ -34,7 +34,7 @@ public:
     ZDisplayManagerRef  get_display_manager() { return _display_manager; }
     
     /* Utility */
-    AlignedBox2f get_viewport_rect() const;
+    ZRect get_viewport_rect() const;
     
     /* Initialization */
     void initialize();

@@ -224,15 +224,15 @@ struct ZKeyEvent {
 };
 
 struct ZMouseEvent {
-    Vector2f                location;         // mouse location at the time of the event
-    Vector2f                velocity;         // velocity vector for mouse movement
+    ZPoint2D                location;         // mouse location at the time of the event
+    ZPoint2D                velocity;         // velocity vector for mouse movement
     ZMouseButtonFlags       pressed_buttons;  // mouse buttons that are pressed for this event
     ZMouseButtonFlags       released_buttons; // mouse buttons that were released for this event
     unsigned                click_count;      // single-, double-, triple-click, etc.
 };
 
 struct ZTouchEvent {
-    Vector2f                location;       // location of the touch
+    ZPoint2D                location;       // location of the touch
     unsigned                tap_count;      // number of taps registered for this event
 };
 

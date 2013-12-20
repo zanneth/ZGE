@@ -30,17 +30,17 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
         
         if (event.type == ZMOUSE_MOVED_EVENT) {
             ZMouseEvent mouse_event = event.mouse_event;
-            float dx = mouse_event.velocity.x() * _mouse_speed;
-            float dy = mouse_event.velocity.y() * _mouse_speed;
+            float dx = mouse_event.velocity.x * _mouse_speed;
+            float dy = mouse_event.velocity.y * _mouse_speed;
             
-            Affine3f rotation = Affine3f::Identity();
-            rotation.rotate(AngleAxisf(-dx, Vector3f::UnitY()));
-            rotation.rotate(AngleAxisf(-dy, Vector3f::UnitX()));
+            ZMatrix rotation;
+            rotation.rotate(-dx, 1.0, 0.0, 0.0);
+            rotation.rotate(-dy, 0.0, 1.0, 0.0);
             
             camera->set_transform(rotation);
         } else if (event.type == ZKEY_DOWN_EVENT || event.type == ZKEY_UP_EVENT) {
             ZKeyEvent key_event = event.key_event;
-            Vector3f movement_vector(0.0, 0.0, 0.0);
+            ZVector movement_vector;
             switch (key_event.key) {
                 case ZKEY_W:
                     movement_vector = { 0.0, 0.0, -1.0 };

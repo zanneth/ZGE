@@ -32,7 +32,7 @@ ZRenderContext::ZRenderContext(ZDisplayRef display) :
     
     _shader_program->use_program();
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
-        _matrix_stacks[i].push(Matrix4f::Identity());
+        _matrix_stacks[i].push(ZMatrix::identity());
         _update_uniforms((ZRenderMatrixType)i);
     }
 }
@@ -63,17 +63,17 @@ void ZRenderContext::make_current()
 
 void ZRenderContext::push_matrix(ZRenderMatrixType type)
 {
-    Matrix4f top = _matrix_stacks[type].top();
+    ZMatrix top = _matrix_stacks[type].top();
     _matrix_stacks[type].push(top);
 }
 
-void ZRenderContext::push_matrix(ZRenderMatrixType type, const Matrix4f &matrix)
+void ZRenderContext::push_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
 {
     push_matrix(type);
     multiply_matrix(type, matrix);
 }
 
-void ZRenderContext::multiply_matrix(ZRenderMatrixType type, const Matrix4f &matrix)
+void ZRenderContext::multiply_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
 {
     _matrix_stacks[type].top() *= matrix;
     _update_uniforms(type);
@@ -81,7 +81,7 @@ void ZRenderContext::multiply_matrix(ZRenderMatrixType type, const Matrix4f &mat
 
 void ZRenderContext::load_identity(ZRenderMatrixType type)
 {
-    _matrix_stacks[type].top() = Matrix4f::Identity();
+    _matrix_stacks[type].top() = ZMatrix::identity();
     _update_uniforms(type);
 }
 
@@ -95,7 +95,7 @@ void ZRenderContext::pop_matrix(ZRenderMatrixType type)
     }
 }
 
-Matrix4f ZRenderContext::get_matrix(ZRenderMatrixType type) const
+ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
 {
     return _matrix_stacks[type].top();
 }
@@ -135,8 +135,8 @@ void ZRenderContext::_update_uniforms(ZRenderMatrixType type)
 {
     GLint uniform = _get_matrix_uniform(type);
     if (uniform != -1) {
-        const Matrix4f &matrix = _matrix_stacks[type].top();
-        glUniformMatrix4fv(uniform, 1, GL_FALSE, matrix.data());
+        const ZMatrix &matrix = _matrix_stacks[type].top();
+        glUniformMatrix4fv(uniform, 1, GL_FALSE, matrix.get_data());
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
     }

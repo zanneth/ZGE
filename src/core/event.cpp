@@ -206,8 +206,8 @@ std::string ZEvent::_mouse_event_description() const
 {
     std::string descr;
     ZMouseEvent mouse_event = this->mouse_event;
-    descr = ZUtil::format("Location: (%f, %f)\n", mouse_event.location.x(), mouse_event.location.y());
-    descr += ZUtil::format("Velocity: (%f, %f)\n", mouse_event.velocity.x(), mouse_event.velocity.y());
+    descr = ZUtil::format("Location: (%f, %f)\n", mouse_event.location.x, mouse_event.location.y);
+    descr += ZUtil::format("Velocity: (%f, %f)\n", mouse_event.velocity.x, mouse_event.velocity.y);
     
     std::string pressed_str = _mouse_buttons_description(mouse_event.pressed_buttons);
     std::string released_str = _mouse_buttons_description(mouse_event.released_buttons);
@@ -224,7 +224,7 @@ std::string ZEvent::_touch_event_description() const
     std::string descr;
     ZTouchEvent touch = this->touch_event;
     
-    descr += ZUtil::format("\tLocation: (%f, %f)\n", touch.location.x(), touch.location.y());
+    descr += ZUtil::format("\tLocation: (%f, %f)\n", touch.location.x, touch.location.y);
     descr += ZUtil::format("\tTaps: %d\n", touch.tap_count);
     
     return descr;

@@ -17,6 +17,7 @@
 
 #ifdef __APPLE__
 extern "C" {
+#undef __BLOCKS__
 #include <CoreFoundation/CoreFoundation.h>
 }
 #endif

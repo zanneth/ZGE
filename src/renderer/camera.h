@@ -22,9 +22,9 @@ class ZCamera : public ZNode {
     GLfloat _near_clip;
     GLfloat _far_clip;
     
-    Matrix4f _projection_matrix;
-    Matrix4f _modelview_matrix;
-    Vector3f _look;
+    ZMatrix _projection_matrix;
+    ZMatrix _modelview_matrix;
+    ZVector _look;
     
     ZRenderContextRef _current_context;
     
@@ -42,17 +42,17 @@ public:
     GLfloat get_far_clipping_distance() { return _far_clip; }
     void set_far_clipping_distance(GLfloat distance) { _far_clip = distance; _projection_dirty = true; }
     
-    Matrix4f get_modelview_matrix() { return _modelview_matrix; }
-    Vector3f get_look() { return _look; }
-    void set_look(const Vector3f &look) { _look = look; _modelview_dirty = true; }
+    ZMatrix get_modelview_matrix() { return _modelview_matrix; }
+    ZVector get_look() { return _look; }
+    void set_look(const ZVector &look) { _look = look; _modelview_dirty = true; }
     
     /* Open/Close */
     void open(ZRenderContextRef context);
     void close();
     
     /* Node Overrides */
-    void set_position(const Vector3f &position) override;
-    void set_transform(const Affine3f &transform) override;
+    void set_position(const ZVector &position) override;
+    void set_transform(const ZMatrix &transform) override;
     
 private:
     void _construct_projection();
