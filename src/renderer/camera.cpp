@@ -36,6 +36,8 @@ void ZCamera::open(ZRenderContextRef context)
     
     _open_projection();
     _open_modelview();
+    
+    _open = true;
 }
 
 void ZCamera::close()
@@ -44,6 +46,7 @@ void ZCamera::close()
     _close_modelview();
     
     _current_context = nullptr;
+    _open = false;
 }
     
 #pragma mark - Node Overrides

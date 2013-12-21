@@ -28,6 +28,7 @@ class ZCamera : public ZNode {
     
     ZRenderContextRef _current_context;
     
+    bool _open;
     bool _projection_dirty;
     bool _modelview_dirty;
     
@@ -48,6 +49,7 @@ public:
     
     /* Open/Close */
     void open(ZRenderContextRef context);
+    bool is_open() const { return _open; }
     void close();
     
     /* Node Overrides */

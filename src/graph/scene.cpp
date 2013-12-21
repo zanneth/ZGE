@@ -38,14 +38,14 @@ void ZScene::add_child(ZNodeRef node)
 
 void ZScene::before_draw(ZRenderContextRef context)
 {
-    if (_active_camera.get() != nullptr) {
+    if (_active_camera.get()) {
         _active_camera->open(context);
     }
 }
 
 void ZScene::after_draw(ZRenderContextRef context)
 {
-    if (_active_camera.get() != nullptr) {
+    if (_active_camera.get()) {
         _active_camera->close();
     }
 }

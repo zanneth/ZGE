@@ -13,25 +13,19 @@ namespace zge {
 
 ZMatrix ZGeometry::frustum(float left, float right, float bottom, float top, float nearZ, float farZ)
 {
-    ZMatrix mat;
-    float deltaX = right - left;
-    float deltaY = top - bottom;
-    float deltaZ = farZ - nearZ;
+    float ral = right + left;
+    float rsl = right - left;
+    float tsb = top - bottom;
+    float tab = top + bottom;
+    float fan = farZ + nearZ;
+    float fsn = farZ - nearZ;
     
-    mat[0] = 2.0f * nearZ / deltaX;
-    mat[1] = mat[2] = mat[3] = 0.0f;
-    
-    mat[4] = mat[6] = mat[7] = 0.0f;
-    mat[5] = 2.0f * nearZ / deltaY;
-    
-    mat[8] = (right + left) / deltaX;
-    mat[9] = (top + bottom) / deltaY;
-    mat[10] = -(nearZ + farZ) / deltaZ;
-    mat[11] = -1.0f;
-    
-    mat[12] = mat[14] = mat[15] = 0.0f;
-    mat[14] = -2.0f * nearZ * farZ / deltaZ;
-    
+    ZMatrix mat = {
+        2.0f * nearZ / rsl, 0.0f, 0.0f, 0.0f,
+        0.0f, 2.0f * nearZ / tsb, 0.0f, 0.0f,
+        ral / rsl, tab / tsb, -fan / fsn, -1.0f,
+        0.0f, 0.0f, (-2.0f * farZ * nearZ) / fsn, 0.0f
+    };
     return mat;
 }
 
@@ -50,10 +44,10 @@ ZMatrix ZGeometry::lookat(const ZVector &eye, const ZVector &center, const ZVect
     ZVector v = n.cross(u);
     
     ZMatrix mat = {
-        u.x(), u.y(), u.z(), -u.dot(eye),
-        v.x(), v.y(), v.z(), -v.dot(eye),
-        n.x(), n.y(), n.z(), -n.dot(eye),
-        0.0, 0.0, 0.0, 1.0
+        u[0], v[0], n[0], 0.0f,
+        u[1], v[1], n[1], 0.0f,
+        u[2], v[2], n[2], 0.0f,
+        -u.dot(eye), -v.dot(eye), -n.dot(eye), 1.0f
     };
     return mat;
 }
@@ -68,12 +62,11 @@ ZMatrix ZGeometry::ortho(float left, float right, float bottom, float top, float
     float fsn = farZ - nearZ;
     
     ZMatrix mat = {
-        2.0f / rsl, 0.0f, 0.0f, -ral / rsl,
-        0.0f, 2.0f / tsb, 0.0f, -tab / tsb,
-        0.0f, 0.0f, -2.0f / fsn, -fan / fsn,
-        0.0f, 0.0f, 0.0f, 1.0f
+        2.0f / rsl, 0.0f, 0.0f, 0.0f,
+        0.0f, 2.0f / tsb, 0.0f, 0.0f,
+        0.0f, 0.0f, -2.0f / fsn, 0.0f,
+        -ral / rsl, -tab / tsb, -fan / fsn, 1.0f
     };
-    
     return mat;
 }
 
