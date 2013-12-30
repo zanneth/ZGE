@@ -168,7 +168,7 @@ ZMatrix ZMatrix::scaling(float sx, float sy, float sz)
 
 ZMatrix ZMatrix::rotation(float radians, float x, float y, float z)
 {
-    ZVector v = { x, y, z };
+    ZVector v = ZVector({ x, y, z }).normalized();
     float cos = cosf(radians);
     float cosp = 1.0f - cos;
     float sin = sinf(radians);

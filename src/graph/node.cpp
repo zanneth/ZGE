@@ -117,9 +117,7 @@ void ZNode::_update_internal(uint32_t dtime)
 void ZNode::_draw_internal(ZRenderContextRef context)
 {
     before_draw(context);
-    
-    context->push_matrix(ZRENDER_MATRIX_MODELVIEW);
-    context->multiply_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
+    context->push_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
     
     for (ZNodeRef child : _children) {
         child->_draw_internal(context);
@@ -128,7 +126,6 @@ void ZNode::_draw_internal(ZRenderContextRef context)
     draw(context);
     
     context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
-    
     after_draw(context);
 }
 
