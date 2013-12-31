@@ -35,6 +35,18 @@ public:
     /// creates a transform matrix for an angle-axis rotation.
     static ZMatrix rotation(float radians, float x, float y, float z);
     
+    /// creates a frustum transformation matrix.
+    static ZMatrix frustum(float left, float right, float bottom, float top, float nearZ, float farZ);
+    
+    /// creates a perspective matrix.
+    static ZMatrix perspective(float fovy, float aspect, float nearZ, float farZ);
+    
+    /// creates a look-at transformation matrix.
+    static ZMatrix lookat(const ZVector &eye, const ZVector &center, const ZVector &up);
+    
+    /// creates an orthogonal transformation matrix.
+    static ZMatrix ortho(float left, float right, float bottom, float top, float nearZ, float farZ);
+    
     // operators
     ZMatrix& operator=(const ZMatrix &rhs);
     float&   operator[](unsigned idx);

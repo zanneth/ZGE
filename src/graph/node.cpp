@@ -7,6 +7,7 @@
  
 #include <zge/node.h>
 #include <zge/logger.h>
+#include <zge/util.h>
 
 #include <sstream>
 #include <typeinfo>
@@ -97,36 +98,38 @@ void ZNode::remove_from_parent()
 
 std::string ZNode::get_description()
 {
-    std::ostringstream oss;
-    oss << "Node (" << this << ") #" << _uid;
-    
-    return oss.str();
+    std::string description = ZUtil::format("<ZNode %p #%u \"%s\">", this, _uid, _name.c_str());
+    return description;
 }
 
 #pragma mark - Private
 
-void ZNode::_update_internal(uint32_t dtime)
+void ZNode::_draw(ZRenderContextRef context)
 {
-    for (ZNodeRef child : _children) {
-        child->_update_internal(dtime);
-    }
-    
-    update(dtime);
-}
-
-void ZNode::_draw_internal(ZRenderContextRef context)
-{
-    before_draw(context);
     context->push_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
     
     for (ZNodeRef child : _children) {
-        child->_draw_internal(context);
+        child->_draw(context);
     }
     
-    draw(context);
+    if (_geometry.get()) {
+        _geometry->render(context);
+    }
     
     context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
-    after_draw(context);
+}
+
+void ZNode::_remove_child_uid(unsigned uid)
+{
+    auto child = std::find_if(_children.begin(), _children.end(), [uid](ZNodeRef child) { return child->_uid == uid; });
+    if (child != _children.end()) {
+        ZNodeRef node = *child;
+        node->_scene  = nullptr;
+        node->_parent = nullptr;
+
+        _children.erase(child);
+        node->_on_exit_internal();
+   }
 }
 
 void ZNode::_on_enter_internal()
@@ -145,19 +148,6 @@ void ZNode::_on_exit_internal()
     for (ZNodeRef child : _children) {
         child->_on_exit_internal();
     }
-}
-
-void ZNode::_remove_child_uid(unsigned uid)
-{
-    auto child = std::find_if(_children.begin(), _children.end(), [uid](ZNodeRef child) { return child->_uid == uid; });
-    if (child != _children.end()) {
-        ZNodeRef node = *child;
-        node->_scene  = nullptr;
-        node->_parent = nullptr;
-
-        _children.erase(child);
-        node->_on_exit_internal();
-   }
 }
 
 } // namespace zge

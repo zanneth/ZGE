@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <zge/geometry.h>
 #include <zge/gl_buffer.h>
 #include <zge/gl_vertexarray.h>
 #include <memory>
@@ -14,9 +15,7 @@
 
 namespace zge {
 
-typedef std::shared_ptr<class ZModel> ZModelRef;
-
-class ZModel {
+class ZModel : public ZGeometry {
 protected:
     std::string     _name;
     unsigned        _num_faces;
@@ -29,6 +28,8 @@ protected:
 public:
     ZModel(std::string filename = std::string());
     ZModel(const ZModel&) = default;
+    ZModel(ZModel&&) = default;
+    ~ZModel() = default;
     
     /* Loading from 3DS Files */
     void load_file(std::string filename);
@@ -36,8 +37,10 @@ public:
     /* Accessors */
     std::string get_name() { return _name; }
     
-    /* Drawing */
-    void draw();
+    /* Geometry Overrides */
+    void render(ZRenderContextRef context) override;
 };
+
+typedef std::shared_ptr<ZModel> ZModelRef;
 
 } // namespace zge

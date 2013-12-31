@@ -10,7 +10,7 @@
 #include <memory>
 #include <stack>
 #include <zge/display.h>
-#include <zge/geometry.h>
+#include <zge/matrix.h>
 #include <zge/noncopyable.h>
 #include <zge/shader_program.h>
 

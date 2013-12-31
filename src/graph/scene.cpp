@@ -36,15 +36,14 @@ void ZScene::add_child(ZNodeRef node)
     ZNode::add_child(node);
 }
 
-void ZScene::before_draw(ZRenderContextRef context)
+void ZScene::_draw(ZRenderContextRef context)
 {
     if (_active_camera.get()) {
         _active_camera->open(context);
     }
-}
-
-void ZScene::after_draw(ZRenderContextRef context)
-{
+    
+    ZNode::_draw(context);
+    
     if (_active_camera.get()) {
         _active_camera->close();
     }

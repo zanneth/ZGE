@@ -7,10 +7,12 @@
  
 #pragma once
 
+#include <zge/matrix.h>
 #include <zge/node.h>
-#include <zge/geometry.h>
+#include <zge/noncopyable.h>
 #include <zge/opengl.h>
 #include <zge/render_context.h>
+#include <zge/vector.h>
 #include <memory>
 
 namespace zge {
@@ -43,9 +45,10 @@ public:
     GLfloat get_far_clipping_distance() { return _far_clip; }
     void set_far_clipping_distance(GLfloat distance) { _far_clip = distance; _projection_dirty = true; }
     
-    ZMatrix get_modelview_matrix() { return _modelview_matrix; }
     ZVector get_look() { return _look; }
     void set_look(const ZVector &look) { _look = look; _modelview_dirty = true; }
+    
+    ZMatrix get_modelview_matrix() { return _modelview_matrix; }
     
     /* Open/Close */
     void open(ZRenderContextRef context);

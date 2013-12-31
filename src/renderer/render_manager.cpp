@@ -9,7 +9,6 @@
 #include <zge/render_manager.h>
 #include <zge/display_manager.h>
 #include <zge/engine.h>
-#include <zge/scene_manager.h>
 #include <zge/node.h>
 #include <zge/scene.h>
 
@@ -32,6 +31,9 @@ ZRenderManager::~ZRenderManager()
 
 ZRenderContextRef ZRenderManager::get_context() const { return _context; }
 
+ZSceneRef ZRenderManager::get_scene() const { return _scene; }
+void ZRenderManager::set_scene(ZSceneRef scene) { _scene = scene; }
+
 #pragma mark - Overrides
 
 void ZRenderManager::run(uint32_t dtime)
@@ -44,10 +46,8 @@ void ZRenderManager::run(uint32_t dtime)
         _context->make_current();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        ZSceneManagerRef scene_manager = ZEngine::instance()->get_scene_manager();
-        ZSceneRef cur_scene = scene_manager->get_current_scene();
-        if (cur_scene.get() != nullptr) {
-            cur_scene->_draw_internal(_context);
+        if (_scene.get() != nullptr) {
+            _scene->_draw(_context);
         }
     }
 }

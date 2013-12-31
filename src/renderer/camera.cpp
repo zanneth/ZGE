@@ -53,7 +53,7 @@ void ZCamera::close()
 
 void ZCamera::set_position(const ZVector &position)
 {
-    ZNode::set_position(position);
+    _position = position;
     _modelview_dirty = true;
 }
 
@@ -69,8 +69,6 @@ void ZCamera::set_transform(const ZMatrix &transform)
     ZVector look = get_look();
     look = final_transform * look;
     set_look(look);
-    
-    ZNode::set_transform(transform);
 }
 
 #pragma mark - Private
@@ -83,10 +81,7 @@ void ZCamera::_construct_projection()
         float viewport_height = viewport_rect.size.height;
         float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
         
-        _projection_matrix = ZGeometry::perspective(_field_of_view,
-                                                   aspect,
-                                                   _near_clip,
-                                                   _far_clip);
+        _projection_matrix = ZMatrix::perspective(_field_of_view, aspect, _near_clip, _far_clip);
         _projection_dirty = false;
     }
 }
@@ -108,7 +103,7 @@ void ZCamera::_close_projection()
 void ZCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
-        _modelview_matrix = ZGeometry::lookat(_position, _look, ZVector::unit_y());
+        _modelview_matrix = ZMatrix::lookat(_position, _look, ZVector::unit_y());
         _modelview_dirty = false;
     }
 }

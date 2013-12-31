@@ -21,7 +21,6 @@ ZEngine* ZEngine::instance()
 
 ZEngine::ZEngine() :
     _input_manager(new ZInputManager),
-    _scene_manager(new ZSceneManager),
     _render_manager(new ZRenderManager),
     _display_manager(new ZDisplayManager)
 {}
@@ -39,7 +38,6 @@ void ZEngine::initialize()
     
     ZRunloop *loop = app->get_main_runloop();
     loop->schedule(_input_manager);
-    loop->schedule(_scene_manager);
     loop->schedule(_render_manager);
     loop->schedule(_display_manager);
     

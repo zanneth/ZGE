@@ -28,8 +28,9 @@ public:
     
     /* Node Overrides */
     void add_child(ZNodeRef node) override;
-    void before_draw(ZRenderContextRef context) override;
-    void after_draw(ZRenderContextRef context) override;
+
+protected:
+    void _draw(ZRenderContextRef context) override;
     
 private:
     void _evict_scene(ZNode *curnode);

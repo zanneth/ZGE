@@ -22,7 +22,6 @@
 #include <zge/input_manager.h>
 #include <zge/logger.h>
 #include <zge/matrix.h>
-#include <zge/mesh_node.h>
 #include <zge/model.h>
 #include <zge/node.h>
 #include <zge/noncopyable.h>
@@ -32,11 +31,9 @@
 #include <zge/render_manager.h>
 #include <zge/run_loop.h>
 #include <zge/scene.h>
-#include <zge/scene_manager.h>
 #include <zge/schedulable.h>
 #include <zge/shader.h>
 #include <zge/shader_program.h>
-#include <zge/shape_node.h>
 #include <zge/timer.h>
 #include <zge/types.h>
 #include <zge/util.h>

@@ -10,7 +10,6 @@
 #include <cmath>
 #include <string>
 #include <vector>
-#include <zge/geometry.h>
 
 #define zassert(...)    ZUtil::assert_true(__VA_ARGS__)
 

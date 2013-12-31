@@ -148,7 +148,7 @@ void ZModel::load_file(std::string filename)
 
 #pragma mark - Drawing
 
-void ZModel::draw()
+void ZModel::render(ZRenderContextRef context)
 {
     _vertex_array->bind();
     glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, nullptr);

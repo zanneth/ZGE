@@ -8,9 +8,7 @@
 #pragma once
 
 #include <zge/geometry.h>
-#include <zge/model.h>
 #include <zge/render_context.h>
-
 #include <memory>
 #include <string>
 #include <vector>
@@ -23,16 +21,16 @@ typedef std::shared_ptr<class ZNode> ZNodeRef;
 
 class ZNode {
 protected:
-    unsigned _uid;
-    ZVector  _position;
-    ZMatrix  _transform;
+    unsigned     _uid;
+    ZVector      _position;
+    ZMatrix      _transform;
+    ZMatrix      _pos_transform;
+    std::string  _name;
+    ZGeometryRef _geometry;
     
     ZNode   *_parent; // weak
     ZScene  *_scene; // weak
     std::vector<ZNodeRef> _children;
-    
-private:
-    ZMatrix _pos_transform;
     
 public:
     ZNode();
@@ -47,11 +45,17 @@ public:
     ZNode*   get_parent() { return _parent; }
     ZScene*  get_scene() { return _scene; }
     
+    std::string get_name() const { return _name; }
+    void        set_name(const std::string &name) { _name = name; }
+    
     virtual ZVector  get_position() { return _position; }
     virtual void     set_position(const ZVector &position);
     
     virtual ZMatrix  get_transform() { return _transform; }
     virtual void     set_transform(const ZMatrix &transform) { _transform = transform; }
+    
+    ZGeometryRef get_geometry() const { return _geometry; }
+    void         set_geometry(ZGeometryRef geometry) { _geometry = geometry; }
     
     /* Manipulating Geometry */
     void append_transform(const ZMatrix &transform);
@@ -66,26 +70,17 @@ public:
     /* Description */
     virtual std::string get_description();
     
-    /* Updating */
-    virtual void update(uint32_t dtime) {}
-    
-    /* Drawing */
-    virtual void before_draw(ZRenderContextRef context) {}
-    virtual void draw(ZRenderContextRef context) {}
-    virtual void after_draw(ZRenderContextRef context) {}
-    
     /* Callbacks */
     virtual void on_enter() {}
     virtual void on_exit() {}
     
 protected:
-    void _update_internal(uint32_t dtime);
-    void _draw_internal(ZRenderContextRef context);
-    void _on_enter_internal();
-    void _on_exit_internal();
+    virtual void _draw(ZRenderContextRef context);
 
 private:
     void _remove_child_uid(unsigned uid);
+    void _on_enter_internal();
+    void _on_exit_internal();
     
 public:
     friend class ZSceneManager;
