@@ -28,7 +28,6 @@ static ZApplication *__current_application = nullptr;
 
 ZApplication::ZApplication(int argc, char **argv) :
     _show_cursor(true),
-    _capture_input(false),
     _time_start(0)
 {
     set_arguments(argc, argv);
@@ -127,15 +126,9 @@ void ZApplication::handle_application_event(const ZEvent &event)
             if (!_show_cursor) {
                 SDL_ShowCursor(0);
             }
-            if (_capture_input) {
-                // TODO: fallout from switching to SDL 2.0
-                // SDL_WM_GrabInput(SDL_GRAB_ON);
-            }
             break;
         case ZAPPLICATION_INACTIVE_EVENT:
             SDL_ShowCursor(1);
-            // TODO: fallout from switching to SDL 2.0
-            // SDL_WM_GrabInput(SDL_GRAB_OFF);
             break;
         default:
             break;

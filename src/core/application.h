@@ -19,7 +19,6 @@ namespace zge {
 class ZApplication : ZNoncopyable {
     std::vector<std::string> _arguments;
     bool _show_cursor;
-    bool _capture_input;
     
     ZRunloop _main_runloop;
     uint32_t _time_start;
@@ -39,8 +38,6 @@ public:
     void set_arguments(int argc, char **argv);
     bool shows_cursor() { return _show_cursor; }
     void set_shows_cursor(bool cursor) { _show_cursor = cursor; }
-    bool captures_input() { return _capture_input; }
-    void set_captures_input(bool capture) { _capture_input = capture; }
     
     /* Accessing the Main Run Loop */
     ZRunloop* get_main_runloop();

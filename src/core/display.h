@@ -31,13 +31,14 @@ public:
 
 typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
 
-class ZDisplay : ZNoncopyable {
+class ZDisplay : public ZNoncopyable, public std::enable_shared_from_this<ZDisplay> {
     std::auto_ptr<struct ZDisplayImpl> _impl;
     
 protected:
     bool _initialized;
     ZDisplayMode _display_mode;
     uint32_t _last_render;
+    bool _captures_input;
     
 protected: // Only a display manager can create displays
     ZDisplay() = default;
@@ -54,6 +55,8 @@ public:
     
     /* Accessors */
     bool is_initialized() { return _initialized; }
+    bool captures_input() const { return _captures_input; }
+    void set_captures_input(bool capture);
     
     ZDisplayMode get_display_mode() { return _display_mode; }
     void set_display_mode(const ZDisplayMode &mode);

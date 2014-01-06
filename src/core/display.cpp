@@ -6,7 +6,9 @@
  */
  
 #include <zge/display.h>
+#include <zge/engine.h>
 #include <zge/exception.h>
+#include <zge/input_manager.h>
 #include <zge/logger.h>
 #include <zge/opengl.h>
 #include <zge/util.h>
@@ -16,6 +18,7 @@ namespace zge {
 
 struct ZDisplayImpl {
     SDL_Window *window;
+    ZResponderRef responder;
 };
 
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
@@ -25,6 +28,8 @@ ZDisplay::ZDisplay(const ZDisplayMode &mode) :
 
 ZDisplay::~ZDisplay()
 {
+    ZInputManagerRef input_manager = ZEngine::instance()->get_input_manager();
+    input_manager->remove_responder(_impl->responder);
     if (_impl->window != nullptr) {
         SDL_DestroyWindow(_impl->window);
     }
@@ -33,6 +38,20 @@ ZDisplay::~ZDisplay()
 void ZDisplay::initialize()
 {
     _init_window();
+    
+    ZInputManagerRef input_manager = ZEngine::instance()->get_input_manager();
+    SDL_Window *window = _impl->window;
+    std::weak_ptr<ZDisplay> weak_display = shared_from_this();
+    _impl->responder = input_manager->add_responder([window, weak_display](const ZEvent &event) {
+        if (event.type == ZAPPLICATION_EVENT) {
+            ZDisplayRef strong_display = weak_display.lock();
+            if (strong_display.get()) {
+                bool grab = (event.application_event != ZAPPLICATION_INACTIVE_EVENT && strong_display->captures_input());
+                SDL_SetWindowGrab(window, (grab ? SDL_TRUE : SDL_FALSE));
+            }
+        }
+    });
+    
     _initialized = true;
 }
 
@@ -63,6 +82,14 @@ void ZDisplay::set_display_mode(const ZDisplayMode &mode)
     SDL_SetWindowSize(_impl->window, _display_mode.width, _display_mode.height);
     SDL_SetWindowTitle(_impl->window, _display_mode.window_title.c_str());
     glViewport(0, 0, _display_mode.width, _display_mode.height);
+}
+
+void ZDisplay::set_captures_input(bool capture)
+{
+    _captures_input = capture;
+    if (_impl->window != nullptr) {
+        SDL_SetWindowGrab(_impl->window, (capture ? SDL_TRUE : SDL_FALSE));
+    }
 }
 
 #pragma mark - API
