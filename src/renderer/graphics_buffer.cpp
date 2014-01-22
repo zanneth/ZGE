@@ -5,14 +5,14 @@
  * Date Created: 09/29/2012
  */
 
-#include <zge/gl_buffer.h>
-#include <zge/gl_vertexarray.h>
+#include <zge/graphics_buffer.h>
+#include <zge/vertexarray.h>
 #include <zge/exception.h>
 #include <zge/logger.h>
 
 namespace zge {
 
-ZGLBuffer::ZGLBuffer() :
+ZGraphicsBuffer::ZGraphicsBuffer() :
     _buffer(ZUNALLOCATED_BUFFER),
     _target(ZUNBOUND_TARGET),
     _vertex_array(nullptr)
@@ -20,7 +20,7 @@ ZGLBuffer::ZGLBuffer() :
     glGenBuffers(1, &_buffer);
 }
 
-ZGLBuffer::ZGLBuffer(ZGLBuffer &&mv)
+ZGraphicsBuffer::ZGraphicsBuffer(ZGraphicsBuffer &&mv)
 {
     _buffer = mv._buffer;
     _target = mv._target;
@@ -28,7 +28,7 @@ ZGLBuffer::ZGLBuffer(ZGLBuffer &&mv)
     mv._target = ZUNBOUND_TARGET;
 }
 
-ZGLBuffer& ZGLBuffer::operator=(ZGLBuffer &&mv)
+ZGraphicsBuffer& ZGraphicsBuffer::operator=(ZGraphicsBuffer &&mv)
 {
     _buffer = mv._buffer;
     _target = mv._target;
@@ -37,7 +37,7 @@ ZGLBuffer& ZGLBuffer::operator=(ZGLBuffer &&mv)
     return *this;
 }
 
-ZGLBuffer::~ZGLBuffer()
+ZGraphicsBuffer::~ZGraphicsBuffer()
 {
     if (_buffer != ZUNALLOCATED_BUFFER) {
         glDeleteBuffers(1, &_buffer);
@@ -47,7 +47,7 @@ ZGLBuffer::~ZGLBuffer()
     
 #pragma mark - Attributes
 
-void ZGLBuffer::add_attribute(ZBufferAttribute attribute)
+void ZGraphicsBuffer::add_attribute(ZBufferAttribute attribute)
 {
     _attributes.push_back(attribute);
     if (_vertex_array != nullptr) {
@@ -57,7 +57,7 @@ void ZGLBuffer::add_attribute(ZBufferAttribute attribute)
     }
 }
 
-ZBufferAttribute ZGLBuffer::get_attribute(ZVertexAttributeIndex index)
+ZBufferAttribute ZGraphicsBuffer::get_attribute(ZVertexAttributeIndex index)
 {
     auto itr = std::find_if(_attributes.begin(), _attributes.end(), [index](ZBufferAttribute attrib) {
         return attrib.index == index;
@@ -72,7 +72,7 @@ ZBufferAttribute ZGLBuffer::get_attribute(ZVertexAttributeIndex index)
     return *itr;
 }
 
-void ZGLBuffer::clear_attributes()
+void ZGraphicsBuffer::clear_attributes()
 {
     if (_vertex_array != nullptr) {
         _vertex_array->bind();
@@ -86,7 +86,7 @@ void ZGLBuffer::clear_attributes()
 
 #pragma mark - Loading Data
 
-void ZGLBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
+void ZGraphicsBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
 {
     _assert_target_bound();
     
@@ -97,7 +97,7 @@ void ZGLBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
     }
 }
 
-void ZGLBuffer::load_subdata(GLsizeiptr offset, GLsizeiptr size, const GLvoid *data)
+void ZGraphicsBuffer::load_subdata(GLsizeiptr offset, GLsizeiptr size, const GLvoid *data)
 {
     _assert_target_bound();
     
@@ -110,7 +110,7 @@ void ZGLBuffer::load_subdata(GLsizeiptr offset, GLsizeiptr size, const GLvoid *d
 
 #pragma mark - Actions
 
-void ZGLBuffer::bind()
+void ZGraphicsBuffer::bind()
 {
     if (_vertex_array != nullptr) {
         _vertex_array->bind();
@@ -122,14 +122,14 @@ void ZGLBuffer::bind()
     }
 }
 
-void ZGLBuffer::unbind()
+void ZGraphicsBuffer::unbind()
 {
     glBindBuffer(_target, 0);
 }
 
 #pragma mark - Private
 
-void ZGLBuffer::_assert_target_bound()
+void ZGraphicsBuffer::_assert_target_bound()
 {
     if (_target == ZUNBOUND_TARGET) {
         ZException e(ENGINE_EXCEPTION_CODE);
@@ -138,7 +138,7 @@ void ZGLBuffer::_assert_target_bound()
     }
 }
 
-void ZGLBuffer::_send_attribute(const ZBufferAttribute &attribute)
+void ZGraphicsBuffer::_send_attribute(const ZBufferAttribute &attribute)
 {
     GLboolean normalized_val = attribute.normalized ? GL_TRUE : GL_FALSE;
     glBindBuffer(_target, _buffer);

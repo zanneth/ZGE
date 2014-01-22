@@ -11,28 +11,28 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include <zge/opengl.h>
 #include <zge/shader.h>
 #include <zge/types.h>
+#include <zge/uniform.h>
 
 namespace zge {
 
 typedef std::shared_ptr<class ZShaderProgram> ZShaderProgramRef;
 
-class ZShaderProgram {
+class ZShaderProgram : public std::enable_shared_from_this<ZShaderProgram> {
 protected:
     GLuint _program_handle;
     std::vector<ZShaderRef> _shaders;
     std::map<GLuint, std::string> _attrib_map;
-    std::map<std::string, GLint> _uniform_map;
+    std::map<std::string, ZUniformRef> _uniform_map;
     bool _linked;
+    bool _uniforms_loaded;
     
 public:
     ZShaderProgram();
     ZShaderProgram(const ZShaderProgram&) = delete;
     ~ZShaderProgram();
     
-    GLuint get_program_handle() const { return _program_handle; }
     std::vector<ZShaderRef> get_attached_shaders() const { return _shaders; }
     bool is_linked() const { return _linked; }
     
@@ -45,7 +45,11 @@ public:
     bool link_program();
     bool use_program();
     
-    GLint get_uniform(std::string name);
+    ZUniformRef get_uniform(std::string name);
+
+private:
+    void _load_uniforms();
+    void _uniform_modified(ZUniformRef uniform);
 };
 
 } // namespace zge

@@ -1,5 +1,5 @@
 /*
- * gl_buffer.h
+ * graphics_buffer.h
  *
  * Author: Charles Magahern <charles@magahern.com>
  * Date Created: 09/29/2012
@@ -41,20 +41,20 @@ struct ZBufferAttribute {
     uintptr_t               offset;                 // offset of the first component of the first vertex attribute
 };
 
-class ZGLVertexArray;
+class ZVertexArray;
 
-class ZGLBuffer : ZNoncopyable {
+class ZGraphicsBuffer : ZNoncopyable {
     GLuint _buffer;
     GLenum _target;
     std::vector<ZBufferAttribute> _attributes;
-    ZGLVertexArray *_vertex_array; // weak
+    ZVertexArray *_vertex_array; // weak
 
 public:
-    ZGLBuffer();
-    ZGLBuffer(ZGLBuffer&&);
-    ~ZGLBuffer();
+    ZGraphicsBuffer();
+    ZGraphicsBuffer(ZGraphicsBuffer&&);
+    ~ZGraphicsBuffer();
     
-    ZGLBuffer& operator=(ZGLBuffer&&);
+    ZGraphicsBuffer& operator=(ZGraphicsBuffer&&);
     
     /* Accessors */
     GLuint  get_buffer() { return _buffer; }
@@ -79,9 +79,9 @@ private:
     void _assert_target_bound();
     void _send_attribute(const ZBufferAttribute &attribute);
     
-    friend ZGLVertexArray;
+    friend ZVertexArray;
 };
 
-typedef std::shared_ptr<ZGLBuffer> ZGLBufferRef;
+typedef std::shared_ptr<ZGraphicsBuffer> ZGraphicsBufferRef;
 
 } // namespace zge

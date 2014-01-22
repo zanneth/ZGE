@@ -14,8 +14,6 @@
 
 namespace zge {
 
-extern const std::string ZDisplayManagerDidCreateDisplayNotification;
-
 class ZDisplayManager : public ZSchedulable, ZNoncopyable {
     ZDisplayRef _current_display;
     

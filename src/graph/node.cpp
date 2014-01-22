@@ -16,13 +16,14 @@ static unsigned __node_global_uid_count = 1;
 
 namespace zge {
 
-ZNode::ZNode() :
+ZNode::ZNode(ZGeometryRef geometry) :
     _uid(__node_global_uid_count++),
     _position({ 0.0, 0.0, 0.0 }),
     _transform(ZMatrix::identity()),
     _parent(nullptr),
     _scene(nullptr),
-    _pos_transform(ZMatrix::identity())
+    _pos_transform(ZMatrix::identity()),
+    _geometry(geometry)
 {}
 
 ZNode::~ZNode()

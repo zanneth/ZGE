@@ -20,10 +20,10 @@ namespace zge {
 ZModel::ZModel(std::string filename) :
     _num_faces(0),
     _num_vertices(0),
-    _vertex_array(new ZGLVertexArray),
-    _element_vbo(new ZGLBuffer),
-    _vertex_vbo(new ZGLBuffer),
-    _normal_vbo(new ZGLBuffer)
+    _vertex_array(new ZVertexArray),
+    _element_vbo(new ZGraphicsBuffer),
+    _vertex_vbo(new ZGraphicsBuffer),
+    _normal_vbo(new ZGraphicsBuffer)
 {
     // setup element buffer
     _element_vbo->set_target(GL_ELEMENT_ARRAY_BUFFER);

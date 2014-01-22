@@ -33,7 +33,7 @@ ZRenderContext::ZRenderContext(ZDisplayRef display) :
     _shader_program->use_program();
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
         _matrix_stacks[i].push(ZMatrix::identity());
-        _update_uniforms((ZRenderMatrixType)i);
+        _update_matrix_uniforms((ZRenderMatrixType)i);
     }
 }
 
@@ -76,20 +76,20 @@ void ZRenderContext::push_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
 void ZRenderContext::multiply_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
 {
     _matrix_stacks[type].top() *= matrix;
-    _update_uniforms(type);
+    _update_matrix_uniforms(type);
 }
 
 void ZRenderContext::load_identity(ZRenderMatrixType type)
 {
     _matrix_stacks[type].top() = ZMatrix::identity();
-    _update_uniforms(type);
+    _update_matrix_uniforms(type);
 }
 
 void ZRenderContext::pop_matrix(ZRenderMatrixType type)
 {
     if (_matrix_stacks[type].size() > 1) {
         _matrix_stacks[type].pop();
-        _update_uniforms(type);
+        _update_matrix_uniforms(type);
     } else {
         load_identity(type);
     }
@@ -115,13 +115,13 @@ void ZRenderContext::_load_shaders()
     }
 }
 
-GLint ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
+ZUniformRef ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
 {
     static std::string uniform_mapping[_ZRENDER_MATRIX_COUNT] = {
         [ZRENDER_MATRIX_MODELVIEW]  = "modelview",
         [ZRENDER_MATRIX_PROJECTION] = "projection"
     };
-    GLint uniform = -1;
+    ZUniformRef uniform = nullptr;
     
     if (_shaders_loaded) {
         std::string uniform_name = uniform_mapping[type];
@@ -131,12 +131,12 @@ GLint ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
     return uniform;
 }
 
-void ZRenderContext::_update_uniforms(ZRenderMatrixType type)
+void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
 {
-    GLint uniform = _get_matrix_uniform(type);
-    if (uniform != -1) {
+    ZUniformRef uniform = _get_matrix_uniform(type);
+    if (uniform.get()) {
         const ZMatrix &matrix = _matrix_stacks[type].top();
-        glUniformMatrix4fv(uniform, 1, GL_FALSE, matrix.get_data());
+        uniform->set_data(matrix.get_data());
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
     }

@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <zge/material.h>
 #include <zge/render_context.h>
 #include <memory>
 
@@ -17,7 +18,13 @@ public:
     ZGeometry();
     virtual ~ZGeometry();
     
+    ZMaterialRef get_material() const;
+    void set_material(ZMaterialRef material);
+    
     virtual void render(ZRenderContextRef context) = 0;
+
+protected:
+    ZMaterialRef _material;
 };
 
 typedef std::shared_ptr<ZGeometry> ZGeometryRef;

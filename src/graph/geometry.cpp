@@ -15,4 +15,9 @@ ZGeometry::ZGeometry()
 ZGeometry::~ZGeometry()
 {}
 
+#pragma mark - Accessors
+
+ZMaterialRef ZGeometry::get_material() const { return _material; }
+void ZGeometry::set_material(ZMaterialRef material) { _material = material; }
+    
 } // namespace zge

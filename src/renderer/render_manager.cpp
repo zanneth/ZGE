@@ -17,15 +17,10 @@ namespace zge {
 ZRenderManager::ZRenderManager() :
     _context(nullptr),
     _initialized(false)
-{
-    auto func = std::bind(&ZRenderManager::_display_notification, this, std::placeholders::_1);
-    _display_observer = ZNotificationCenter::instance()->add_observer(ZDisplayManagerDidCreateDisplayNotification, func);
-}
+{}
 
 ZRenderManager::~ZRenderManager()
-{
-    ZNotificationCenter::instance()->remove_observer(_display_observer);
-}
+{}
 
 #pragma mark - Accessors
 
@@ -54,6 +49,11 @@ void ZRenderManager::run(uint32_t dtime)
 
 #pragma mark - Internal
 
+void ZRenderManager::_setup_display(ZDisplayRef display)
+{
+    _context = ZRenderContextRef(new ZRenderContext(display));
+}
+
 void ZRenderManager::_initialize()
 {
     glClearColor(0.f, 0.f, 0.f, 1.f);
@@ -62,17 +62,6 @@ void ZRenderManager::_initialize()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     _initialized = true;
-}
-
-void ZRenderManager::_display_notification(const ZNotification *notification)
-{
-    if (notification->sender != nullptr) {
-        ZDisplayManager *display_manager = static_cast<ZDisplayManager *>(notification->sender);
-        ZDisplayRef current_display = display_manager->get_current_display();
-        if (current_display != nullptr) {
-            _context = ZRenderContextRef(new ZRenderContext(current_display));
-        }
-    }
 }
 
 } // namespace zge

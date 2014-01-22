@@ -293,7 +293,16 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     if (sdl_event.type == SDL_QUIT) {
         event.application_event = ZAPPLICATION_QUIT_EVENT;
     } else if (sdl_event.type == SDL_WINDOWEVENT) {
-        // TODO: application event
+        switch (sdl_event.window.event) {
+            case SDL_WINDOWEVENT_SHOWN:
+            case SDL_WINDOWEVENT_FOCUS_GAINED:
+                event.application_event = ZAPPLICATION_ACTIVE_EVENT;
+                break;
+            case SDL_WINDOWEVENT_HIDDEN:
+            case SDL_WINDOWEVENT_FOCUS_LOST:
+                event.application_event = ZAPPLICATION_INACTIVE_EVENT;
+                break;
+        }
     }
     
     return event;

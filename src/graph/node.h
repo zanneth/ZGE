@@ -33,7 +33,7 @@ protected:
     std::vector<ZNodeRef> _children;
     
 public:
-    ZNode();
+    ZNode(ZGeometryRef geometry = nullptr);
     ZNode(const ZNode&) = default;
     virtual ~ZNode();
     
@@ -48,11 +48,11 @@ public:
     std::string get_name() const { return _name; }
     void        set_name(const std::string &name) { _name = name; }
     
-    virtual ZVector  get_position() { return _position; }
-    virtual void     set_position(const ZVector &position);
+    virtual ZVector get_position() { return _position; }
+    virtual void    set_position(const ZVector &position);
     
-    virtual ZMatrix  get_transform() { return _transform; }
-    virtual void     set_transform(const ZMatrix &transform) { _transform = transform; }
+    virtual ZMatrix get_transform() { return _transform; }
+    virtual void    set_transform(const ZMatrix &transform) { _transform = transform; }
     
     ZGeometryRef get_geometry() const { return _geometry; }
     void         set_geometry(ZGeometryRef geometry) { _geometry = geometry; }

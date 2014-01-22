@@ -17,15 +17,15 @@
 #include <zge/exception.h>
 #include <zge/fp_responder.h>
 #include <zge/geometry.h>
-#include <zge/gl_buffer.h>
-#include <zge/gl_vertexarray.h>
+#include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
 #include <zge/logger.h>
+#include <zge/material.h>
 #include <zge/matrix.h>
 #include <zge/model.h>
 #include <zge/node.h>
 #include <zge/noncopyable.h>
-#include <zge/notification_center.h>
+#include <zge/observable.h>
 #include <zge/opengl.h>
 #include <zge/render_context.h>
 #include <zge/render_manager.h>
@@ -36,5 +36,7 @@
 #include <zge/shader_program.h>
 #include <zge/timer.h>
 #include <zge/types.h>
+#include <zge/uniform.h>
 #include <zge/util.h>
 #include <zge/vector.h>
+#include <zge/vertexarray.h>

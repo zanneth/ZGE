@@ -7,12 +7,11 @@
  
 #include <zge/display_manager.h>
 #include <zge/display.h>
+#include <zge/engine.h>
 #include <zge/exception.h>
-#include <zge/notification_center.h>
+#include <zge/render_manager.h>
 
 namespace zge {
-
-const std::string ZDisplayManagerDidCreateDisplayNotification = "ZDisplayManagerDidCreateDisplayNotification";
 
 ZDisplayManager::ZDisplayManager() :
     _current_display(nullptr)
@@ -28,10 +27,8 @@ ZDisplayRef ZDisplayManager::create_display(const ZDisplayMode &mode)
     
     _current_display = display;
     
-    ZNotification notification;
-    notification.name = ZDisplayManagerDidCreateDisplayNotification;
-    notification.sender = this;
-    ZNotificationCenter::instance()->post_notification(notification);
+    ZRenderManagerRef render_manager = ZEngine::instance()->get_render_manager();
+    render_manager->_setup_display(_current_display);
     
     return _current_display;
 }

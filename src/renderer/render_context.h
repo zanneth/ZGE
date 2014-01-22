@@ -13,6 +13,7 @@
 #include <zge/matrix.h>
 #include <zge/noncopyable.h>
 #include <zge/shader_program.h>
+#include <zge/uniform.h>
 
 namespace zge {
 
@@ -53,9 +54,9 @@ public:
     ZMatrix get_matrix(ZRenderMatrixType type) const;
     
 protected:
-    void    _load_shaders();
-    GLint   _get_matrix_uniform(ZRenderMatrixType type);
-    void    _update_uniforms(ZRenderMatrixType type);
+    void        _load_shaders();
+    ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
+    void        _update_matrix_uniforms(ZRenderMatrixType type);
 };
 
 typedef std::shared_ptr<ZRenderContext> ZRenderContextRef;
