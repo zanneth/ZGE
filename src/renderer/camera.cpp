@@ -8,6 +8,7 @@
 #include <zge/camera.h>
 #include <zge/engine.h>
 #include <zge/logger.h>
+#include <zge/opengl.h>
 #include <zge/scene.h>
 #include <zge/util.h>
 

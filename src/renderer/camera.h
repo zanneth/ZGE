@@ -10,7 +10,6 @@
 #include <zge/matrix.h>
 #include <zge/node.h>
 #include <zge/noncopyable.h>
-#include <zge/opengl.h>
 #include <zge/render_context.h>
 #include <zge/vector.h>
 #include <memory>
@@ -20,9 +19,9 @@ namespace zge {
 typedef std::shared_ptr<class ZCamera> ZCameraRef;
 
 class ZCamera : public ZNode {
-    GLfloat _field_of_view;
-    GLfloat _near_clip;
-    GLfloat _far_clip;
+    float _field_of_view;
+    float _near_clip;
+    float _far_clip;
     
     ZMatrix _projection_matrix;
     ZMatrix _modelview_matrix;
@@ -38,12 +37,12 @@ public:
     ZCamera();
     
     /* Accessors */
-    GLfloat get_fov() { return _field_of_view; }
-    void set_fov(GLfloat degrees) { _field_of_view = degrees; _projection_dirty = true; }
-    GLfloat get_near_clipping_distance() { return _near_clip; }
-    void set_near_clipping_distance(GLfloat distance) { _near_clip = distance; _projection_dirty = true; }
-    GLfloat get_far_clipping_distance() { return _far_clip; }
-    void set_far_clipping_distance(GLfloat distance) { _far_clip = distance; _projection_dirty = true; }
+    float get_fov() { return _field_of_view; }
+    void set_fov(float degrees) { _field_of_view = degrees; _projection_dirty = true; }
+    float get_near_clipping_distance() { return _near_clip; }
+    void set_near_clipping_distance(float distance) { _near_clip = distance; _projection_dirty = true; }
+    float get_far_clipping_distance() { return _far_clip; }
+    void set_far_clipping_distance(float distance) { _far_clip = distance; _projection_dirty = true; }
     
     ZVector get_look() { return _look; }
     void set_look(const ZVector &look) { _look = look; _modelview_dirty = true; }
