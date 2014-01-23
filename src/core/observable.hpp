@@ -22,7 +22,7 @@ struct ZObservableImpl {
 
 template <typename T>
 ZObservable<T>::ZObservable() :
-_impl(new ZObservableImpl<T>)
+    _impl(new ZObservableImpl<T>)
 {}
 
 template <typename T>
@@ -45,7 +45,6 @@ void ZObservable<T>::remove_observer(ZObserver *observer)
         return other->uid == uid;
     });
     if (itr != _impl->observers.end()) {
-        printf("Remove %p\n", itr->get());
         _impl->observers.erase(itr);
     }
 }
