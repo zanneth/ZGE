@@ -11,6 +11,7 @@
 		0C07BD7517C0496A00C38084 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C07BD7317C0496A00C38084 /* color.cpp */; };
 		0C07BD7617C0496A00C38084 /* color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C07BD7417C0496A00C38084 /* color.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C0E7900188F8ECA005CF0E3 /* observable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0CD633A7188F8E360061D259 /* observable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C0E79021890D5C6005CF0E3 /* material.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C0E79011890D5C6005CF0E3 /* material.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C1F28BA17C1C3FF00CA03C4 /* vertexarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1F28B817C1C3FF00CA03C4 /* vertexarray.cpp */; };
 		0C1F28BB17C1C3FF00CA03C4 /* vertexarray.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1F28B917C1C3FF00CA03C4 /* vertexarray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C2B01AB176D5FE300522671 /* render_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B01A9176D5FE300522671 /* render_manager.cpp */; };
@@ -165,6 +166,7 @@
 		0C064489177029CC004AAA20 /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
 		0C07BD7317C0496A00C38084 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
 		0C07BD7417C0496A00C38084 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
+		0C0E79011890D5C6005CF0E3 /* material.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = material.hpp; path = src/graph/material.hpp; sourceTree = SOURCE_ROOT; };
 		0C1F28B817C1C3FF00CA03C4 /* vertexarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertexarray.cpp; sourceTree = "<group>"; };
 		0C1F28B917C1C3FF00CA03C4 /* vertexarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vertexarray.h; sourceTree = "<group>"; };
 		0C2B01A9176D5FE300522671 /* render_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_manager.cpp; sourceTree = "<group>"; };
@@ -1330,6 +1332,7 @@
 				0C688F9F18726E64002C38EF /* geometry.h */,
 				0C688F9E18726E64002C38EF /* geometry.cpp */,
 				0C688FA318727756002C38EF /* material.h */,
+				0C0E79011890D5C6005CF0E3 /* material.hpp */,
 				0C688FA218727756002C38EF /* material.cpp */,
 				0C688F9718726A65002C38EF /* model.h */,
 				0C688F9618726A65002C38EF /* model.cpp */,
@@ -1504,6 +1507,7 @@
 				0C46F5A7175F00E800BF6EC9 /* SDL_keycode.h in Headers */,
 				0C46F5CB175F00E800BF6EC9 /* SDL_test_random.h in Headers */,
 				0C46F5AD175F00E800BF6EC9 /* SDL_mutex.h in Headers */,
+				0C0E79021890D5C6005CF0E3 /* material.hpp in Headers */,
 				0C46F596175F00E800BF6EC9 /* SDL_assert.h in Headers */,
 				0C46F5AB175F00E800BF6EC9 /* SDL_messagebox.h in Headers */,
 				0C46F592175F00E800BF6EC9 /* lib3ds.h in Headers */,

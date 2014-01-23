@@ -21,7 +21,7 @@ public:
     ZMaterialRef get_material() const;
     void set_material(ZMaterialRef material);
     
-    virtual void render(ZRenderContextRef context) = 0;
+    virtual void render(ZRenderContextRef context);
 
 protected:
     ZMaterialRef _material;

@@ -150,6 +150,8 @@ void ZModel::load_file(std::string filename)
 
 void ZModel::render(ZRenderContextRef context)
 {
+    ZGeometry::render(context);
+    
     _vertex_array->bind();
     glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, nullptr);
     _vertex_array->unbind();

@@ -204,37 +204,37 @@ void ZShaderProgram::_uniform_modified(ZUniformRef uniform)
             glUniform1fv(location, 1, (const GLfloat *)data);
             break;
         case GL_FLOAT_VEC2:
-            glUniform2fv(location, 2, (const GLfloat *)data);
+            glUniform2fv(location, 1, (const GLfloat *)data);
             break;
         case GL_FLOAT_VEC3:
-            glUniform3fv(location, 3, (const GLfloat *)data);
+            glUniform3fv(location, 1, (const GLfloat *)data);
             break;
         case GL_FLOAT_VEC4:
-            glUniform4fv(location, 4, (const GLfloat *)data);
+            glUniform4fv(location, 1, (const GLfloat *)data);
             break;
         case GL_INT:
             glUniform1iv(location, 1, (const GLint *)data);
             break;
         case GL_INT_VEC2:
-            glUniform2iv(location, 2, (const GLint *)data);
+            glUniform2iv(location, 1, (const GLint *)data);
             break;
         case GL_INT_VEC3:
-            glUniform3iv(location, 3, (const GLint *)data);
+            glUniform3iv(location, 1, (const GLint *)data);
             break;
         case GL_INT_VEC4:
-            glUniform4iv(location, 4, (const GLint *)data);
+            glUniform4iv(location, 1, (const GLint *)data);
             break;
         case GL_UNSIGNED_INT:
             glUniform1uiv(location, 1, (const GLuint *)data);
             break;
         case GL_UNSIGNED_INT_VEC2:
-            glUniform2uiv(location, 2, (const GLuint *)data);
+            glUniform2uiv(location, 1, (const GLuint *)data);
             break;
         case GL_UNSIGNED_INT_VEC3:
-            glUniform3uiv(location, 3, (const GLuint *)data);
+            glUniform3uiv(location, 1, (const GLuint *)data);
             break;
         case GL_UNSIGNED_INT_VEC4:
-            glUniform4uiv(location, 4, (const GLuint *)data);
+            glUniform4uiv(location, 1, (const GLuint *)data);
             break;
         case GL_FLOAT_MAT2:
             glUniformMatrix2fv(location, 1, GL_FALSE, (const GLfloat *)data);
