@@ -31,6 +31,8 @@ public:
     ZModel(ZModel&&) = default;
     ~ZModel() = default;
     
+    ZGeometryRef copy() const override;
+    
     /* Loading from 3DS Files */
     void load_file(std::string filename);
     

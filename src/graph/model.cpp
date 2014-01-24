@@ -59,6 +59,11 @@ ZModel::ZModel(std::string filename) :
     }
 }
 
+ZGeometryRef ZModel::copy() const
+{
+    return ZModelRef(new ZModel(*this));
+}
+
 #pragma mark - Loading from Files
 
 void ZModel::load_file(std::string filename)

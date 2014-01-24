@@ -17,8 +17,23 @@ ZGeometry::ZGeometry() :
     _material(new ZMaterial)
 {}
 
+ZGeometry::ZGeometry(const ZGeometry &cp) :
+    _material(new ZMaterial(*cp._material))
+{}
+
+ZGeometry::ZGeometry(ZGeometry &&mv)
+{
+    _material = mv._material;
+    mv._material = nullptr;
+}
+
 ZGeometry::~ZGeometry()
 {}
+
+ZGeometryRef ZGeometry::copy() const
+{
+    return ZGeometryRef(new ZGeometry(*this));
+}
 
 #pragma mark - Accessors
 
@@ -29,10 +44,7 @@ void ZGeometry::set_material(ZMaterialRef material) { _material = material; }
 
 void ZGeometry::render(ZRenderContextRef context)
 {
-    if (_material->is_dirty()) {
-        _update_material_data(context, _material);
-    }
-    
+    _update_material_data(context, _material);
     // subclasses will render geometry
 }
 
@@ -46,9 +58,6 @@ void _update_material_data(ZRenderContextRef context, ZMaterialRef material)
     ZMaterialProperty<ZColor> *ambient = material->get_ambient();
     ZUniformRef ambient_uniform = program->get_uniform(ambient->get_name());
     ambient_uniform->set_data(ambient->get_contents().data);
-    
-    // clear dirty flag
-    material->clear_dirty();
 }
 
 } // namespace zge

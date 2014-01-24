@@ -76,6 +76,7 @@ public:
     void unbind();
     
 private:
+    void _move(ZGraphicsBuffer &&mv);
     void _assert_target_bound();
     void _send_attribute(const ZBufferAttribute &attribute);
     

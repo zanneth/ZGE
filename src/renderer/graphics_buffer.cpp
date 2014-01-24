@@ -22,18 +22,12 @@ ZGraphicsBuffer::ZGraphicsBuffer() :
 
 ZGraphicsBuffer::ZGraphicsBuffer(ZGraphicsBuffer &&mv)
 {
-    _buffer = mv._buffer;
-    _target = mv._target;
-    mv._buffer = ZUNALLOCATED_BUFFER;
-    mv._target = ZUNBOUND_TARGET;
+    _move(std::move(mv));
 }
 
 ZGraphicsBuffer& ZGraphicsBuffer::operator=(ZGraphicsBuffer &&mv)
 {
-    _buffer = mv._buffer;
-    _target = mv._target;
-    mv._buffer = ZUNALLOCATED_BUFFER;
-    mv._target = ZUNBOUND_TARGET;
+    _move(std::move(mv));
     return *this;
 }
 
@@ -128,6 +122,18 @@ void ZGraphicsBuffer::unbind()
 }
 
 #pragma mark - Private
+
+void ZGraphicsBuffer::_move(ZGraphicsBuffer &&mv)
+{
+    _buffer = mv._buffer;
+    _target = mv._target;
+    _attributes = std::move(mv._attributes);
+    _vertex_array = mv._vertex_array;
+    
+    mv._buffer = ZUNALLOCATED_BUFFER;
+    mv._target = ZUNBOUND_TARGET;
+    mv._vertex_array = nullptr;
+}
 
 void ZGraphicsBuffer::_assert_target_bound()
 {

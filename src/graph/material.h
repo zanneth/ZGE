@@ -17,29 +17,26 @@ template <typename T>
 class ZMaterialProperty {
 public:
     ZMaterialProperty(std::string name);
+    ZMaterialProperty(const ZMaterialProperty &cp);
+    ZMaterialProperty(ZMaterialProperty &&mv);
+    ~ZMaterialProperty();
     
     T get_contents() const;
     void set_contents(const T &contents);
     
     std::string get_name() const;
     
-    bool is_dirty() const;
-    void clear_dirty();
-    
 private:
     T _contents;
     std::string _name;
-    bool _dirty;
 };
 
-class ZMaterial : ZNoncopyable {
+class ZMaterial {
 public:
     ZMaterial();
+    ZMaterial(const ZMaterial &cp) = default;
+    ZMaterial(ZMaterial &&mv) = default;
     ~ZMaterial();
-    
-    // returns true if any of the material properties are dirty.
-    bool is_dirty() const;
-    void clear_dirty();
     
     // these properties are mutable
     ZMaterialProperty<ZColor>* get_ambient();

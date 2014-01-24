@@ -23,4 +23,6 @@ extern ZColor ZRedColor;
 extern ZColor ZGreenColor;
 extern ZColor ZBlueColor;
 
+extern ZColor ZColorRandom(float alpha);
+
 } // namespace zge

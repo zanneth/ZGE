@@ -23,7 +23,7 @@ ZNode::ZNode(ZGeometryRef geometry) :
     _parent(nullptr),
     _scene(nullptr),
     _pos_transform(ZMatrix::identity()),
-    _geometry(geometry)
+    _geometry(geometry.get() ? geometry->copy() : nullptr) // copy geometry
 {}
 
 ZNode::~ZNode()

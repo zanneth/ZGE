@@ -13,10 +13,16 @@
 
 namespace zge {
 
+typedef std::shared_ptr<class ZGeometry> ZGeometryRef;
+
 class ZGeometry {
 public:
     ZGeometry();
+    ZGeometry(const ZGeometry &cp);
+    ZGeometry(ZGeometry &&mv);
     virtual ~ZGeometry();
+    
+    virtual ZGeometryRef copy() const;
     
     ZMaterialRef get_material() const;
     void set_material(ZMaterialRef material);
@@ -26,7 +32,5 @@ public:
 protected:
     ZMaterialRef _material;
 };
-
-typedef std::shared_ptr<ZGeometry> ZGeometryRef;
 
 } // namespace zge
