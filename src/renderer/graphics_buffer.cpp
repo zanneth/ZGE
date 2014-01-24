@@ -58,7 +58,7 @@ ZBufferAttribute ZGraphicsBuffer::get_attribute(ZVertexAttributeIndex index)
     });
     
     if (itr == _attributes.end()) {
-        ZException exception(ASSERTION_EXCEPTION_CODE);
+        ZException exception(ZASSERTION_EXCEPTION_CODE);
         exception.description = "Could not find attribute for specified index.";
         throw exception;
     }
@@ -138,7 +138,7 @@ void ZGraphicsBuffer::_move(ZGraphicsBuffer &&mv)
 void ZGraphicsBuffer::_assert_target_bound()
 {
     if (_target == ZUNBOUND_TARGET) {
-        ZException e(ENGINE_EXCEPTION_CODE);
+        ZException e(ZENGINE_EXCEPTION_CODE);
         e.extra_info = "Attempted to load data into a buffer with no target buffer object.";
         throw e;
     }

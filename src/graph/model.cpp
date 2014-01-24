@@ -70,13 +70,13 @@ void ZModel::load_file(std::string filename)
 {
     Lib3dsFile *model_file = lib3ds_file_open(filename.c_str());
     if (!model_file) {
-        ZException e(FILE_EXCEPTION_CODE);
+        ZException e(ZFILE_EXCEPTION_CODE);
         e.extra_info = "Unable to load file " + filename;
         throw e;
     }
     
     if (model_file->nmeshes == 0) {
-        ZException e(ENGINE_EXCEPTION_CODE);
+        ZException e(ZENGINE_EXCEPTION_CODE);
         e.extra_info = "Model file " + filename + " contains no meshes.";
         throw e;
     }

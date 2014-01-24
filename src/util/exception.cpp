@@ -16,28 +16,28 @@ ZException::ZException(int code_) :
     code(code_)
 {
     switch (code_) {
-        case UNKNOWN_EXCEPTION_CODE:
+        case ZUNKNOWN_EXCEPTION_CODE:
             description = "An unknown exception has occurred.";
             break;
-        case NOT_IMPLEMENTED_EXCEPTION_CODE:
+        case ZNOT_IMPLEMENTED_EXCEPTION_CODE:
             description = "The functionality is not implemented.";
             break;
-        case APPLICATION_EXCEPTION_CODE:
+        case ZAPPLICATION_EXCEPTION_CODE:
             description = "The application created an exception.";
             break;
-        case DISPLAY_EXCEPTION_CODE:
+        case ZDISPLAY_EXCEPTION_CODE:
             description = "There was an exception in managing the display.";
             break;
-        case ENGINE_EXCEPTION_CODE:
+        case ZENGINE_EXCEPTION_CODE:
             description = "General engine exception.";
             break;
-        case MATHEMATIC_EXCEPTION_CODE:
+        case ZMATHEMATIC_EXCEPTION_CODE:
             description = "There was a mathematical exception.";
             break;
-        case FILE_EXCEPTION_CODE:
+        case ZFILE_EXCEPTION_CODE:
             description = "There was a filesystem exception.";
             break;
-        case ASSERTION_EXCEPTION_CODE:
+        case ZASSERTION_EXCEPTION_CODE:
             description = "Assertion failure.";
             break;
         default:

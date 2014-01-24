@@ -39,10 +39,10 @@ public:
     ~ZMaterial();
     
     // these properties are mutable
-    ZMaterialProperty<ZColor>* get_ambient();
+    ZMaterialProperty<ZColor>* get_color();
     
 private:
-    ZMaterialProperty<ZColor> _ambient;
+    ZMaterialProperty<ZColor> _color;
 };
 
 typedef std::shared_ptr<ZMaterial> ZMaterialRef;

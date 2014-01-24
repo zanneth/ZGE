@@ -13,23 +13,22 @@
 namespace zge {
 
 enum {
-    UNKNOWN_EXCEPTION_CODE              = -1,
-    NOT_IMPLEMENTED_EXCEPTION_CODE      = 100,
-    APPLICATION_EXCEPTION_CODE          = 200,
-    DISPLAY_EXCEPTION_CODE              = 300,
-    ENGINE_EXCEPTION_CODE               = 400,
-    MATHEMATIC_EXCEPTION_CODE           = 500,
-    FILE_EXCEPTION_CODE                 = 600,
-    ASSERTION_EXCEPTION_CODE            = 700
+    ZUNKNOWN_EXCEPTION_CODE              = -1,
+    ZNOT_IMPLEMENTED_EXCEPTION_CODE      = 100,
+    ZAPPLICATION_EXCEPTION_CODE          = 200,
+    ZDISPLAY_EXCEPTION_CODE              = 300,
+    ZENGINE_EXCEPTION_CODE               = 400,
+    ZMATHEMATIC_EXCEPTION_CODE           = 500,
+    ZFILE_EXCEPTION_CODE                 = 600,
+    ZASSERTION_EXCEPTION_CODE            = 700
 };
 
-class ZException : public std::exception {
-public:
+struct ZException : public std::exception {
     int code;
     std::string description;
     std::string extra_info;
     
-    ZException(int code_ = UNKNOWN_EXCEPTION_CODE);
+    ZException(int code_ = ZUNKNOWN_EXCEPTION_CODE);
     
     virtual const char* what() const throw();
     

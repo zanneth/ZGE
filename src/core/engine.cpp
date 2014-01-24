@@ -31,7 +31,7 @@ void ZEngine::initialize()
 {
     ZApplication *app = ZApplication::get_current_application();
     if (!app) {
-        ZException e(ENGINE_EXCEPTION_CODE);
+        ZException e(ZENGINE_EXCEPTION_CODE);
         e.extra_info = "Main run loop not available. Engine initialization failed.";
         throw e;
     }

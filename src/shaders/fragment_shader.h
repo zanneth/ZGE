@@ -11,12 +11,12 @@ namespace zge {
     
 const std::string ZFragmentShaderSource = "#version 150\n" + HEREDOC(
 
-uniform vec4 ambientColor;
+uniform vec4 materialColor;
 out vec4 outputColor;
 
 void main()
 {
-    outputColor = ambientColor;
+    outputColor = materialColor;
 }
 
 );

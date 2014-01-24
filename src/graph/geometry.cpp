@@ -54,10 +54,10 @@ void _update_material_data(ZRenderContextRef context, ZMaterialRef material)
 {
     ZShaderProgramRef program = context->get_shader_program();
     
-    // update ambient property
-    ZMaterialProperty<ZColor> *ambient = material->get_ambient();
-    ZUniformRef ambient_uniform = program->get_uniform(ambient->get_name());
-    ambient_uniform->set_data(ambient->get_contents().data);
+    // update material color property
+    ZMaterialProperty<ZColor> *color = material->get_color();
+    ZUniformRef color_uniform = program->get_uniform(color->get_name());
+    color_uniform->set_data(color->get_contents().data);
 }
 
 } // namespace zge

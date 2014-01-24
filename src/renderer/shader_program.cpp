@@ -246,7 +246,7 @@ void ZShaderProgram::_uniform_modified(ZUniformRef uniform)
             glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)data);
             break;
         default: {
-            ZException e(NOT_IMPLEMENTED_EXCEPTION_CODE);
+            ZException e(ZNOT_IMPLEMENTED_EXCEPTION_CODE);
             e.extra_info = ZUtil::format("Uniform of type %ld has no API implementation.", (long)type);
             throw e;
             break;

@@ -72,7 +72,7 @@ void ZUtil::assert_true(bool expression, const char *format, ...) throw()
         std::vsnprintf(error_message, 512, format, args_list);
         va_end(args_list);
         
-        ZException exception(ASSERTION_EXCEPTION_CODE);
+        ZException exception(ZASSERTION_EXCEPTION_CODE);
         exception.extra_info = error_message;
         throw exception;
     }

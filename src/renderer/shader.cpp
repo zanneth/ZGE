@@ -22,7 +22,7 @@ ZShader::ZShader(const ZShaderType &type) :
     if (gltype != 0) {
         _shader_handle = glCreateShader(gltype);
     } else {
-        ZException exception(ENGINE_EXCEPTION_CODE);
+        ZException exception(ZENGINE_EXCEPTION_CODE);
         exception.description = "Attempted to create a shader of an unsupported type.";
         throw exception;
     }

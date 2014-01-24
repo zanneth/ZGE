@@ -10,15 +10,15 @@
 namespace zge {
 
 ZMaterial::ZMaterial() :
-    _ambient("ambientColor")
+    _color("materialColor")
 {}
 
 ZMaterial::~ZMaterial()
 {}
 
-ZMaterialProperty<ZColor>* ZMaterial::get_ambient()
+ZMaterialProperty<ZColor>* ZMaterial::get_color()
 {
-    return &_ambient;
+    return &_color;
 }
 
 } // namespace zge
