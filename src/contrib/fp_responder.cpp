@@ -14,7 +14,7 @@
 
 #define DEFAULT_MOUSE_SPEED 0.0005f // TODO: this shouldn't be so arbitrary
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZFirstPersonResponder::ZFirstPersonResponder() : ZResponder(),
     _mouse_speed(DEFAULT_MOUSE_SPEED)
@@ -63,4 +63,4 @@ void ZFirstPersonResponder::_responder_function(const ZEvent &event)
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

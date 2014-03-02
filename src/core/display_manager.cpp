@@ -11,7 +11,7 @@
 #include <zge/exception.h>
 #include <zge/render_manager.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZDisplayManager::ZDisplayManager() :
     _current_display(nullptr)
@@ -44,4 +44,4 @@ void ZDisplayManager::run(uint32_t dtime)
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

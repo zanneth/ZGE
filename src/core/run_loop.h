@@ -12,7 +12,7 @@
 #include <zge/noncopyable.h>
 #include <vector>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZRunloop : ZNoncopyable {
     std::vector<ZSchedulableRef> _schedulables;
@@ -42,4 +42,4 @@ private:
     void _main();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

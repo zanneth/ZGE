@@ -9,7 +9,7 @@
 #include <zge/shader_program.h>
 #include <zge/uniform.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
     
 static void _update_material_data(ZRenderContextRef context, ZMaterialRef material);
 
@@ -55,9 +55,9 @@ void _update_material_data(ZRenderContextRef context, ZMaterialRef material)
     ZShaderProgramRef program = context->get_shader_program();
     
     // update material color property
-    ZMaterialProperty<ZColor> *color = material->get_color();
-    ZUniformRef color_uniform = program->get_uniform(color->get_name());
-    color_uniform->set_data(color->get_contents().data);
+    ZMaterialProperty<ZColor> color = material->get_color();
+    ZUniformRef color_uniform = program->get_uniform(color.get_name());
+    color_uniform->set_data(color.get_contents().data);
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

@@ -13,7 +13,7 @@
 #include <zge/schedulable.h>
 #include <zge/types.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZTimer> ZTimerRef;
 typedef std::function<void(ZTimerRef)> ZTimerFunction;
@@ -53,4 +53,4 @@ public:
     void on_schedule() override;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

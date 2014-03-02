@@ -9,7 +9,7 @@
 #include <zge/vector_private.h>
 #include <zge/logger.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZVector::ZVector(std::initializer_list<float> list) :
     _impl(new ZVectorImpl)
@@ -18,7 +18,7 @@ ZVector::ZVector(std::initializer_list<float> list) :
     for (float f : list) {
         _impl->data[idx++] = f;
         if (idx >= 3) {
-            return;
+            break;
         }
     }
 }
@@ -182,4 +182,4 @@ ZVector ZVector::normalized() const
     return v;
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

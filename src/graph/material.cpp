@@ -7,7 +7,7 @@
 
 #include "material.h"
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZMaterial::ZMaterial() :
     _color("materialColor")
@@ -16,9 +16,14 @@ ZMaterial::ZMaterial() :
 ZMaterial::~ZMaterial()
 {}
 
-ZMaterialProperty<ZColor>* ZMaterial::get_color()
+const ZMaterialProperty<ZColor>& ZMaterial::get_color() const
 {
-    return &_color;
+    return _color;
 }
 
-} // namespace zge
+void ZMaterial::set_color(const ZColor &color)
+{
+    _color.set_contents(color);
+}
+
+END_ZGE_NAMESPACE

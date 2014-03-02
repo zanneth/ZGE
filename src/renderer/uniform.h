@@ -14,7 +14,7 @@
 #include <zge/observable.h>
 #include <zge/opengl.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZUniformBase> ZUniformRef;
 
@@ -51,6 +51,6 @@ public:
     void set_data(const void *data) override;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE
 
 #include <zge/uniform.hpp>

@@ -11,14 +11,14 @@
 #include <cstdio>
 #include <sstream>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 inline float ZUtil::degrees_to_radians(float degrees)
 {
     return degrees * (M_PI / 180.0f);
 }
 
-std::string ZUtil::format(const std::string &format, ...)
+std::string ZUtil::format(std::string format, ...)
 {
     char *final_string = nullptr;
     unsigned size = 128;
@@ -78,4 +78,4 @@ void ZUtil::assert_true(bool expression, const char *format, ...) throw()
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

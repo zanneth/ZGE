@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <SDL2/SDL.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZRunloop::ZRunloop() :
     _running(false)
@@ -80,4 +80,4 @@ void ZRunloop::_main()
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

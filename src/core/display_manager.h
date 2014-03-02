@@ -12,7 +12,7 @@
 #include <zge/schedulable.h>
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZDisplayManager : public ZSchedulable, ZNoncopyable {
     ZDisplayRef _current_display;
@@ -31,4 +31,4 @@ public:
 
 typedef std::shared_ptr<ZDisplayManager> ZDisplayManagerRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE

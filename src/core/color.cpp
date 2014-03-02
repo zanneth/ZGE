@@ -7,7 +7,7 @@
 
 #include <zge/color.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZColor::ZColor(float r, float g, float b, float a) :
     r(r),
@@ -33,4 +33,4 @@ ZColor ZColorRandom(float alpha)
     return color;
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

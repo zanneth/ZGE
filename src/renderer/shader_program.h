@@ -15,7 +15,7 @@
 #include <zge/types.h>
 #include <zge/uniform.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZShaderProgram> ZShaderProgramRef;
 
@@ -52,4 +52,4 @@ private:
     void _uniform_modified(ZUniformRef uniform);
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

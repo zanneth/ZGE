@@ -11,7 +11,7 @@
 #include <zge/node.h>
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZScene> ZSceneRef;
 
@@ -40,4 +40,4 @@ public:
     friend class ZRenderManager;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

@@ -13,7 +13,7 @@
 
 #define zassert(...)    ZUtil::assert_true(__VA_ARGS__)
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZUtil {
 public:
@@ -21,7 +21,7 @@ public:
     static inline float degrees_to_radians(float degrees);
     
     // format a stl string
-    static std::string format(const std::string &format, ...);
+    static std::string format(std::string format, ...);
     
     // return a string representing the components of `vec` separated by `delimiter`
     static std::string separate_components(const std::vector<std::string> &vec, std::string delimiter);
@@ -30,4 +30,4 @@ public:
     static void assert_true(bool expression, const char *format, ...) throw();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

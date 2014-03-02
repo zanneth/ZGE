@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
     
 const std::string ZVertexShaderSource = "#version 150\n" + HEREDOC(
 
@@ -23,4 +23,4 @@ void main()
 
 );
 
-} // namespace zge
+END_ZGE_NAMESPACE

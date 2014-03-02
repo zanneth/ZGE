@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZScene;
 
@@ -87,4 +87,4 @@ public:
     friend class ZScene;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

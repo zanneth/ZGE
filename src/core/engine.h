@@ -13,7 +13,7 @@
 #include <zge/render_manager.h>
 #include <zge/types.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZEngine : ZNoncopyable {
     ZInputManagerRef    _input_manager;
@@ -41,4 +41,4 @@ private:
     ZEngine();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

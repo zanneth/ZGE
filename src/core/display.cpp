@@ -14,7 +14,7 @@
 #include <zge/util.h>
 #include <SDL2/SDL.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 struct ZDisplayImpl {
     SDL_Window *window;
@@ -133,4 +133,4 @@ void* ZDisplay::_get_sdl_window()
     return static_cast<void *>(_impl->window);
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

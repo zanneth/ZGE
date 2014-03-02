@@ -15,7 +15,7 @@
 #include <lib3ds.h>
 #include <sstream>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZModel::ZModel(std::string filename) :
     _num_faces(0),
@@ -30,24 +30,28 @@ ZModel::ZModel(std::string filename) :
     
     // setup vertex buffer
     _vertex_vbo->set_target(GL_ARRAY_BUFFER);
-    ZBufferAttribute vertex_attrib;
-    vertex_attrib.index = ZVERTEX_ATTRIB_POSITION;
-    vertex_attrib.components_per_vertex = 3;
-    vertex_attrib.component_type = ZBUFFER_COMPONENT_TYPE_FLOAT;
-    vertex_attrib.normalized = false;
-    vertex_attrib.stride = 0;
-    vertex_attrib.offset = 0;
+    
+    ZBufferAttribute vertex_attrib = {
+        .index = ZVERTEX_ATTRIB_POSITION,
+        .components_per_vertex = 3,
+        .component_type = ZCOMPONENT_TYPE_FLOAT,
+        .normalized = false,
+        .stride = 0,
+        .offset = 0
+    };
     _vertex_vbo->add_attribute(vertex_attrib);
     
     // setup normal buffer
     _normal_vbo->set_target(GL_ARRAY_BUFFER);
-    ZBufferAttribute normal_attrib;
-    normal_attrib.index = ZVERTEX_ATTRIB_NORMAL;
-    normal_attrib.components_per_vertex = 3;
-    normal_attrib.component_type = ZBUFFER_COMPONENT_TYPE_FLOAT;
-    normal_attrib.normalized = false;
-    normal_attrib.stride = 0;
-    normal_attrib.offset = 0;
+    
+    ZBufferAttribute normal_attrib = {
+        .index = ZVERTEX_ATTRIB_NORMAL,
+        .components_per_vertex = 3,
+        .component_type = ZCOMPONENT_TYPE_FLOAT,
+        .normalized = false,
+        .stride = 0,
+        .offset = 0
+    };
     _normal_vbo->add_attribute(normal_attrib);
     
     _vertex_array->add_buffer(_vertex_vbo);
@@ -162,4 +166,4 @@ void ZModel::render(ZRenderContextRef context)
     _vertex_array->unbind();
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

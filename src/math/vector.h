@@ -10,7 +10,7 @@
 #include <initializer_list>
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZVector {
 private:
@@ -65,4 +65,4 @@ public:
     friend class ZMatrix;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

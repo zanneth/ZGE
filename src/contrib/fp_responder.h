@@ -12,7 +12,7 @@
 #include <zge/scene.h>
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZFirstPersonResponder> ZFirstPersonResponderRef;
 
@@ -37,4 +37,4 @@ private:
     void _responder_function(const ZEvent &event);
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

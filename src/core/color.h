@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 union ZColor {
     struct { float r, g, b, a; };
@@ -25,4 +25,4 @@ extern ZColor ZBlueColor;
 
 extern ZColor ZColorRandom(float alpha);
 
-} // namespace zge
+END_ZGE_NAMESPACE

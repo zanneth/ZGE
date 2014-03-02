@@ -16,7 +16,7 @@
 #include <memory>
 #include <queue>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
 typedef std::shared_ptr<class ZResponder> ZResponderRef;
@@ -73,4 +73,4 @@ private:
     void _remove_responder_internal(ZResponderRef responder);
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

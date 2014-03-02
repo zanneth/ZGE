@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZApplication : ZNoncopyable {
     std::vector<std::string> _arguments;
@@ -24,7 +24,7 @@ class ZApplication : ZNoncopyable {
     uint32_t _time_start;
     
 public:
-    ZApplication(int argc, char **argv);
+    ZApplication(int argc, const char **argv);
     virtual ~ZApplication();
     
     /* Getting the Application Instance */
@@ -35,7 +35,7 @@ public:
     
     /* Accessors */
     std::vector<std::string> get_arguments() { return _arguments; }
-    void set_arguments(int argc, char **argv);
+    void set_arguments(int argc, const char **argv);
     bool shows_cursor() { return _show_cursor; }
     void set_shows_cursor(bool cursor) { _show_cursor = cursor; }
     
@@ -59,4 +59,4 @@ private:
     void _change_resources_directory();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

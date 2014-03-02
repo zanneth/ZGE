@@ -12,7 +12,7 @@
 #include <string>
 #include <sstream>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZLogger : ZNoncopyable {
 public:
@@ -46,6 +46,6 @@ private:
     ~ZLogger();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE
 
 #define zlog(...) zge::ZLogger::log(__VA_ARGS__)

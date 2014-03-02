@@ -15,4 +15,7 @@
 
 #define HEREDOC(...) std::string(#__VA_ARGS__)
 
+#define BEGIN_ZGE_NAMESPACE namespace zge {
+#define END_ZGE_NAMESPACE }
+
 #endif // __ZGE_PCH__

@@ -11,7 +11,7 @@
 #include <zge/logger.h>
 #include <zge/util.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 static ZUniformRef _create_uniform(GLenum type, std::string name, GLuint index);
 
@@ -311,4 +311,4 @@ ZUniformRef _create_uniform(GLenum type, std::string name, GLuint index)
     return uniform;
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

@@ -14,11 +14,12 @@
 #include <zge/opengl.h>
 #include <zge/noncopyable.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZVertexArray : ZNoncopyable {
     GLuint _vertex_array_obj;
     std::vector<ZGraphicsBufferRef> _buffers;
+    std::vector<ZBufferAttribute> _enabled_attributes;
     
 public:
     ZVertexArray(std::initializer_list<ZGraphicsBufferRef> buffers = {});
@@ -32,16 +33,13 @@ public:
     void remove_all_buffers();
     std::vector<ZGraphicsBufferRef> get_buffers();
     
-    void bind();
-    void unbind();
-    bool is_bound();
-    
 private:
-    void _enable_buffer_attribute(const ZBufferAttribute &attribute);
-    void _disable_buffer_attribute(const ZBufferAttribute &attribute);
-    friend ZGraphicsBuffer;
+    void _bind();
+    void _unbind();
+    
+    friend class ZRenderContext;
 };
 
 typedef std::shared_ptr<ZVertexArray> ZVertexArrayRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE

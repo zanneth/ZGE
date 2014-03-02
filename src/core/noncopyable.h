@@ -7,7 +7,7 @@
  
 #pragma once
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZNoncopyable {
 protected:
@@ -19,4 +19,4 @@ private:
     const ZNoncopyable& operator=(const ZNoncopyable&)  = delete;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

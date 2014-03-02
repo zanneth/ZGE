@@ -9,10 +9,10 @@
 
 #include <Eigen/Eigen>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 struct ZVectorImpl {
     Eigen::Vector3f data;
 };
     
-} // namespace zge
+END_ZGE_NAMESPACE

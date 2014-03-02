@@ -19,6 +19,7 @@
 #include <zge/geometry.h>
 #include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
+#include <zge/light.h>
 #include <zge/logger.h>
 #include <zge/material.h>
 #include <zge/matrix.h>

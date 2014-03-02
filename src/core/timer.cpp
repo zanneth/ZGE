@@ -9,7 +9,7 @@
 #include <zge/run_loop.h>
 #include <SDL2/SDL.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZTimer::ZTimer(const ZTimerFunction &func) :
     _function(func),
@@ -74,4 +74,4 @@ void ZTimer::invalidate()
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

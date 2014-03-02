@@ -10,7 +10,7 @@
 
 #include <typeinfo>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZScene::ZScene() : ZNode(),
     _active_camera(nullptr)
@@ -59,4 +59,4 @@ void ZScene::_evict_scene(ZNode *curnode)
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

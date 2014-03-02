@@ -11,7 +11,7 @@
 #include <zge/noncopyable.h>
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 template <typename T>
 class ZMaterialProperty {
@@ -39,7 +39,8 @@ public:
     ~ZMaterial();
     
     // these properties are mutable
-    ZMaterialProperty<ZColor>* get_color();
+    const ZMaterialProperty<ZColor>& get_color() const;
+    void set_color(const ZColor &color);
     
 private:
     ZMaterialProperty<ZColor> _color;
@@ -47,6 +48,6 @@ private:
 
 typedef std::shared_ptr<ZMaterial> ZMaterialRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE
 
 #include <zge/material.hpp>

@@ -11,7 +11,7 @@
 #include <zge/exception.h>
 #include <zge/run_loop.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZEngine* ZEngine::instance()
 {
@@ -69,4 +69,4 @@ ZRect ZEngine::get_viewport_rect() const
     return viewport_rect;
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

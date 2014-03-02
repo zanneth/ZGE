@@ -14,7 +14,7 @@
 
 static unsigned __node_global_uid_count = 1;
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZNode::ZNode(ZGeometryRef geometry) :
     _uid(__node_global_uid_count++),
@@ -151,4 +151,4 @@ void ZNode::_on_exit_internal()
     }
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

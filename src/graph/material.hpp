@@ -5,7 +5,7 @@
  * Date Created: 01/22/2014
  */
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 template <typename T>
 ZMaterialProperty<T>::ZMaterialProperty(std::string name) :
@@ -37,4 +37,4 @@ void ZMaterialProperty<T>::set_contents(const T &contents) { _contents = content
 template <typename T>
 std::string ZMaterialProperty<T>::get_name() const { return _name; }
 
-} // namespace zge
+END_ZGE_NAMESPACE

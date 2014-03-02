@@ -10,7 +10,7 @@
 #include <exception>
 #include <string>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 enum {
     ZUNKNOWN_EXCEPTION_CODE              = -1,
@@ -36,4 +36,4 @@ struct ZException : public std::exception {
     bool operator!=(const ZException &other);
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

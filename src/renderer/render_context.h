@@ -14,8 +14,9 @@
 #include <zge/noncopyable.h>
 #include <zge/shader_program.h>
 #include <zge/uniform.h>
+#include <zge/vertexarray.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 enum ZRenderMatrixType {
     ZRENDER_MATRIX_PROJECTION,
@@ -30,6 +31,7 @@ class ZRenderContext : ZNoncopyable {
     ZShaderProgramRef    _shader_program;
     bool                 _shaders_loaded;
     std::stack<ZMatrix>  _matrix_stacks[_ZRENDER_MATRIX_COUNT];
+    ZVertexArrayRef      _bound_vertex_array;
     
     std::auto_ptr<struct ZRenderContextImpl> _impl;
     
@@ -53,12 +55,17 @@ public:
     
     ZMatrix get_matrix(ZRenderMatrixType type) const;
     
+    /* Drawing */
+    void draw_elements(ZRenderMode mode, ZComponentType element_type, ZVertexArrayRef varray, size_t count);
+    
 protected:
     void        _load_shaders();
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
+    void        _bind_vertex_array(ZVertexArrayRef varray);
+    void        _unbind_vertex_array();
 };
 
 typedef std::shared_ptr<ZRenderContext> ZRenderContextRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE

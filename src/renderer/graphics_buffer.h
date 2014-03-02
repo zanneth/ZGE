@@ -15,39 +15,27 @@
 #include <typeindex>
 #include <vector>
 
-#define ZUNALLOCATED_BUFFER 0
-#define ZUNBOUND_TARGET     0
+#define ZUNALLOCATED_BUFFER -1
+#define ZUNBOUND_TARGET     -1
 
-namespace zge {
-
-enum ZBufferComponentType {
-    ZBUFFER_COMPONENT_TYPE_UNKNOWN = 0,
-    ZBUFFER_COMPONENT_TYPE_BYTE = GL_BYTE,
-    ZBUFFER_COMPONENT_TYPE_UNSIGNED_BYTE = GL_UNSIGNED_BYTE,
-    ZBUFFER_COMPONENT_TYPE_SHORT = GL_SHORT,
-    ZBUFFER_COMPONENT_TYPE_UNSIGNED_SHORT = GL_UNSIGNED_SHORT,
-    ZBUFFER_COMPONENT_TYPE_INT = GL_INT,
-    ZBUFFER_COMPONENT_TYPE_UNSIGNED_INT = GL_UNSIGNED_INT,
-    ZBUFFER_COMPONENT_TYPE_FLOAT = GL_FLOAT,
-    ZBUFFER_COMPONENT_TYPE_DOUBLE = GL_DOUBLE
-};
+BEGIN_ZGE_NAMESPACE
 
 struct ZBufferAttribute {
-    ZVertexAttributeIndex   index;                  // generic vertex attribute index
-    unsigned                components_per_vertex;  // components per vertex attribute (1, 2, 3, or 4)
-    ZBufferComponentType    component_type;         // data type of each component
-    bool                    normalized;             // whether fixed-point data values should be normalized
-    size_t                  stride;                 // byte offset between consecutive vertex attributes
-    uintptr_t               offset;                 // offset of the first component of the first vertex attribute
+    ZVertexAttributeIndex index;                  // generic vertex attribute index
+    unsigned              components_per_vertex;  // components per vertex attribute (1, 2, 3, or 4)
+    ZComponentType        component_type;         // data type of each component
+    bool                  normalized;             // whether fixed-point data values should be normalized
+    size_t                stride;                 // byte offset between consecutive vertex attributes
+    uintptr_t             offset;                 // offset of the first component of the first vertex attribute
 };
 
 class ZVertexArray;
 
 class ZGraphicsBuffer : ZNoncopyable {
     GLuint _buffer;
-    GLenum _target;
+    ZBufferTarget _target;
     std::vector<ZBufferAttribute> _attributes;
-    ZVertexArray *_vertex_array; // weak
+    std::weak_ptr<ZVertexArray> _bound_vertex_array;
 
 public:
     ZGraphicsBuffer();
@@ -57,9 +45,8 @@ public:
     ZGraphicsBuffer& operator=(ZGraphicsBuffer&&);
     
     /* Accessors */
-    GLuint  get_buffer() { return _buffer; }
-    GLenum  get_target() { return _target; }
-    void    set_target(GLenum target) { _target = target; }
+    ZBufferTarget get_target();
+    void set_target(ZBufferTarget target);
     
     /* Attributes */
     void             add_attribute(ZBufferAttribute attribute);
@@ -71,18 +58,17 @@ public:
     void load_data(GLsizeiptr size, const GLvoid *data, GLenum usage);
     void load_subdata(GLsizeiptr offset, GLsizeiptr size, const GLvoid *data);
     
-    /* Actions */
-    void bind();
-    void unbind();
-    
 private:
-    void _move(ZGraphicsBuffer &&mv);
+    void _bind();
+    void _unbind();
+    
     void _assert_target_bound();
+    void _move(ZGraphicsBuffer &&mv);
     void _send_attribute(const ZBufferAttribute &attribute);
     
-    friend ZVertexArray;
+    friend class ZVertexArray;
 };
 
 typedef std::shared_ptr<ZGraphicsBuffer> ZGraphicsBufferRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE

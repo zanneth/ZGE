@@ -11,7 +11,7 @@
 #include <string>
 #include <zge/noncopyable.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 struct ZDisplayMode {
     bool windowed;
@@ -73,4 +73,4 @@ protected:
     void* _get_sdl_window();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

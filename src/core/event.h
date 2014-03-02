@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 enum ZEventType {
     ZUNKNOWN_EVENT = 0,
@@ -54,7 +54,6 @@ enum ZKeyModifierFlags : unsigned {
     ZNUM_LOCK_KEY      = 1 << 8,
     ZCAPS_LOCK_KEY     = 1 << 9
 };
-// for all my Mac homeboys
 #define ZLEFT_COMMAND_KEY  ZLEFT_META_KEY
 #define ZRIGHT_COMMAND_KEY ZRIGHT_META_KEY
 #define ZLEFT_OPTION_KEY   ZLEFT_ALT_KEY
@@ -269,4 +268,4 @@ private:
     std::string _mouse_buttons_description(ZMouseButtonFlags button_flags) const;
 };
  
-} // namespace zge
+END_ZGE_NAMESPACE

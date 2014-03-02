@@ -14,7 +14,7 @@
 #include <zge/vector.h>
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZCamera> ZCameraRef;
 
@@ -68,4 +68,4 @@ private:
     void _close_modelview();
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE

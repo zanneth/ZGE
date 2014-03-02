@@ -22,11 +22,11 @@ extern "C" {
 }
 #endif
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 static ZApplication *__current_application = nullptr;
 
-ZApplication::ZApplication(int argc, char **argv) :
+ZApplication::ZApplication(int argc, const char **argv) :
     _show_cursor(true),
     _time_start(0)
 {
@@ -77,7 +77,7 @@ void ZApplication::run()
 
 #pragma mark - Accessors
 
-void ZApplication::set_arguments(int argc, char **argv)
+void ZApplication::set_arguments(int argc, const char **argv)
 {
     for (int i = 0; i < argc; ++i) {
         std::string str = argv[i];
@@ -149,4 +149,4 @@ void ZApplication::_change_resources_directory()
 #endif
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

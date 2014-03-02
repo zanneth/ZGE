@@ -18,7 +18,7 @@
 #define DEFAULT_NEAR_CLIP   0.001f
 #define DEFAULT_FAR_CLIP    10000.0f
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZCamera::ZCamera() :
     _field_of_view(DEFAULT_FOV),
@@ -123,4 +123,4 @@ void ZCamera::_close_modelview()
     _current_context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

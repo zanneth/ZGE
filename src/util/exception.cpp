@@ -10,7 +10,7 @@
 #include <cstdio>
 #include <sstream>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZException::ZException(int code_) :
     code(code_)
@@ -66,4 +66,4 @@ bool ZException::operator!=(const ZException &other)
     return !operator==(other);
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

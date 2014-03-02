@@ -15,7 +15,7 @@
 #include <zge/schedulable.h>
 #include <zge/types.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZRenderManager : public ZSchedulable, ZNoncopyable {
     ZRenderContextRef _context;
@@ -45,4 +45,4 @@ private:
 
 typedef std::shared_ptr<ZRenderManager> ZRenderManagerRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE

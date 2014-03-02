@@ -9,7 +9,7 @@
 #include "util.h"
 #include <regex>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZEvent::ZEvent() :
     timestamp(0),
@@ -310,4 +310,4 @@ std::string ZEvent::_mouse_buttons_description(ZMouseButtonFlags button_flags) c
     return buttons_string;
 }
     
-} // namespace zge
+END_ZGE_NAMESPACE

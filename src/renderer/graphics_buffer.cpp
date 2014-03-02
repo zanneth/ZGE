@@ -6,16 +6,16 @@
  */
 
 #include <zge/graphics_buffer.h>
+#include <zge/glutil.h>
 #include <zge/vertexarray.h>
 #include <zge/exception.h>
 #include <zge/logger.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZGraphicsBuffer::ZGraphicsBuffer() :
     _buffer(ZUNALLOCATED_BUFFER),
-    _target(ZUNBOUND_TARGET),
-    _vertex_array(nullptr)
+    _target(ZBUFFER_TARGET_ARRAY)
 {
     glGenBuffers(1, &_buffer);
 }
@@ -38,17 +38,25 @@ ZGraphicsBuffer::~ZGraphicsBuffer()
     }
     zlog("Buffer %p deleted.", this);
 }
-    
+
+#pragma mark - Accessors
+
+ZBufferTarget ZGraphicsBuffer::get_target() { return _target; }
+
+void ZGraphicsBuffer::set_target(ZBufferTarget target)
+{
+    _unbind();
+    _target = target;
+}
+
 #pragma mark - Attributes
 
 void ZGraphicsBuffer::add_attribute(ZBufferAttribute attribute)
 {
     _attributes.push_back(attribute);
-    if (_vertex_array != nullptr) {
-        _vertex_array->bind();
-        _vertex_array->_enable_buffer_attribute(attribute);
-        _send_attribute(attribute);
-    }
+    
+    // clear bound vertex array to reload attributes
+    _bound_vertex_array.reset();
 }
 
 ZBufferAttribute ZGraphicsBuffer::get_attribute(ZVertexAttributeIndex index)
@@ -68,14 +76,8 @@ ZBufferAttribute ZGraphicsBuffer::get_attribute(ZVertexAttributeIndex index)
 
 void ZGraphicsBuffer::clear_attributes()
 {
-    if (_vertex_array != nullptr) {
-        _vertex_array->bind();
-        for (ZBufferAttribute attrib : _attributes) {
-            _vertex_array->_disable_buffer_attribute(attrib);
-        }
-    }
-    
     _attributes.clear();
+    _bound_vertex_array.reset();
 }
 
 #pragma mark - Loading Data
@@ -83,56 +85,52 @@ void ZGraphicsBuffer::clear_attributes()
 void ZGraphicsBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
 {
     _assert_target_bound();
+    _bind();
     
-    bind();
     glBufferData(_target, size, data, usage);
-    if (_vertex_array == nullptr || !_vertex_array->is_bound()) {
-        unbind();
+    
+    if (_bound_vertex_array.expired()) {
+        _unbind();
     }
 }
 
 void ZGraphicsBuffer::load_subdata(GLsizeiptr offset, GLsizeiptr size, const GLvoid *data)
 {
     _assert_target_bound();
+    _bind();
     
-    bind();
     glBufferSubData(_target, offset, size, data);
-    if (_vertex_array == nullptr || !_vertex_array->is_bound()) {
-        unbind();
+    
+    if (_bound_vertex_array.expired()) {
+        _unbind();
     }
 }
 
-#pragma mark - Actions
+#pragma mark - Private
 
-void ZGraphicsBuffer::bind()
+void ZGraphicsBuffer::_bind()
 {
-    if (_vertex_array != nullptr) {
-        _vertex_array->bind();
-    }
-    
     glBindBuffer(_target, _buffer);
     for (const ZBufferAttribute &buffer_attribute : _attributes) {
         _send_attribute(buffer_attribute);
     }
 }
 
-void ZGraphicsBuffer::unbind()
+void ZGraphicsBuffer::_unbind()
 {
     glBindBuffer(_target, 0);
 }
-
-#pragma mark - Private
 
 void ZGraphicsBuffer::_move(ZGraphicsBuffer &&mv)
 {
     _buffer = mv._buffer;
     _target = mv._target;
     _attributes = std::move(mv._attributes);
-    _vertex_array = mv._vertex_array;
+    _bound_vertex_array = mv._bound_vertex_array;
     
     mv._buffer = ZUNALLOCATED_BUFFER;
-    mv._target = ZUNBOUND_TARGET;
-    mv._vertex_array = nullptr;
+    mv._target = (ZBufferTarget)ZUNBOUND_TARGET;
+    mv._bound_vertex_array.reset();
 }
 
 void ZGraphicsBuffer::_assert_target_bound()
@@ -147,8 +145,9 @@ void ZGraphicsBuffer::_assert_target_bound()
 void ZGraphicsBuffer::_send_attribute(const ZBufferAttribute &attribute)
 {
     GLboolean normalized_val = attribute.normalized ? GL_TRUE : GL_FALSE;
+    GLenum value_type = ZGLUtil::gl_value_type_from_component_type(attribute.component_type);
     glBindBuffer(_target, _buffer);
-    glVertexAttribPointer(attribute.index, attribute.components_per_vertex, attribute.component_type, normalized_val, attribute.stride, (const GLvoid *)attribute.offset);
+    glVertexAttribPointer(attribute.index, attribute.components_per_vertex, value_type, normalized_val, attribute.stride, (const GLvoid *)attribute.offset);
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

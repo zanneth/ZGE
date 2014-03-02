@@ -12,7 +12,7 @@
 #include <memory>
 #include <vector>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
     
 template <typename T> using ZObserverFunc = std::function<void(T)>;
 template <typename T> struct ZObservableImpl;
@@ -33,6 +33,6 @@ private:
     std::auto_ptr<ZObservableImpl<T>> _impl;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE
 
 #include <zge/observable.hpp>

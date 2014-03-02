@@ -7,11 +7,14 @@
 
 #include <zge/render_context.h>
 #include <zge/fragment_shader.h>
+#include <zge/glutil.h>
 #include <zge/logger.h>
 #include <zge/vertex_shader.h>
+#include <zge/util.h>
 #include <SDL2/SDL.h>
+#include <vector>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 struct ZRenderContextImpl {
     SDL_GLContext gl_context;
@@ -100,6 +103,17 @@ ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
     return _matrix_stacks[type].top();
 }
 
+void ZRenderContext::draw_elements(ZRenderMode mode, ZComponentType element_type, ZVertexArrayRef varray, size_t count)
+{
+    _bind_vertex_array(varray);
+    
+    GLenum component_type = ZGLUtil::gl_value_type_from_component_type(element_type);
+    GLenum draw_mode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
+    glDrawElements(draw_mode, count, component_type, nullptr);
+    
+    // unbind
+}
+
 #pragma mark - Internal
 
 void ZRenderContext::_load_shaders()
@@ -142,4 +156,35 @@ void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
     }
 }
 
-} // namespace zge
+void ZRenderContext::_bind_vertex_array(ZVertexArrayRef varray)
+{
+    zassert(varray.get(), "Tried to bind NULL vertex array.");
+    
+    varray->_bind();
+    
+    std::vector<ZGraphicsBufferRef> buffers = varray->get_buffers();
+    for (ZGraphicsBufferRef buffer : buffers) {
+        // check if this buffer has been bound to this vertex array yet
+        ZVertexArrayRef bound_varray = buffer->_bound_vertex_array.lock();
+        if (!bound_varray.get()) {
+            buffer->bind();
+            
+            std::vector<ZBufferAttribute> buffer_attribs = buffer->get_attributes();
+            for (ZBufferAttribute buffer_attrib : buffer_attribs) {
+                glEnableVertexAttribArray(buffer_attrib.index);
+            }
+            
+            buffer->_bound_vertex_array = varray;
+        }
+    }
+}
+
+void ZRenderContext::_unbind_vertex_array()
+{
+    if (_bound_vertex_array.get()) {
+        glBindVertexArray(0);
+        _bound_vertex_array = nullptr;
+    }
+}
+
+END_ZGE_NAMESPACE

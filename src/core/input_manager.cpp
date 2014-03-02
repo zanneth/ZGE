@@ -15,7 +15,7 @@
 
 static unsigned __responder_global_uid_count = 1;
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZEvent _convert_sdl_event(const SDL_Event &sdl_event);
 ZKey _convert_sdl_key(SDL_Keycode sdl_keycode);
@@ -308,7 +308,6 @@ ZEvent _convert_sdl_event(const SDL_Event &sdl_event)
     return event;
 }
 
-// long function is looong
 ZKey _convert_sdl_key(SDL_Keycode sdl_keycode)
 {
     ZKey key = ZKEY_UNKNOWN;
@@ -708,4 +707,4 @@ ZKey _convert_sdl_key(SDL_Keycode sdl_keycode)
     return key;
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

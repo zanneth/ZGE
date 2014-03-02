@@ -11,7 +11,7 @@
 #include <zge/exception.h>
 #include <zge/logger.h>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 ZShader::ZShader(const ZShaderType &type) :
     _type(type),
@@ -133,4 +133,4 @@ GLenum ZShader::_get_opengl_shader_type(const ZShaderType &type)
     return gltype;
 }
 
-} // namespace zge
+END_ZGE_NAMESPACE

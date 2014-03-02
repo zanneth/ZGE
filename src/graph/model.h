@@ -13,7 +13,7 @@
 #include <memory>
 #include <string>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 class ZModel : public ZGeometry {
 protected:
@@ -45,4 +45,4 @@ public:
 
 typedef std::shared_ptr<ZModel> ZModelRef;
 
-} // namespace zge
+END_ZGE_NAMESPACE

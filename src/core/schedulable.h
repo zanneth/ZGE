@@ -9,7 +9,7 @@
 
 #include <memory>
 
-namespace zge {
+BEGIN_ZGE_NAMESPACE
 
 typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;
 class ZRunloop;
@@ -30,4 +30,4 @@ public:
     friend class ZRunloop;
 };
 
-} // namespace zge
+END_ZGE_NAMESPACE
