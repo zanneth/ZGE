@@ -6,10 +6,11 @@
  */
 
 #include <string>
+#include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
     
-const std::string ZVertexShaderSource = "#version 150\n" + HEREDOC(
+const std::string ZVertexShaderSource = "#version 150\n" + ZHEREDOC(
 
 in vec4 position;
 

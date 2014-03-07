@@ -42,7 +42,7 @@ GLenum ZGLUtil::gl_value_type_from_component_type(ZComponentType component_type)
         default:
             break;
     }
-    return 0;
+    return gltype;
 }
 
 GLenum ZGLUtil::gl_draw_mode_from_render_mode(ZRenderMode render_mode)
@@ -111,6 +111,100 @@ GLenum ZGLUtil::gl_target_from_buffer_target(ZBufferTarget target)
             break;
     }
     return gltype;
+}
+
+GLenum ZGLUtil::gl_usage_from_buffer_usage(ZBufferUsage usage)
+{
+    GLenum gltype = 0;
+    
+    ZBufferUsageFrequencyType frequency = usage.frequency;
+    ZBufferUsageNature nature = usage.nature;
+    switch (frequency) {
+        case ZBUFFER_USAGE_FREQUENCY_DYNAMIC:
+            switch (nature) {
+                case ZBUFFER_USAGE_NATURE_COPY:
+                    gltype = GL_DYNAMIC_COPY;
+                    break;
+                case ZBUFFER_USAGE_NATURE_DRAW:
+                    gltype = GL_DYNAMIC_DRAW;
+                    break;
+                case ZBUFFER_USAGE_NATURE_READ:
+                    gltype = GL_DYNAMIC_READ;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case ZBUFFER_USAGE_FREQUENCY_STATIC:
+            switch (nature) {
+                case ZBUFFER_USAGE_NATURE_COPY:
+                    gltype = GL_STATIC_COPY;
+                    break;
+                case ZBUFFER_USAGE_NATURE_DRAW:
+                    gltype = GL_STATIC_DRAW;
+                    break;
+                case ZBUFFER_USAGE_NATURE_READ:
+                    gltype = GL_STATIC_READ;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case ZBUFFER_USAGE_FREQUENCY_STREAM:
+            switch (nature) {
+                case ZBUFFER_USAGE_NATURE_COPY:
+                    gltype = GL_STREAM_COPY;
+                    break;
+                case ZBUFFER_USAGE_NATURE_DRAW:
+                    gltype = GL_STREAM_DRAW;
+                    break;
+                case ZBUFFER_USAGE_NATURE_READ:
+                    gltype = GL_STREAM_READ;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    return gltype;
+}
+
+size_t ZGLUtil::gl_host_size_for_component(ZComponentType component_type)
+{
+    size_t size = 0;
+    switch (component_type) {
+        case ZCOMPONENT_TYPE_BYTE:
+            size = sizeof(GLbyte);
+            break;
+        case ZCOMPONENT_TYPE_UNSIGNED_BYTE:
+            size = sizeof(GLubyte);
+            break;
+        case ZCOMPONENT_TYPE_SHORT:
+            size = sizeof(GLshort);
+            break;
+        case ZCOMPONENT_TYPE_UNSIGNED_SHORT:
+            size = sizeof(GLushort);
+            break;
+        case ZCOMPONENT_TYPE_INT:
+            size = sizeof(GLint);
+            break;
+        case ZCOMPONENT_TYPE_UNSIGNED_INT:
+            size = sizeof(GLuint);
+            break;
+        case ZCOMPONENT_TYPE_FLOAT:
+            size = sizeof(GLfloat);
+            break;
+        case ZCOMPONENT_TYPE_DOUBLE:
+            size = sizeof(GLdouble);
+            break;
+        case ZCOMPONENT_TYPE_UNKNOWN:
+        default:
+            break;
+    }
+    return size;
 }
 
 END_ZGE_NAMESPACE

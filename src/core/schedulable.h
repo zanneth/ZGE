@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
 

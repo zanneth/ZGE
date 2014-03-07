@@ -16,6 +16,8 @@
 
 BEGIN_ZGE_NAMESPACE
 
+static ZRenderContextRef __current_context = nullptr;
+
 struct ZRenderContextImpl {
     SDL_GLContext gl_context;
 };
@@ -62,6 +64,13 @@ void ZRenderContext::make_current()
     if (_shaders_loaded) {
         _shader_program->use_program();
     }
+    
+    __current_context = shared_from_this();
+}
+
+ZRenderContextRef ZRenderContext::get_current_context()
+{
+    return __current_context;
 }
 
 void ZRenderContext::push_matrix(ZRenderMatrixType type)
@@ -103,15 +112,19 @@ ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
     return _matrix_stacks[type].top();
 }
 
-void ZRenderContext::draw_elements(ZRenderMode mode, ZComponentType element_type, ZVertexArrayRef varray, size_t count)
+void ZRenderContext::draw(ZRenderMode mode, ZVertexArrayRef varray)
 {
-    _bind_vertex_array(varray);
+    varray->_bind(shared_from_this());
     
-    GLenum component_type = ZGLUtil::gl_value_type_from_component_type(element_type);
-    GLenum draw_mode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
-    glDrawElements(draw_mode, count, component_type, nullptr);
+    ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
+    if (element_buffer.get()) {
+        GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
+        GLenum indices_type = ZGLUtil::gl_value_type_from_component_type(element_buffer->get_indices_type());
+        GLsizei count = (GLsizei)element_buffer->get_elements_count();
+        glDrawElements(glmode, count, indices_type, nullptr);
+    }
     
-    // unbind
+    // TODO: support for drawing from array data (no elements)
 }
 
 #pragma mark - Internal
@@ -153,37 +166,6 @@ void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
         uniform->set_data(matrix.get_data());
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
-    }
-}
-
-void ZRenderContext::_bind_vertex_array(ZVertexArrayRef varray)
-{
-    zassert(varray.get(), "Tried to bind NULL vertex array.");
-    
-    varray->_bind();
-    
-    std::vector<ZGraphicsBufferRef> buffers = varray->get_buffers();
-    for (ZGraphicsBufferRef buffer : buffers) {
-        // check if this buffer has been bound to this vertex array yet
-        ZVertexArrayRef bound_varray = buffer->_bound_vertex_array.lock();
-        if (!bound_varray.get()) {
-            buffer->bind();
-            
-            std::vector<ZBufferAttribute> buffer_attribs = buffer->get_attributes();
-            for (ZBufferAttribute buffer_attrib : buffer_attribs) {
-                glEnableVertexAttribArray(buffer_attrib.index);
-            }
-            
-            buffer->_bound_vertex_array = varray;
-        }
-    }
-}
-
-void ZRenderContext::_unbind_vertex_array()
-{
-    if (_bound_vertex_array.get()) {
-        glBindVertexArray(0);
-        _bound_vertex_array = nullptr;
     }
 }
 

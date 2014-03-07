@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <zge/defines.h>
 #include <zge/display.h>
 #include <zge/noncopyable.h>
 #include <zge/schedulable.h>

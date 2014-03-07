@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <zge/defines.h>
 #include <zge/observable.h>
 #include <zge/opengl.h>
 

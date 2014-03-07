@@ -8,6 +8,7 @@
 #pragma once
 
 #include <zge/color.h>
+#include <zge/defines.h>
 #include <zge/noncopyable.h>
 #include <memory>
 

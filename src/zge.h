@@ -10,6 +10,8 @@
 #include <zge/application.h>
 #include <zge/camera.h>
 #include <zge/color.h>
+#include <zge/data.h>
+#include <zge/defines.h>
 #include <zge/display.h>
 #include <zge/display_manager.h>
 #include <zge/engine.h>
@@ -19,7 +21,6 @@
 #include <zge/geometry.h>
 #include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
-#include <zge/light.h>
 #include <zge/logger.h>
 #include <zge/material.h>
 #include <zge/matrix.h>
@@ -40,4 +41,4 @@
 #include <zge/uniform.h>
 #include <zge/util.h>
 #include <zge/vector.h>
-#include <zge/vertexarray.h>
+#include <zge/vertex_array.h>

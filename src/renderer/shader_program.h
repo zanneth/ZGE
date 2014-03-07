@@ -11,6 +11,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <zge/defines.h>
 #include <zge/shader.h>
 #include <zge/types.h>
 #include <zge/uniform.h>

@@ -9,12 +9,13 @@
 
 #include <memory>
 #include <stack>
+#include <zge/defines.h>
 #include <zge/display.h>
 #include <zge/matrix.h>
 #include <zge/noncopyable.h>
 #include <zge/shader_program.h>
 #include <zge/uniform.h>
-#include <zge/vertexarray.h>
+#include <zge/vertex_array.h>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -26,7 +27,9 @@ enum ZRenderMatrixType {
     _ZRENDER_MATRIX_COUNT
 };
 
-class ZRenderContext : ZNoncopyable {
+typedef std::shared_ptr<class ZRenderContext> ZRenderContextRef;
+
+class ZRenderContext : ZNoncopyable, public std::enable_shared_from_this<ZRenderContext> {
     ZDisplayRef          _display;
     ZShaderProgramRef    _shader_program;
     bool                 _shaders_loaded;
@@ -39,14 +42,12 @@ public:
     ZRenderContext(ZDisplayRef display);
     virtual ~ZRenderContext();
     
-    /* Accessors */
     ZDisplayRef       get_display() const;
     ZShaderProgramRef get_shader_program() const;
     
-    /* Setting the Current Context */
     void make_current();
+    static ZRenderContextRef get_current_context();
     
-    /* Managing Matrices */
     void push_matrix(ZRenderMatrixType type);
     void push_matrix(ZRenderMatrixType type, const ZMatrix &matrix); // convenience: pushes then multiplies
     void multiply_matrix(ZRenderMatrixType type, const ZMatrix &matrix);
@@ -56,16 +57,14 @@ public:
     ZMatrix get_matrix(ZRenderMatrixType type) const;
     
     /* Drawing */
-    void draw_elements(ZRenderMode mode, ZComponentType element_type, ZVertexArrayRef varray, size_t count);
+    void draw(ZRenderMode mode, ZVertexArrayRef varray);
     
-protected:
+private:
     void        _load_shaders();
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
-    void        _bind_vertex_array(ZVertexArrayRef varray);
-    void        _unbind_vertex_array();
+    
+    friend ZVertexArray;
 };
-
-typedef std::shared_ptr<ZRenderContext> ZRenderContextRef;
 
 END_ZGE_NAMESPACE

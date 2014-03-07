@@ -8,6 +8,7 @@
 #pragma once
 
 #include <zge/camera.h>
+#include <zge/defines.h>
 #include <zge/node.h>
 #include <memory>
 

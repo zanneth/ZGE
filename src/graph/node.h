@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <zge/defines.h>
 #include <zge/geometry.h>
 #include <zge/render_context.h>
 #include <memory>

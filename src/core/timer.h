@@ -9,6 +9,7 @@
 
 #include <functional>
 #include <memory>
+#include <zge/defines.h>
 #include <zge/noncopyable.h>
 #include <zge/schedulable.h>
 #include <zge/types.h>

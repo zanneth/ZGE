@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <string>
+#include <zge/defines.h>
 #include <zge/noncopyable.h>
 
 BEGIN_ZGE_NAMESPACE

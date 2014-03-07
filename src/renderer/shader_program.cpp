@@ -116,7 +116,7 @@ bool ZShaderProgram::link_program()
             
             char *errstr = new char[errlen];
             glGetProgramInfoLog(_program_handle, errlen, 0, errstr);
-            ZLogger::log_error(errstr);
+            ZLogger::log_error("%s", errstr);
             delete[] errstr;
             
             _linked = false;

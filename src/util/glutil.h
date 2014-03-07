@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <zge/defines.h>
 #include <zge/opengl.h>
 #include <zge/types.h>
 
@@ -18,6 +19,8 @@ public:
     static GLenum gl_value_type_from_component_type(ZComponentType component_type);
     static GLenum gl_draw_mode_from_render_mode(ZRenderMode render_mode);
     static GLenum gl_target_from_buffer_target(ZBufferTarget target);
+    static GLenum gl_usage_from_buffer_usage(ZBufferUsage usage);
+    static size_t gl_host_size_for_component(ZComponentType component_type);
 };
 
 END_ZGE_NAMESPACE

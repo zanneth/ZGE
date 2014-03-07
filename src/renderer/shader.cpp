@@ -93,7 +93,7 @@ bool ZShader::compile()
         
         char *errstr = new char[errlen];
         glGetShaderInfoLog(_shader_handle, errlen, 0, errstr);
-        ZLogger::log_error(errstr);
+        ZLogger::log_error("%s", errstr);
         delete[] errstr;
         
         success = false;

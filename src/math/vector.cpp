@@ -70,10 +70,9 @@ float ZVector::get_z() const
 
 ZVector& ZVector::operator=(const ZVector &rhs)
 {
-    if (this == &rhs) {
-        return *this;
+    if (this != &rhs) {
+        _impl->data = rhs._impl->data;
     }
-    _impl->data = rhs._impl->data;
     return *this;
 }
 

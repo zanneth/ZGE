@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cstdint>
+#include <zge/defines.h>
 #include <zge/schedulable.h>
 #include <zge/noncopyable.h>
 #include <vector>

@@ -21,18 +21,11 @@ ZModel::ZModel(std::string filename) :
     _num_faces(0),
     _num_vertices(0),
     _vertex_array(new ZVertexArray),
-    _element_vbo(new ZGraphicsBuffer),
+    _element_vbo(new ZElementGraphicsBuffer),
     _vertex_vbo(new ZGraphicsBuffer),
     _normal_vbo(new ZGraphicsBuffer)
 {
-    // setup element buffer
-    _element_vbo->set_target(GL_ELEMENT_ARRAY_BUFFER);
-    
-    // setup vertex buffer
-    _vertex_vbo->set_target(GL_ARRAY_BUFFER);
-    
     ZBufferAttribute vertex_attrib = {
-        .index = ZVERTEX_ATTRIB_POSITION,
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,
         .normalized = false,
@@ -41,11 +34,7 @@ ZModel::ZModel(std::string filename) :
     };
     _vertex_vbo->add_attribute(vertex_attrib);
     
-    // setup normal buffer
-    _normal_vbo->set_target(GL_ARRAY_BUFFER);
-    
     ZBufferAttribute normal_attrib = {
-        .index = ZVERTEX_ATTRIB_NORMAL,
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,
         .normalized = false,
@@ -54,9 +43,9 @@ ZModel::ZModel(std::string filename) :
     };
     _normal_vbo->add_attribute(normal_attrib);
     
-    _vertex_array->add_buffer(_vertex_vbo);
-    _vertex_array->add_buffer(_normal_vbo);
-    _vertex_array->add_buffer(_element_vbo);
+    _vertex_array->add_buffer(_vertex_vbo, ZVERTEX_ATTRIB_POSITION);
+    _vertex_array->add_buffer(_normal_vbo, ZVERTEX_ATTRIB_NORMAL);
+    _vertex_array->set_element_buffer(_element_vbo);
     
     if (filename.length()) {
         load_file(filename);
@@ -129,25 +118,14 @@ void ZModel::load_file(std::string filename)
     }
     
     // load data into each VBO
-    _element_vbo->load_data(total_faces * 3 * sizeof(unsigned), elements, GL_STATIC_DRAW);
-    _vertex_vbo->load_data(total_vertices * 3 * sizeof(float), vertices, GL_STATIC_DRAW);
-    _normal_vbo->load_data(total_faces * 3 * sizeof(float), normals, GL_STATIC_DRAW);
+    ZBufferUsage static_draw = { ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW };
+    _element_vbo->load_data(elements, total_faces * 3 * sizeof(unsigned), static_draw);
+    _vertex_vbo->load_data(vertices, total_vertices * 3 * sizeof(float), static_draw);
+    _normal_vbo->load_data(normals, total_faces * 3 * sizeof(float), static_draw);
     
-#if (ZDEBUG)
-    ZLogger::log("Number of meshes: %u", model_file->nmeshes);
-    ZLogger::log("Number of faces (polygons): %u", total_faces);
-    ZLogger::log("Number of vertices: %u", total_vertices);
-    // print elements array
-    ZLogger::log("Elements array:");
-    ZLogger::log_array(elements, total_faces * 3);
+    _element_vbo->set_elements_count(_num_faces * 3);
+    _element_vbo->set_indices_type(ZCOMPONENT_TYPE_UNSIGNED_INT);
     
-    ZLogger::log("Vertex array:");
-    ZLogger::log_array(vertices, total_vertices * 3);
-    
-    ZLogger::log("Normals array:");
-    ZLogger::log_array(normals, total_faces * 3);
-#endif
-
     // cleanup
     delete[] elements;
     delete[] vertices;
@@ -160,10 +138,7 @@ void ZModel::load_file(std::string filename)
 void ZModel::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
-    
-    _vertex_array->bind();
-    glDrawElements(GL_TRIANGLES, _num_faces * 3, GL_UNSIGNED_INT, nullptr);
-    _vertex_array->unbind();
+    context->draw(ZRENDER_MODE_TRIANGLES, _vertex_array);
 }
 
 END_ZGE_NAMESPACE

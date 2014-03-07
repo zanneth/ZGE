@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <string>
+#include <zge/defines.h>
 #include <zge/opengl.h>
 #include <zge/noncopyable.h>
 

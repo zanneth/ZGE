@@ -7,15 +7,14 @@
 
 #include <zge/graphics_buffer.h>
 #include <zge/glutil.h>
-#include <zge/vertexarray.h>
 #include <zge/exception.h>
 #include <zge/logger.h>
 
 BEGIN_ZGE_NAMESPACE
 
-ZGraphicsBuffer::ZGraphicsBuffer() :
+ZGraphicsBuffer::ZGraphicsBuffer(ZBufferTarget target) :
     _buffer(ZUNALLOCATED_BUFFER),
-    _target(ZBUFFER_TARGET_ARRAY)
+    _target(target)
 {
     glGenBuffers(1, &_buffer);
 }
@@ -41,84 +40,48 @@ ZGraphicsBuffer::~ZGraphicsBuffer()
 
 #pragma mark - Accessors
 
-ZBufferTarget ZGraphicsBuffer::get_target() { return _target; }
-
-void ZGraphicsBuffer::set_target(ZBufferTarget target)
-{
-    _unbind();
-    _target = target;
-}
+ZBufferTarget ZGraphicsBuffer::get_target() const { return _target; }
 
 #pragma mark - Attributes
 
 void ZGraphicsBuffer::add_attribute(ZBufferAttribute attribute)
 {
     _attributes.push_back(attribute);
-    
-    // clear bound vertex array to reload attributes
-    _bound_vertex_array.reset();
 }
 
-ZBufferAttribute ZGraphicsBuffer::get_attribute(ZVertexAttributeIndex index)
+std::vector<ZBufferAttribute> ZGraphicsBuffer::get_attributes() const
 {
-    auto itr = std::find_if(_attributes.begin(), _attributes.end(), [index](ZBufferAttribute attrib) {
-        return attrib.index == index;
-    });
-    
-    if (itr == _attributes.end()) {
-        ZException exception(ZASSERTION_EXCEPTION_CODE);
-        exception.description = "Could not find attribute for specified index.";
-        throw exception;
-    }
-    
-    return *itr;
+    return _attributes;
 }
 
 void ZGraphicsBuffer::clear_attributes()
 {
     _attributes.clear();
-    _bound_vertex_array.reset();
 }
 
 #pragma mark - Loading Data
 
-void ZGraphicsBuffer::load_data(GLsizeiptr size, const GLvoid *data, GLenum usage)
+void ZGraphicsBuffer::load_data(const void *data, size_t length, ZBufferUsage usage)
 {
-    _assert_target_bound();
     _bind();
     
-    glBufferData(_target, size, data, usage);
-    
-    if (_bound_vertex_array.expired()) {
-        _unbind();
-    }
-}
-
-void ZGraphicsBuffer::load_subdata(GLsizeiptr offset, GLsizeiptr size, const GLvoid *data)
-{
-    _assert_target_bound();
-    _bind();
-    
-    glBufferSubData(_target, offset, size, data);
-    
-    if (_bound_vertex_array.expired()) {
-        _unbind();
-    }
+    GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
+    GLenum glusage = ZGLUtil::gl_usage_from_buffer_usage(usage);
+    glBufferData(target, (GLsizeiptr)length, (const GLvoid *)data, glusage);
 }
 
 #pragma mark - Private
 
 void ZGraphicsBuffer::_bind()
 {
-    glBindBuffer(_target, _buffer);
-    for (const ZBufferAttribute &buffer_attribute : _attributes) {
-        _send_attribute(buffer_attribute);
-    }
+    GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
+    glBindBuffer(target, _buffer);
 }
 
 void ZGraphicsBuffer::_unbind()
 {
-    glBindBuffer(_target, 0);
+    GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
+    glBindBuffer(target, 0);
 }
 
 void ZGraphicsBuffer::_move(ZGraphicsBuffer &&mv)
@@ -126,28 +89,24 @@ void ZGraphicsBuffer::_move(ZGraphicsBuffer &&mv)
     _buffer = mv._buffer;
     _target = mv._target;
     _attributes = std::move(mv._attributes);
-    _bound_vertex_array = mv._bound_vertex_array;
     
     mv._buffer = ZUNALLOCATED_BUFFER;
     mv._target = (ZBufferTarget)ZUNBOUND_TARGET;
-    mv._bound_vertex_array.reset();
 }
 
-void ZGraphicsBuffer::_assert_target_bound()
-{
-    if (_target == ZUNBOUND_TARGET) {
-        ZException e(ZENGINE_EXCEPTION_CODE);
-        e.extra_info = "Attempted to load data into a buffer with no target buffer object.";
-        throw e;
-    }
-}
+#pragma mark - ZElementGraphicsBuffer
 
-void ZGraphicsBuffer::_send_attribute(const ZBufferAttribute &attribute)
-{
-    GLboolean normalized_val = attribute.normalized ? GL_TRUE : GL_FALSE;
-    GLenum value_type = ZGLUtil::gl_value_type_from_component_type(attribute.component_type);
-    glBindBuffer(_target, _buffer);
-    glVertexAttribPointer(attribute.index, attribute.components_per_vertex, value_type, normalized_val, attribute.stride, (const GLvoid *)attribute.offset);
-}
+ZElementGraphicsBuffer::ZElementGraphicsBuffer() : ZGraphicsBuffer(ZBUFFER_TARGET_ELEMENT_ARRAY),
+    _elements_count(0),
+    _indices_type(ZCOMPONENT_TYPE_UNSIGNED_INT)
+{}
+
+void ZElementGraphicsBuffer::set_elements_count(unsigned count) { _elements_count = count; }
+
+unsigned ZElementGraphicsBuffer::get_elements_count() const { return _elements_count; }
+
+void ZElementGraphicsBuffer::set_indices_type(ZComponentType type) { _indices_type = type; }
+
+ZComponentType ZElementGraphicsBuffer::get_indices_type() const { return _indices_type; }
 
 END_ZGE_NAMESPACE

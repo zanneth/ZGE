@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <zge/defines.h>
 #include <Eigen/Eigen>
 
 BEGIN_ZGE_NAMESPACE

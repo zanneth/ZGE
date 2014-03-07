@@ -7,9 +7,10 @@
  
 #pragma once
 
+#include <zge/defines.h>
 #include <zge/geometry.h>
 #include <zge/graphics_buffer.h>
-#include <zge/vertexarray.h>
+#include <zge/vertex_array.h>
 #include <memory>
 #include <string>
 
@@ -21,9 +22,10 @@ protected:
     unsigned        _num_faces;
     unsigned        _num_vertices;
     ZVertexArrayRef _vertex_array;
-    ZGraphicsBufferRef    _element_vbo;
-    ZGraphicsBufferRef    _vertex_vbo;
-    ZGraphicsBufferRef    _normal_vbo;
+    
+    ZElementGraphicsBufferRef _element_vbo;
+    ZGraphicsBufferRef        _vertex_vbo;
+    ZGraphicsBufferRef        _normal_vbo;
     
 public:
     ZModel(std::string filename = std::string());

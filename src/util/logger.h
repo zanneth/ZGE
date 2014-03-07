@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <zge/defines.h>
 #include <zge/noncopyable.h>
 #include <iostream>
 #include <string>
@@ -16,9 +17,9 @@ BEGIN_ZGE_NAMESPACE
 
 class ZLogger : ZNoncopyable {
 public:
-    static void log(const char *format, ...);
+    static void log(const char *format, ...) ZFORMATARG(1, 2);
     static void log(const std::string str);
-    static void log_error(const char *format, ...);
+    static void log_error(const char *format, ...) ZFORMATARG(1, 2);
     static void log_error(const std::string str);
     
     template <typename T>

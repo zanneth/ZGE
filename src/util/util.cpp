@@ -18,7 +18,7 @@ inline float ZUtil::degrees_to_radians(float degrees)
     return degrees * (M_PI / 180.0f);
 }
 
-std::string ZUtil::format(std::string format, ...)
+std::string ZUtil::format(const char *format, ...)
 {
     char *final_string = nullptr;
     unsigned size = 128;
@@ -32,7 +32,7 @@ std::string ZUtil::format(std::string format, ...)
         final_string = new char[size];
         
         va_start(args_list, format);
-        int n = std::vsnprintf(final_string, size, format.c_str(), args_list);
+        int n = std::vsnprintf(final_string, size, format, args_list);
         va_end(args_list);
         
         if (n != -1 && n < size) {

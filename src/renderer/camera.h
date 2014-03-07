@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <zge/defines.h>
 #include <zge/matrix.h>
 #include <zge/node.h>
 #include <zge/noncopyable.h>

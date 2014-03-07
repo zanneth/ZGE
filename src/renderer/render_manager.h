@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <zge/defines.h>
 #include <zge/display.h>
 #include <zge/noncopyable.h>
 #include <zge/render_context.h>

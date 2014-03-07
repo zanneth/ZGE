@@ -10,6 +10,7 @@
 #include <initializer_list>
 #include <memory>
 #include <string>
+#include <zge/defines.h>
 #include <zge/vector.h>
 
 BEGIN_ZGE_NAMESPACE

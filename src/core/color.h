@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <zge/defines.h>
+
 BEGIN_ZGE_NAMESPACE
 
 union ZColor {

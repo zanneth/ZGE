@@ -10,6 +10,7 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include <zge/defines.h>
 
 #define zassert(...)    ZUtil::assert_true(__VA_ARGS__)
 
@@ -21,13 +22,13 @@ public:
     static inline float degrees_to_radians(float degrees);
     
     // format a stl string
-    static std::string format(std::string format, ...);
+    static std::string format(const char *format, ...) ZFORMATARG(1, 2);
     
     // return a string representing the components of `vec` separated by `delimiter`
     static std::string separate_components(const std::vector<std::string> &vec, std::string delimiter);
     
     // assertions with formatted error strings
-    static void assert_true(bool expression, const char *format, ...) throw();
+    static void assert_true(bool expression, const char *format, ...) throw() ZFORMATARG(2, 3);
 };
 
 END_ZGE_NAMESPACE

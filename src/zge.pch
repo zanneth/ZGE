@@ -8,14 +8,6 @@
 #ifndef __ZGE_PCH__
 #define __ZGE_PCH__
 
-#include <cstdint>
-#include <iostream>
-
-#define ZDEBUG 0
-
-#define HEREDOC(...) std::string(#__VA_ARGS__)
-
-#define BEGIN_ZGE_NAMESPACE namespace zge {
-#define END_ZGE_NAMESPACE }
+#include <zge/defines.h>
 
 #endif // __ZGE_PCH__

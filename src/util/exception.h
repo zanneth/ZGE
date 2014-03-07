@@ -9,6 +9,7 @@
 
 #include <exception>
 #include <string>
+#include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
 

@@ -9,6 +9,7 @@
 
 #include <initializer_list>
 #include <memory>
+#include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
 

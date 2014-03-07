@@ -11,6 +11,7 @@
 #include <functional>
 #include <memory>
 #include <vector>
+#include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
     

@@ -8,6 +8,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -70,6 +71,23 @@ enum ZBufferTarget {
     ZBUFFER_TARGET_TEXTURE,
     ZBUFFER_TARGET_TRANSFORM_FEEDBACK,
     ZBUFFER_TARGET_UNIFORM
+};
+
+enum ZBufferUsageFrequencyType {
+    ZBUFFER_USAGE_FREQUENCY_STREAM, // data will be modified once and used a few times
+    ZBUFFER_USAGE_FREQUENCY_STATIC, // data will be modified once and used many times
+    ZBUFFER_USAGE_FREQUENCY_DYNAMIC // data will be modified and used repeatedly
+};
+
+enum ZBufferUsageNature {
+    ZBUFFER_USAGE_NATURE_DRAW, // data will be used for drawing
+    ZBUFFER_USAGE_NATURE_READ, // data will be used to read from the graphics library
+    ZBUFFER_USAGE_NATURE_COPY, // data will be used to read and used for drawing
+};
+
+struct ZBufferUsage {
+    ZBufferUsageFrequencyType frequency;
+    ZBufferUsageNature nature;
 };
 
 END_ZGE_NAMESPACE
