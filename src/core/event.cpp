@@ -51,13 +51,13 @@ ZEvent::ZEvent(const ZEvent &copy)
 
 std::string ZEvent::get_description() const
 {
-    const char *format = "[ZEvent 0x%x] {\n"
-        "\tTimestamp: %d\n"
-        "\tType: %s\n"
-        "\tContext: 0x%x\n"
-        "\tIs Repeat: %s\n"
-        "\tDetails:\n\t\t%s\n"
-        "}"
+    const char *format = "<ZEvent %p \n"
+        "\ttimestamp: %d\n"
+        "\ttype: %s\n"
+        "\tcontext: 0x%x\n"
+        "\tis_repeat: %s\n"
+        "\tdetails:\n\t\t%s\n"
+        ">"
     ;
     std::string type_str = _type_description();
     const char *is_repeat_str = is_repeat ? "true" : "false";

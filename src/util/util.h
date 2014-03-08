@@ -12,7 +12,7 @@
 #include <vector>
 #include <zge/defines.h>
 
-#define zassert(...)    ZUtil::assert_true(__VA_ARGS__)
+#define zassert(...)    zge::ZUtil::assert_true(__VA_ARGS__)
 
 BEGIN_ZGE_NAMESPACE
 

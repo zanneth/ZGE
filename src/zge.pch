@@ -8,6 +8,7 @@
 #ifndef __ZGE_PCH__
 #define __ZGE_PCH__
 
-#include <zge/defines.h>
+#include <cstdint>
+#include <string>
 
 #endif // __ZGE_PCH__
