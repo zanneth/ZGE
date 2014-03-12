@@ -60,6 +60,8 @@ void ZCamera::set_position(const ZVector &position)
 
 void ZCamera::set_transform(const ZMatrix &transform)
 {
+    ZNode::set_transform(transform);
+    
     ZVector position = get_position();
     ZMatrix translation = ZMatrix::identity();
     translation.translate(position);

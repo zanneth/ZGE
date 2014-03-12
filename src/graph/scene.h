@@ -37,7 +37,6 @@ private:
     void _evict_scene(ZNode *curnode);
     
 public:
-    friend class ZSceneManager;
     friend class ZRenderManager;
 };
 

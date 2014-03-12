@@ -20,6 +20,7 @@ BEGIN_ZGE_NAMESPACE
 class ZApplication : ZNoncopyable {
     std::vector<std::string> _arguments;
     bool _show_cursor;
+    bool _use_relative_cursor;
     
     ZRunloop _main_runloop;
     uint32_t _time_start;
@@ -35,10 +36,14 @@ public:
     void run();
     
     /* Accessors */
-    std::vector<std::string> get_arguments() { return _arguments; }
+    std::vector<std::string> get_arguments();
     void set_arguments(int argc, const char **argv);
-    bool shows_cursor() { return _show_cursor; }
-    void set_shows_cursor(bool cursor) { _show_cursor = cursor; }
+    
+    bool shows_cursor() const;
+    void set_shows_cursor(bool cursor);
+    
+    bool get_use_relative_cursor() const;
+    void set_use_relative_cursor(bool use_relative);
     
     /* Accessing the Main Run Loop */
     ZRunloop* get_main_runloop();

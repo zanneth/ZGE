@@ -77,12 +77,26 @@ void ZApplication::run()
 
 #pragma mark - Accessors
 
+std::vector<std::string> ZApplication::get_arguments() { return _arguments; }
+
 void ZApplication::set_arguments(int argc, const char **argv)
 {
     for (int i = 0; i < argc; ++i) {
         std::string str = argv[i];
         _arguments.push_back(str);
     }
+}
+
+bool ZApplication::shows_cursor() const { return _show_cursor; }
+
+void ZApplication::set_shows_cursor(bool cursor) { _show_cursor = cursor; }
+
+
+bool ZApplication::get_use_relative_cursor() const { return _use_relative_cursor; }
+
+void ZApplication::set_use_relative_cursor(bool use_relative)
+{
+    SDL_SetRelativeMouseMode((use_relative ? SDL_TRUE : SDL_FALSE));
 }
 
 #pragma mark - Run Loop

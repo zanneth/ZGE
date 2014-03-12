@@ -84,7 +84,6 @@ private:
     void _on_exit_internal();
     
 public:
-    friend class ZSceneManager;
     friend class ZScene;
 };
 
