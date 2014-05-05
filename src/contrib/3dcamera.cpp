@@ -1,18 +1,14 @@
 /*
- * camera.cpp
+ * 3dcamera.cpp
  *
  * Author: Charles Magahern <charles@magahern.com>
- * Date Created: 06/30/2012
+ * Date Created: 05/04/2014
  */
- 
-#include <zge/camera.h>
-#include <zge/engine.h>
-#include <zge/logger.h>
-#include <zge/opengl.h>
-#include <zge/scene.h>
-#include <zge/util.h>
 
-#include <algorithm>
+#include <zge/3dcamera.h>
+#include <zge/engine.h>
+#include <zge/node.h>
+#include <zge/util.h>
 
 #define DEFAULT_FOV         45.0f
 #define DEFAULT_NEAR_CLIP   0.001f
@@ -20,7 +16,7 @@
 
 BEGIN_ZGE_NAMESPACE
 
-ZCamera::ZCamera() :
+Z3DCamera::Z3DCamera() :
     _field_of_view(DEFAULT_FOV),
     _near_clip(DEFAULT_NEAR_CLIP),
     _far_clip(DEFAULT_FAR_CLIP),
@@ -28,9 +24,9 @@ ZCamera::ZCamera() :
     _modelview_dirty(true)
 {}
 
-#pragma mark - Open/Close
+#pragma mark - Camera Overrides
 
-void ZCamera::open(ZRenderContextRef context)
+void Z3DCamera::open(ZRenderContextRef context)
 {
     zassert(_current_context == nullptr, "Attempted to open a camera on a new context before closing with an existing context.");
     _current_context = context;
@@ -41,7 +37,7 @@ void ZCamera::open(ZRenderContextRef context)
     _open = true;
 }
 
-void ZCamera::close()
+void Z3DCamera::close()
 {
     _close_projection();
     _close_modelview();
@@ -49,16 +45,32 @@ void ZCamera::close()
     _current_context = nullptr;
     _open = false;
 }
-    
+
+bool Z3DCamera::is_open() const
+{
+    return _open;
+}
+
+#pragma mark - Accessors
+
+float Z3DCamera::get_fov() const { return _field_of_view; }
+void Z3DCamera::set_fov(float degrees) { _field_of_view = degrees; _projection_dirty = true; }
+float Z3DCamera::get_near_clipping_distance() const { return _near_clip; }
+void Z3DCamera::set_near_clipping_distance(float distance) { _near_clip = distance; _projection_dirty = true; }
+float Z3DCamera::get_far_clipping_distance() const { return _far_clip; }
+void Z3DCamera::set_far_clipping_distance(float distance) { _far_clip = distance; _projection_dirty = true; }
+ZVector Z3DCamera::get_look() const { return _look; }
+void Z3DCamera::set_look(const ZVector &look) { _look = look; _modelview_dirty = true; }
+
 #pragma mark - Node Overrides
 
-void ZCamera::set_position(const ZVector &position)
+void Z3DCamera::set_position(const ZVector &position)
 {
     _position = position;
     _modelview_dirty = true;
 }
 
-void ZCamera::set_transform(const ZMatrix &transform)
+void Z3DCamera::set_transform(const ZMatrix &transform)
 {
     ZNode::set_transform(transform);
     
@@ -76,7 +88,7 @@ void ZCamera::set_transform(const ZMatrix &transform)
 
 #pragma mark - Private
 
-void ZCamera::_construct_projection()
+void Z3DCamera::_construct_projection()
 {
     if (_projection_dirty) {
         ZRect viewport_rect = ZEngine::instance()->get_viewport_rect();
@@ -89,7 +101,7 @@ void ZCamera::_construct_projection()
     }
 }
 
-void ZCamera::_open_projection()
+void Z3DCamera::_open_projection()
 {
     if (_projection_dirty) {
         _construct_projection();
@@ -98,12 +110,12 @@ void ZCamera::_open_projection()
     _current_context->push_matrix(ZRENDER_MATRIX_PROJECTION, _projection_matrix);
 }
 
-void ZCamera::_close_projection()
+void Z3DCamera::_close_projection()
 {
     _current_context->pop_matrix(ZRENDER_MATRIX_PROJECTION);
 }
 
-void ZCamera::_construct_modelview()
+void Z3DCamera::_construct_modelview()
 {
     if (_modelview_dirty) {
         _modelview_matrix = ZMatrix::lookat(_position, _look, ZVector::unit_y());
@@ -111,7 +123,7 @@ void ZCamera::_construct_modelview()
     }
 }
 
-void ZCamera::_open_modelview()
+void Z3DCamera::_open_modelview()
 {
     if (_modelview_dirty) {
         _construct_modelview();
@@ -120,7 +132,7 @@ void ZCamera::_open_modelview()
     _current_context->push_matrix(ZRENDER_MATRIX_MODELVIEW, _modelview_matrix);
 }
 
-void ZCamera::_close_modelview()
+void Z3DCamera::_close_modelview()
 {
     _current_context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
 }

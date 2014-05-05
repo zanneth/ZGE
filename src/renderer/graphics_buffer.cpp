@@ -9,6 +9,7 @@
 #include <zge/glutil.h>
 #include <zge/exception.h>
 #include <zge/logger.h>
+#include <zge/opengl.h>
 
 BEGIN_ZGE_NAMESPACE
 

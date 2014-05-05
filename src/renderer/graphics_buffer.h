@@ -9,7 +9,6 @@
 
 #include <zge/defines.h>
 #include <zge/noncopyable.h>
-#include <zge/opengl.h>
 #include <zge/types.h>
 #include <memory>
 #include <typeinfo>
@@ -30,7 +29,7 @@ struct ZBufferAttribute {
 };
 
 class ZGraphicsBuffer : ZNoncopyable {
-    GLuint _buffer;
+    uint32_t _buffer;
     ZBufferTarget _target;
     std::vector<ZBufferAttribute> _attributes;
 

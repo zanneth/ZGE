@@ -57,7 +57,8 @@ public:
     ZMatrix get_matrix(ZRenderMatrixType type) const;
     
     /* Drawing */
-    void draw(ZRenderMode mode, ZVertexArrayRef varray);
+    void draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count);
+    void draw_elements(ZRenderMode mode, ZVertexArrayRef varray);
     
 private:
     void        _load_shaders();

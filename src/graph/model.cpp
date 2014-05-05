@@ -138,7 +138,7 @@ void ZModel::load_file(std::string filename)
 void ZModel::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
-    context->draw(ZRENDER_MODE_TRIANGLES, _vertex_array);
+    context->draw_elements(ZRENDER_MODE_TRIANGLES, _vertex_array);
 }
 
 END_ZGE_NAMESPACE

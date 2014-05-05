@@ -8,6 +8,7 @@
 #pragma once
 
 #include <zge/application.h>
+#include <zge/3dcamera.h>
 #include <zge/camera.h>
 #include <zge/color.h>
 #include <zge/data.h>
@@ -17,7 +18,6 @@
 #include <zge/engine.h>
 #include <zge/event.h>
 #include <zge/exception.h>
-#include <zge/fp_responder.h>
 #include <zge/geometry.h>
 #include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
@@ -29,6 +29,8 @@
 #include <zge/noncopyable.h>
 #include <zge/observable.h>
 #include <zge/opengl.h>
+#include <zge/orthocamera.h>
+#include <zge/quad.h>
 #include <zge/render_context.h>
 #include <zge/render_manager.h>
 #include <zge/run_loop.h>

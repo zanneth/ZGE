@@ -103,7 +103,12 @@
 		0C688FA518727756002C38EF /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C688FA318727756002C38EF /* material.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C8302D5187FF4BC00708944 /* uniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8302D3187FF4BC00708944 /* uniform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C8302D6187FF71700708944 /* uniform.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C8302D2187FF4BC00708944 /* uniform.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C977F551737510C0071E8E6 /* fp_responder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3A416D208A900E43D7B /* fp_responder.cpp */; };
+		0C898C72191722B600CF3009 /* orthocamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C898C70191722B600CF3009 /* orthocamera.cpp */; };
+		0C898C73191722B600CF3009 /* orthocamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C898C71191722B600CF3009 /* orthocamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C898C761917251000CF3009 /* 3dcamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C898C741917251000CF3009 /* 3dcamera.cpp */; };
+		0C898C771917251000CF3009 /* 3dcamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C898C751917251000CF3009 /* 3dcamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C898C7A19172F2900CF3009 /* quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C898C7819172F2900CF3009 /* quad.cpp */; };
+		0C898C7B19172F2900CF3009 /* quad.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C898C7919172F2900CF3009 /* quad.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F571737510C0071E8E6 /* application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3A816D208A900E43D7B /* application.cpp */; };
 		0C977F591737510C0071E8E6 /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3A916D208A900E43D7B /* display.cpp */; };
 		0C977F5B1737510C0071E8E6 /* display_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AB16D208A900E43D7B /* display_manager.cpp */; };
@@ -111,13 +116,11 @@
 		0C977F5F1737510C0071E8E6 /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AF16D208A900E43D7B /* event.cpp */; };
 		0C977F651737510C0071E8E6 /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3B516D208A900E43D7B /* input_manager.cpp */; };
 		0C977F681737510C0071E8E6 /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3BC16D208A900E43D7B /* run_loop.cpp */; };
-		0C977F701737510C0071E8E6 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3C616D208A900E43D7B /* camera.cpp */; };
 		0C977F721737510C0071E8E6 /* graphics_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3C816D208A900E43D7B /* graphics_buffer.cpp */; };
 		0C977F791737510C0071E8E6 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D216D208A900E43D7B /* exception.cpp */; };
 		0C977F7B1737510C0071E8E6 /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D416D208A900E43D7B /* logger.cpp */; };
 		0C977F7F1737510C0071E8E6 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D816D208A900E43D7B /* util.cpp */; };
 		0C977F801737512D0071E8E6 /* zge.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D25A16D2089C00E43D7B /* zge.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C977F811737512D0071E8E6 /* fp_responder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3A516D208A900E43D7B /* fp_responder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F831737512D0071E8E6 /* application.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3A716D208A900E43D7B /* application.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F851737512D0071E8E6 /* display.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3AA16D208A900E43D7B /* display.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F871737512D0071E8E6 /* display_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3AC16D208A900E43D7B /* display_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -578,8 +581,6 @@
 		0C4B4AF31749A83500FD4B53 /* render_context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_context.cpp; sourceTree = "<group>"; };
 		0C4B4AF41749A83500FD4B53 /* render_context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_context.h; sourceTree = "<group>"; };
 		0C50D25A16D2089C00E43D7B /* zge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zge.h; sourceTree = "<group>"; };
-		0C50D3A416D208A900E43D7B /* fp_responder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fp_responder.cpp; sourceTree = "<group>"; };
-		0C50D3A516D208A900E43D7B /* fp_responder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fp_responder.h; sourceTree = "<group>"; };
 		0C50D3A716D208A900E43D7B /* application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = application.h; sourceTree = "<group>"; };
 		0C50D3A816D208A900E43D7B /* application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = application.cpp; sourceTree = "<group>"; };
 		0C50D3A916D208A900E43D7B /* display.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = display.cpp; sourceTree = "<group>"; };
@@ -597,7 +598,6 @@
 		0C50D3BD16D208A900E43D7B /* run_loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_loop.h; sourceTree = "<group>"; };
 		0C50D3BE16D208A900E43D7B /* schedulable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schedulable.h; sourceTree = "<group>"; };
 		0C50D3BF16D208A900E43D7B /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		0C50D3C616D208A900E43D7B /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		0C50D3C716D208A900E43D7B /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		0C50D3C816D208A900E43D7B /* graphics_buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graphics_buffer.cpp; sourceTree = "<group>"; };
 		0C50D3C916D208A900E43D7B /* graphics_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graphics_buffer.h; sourceTree = "<group>"; };
@@ -622,6 +622,12 @@
 		0C688FA318727756002C38EF /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = src/graph/material.h; sourceTree = SOURCE_ROOT; };
 		0C8302D2187FF4BC00708944 /* uniform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uniform.hpp; sourceTree = "<group>"; };
 		0C8302D3187FF4BC00708944 /* uniform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uniform.h; sourceTree = "<group>"; };
+		0C898C70191722B600CF3009 /* orthocamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = orthocamera.cpp; sourceTree = "<group>"; };
+		0C898C71191722B600CF3009 /* orthocamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orthocamera.h; sourceTree = "<group>"; };
+		0C898C741917251000CF3009 /* 3dcamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = 3dcamera.cpp; sourceTree = "<group>"; };
+		0C898C751917251000CF3009 /* 3dcamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 3dcamera.h; sourceTree = "<group>"; };
+		0C898C7819172F2900CF3009 /* quad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quad.cpp; sourceTree = "<group>"; };
+		0C898C7919172F2900CF3009 /* quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quad.h; sourceTree = "<group>"; };
 		0C977F50173750B80071E8E6 /* libZGE.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libZGE.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C977FB0173752B60071E8E6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		0C977FB2173752CD0071E8E6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
@@ -1398,8 +1404,12 @@
 		0C50D3A316D208A900E43D7B /* contrib */ = {
 			isa = PBXGroup;
 			children = (
-				0C50D3A516D208A900E43D7B /* fp_responder.h */,
-				0C50D3A416D208A900E43D7B /* fp_responder.cpp */,
+				0C898C751917251000CF3009 /* 3dcamera.h */,
+				0C898C741917251000CF3009 /* 3dcamera.cpp */,
+				0C898C71191722B600CF3009 /* orthocamera.h */,
+				0C898C70191722B600CF3009 /* orthocamera.cpp */,
+				0C898C7919172F2900CF3009 /* quad.h */,
+				0C898C7819172F2900CF3009 /* quad.cpp */,
 			);
 			path = contrib;
 			sourceTree = "<group>";
@@ -1458,7 +1468,6 @@
 			isa = PBXGroup;
 			children = (
 				0C50D3C716D208A900E43D7B /* camera.h */,
-				0C50D3C616D208A900E43D7B /* camera.cpp */,
 				0C50D3C916D208A900E43D7B /* graphics_buffer.h */,
 				0C50D3C816D208A900E43D7B /* graphics_buffer.cpp */,
 				0C064489177029CC004AAA20 /* opengl.h */,
@@ -1557,7 +1566,6 @@
 			files = (
 				0CD633AA188F8E360061D259 /* observable.h in Headers */,
 				0C977F801737512D0071E8E6 /* zge.h in Headers */,
-				0C977F811737512D0071E8E6 /* fp_responder.h in Headers */,
 				0C2B01AC176D5FE300522671 /* render_manager.h in Headers */,
 				0C977F831737512D0071E8E6 /* application.h in Headers */,
 				0C21E5EC18C2AC99009E508D /* glutil.h in Headers */,
@@ -1599,6 +1607,7 @@
 				0C46F5C7175F00E800BF6EC9 /* SDL_test_harness.h in Headers */,
 				0C46F5A1175F00E800BF6EC9 /* SDL_gamecontroller.h in Headers */,
 				0C688FA118726E64002C38EF /* geometry.h in Headers */,
+				0C898C73191722B600CF3009 /* orthocamera.h in Headers */,
 				0C46F597175F00E800BF6EC9 /* SDL_atomic.h in Headers */,
 				0C46F5A6175F00E800BF6EC9 /* SDL_keyboard.h in Headers */,
 				0C0D7C6F18C410B100021CD6 /* data.h in Headers */,
@@ -1613,12 +1622,14 @@
 				0C46F5B1175F00E800BF6EC9 /* SDL_opengles2.h in Headers */,
 				0C46F5B8175F00E800BF6EC9 /* SDL_revision.h in Headers */,
 				0C46F598175F00E800BF6EC9 /* SDL_audio.h in Headers */,
+				0C898C7B19172F2900CF3009 /* quad.h in Headers */,
 				0C46F5C5175F00E800BF6EC9 /* SDL_test_font.h in Headers */,
 				0C46F5B5175F00E800BF6EC9 /* SDL_quit.h in Headers */,
 				0C46F5CE175F00E800BF6EC9 /* SDL_touch.h in Headers */,
 				0C46F5A3175F00E800BF6EC9 /* SDL_haptic.h in Headers */,
 				0C46F5A2175F00E800BF6EC9 /* SDL_gesture.h in Headers */,
 				0C46F5A5175F00E800BF6EC9 /* SDL_joystick.h in Headers */,
+				0C898C771917251000CF3009 /* 3dcamera.h in Headers */,
 				0C46F5A7175F00E800BF6EC9 /* SDL_keycode.h in Headers */,
 				0C46F5CB175F00E800BF6EC9 /* SDL_test_random.h in Headers */,
 				0C46F5AD175F00E800BF6EC9 /* SDL_mutex.h in Headers */,
@@ -1718,7 +1729,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C07BD7517C0496A00C38084 /* color.cpp in Sources */,
-				0C977F551737510C0071E8E6 /* fp_responder.cpp in Sources */,
 				0C688FA018726E64002C38EF /* geometry.cpp in Sources */,
 				0C1F28BA17C1C3FF00CA03C4 /* vertex_array.cpp in Sources */,
 				0C977F571737510C0071E8E6 /* application.cpp in Sources */,
@@ -1731,19 +1741,21 @@
 				0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */,
 				0C977F651737510C0071E8E6 /* input_manager.cpp in Sources */,
 				0C4B4AF11749A52700FD4B53 /* shader_program.cpp in Sources */,
+				0C898C72191722B600CF3009 /* orthocamera.cpp in Sources */,
 				0C977F681737510C0071E8E6 /* run_loop.cpp in Sources */,
 				0C688F9818726A65002C38EF /* model.cpp in Sources */,
 				0CA262681863F71A003E8D37 /* vector.cpp in Sources */,
 				0C688FA418727756002C38EF /* material.cpp in Sources */,
 				0C142EB118C42A5600722C83 /* data.cpp in Sources */,
-				0C977F701737510C0071E8E6 /* camera.cpp in Sources */,
 				0C977F721737510C0071E8E6 /* graphics_buffer.cpp in Sources */,
+				0C898C761917251000CF3009 /* 3dcamera.cpp in Sources */,
 				0C5D324C1761C82A0013ACFF /* shader.cpp in Sources */,
 				0C977F791737510C0071E8E6 /* exception.cpp in Sources */,
 				0C21E5EA18C2AC80009E508D /* glutil.cpp in Sources */,
 				0C2B01AB176D5FE300522671 /* render_manager.cpp in Sources */,
 				0CEC0253176D5DF90029DE82 /* scene.cpp in Sources */,
 				0C977F7B1737510C0071E8E6 /* logger.cpp in Sources */,
+				0C898C7A19172F2900CF3009 /* quad.cpp in Sources */,
 				0C977F7F1737510C0071E8E6 /* util.cpp in Sources */,
 				0CEC0251176D5DF90029DE82 /* node.cpp in Sources */,
 				0C62281018610B6F00DA3182 /* matrix.cpp in Sources */,
@@ -1758,6 +1770,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/src/zge.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = "@rpath";

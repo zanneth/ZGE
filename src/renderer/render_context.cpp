@@ -112,7 +112,15 @@ ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
     return _matrix_stacks[type].top();
 }
 
-void ZRenderContext::draw(ZRenderMode mode, ZVertexArrayRef varray)
+void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
+{
+    varray->_bind(shared_from_this());
+    
+    GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
+    glDrawArrays(glmode, first_idx, count);
+}
+
+void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
 {
     varray->_bind(shared_from_this());
     
@@ -122,9 +130,9 @@ void ZRenderContext::draw(ZRenderMode mode, ZVertexArrayRef varray)
         GLenum indices_type = ZGLUtil::gl_value_type_from_component_type(element_buffer->get_indices_type());
         GLsizei count = (GLsizei)element_buffer->get_elements_count();
         glDrawElements(glmode, count, indices_type, nullptr);
+    } else {
+        zlog("%s failed. No elements buffer was provided in vertex array %p.", __FUNCTION__, varray.get());
     }
-    
-    // TODO: support for drawing from array data (no elements)
 }
 
 #pragma mark - Internal
