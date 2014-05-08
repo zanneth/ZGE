@@ -8,6 +8,8 @@
 #pragma once
 
 #include <zge/application.h>
+#include <zge/audio_asset.h>
+#include <zge/audio_manager.h>
 #include <zge/3dcamera.h>
 #include <zge/camera.h>
 #include <zge/color.h>
@@ -38,9 +40,11 @@
 #include <zge/schedulable.h>
 #include <zge/shader.h>
 #include <zge/shader_program.h>
+#include <zge/sound.h>
 #include <zge/timer.h>
 #include <zge/types.h>
 #include <zge/uniform.h>
 #include <zge/util.h>
 #include <zge/vector.h>
 #include <zge/vertex_array.h>
+#include <zge/wave_audio_asset.h>

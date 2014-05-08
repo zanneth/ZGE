@@ -101,6 +101,7 @@
 		0C688FA118726E64002C38EF /* geometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C688F9F18726E64002C38EF /* geometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C688FA418727756002C38EF /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C688FA218727756002C38EF /* material.cpp */; };
 		0C688FA518727756002C38EF /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C688FA318727756002C38EF /* material.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C7712F919177E4D0050C098 /* sound_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C7712F819177E4D0050C098 /* sound_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0C8302D5187FF4BC00708944 /* uniform.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8302D3187FF4BC00708944 /* uniform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C8302D6187FF71700708944 /* uniform.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C8302D2187FF4BC00708944 /* uniform.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C898C72191722B600CF3009 /* orthocamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C898C70191722B600CF3009 /* orthocamera.cpp */; };
@@ -113,8 +114,6 @@
 		0C977F591737510C0071E8E6 /* display.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3A916D208A900E43D7B /* display.cpp */; };
 		0C977F5B1737510C0071E8E6 /* display_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AB16D208A900E43D7B /* display_manager.cpp */; };
 		0C977F5D1737510C0071E8E6 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AD16D208A900E43D7B /* engine.cpp */; };
-		0C977F5F1737510C0071E8E6 /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AF16D208A900E43D7B /* event.cpp */; };
-		0C977F651737510C0071E8E6 /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3B516D208A900E43D7B /* input_manager.cpp */; };
 		0C977F681737510C0071E8E6 /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3BC16D208A900E43D7B /* run_loop.cpp */; };
 		0C977F721737510C0071E8E6 /* graphics_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3C816D208A900E43D7B /* graphics_buffer.cpp */; };
 		0C977F791737510C0071E8E6 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3D216D208A900E43D7B /* exception.cpp */; };
@@ -125,8 +124,6 @@
 		0C977F851737512D0071E8E6 /* display.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3AA16D208A900E43D7B /* display.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F871737512D0071E8E6 /* display_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3AC16D208A900E43D7B /* display_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F891737512D0071E8E6 /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3AE16D208A900E43D7B /* engine.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C977F8B1737512D0071E8E6 /* event.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3B016D208A900E43D7B /* event.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C977F911737512D0071E8E6 /* input_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3B616D208A900E43D7B /* input_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F931737512D0071E8E6 /* noncopyable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3B716D208A900E43D7B /* noncopyable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F941737512D0071E8E6 /* run_loop.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BD16D208A900E43D7B /* run_loop.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C977F961737512D0071E8E6 /* schedulable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BE16D208A900E43D7B /* schedulable.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -140,9 +137,9 @@
 		0C977FB3173752CD0071E8E6 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C977FB2173752CD0071E8E6 /* CoreFoundation.framework */; };
 		0CA262681863F71A003E8D37 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA262661863F71A003E8D37 /* vector.cpp */; };
 		0CA262691863F71A003E8D37 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA262671863F71A003E8D37 /* vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0CC5B042176107B900B7C2BD /* lib3ds-2.0.0.0.dylib in Copy Library Dependencies */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.0.0.dylib */; };
+		0CC5B042176107B900B7C2BD /* lib3ds-2.0.dylib in Copy Library Dependencies */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; };
 		0CC5B043176107BA00B7C2BD /* libSDL2-2.0.0.dylib in Copy Library Dependencies */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; };
-		0CC5B044176107ED00B7C2BD /* lib3ds-2.0.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.0.0.dylib */; };
+		0CC5B044176107ED00B7C2BD /* lib3ds-2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; };
 		0CC5B045176107F000B7C2BD /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; };
 		0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCD2F59176128AC00F497CF /* timer.cpp */; };
 		0CCD2F5C176128AC00F497CF /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCD2F5A176128AC00F497CF /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -153,6 +150,18 @@
 		0CEC0252176D5DF90029DE82 /* node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEC024C176D5DF90029DE82 /* node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CEC0253176D5DF90029DE82 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CEC024D176D5DF90029DE82 /* scene.cpp */; };
 		0CEC0254176D5DF90029DE82 /* scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEC024E176D5DF90029DE82 /* scene.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF1D29A1917664800CDBEEE /* audio_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D2981917664800CDBEEE /* audio_manager.cpp */; };
+		0CF1D29B1917664800CDBEEE /* audio_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF1D2991917664800CDBEEE /* audio_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF1D2A119176ADC00CDBEEE /* event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D29D19176ADC00CDBEEE /* event.cpp */; };
+		0CF1D2A219176ADC00CDBEEE /* event.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF1D29E19176ADC00CDBEEE /* event.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF1D2A319176ADC00CDBEEE /* input_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D29F19176ADC00CDBEEE /* input_manager.cpp */; };
+		0CF1D2A419176ADC00CDBEEE /* input_manager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF1D2A019176ADC00CDBEEE /* input_manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF1D2A719176D2600CDBEEE /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D2A519176D2600CDBEEE /* sound.cpp */; };
+		0CF1D2A819176D2600CDBEEE /* sound.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF1D2A619176D2600CDBEEE /* sound.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF1D2AB19176D9300CDBEEE /* audio_asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D2A919176D9300CDBEEE /* audio_asset.cpp */; };
+		0CF1D2AC19176D9300CDBEEE /* audio_asset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF1D2AA19176D9300CDBEEE /* audio_asset.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CF1D2AF19176F9400CDBEEE /* wave_audio_asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D2AD19176F9400CDBEEE /* wave_audio_asset.cpp */; };
+		0CF1D2B019176F9400CDBEEE /* wave_audio_asset.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CF1D2AE19176F9400CDBEEE /* wave_audio_asset.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -162,7 +171,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				0CC5B042176107B900B7C2BD /* lib3ds-2.0.0.0.dylib in Copy Library Dependencies */,
+				0CC5B042176107B900B7C2BD /* lib3ds-2.0.dylib in Copy Library Dependencies */,
 				0CC5B043176107BA00B7C2BD /* libSDL2-2.0.0.dylib in Copy Library Dependencies */,
 			);
 			name = "Copy Library Dependencies";
@@ -507,6 +516,7 @@
 		0C21E5EB18C2AC99009E508D /* glutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glutil.h; sourceTree = "<group>"; };
 		0C2B01A9176D5FE300522671 /* render_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = render_manager.cpp; sourceTree = "<group>"; };
 		0C2B01AA176D5FE300522671 /* render_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = render_manager.h; sourceTree = "<group>"; };
+		0C3BE7AD191B1D5F0048742B /* SDL_mixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDL_mixer.h; sourceTree = "<group>"; };
 		0C46F551175F00E800BF6EC9 /* lib3ds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib3ds.h; sourceTree = "<group>"; };
 		0C46F553175F00E800BF6EC9 /* begin_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = begin_code.h; sourceTree = "<group>"; };
 		0C46F554175F00E800BF6EC9 /* close_code.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = close_code.h; sourceTree = "<group>"; };
@@ -573,7 +583,7 @@
 		0C46F591175F00E800BF6EC9 /* SDL_video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_video.h; sourceTree = "<group>"; };
 		0C46F5D2175F014F00BF6EC9 /* lib3ds-2.0.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "lib3ds-2.0.0.0.dylib"; path = "lib/lib3ds-2.0.0.0.dylib"; sourceTree = "<group>"; };
 		0C46F5D3175F014F00BF6EC9 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
-		0C46F612175F026F00BF6EC9 /* lib3ds-2.0.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "lib3ds-2.0.0.0.dylib"; sourceTree = "<group>"; };
+		0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "lib3ds-2.0.dylib"; sourceTree = "<group>"; };
 		0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		0C49AEDE18642152005A1D78 /* vector_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector_private.h; sourceTree = "<group>"; };
 		0C4B4AEF1749A52700FD4B53 /* shader_program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader_program.cpp; sourceTree = "<group>"; };
@@ -589,10 +599,6 @@
 		0C50D3AC16D208A900E43D7B /* display_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = display_manager.h; sourceTree = "<group>"; };
 		0C50D3AD16D208A900E43D7B /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
 		0C50D3AE16D208A900E43D7B /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
-		0C50D3AF16D208A900E43D7B /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
-		0C50D3B016D208A900E43D7B /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
-		0C50D3B516D208A900E43D7B /* input_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_manager.cpp; sourceTree = "<group>"; };
-		0C50D3B616D208A900E43D7B /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
 		0C50D3B716D208A900E43D7B /* noncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = noncopyable.h; sourceTree = "<group>"; };
 		0C50D3BC16D208A900E43D7B /* run_loop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = run_loop.cpp; sourceTree = "<group>"; };
 		0C50D3BD16D208A900E43D7B /* run_loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = run_loop.h; sourceTree = "<group>"; };
@@ -620,6 +626,7 @@
 		0C688F9F18726E64002C38EF /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = geometry.h; path = src/graph/geometry.h; sourceTree = SOURCE_ROOT; };
 		0C688FA218727756002C38EF /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = material.cpp; path = src/graph/material.cpp; sourceTree = SOURCE_ROOT; };
 		0C688FA318727756002C38EF /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = src/graph/material.h; sourceTree = SOURCE_ROOT; };
+		0C7712F819177E4D0050C098 /* sound_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_private.h; sourceTree = "<group>"; };
 		0C8302D2187FF4BC00708944 /* uniform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = uniform.hpp; sourceTree = "<group>"; };
 		0C8302D3187FF4BC00708944 /* uniform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uniform.h; sourceTree = "<group>"; };
 		0C898C70191722B600CF3009 /* orthocamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = orthocamera.cpp; sourceTree = "<group>"; };
@@ -643,6 +650,19 @@
 		0CEC024C176D5DF90029DE82 /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = src/graph/node.h; sourceTree = SOURCE_ROOT; };
 		0CEC024D176D5DF90029DE82 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene.cpp; path = src/graph/scene.cpp; sourceTree = SOURCE_ROOT; };
 		0CEC024E176D5DF90029DE82 /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scene.h; path = src/graph/scene.h; sourceTree = SOURCE_ROOT; };
+		0CF1D2951917639400CDBEEE /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		0CF1D2981917664800CDBEEE /* audio_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_manager.cpp; sourceTree = "<group>"; };
+		0CF1D2991917664800CDBEEE /* audio_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audio_manager.h; sourceTree = "<group>"; };
+		0CF1D29D19176ADC00CDBEEE /* event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event.cpp; sourceTree = "<group>"; };
+		0CF1D29E19176ADC00CDBEEE /* event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event.h; sourceTree = "<group>"; };
+		0CF1D29F19176ADC00CDBEEE /* input_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input_manager.cpp; sourceTree = "<group>"; };
+		0CF1D2A019176ADC00CDBEEE /* input_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = input_manager.h; sourceTree = "<group>"; };
+		0CF1D2A519176D2600CDBEEE /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
+		0CF1D2A619176D2600CDBEEE /* sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
+		0CF1D2A919176D9300CDBEEE /* audio_asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_asset.cpp; sourceTree = "<group>"; };
+		0CF1D2AA19176D9300CDBEEE /* audio_asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audio_asset.h; sourceTree = "<group>"; };
+		0CF1D2AD19176F9400CDBEEE /* wave_audio_asset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wave_audio_asset.cpp; sourceTree = "<group>"; };
+		0CF1D2AE19176F9400CDBEEE /* wave_audio_asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wave_audio_asset.h; sourceTree = "<group>"; };
 		0CF7E21A161C010F00105F7C /* zge.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zge.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -653,7 +673,7 @@
 			files = (
 				0C977FB3173752CD0071E8E6 /* CoreFoundation.framework in Frameworks */,
 				0C977FB1173752B60071E8E6 /* OpenGL.framework in Frameworks */,
-				0CC5B044176107ED00B7C2BD /* lib3ds-2.0.0.0.dylib in Frameworks */,
+				0CC5B044176107ED00B7C2BD /* lib3ds-2.0.dylib in Frameworks */,
 				0CC5B045176107F000B7C2BD /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1288,6 +1308,14 @@
 			path = UmfPackSupport;
 			sourceTree = "<group>";
 		};
+		0C3BE7AC191B1D5F0048742B /* SDL_mixer */ = {
+			isa = PBXGroup;
+			children = (
+				0C3BE7AD191B1D5F0048742B /* SDL_mixer.h */,
+			);
+			path = SDL_mixer;
+			sourceTree = "<group>";
+		};
 		0C46F550175F00E800BF6EC9 /* lib3ds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1372,6 +1400,7 @@
 				0C0D7B0218C4100500021CD6 /* Eigen */,
 				0C46F550175F00E800BF6EC9 /* lib3ds */,
 				0C46F552175F00E800BF6EC9 /* SDL2 */,
+				0C3BE7AC191B1D5F0048742B /* SDL_mixer */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -1379,7 +1408,7 @@
 		0C50D3A116D208A900E43D7B /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				0C46F612175F026F00BF6EC9 /* lib3ds-2.0.0.0.dylib */,
+				0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */,
 				0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */,
 			);
 			path = lib;
@@ -1390,10 +1419,12 @@
 			children = (
 				0C50D25A16D2089C00E43D7B /* zge.h */,
 				0CF7E21A161C010F00105F7C /* zge.pch */,
+				0CF1D2971917663200CDBEEE /* audio */,
 				0C50D3A316D208A900E43D7B /* contrib */,
 				0C50D3A616D208A900E43D7B /* core */,
 				0CC464B6186109B400C6AF22 /* math */,
 				0C50D3C016D208A900E43D7B /* graph */,
+				0CF1D29C19176ADC00CDBEEE /* input */,
 				0C50D3C516D208A900E43D7B /* renderer */,
 				0C5D32451761C38B0013ACFF /* shaders */,
 				0C50D3D116D208A900E43D7B /* util */,
@@ -1410,6 +1441,8 @@
 				0C898C70191722B600CF3009 /* orthocamera.cpp */,
 				0C898C7919172F2900CF3009 /* quad.h */,
 				0C898C7819172F2900CF3009 /* quad.cpp */,
+				0CF1D2AE19176F9400CDBEEE /* wave_audio_asset.h */,
+				0CF1D2AD19176F9400CDBEEE /* wave_audio_asset.cpp */,
 			);
 			path = contrib;
 			sourceTree = "<group>";
@@ -1428,10 +1461,6 @@
 				0C50D3AB16D208A900E43D7B /* display_manager.cpp */,
 				0C50D3AE16D208A900E43D7B /* engine.h */,
 				0C50D3AD16D208A900E43D7B /* engine.cpp */,
-				0C50D3B016D208A900E43D7B /* event.h */,
-				0C50D3AF16D208A900E43D7B /* event.cpp */,
-				0C50D3B616D208A900E43D7B /* input_manager.h */,
-				0C50D3B516D208A900E43D7B /* input_manager.cpp */,
 				0C50D3B716D208A900E43D7B /* noncopyable.h */,
 				0CD633A8188F8E360061D259 /* observable.h */,
 				0CD633A7188F8E360061D259 /* observable.hpp */,
@@ -1526,6 +1555,31 @@
 			path = math;
 			sourceTree = "<group>";
 		};
+		0CF1D2971917663200CDBEEE /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				0CF1D2AA19176D9300CDBEEE /* audio_asset.h */,
+				0CF1D2A919176D9300CDBEEE /* audio_asset.cpp */,
+				0CF1D2991917664800CDBEEE /* audio_manager.h */,
+				0CF1D2981917664800CDBEEE /* audio_manager.cpp */,
+				0CF1D2A619176D2600CDBEEE /* sound.h */,
+				0C7712F819177E4D0050C098 /* sound_private.h */,
+				0CF1D2A519176D2600CDBEEE /* sound.cpp */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
+		0CF1D29C19176ADC00CDBEEE /* input */ = {
+			isa = PBXGroup;
+			children = (
+				0CF1D29E19176ADC00CDBEEE /* event.h */,
+				0CF1D29D19176ADC00CDBEEE /* event.cpp */,
+				0CF1D2A019176ADC00CDBEEE /* input_manager.h */,
+				0CF1D29F19176ADC00CDBEEE /* input_manager.cpp */,
+			);
+			path = input;
+			sourceTree = "<group>";
+		};
 		563B6E8B14B2FD2600004C6A = {
 			isa = PBXGroup;
 			children = (
@@ -1549,6 +1603,7 @@
 		563B6EC214B2FD8500004C6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CF1D2951917639400CDBEEE /* OpenAL.framework */,
 				0C46F5D2175F014F00BF6EC9 /* lib3ds-2.0.0.0.dylib */,
 				0C46F5D3175F014F00BF6EC9 /* libSDL2-2.0.0.dylib */,
 				0C977FB2173752CD0071E8E6 /* CoreFoundation.framework */,
@@ -1564,6 +1619,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CF1D2B019176F9400CDBEEE /* wave_audio_asset.h in Headers */,
 				0CD633AA188F8E360061D259 /* observable.h in Headers */,
 				0C977F801737512D0071E8E6 /* zge.h in Headers */,
 				0C2B01AC176D5FE300522671 /* render_manager.h in Headers */,
@@ -1572,10 +1628,8 @@
 				0C977F851737512D0071E8E6 /* display.h in Headers */,
 				0C977F871737512D0071E8E6 /* display_manager.h in Headers */,
 				0C977F891737512D0071E8E6 /* engine.h in Headers */,
-				0C977F8B1737512D0071E8E6 /* event.h in Headers */,
 				0C49AEDF1864219E005A1D78 /* vector_private.h in Headers */,
 				0C5D32501761D76D0013ACFF /* fragment_shader.h in Headers */,
-				0C977F911737512D0071E8E6 /* input_manager.h in Headers */,
 				0C07BD7617C0496A00C38084 /* color.h in Headers */,
 				0C977F931737512D0071E8E6 /* noncopyable.h in Headers */,
 				0C977F941737512D0071E8E6 /* run_loop.h in Headers */,
@@ -1585,6 +1639,7 @@
 				0C977F9C1737512D0071E8E6 /* camera.h in Headers */,
 				0C5D324D1761C82A0013ACFF /* shader.h in Headers */,
 				0C977F9E1737512D0071E8E6 /* graphics_buffer.h in Headers */,
+				0C7712F919177E4D0050C098 /* sound_private.h in Headers */,
 				0C06448A177029CC004AAA20 /* opengl.h in Headers */,
 				0C977FA51737512D0071E8E6 /* exception.h in Headers */,
 				0C4B4AF21749A52700FD4B53 /* shader_program.h in Headers */,
@@ -1595,6 +1650,7 @@
 				0CEC0252176D5DF90029DE82 /* node.h in Headers */,
 				0C977FAB1737512D0071E8E6 /* util.h in Headers */,
 				0C5D324E1761D6CF0013ACFF /* vertex_shader.h in Headers */,
+				0CF1D2A419176ADC00CDBEEE /* input_manager.h in Headers */,
 				0C46F595175F00E800BF6EC9 /* SDL.h in Headers */,
 				0C62281118610B6F00DA3182 /* matrix.h in Headers */,
 				0C46F5A0175F00E800BF6EC9 /* SDL_events.h in Headers */,
@@ -1616,6 +1672,8 @@
 				0C46F5B4175F00E800BF6EC9 /* SDL_power.h in Headers */,
 				0C46F5C4175F00E800BF6EC9 /* SDL_test_crc32.h in Headers */,
 				0C46F5A8175F00E800BF6EC9 /* SDL_loadso.h in Headers */,
+				0CF1D2A819176D2600CDBEEE /* sound.h in Headers */,
+				0CF1D2AC19176D9300CDBEEE /* audio_asset.h in Headers */,
 				0C46F5AE175F00E800BF6EC9 /* SDL_name.h in Headers */,
 				0C46F5C3175F00E800BF6EC9 /* SDL_test_compare.h in Headers */,
 				0C46F5CD175F00E800BF6EC9 /* SDL_timer.h in Headers */,
@@ -1642,6 +1700,7 @@
 				0C46F5A4175F00E800BF6EC9 /* SDL_hints.h in Headers */,
 				0C46F5CA175F00E800BF6EC9 /* SDL_test_md5.h in Headers */,
 				0C46F5B9175F00E800BF6EC9 /* SDL_rwops.h in Headers */,
+				0CF1D2A219176ADC00CDBEEE /* event.h in Headers */,
 				0C46F5C9175F00E800BF6EC9 /* SDL_test_log.h in Headers */,
 				0C46F594175F00E800BF6EC9 /* close_code.h in Headers */,
 				0C46F59D175F00E800BF6EC9 /* SDL_cpuinfo.h in Headers */,
@@ -1669,6 +1728,7 @@
 				0C46F5BB175F00E800BF6EC9 /* SDL_shape.h in Headers */,
 				0C46F5BC175F00E800BF6EC9 /* SDL_stdinc.h in Headers */,
 				0C46F5B0175F00E800BF6EC9 /* SDL_opengles.h in Headers */,
+				0CF1D29B1917664800CDBEEE /* audio_manager.h in Headers */,
 				0C46F5D0175F00E800BF6EC9 /* SDL_version.h in Headers */,
 				0C46F5B3175F00E800BF6EC9 /* SDL_platform.h in Headers */,
 				0C46F5BF175F00E800BF6EC9 /* SDL_syswm.h in Headers */,
@@ -1732,16 +1792,18 @@
 				0C688FA018726E64002C38EF /* geometry.cpp in Sources */,
 				0C1F28BA17C1C3FF00CA03C4 /* vertex_array.cpp in Sources */,
 				0C977F571737510C0071E8E6 /* application.cpp in Sources */,
+				0CF1D2A719176D2600CDBEEE /* sound.cpp in Sources */,
 				0C977F591737510C0071E8E6 /* display.cpp in Sources */,
+				0CF1D2AF19176F9400CDBEEE /* wave_audio_asset.cpp in Sources */,
 				0CD633A6188EF3E20061D259 /* uniform.cpp in Sources */,
 				0C977F5B1737510C0071E8E6 /* display_manager.cpp in Sources */,
 				0C4B4AF51749A83500FD4B53 /* render_context.cpp in Sources */,
+				0CF1D2A319176ADC00CDBEEE /* input_manager.cpp in Sources */,
 				0C977F5D1737510C0071E8E6 /* engine.cpp in Sources */,
-				0C977F5F1737510C0071E8E6 /* event.cpp in Sources */,
 				0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */,
-				0C977F651737510C0071E8E6 /* input_manager.cpp in Sources */,
 				0C4B4AF11749A52700FD4B53 /* shader_program.cpp in Sources */,
 				0C898C72191722B600CF3009 /* orthocamera.cpp in Sources */,
+				0CF1D29A1917664800CDBEEE /* audio_manager.cpp in Sources */,
 				0C977F681737510C0071E8E6 /* run_loop.cpp in Sources */,
 				0C688F9818726A65002C38EF /* model.cpp in Sources */,
 				0CA262681863F71A003E8D37 /* vector.cpp in Sources */,
@@ -1752,6 +1814,8 @@
 				0C5D324C1761C82A0013ACFF /* shader.cpp in Sources */,
 				0C977F791737510C0071E8E6 /* exception.cpp in Sources */,
 				0C21E5EA18C2AC80009E508D /* glutil.cpp in Sources */,
+				0CF1D2AB19176D9300CDBEEE /* audio_asset.cpp in Sources */,
+				0CF1D2A119176ADC00CDBEEE /* event.cpp in Sources */,
 				0C2B01AB176D5FE300522671 /* render_manager.cpp in Sources */,
 				0CEC0253176D5DF90029DE82 /* scene.cpp in Sources */,
 				0C977F7B1737510C0071E8E6 /* logger.cpp in Sources */,
@@ -1774,6 +1838,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/src/zge.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = "@rpath";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1785,6 +1853,10 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/src/zge.pch";
 				INSTALL_PATH = "@rpath";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

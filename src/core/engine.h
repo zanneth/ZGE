@@ -8,6 +8,7 @@
 #pragma once
 
 #include <zge/defines.h>
+#include <zge/audio_manager.h>
 #include <zge/display_manager.h>
 #include <zge/input_manager.h>
 #include <zge/noncopyable.h>
@@ -20,6 +21,7 @@ class ZEngine : ZNoncopyable {
     ZInputManagerRef    _input_manager;
     ZRenderManagerRef   _render_manager;
     ZDisplayManagerRef  _display_manager;
+    ZAudioManagerRef    _audio_manager;
     
     ZResponderRef       _application_responder;
 
@@ -27,9 +29,10 @@ public:
     static ZEngine* instance();
     
     /* Accessors */
-    ZInputManagerRef    get_input_manager()   { return _input_manager; }
-    ZRenderManagerRef   get_render_manager()  { return _render_manager; }
-    ZDisplayManagerRef  get_display_manager() { return _display_manager; }
+    ZInputManagerRef    get_input_manager();
+    ZRenderManagerRef   get_render_manager();
+    ZDisplayManagerRef  get_display_manager();
+    ZAudioManagerRef    get_audio_manager();
     
     /* Utility */
     ZRect get_viewport_rect() const;

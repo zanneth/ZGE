@@ -22,7 +22,8 @@ ZEngine* ZEngine::instance()
 ZEngine::ZEngine() :
     _input_manager(new ZInputManager),
     _render_manager(new ZRenderManager),
-    _display_manager(new ZDisplayManager)
+    _display_manager(new ZDisplayManager),
+    _audio_manager(new ZAudioManager)
 {}
 
 #pragma mark - Initialization
@@ -40,6 +41,7 @@ void ZEngine::initialize()
     loop->schedule(_input_manager);
     loop->schedule(_render_manager);
     loop->schedule(_display_manager);
+    loop->schedule(_audio_manager);
     
     // engine always adds application as the first responder
     _application_responder = _input_manager->add_responder([](const ZEvent &event) {
@@ -51,6 +53,13 @@ void ZEngine::initialize()
         }
     });
 }
+
+#pragma mark - Accessors
+
+ZInputManagerRef ZEngine::get_input_manager() { return _input_manager; }
+ZRenderManagerRef ZEngine::get_render_manager() { return _render_manager; }
+ZDisplayManagerRef ZEngine::get_display_manager() { return _display_manager; }
+ZAudioManagerRef ZEngine::get_audio_manager() { return _audio_manager; }
 
 #pragma mark - Utility
 

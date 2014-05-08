@@ -19,6 +19,8 @@ protected:
     ZRenderContextRef _current_context;
     
 public:
+    virtual ~ZCamera() {}
+    
     /* Open/Close */
     virtual void open(ZRenderContextRef context) = 0;
     virtual bool is_open() const = 0;
