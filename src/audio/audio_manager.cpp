@@ -32,7 +32,7 @@ ZAudioManager::ZAudioManager() :
     spec.userdata = this;
     
     SDL_AudioSpec actual_spec;
-    SDL_AudioDeviceID device_id = SDL_OpenAudioDevice(NULL, 0, &spec, &actual_spec, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+    SDL_AudioDeviceID device_id = SDL_OpenAudioDevice(NULL, 0, &spec, &actual_spec, SDL_AUDIO_ALLOW_ANY_CHANGE);
     if (device_id != 0) {
         zlog("Successfully opened audio device with ID %u", device_id);
         _impl->device_id = device_id;
@@ -115,9 +115,11 @@ void _audio_callback(void *userdata, uint8_t *stream, int len)
         size_t remaining_length = asset->get_buffer_length() - playback_state->current_offset;
         SDL_AudioFormat format = static_cast<SDL_AudioFormat>(asset->get_audio_format());
         
-        size_t len_to_mix = (len > remaining_length ? remaining_length : len);
-        SDL_MixAudioFormat(stream, src_buffer, format, len_to_mix, volume * (float)SDL_MIX_MAXVOLUME);
-        playback_state->current_offset += len_to_mix;
+        if (remaining_length > 0) {
+            size_t len_to_mix = (len > remaining_length ? remaining_length : len);
+            SDL_MixAudioFormat(stream, src_buffer, format, len_to_mix, volume * (float)SDL_MIX_MAXVOLUME);
+            playback_state->current_offset += len_to_mix;
+        }
     }
 }
 
