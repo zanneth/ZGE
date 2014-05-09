@@ -17,9 +17,9 @@ public:
     ZBMPImage(std::string path);
     ~ZBMPImage();
     
-    ZSize2D      get_size() const;
-    ZPixelFormat get_pixel_format() const;
-    ZDataRef     get_pixel_data() const;
+    ZSize2D      get_size() const override;
+    ZPixelFormat get_pixel_format() const override;
+    ZDataRef     get_pixel_data() const override;
     
 private:
     std::auto_ptr<struct _ZBMPImageImpl> _impl;

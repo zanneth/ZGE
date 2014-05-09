@@ -39,8 +39,8 @@ public:
     void set_color(const ZColor &color);
     
     // material overrides
-    std::string get_shader_name() const;
-    const void* get_contents_data() const;
+    std::string get_shader_name() const override;
+    const void* get_contents_data() const override;
     
 private:
     ZColor _color;
@@ -58,10 +58,10 @@ public:
     void set_texture(ZTextureRef texture);
     
     // material overrides
-    std::string get_shader_name() const;
-    const void* get_contents_data() const;
-    void prepare_for_draw(ZRenderContextRef context);
-    void finalize_draw(ZRenderContextRef context);
+    std::string get_shader_name() const override;
+    const void* get_contents_data() const override;
+    void prepare_for_draw(ZRenderContextRef context) override;
+    void finalize_draw(ZRenderContextRef context) override;
     
 private:
     ZTextureRef _texture;

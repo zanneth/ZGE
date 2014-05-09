@@ -75,7 +75,7 @@ ZDataRef ZBMPImage::get_pixel_data() const
         pixel_buffer[pixel_buffer_length++] = cur_color.r;
         pixel_buffer[pixel_buffer_length++] = cur_color.g;
         pixel_buffer[pixel_buffer_length++] = cur_color.b;
-        pixel_buffer[pixel_buffer_length++] = 255;
+        pixel_buffer[pixel_buffer_length++] = 0xFF;
         
         cur_byte_ptr += format->BytesPerPixel;
     }
