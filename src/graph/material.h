@@ -7,53 +7,67 @@
 
 #pragma once
 
+#include <zge/foundation.h>
 #include <zge/color.h>
-#include <zge/defines.h>
-#include <zge/noncopyable.h>
+#include <zge/render_context.h>
 #include <zge/texture.h>
-#include <memory>
 
 BEGIN_ZGE_NAMESPACE
 
-template <typename T>
-class ZMaterialProperty {
-public:
-    ZMaterialProperty(std::string name);
-    ZMaterialProperty(const ZMaterialProperty &cp);
-    ZMaterialProperty(ZMaterialProperty &&mv);
-    ~ZMaterialProperty();
-    
-    T get_contents() const;
-    void set_contents(const T &contents);
-    
-    std::string get_name() const;
-    
-private:
-    T _contents;
-    std::string _name;
-};
-
 class ZMaterial {
 public:
-    ZMaterial();
+    ZMaterial() = default;
     ZMaterial(const ZMaterial &cp) = default;
     ZMaterial(ZMaterial &&mv) = default;
-    ~ZMaterial();
+    virtual ~ZMaterial();
     
-    // these properties are mutable
-    const ZMaterialProperty<ZColor>& get_color() const;
-    void set_color(const ZColor &color);
-    
-    const ZMaterialProperty<ZTextureRef>& get_texture() const;
-    void set_texture(ZTextureRef texture);
-    
-private:
-    ZMaterialProperty<ZColor> _color;
-    ZMaterialProperty<ZTextureRef> _texture;
+    virtual std::string get_shader_name() const = 0;
+    virtual const void* get_contents_data() const = 0;
+    virtual void prepare_for_draw(ZRenderContextRef context);
+    virtual void finalize_draw(ZRenderContextRef context);
 };
 
 typedef std::shared_ptr<ZMaterial> ZMaterialRef;
 
-END_ZGE_NAMESPACE
+class ZColorMaterial : public ZMaterial {
+public:
+    ZColorMaterial();
+    ZColorMaterial(const ZColorMaterial &cp) = default;
+    ZColorMaterial(ZColorMaterial &&mv) = default;
+    
+    ZColor get_color() const;
+    void set_color(const ZColor &color);
+    
+    // material overrides
+    std::string get_shader_name() const;
+    const void* get_contents_data() const;
+    
+private:
+    ZColor _color;
+};
 
-#include <zge/material.hpp>
+typedef std::shared_ptr<ZColorMaterial> ZColorMaterialRef;
+
+class ZTextureMaterial : public ZMaterial {
+public:
+    ZTextureMaterial();
+    ZTextureMaterial(const ZTextureMaterial &cp) = default;
+    ZTextureMaterial(ZTextureMaterial &&mv) = default;
+    
+    ZTextureRef get_texture() const;
+    void set_texture(ZTextureRef texture);
+    
+    // material overrides
+    std::string get_shader_name() const;
+    const void* get_contents_data() const;
+    void prepare_for_draw(ZRenderContextRef context);
+    void finalize_draw(ZRenderContextRef context);
+    
+private:
+    ZTextureRef _texture;
+    uint32_t _cached_texture_name;
+};
+
+typedef std::shared_ptr<ZTextureMaterial> ZTextureMaterialRef;
+
+END_ZGE_NAMESPACE

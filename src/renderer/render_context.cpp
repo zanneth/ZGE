@@ -117,12 +117,20 @@ void ZRenderContext::bind_texture(ZTextureRef texture)
     GLuint texture_name = texture->_get_texture_name();
     glBindTexture(GL_TEXTURE_2D, texture_name);
     _bound_texture = texture;
+    
+    ZUniformRef texture_flag_uniform = _shader_program->get_uniform("textureFlag");
+    int texture_flag = 1;
+    texture_flag_uniform->set_data(&texture_flag);
 }
 
 void ZRenderContext::unbind_texture()
 {
     glBindTexture(GL_TEXTURE_2D, 0);
     _bound_texture = nullptr;
+    
+    ZUniformRef texture_flag_uniform = _shader_program->get_uniform("textureFlag");
+    int texture_flag = 0;
+    texture_flag_uniform->set_data(&texture_flag);
 }
 
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)

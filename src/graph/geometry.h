@@ -7,10 +7,9 @@
 
 #pragma once
 
-#include <zge/defines.h>
+#include <zge/foundation.h>
 #include <zge/material.h>
 #include <zge/render_context.h>
-#include <memory>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -18,20 +17,24 @@ typedef std::shared_ptr<class ZGeometry> ZGeometryRef;
 
 class ZGeometry {
 public:
-    ZGeometry();
-    ZGeometry(const ZGeometry &cp);
-    ZGeometry(ZGeometry &&mv);
-    virtual ~ZGeometry();
+    ZGeometry() = default;
+    ZGeometry(const ZGeometry &cp) = default;
+    ZGeometry(ZGeometry &&mv) = default;
+    virtual ~ZGeometry() = default;
     
     virtual ZGeometryRef copy() const;
     
-    ZMaterialRef get_material() const;
-    void set_material(ZMaterialRef material);
+    std::vector<ZMaterialRef> get_materials() const;
+    void add_material(ZMaterialRef material);
+    void remove_material(ZMaterialRef material);
+    void clear_materials();
     
+    virtual void prepare_render(ZRenderContextRef context);
     virtual void render(ZRenderContextRef context);
+    virtual void finalize_render(ZRenderContextRef context);
 
 protected:
-    ZMaterialRef _material;
+    std::vector<ZMaterialRef> _materials;
 };
 
 END_ZGE_NAMESPACE

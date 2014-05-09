@@ -11,60 +11,72 @@
 
 BEGIN_ZGE_NAMESPACE
     
-static void _update_material_data(ZRenderContextRef context, ZMaterialRef material);
-
-ZGeometry::ZGeometry() :
-    _material(new ZMaterial)
-{}
-
-ZGeometry::ZGeometry(const ZGeometry &cp) :
-    _material(new ZMaterial(*cp._material))
-{}
-
-ZGeometry::ZGeometry(ZGeometry &&mv)
-{
-    _material = mv._material;
-    mv._material = nullptr;
-}
-
-ZGeometry::~ZGeometry()
-{}
+static void _update_material_data(ZRenderContextRef context, std::vector<ZMaterialRef> materials);
 
 ZGeometryRef ZGeometry::copy() const
 {
     return ZGeometryRef(new ZGeometry(*this));
 }
 
-#pragma mark - Accessors
+#pragma mark -
 
-ZMaterialRef ZGeometry::get_material() const { return _material; }
-void ZGeometry::set_material(ZMaterialRef material) { _material = material; }
+std::vector<ZMaterialRef> ZGeometry::get_materials() const
+{
+    return _materials;
+}
+
+void ZGeometry::add_material(ZMaterialRef material)
+{
+    _materials.push_back(material);
+}
+
+void ZGeometry::remove_material(ZMaterialRef material_to_remove)
+{
+    std::remove_if(_materials.begin(), _materials.end(), [material_to_remove](ZMaterialRef m) {
+        return m.get() == material_to_remove.get();
+    });
+}
+
+void ZGeometry::clear_materials()
+{
+    _materials.clear();
+}
 
 #pragma mark - Rendering
 
+void ZGeometry::prepare_render(ZRenderContextRef context)
+{
+    _update_material_data(context, _materials);
+    for (ZMaterialRef material : _materials) {
+        material->prepare_for_draw(context);
+    }
+}
+
 void ZGeometry::render(ZRenderContextRef context)
 {
-    _update_material_data(context, _material);
     // subclasses will render geometry
+}
+
+void ZGeometry::finalize_render(ZRenderContextRef context)
+{
+    for (ZMaterialRef material : _materials) {
+        material->finalize_draw(context);
+    }
 }
 
 #pragma mark - Internal
 
-void _update_material_data(ZRenderContextRef context, ZMaterialRef material)
+void _update_material_data(ZRenderContextRef context, std::vector<ZMaterialRef> materials)
 {
     ZShaderProgramRef program = context->get_shader_program();
     
-    // update material color property
-    ZMaterialProperty<ZColor> color = material->get_color();
-    ZUniformRef color_uniform = program->get_uniform(color.get_name());
-    color_uniform->set_data(color.get_contents().data);
-    
-    ZMaterialProperty<ZTextureRef> texture_property = material->get_texture();
-    ZTextureRef texture = texture_property.get_contents();
-    if (texture.get()) {
-        ZUniformRef texture_uniform = program->get_uniform(texture_property.get_name());
-        GLuint texture_name = texture->_get_texture_name();
-        texture_uniform->set_data(&texture_name);
+    for (ZMaterialRef material : materials) {
+        std::string uniform_name = material->get_shader_name();
+        ZUniformRef uniform = program->get_uniform(uniform_name);
+        if (uniform.get()) {
+            const void *material_data = material->get_contents_data();
+            uniform->set_data(material_data);
+        }
     }
 }
 

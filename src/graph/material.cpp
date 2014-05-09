@@ -9,34 +9,66 @@
 
 BEGIN_ZGE_NAMESPACE
 
-ZMaterial::ZMaterial() :
-    _color("materialColor"),
-    _texture("materialTexture")
-{
-    _color.set_contents(ZWhiteColor);
-}
-
 ZMaterial::~ZMaterial()
 {}
 
-const ZMaterialProperty<ZColor>& ZMaterial::get_color() const
+void ZMaterial::prepare_for_draw(ZRenderContextRef context)
+{}
+
+void ZMaterial::finalize_draw(ZRenderContextRef context)
+{}
+
+#pragma mark - ZColorMaterial
+
+ZColorMaterial::ZColorMaterial() :
+    _color(ZWhiteColor)
+{}
+
+ZColor ZColorMaterial::get_color() const { return _color; }
+void ZColorMaterial::set_color(const ZColor &color) { _color = color; }
+
+std::string ZColorMaterial::get_shader_name() const
 {
-    return _color;
+    return "materialColor";
 }
 
-void ZMaterial::set_color(const ZColor &color)
+const void* ZColorMaterial::get_contents_data() const
 {
-    _color.set_contents(color);
+    return (const void *)_color.data;
 }
 
-const ZMaterialProperty<ZTextureRef>& ZMaterial::get_texture() const
+#pragma mark - ZTextureMaterial
+
+ZTextureMaterial::ZTextureMaterial()
+{}
+
+ZTextureRef ZTextureMaterial::get_texture() const { return _texture; }
+void ZTextureMaterial::set_texture(ZTextureRef texture)
 {
-    return _texture;
+    _texture = texture;
+    _cached_texture_name = _texture->_get_texture_name();
 }
 
-void ZMaterial::set_texture(ZTextureRef texture)
+std::string ZTextureMaterial::get_shader_name() const
 {
-    _texture.set_contents(texture);
+    return "materialTexture";
+}
+
+const void* ZTextureMaterial::get_contents_data() const
+{
+    return &_cached_texture_name;
+}
+
+void ZTextureMaterial::prepare_for_draw(ZRenderContextRef context)
+{
+    if (_texture.get()) {
+        context->bind_texture(_texture);
+    }
+}
+
+void ZTextureMaterial::finalize_draw(ZRenderContextRef context)
+{
+    context->unbind_texture();
 }
 
 END_ZGE_NAMESPACE

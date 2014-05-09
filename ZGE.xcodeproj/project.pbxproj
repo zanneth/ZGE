@@ -12,7 +12,6 @@
 		0C07BD7617C0496A00C38084 /* color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C07BD7417C0496A00C38084 /* color.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C0D7C6F18C410B100021CD6 /* data.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0D7C6D18C410B100021CD6 /* data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C0E7900188F8ECA005CF0E3 /* observable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0CD633A7188F8E360061D259 /* observable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C0E79021890D5C6005CF0E3 /* material.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C0E79011890D5C6005CF0E3 /* material.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C142EB118C42A5600722C83 /* data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0D7C6C18C410B100021CD6 /* data.cpp */; };
 		0C1F28BA17C1C3FF00CA03C4 /* vertex_array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1F28B817C1C3FF00CA03C4 /* vertex_array.cpp */; };
 		0C1F28BB17C1C3FF00CA03C4 /* vertex_array.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1F28B917C1C3FF00CA03C4 /* vertex_array.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -518,7 +517,6 @@
 		0C0D7C6B18C4100500021CD6 /* UmfPackSupport */ = {isa = PBXFileReference; lastKnownFileType = text; path = UmfPackSupport; sourceTree = "<group>"; };
 		0C0D7C6C18C410B100021CD6 /* data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = data.cpp; sourceTree = "<group>"; };
 		0C0D7C6D18C410B100021CD6 /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
-		0C0E79011890D5C6005CF0E3 /* material.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = material.hpp; path = src/graph/material.hpp; sourceTree = SOURCE_ROOT; };
 		0C1F28B817C1C3FF00CA03C4 /* vertex_array.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_array.cpp; sourceTree = "<group>"; };
 		0C1F28B917C1C3FF00CA03C4 /* vertex_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vertex_array.h; sourceTree = "<group>"; };
 		0C21E5E918C2AC80009E508D /* glutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glutil.cpp; sourceTree = "<group>"; };
@@ -1503,7 +1501,6 @@
 				0C688F9F18726E64002C38EF /* geometry.h */,
 				0C688F9E18726E64002C38EF /* geometry.cpp */,
 				0C688FA318727756002C38EF /* material.h */,
-				0C0E79011890D5C6005CF0E3 /* material.hpp */,
 				0C688FA218727756002C38EF /* material.cpp */,
 				0C688F9718726A65002C38EF /* model.h */,
 				0C688F9618726A65002C38EF /* model.cpp */,
@@ -1720,7 +1717,6 @@
 				0C46F5A7175F00E800BF6EC9 /* SDL_keycode.h in Headers */,
 				0C46F5CB175F00E800BF6EC9 /* SDL_test_random.h in Headers */,
 				0C46F5AD175F00E800BF6EC9 /* SDL_mutex.h in Headers */,
-				0C0E79021890D5C6005CF0E3 /* material.hpp in Headers */,
 				0C46F596175F00E800BF6EC9 /* SDL_assert.h in Headers */,
 				0C46F5AB175F00E800BF6EC9 /* SDL_messagebox.h in Headers */,
 				0CE6989918C9AB8100D57528 /* defines.h in Headers */,

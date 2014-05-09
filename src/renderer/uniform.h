@@ -25,7 +25,7 @@ class ZUniformBase : public ZObservable<ZUniformRef>, public std::enable_shared_
     GLenum _type;
     
 public:
-    ZUniformBase(std::string name = "", GLint location = -1, GLenum type = GL_ZERO);
+    ZUniformBase(std::string name, GLint location, GLenum type);
     virtual ~ZUniformBase();
     
     std::string get_name() const;
@@ -43,7 +43,7 @@ class ZUniform : public ZUniformBase {
     T _values[count];
     
 public:
-    ZUniform(std::string name = "", GLint location = -1, GLenum type = GL_ZERO);
+    ZUniform(std::string name, GLint location, GLenum type);
     ZUniform(const ZUniform &cp);
     ZUniform(ZUniform&&);
     ~ZUniform();

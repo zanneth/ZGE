@@ -16,12 +16,24 @@ in vec2 frag_texcoord0;
                                                                       
 uniform vec4 materialColor;
 uniform sampler2D materialTexture;
+uniform int textureFlag;
+                                                                      
 out vec4 outputColor;
 
 void main()
 {
-    vec4 texcolor = texture(materialTexture, frag_texcoord0);
-    outputColor = texcolor * materialColor;
+    vec4 pixel = vec4(1.0);
+    
+    if (materialColor != vec4(0.0)) {
+        pixel = materialColor;
+    }
+    
+    if (textureFlag == 1) {
+        vec4 texel = texture(materialTexture, frag_texcoord0);
+        pixel *= texel;
+    }
+    
+    outputColor = pixel;
 }
 
 );

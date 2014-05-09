@@ -67,20 +67,7 @@ ZGeometryRef ZQuad::copy() const
 void ZQuad::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
-    
-    bool bound_texture = false;
-    ZMaterialRef material = get_material();
-    ZTextureRef texture = material->get_texture().get_contents();
-    if (texture.get()) {
-        context->bind_texture(texture);
-        bound_texture = true;
-    }
-    
     context->draw_array(ZRENDER_MODE_TRIANGLE_STRIP, _vertex_array, 0, 4);
-    
-    if (bound_texture) {
-        context->unbind_texture();
-    }
 }
 
 END_ZGE_NAMESPACE

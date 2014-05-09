@@ -114,7 +114,9 @@ void ZNode::_draw(ZRenderContextRef context)
     }
     
     if (_geometry.get()) {
+        _geometry->prepare_render(context);
         _geometry->render(context);
+        _geometry->finalize_render(context);
     }
     
     context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
