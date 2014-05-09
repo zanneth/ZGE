@@ -58,6 +58,14 @@ void _update_material_data(ZRenderContextRef context, ZMaterialRef material)
     ZMaterialProperty<ZColor> color = material->get_color();
     ZUniformRef color_uniform = program->get_uniform(color.get_name());
     color_uniform->set_data(color.get_contents().data);
+    
+    ZMaterialProperty<ZTextureRef> texture_property = material->get_texture();
+    ZTextureRef texture = texture_property.get_contents();
+    if (texture.get()) {
+        ZUniformRef texture_uniform = program->get_uniform(texture_property.get_name());
+        GLuint texture_name = texture->_get_texture_name();
+        texture_uniform->set_data(&texture_name);
+    }
 }
 
 END_ZGE_NAMESPACE

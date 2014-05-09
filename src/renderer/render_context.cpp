@@ -112,9 +112,23 @@ ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
     return _matrix_stacks[type].top();
 }
 
+void ZRenderContext::bind_texture(ZTextureRef texture)
+{
+    GLuint texture_name = texture->_get_texture_name();
+    glBindTexture(GL_TEXTURE_2D, texture_name);
+    _bound_texture = texture;
+}
+
+void ZRenderContext::unbind_texture()
+{
+    glBindTexture(GL_TEXTURE_2D, 0);
+    _bound_texture = nullptr;
+}
+
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
 {
-    varray->_bind(shared_from_this());
+    varray->_bind();
+    _bound_vertex_array = varray;
     
     GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
     glDrawArrays(glmode, first_idx, count);
@@ -122,7 +136,8 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
 
 void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
 {
-    varray->_bind(shared_from_this());
+    varray->_bind();
+    _bound_vertex_array = varray;
     
     ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
     if (element_buffer.get()) {
@@ -143,6 +158,7 @@ void ZRenderContext::_load_shaders()
         _shader_program->load_shader_source(ZVertexShaderSource, ZVERTEX_SHADER);
         _shader_program->load_shader_source(ZFragmentShaderSource, ZFRAGMENT_SHADER);
         _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_POSITION, "position");
+        _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_TEXCOORD0, "texcoord0");
         _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_COLOR, "color");
         _shader_program->link_program();
         

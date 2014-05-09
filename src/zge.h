@@ -10,6 +10,7 @@
 #include <zge/application.h>
 #include <zge/audio_asset.h>
 #include <zge/audio_manager.h>
+#include <zge/bmp_image.h>
 #include <zge/3dcamera.h>
 #include <zge/camera.h>
 #include <zge/color.h>
@@ -23,6 +24,7 @@
 #include <zge/geometry.h>
 #include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
+#include <zge/image.h>
 #include <zge/logger.h>
 #include <zge/material.h>
 #include <zge/matrix.h>
@@ -42,6 +44,7 @@
 #include <zge/shader.h>
 #include <zge/shader_program.h>
 #include <zge/sound.h>
+#include <zge/texture.h>
 #include <zge/timer.h>
 #include <zge/types.h>
 #include <zge/uniform.h>

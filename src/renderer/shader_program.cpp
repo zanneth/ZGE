@@ -245,6 +245,11 @@ void ZShaderProgram::_uniform_modified(ZUniformRef uniform)
         case GL_FLOAT_MAT4:
             glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)data);
             break;
+        case GL_SAMPLER_1D:
+        case GL_SAMPLER_2D:
+        case GL_SAMPLER_3D:
+            glUniform1uiv(location, 1, (const GLuint *)data);
+            break;
         default: {
             ZException e(ZNOT_IMPLEMENTED_EXCEPTION_CODE);
             e.extra_info = ZUtil::format("Uniform of type %ld has no API implementation.", (long)type);
@@ -303,6 +308,15 @@ ZUniformRef _create_uniform(GLenum type, std::string name, GLuint index)
             break;
         case GL_FLOAT_MAT4:
             uniform = ZUniformRef(new ZUniform<GLfloat, 4*4>(name, index, GL_FLOAT_MAT4));
+            break;
+        case GL_SAMPLER_1D:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_1D));
+            break;
+        case GL_SAMPLER_2D:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_2D));
+            break;
+        case GL_SAMPLER_3D:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_3D));
             break;
         default:
             break;

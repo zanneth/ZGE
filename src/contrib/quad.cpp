@@ -32,8 +32,26 @@ ZQuad::ZQuad(ZRect rect) :
     };
     ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
     vbo->load_data(vertex_data, 4 * 3 * sizeof(float), usage);
-    
     _vertex_array->add_buffer(vbo, ZVERTEX_ATTRIB_POSITION);
+    
+    ZGraphicsBufferRef texcoord_vbo = ZGraphicsBufferRef(new ZGraphicsBuffer);
+    ZBufferAttribute texcoord_attr = {
+        .components_per_vertex = 2,
+        .component_type = ZCOMPONENT_TYPE_FLOAT,
+        .normalized = false,
+        .stride = 0,
+        .offset = 0
+    };
+    texcoord_vbo->add_attribute(texcoord_attr);
+    
+    float texcoord_data[4 * 2] = {
+        0.0, 0.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 1.0
+    };
+    texcoord_vbo->load_data(texcoord_data, 4 * 2 * sizeof(float), usage);
+    _vertex_array->add_buffer(texcoord_vbo, ZVERTEX_ATTRIB_TEXCOORD0);
 }
 
 ZRect ZQuad::get_quad_rect() const
@@ -49,7 +67,20 @@ ZGeometryRef ZQuad::copy() const
 void ZQuad::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
+    
+    bool bound_texture = false;
+    ZMaterialRef material = get_material();
+    ZTextureRef texture = material->get_texture().get_contents();
+    if (texture.get()) {
+        context->bind_texture(texture);
+        bound_texture = true;
+    }
+    
     context->draw_array(ZRENDER_MODE_TRIANGLE_STRIP, _vertex_array, 0, 4);
+    
+    if (bound_texture) {
+        context->unbind_texture();
+    }
 }
 
 END_ZGE_NAMESPACE

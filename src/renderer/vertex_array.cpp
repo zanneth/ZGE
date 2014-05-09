@@ -81,7 +81,7 @@ ZElementGraphicsBufferRef ZVertexArray::get_element_buffer() const { return _imp
 
 #pragma mark - Private
 
-void ZVertexArray::_bind(ZRenderContextRef context)
+void ZVertexArray::_bind()
 {
     glBindVertexArray(_impl->vao);
     
@@ -99,19 +99,6 @@ void ZVertexArray::_bind(ZRenderContextRef context)
     
     if (_impl->element_buffer.get()) {
         _impl->element_buffer->_bind();
-    }
-    
-    context->_bound_vertex_array = shared_from_this();
-}
-
-void ZVertexArray::_unbind(ZRenderContextRef context)
-{
-    ZVertexArrayRef bound_varray = context->_bound_vertex_array;
-    if (bound_varray.get() == this) {
-        glBindVertexArray(0);
-        context->_bound_vertex_array = nullptr;
-    } else {
-        ZLogger::log_error("Attempted to unbind vertex array (%p) that is different from the one that is bound (%p)", this, bound_varray.get());
     }
 }
 

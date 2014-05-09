@@ -14,6 +14,7 @@
 #include <zge/matrix.h>
 #include <zge/noncopyable.h>
 #include <zge/shader_program.h>
+#include <zge/texture.h>
 #include <zge/uniform.h>
 #include <zge/vertex_array.h>
 
@@ -35,6 +36,7 @@ class ZRenderContext : ZNoncopyable, public std::enable_shared_from_this<ZRender
     bool                 _shaders_loaded;
     std::stack<ZMatrix>  _matrix_stacks[_ZRENDER_MATRIX_COUNT];
     ZVertexArrayRef      _bound_vertex_array;
+    ZTextureRef          _bound_texture;
     
     std::auto_ptr<struct ZRenderContextImpl> _impl;
     
@@ -55,6 +57,9 @@ public:
     void pop_matrix(ZRenderMatrixType type);
     
     ZMatrix get_matrix(ZRenderMatrixType type) const;
+    
+    void bind_texture(ZTextureRef texture);
+    void unbind_texture();
     
     /* Drawing */
     void draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count);

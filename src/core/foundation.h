@@ -6,9 +6,11 @@
  */
 
 #include <zge/defines.h>
+#include <zge/exception.h>
 #include <zge/logger.h>
 #include <zge/noncopyable.h>
 #include <zge/types.h>
+#include <zge/util.h>
 
 #include <array>
 #include <cstdint>

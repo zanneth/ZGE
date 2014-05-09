@@ -27,6 +27,4 @@ private:
     char        _path_separator;
 };
 
-typedef std::shared_ptr<ZResourceBundle> ZResourceBundleRef;
-
 END_ZGE_NAMESPACE

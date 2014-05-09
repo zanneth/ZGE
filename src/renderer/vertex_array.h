@@ -36,8 +36,7 @@ public:
     ZElementGraphicsBufferRef get_element_buffer() const;
     
 private:
-    void _bind(std::shared_ptr<ZRenderContext> context);
-    void _unbind(std::shared_ptr<ZRenderContext> context);
+    void _bind();
     friend ZRenderContext;
 };
 

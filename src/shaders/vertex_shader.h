@@ -13,12 +13,16 @@ BEGIN_ZGE_NAMESPACE
 const std::string ZVertexShaderSource = "#version 150\n" + ZHEREDOC(
 
 in vec4 position;
+in vec2 texcoord0;
 
 uniform mat4 projection;
 uniform mat4 modelview;
+                                                                    
+out vec2 frag_texcoord0;
 
 void main()
 {
+    frag_texcoord0 = texcoord0;
     gl_Position = projection * modelview * position;
 }
 

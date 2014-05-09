@@ -18,6 +18,11 @@ union ZColor {
     ZColor(float r = 0.0, float g = 0.0, float b = 0.0, float a = 0.0);
 };
 
+union ZColorb {
+    struct { uint8_t r, g, b, a; };
+    uint8_t data[4];
+};
+
 extern ZColor ZBlackColor;
 extern ZColor ZWhiteColor;
 extern ZColor ZClearColor;

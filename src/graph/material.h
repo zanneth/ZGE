@@ -10,6 +10,7 @@
 #include <zge/color.h>
 #include <zge/defines.h>
 #include <zge/noncopyable.h>
+#include <zge/texture.h>
 #include <memory>
 
 BEGIN_ZGE_NAMESPACE
@@ -43,8 +44,12 @@ public:
     const ZMaterialProperty<ZColor>& get_color() const;
     void set_color(const ZColor &color);
     
+    const ZMaterialProperty<ZTextureRef>& get_texture() const;
+    void set_texture(ZTextureRef texture);
+    
 private:
     ZMaterialProperty<ZColor> _color;
+    ZMaterialProperty<ZTextureRef> _texture;
 };
 
 typedef std::shared_ptr<ZMaterial> ZMaterialRef;

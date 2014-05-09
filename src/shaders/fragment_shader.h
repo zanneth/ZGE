@@ -11,13 +11,17 @@
 BEGIN_ZGE_NAMESPACE
     
 const std::string ZFragmentShaderSource = "#version 150\n" + ZHEREDOC(
-
+                                                                      
+in vec2 frag_texcoord0;
+                                                                      
 uniform vec4 materialColor;
+uniform sampler2D materialTexture;
 out vec4 outputColor;
 
 void main()
 {
-    outputColor = materialColor;
+    vec4 texcolor = texture(materialTexture, frag_texcoord0);
+    outputColor = texcolor * materialColor;
 }
 
 );
