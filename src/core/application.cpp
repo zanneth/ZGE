@@ -15,13 +15,6 @@
 #include <ctime>
 #include <SDL2/SDL.h>
 
-#ifdef __APPLE__
-extern "C" {
-#undef __BLOCKS__
-#include <CoreFoundation/CoreFoundation.h>
-}
-#endif
-
 BEGIN_ZGE_NAMESPACE
 
 static ZApplication *__current_application = nullptr;
@@ -66,7 +59,6 @@ void ZApplication::run()
     
     // perform any remaining initializations
     _time_start = SDL_GetTicks();
-    _change_resources_directory();
     
     // callback to client to notify application is ready to run
     application_ready();
@@ -147,20 +139,6 @@ void ZApplication::handle_application_event(const ZEvent &event)
         default:
             break;
     }
-}
-
-#pragma mark - Internal
-
-void ZApplication::_change_resources_directory()
-{
-#ifdef __APPLE__
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-    char path[PATH_MAX];
-    CFURLGetFileSystemRepresentation(resourcesURL, true, (UInt8 *)path, PATH_MAX);
-    CFRelease(resourcesURL);
-    chdir(path);
-#endif
 }
 
 END_ZGE_NAMESPACE

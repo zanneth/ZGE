@@ -7,7 +7,6 @@
 
 #include <zge/util.h>
 #include <zge/exception.h>
-
 #include <cstdio>
 #include <sstream>
 

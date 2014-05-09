@@ -60,9 +60,6 @@ public:
     
     /* Callbacks */
     virtual void application_ready() {}
-
-private:
-    void _change_resources_directory();
 };
 
 END_ZGE_NAMESPACE

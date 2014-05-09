@@ -35,6 +35,7 @@
 #include <zge/quad.h>
 #include <zge/render_context.h>
 #include <zge/render_manager.h>
+#include <zge/resource_bundle.h>
 #include <zge/run_loop.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>
