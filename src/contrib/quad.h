@@ -15,16 +15,19 @@
 BEGIN_ZGE_NAMESPACE
 
 class ZQuad : public ZGeometry {
-    ZVertexArrayRef _vertex_array;
-    ZRect           _quad_rect;
-    
 public:
     ZQuad(ZRect rect = {{0.0, 0.0}, {1.0, 1.0}});
     
     ZRect get_quad_rect() const;
+    void set_quad_rect(const ZRect &rect);
     
     ZGeometryRef copy() const override;
     void render(ZRenderContextRef context) override;
+    
+private:
+    ZVertexArrayRef    _vertex_array;
+    ZGraphicsBufferRef _vbo;
+    ZRect              _quad_rect;
 };
 
 typedef std::shared_ptr<ZQuad> ZQuadRef;

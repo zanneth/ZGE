@@ -43,20 +43,20 @@ public:
     bool operator!=(const ZNode &other);
     
     /* Accessors */
-    ZNode*   get_parent() { return _parent; }
-    ZScene*  get_scene() { return _scene; }
+    ZNode*   get_parent();
+    ZScene*  get_scene();
     
-    std::string get_name() const { return _name; }
-    void        set_name(const std::string &name) { _name = name; }
+    std::string get_name() const;
+    void        set_name(const std::string &name);
     
-    virtual ZVector get_position() { return _position; }
+    virtual ZVector get_position();
     virtual void    set_position(const ZVector &position);
     
-    virtual ZMatrix get_transform() { return _transform; }
-    virtual void    set_transform(const ZMatrix &transform) { _transform = transform; }
+    virtual ZMatrix get_transform();
+    virtual void    set_transform(const ZMatrix &transform);
     
-    ZGeometryRef get_geometry() const { return _geometry; }
-    void         set_geometry(ZGeometryRef geometry) { _geometry = geometry; }
+    ZGeometryRef get_geometry() const;
+    void         set_geometry(ZGeometryRef geometry);
     
     /* Manipulating Geometry */
     void append_transform(const ZMatrix &transform);
@@ -66,7 +66,7 @@ public:
     virtual bool remove_child(ZNodeRef node);
     
     void remove_from_parent();
-    std::vector<ZNodeRef> get_children() { return _children; }
+    std::vector<ZNodeRef> get_children();
     
     /* Description */
     virtual std::string get_description();

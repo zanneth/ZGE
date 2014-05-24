@@ -24,10 +24,9 @@ ZResourceBundle* ZResourceBundle::get_main_bundle()
     char path_separator;
     std::string main_bundle_path = _get_main_bundle_path(&path_separator);
     
-    static ZResourceBundle main_bundle(main_bundle_path);
-    main_bundle._path_separator = path_separator;
-    
-    return &main_bundle;
+    static ZResourceBundle __main_bundle(main_bundle_path);
+    __main_bundle._path_separator = path_separator;
+    return &__main_bundle;
 }
 
 std::string ZResourceBundle::get_bundle_path() const

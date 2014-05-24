@@ -44,6 +44,7 @@
 #include <zge/shader.h>
 #include <zge/shader_program.h>
 #include <zge/sound.h>
+#include <zge/sprite_node.h>
 #include <zge/texture.h>
 #include <zge/timer.h>
 #include <zge/types.h>

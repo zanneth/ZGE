@@ -18,13 +18,6 @@
 BEGIN_ZGE_NAMESPACE
 
 class ZEngine : ZNoncopyable {
-    ZInputManagerRef    _input_manager;
-    ZRenderManagerRef   _render_manager;
-    ZDisplayManagerRef  _display_manager;
-    ZAudioManagerRef    _audio_manager;
-    
-    ZResponderRef       _application_responder;
-
 public:
     static ZEngine* instance();
     
@@ -39,6 +32,14 @@ public:
     
     /* Initialization */
     void initialize();
+    
+private:
+    ZInputManagerRef    _input_manager;
+    ZRenderManagerRef   _render_manager;
+    ZDisplayManagerRef  _display_manager;
+    ZAudioManagerRef    _audio_manager;
+    
+    ZResponderRef       _application_responder;
     
 private:
     // singleton

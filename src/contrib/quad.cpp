@@ -11,10 +11,10 @@
 BEGIN_ZGE_NAMESPACE
 
 ZQuad::ZQuad(ZRect rect) :
-    _quad_rect(rect),
-    _vertex_array(new ZVertexArray)
+    _vertex_array(new ZVertexArray),
+    _vbo(new ZGraphicsBuffer),
+    _quad_rect(rect)
 {
-    ZGraphicsBufferRef vbo = ZGraphicsBufferRef(new ZGraphicsBuffer);
     ZBufferAttribute attr = {
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,
@@ -22,17 +22,9 @@ ZQuad::ZQuad(ZRect rect) :
         .stride = 0,
         .offset = 0
     };
-    vbo->add_attribute(attr);
-    
-    float vertex_data[4 * 3] = {
-        _quad_rect.origin.x, _quad_rect.origin.y, 0.0,
-        _quad_rect.origin.x + _quad_rect.size.width, _quad_rect.origin.y, 0.0,
-        _quad_rect.origin.x, _quad_rect.origin.y + _quad_rect.size.height, 0.0,
-        _quad_rect.origin.x + _quad_rect.size.width, _quad_rect.origin.y + _quad_rect.size.height, 0.0
-    };
-    ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
-    vbo->load_data(vertex_data, 4 * 3 * sizeof(float), usage);
-    _vertex_array->add_buffer(vbo, ZVERTEX_ATTRIB_POSITION);
+    _vbo->add_attribute(attr);
+    set_quad_rect(rect);
+    _vertex_array->add_buffer(_vbo, ZVERTEX_ATTRIB_POSITION);
     
     ZGraphicsBufferRef texcoord_vbo = ZGraphicsBufferRef(new ZGraphicsBuffer);
     ZBufferAttribute texcoord_attr = {
@@ -50,6 +42,7 @@ ZQuad::ZQuad(ZRect rect) :
         0.0, 1.0,
         1.0, 1.0
     };
+    ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
     texcoord_vbo->load_data(texcoord_data, 4 * 2 * sizeof(float), usage);
     _vertex_array->add_buffer(texcoord_vbo, ZVERTEX_ATTRIB_TEXCOORD0);
 }
@@ -57,6 +50,19 @@ ZQuad::ZQuad(ZRect rect) :
 ZRect ZQuad::get_quad_rect() const
 {
     return _quad_rect;
+}
+
+void ZQuad::set_quad_rect(const ZRect &rect)
+{
+    float vertex_data[4 * 3] = {
+        rect.origin.x, rect.origin.y, 0.0,
+        rect.origin.x + rect.size.width, rect.origin.y, 0.0,
+        rect.origin.x, rect.origin.y + rect.size.height, 0.0,
+        rect.origin.x + rect.size.width, rect.origin.y + rect.size.height, 0.0
+    };
+    
+    ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
+    _vbo->load_data(vertex_data, 4 * 3 * sizeof(float), usage);
 }
 
 ZGeometryRef ZQuad::copy() const

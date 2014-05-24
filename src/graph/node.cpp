@@ -47,6 +47,17 @@ bool ZNode::operator!=(const ZNode &other)
 
 #pragma mark - Accessors
 
+ZNode* ZNode::get_parent() { return _parent; }
+ZScene* ZNode::get_scene() { return _scene; }
+std::string ZNode::get_name() const { return _name; }
+void ZNode::set_name(const std::string &name) { _name = name; }
+ZVector ZNode::get_position() { return _position; }
+ZMatrix ZNode::get_transform() { return _transform; }
+void ZNode::set_transform(const ZMatrix &transform) { _transform = transform; }
+ZGeometryRef ZNode::get_geometry() const { return _geometry; }
+void ZNode::set_geometry(ZGeometryRef geometry) { _geometry = geometry; }
+std::vector<ZNodeRef> ZNode::get_children() { return _children; }
+
 void ZNode::set_position(const ZVector &position)
 {
     _position = position;
