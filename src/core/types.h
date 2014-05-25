@@ -7,12 +7,14 @@
  
 #pragma once
 
-#include <stdint.h>
+#include <chrono>
+#include <cstdint>
 #include <zge/defines.h>
 
 BEGIN_ZGE_NAMESPACE
 
-typedef uint32_t ZTimeInterval;
+typedef std::chrono::time_point<std::chrono::system_clock> ZTime;
+typedef std::chrono::duration<double> ZTimeInterval;
 
 struct ZPoint2D {
     float x;

@@ -8,7 +8,8 @@
 #include <zge/node.h>
 #include <zge/logger.h>
 #include <zge/util.h>
-
+#include <algorithm>
+#include <unordered_set>
 #include <sstream>
 #include <typeinfo>
 
@@ -106,6 +107,29 @@ void ZNode::remove_from_parent()
     }
 }
 
+#pragma mark - Actions
+
+void ZNode::add_action(ZActionRef action)
+{
+    _actions.push_back(action);
+    action->_set_start_time(ZUtil::get_current_time());
+}
+
+void ZNode::remove_action(ZActionRef action)
+{
+    auto rmaction = std::find(_actions.begin(), _actions.end(), action);
+    if (rmaction != _actions.end()) {
+        _actions.erase(rmaction);
+    } else {
+        zlog("Could not find action %p in node %s", action.get(), get_description().c_str());
+    }
+}
+
+void ZNode::remove_all_actions()
+{
+    _actions.clear();
+}
+
 #pragma mark - Description
 
 std::string ZNode::get_description()
@@ -131,6 +155,32 @@ void ZNode::_draw(ZRenderContextRef context)
     }
     
     context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
+}
+
+void ZNode::_update()
+{
+    // update children
+    for (ZNodeRef child : _children) {
+        child->_update();
+    }
+    
+    // step actions
+    ZNodeRef selfptr = shared_from_this();
+    for (ZActionRef action : _actions) {
+        if (!action->is_finished()) {
+            action->step(selfptr);
+        }
+    }
+    
+    // remove completed actions
+    auto new_end = std::remove_if(_actions.begin(), _actions.end(), [](const ZActionRef &action) {
+        bool finished = action->is_finished();
+        if (finished) {
+            zlog("Removing completed action %p", action.get());
+        }
+        return finished;
+    });
+    _actions.erase(new_end, _actions.end());
 }
 
 void ZNode::_remove_child_uid(unsigned uid)

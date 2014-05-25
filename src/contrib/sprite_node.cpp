@@ -22,12 +22,16 @@ void ZSpriteNode::set_texture(ZTextureRef texture)
 {
     _texture = texture;
     
-    if (!_texture_material.get()) {
-        _texture_material = ZTextureMaterialRef(new ZTextureMaterial);
-        _quad->add_material(_texture_material);
+    if (_texture.get()) {
+        if (!_texture_material.get()) {
+            _texture_material = ZTextureMaterialRef(new ZTextureMaterial);
+            _quad->add_material(_texture_material);
+        }
     }
     
-    _texture_material->set_texture(_texture);
+    if (_texture_material.get()) {
+        _texture_material->set_texture(_texture);
+    }
 }
 
 void ZSpriteNode::set_color(const ZColor &color)

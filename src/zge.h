@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <zge/action.h>
 #include <zge/application.h>
 #include <zge/audio_asset.h>
 #include <zge/audio_manager.h>

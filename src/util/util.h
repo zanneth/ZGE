@@ -7,10 +7,7 @@
 
 #pragma once
 
-#include <cmath>
-#include <string>
-#include <vector>
-#include <zge/defines.h>
+#include <zge/foundation.h>
 
 #define zassert(...)    zge::ZUtil::assert_true(__VA_ARGS__)
 
@@ -29,6 +26,9 @@ public:
     
     // assertions with formatted error strings
     static void assert_true(bool expression, const char *format, ...) throw() ZFORMATARG(2, 3);
+    
+    // return the current time
+    static ZTime get_current_time();
 };
 
 END_ZGE_NAMESPACE

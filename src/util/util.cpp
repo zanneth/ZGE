@@ -7,7 +7,9 @@
 
 #include <zge/util.h>
 #include <zge/exception.h>
+#include <chrono>
 #include <cstdio>
+#include <cmath>
 #include <sstream>
 
 BEGIN_ZGE_NAMESPACE
@@ -75,6 +77,11 @@ void ZUtil::assert_true(bool expression, const char *format, ...) throw()
         exception.extra_info = error_message;
         throw exception;
     }
+}
+
+ZTime ZUtil::get_current_time()
+{
+    return std::chrono::system_clock::now();
 }
 
 END_ZGE_NAMESPACE

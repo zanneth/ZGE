@@ -66,4 +66,6 @@ public:
     friend class ZMatrix;
 };
 
+extern const ZVector ZVecZero;
+
 END_ZGE_NAMESPACE

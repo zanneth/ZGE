@@ -23,7 +23,9 @@ struct ZDisplayImpl {
 
 ZDisplay::ZDisplay(const ZDisplayMode &mode) :
     _impl(new ZDisplayImpl),
-    _display_mode(mode)
+    _display_mode(mode),
+    _initialized(false),
+    _captures_input(false)
 {}
 
 ZDisplay::~ZDisplay()

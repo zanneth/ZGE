@@ -7,12 +7,10 @@
  
 #pragma once
 
-#include <zge/defines.h>
+#include <zge/foundation.h>
+#include <zge/action.h>
 #include <zge/geometry.h>
 #include <zge/render_context.h>
-#include <memory>
-#include <string>
-#include <vector>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -20,7 +18,7 @@ class ZScene;
 
 typedef std::shared_ptr<class ZNode> ZNodeRef;
 
-class ZNode {
+class ZNode : public std::enable_shared_from_this<ZNode> {
 protected:
     unsigned     _uid;
     ZVector      _position;
@@ -31,7 +29,9 @@ protected:
     
     ZNode   *_parent; // weak
     ZScene  *_scene; // weak
-    std::vector<ZNodeRef> _children;
+    
+    std::vector<ZNodeRef>   _children;
+    std::vector<ZActionRef> _actions;
     
 public:
     ZNode(ZGeometryRef geometry = nullptr);
@@ -71,12 +71,18 @@ public:
     /* Description */
     virtual std::string get_description();
     
+    /* Actions */
+    void add_action(ZActionRef action);
+    void remove_action(ZActionRef action);
+    void remove_all_actions();
+    
     /* Callbacks */
     virtual void on_enter() {}
     virtual void on_exit() {}
     
 protected:
     virtual void _draw(ZRenderContextRef context);
+    virtual void _update();
 
 private:
     void _remove_child_uid(unsigned uid);

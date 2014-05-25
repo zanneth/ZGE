@@ -22,7 +22,7 @@ typedef std::function<void(ZTimerRef)> ZTimerFunction;
 class ZTimer : public ZSchedulable, ZNoncopyable, public std::enable_shared_from_this<ZTimer> {
 protected:
     ZTimerFunction _function;
-    ZTimeInterval _interval;
+    uint32_t _interval;
     bool _repeats;
     
     uint32_t _time_scheduled;
