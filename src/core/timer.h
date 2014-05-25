@@ -22,7 +22,7 @@ typedef std::function<void(ZTimerRef)> ZTimerFunction;
 class ZTimer : public ZSchedulable, ZNoncopyable, public std::enable_shared_from_this<ZTimer> {
 protected:
     ZTimerFunction _function;
-    uint32_t _interval;
+    ZTimeInterval _interval;
     bool _repeats;
     
     uint32_t _time_scheduled;
@@ -36,8 +36,8 @@ public:
     void set_function(const ZTimerFunction &function);
     
     // How often the timer should fire once scheduled.
-    uint32_t get_interval() const;
-    void     set_interval(const uint32_t interval);
+    ZTimeInterval get_interval() const;
+    void          set_interval(ZTimeInterval interval);
     
     // Whether the timer should repeat or not (default is false).
     bool repeats() const;

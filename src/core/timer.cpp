@@ -6,6 +6,7 @@
  */
 
 #include "timer.h"
+#include <chrono>
 #include <zge/run_loop.h>
 #include <SDL2/SDL.h>
 
@@ -25,8 +26,8 @@ ZTimer::~ZTimer()
 
 void ZTimer::set_function(const ZTimerFunction &function) { _function = function; }
 
-uint32_t ZTimer::get_interval() const { return _interval; }
-void ZTimer::set_interval(const uint32_t interval) { _interval = interval; }
+ZTimeInterval ZTimer::get_interval() const { return _interval; }
+void ZTimer::set_interval(ZTimeInterval interval) { _interval = interval; }
 
 bool ZTimer::repeats() const { return _repeats; }
 void ZTimer::set_repeats(bool repeats) { _repeats = repeats; }
@@ -35,6 +36,8 @@ void ZTimer::set_repeats(bool repeats) { _repeats = repeats; }
 
 void ZTimer::run(uint32_t dtime)
 {
+    using namespace std::chrono;
+    
     uint32_t time = SDL_GetTicks();
     uint32_t time_delta = 0;
     
@@ -44,7 +47,8 @@ void ZTimer::run(uint32_t dtime)
         time_delta = time - _time_last_fired;
     }
     
-    if (time_delta >= _interval) {
+    uint32_t interval_millis = duration_cast<milliseconds>(_interval).count();
+    if (time_delta >= interval_millis) {
         fire();
         
         if (!_repeats) {
