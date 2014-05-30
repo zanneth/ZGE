@@ -24,17 +24,25 @@ public:
     ZTimeInterval get_duration() const;
     void set_duration(ZTimeInterval duration);
     
+    uint64_t get_repeat_count() const;
+    void set_repeat_count(uint64_t repeat_count);
+    
     ZTime get_start_time() const;
     
     virtual bool is_finished() const = 0;
     virtual void step(std::shared_ptr<ZNode> node) = 0;
     
+public:
+    static const uint64_t repeat_count_infinity;
+    
 protected:
     void _set_start_time(ZTime start_time);
     friend class ZNode;
     
-private:
+protected:
     ZTimeInterval _duration;
+    uint64_t      _repeat_count;
+    uint64_t      _num_repeats;
     ZTime         _start_time;
 };
 
