@@ -54,7 +54,7 @@ void ZRenderManager::run(uint32_t dtime)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         if (_scene.get() != nullptr) {
-            _scene->_update();
+            _scene->_update_internal();
             _scene->_draw(_context);
         }
     }

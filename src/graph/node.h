@@ -79,10 +79,11 @@ public:
     /* Callbacks */
     virtual void on_enter() {}
     virtual void on_exit() {}
+    virtual void update() {}
     
 protected:
     virtual void _draw(ZRenderContextRef context);
-    virtual void _update();
+    virtual void _update_internal();
 
 private:
     void _remove_child_uid(unsigned uid);

@@ -157,12 +157,15 @@ void ZNode::_draw(ZRenderContextRef context)
     context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
 }
 
-void ZNode::_update()
+void ZNode::_update_internal()
 {
     // update children
     for (ZNodeRef child : _children) {
-        child->_update();
+        child->_update_internal();
     }
+    
+    // update callback
+    update();
     
     // step actions
     ZNodeRef selfptr = shared_from_this();
