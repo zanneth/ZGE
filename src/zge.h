@@ -11,7 +11,6 @@
 #include <zge/application.h>
 #include <zge/audio_asset.h>
 #include <zge/audio_manager.h>
-#include <zge/bmp_image.h>
 #include <zge/3dcamera.h>
 #include <zge/camera.h>
 #include <zge/color.h>

@@ -18,11 +18,15 @@ struct ZPixelFormat {
 
 class ZImage : ZNoncopyable {
 public:
+    ZImage(std::string path);
     virtual ~ZImage();
     
-    virtual ZSize2D      get_size() const = 0;
-    virtual ZPixelFormat get_pixel_format() const = 0;
-    virtual ZDataRef     get_pixel_data() const = 0;
+    ZSize2D      get_size() const;
+    ZPixelFormat get_pixel_format() const;
+    ZDataRef     get_pixel_data() const;
+    
+private:
+    std::auto_ptr<struct _ZImageImpl> _impl;
 };
 
 typedef std::shared_ptr<ZImage> ZImageRef;

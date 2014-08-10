@@ -27,7 +27,19 @@ ZRenderManager::~ZRenderManager()
 ZRenderContextRef ZRenderManager::get_context() const { return _context; }
 
 ZSceneRef ZRenderManager::get_scene() const { return _scene; }
-void ZRenderManager::set_scene(ZSceneRef scene) { _scene = scene; }
+
+void ZRenderManager::set_scene(ZSceneRef scene)
+{
+    if (_scene) {
+        _scene->on_exit();
+    }
+    
+    _scene = scene;
+    
+    if (_scene) {
+        _scene->on_enter();
+    }
+}
 
 #pragma mark - Overrides
 
