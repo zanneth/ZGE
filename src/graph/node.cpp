@@ -144,8 +144,8 @@ void ZNode::_draw(ZRenderContextRef context)
 {
     context->push_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
     
-    for (ZNodeRef child : _children) {
-        child->_draw(context);
+    for (auto child_itr = _children.rbegin(); child_itr != _children.rend(); ++child_itr) {
+        (*child_itr)->_draw(context);
     }
     
     if (_geometry.get()) {
