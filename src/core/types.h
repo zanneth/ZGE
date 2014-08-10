@@ -29,6 +29,18 @@ struct ZSize2D {
 struct ZRect {
     ZPoint2D origin;
     ZSize2D size;
+    
+    inline bool contains_rect(const ZRect &other) const {
+        return (
+            (
+                other.origin.x >= origin.x &&
+                other.origin.x + other.size.width < origin.x + size.width
+            ) && (
+                other.origin.y >= origin.y &&
+                other.origin.y + other.size.height < origin.y + size.height
+            )
+        );
+    }
 };
     
 enum ZVertexAttributeIndex {

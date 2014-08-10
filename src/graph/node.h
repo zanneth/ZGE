@@ -49,10 +49,10 @@ public:
     std::string get_name() const;
     void        set_name(const std::string &name);
     
-    virtual ZVector get_position();
+    virtual ZVector get_position() const;
     virtual void    set_position(const ZVector &position);
     
-    virtual ZMatrix get_transform();
+    virtual ZMatrix get_transform() const;
     virtual void    set_transform(const ZMatrix &transform);
     
     ZGeometryRef get_geometry() const;

@@ -33,6 +33,8 @@ public:
     float get_rotation() const;
     void set_rotation(float radians);
     
+    ZRect get_frame() const;
+    
 private:
     ZTextureMaterialRef _texture_material;
     ZColorMaterialRef   _color_material;

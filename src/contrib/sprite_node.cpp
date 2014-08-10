@@ -64,6 +64,15 @@ void ZSpriteNode::set_rotation(float radians)
     _rotation = radians;
 }
 
+ZRect ZSpriteNode::get_frame() const
+{
+    ZVector origin = this->get_position();
+    return {
+        .origin = ZPoint2D{origin.get_x(), origin.get_y()},
+        .size = _size
+    };
+}
+
 ZTextureRef ZSpriteNode::get_texture() const { return _texture; }
 ZColor ZSpriteNode::get_color() const { return _color; }
 ZSize2D ZSpriteNode::get_size() const { return _size; }
