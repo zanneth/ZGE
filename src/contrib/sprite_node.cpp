@@ -52,8 +52,21 @@ void ZSpriteNode::set_size(const ZSize2D size)
     _quad->set_quad_rect({{0.0, 0.0}, size});
 }
 
+void ZSpriteNode::set_rotation(float radians)
+{
+    float tx = _size.width / 2.0;
+    float ty = _size.height / 2.0;
+    ZMatrix transform = ZMatrix::translation(tx, ty, 0.0);
+    transform = transform.rotate(radians, 0.0, 0.0, 1.0);
+    transform = transform.translate(-tx, -ty, 0.0);
+    
+    set_transform(transform);
+    _rotation = radians;
+}
+
 ZTextureRef ZSpriteNode::get_texture() const { return _texture; }
 ZColor ZSpriteNode::get_color() const { return _color; }
 ZSize2D ZSpriteNode::get_size() const { return _size; }
+float ZSpriteNode::get_rotation() const { return _rotation; }
 
 END_ZGE_NAMESPACE

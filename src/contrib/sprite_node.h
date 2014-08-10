@@ -30,6 +30,9 @@ public:
     ZSize2D get_size() const;
     void set_size(const ZSize2D size);
     
+    float get_rotation() const;
+    void set_rotation(float radians);
+    
 private:
     ZTextureMaterialRef _texture_material;
     ZColorMaterialRef   _color_material;
@@ -37,6 +40,7 @@ private:
     ZColor              _color;
     ZQuadRef            _quad;
     ZSize2D             _size;
+    float               _rotation;
 };
 
 typedef std::shared_ptr<ZSpriteNode> ZSpriteNodeRef;
