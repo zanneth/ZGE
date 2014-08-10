@@ -78,4 +78,14 @@ ZRect ZEngine::get_viewport_rect() const
     return viewport_rect;
 }
 
+ZSceneRef ZEngine::get_current_scene() const
+{
+    return _render_manager->get_scene();
+}
+
+void ZEngine::set_current_scene(ZSceneRef scene)
+{
+    _render_manager->set_scene(scene);
+}
+
 END_ZGE_NAMESPACE

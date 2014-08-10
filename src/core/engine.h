@@ -30,6 +30,10 @@ public:
     /* Utility */
     ZRect get_viewport_rect() const;
     
+    // convenience: accesses the render manager's scene property
+    ZSceneRef get_current_scene() const;
+    void set_current_scene(ZSceneRef scene);
+    
     /* Initialization */
     void initialize();
     
