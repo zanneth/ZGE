@@ -11,6 +11,8 @@
 
 BEGIN_ZGE_NAMESPACE
 
+static ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt);
+
 struct _ZImageImpl {
     SDL_Surface *img_surface;
 };
@@ -44,17 +46,25 @@ ZSize2D ZImage::get_size() const
     return {(float)width, (float)height};
 }
 
-ZPixelFormat ZImage::get_pixel_format() const
+ZImageFormat ZImage::get_format() const
 {
-    ZPixelFormat format = {
-        .bytes_per_pixel = 4
+    ZPixelFormat pixel_frmt = ZPIXEL_FORMAT_RGBA;
+    SDL_PixelFormat *sdl_frmt = (_impl->img_surface ? _impl->img_surface->format : nullptr);
+    if (sdl_frmt) {
+        pixel_frmt = _pixel_frmt_from_sdl_frmt(sdl_frmt);
+    }
+    
+    ZImageFormat format = {
+        .bytes_per_pixel = 4,
+        .pixel_format = pixel_frmt
     };
+    
     return format;
 }
 
 ZDataRef ZImage::get_pixel_data() const
 {
-    ZPixelFormat format = get_pixel_format();
+    ZImageFormat format = get_format();
     SDL_Surface *surface = _impl->img_surface;
     int width = surface->w;
     int height = surface->h;
@@ -63,6 +73,22 @@ ZDataRef ZImage::get_pixel_data() const
     
     ZDataRef pixel_data = std::make_shared<ZData>(surface->pixels, pixel_buffer_sz);
     return pixel_data;
+}
+
+#pragma mark - Internal
+
+ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt)
+{
+    ZPixelFormat format = ZPIXEL_FORMAT_RGBA;
+    uint32_t rmask = sdl_frmt->Rmask;
+    
+    if (rmask == 0x0) {
+        format = ZPIXEL_FORMAT_RGBA;
+    } else if (rmask == 0xff0000) {
+        format = ZPIXEL_FORMAT_BGRA;
+    }
+    
+    return format;
 }
 
 END_ZGE_NAMESPACE

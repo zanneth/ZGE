@@ -207,4 +207,26 @@ size_t ZGLUtil::gl_host_size_for_component(ZComponentType component_type)
     return size;
 }
 
+GLenum ZGLUtil::gl_format_from_pixel_format(ZPixelFormat format)
+{
+    GLenum gl_frmt = 0;
+    switch (format) {
+        case ZPIXEL_FORMAT_RGB:
+            gl_frmt = GL_RGB;
+            break;
+        case ZPIXEL_FORMAT_RGBA:
+            gl_frmt = GL_RGBA;
+            break;
+        case ZPIXEL_FORMAT_BGR:
+            gl_frmt = GL_BGR;
+            break;
+        case ZPIXEL_FORMAT_BGRA:
+            gl_frmt = GL_BGRA;
+            break;
+        default:
+            break;
+    }
+    return gl_frmt;
+}
+
 END_ZGE_NAMESPACE

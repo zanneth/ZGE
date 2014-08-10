@@ -92,4 +92,16 @@ struct ZBufferUsage {
     ZBufferUsageNature nature;
 };
 
+enum ZPixelFormat {
+    ZPIXEL_FORMAT_RGB,
+    ZPIXEL_FORMAT_BGR,
+    ZPIXEL_FORMAT_RGBA,
+    ZPIXEL_FORMAT_BGRA,
+};
+
+struct ZImageFormat {
+    uint8_t bytes_per_pixel;
+    ZPixelFormat pixel_format;
+};
+
 END_ZGE_NAMESPACE

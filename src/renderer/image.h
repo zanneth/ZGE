@@ -12,17 +12,13 @@
 
 BEGIN_ZGE_NAMESPACE
 
-struct ZPixelFormat {
-    uint8_t bytes_per_pixel;
-};
-
 class ZImage : ZNoncopyable {
 public:
     ZImage(std::string path);
     virtual ~ZImage();
     
     ZSize2D      get_size() const;
-    ZPixelFormat get_pixel_format() const;
+    ZImageFormat get_format() const;
     ZDataRef     get_pixel_data() const;
     
 private:

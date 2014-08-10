@@ -7,6 +7,7 @@
 
 #include <zge/texture.h>
 #include <zge/opengl.h>
+#include <zge/glutil.h>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -27,7 +28,9 @@ ZTexture::ZTexture(ZImageRef image) :
     
     ZSize2D img_size = image->get_size();
     ZDataRef img_data = image->get_pixel_data();
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_size.width, img_size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img_data->get_data());
+    ZImageFormat img_format = image->get_format();
+    GLenum gl_format = ZGLUtil::gl_format_from_pixel_format(img_format.pixel_format);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_size.width, img_size.height, 0, gl_format, GL_UNSIGNED_BYTE, img_data->get_data());
     glBindTexture(GL_TEXTURE_2D, 0);
     
     _impl->name = texture;
