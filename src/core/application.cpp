@@ -10,7 +10,6 @@
 #include <zge/logger.h>
 #include <zge/run_loop.h>
 #include <zge/util.h>
-
 #include <cstdlib>
 #include <ctime>
 #include <SDL2/SDL.h>
@@ -20,8 +19,7 @@ BEGIN_ZGE_NAMESPACE
 static ZApplication *__current_application = nullptr;
 
 ZApplication::ZApplication(int argc, const char **argv) :
-    _show_cursor(true),
-    _time_start(0)
+    _show_cursor(true)
 {
     set_arguments(argc, argv);
     _main_runloop._on_main_thread = true;
@@ -58,7 +56,7 @@ void ZApplication::run()
     std::srand((unsigned)std::time(NULL));
     
     // perform any remaining initializations
-    _time_start = SDL_GetTicks();
+    _time_start = ZUtil::get_current_time();
     
     // callback to client to notify application is ready to run
     application_ready();
@@ -83,7 +81,6 @@ bool ZApplication::shows_cursor() const { return _show_cursor; }
 
 void ZApplication::set_shows_cursor(bool cursor) { _show_cursor = cursor; }
 
-
 bool ZApplication::get_use_relative_cursor() const { return _use_relative_cursor; }
 
 void ZApplication::set_use_relative_cursor(bool use_relative)
@@ -105,13 +102,9 @@ void ZApplication::start_main_runloop()
 
 #pragma mark - Utility Functions
 
-uint32_t ZApplication::get_time_running()
+ZTimeInterval ZApplication::get_time_running()
 {
-    if (_time_start == 0) {
-        return 0;
-    }
-    
-    return SDL_GetTicks() - _time_start;
+    return ZUtil::get_current_time() - _time_start;
 }
 
 void ZApplication::exit()

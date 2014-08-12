@@ -23,7 +23,7 @@ class ZApplication : ZNoncopyable {
     bool _use_relative_cursor;
     
     ZRunloop _main_runloop;
-    uint32_t _time_start;
+    ZTime _time_start;
     
 public:
     ZApplication(int argc, const char **argv);
@@ -50,7 +50,7 @@ public:
     void start_main_runloop();
     
     /* Utility Functions */
-    uint32_t get_time_running(); // returns time in seconds
+    ZTimeInterval get_time_running();
     void exit();
     
     /* Handling Events */
