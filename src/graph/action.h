@@ -69,4 +69,6 @@ private:
     bool    _finished;
 };
 
+typedef std::shared_ptr<ZTranslationAction> ZTranslationActionRef;
+
 END_ZGE_NAMESPACE

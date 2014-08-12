@@ -8,7 +8,7 @@
 #pragma once
 
 #include <memory>
-#include <zge/defines.h>
+#include <zge/foundation.h>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -17,7 +17,7 @@ class ZRunloop;
 
 class ZSchedulable {
 protected:
-    uint32_t _last_update = 0;
+    ZTime _last_update;
     ZRunloop *_run_loop = nullptr; // weak
     
 public:

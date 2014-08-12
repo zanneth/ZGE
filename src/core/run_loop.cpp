@@ -6,9 +6,9 @@
  */
  
 #include <zge/run_loop.h>
-
+#include <zge/util.h>
 #include <algorithm>
-#include <SDL2/SDL.h>
+#include <thread>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -59,24 +59,20 @@ void ZRunloop::unschedule(ZSchedulableRef schedulable)
 
 void ZRunloop::_main()
 {
+    using namespace std::chrono;
     while (_running) {
         for (ZSchedulableRef schedulable : _schedulables) {
-            uint32_t time = SDL_GetTicks();
-            uint32_t last_update = schedulable->_last_update;
-            uint32_t dtime;
+            ZTime time = ZUtil::get_current_time();
+            ZTime last_update = schedulable->_last_update;
+            ZTimeInterval dtime = time - last_update;
+            uint32_t millseconds = duration_cast<milliseconds>(dtime).count();
             
-            if (last_update == 0) {
-                dtime = 0;
-            } else {
-                dtime = time - last_update;
-            }
-            
-            schedulable->run(dtime);
+            schedulable->run(millseconds);
             schedulable->_last_update = time;
         }
         
-        // very naive timing mechanism.
-        SDL_Delay(1);
+        // sleep so we don't peg at 100%
+        std::this_thread::sleep_for(milliseconds(1));
     }
 }
 
