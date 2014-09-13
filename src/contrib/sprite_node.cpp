@@ -14,7 +14,7 @@ ZSpriteNode::ZSpriteNode(ZTextureRef texture) :
 {
     set_geometry(_quad);
     set_texture(texture);
-    set_color(ZWhiteColor);
+    set_color(ZColor::white);
 }
 
 #pragma mark - Accessors

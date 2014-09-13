@@ -21,7 +21,7 @@ void ZMaterial::finalize_draw(ZRenderContextRef context)
 #pragma mark - ZColorMaterial
 
 ZColorMaterial::ZColorMaterial() :
-    _color(ZWhiteColor)
+    _color(ZColor::white)
 {}
 
 ZColor ZColorMaterial::get_color() const { return _color; }

@@ -52,7 +52,7 @@ typedef std::shared_ptr<ZAction> ZActionRef;
 
 class ZTranslationAction : public ZAction {
 public:
-    ZTranslationAction(const ZVector &start = ZVecZero, const ZVector &end = ZVecZero);
+    ZTranslationAction(const ZVector &start = ZVector::zero, const ZVector &end = ZVector::zero);
     
     ZVector get_start_position() const;
     void set_start_position(const ZVector &start);

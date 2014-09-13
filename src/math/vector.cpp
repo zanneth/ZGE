@@ -11,7 +11,7 @@
 
 BEGIN_ZGE_NAMESPACE
 
-const ZVector ZVecZero = ZVector({0.0, 0.0, 0.0});
+const ZVector ZVector::zero = ZVector({0.0, 0.0, 0.0});
 
 ZVector::ZVector(std::initializer_list<float> list) :
     _impl(new ZVectorImpl)

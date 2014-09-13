@@ -9,6 +9,13 @@
 
 BEGIN_ZGE_NAMESPACE
 
+const ZColor ZColor::black = ZColor(0.0, 0.0, 0.0, 1.0);
+const ZColor ZColor::white = ZColor(1.0, 1.0, 1.0, 1.0);
+const ZColor ZColor::clear = ZColor(0.0, 0.0, 0.0, 0.0);
+const ZColor ZColor::red = ZColor(1.0, 0.0, 0.0, 1.0);
+const ZColor ZColor::green = ZColor(0.0, 1.0, 0.0, 1.0);
+const ZColor ZColor::blue = ZColor(0.0, 0.0, 1.0, 1.0);
+
 ZColor::ZColor(float r, float g, float b, float a) :
     r(r),
     g(g),
@@ -16,14 +23,7 @@ ZColor::ZColor(float r, float g, float b, float a) :
     a(a)
 {}
 
-ZColor ZBlackColor = ZColor(0.0, 0.0, 0.0, 1.0);
-ZColor ZWhiteColor = ZColor(1.0, 1.0, 1.0, 1.0);
-ZColor ZClearColor = ZColor(0.0, 0.0, 0.0, 0.0);
-ZColor ZRedColor   = ZColor(1.0, 0.0, 0.0, 1.0);
-ZColor ZGreenColor = ZColor(0.0, 1.0, 0.0, 1.0);
-ZColor ZBlueColor  = ZColor(0.0, 0.0, 1.0, 1.0);
-
-ZColor ZColorRandom(float alpha)
+ZColor ZColor::random_color(float alpha)
 {
     ZColor color;
     color.r = (float)arc4random() / (float)UINT32_MAX;

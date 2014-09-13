@@ -32,6 +32,9 @@ public:
     /// creates a new unit vector on the Z axis.
     static ZVector unit_z();
     
+    /// the zero vector
+    static const ZVector zero;
+    
     // accessors
     float& x();
     float get_x() const;

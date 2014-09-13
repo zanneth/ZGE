@@ -16,20 +16,20 @@ union ZColor {
     float data[4];
     
     ZColor(float r = 0.0, float g = 0.0, float b = 0.0, float a = 0.0);
+    
+    static ZColor random_color(float alpha = 1.0);
+    
+    static const ZColor black;
+    static const ZColor white;
+    static const ZColor clear;
+    static const ZColor red;
+    static const ZColor green;
+    static const ZColor blue;
 };
 
 union ZColorb {
     struct { uint8_t r, g, b, a; };
     uint8_t data[4];
 };
-
-extern ZColor ZBlackColor;
-extern ZColor ZWhiteColor;
-extern ZColor ZClearColor;
-extern ZColor ZRedColor;
-extern ZColor ZGreenColor;
-extern ZColor ZBlueColor;
-
-extern ZColor ZColorRandom(float alpha);
 
 END_ZGE_NAMESPACE
