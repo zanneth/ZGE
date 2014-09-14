@@ -104,6 +104,8 @@
 		0C688FA418727756002C38EF /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C688FA218727756002C38EF /* material.cpp */; };
 		0C688FA518727756002C38EF /* material.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C688FA318727756002C38EF /* material.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C7712F919177E4D0050C098 /* sound_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C7712F819177E4D0050C098 /* sound_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0C7D3E1119C57194003AC9E9 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C7D3E0F19C57194003AC9E9 /* cube.cpp */; };
+		0C7D3E1219C57194003AC9E9 /* cube.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C7D3E1019C57194003AC9E9 /* cube.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C82C32C191C8633006E0295 /* foundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C82C32B191C859A006E0295 /* foundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C82C32F191C87FB006E0295 /* resource_bundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C82C32D191C87FB006E0295 /* resource_bundle.cpp */; };
 		0C82C330191C87FB006E0295 /* resource_bundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C82C32E191C87FB006E0295 /* resource_bundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -642,6 +644,8 @@
 		0C688FA218727756002C38EF /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = material.cpp; path = src/graph/material.cpp; sourceTree = SOURCE_ROOT; };
 		0C688FA318727756002C38EF /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = src/graph/material.h; sourceTree = SOURCE_ROOT; };
 		0C7712F819177E4D0050C098 /* sound_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_private.h; sourceTree = "<group>"; };
+		0C7D3E0F19C57194003AC9E9 /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
+		0C7D3E1019C57194003AC9E9 /* cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
 		0C82C32B191C859A006E0295 /* foundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = foundation.h; sourceTree = "<group>"; };
 		0C82C32D191C87FB006E0295 /* resource_bundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = resource_bundle.cpp; sourceTree = "<group>"; };
 		0C82C32E191C87FB006E0295 /* resource_bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resource_bundle.h; sourceTree = "<group>"; };
@@ -1466,6 +1470,8 @@
 			children = (
 				0C898C751917251000CF3009 /* 3dcamera.h */,
 				0C898C741917251000CF3009 /* 3dcamera.cpp */,
+				0C7D3E1019C57194003AC9E9 /* cube.h */,
+				0C7D3E0F19C57194003AC9E9 /* cube.cpp */,
 				0C898C71191722B600CF3009 /* orthocamera.h */,
 				0C898C70191722B600CF3009 /* orthocamera.cpp */,
 				0C898C7919172F2900CF3009 /* quad.h */,
@@ -1719,6 +1725,7 @@
 				0C46F5C3175F00E800BF6EC9 /* SDL_test_compare.h in Headers */,
 				0C46F5CD175F00E800BF6EC9 /* SDL_timer.h in Headers */,
 				0C46F5B1175F00E800BF6EC9 /* SDL_opengles2.h in Headers */,
+				0C7D3E1219C57194003AC9E9 /* cube.h in Headers */,
 				0C46F5B8175F00E800BF6EC9 /* SDL_revision.h in Headers */,
 				0C46F598175F00E800BF6EC9 /* SDL_audio.h in Headers */,
 				0C898C7B19172F2900CF3009 /* quad.h in Headers */,
@@ -1837,6 +1844,7 @@
 				0C688FA018726E64002C38EF /* geometry.cpp in Sources */,
 				0C1F28BA17C1C3FF00CA03C4 /* vertex_array.cpp in Sources */,
 				0C977F571737510C0071E8E6 /* application.cpp in Sources */,
+				0C7D3E1119C57194003AC9E9 /* cube.cpp in Sources */,
 				0CF1D2A719176D2600CDBEEE /* sound.cpp in Sources */,
 				0CAA7A52191C975200462668 /* texture.cpp in Sources */,
 				0C977F591737510C0071E8E6 /* display.cpp in Sources */,

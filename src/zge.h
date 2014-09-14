@@ -14,6 +14,7 @@
 #include <zge/3dcamera.h>
 #include <zge/camera.h>
 #include <zge/color.h>
+#include <zge/cube.h>
 #include <zge/data.h>
 #include <zge/defines.h>
 #include <zge/display.h>
