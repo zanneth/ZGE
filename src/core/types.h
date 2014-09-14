@@ -7,6 +7,7 @@
  
 #pragma once
 
+#include <array>
 #include <chrono>
 #include <cstdint>
 #include <zge/defines.h>
@@ -30,7 +31,8 @@ struct ZRect {
     ZPoint2D origin;
     ZSize2D size;
     
-    inline bool contains_rect(const ZRect &other) const {
+    inline bool contains_rect(const ZRect &other) const
+    {
         return (
             (
                 other.origin.x >= origin.x &&
@@ -41,8 +43,19 @@ struct ZRect {
             )
         );
     }
-};
     
+    std::array<float, 4 * 2> vertex_data() const
+    {
+        std::array<float, 4 * 2> vertex_data{{
+            origin.x, origin.y,
+            origin.x + size.width, origin.y,
+            origin.x, origin.y + size.height,
+            origin.x + size.width, origin.y + size.height
+        }};
+        return vertex_data;
+    }
+};
+
 enum ZVertexAttributeIndex {
     ZVERTEX_ATTRIB_UNDEFINED = -1,
     ZVERTEX_ATTRIB_POSITION = 0,

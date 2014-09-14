@@ -53,6 +53,16 @@ void ZSpriteNode::set_size(const ZSize2D size)
     _quad->set_quad_rect({{0.0, 0.0}, size});
 }
 
+ZRect ZSpriteNode::get_texture_rect() const
+{
+    return _quad->get_texcoord_rect();
+}
+
+void ZSpriteNode::set_texture_rect(const ZRect &texture_rect)
+{
+    _quad->set_texcoord_rect(texture_rect);
+}
+
 void ZSpriteNode::set_rotation(float radians)
 {
     float tx = _size.width / 2.0;

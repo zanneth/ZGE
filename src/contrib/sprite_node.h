@@ -30,6 +30,9 @@ public:
     ZSize2D get_size() const;
     void set_size(const ZSize2D size);
     
+    ZRect get_texture_rect() const;
+    void set_texture_rect(const ZRect &texture_rect);
+    
     float get_rotation() const;
     void set_rotation(float radians);
     
