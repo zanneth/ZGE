@@ -25,6 +25,7 @@ public:
 private:
     ZVertexArrayRef    _vertex_array;
     ZGraphicsBufferRef _vbo;
+    ZGraphicsBufferRef _normals_vbo;
     float              _scale;
 };
 

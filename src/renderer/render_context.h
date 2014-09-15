@@ -29,17 +29,9 @@ enum ZRenderMatrixType {
 };
 
 typedef std::shared_ptr<class ZRenderContext> ZRenderContextRef;
+typedef std::shared_ptr<class ZLight> ZLightRef;
 
 class ZRenderContext : ZNoncopyable, public std::enable_shared_from_this<ZRenderContext> {
-    ZDisplayRef          _display;
-    ZShaderProgramRef    _shader_program;
-    bool                 _shaders_loaded;
-    std::stack<ZMatrix>  _matrix_stacks[_ZRENDER_MATRIX_COUNT];
-    ZVertexArrayRef      _bound_vertex_array;
-    ZTextureRef          _bound_texture;
-    
-    std::auto_ptr<struct ZRenderContextImpl> _impl;
-    
 public:
     ZRenderContext(ZDisplayRef display);
     virtual ~ZRenderContext();
@@ -61,6 +53,10 @@ public:
     void bind_texture(ZTextureRef texture);
     void unbind_texture();
     
+    void add_light(ZLightRef light);
+    void add_lights(std::vector<ZLightRef> lights);
+    void clear_lights();
+    
     /* Drawing */
     void draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count);
     void draw_elements(ZRenderMode mode, ZVertexArrayRef varray);
@@ -69,8 +65,20 @@ private:
     void        _load_shaders();
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
+    void        _set_boolean_uniform(const std::string uniform_name, bool flag);
     
     friend ZVertexArray;
+    
+private:
+    ZDisplayRef            _display;
+    ZShaderProgramRef      _shader_program;
+    bool                   _shaders_loaded;
+    std::stack<ZMatrix>    _matrix_stacks[_ZRENDER_MATRIX_COUNT];
+    ZVertexArrayRef        _bound_vertex_array;
+    ZTextureRef            _bound_texture;
+    std::vector<ZLightRef> _lights;
+    
+    std::auto_ptr<struct ZRenderContextImpl> _impl;
 };
 
 END_ZGE_NAMESPACE

@@ -99,11 +99,11 @@ void ZModel::load_file(std::string filename)
         Lib3dsMesh *mesh = model_file->meshes[i];
         
         // calculate normals and fill buffer
-        float (*cur_normals)[3] = (float(*)[3]) &normals[faces_copied * 3];
+        float (*cur_normals)[3] = (float(*)[3])&normals[faces_copied * 3];
         lib3ds_mesh_calculate_face_normals(mesh, cur_normals);
         
         // copy vertex data
-        float (*cur_vertices)[3] = (float(*)[3]) &vertices[i * 3];
+        float (*cur_vertices)[3] = (float(*)[3])&vertices[i * 3];
         memcpy(cur_vertices, mesh->vertices, 3 * mesh->nvertices * sizeof(float));
         
         // copy element data

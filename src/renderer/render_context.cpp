@@ -8,10 +8,12 @@
 #include <zge/render_context.h>
 #include <zge/fragment_shader.h>
 #include <zge/glutil.h>
+#include <zge/light.h>
 #include <zge/logger.h>
 #include <zge/vertex_shader.h>
 #include <zge/util.h>
 #include <SDL2/SDL.h>
+#include <stdexcept>
 #include <vector>
 
 BEGIN_ZGE_NAMESPACE
@@ -118,9 +120,7 @@ void ZRenderContext::bind_texture(ZTextureRef texture)
     glBindTexture(GL_TEXTURE_2D, texture_name);
     _bound_texture = texture;
     
-    ZUniformRef texture_flag_uniform = _shader_program->get_uniform("textureFlag");
-    int texture_flag = 1;
-    texture_flag_uniform->set_data(&texture_flag);
+    _set_boolean_uniform("textureFlag", true);
 }
 
 void ZRenderContext::unbind_texture()
@@ -128,9 +128,40 @@ void ZRenderContext::unbind_texture()
     glBindTexture(GL_TEXTURE_2D, 0);
     _bound_texture = nullptr;
     
-    ZUniformRef texture_flag_uniform = _shader_program->get_uniform("textureFlag");
-    int texture_flag = 0;
-    texture_flag_uniform->set_data(&texture_flag);
+    _set_boolean_uniform("textureFlag", false);
+}
+
+void ZRenderContext::add_light(ZLightRef light)
+{
+    if (_lights.size() > 0) {
+        throw std::runtime_error("Only one light is supported currently.");
+    }
+    
+    _lights.push_back(light);
+    
+    // flip lights flag if not set already
+    _set_boolean_uniform("lightFlag", true);
+    
+    // setup position uniform
+    ZUniformRef pos_uniform = _shader_program->get_uniform("lightPosition");
+    pos_uniform->set_data(light->get_position().get_data());
+    
+    // setup color uniform
+    ZUniformRef color_uniform = _shader_program->get_uniform("lightColor");
+    color_uniform->set_data(light->get_color().data);
+}
+
+void ZRenderContext::add_lights(std::vector<ZLightRef> lights)
+{
+    for (ZLightRef light : lights) {
+        add_light(light);
+    }
+}
+
+void ZRenderContext::clear_lights()
+{
+    _lights.clear();
+    _set_boolean_uniform("lightFlag", false);
 }
 
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
@@ -166,6 +197,7 @@ void ZRenderContext::_load_shaders()
         _shader_program->load_shader_source(ZVertexShaderSource, ZVERTEX_SHADER);
         _shader_program->load_shader_source(ZFragmentShaderSource, ZFRAGMENT_SHADER);
         _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_POSITION, "position");
+        _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_NORMAL, "normal");
         _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_TEXCOORD0, "texcoord0");
         _shader_program->bind_attribute_index(ZVERTEX_ATTRIB_COLOR, "color");
         _shader_program->link_program();
@@ -199,6 +231,13 @@ void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
     }
+}
+
+void ZRenderContext::_set_boolean_uniform(const std::string uniform_name, bool flag)
+{
+    ZUniformRef uniform = _shader_program->get_uniform(uniform_name);
+    int uniform_data = (flag ? 1 : 0);
+    uniform->set_data(&uniform_data);
 }
 
 END_ZGE_NAMESPACE

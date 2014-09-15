@@ -148,7 +148,7 @@ void ZNode::_draw(ZRenderContextRef context)
         (*child_itr)->_draw(context);
     }
     
-    if (_geometry.get()) {
+    if (_geometry) {
         _geometry->prepare_render(context);
         _geometry->render(context);
         _geometry->finalize_render(context);
