@@ -33,6 +33,12 @@ public:
 protected:
     void _draw(ZRenderContextRef context) override;
     
+    void _prepare_camera(ZRenderContextRef context);
+    void _prepare_lights(ZRenderContextRef context);
+    
+    void _teardown_camera(ZRenderContextRef context);
+    void _teardown_lights(ZRenderContextRef context);
+    
 private:
     void _evict_scene(ZNode *curnode);
     

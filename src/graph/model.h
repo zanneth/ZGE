@@ -19,13 +19,12 @@ BEGIN_ZGE_NAMESPACE
 class ZModel : public ZGeometry {
 protected:
     std::string     _name;
-    unsigned        _num_faces;
-    unsigned        _num_vertices;
+    size_t          _faces_count;
+    size_t          _vertices_count;
     ZVertexArrayRef _vertex_array;
     
-    ZElementGraphicsBufferRef _element_vbo;
-    ZGraphicsBufferRef        _vertex_vbo;
-    ZGraphicsBufferRef        _normal_vbo;
+    ZGraphicsBufferRef _vertex_vbo;
+    ZGraphicsBufferRef _normal_vbo;
     
 public:
     ZModel(std::string filename = std::string());

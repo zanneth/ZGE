@@ -43,6 +43,9 @@ public:
     float& z();
     float get_z() const;
     
+    /// returns a pointer to the internal data for this vector.
+    const float* get_data() const;
+    
     // operators
     ZVector& operator=(const ZVector &rhs);
     float&   operator[](unsigned idx);

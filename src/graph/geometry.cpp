@@ -73,7 +73,7 @@ void _update_material_data(ZRenderContextRef context, std::vector<ZMaterialRef> 
     for (ZMaterialRef material : materials) {
         std::string uniform_name = material->get_shader_name();
         ZUniformRef uniform = program->get_uniform(uniform_name);
-        if (uniform.get()) {
+        if (uniform) {
             const void *material_data = material->get_contents_data();
             uniform->set_data(material_data);
         }

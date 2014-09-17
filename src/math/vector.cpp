@@ -164,6 +164,11 @@ ZVector ZVector::unit_z()
     return { 0.0, 0.0, 1.0 };
 }
 
+const float* ZVector::get_data() const
+{
+    return _impl->data.data();
+}
+
 float ZVector::dot(const ZVector &other) const
 {
     return _impl->data.dot(other._impl->data);

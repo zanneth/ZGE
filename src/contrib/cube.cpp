@@ -10,49 +10,114 @@
 BEGIN_ZGE_NAMESPACE
 
 static const float __cube_vertex_data[] = {
-    -1.0f, -1.0f, -1.0f,
+    // front
+    -1.0f, 1.0f, 1.0f,
     -1.0f, -1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, 1.0f, -1.0f,
-    1.0f, -1.0f, 1.0f,
-    -1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
-    1.0f, 1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f, -1.0f,
-    1.0f, -1.0f, 1.0f,
-    -1.0f, -1.0f, 1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
     -1.0f, -1.0f, 1.0f,
     1.0f, -1.0f, 1.0f,
     1.0f, 1.0f, 1.0f,
-    1.0f, -1.0f, -1.0f,
-    1.0f, 1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
+
+    // right
     1.0f, 1.0f, 1.0f,
     1.0f, -1.0f, 1.0f,
+    1.0f, 1.0f, -1.0f,
+    1.0f, -1.0f, 1.0f,
+    1.0f, -1.0f, -1.0f,
+    1.0f, 1.0f, -1.0f,
+
+    // back
+    1.0f, 1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
+    -1.0f, 1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, 1.0f, -1.0f,
+
+    // left
+    -1.0f, 1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, 1.0f, 1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f, 1.0f,
+    -1.0f, 1.0f, 1.0f,
+
+    // top
+    -1.0f, 1.0f, -1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, -1.0f,
+    -1.0f, 1.0f, 1.0f,
     1.0f, 1.0f, 1.0f,
     1.0f, 1.0f, -1.0f,
-    -1.0f, 1.0f, -1.0f,
-    1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f, -1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, -1.0f, 1.0f
+
+    // bottom
+    1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, 1.0f,
+    -1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, 1.0f,
+    -1.0f, -1.0f, 1.0f,
+    -1.0f, -1.0f, -1.0f
+};
+
+static const float __cube_normals_data[] = {
+    // front
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+    0.0f, 0.0f, 1.0f,
+
+    // right
+    1.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
+
+    // back
+    0.0f, 0.0f, -1.0f,
+    0.0f, 0.0f, -1.0f,
+    0.0f, 0.0f, -1.0f,
+    0.0f, 0.0f, -1.0f,
+    0.0f, 0.0f, -1.0f,
+    0.0f, 0.0f, -1.0f,
+
+    // left
+    -1.0f, 0.0f, 0.0f,
+    -1.0f, 0.0f, 0.0f,
+    -1.0f, 0.0f, 0.0f,
+    -1.0f, 0.0f, 0.0f,
+    -1.0f, 0.0f, 0.0f,
+    -1.0f, 0.0f, 0.0f,
+
+    // top
+    0.0f, 1.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+
+    // bottom
+    0.0f, -1.0f, 0.0f,
+    0.0f, -1.0f, 0.0f,
+    0.0f, -1.0f, 0.0f,
+    0.0f, -1.0f, 0.0f,
+    0.0f, -1.0f, 0.0f,
+    0.0f, -1.0f, 0.0f
 };
 
 ZCube::ZCube(float scale) :
     _vertex_array(std::make_shared<ZVertexArray>()),
     _vbo(std::make_shared<ZGraphicsBuffer>()),
+    _normals_vbo(std::make_shared<ZGraphicsBuffer>()),
     _scale(scale)
 {
+    const ZBufferUsage static_draw_usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
+    
+    // setup vbo
     ZBufferAttribute attr = {
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,
@@ -72,8 +137,19 @@ ZCube::ZCube(float scale) :
         vertex_data[i] *= _scale;
     }
     
-    ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
-    _vbo->load_data(vertex_data, sizeof(vertex_data), usage);
+    _vbo->load_data(vertex_data, sizeof(vertex_data), static_draw_usage);
+    
+    // setup normals vbo
+    ZBufferAttribute normal_attrib = {
+        .components_per_vertex = 3,
+        .component_type = ZCOMPONENT_TYPE_FLOAT,
+        .normalized = false,
+        .stride = 0,
+        .offset = 0
+    };
+    _normals_vbo->add_attribute(normal_attrib);
+    _normals_vbo->load_data(__cube_normals_data, sizeof(__cube_normals_data), static_draw_usage);
+    _vertex_array->add_buffer(_normals_vbo, ZVERTEX_ATTRIB_NORMAL);
 }
 
 #pragma mark - Accessors
@@ -91,8 +167,8 @@ void ZCube::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
     
-    size_t num_faces = sizeof(__cube_vertex_data) / sizeof(__cube_vertex_data[0]) / 3;
-    context->draw_array(ZRENDER_MODE_TRIANGLE_STRIP, _vertex_array, 0, num_faces);
+    size_t num_triangles = sizeof(__cube_vertex_data) / sizeof(__cube_vertex_data[0]) / 3;
+    context->draw_array(ZRENDER_MODE_TRIANGLES, _vertex_array, 0, num_triangles);
 }
 
 END_ZGE_NAMESPACE

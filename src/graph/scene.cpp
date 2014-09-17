@@ -6,8 +6,8 @@
  */
  
 #include <zge/scene.h>
+#include <zge/light.h>
 #include <zge/logger.h>
-
 #include <typeinfo>
 
 BEGIN_ZGE_NAMESPACE
@@ -38,15 +38,13 @@ void ZScene::add_child(ZNodeRef node)
 
 void ZScene::_draw(ZRenderContextRef context)
 {
-    if (_active_camera.get()) {
-        _active_camera->open(context);
-    }
+    _prepare_camera(context);
+    _prepare_lights(context);
     
     ZNode::_draw(context);
     
-    if (_active_camera.get()) {
-        _active_camera->close();
-    }
+    _teardown_camera(context);
+    _teardown_lights(context);
 }
 
 #pragma mark - Private
@@ -57,6 +55,37 @@ void ZScene::_evict_scene(ZNode *curnode)
     for (ZNodeRef node : curnode->_children) {
         _evict_scene(node.get());
     }
+}
+
+void ZScene::_prepare_camera(ZRenderContextRef context)
+{
+    if (_active_camera) {
+        _active_camera->open(context);
+    }
+}
+
+void ZScene::_prepare_lights(ZRenderContextRef context)
+{
+    std::vector<ZLightRef> lights;
+    for (ZNodeRef child : _children) {
+        ZLightRef light = std::dynamic_pointer_cast<ZLight>(child);
+        if (light) {
+            lights.push_back(light);
+        }
+    }
+    context->add_lights(lights);
+}
+
+void ZScene::_teardown_camera(ZRenderContextRef context)
+{
+    if (_active_camera) {
+        _active_camera->close();
+    }
+}
+
+void ZScene::_teardown_lights(ZRenderContextRef context)
+{
+    context->clear_lights();
 }
 
 END_ZGE_NAMESPACE
