@@ -70,15 +70,7 @@ private:
     friend ZVertexArray;
     
 private:
-    ZDisplayRef            _display;
-    ZShaderProgramRef      _shader_program;
-    bool                   _shaders_loaded;
-    std::stack<ZMatrix>    _matrix_stacks[_ZRENDER_MATRIX_COUNT];
-    ZVertexArrayRef        _bound_vertex_array;
-    ZTextureRef            _bound_texture;
-    std::vector<ZLightRef> _lights;
-    
-    std::auto_ptr<struct ZRenderContextImpl> _impl;
+    std::unique_ptr<struct ZRenderContextImpl> _impl;
 };
 
 END_ZGE_NAMESPACE

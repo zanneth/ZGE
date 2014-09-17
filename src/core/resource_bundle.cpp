@@ -21,7 +21,7 @@ ZResourceBundle::ZResourceBundle(std::string path) :
 
 ZResourceBundle* ZResourceBundle::get_main_bundle()
 {
-    char path_separator;
+    char path_separator = '\0';
     std::string main_bundle_path = _get_main_bundle_path(&path_separator);
     
     static ZResourceBundle __main_bundle(main_bundle_path);

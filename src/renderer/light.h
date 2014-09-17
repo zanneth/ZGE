@@ -15,12 +15,13 @@
 BEGIN_ZGE_NAMESPACE
 
 enum ZLightType {
-    ZLIGHT_TYPE_OMNIDIRECTIONAL
+    ZLIGHT_TYPE_POINT,
+    ZLIGHT_TYPE_AMBIENT
 };
 
 class ZLight : public ZNode {
 public:
-    ZLight();
+    ZLight(ZLightType type = ZLIGHT_TYPE_POINT);
     
     ZLightType get_type() const;
     void set_type(ZLightType type);

@@ -9,8 +9,8 @@
 
 BEGIN_ZGE_NAMESPACE
 
-ZLight::ZLight() :
-    _type(ZLIGHT_TYPE_OMNIDIRECTIONAL),
+ZLight::ZLight(ZLightType type) :
+    _type(type),
     _color(ZColor::white)
 {}
 

@@ -29,7 +29,7 @@ void ZColorMaterial::set_color(const ZColor &color) { _color = color; }
 
 std::string ZColorMaterial::get_shader_name() const
 {
-    return "materialColor";
+    return "material.color";
 }
 
 const void* ZColorMaterial::get_contents_data() const
@@ -51,7 +51,7 @@ void ZTextureMaterial::set_texture(ZTextureRef texture)
 
 std::string ZTextureMaterial::get_shader_name() const
 {
-    return "materialTexture";
+    return "material.texture";
 }
 
 const void* ZTextureMaterial::get_contents_data() const
