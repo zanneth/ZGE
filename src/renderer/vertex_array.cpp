@@ -88,7 +88,7 @@ void ZVertexArray::_bind()
     for (unsigned i = 0; i < ZVERTEX_ATTRIB_COUNT; ++i) {
         ZVertexAttributeIndex index = (ZVertexAttributeIndex)i;
         ZGraphicsBufferRef buffer = _impl->buffers[index];
-        if (buffer.get()) {
+        if (buffer) {
             buffer->_bind();
             if (_impl->defined_attributes.count(index) == 0) {
                 _zvertexarray_setup_vertex_attrib_pointer(buffer, index);
@@ -97,7 +97,7 @@ void ZVertexArray::_bind()
         }
     }
     
-    if (_impl->element_buffer.get()) {
+    if (_impl->element_buffer) {
         _impl->element_buffer->_bind();
     }
 }

@@ -10,18 +10,20 @@
 #include <zge/logger.h>
 #include <zge/shader_program.h>
 #include <zge/util.h>
-
+#include <array>
 #include <cassert>
 #include <lib3ds.h>
 #include <sstream>
 
 BEGIN_ZGE_NAMESPACE
 
+template<typename T, size_t S>
+std::array<T, S> __copy_vertex_data(T vertex[S]);
+
 ZModel::ZModel(std::string filename) :
-    _num_faces(0),
-    _num_vertices(0),
+    _faces_count(0),
+    _vertices_count(0),
     _vertex_array(new ZVertexArray),
-    _element_vbo(new ZElementGraphicsBuffer),
     _vertex_vbo(new ZGraphicsBuffer),
     _normal_vbo(new ZGraphicsBuffer)
 {
@@ -45,7 +47,6 @@ ZModel::ZModel(std::string filename) :
     
     _vertex_array->add_buffer(_vertex_vbo, ZVERTEX_ATTRIB_POSITION);
     _vertex_array->add_buffer(_normal_vbo, ZVERTEX_ATTRIB_NORMAL);
-    _vertex_array->set_element_buffer(_element_vbo);
     
     if (filename.length()) {
         load_file(filename);
@@ -54,7 +55,7 @@ ZModel::ZModel(std::string filename) :
 
 ZGeometryRef ZModel::copy() const
 {
-    return ZModelRef(new ZModel(*this));
+    return std::make_shared<ZModel>(*this);
 }
 
 #pragma mark - Loading from Files
@@ -77,59 +78,43 @@ void ZModel::load_file(std::string filename)
     // load information about the model
     _name = model_file->name;
     
-    // calculate the total number of faces (triangles) and vertices
-    unsigned total_faces = 0;
-    unsigned total_vertices = 0;
-    for (unsigned i = 0; i < model_file->nmeshes; ++i) {
-        Lib3dsMesh *mesh = model_file->meshes[i];
-        total_faces += mesh->nfaces;
-        total_vertices += mesh->nvertices;
-    }
-    _num_faces = total_faces;
-    _num_vertices = total_vertices;
-    
-    // create our element, vertex, and normal arrays
-    unsigned *elements  = new unsigned[total_faces * 3]; // 3 indices (elements) per face
-    float *vertices     = new float[total_vertices * 3]; // 3 floats per vertex
-    float *normals      = new float[total_faces * 3];    // 3 floats per vertex normal per face
+    size_t total_faces = 0;
+    size_t total_vertices = 0;
+    std::vector<std::array<float, 3>> vertices;
+    std::vector<std::array<float, 3>> normals;
     
     // copy data for each mesh from model file
-    unsigned faces_copied = 0;
     for (unsigned i = 0; i < model_file->nmeshes; ++i) {
         Lib3dsMesh *mesh = model_file->meshes[i];
+        size_t mesh_faces_count = mesh->nfaces;
+        size_t mesh_vertices_count = mesh->nvertices;
         
-        // calculate normals and fill buffer
-        float (*cur_normals)[3] = (float(*)[3])&normals[faces_copied * 3];
-        lib3ds_mesh_calculate_face_normals(mesh, cur_normals);
+        float (*calculated_normals)[3] = new float[mesh_faces_count * 3][3];
+        lib3ds_mesh_calculate_vertex_normals(mesh, calculated_normals);
         
-        // copy vertex data
-        float (*cur_vertices)[3] = (float(*)[3])&vertices[i * 3];
-        memcpy(cur_vertices, mesh->vertices, 3 * mesh->nvertices * sizeof(float));
-        
-        // copy element data
-        for (unsigned j = 0; j < mesh->nfaces; ++j) {
+        unsigned cur_normals_idx = 0;
+        for (unsigned j = 0; j < mesh_faces_count; ++j) {
             Lib3dsFace *face = &mesh->faces[j];
             for (unsigned k = 0; k < 3; ++k) {
-                elements[faces_copied * 3 + k] = face->index[k];
+                vertices.push_back(__copy_vertex_data<float, 3>(mesh->vertices[face->index[k]]));
+                normals.push_back(__copy_vertex_data<float, 3>(calculated_normals[cur_normals_idx++]));
             }
-            
-            faces_copied++;
         }
+        
+        total_faces += mesh_faces_count;
+        total_vertices += mesh_vertices_count;
+        delete [] calculated_normals;
     }
     
     // load data into each VBO
+    #define VEC_ARR_DATA_SZ(vec) (vec.size() * 3 * sizeof(decltype(vec)::value_type::value_type))
     ZBufferUsage static_draw = { ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW };
-    _element_vbo->load_data(elements, total_faces * 3 * sizeof(unsigned), static_draw);
-    _vertex_vbo->load_data(vertices, total_vertices * 3 * sizeof(float), static_draw);
-    _normal_vbo->load_data(normals, total_faces * 3 * sizeof(float), static_draw);
+    _vertex_vbo->load_data(vertices.data(), VEC_ARR_DATA_SZ(vertices), static_draw);
+    _normal_vbo->load_data(normals.data(), VEC_ARR_DATA_SZ(normals), static_draw);
     
-    _element_vbo->set_elements_count(_num_faces * 3);
-    _element_vbo->set_indices_type(ZCOMPONENT_TYPE_UNSIGNED_INT);
+    _faces_count = total_faces;
+    _vertices_count = total_vertices;
     
-    // cleanup
-    delete[] elements;
-    delete[] vertices;
-    delete[] normals;
     lib3ds_file_free(model_file);
 }
 
@@ -138,7 +123,17 @@ void ZModel::load_file(std::string filename)
 void ZModel::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
-    context->draw_elements(ZRENDER_MODE_TRIANGLES, _vertex_array);
+    context->draw_array(ZRENDER_MODE_TRIANGLES, _vertex_array, 0, _faces_count * 3);
+}
+
+#pragma mark - Internal
+
+template<typename T, size_t S>
+std::array<T, S> __copy_vertex_data(T vertex[S])
+{
+    std::array<T, S> array;
+    std::copy(vertex, vertex + 3, array.begin());
+    return array;
 }
 
 END_ZGE_NAMESPACE
