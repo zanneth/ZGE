@@ -60,9 +60,9 @@ void main()
         float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));
         brightness = clamp(brightness, 0.0, 1.0);
         
-        vec4 ambient = vec4(0.0);
+        vec4 ambient = vec4(0.0, 0.0, 0.0, 1.0);
         if (ambientLight.exists == 1) {
-            ambient = ambientLight.color;
+            ambient = vec4(ambientLight.color.rgb * ambientLight.color.a, 1.0);
         }
         
         vec4 diffuseColor = ambient + brightness * diffuseLight.color;
