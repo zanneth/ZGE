@@ -50,10 +50,10 @@ void ZQuad::set_quad_rect(const ZRect &rect)
     _quad_rect = rect;
     
     float vertex_data[4 * 3] = {
-        rect.origin.x, rect.origin.y, 0.0,
         rect.origin.x + rect.size.width, rect.origin.y, 0.0,
+        rect.origin.x, rect.origin.y, 0.0,
+        rect.origin.x + rect.size.width, rect.origin.y + rect.size.height, 0.0,
         rect.origin.x, rect.origin.y + rect.size.height, 0.0,
-        rect.origin.x + rect.size.width, rect.origin.y + rect.size.height, 0.0
     };
     ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
     _vbo->load_data(vertex_data, 4 * 3 * sizeof(float), usage);
