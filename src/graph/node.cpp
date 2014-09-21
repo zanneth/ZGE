@@ -6,6 +6,7 @@
  */
  
 #include <zge/node.h>
+#include <zge/light.h>
 #include <zge/logger.h>
 #include <zge/util.h>
 #include <algorithm>
@@ -58,6 +59,8 @@ void ZNode::set_transform(const ZMatrix &transform) { _transform = transform; }
 ZGeometryRef ZNode::get_geometry() const { return _geometry; }
 void ZNode::set_geometry(ZGeometryRef geometry) { _geometry = geometry; }
 std::vector<ZNodeRef> ZNode::get_children() { return _children; }
+ZCameraRef ZNode::get_camera() const { return _camera; }
+void ZNode::set_camera(ZCameraRef camera) { _camera = camera; }
 
 void ZNode::set_position(const ZVector &position)
 {
@@ -142,10 +145,13 @@ std::string ZNode::get_description()
 
 void ZNode::_draw(ZRenderContextRef context)
 {
+    _prepare_camera(context);
+    _prepare_lights(context);
+    
     context->push_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
     
-    for (auto child_itr = _children.rbegin(); child_itr != _children.rend(); ++child_itr) {
-        (*child_itr)->_draw(context);
+    for (ZNodeRef child : _children) {
+        child->_draw(context);
     }
     
     if (_geometry) {
@@ -155,6 +161,9 @@ void ZNode::_draw(ZRenderContextRef context)
     }
     
     context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
+    
+    _teardown_camera(context);
+    _teardown_lights(context);
 }
 
 void ZNode::_update_internal()
@@ -186,6 +195,8 @@ void ZNode::_update_internal()
     _actions.erase(new_end, _actions.end());
 }
 
+#pragma mark - Internal
+
 void ZNode::_remove_child_uid(unsigned uid)
 {
     auto child = std::find_if(_children.begin(), _children.end(), [uid](ZNodeRef child) { return child->_uid == uid; });
@@ -215,6 +226,37 @@ void ZNode::_on_exit_internal()
     for (ZNodeRef child : _children) {
         child->_on_exit_internal();
     }
+}
+
+void ZNode::_prepare_camera(ZRenderContextRef context)
+{
+    if (_camera) {
+        _camera->open(context);
+    }
+}
+
+void ZNode::_prepare_lights(ZRenderContextRef context)
+{
+    std::vector<ZLightRef> lights;
+    for (ZNodeRef child : _children) {
+        ZLightRef light = std::dynamic_pointer_cast<ZLight>(child);
+        if (light) {
+            lights.push_back(light);
+        }
+    }
+    context->add_lights(lights);
+}
+
+void ZNode::_teardown_camera(ZRenderContextRef context)
+{
+    if (_camera) {
+        _camera->close();
+    }
+}
+
+void ZNode::_teardown_lights(ZRenderContextRef context)
+{
+    // XXX: should remove lights that we added to the render context here
 }
 
 END_ZGE_NAMESPACE

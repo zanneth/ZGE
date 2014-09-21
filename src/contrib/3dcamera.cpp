@@ -61,6 +61,7 @@ float Z3DCamera::get_far_clipping_distance() const { return _far_clip; }
 void Z3DCamera::set_far_clipping_distance(float distance) { _far_clip = distance; _projection_dirty = true; }
 ZVector Z3DCamera::get_look() const { return _look; }
 void Z3DCamera::set_look(const ZVector &look) { _look = look; _modelview_dirty = true; }
+ZVector Z3DCamera::get_position() const { return _position; }
 
 #pragma mark - Node Overrides
 
@@ -72,8 +73,6 @@ void Z3DCamera::set_position(const ZVector &position)
 
 void Z3DCamera::set_transform(const ZMatrix &transform)
 {
-    ZNode::set_transform(transform);
-    
     ZVector position = get_position();
     ZMatrix translation = ZMatrix::identity();
     translation.translate(position);

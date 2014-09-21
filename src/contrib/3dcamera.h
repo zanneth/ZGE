@@ -16,18 +16,6 @@
 BEGIN_ZGE_NAMESPACE
 
 class Z3DCamera : public ZCamera {
-    float _field_of_view;
-    float _near_clip;
-    float _far_clip;
-    
-    ZMatrix _projection_matrix;
-    ZMatrix _modelview_matrix;
-    ZVector _look;
-    
-    bool _open;
-    bool _projection_dirty;
-    bool _modelview_dirty;
-    
 public:
     Z3DCamera();
     
@@ -47,9 +35,11 @@ public:
     ZVector get_look() const;
     void    set_look(const ZVector &look);
     
-    /* Node Overrides */
-    void set_position(const ZVector &position) override;
-    void set_transform(const ZMatrix &transform) override;
+    ZVector get_position() const;
+    void    set_position(const ZVector &position);
+    
+    // convenience for setting above properties
+    void    set_transform(const ZMatrix &transform);
     
 private:
     void _construct_projection();
@@ -59,6 +49,20 @@ private:
     void _construct_modelview();
     void _open_modelview();
     void _close_modelview();
+    
+protected:
+    float _field_of_view;
+    float _near_clip;
+    float _far_clip;
+    
+    ZMatrix _projection_matrix;
+    ZMatrix _modelview_matrix;
+    ZVector _look;
+    ZVector _position;
+    
+    bool _open;
+    bool _projection_dirty;
+    bool _modelview_dirty;
 };
 
 typedef std::shared_ptr<Z3DCamera> Z3DCameraRef;

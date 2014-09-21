@@ -7,19 +7,17 @@
  
 #pragma once
 
-#include <zge/defines.h>
-#include <zge/node.h>
+#include <zge/foundation.h>
 #include <zge/render_context.h>
-#include <memory>
 
 BEGIN_ZGE_NAMESPACE
 
-class ZCamera : public ZNode {
+class ZCamera : ZNoncopyable {
 protected:
     ZRenderContextRef _current_context;
     
 public:
-    virtual ~ZCamera() {}
+    virtual ~ZCamera() = default;
     
     /* Open/Close */
     virtual void open(ZRenderContextRef context) = 0;

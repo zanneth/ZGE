@@ -9,6 +9,7 @@
 
 #include <zge/foundation.h>
 #include <zge/action.h>
+#include <zge/camera.h>
 #include <zge/geometry.h>
 #include <zge/render_context.h>
 
@@ -19,20 +20,6 @@ class ZScene;
 typedef std::shared_ptr<class ZNode> ZNodeRef;
 
 class ZNode : public std::enable_shared_from_this<ZNode> {
-protected:
-    unsigned     _uid;
-    ZVector      _position;
-    ZMatrix      _transform;
-    ZMatrix      _pos_transform;
-    std::string  _name;
-    ZGeometryRef _geometry;
-    
-    ZNode   *_parent; // weak
-    ZScene  *_scene; // weak
-    
-    std::vector<ZNodeRef>   _children;
-    std::vector<ZActionRef> _actions;
-    
 public:
     ZNode(ZGeometryRef geometry = nullptr);
     ZNode(const ZNode&) = default;
@@ -57,6 +44,9 @@ public:
     
     ZGeometryRef get_geometry() const;
     void         set_geometry(ZGeometryRef geometry);
+    
+    ZCameraRef get_camera() const;
+    void       set_camera(ZCameraRef camera);
     
     /* Manipulating Geometry */
     void append_transform(const ZMatrix &transform);
@@ -89,8 +79,28 @@ private:
     void _remove_child_uid(unsigned uid);
     void _on_enter_internal();
     void _on_exit_internal();
+
+    void _prepare_camera(ZRenderContextRef context);
+    void _prepare_lights(ZRenderContextRef context);
     
-public:
+    void _teardown_camera(ZRenderContextRef context);
+    void _teardown_lights(ZRenderContextRef context);
+    
+protected:
+    unsigned     _uid;
+    ZVector      _position;
+    ZMatrix      _transform;
+    ZMatrix      _pos_transform;
+    std::string  _name;
+    ZGeometryRef _geometry;
+    ZCameraRef   _camera;
+    
+    ZNode   *_parent; // weak
+    ZScene  *_scene; // weak
+    
+    std::vector<ZNodeRef>   _children;
+    std::vector<ZActionRef> _actions;
+    
     friend class ZScene;
 };
 

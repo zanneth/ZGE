@@ -17,27 +17,10 @@ BEGIN_ZGE_NAMESPACE
 typedef std::shared_ptr<class ZScene> ZSceneRef;
 
 class ZScene : public ZNode {
-    ZCameraRef _active_camera;
-    
 public:
     ZScene();
     ZScene(const ZScene &) = default;
     ~ZScene();
-    
-    /* Accessors */
-    ZCameraRef get_active_camera() { return _active_camera; }
-    
-    /* Node Overrides */
-    void add_child(ZNodeRef node) override;
-
-protected:
-    void _draw(ZRenderContextRef context) override;
-    
-    void _prepare_camera(ZRenderContextRef context);
-    void _prepare_lights(ZRenderContextRef context);
-    
-    void _teardown_camera(ZRenderContextRef context);
-    void _teardown_lights(ZRenderContextRef context);
     
 private:
     void _evict_scene(ZNode *curnode);
