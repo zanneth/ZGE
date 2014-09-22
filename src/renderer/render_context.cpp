@@ -179,10 +179,29 @@ void ZRenderContext::add_light(ZLightRef light)
     color_uniform->set_data(light->get_color().data);
 }
 
-void ZRenderContext::add_lights(std::vector<ZLightRef> lights)
+void ZRenderContext::add_lights(const std::vector<ZLightRef> &lights)
 {
     for (ZLightRef light : lights) {
         add_light(light);
+    }
+}
+
+void ZRenderContext::remove_lights(const std::vector<ZLightRef> &lights)
+{
+    std::vector<ZLightType> light_types_to_clear;
+    for (const auto &kv : _impl->lights) {
+        ZLightRef stored_light = kv.second;
+        if (std::find(lights.begin(), lights.end(), stored_light) != lights.end()) {
+            ZLightType light_type = kv.first;
+            ZLightUniformDescriptor uniform_descriptor = __uniform_descriptor_for_light_type(light_type);
+            _set_boolean_uniform(uniform_descriptor.exists_name, false);
+            
+            light_types_to_clear.push_back(light_type);
+        }
+    }
+    
+    for (ZLightType type_to_clear : light_types_to_clear) {
+        _impl->lights.erase(type_to_clear);
     }
 }
 

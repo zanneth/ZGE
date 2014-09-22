@@ -54,7 +54,8 @@ public:
     void unbind_texture();
     
     void add_light(ZLightRef light);
-    void add_lights(std::vector<ZLightRef> lights);
+    void add_lights(const std::vector<ZLightRef> &lights);
+    void remove_lights(const std::vector<ZLightRef> &lights);
     void clear_lights();
     
     /* Drawing */

@@ -245,6 +245,7 @@ void ZNode::_prepare_lights(ZRenderContextRef context)
         }
     }
     context->add_lights(lights);
+    _lights_used_for_draw = lights;
 }
 
 void ZNode::_teardown_camera(ZRenderContextRef context)
@@ -256,7 +257,8 @@ void ZNode::_teardown_camera(ZRenderContextRef context)
 
 void ZNode::_teardown_lights(ZRenderContextRef context)
 {
-    // XXX: should remove lights that we added to the render context here
+    context->remove_lights(_lights_used_for_draw);
+    _lights_used_for_draw.clear();
 }
 
 END_ZGE_NAMESPACE

@@ -15,6 +15,7 @@
 
 BEGIN_ZGE_NAMESPACE
 
+class ZLight;
 class ZScene;
 
 typedef std::shared_ptr<class ZNode> ZNodeRef;
@@ -100,6 +101,8 @@ protected:
     
     std::vector<ZNodeRef>   _children;
     std::vector<ZActionRef> _actions;
+    
+    std::vector<std::shared_ptr<ZLight>> _lights_used_for_draw;
     
     friend class ZScene;
 };
