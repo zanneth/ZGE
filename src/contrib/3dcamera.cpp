@@ -93,7 +93,7 @@ void Z3DCamera::_construct_projection()
         ZRect viewport_rect = ZEngine::instance()->get_viewport_rect();
         float viewport_width = viewport_rect.size.width;
         float viewport_height = viewport_rect.size.height;
-        float aspect = std::max(viewport_width, viewport_height) / std::min(viewport_width, viewport_height);
+        float aspect = viewport_width / viewport_height;
         
         _projection_matrix = ZMatrix::perspective(_field_of_view, aspect, _near_clip, _far_clip);
         _projection_dirty = false;
