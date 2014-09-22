@@ -58,6 +58,9 @@ public:
     void remove_lights(const std::vector<ZLightRef> &lights);
     void clear_lights();
     
+    void enable_depth_testing();
+    void disable_depth_testing();
+    
     /* Drawing */
     void draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count);
     void draw_elements(ZRenderMode mode, ZVertexArrayRef varray);

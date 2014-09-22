@@ -123,7 +123,10 @@ void ZModel::load_file(std::string filename)
 void ZModel::render(ZRenderContextRef context)
 {
     ZGeometry::render(context);
+    
+    context->enable_depth_testing();
     context->draw_array(ZRENDER_MODE_TRIANGLES, _vertex_array, 0, _faces_count * 3);
+    context->disable_depth_testing();
 }
 
 #pragma mark - Internal

@@ -89,13 +89,15 @@ ZShaderProgramRef ZRenderContext::get_shader_program() const { return _impl->sha
 
 void ZRenderContext::make_current()
 {
-    SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
-    SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
-    if (_impl->shaders_loaded) {
-        _impl->shader_program->use_program();
+    if (__current_context != shared_from_this()) {
+        SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
+        SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
+        if (_impl->shaders_loaded) {
+            _impl->shader_program->use_program();
+        }
+        
+        __current_context = shared_from_this();
     }
-    
-    __current_context = shared_from_this();
 }
 
 ZRenderContextRef ZRenderContext::get_current_context()
@@ -214,6 +216,18 @@ void ZRenderContext::clear_lights()
     }
     
     _impl->lights.clear();
+}
+
+void ZRenderContext::enable_depth_testing()
+{
+    make_current();
+    glEnable(GL_DEPTH_TEST);
+}
+
+void ZRenderContext::disable_depth_testing()
+{
+    make_current();
+    glDisable(GL_DEPTH_TEST);
 }
 
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
