@@ -13,6 +13,7 @@
 #include <zge/audio_manager.h>
 #include <zge/3dcamera.h>
 #include <zge/camera.h>
+#include <zge/camera_controller.h>
 #include <zge/color.h>
 #include <zge/cube.h>
 #include <zge/data.h>
@@ -40,6 +41,7 @@
 #include <zge/render_context.h>
 #include <zge/render_manager.h>
 #include <zge/resource_bundle.h>
+#include <zge/responder.h>
 #include <zge/run_loop.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>

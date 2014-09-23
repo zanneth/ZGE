@@ -13,37 +13,10 @@
 #include <algorithm>
 #include <SDL2/SDL.h>
 
-static unsigned __responder_global_uid_count = 1;
-
 BEGIN_ZGE_NAMESPACE
 
 ZEvent _convert_sdl_event(const SDL_Event &sdl_event);
 ZKey _convert_sdl_key(SDL_Keycode sdl_keycode);
-
-#pragma mark - ZResponder
-
-ZResponder::ZResponder(ZResponderFunction function, bool swallows_events) :
-    _function(function),
-    _swallows_events(swallows_events),
-    _uid(__responder_global_uid_count++)
-{}
-
-bool ZResponder::operator==(const ZResponder &other)
-{
-    return _uid == other._uid;
-}
-
-bool ZResponder::operator!=(const ZResponder &other)
-{
-    return !operator==(other);
-}
-
-void ZResponder::send_event(const ZEvent &event)
-{
-    _function(event);
-}
-
-#pragma mark - ZInputManager
 
 #pragma mark - Adding/Removing Responders
 

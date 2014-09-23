@@ -160,6 +160,10 @@
 		0CD633AA188F8E360061D259 /* observable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD633A8188F8E360061D259 /* observable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CDE862A19311B0F00C787FD /* sprite_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CDE862819311B0F00C787FD /* sprite_node.cpp */; };
 		0CDE862B19311B0F00C787FD /* sprite_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDE862919311B0F00C787FD /* sprite_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE0341919D1D6EC00CD7A19 /* camera_controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0341719D1D6EC00CD7A19 /* camera_controller.cpp */; };
+		0CE0341A19D1D6EC00CD7A19 /* camera_controller.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE0341819D1D6EC00CD7A19 /* camera_controller.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE0341D19D1D76800CD7A19 /* responder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0341B19D1D76800CD7A19 /* responder.cpp */; };
+		0CE0341E19D1D76800CD7A19 /* responder.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE0341C19D1D76800CD7A19 /* responder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CE6989918C9AB8100D57528 /* defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE6989818C9AB8100D57528 /* defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CE99A09191C99F50011DED6 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE99A07191C99F50011DED6 /* image.cpp */; };
 		0CE99A0A191C99F50011DED6 /* image.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE99A08191C99F50011DED6 /* image.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -677,6 +681,10 @@
 		0CD633A8188F8E360061D259 /* observable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = observable.h; sourceTree = "<group>"; };
 		0CDE862819311B0F00C787FD /* sprite_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_node.cpp; sourceTree = "<group>"; };
 		0CDE862919311B0F00C787FD /* sprite_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite_node.h; sourceTree = "<group>"; };
+		0CE0341719D1D6EC00CD7A19 /* camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera_controller.cpp; sourceTree = "<group>"; };
+		0CE0341819D1D6EC00CD7A19 /* camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera_controller.h; sourceTree = "<group>"; };
+		0CE0341B19D1D76800CD7A19 /* responder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = responder.cpp; sourceTree = "<group>"; };
+		0CE0341C19D1D76800CD7A19 /* responder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = responder.h; sourceTree = "<group>"; };
 		0CE6989818C9AB8100D57528 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		0CE99A07191C99F50011DED6 /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
 		0CE99A08191C99F50011DED6 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
@@ -1474,6 +1482,8 @@
 			children = (
 				0C898C751917251000CF3009 /* 3dcamera.h */,
 				0C898C741917251000CF3009 /* 3dcamera.cpp */,
+				0CE0341819D1D6EC00CD7A19 /* camera_controller.h */,
+				0CE0341719D1D6EC00CD7A19 /* camera_controller.cpp */,
 				0C7D3E1019C57194003AC9E9 /* cube.h */,
 				0C7D3E0F19C57194003AC9E9 /* cube.cpp */,
 				0C898C71191722B600CF3009 /* orthocamera.h */,
@@ -1627,6 +1637,8 @@
 				0CF1D29D19176ADC00CDBEEE /* event.cpp */,
 				0CF1D2A019176ADC00CDBEEE /* input_manager.h */,
 				0CF1D29F19176ADC00CDBEEE /* input_manager.cpp */,
+				0CE0341C19D1D76800CD7A19 /* responder.h */,
+				0CE0341B19D1D76800CD7A19 /* responder.cpp */,
 			);
 			path = input;
 			sourceTree = "<group>";
@@ -1725,6 +1737,7 @@
 				0C46F5A9175F00E800BF6EC9 /* SDL_log.h in Headers */,
 				0C46F5B4175F00E800BF6EC9 /* SDL_power.h in Headers */,
 				0C46F5C4175F00E800BF6EC9 /* SDL_test_crc32.h in Headers */,
+				0CE0341E19D1D76800CD7A19 /* responder.h in Headers */,
 				0C46F5A8175F00E800BF6EC9 /* SDL_loadso.h in Headers */,
 				0CF1D2A819176D2600CDBEEE /* sound.h in Headers */,
 				0CF1D2AC19176D9300CDBEEE /* audio_asset.h in Headers */,
@@ -1746,6 +1759,7 @@
 				0C898C771917251000CF3009 /* 3dcamera.h in Headers */,
 				0C46F5A7175F00E800BF6EC9 /* SDL_keycode.h in Headers */,
 				0C46F5CB175F00E800BF6EC9 /* SDL_test_random.h in Headers */,
+				0CE0341A19D1D6EC00CD7A19 /* camera_controller.h in Headers */,
 				0C46F5AD175F00E800BF6EC9 /* SDL_mutex.h in Headers */,
 				0C46F596175F00E800BF6EC9 /* SDL_assert.h in Headers */,
 				0C46F5AB175F00E800BF6EC9 /* SDL_messagebox.h in Headers */,
@@ -1875,6 +1889,8 @@
 				0C688FA418727756002C38EF /* material.cpp in Sources */,
 				0C142EB118C42A5600722C83 /* data.cpp in Sources */,
 				0C977F721737510C0071E8E6 /* graphics_buffer.cpp in Sources */,
+				0CE0341D19D1D76800CD7A19 /* responder.cpp in Sources */,
+				0CE0341919D1D6EC00CD7A19 /* camera_controller.cpp in Sources */,
 				0C898C761917251000CF3009 /* 3dcamera.cpp in Sources */,
 				0C5D324C1761C82A0013ACFF /* shader.cpp in Sources */,
 				0C977F791737510C0071E8E6 /* exception.cpp in Sources */,
