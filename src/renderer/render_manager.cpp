@@ -7,7 +7,7 @@
 
 #include <functional>
 #include <zge/render_manager.h>
-#include <zge/display_manager.h>
+#include <zge/display.h>
 #include <zge/engine.h>
 #include <zge/node.h>
 #include <zge/scene.h>
@@ -22,7 +22,21 @@ ZRenderManager::ZRenderManager() :
 ZRenderManager::~ZRenderManager()
 {}
 
+#pragma mark - Creating a Display
+
+ZDisplayRef ZRenderManager::create_display(const zge::ZDisplayMode &mode)
+{
+    _display = ZDisplayRef(new ZDisplay(mode));
+    _display->initialize();
+    
+    _initialize_render_context();
+    
+    return _display;
+}
+
 #pragma mark - Accessors
+
+ZDisplayRef ZRenderManager::get_current_display() const { return _display; }
 
 ZRenderContextRef ZRenderManager::get_context() const { return _context; }
 
@@ -45,36 +59,39 @@ void ZRenderManager::set_scene(ZSceneRef scene)
 
 void ZRenderManager::run(uint32_t dtime)
 {
-    if (_context != nullptr) {
-        if (!_initialized) {
-            _initialize();
-        }
-        
+    if (_context) {
         _context->make_current();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        if (_scene.get() != nullptr) {
+        if (_scene) {
             _scene->_update_internal();
             _scene->_draw(_context);
         }
+    }
+    
+    if (_display) {
+        _display->update(dtime);
     }
 }
 
 #pragma mark - Internal
 
-void ZRenderManager::_setup_display(ZDisplayRef display)
+void ZRenderManager::_initialize_render_context()
 {
-    _context = ZRenderContextRef(new ZRenderContext(display));
-}
-
-void ZRenderManager::_initialize()
-{
-    glClearColor(0.f, 0.f, 0.f, 1.f);
-    glEnable(GL_BLEND);
-    glEnable(GL_CULL_FACE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if (!_display) {
+        return;
+    }
     
-    _initialized = true;
+    if (!_initialized) {
+        _context = std::make_shared<ZRenderContext>(_display);
+        
+        glClearColor(0.f, 0.f, 0.f, 1.f);
+        glEnable(GL_BLEND);
+        glEnable(GL_CULL_FACE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+        _initialized = true;
+    }
 }
 
 END_ZGE_NAMESPACE

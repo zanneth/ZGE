@@ -39,22 +39,24 @@ ZDisplay::~ZDisplay()
 
 void ZDisplay::initialize()
 {
-    _init_window();
-    
-    ZInputManagerRef input_manager = ZEngine::instance()->get_input_manager();
-    SDL_Window *window = _impl->window;
-    std::weak_ptr<ZDisplay> weak_display = shared_from_this();
-    _impl->responder = input_manager->add_responder([window, weak_display](const ZEvent &event) {
-        if (event.type == ZAPPLICATION_EVENT) {
-            ZDisplayRef strong_display = weak_display.lock();
-            if (strong_display.get()) {
-                bool grab = (event.application_event != ZAPPLICATION_INACTIVE_EVENT && strong_display->captures_input());
-                SDL_SetWindowGrab(window, (grab ? SDL_TRUE : SDL_FALSE));
+    if (!_initialized) {
+        _init_window();
+        
+        ZInputManagerRef input_manager = ZEngine::instance()->get_input_manager();
+        SDL_Window *window = _impl->window;
+        std::weak_ptr<ZDisplay> weak_display = shared_from_this();
+        _impl->responder = input_manager->add_responder([window, weak_display](const ZEvent &event) {
+            if (event.type == ZAPPLICATION_EVENT) {
+                ZDisplayRef strong_display = weak_display.lock();
+                if (strong_display.get()) {
+                    bool grab = (event.application_event != ZAPPLICATION_INACTIVE_EVENT && strong_display->captures_input());
+                    SDL_SetWindowGrab(window, (grab ? SDL_TRUE : SDL_FALSE));
+                }
             }
-        }
-    });
-    
-    _initialized = true;
+        });
+        
+        _initialized = true;
+    }
 }
 
 void ZDisplay::update(uint32_t dtime)

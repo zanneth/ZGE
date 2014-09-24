@@ -31,4 +31,20 @@ public:
     friend class ZRunloop;
 };
 
+template<typename T>
+class ZWeakSchedulable : public ZSchedulable {
+public:
+    ZWeakSchedulable(std::weak_ptr<T> weak);
+    ZWeakSchedulable(std::shared_ptr<T> shared);
+    
+    void run(uint32_t dtime) override;
+    
+private:
+    std::weak_ptr<T> _ref;
+};
+
 END_ZGE_NAMESPACE
+
+#define __ZGE_ZSCHEDULABLE_IMPL_GUARD__
+#include <zge/schedulable.hpp>
+#undef __ZGE_ZSCHEDULABLE_IMPL_GUARD__

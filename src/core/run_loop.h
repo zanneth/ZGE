@@ -16,10 +16,6 @@
 BEGIN_ZGE_NAMESPACE
 
 class ZRunloop : ZNoncopyable {
-    std::vector<ZSchedulableRef> _schedulables;
-    bool _running;
-    bool _on_main_thread;
-    
 public:
     ZRunloop();
     ~ZRunloop();
@@ -41,6 +37,14 @@ public:
 
 private:
     void _main();
+    
+private:
+    std::vector<ZSchedulableRef> _schedulables;
+    bool _running;
+    bool _on_main_thread;
+    std::mutex _mutex;
 };
+
+typedef std::shared_ptr<ZRunloop> ZRunloopRef;
 
 END_ZGE_NAMESPACE

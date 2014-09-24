@@ -22,7 +22,6 @@ ZEngine* ZEngine::instance()
 ZEngine::ZEngine() :
     _input_manager(new ZInputManager),
     _render_manager(new ZRenderManager),
-    _display_manager(new ZDisplayManager),
     _audio_manager(new ZAudioManager)
 {}
 
@@ -40,7 +39,6 @@ void ZEngine::initialize()
     ZRunloop *loop = app->get_main_runloop();
     loop->schedule(_input_manager);
     loop->schedule(_render_manager);
-    loop->schedule(_display_manager);
     loop->schedule(_audio_manager);
     
     // engine always adds application as the first responder
@@ -58,7 +56,6 @@ void ZEngine::initialize()
 
 ZInputManagerRef ZEngine::get_input_manager() { return _input_manager; }
 ZRenderManagerRef ZEngine::get_render_manager() { return _render_manager; }
-ZDisplayManagerRef ZEngine::get_display_manager() { return _display_manager; }
 ZAudioManagerRef ZEngine::get_audio_manager() { return _audio_manager; }
 
 #pragma mark - Utility
@@ -66,8 +63,8 @@ ZAudioManagerRef ZEngine::get_audio_manager() { return _audio_manager; }
 ZRect ZEngine::get_viewport_rect() const
 {
     ZRect viewport_rect;
-    ZDisplayRef cur_display = _display_manager->get_current_display();
-    if (cur_display != nullptr) {
+    ZDisplayRef cur_display = _render_manager->get_current_display();
+    if (cur_display) {
         ZDisplayMode disp_mode = cur_display->get_display_mode();
         viewport_rect = {
             ZPoint2D(),

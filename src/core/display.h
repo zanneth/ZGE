@@ -33,15 +33,7 @@ public:
 typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
 
 class ZDisplay : public ZNoncopyable, public std::enable_shared_from_this<ZDisplay> {
-    std::auto_ptr<struct ZDisplayImpl> _impl;
-    
-protected:
-    bool _initialized;
-    ZDisplayMode _display_mode;
-    uint32_t _last_render;
-    bool _captures_input;
-    
-protected: // Only a display manager can create displays
+protected: // Only a render manager can create displays
     ZDisplay() = default;
     ZDisplay(const ZDisplayMode &display_mode);
     
@@ -66,12 +58,21 @@ public:
     void swap_buffer();
     
     /* Friends */
-    friend class ZDisplayManager;
+    friend class ZRenderManager;
     friend class ZRenderContext;
     
 protected:
     void  _init_window();
     void* _get_sdl_window();
+    
+private:
+    std::auto_ptr<struct ZDisplayImpl> _impl;
+    
+protected:
+    bool _initialized;
+    ZDisplayMode _display_mode;
+    uint32_t _last_render;
+    bool _captures_input;
 };
 
 END_ZGE_NAMESPACE

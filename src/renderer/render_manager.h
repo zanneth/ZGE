@@ -19,13 +19,13 @@
 BEGIN_ZGE_NAMESPACE
 
 class ZRenderManager : public ZSchedulable, ZNoncopyable {
-    ZRenderContextRef _context;
-    ZSceneRef _scene;
-    bool _initialized;
-    
 public:
     ZRenderManager();
     ~ZRenderManager();
+    
+    /// Creates a new display and sets as current.
+    ZDisplayRef create_display(const ZDisplayMode &mode);
+    ZDisplayRef get_current_display() const;
     
     /* Accessors */
     ZRenderContextRef get_context() const;
@@ -36,12 +36,14 @@ public:
     /* Schedulable Overrides */
     void run(uint32_t dtime) override;
     
-protected:
-    void _setup_display(ZDisplayRef display);
-    friend class ZDisplayManager;
+private:
+    void _initialize_render_context();
     
 private:
-    void _initialize();
+    ZDisplayRef _display;
+    ZRenderContextRef _context;
+    ZSceneRef _scene;
+    bool _initialized;
 };
 
 typedef std::shared_ptr<ZRenderManager> ZRenderManagerRef;

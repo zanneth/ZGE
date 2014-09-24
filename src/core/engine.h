@@ -9,7 +9,6 @@
 
 #include <zge/defines.h>
 #include <zge/audio_manager.h>
-#include <zge/display_manager.h>
 #include <zge/input_manager.h>
 #include <zge/noncopyable.h>
 #include <zge/render_manager.h>
@@ -24,7 +23,6 @@ public:
     /* Accessors */
     ZInputManagerRef    get_input_manager();
     ZRenderManagerRef   get_render_manager();
-    ZDisplayManagerRef  get_display_manager();
     ZAudioManagerRef    get_audio_manager();
     
     /* Utility */
@@ -38,12 +36,11 @@ public:
     void initialize();
     
 private:
-    ZInputManagerRef    _input_manager;
-    ZRenderManagerRef   _render_manager;
-    ZDisplayManagerRef  _display_manager;
-    ZAudioManagerRef    _audio_manager;
+    ZInputManagerRef  _input_manager;
+    ZRenderManagerRef _render_manager;
+    ZAudioManagerRef  _audio_manager;
     
-    ZResponderRef       _application_responder;
+    ZResponderRef     _application_responder;
     
 private:
     // singleton

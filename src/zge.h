@@ -51,6 +51,7 @@
 #include <zge/sprite_node.h>
 #include <zge/texture.h>
 #include <zge/timer.h>
+#include <zge/thread.h>
 #include <zge/types.h>
 #include <zge/uniform.h>
 #include <zge/util.h>
