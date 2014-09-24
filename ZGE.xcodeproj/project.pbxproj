@@ -10,6 +10,9 @@
 		0C06349D19D26B5000832237 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C06349B19D26B5000832237 /* thread.cpp */; };
 		0C06349E19D26B5000832237 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C06349C19D26B5000832237 /* thread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C0634A119D26EA500832237 /* schedulable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C06349F19D26DE100832237 /* schedulable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C0634A319D27E8700832237 /* schedulable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0634A219D27E8700832237 /* schedulable.cpp */; };
+		0C0634A619D2809A00832237 /* semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0634A419D2809A00832237 /* semaphore.cpp */; };
+		0C0634A719D2809A00832237 /* semaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0634A519D2809A00832237 /* semaphore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C06448A177029CC004AAA20 /* opengl.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C064489177029CC004AAA20 /* opengl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C07BD7517C0496A00C38084 /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C07BD7317C0496A00C38084 /* color.cpp */; };
 		0C07BD7617C0496A00C38084 /* color.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C07BD7417C0496A00C38084 /* color.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -206,6 +209,9 @@
 		0C06349B19D26B5000832237 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread.cpp; sourceTree = "<group>"; };
 		0C06349C19D26B5000832237 /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
 		0C06349F19D26DE100832237 /* schedulable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = schedulable.hpp; sourceTree = "<group>"; };
+		0C0634A219D27E8700832237 /* schedulable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = schedulable.cpp; sourceTree = "<group>"; };
+		0C0634A419D2809A00832237 /* semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = semaphore.cpp; sourceTree = "<group>"; };
+		0C0634A519D2809A00832237 /* semaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = semaphore.h; sourceTree = "<group>"; };
 		0C064489177029CC004AAA20 /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
 		0C07BD7317C0496A00C38084 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
 		0C07BD7417C0496A00C38084 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
@@ -1520,8 +1526,11 @@
 				0C82C32D191C87FB006E0295 /* resource_bundle.cpp */,
 				0C50D3BD16D208A900E43D7B /* run_loop.h */,
 				0C50D3BC16D208A900E43D7B /* run_loop.cpp */,
+				0C0634A519D2809A00832237 /* semaphore.h */,
+				0C0634A419D2809A00832237 /* semaphore.cpp */,
 				0C50D3BE16D208A900E43D7B /* schedulable.h */,
 				0C06349F19D26DE100832237 /* schedulable.hpp */,
+				0C0634A219D27E8700832237 /* schedulable.cpp */,
 				0CCD2F5A176128AC00F497CF /* timer.h */,
 				0CCD2F59176128AC00F497CF /* timer.cpp */,
 				0C06349C19D26B5000832237 /* thread.h */,
@@ -1720,6 +1729,7 @@
 				0C5D324E1761D6CF0013ACFF /* vertex_shader.h in Headers */,
 				0CF1D2A419176ADC00CDBEEE /* input_manager.h in Headers */,
 				0C46F595175F00E800BF6EC9 /* SDL.h in Headers */,
+				0C0634A719D2809A00832237 /* semaphore.h in Headers */,
 				0C62281118610B6F00DA3182 /* matrix.h in Headers */,
 				0C46F5A0175F00E800BF6EC9 /* SDL_events.h in Headers */,
 				0C46F5AA175F00E800BF6EC9 /* SDL_main.h in Headers */,
@@ -1865,6 +1875,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C0634A619D2809A00832237 /* semaphore.cpp in Sources */,
 				0C07BD7517C0496A00C38084 /* color.cpp in Sources */,
 				0C688FA018726E64002C38EF /* geometry.cpp in Sources */,
 				0C1F28BA17C1C3FF00CA03C4 /* vertex_array.cpp in Sources */,
@@ -1879,6 +1890,7 @@
 				0CF1D2A319176ADC00CDBEEE /* input_manager.cpp in Sources */,
 				0C977F5D1737510C0071E8E6 /* engine.cpp in Sources */,
 				0CE99A09191C99F50011DED6 /* image.cpp in Sources */,
+				0C0634A319D27E8700832237 /* schedulable.cpp in Sources */,
 				0CCD2F5B176128AC00F497CF /* timer.cpp in Sources */,
 				0C82C32F191C87FB006E0295 /* resource_bundle.cpp in Sources */,
 				0C89D4441931424400F1D9DB /* action.cpp in Sources */,

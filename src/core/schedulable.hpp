@@ -28,7 +28,7 @@ void ZWeakSchedulable<T>::run(uint32_t dtime)
 {
     std::shared_ptr<T> shared = _ref.lock();
     if (shared) {
-        shared->run();
+        shared->run(dtime);
     }
 }
 

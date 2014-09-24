@@ -31,6 +31,15 @@ public:
     friend class ZRunloop;
 };
 
+class ZWorkSchedulable : public ZSchedulable, public std::enable_shared_from_this<ZWorkSchedulable> {
+public:
+    ZWorkSchedulable(std::function<void()> work);
+    void run(uint32_t dtime) override;
+    
+private:
+    std::function<void()> _work;
+};
+
 template<typename T>
 class ZWeakSchedulable : public ZSchedulable {
 public:

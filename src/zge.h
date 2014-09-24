@@ -43,6 +43,7 @@
 #include <zge/resource_bundle.h>
 #include <zge/responder.h>
 #include <zge/run_loop.h>
+#include <zge/semaphore.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>
 #include <zge/shader.h>
