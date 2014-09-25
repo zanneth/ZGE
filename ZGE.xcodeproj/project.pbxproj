@@ -471,7 +471,25 @@
 		0C10FB7819D3CB4B0010815F /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; };
 		0C10FB7919D3CB4B0010815F /* libSDL_image-1.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; };
 		0C10FB7B19D3CB540010815F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C10FB7A19D3CB540010815F /* OpenGL.framework */; };
+		0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0C10FB8119D3CE550010815F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */,
+				0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */,
+				0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C06349B19D26B5000832237 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread.cpp; sourceTree = "<group>"; };
@@ -2030,6 +2048,7 @@
 				0C10FA1119D3C9C10010815F /* data.h in Headers */,
 				0C10FA1319D3C9C10010815F /* logger.h in Headers */,
 				0C10FA1419D3C9C10010815F /* util.h in Headers */,
+				0C10FB7619D3CB240010815F /* exception.h in Headers */,
 				0C10F9DD19D3C9BE0010815F /* sound_private.h in Headers */,
 				0C10F9F819D3C9BF0010815F /* vector_private.h in Headers */,
 				0C10FA1219D3C9C10010815F /* glutil.h in Headers */,
@@ -2119,7 +2138,6 @@
 				0C10FA8719D3CA800010815F /* Swap.h in Headers */,
 				0C10FA8819D3CA800010815F /* Transpose.h in Headers */,
 				0C10FA8919D3CA810010815F /* Transpositions.h in Headers */,
-				0C10FB7619D3CB240010815F /* exception.h in Headers */,
 				0C10FA8A19D3CA810010815F /* TriangularMatrix.h in Headers */,
 				0C10FA8B19D3CA810010815F /* BlasUtil.h in Headers */,
 				0C10FA8C19D3CA810010815F /* Constants.h in Headers */,
@@ -2401,6 +2419,7 @@
 				0C10F95219D3C8800010815F /* Frameworks */,
 				0C10F95319D3C8800010815F /* Headers */,
 				0C10F95419D3C8800010815F /* Resources */,
+				0C10FB8119D3CE550010815F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2512,9 +2531,7 @@
 		0C10F96A19D3C8800010815F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -2536,7 +2553,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -2557,7 +2573,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2567,9 +2582,7 @@
 		0C10F96B19D3C8800010815F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -2591,7 +2604,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2607,7 +2619,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2621,7 +2632,6 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/zge.pch";
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2634,7 +2644,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@rpath";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/lib";
 				ONLY_ACTIVE_ARCH = YES;
-				PUBLIC_HEADERS_FOLDER_PATH = zge;
 			};
 			name = Debug;
 		};
@@ -2645,7 +2654,6 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/zge.pch";
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2657,7 +2665,6 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
 				LD_RUNPATH_SEARCH_PATHS = "@rpath";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/lib";
-				PUBLIC_HEADERS_FOLDER_PATH = zge;
 			};
 			name = Release;
 		};

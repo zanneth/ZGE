@@ -19,7 +19,6 @@
 #include <zge/data.h>
 #include <zge/defines.h>
 #include <zge/display.h>
-#include <zge/display_manager.h>
 #include <zge/engine.h>
 #include <zge/event.h>
 #include <zge/exception.h>
