@@ -9,6 +9,9 @@
 #include <zge/util.h>
 #include <algorithm>
 #include <thread>
+#include <SDL2/SDL.h>
+
+#define FRAMES_PER_SECOND 60
 
 BEGIN_ZGE_NAMESPACE
 
@@ -64,6 +67,7 @@ void ZRunloop::unschedule(ZSchedulableRef schedulable)
 void ZRunloop::_main()
 {
     using namespace std::chrono;
+    static const ZTimeInterval __fps_interval(1.0 / (double)FRAMES_PER_SECOND);
     
     while (_running) {
         std::vector<ZSchedulableRef> schedulables;
@@ -72,6 +76,8 @@ void ZRunloop::_main()
             std::lock_guard<std::mutex> lock(_mutex);
             schedulables = _schedulables;
         }
+        
+        ZTime loop_start_time = ZUtil::get_current_time();
         
         for (ZSchedulableRef schedulable : schedulables) {
             ZTime time = ZUtil::get_current_time();
@@ -83,8 +89,12 @@ void ZRunloop::_main()
             schedulable->_last_update = time;
         }
         
-        // sleep so we don't peg at 100%
-        std::this_thread::sleep_for(milliseconds(1));
+        ZTime loop_end_time = ZUtil::get_current_time();
+        milliseconds loop_duration = duration_cast<milliseconds>(loop_end_time - loop_start_time);
+        
+        if (__fps_interval > loop_duration) {
+            std::this_thread::sleep_for(__fps_interval - loop_duration);
+        }
     }
 }
 
