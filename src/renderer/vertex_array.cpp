@@ -112,7 +112,7 @@ void _zvertexarray_setup_vertex_attrib_pointer(ZGraphicsBufferRef buffer, ZVerte
     for (const ZBufferAttribute &attribute : attributes) {
         GLboolean normalized_val = attribute.normalized ? GL_TRUE : GL_FALSE;
         GLenum value_type = ZGLUtil::gl_value_type_from_component_type(attribute.component_type);
-        glVertexAttribPointer(index, attribute.components_per_vertex, value_type, normalized_val, attribute.stride, (const GLvoid *)attribute.offset);
+        glVertexAttribPointer(index, attribute.components_per_vertex, value_type, normalized_val, (GLsizei)attribute.stride, (const GLvoid *)attribute.offset);
     }
 }
 

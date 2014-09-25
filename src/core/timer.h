@@ -25,8 +25,8 @@ protected:
     ZTimeInterval _interval;
     bool _repeats;
     
-    uint32_t _time_scheduled;
-    uint32_t _time_last_fired;
+    ZTime _time_scheduled;
+    ZTime _time_last_fired;
     
 public:
     ZTimer(const ZTimerFunction &func = [](ZTimerRef){});

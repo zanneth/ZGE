@@ -14,8 +14,6 @@ BEGIN_ZGE_NAMESPACE
 
 #pragma mark - ZData
 
-static void _zdata_move(ZData &dst, ZData &&src);
-
 ZData::ZData(const void *data, size_t length) :
     _length(length),
     _data(length > 0 ? new uint8_t[length] : nullptr)

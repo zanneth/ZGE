@@ -23,7 +23,7 @@ ZMatrix::ZMatrix(std::initializer_list<float> list) :
     _impl(new ZMatrixImpl)
 {
     unsigned idx = 0;
-    unsigned list_size = list.size();
+    size_t list_size = list.size();
     for (float f : list) {
         _impl->data(idx++) = f;
         if (idx >= list_size) {

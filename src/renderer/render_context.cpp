@@ -236,7 +236,7 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
     _impl->bound_vertex_array = varray;
     
     GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
-    glDrawArrays(glmode, first_idx, count);
+    glDrawArrays(glmode, first_idx, (GLsizei)count);
 }
 
 void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)

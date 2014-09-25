@@ -117,7 +117,7 @@ void _audio_callback(void *userdata, uint8_t *stream, int len)
         
         if (remaining_length > 0) {
             size_t len_to_mix = (len > remaining_length ? remaining_length : len);
-            SDL_MixAudioFormat(stream, src_buffer, format, len_to_mix, volume * (float)SDL_MIX_MAXVOLUME);
+            SDL_MixAudioFormat(stream, src_buffer, format, (uint32_t)len_to_mix, volume * (float)SDL_MIX_MAXVOLUME);
             playback_state->current_offset += len_to_mix;
         }
     }

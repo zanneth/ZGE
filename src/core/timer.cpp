@@ -8,15 +8,12 @@
 #include "timer.h"
 #include <chrono>
 #include <zge/run_loop.h>
-#include <SDL2/SDL.h>
 
 BEGIN_ZGE_NAMESPACE
 
 ZTimer::ZTimer(const ZTimerFunction &func) :
     _function(func),
-    _repeats(false),
-    _time_scheduled(0),
-    _time_last_fired(0)
+    _repeats(false)
 {}
 
 ZTimer::~ZTimer()
@@ -38,17 +35,10 @@ void ZTimer::run(uint32_t dtime)
 {
     using namespace std::chrono;
     
-    uint32_t time = SDL_GetTicks();
-    uint32_t time_delta = 0;
+    ZTime time = ZUtil::get_current_time();
+    ZTimeInterval time_delta = time - _time_last_fired;
     
-    if (_time_last_fired == 0) {
-        time_delta = time - _time_scheduled;
-    } else {
-        time_delta = time - _time_last_fired;
-    }
-    
-    uint32_t interval_millis = duration_cast<milliseconds>(_interval).count();
-    if (time_delta >= interval_millis) {
+    if (time_delta >= _interval) {
         fire();
         
         if (!_repeats) {
@@ -59,7 +49,7 @@ void ZTimer::run(uint32_t dtime)
 
 void ZTimer::on_schedule()
 {
-    _time_scheduled = SDL_GetTicks();
+    _time_scheduled = ZUtil::get_current_time();
 }
 
 #pragma mark - API Functions
@@ -67,7 +57,7 @@ void ZTimer::on_schedule()
 void ZTimer::fire()
 {
     _function(shared_from_this());
-    _time_last_fired = SDL_GetTicks();
+    _time_last_fired = ZUtil::get_current_time();
 }
 
 void ZTimer::invalidate()

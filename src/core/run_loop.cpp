@@ -83,7 +83,7 @@ void ZRunloop::_main()
             ZTime time = ZUtil::get_current_time();
             ZTime last_update = schedulable->_last_update;
             ZTimeInterval dtime = time - last_update;
-            uint32_t millseconds = duration_cast<milliseconds>(dtime).count();
+            uint32_t millseconds = (uint32_t)duration_cast<milliseconds>(dtime).count();
             
             schedulable->run(millseconds);
             schedulable->_last_update = time;
