@@ -8,7 +8,13 @@
 #pragma once
 
 #ifdef __APPLE__
+#if TARGET_OS_IPHONE
+#   include <OpenGLES/EAGL.h>
+#   include <OpenGLES/gltypes.h>
+#else
 #   include <OpenGL/gl3.h>
+#   include <OpenGL/gltypes.h>
+#endif
 #else
 #   include <GL/gl3.h>
 #endif
