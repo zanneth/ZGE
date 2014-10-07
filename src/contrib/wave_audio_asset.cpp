@@ -23,9 +23,9 @@ struct _ZWaveAudioAssetImpl {
 ZWaveAudioAsset::ZWaveAudioAsset(std::string path) :
     _impl(new _ZWaveAudioAssetImpl)
 {
-    uint8_t *buffer;
-    uint32_t length;
-    SDL_AudioSpec spec;
+    uint8_t *buffer = nullptr;
+    uint32_t length = 0;
+    SDL_AudioSpec spec = {0};
     
     SDL_AudioSpec *result_spec = SDL_LoadWAV(path.c_str(), &spec, &buffer, &length);
     if (result_spec) {

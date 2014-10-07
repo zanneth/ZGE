@@ -26,6 +26,9 @@ public:
     void run(uint32_t dtime) override;
     
 private:
+    static void _callback(void *userdata, uint8_t *stream, int len);
+    
+private:
     std::auto_ptr<struct _ZAudioManagerImpl> _impl;
 };
 

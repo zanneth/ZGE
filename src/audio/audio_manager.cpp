@@ -17,8 +17,6 @@
 
 BEGIN_ZGE_NAMESPACE
 
-static void _audio_callback(void *userdata, uint8_t *stream, int len);
-
 struct _ZAudioManagerImpl {
     SDL_AudioDeviceID device_id;
     std::vector<ZSoundRef> active_sounds;
@@ -28,7 +26,7 @@ ZAudioManager::ZAudioManager() :
     _impl(new _ZAudioManagerImpl)
 {
     SDL_AudioSpec spec = {0};
-    spec.callback = _audio_callback;
+    spec.callback = ZAudioManager::_callback;
     spec.userdata = this;
     
     SDL_AudioSpec actual_spec;
@@ -97,9 +95,9 @@ void ZAudioManager::run(uint32_t dtime)
     active_sounds.erase(new_end_iter, active_sounds.end());
 }
 
-#pragma mark - Callbacks
+#pragma mark - Private
 
-void _audio_callback(void *userdata, uint8_t *stream, int len)
+void ZAudioManager::_callback(void *userdata, uint8_t *stream, int len)
 {
     // ensure silence if no data
     memset(stream, 0, len);
