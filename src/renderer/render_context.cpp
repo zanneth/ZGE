@@ -75,6 +75,8 @@ ZRenderContext::ZRenderContext(ZDisplayRef display) :
 ZRenderContext::~ZRenderContext()
 {
     if (_impl->gl_context != nullptr) {
+        SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
+        SDL_GL_MakeCurrent(sdl_window, nullptr);
         SDL_GL_DeleteContext(_impl->gl_context);
     }
 }

@@ -34,7 +34,9 @@ ZResponderRef ZInputManager::add_responder(ZResponderFunction func, bool swallow
 
 void ZInputManager::remove_responder(ZResponderRef responder)
 {
-    _removal_queue.push(responder);
+    if (responder) {
+        _removal_queue.push(responder);
+    }
 }
 
 void ZInputManager::promote_first_responder(ZResponderRef responder)
