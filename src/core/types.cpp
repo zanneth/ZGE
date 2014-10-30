@@ -38,6 +38,22 @@ std::vector<std::string> ZSize2D::get_description_attributes() const
     };
 }
 
+#pragma mark - ZEdgeInsets
+
+ZEdgeInsets::ZEdgeInsets(float top, float left, float bottom, float right) :
+    top(top),
+    left(left),
+    bottom(bottom),
+    right(right)
+{}
+
+std::vector<std::string> ZEdgeInsets::get_description_attributes() const
+{
+    return {
+        ZUtil::format("{top = %f, left = %f, bottom = %f, right = %f}", top, left, bottom, right)
+    };
+}
+
 #pragma mark - ZRect
 
 ZRect::ZRect(const ZPoint2D &origin, const ZSize2D &size) :

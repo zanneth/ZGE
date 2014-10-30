@@ -36,6 +36,17 @@ struct ZSize2D : public ZDescribable {
     std::vector<std::string> get_description_attributes() const override;
 };
 
+struct ZEdgeInsets : public ZDescribable {
+    float top;
+    float left;
+    float bottom;
+    float right;
+    
+    ZEdgeInsets(float top = 0.f, float left = 0.f, float bottom = 0.f, float right = 0.f);
+    
+    std::vector<std::string> get_description_attributes() const override;
+};
+
 struct ZRect : public ZDescribable {
     ZPoint2D origin;
     ZSize2D size;

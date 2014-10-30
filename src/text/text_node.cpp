@@ -8,6 +8,7 @@
 #include "text_node.h"
 #include "material.h"
 #include "quad.h"
+#include "sprite_node.h"
 #include "texture.h"
 
 BEGIN_ZGE_NAMESPACE
@@ -48,6 +49,8 @@ void ZTextNode::_render_glyphs()
         return;
     }
     
+    remove_all_children();
+    
     // create glyphs using provided font
     std::vector<ZGlyph> glyphs;
     for (const char &character : _text) {
@@ -55,46 +58,48 @@ void ZTextNode::_render_glyphs()
         glyphs.push_back(glyph);
     }
     
-    ZGlyph tglyph = glyphs[0];
-    
-    // create texture for glyph
+    // create textures and nodes for glyph
     const size_t bytes_per_pixel = 4;
-    const size_t num_pixels = (size_t)tglyph.size.width * (size_t)tglyph.size.height;
-    ZImageFormat format = {
+    const ZImageFormat format = {
         .bytes_per_pixel = bytes_per_pixel,
         .pixel_format = ZPIXEL_FORMAT_RGBA
     };
     
-    ZDataRef dst_pixbuf_data = std::make_shared<ZData>(nullptr, bytes_per_pixel * num_pixels);
-    uint8_t *src_pixbuf = (uint8_t *)tglyph.bitmap->get_data();
-    uint8_t *dst_pixbuf = (uint8_t *)dst_pixbuf_data->get_data();
-    size_t width = (size_t)tglyph.size.width;
-    size_t height = (size_t)tglyph.size.height;
-    
-    for (unsigned y = 0; y < height; ++y) {
-        for (unsigned x = 0; x < width; ++x) {
-            size_t src_off = (y * width) + (width - x - 1);
-            size_t dst_off = 4 * ((y * width) + x);
-            
-            dst_pixbuf[dst_off + 0] =
-            dst_pixbuf[dst_off + 1] =
-            dst_pixbuf[dst_off + 2] =
-                src_pixbuf[src_off];
-            dst_pixbuf[dst_off + 3] = 0xff;
-        }
-    }
-    
-    ZImageRef texture_image = std::make_shared<ZImage>(dst_pixbuf_data, tglyph.size, format);
-    ZTextureRef texture = std::make_shared<ZTexture>(texture_image);
-    set_texture(texture);
-    
-    // calculate bounding box
-    ZSize2D size = {0.0, 0.0};
+    float last_glyph_max_x = 0.0;
     for (const ZGlyph &glyph : glyphs) {
-        size.width = std::max(glyph.size.width, size.width);
-        size.height = std::max(glyph.size.height, size.height);
+        size_t num_pixels = (size_t)glyph.size.width * (size_t)glyph.size.height;
+        ZDataRef dst_pixbuf_data = std::make_shared<ZData>(nullptr, bytes_per_pixel * num_pixels);
+        uint8_t *src_pixbuf = (uint8_t *)glyph.bitmap->get_data();
+        uint8_t *dst_pixbuf = (uint8_t *)dst_pixbuf_data->get_data();
+        size_t width = (size_t)glyph.size.width;
+        size_t height = (size_t)glyph.size.height;
+        
+        for (unsigned y = 0; y < height; ++y) {
+            for (unsigned x = 0; x < width; ++x) {
+                size_t src_off = (y * width) + (width - x - 1);
+                size_t dst_off = 4 * ((y * width) + x);
+                
+                dst_pixbuf[dst_off + 0] =
+                dst_pixbuf[dst_off + 1] =
+                dst_pixbuf[dst_off + 2] =
+                    src_pixbuf[src_off];
+                dst_pixbuf[dst_off + 3] = 0xff;
+            }
+        }
+        
+        ZImageRef texture_image = std::make_shared<ZImage>(dst_pixbuf_data, glyph.size, format);
+        ZTextureRef texture = std::make_shared<ZTexture>(texture_image);
+        ZSpriteNodeRef glyph_node = std::make_shared<ZSpriteNode>(texture);
+        glyph_node->set_size(glyph.size);
+        
+        std::cout << glyph.insets.get_description() << std::endl;
+        
+        ZVector position = {last_glyph_max_x + glyph.insets.left, glyph.insets.top};
+        last_glyph_max_x = position.x() + glyph.advance.width;
+        glyph_node->set_position(position);
+        
+        add_child(glyph_node);
     }
-    set_size(size);
 }
 
 END_ZGE_NAMESPACE

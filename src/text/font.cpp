@@ -110,7 +110,9 @@ ZGlyph ZFont::create_glyph(char character)
     
     ZGlyph glyph = {
         .size = { float(width), float(height) },
-        .bitmap = bitmap_data
+        .advance = ZSize2D(face->glyph->advance.x / 64.0, face->glyph->advance.y / 64.0),
+        .insets = ZEdgeInsets(bitmap_glyph->top, bitmap_glyph->left, 0.0, 0.0),
+        .bitmap = bitmap_data,
     };
     return glyph;
 }

@@ -11,11 +11,10 @@
 #include <zge/font.h>
 #include <zge/glyph.h>
 #include <zge/node.h>
-#include <zge/sprite_node.h>
 
 BEGIN_ZGE_NAMESPACE
 
-class ZTextNode : public ZSpriteNode {
+class ZTextNode : public ZNode {
 public:
     ZTextNode(const std::string &text = "", ZFontRef font = nullptr);
     ~ZTextNode();

@@ -13,8 +13,10 @@
 BEGIN_ZGE_NAMESPACE
 
 struct ZGlyph {
-    ZSize2D  size;
-    ZDataRef bitmap;
+    ZSize2D     size;
+    ZSize2D     advance;
+    ZEdgeInsets insets;
+    ZDataRef    bitmap;
 };
 
 END_ZGE_NAMESPACE
