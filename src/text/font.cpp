@@ -6,9 +6,11 @@
  */
 
 #include "font.h"
+#include "util.h"
 #include <mutex>
 #include <freetype2/ft2build.h>
 #include FT_FREETYPE_H
+#include FT_GLYPH_H
 
 BEGIN_ZGE_NAMESPACE
 
@@ -50,6 +52,7 @@ ZFont::ZFont(const std::string &font_path, size_t height) :
     }
     
     FT_Set_Char_Size(face, height * 64, height * 64, 96, 96);
+    _impl->face = face;
 }
 
 ZFont::ZFont(const ZFont &cp) :
@@ -72,6 +75,45 @@ ZFont::~ZFont()
 std::string ZFont::get_font_path() const { return _impl->path; }
 
 size_t ZFont::get_font_height() const { return _impl->height; }
+
+#pragma mark - API
+
+ZGlyph ZFont::create_glyph(char character)
+{
+    FT_Error error = 0;
+    FT_Face face = _impl->face;
+    
+    unsigned glyph_index = FT_Get_Char_Index(face, character);
+    error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
+    if (error != 0) {
+        ZException ex(ZENGINE_EXCEPTION_CODE);
+        ex.extra_info = ZUtil::format("Font %p failed to load glyph for character '%c'", this, character);
+        throw ex;
+    }
+    
+    FT_Glyph freetype_glyph;
+    error = FT_Get_Glyph(face->glyph, &freetype_glyph);
+    if (error != 0) {
+        ZException ex(ZENGINE_EXCEPTION_CODE);
+        ex.extra_info = ZUtil::format("Font %p failed to get glyph for character '%c'", this, character);
+        throw ex;
+    }
+    
+    FT_Glyph_To_Bitmap(&freetype_glyph, FT_RENDER_MODE_NORMAL, 0, 1);
+    FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)freetype_glyph;
+    FT_Bitmap bitmap = bitmap_glyph->bitmap;
+    
+    int width = bitmap.width;
+    int height = bitmap.rows;
+    size_t bitmap_length = width * height;
+    ZDataRef bitmap_data = std::make_shared<ZData>(bitmap.buffer, bitmap_length);
+    
+    ZGlyph glyph = {
+        .size = { float(width), float(height) },
+        .bitmap = bitmap_data
+    };
+    return glyph;
+}
 
 #pragma mark - ZFontLibrary
 

@@ -12,14 +12,19 @@
 BEGIN_ZGE_NAMESPACE
 
 static ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt);
+static ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat format);
 
 struct _ZImageImpl {
     SDL_Surface *img_surface;
+    ZImageFormat img_format;
+    ZDataRef     img_data;
+    ZSize2D      img_size;
 };
 
-ZImage::ZImage(std::string path) :
+ZImage::ZImage(const std::string &path) :
     _impl(new _ZImageImpl)
 {
+    // create SDL surface from image at the specified path
     SDL_Surface *surface = IMG_Load(path.c_str());
     if (!surface) {
         ZException exception(ZFILE_EXCEPTION_CODE);
@@ -28,6 +33,32 @@ ZImage::ZImage(std::string path) :
     }
     
     _impl->img_surface = surface;
+    
+    // convert pixel format to something usable
+    ZPixelFormat pixel_frmt = ZPIXEL_FORMAT_RGBA;
+    SDL_PixelFormat *sdl_frmt = (_impl->img_surface ? _impl->img_surface->format : nullptr);
+    if (sdl_frmt) {
+        pixel_frmt = _pixel_frmt_from_sdl_frmt(sdl_frmt);
+    }
+    
+    ZImageFormat format = {
+        .bytes_per_pixel = 4,
+        .pixel_format = pixel_frmt
+    };
+    _impl->img_format = format;
+    _impl->img_size = ZSize2D{float(surface->w), float(surface->h)};
+    
+    // store image data from surface
+    _impl->img_data = _pixel_data_from_sdl_surface(surface, format);
+}
+
+ZImage::ZImage(ZDataRef image_data, ZSize2D size, ZImageFormat image_format) :
+    _impl(new _ZImageImpl)
+{
+    _impl->img_data = image_data;
+    _impl->img_format = image_format;
+    _impl->img_surface = nullptr;
+    _impl->img_size = size;
 }
 
 ZImage::~ZImage()
@@ -41,38 +72,17 @@ ZImage::~ZImage()
 
 ZSize2D ZImage::get_size() const
 {
-    int width = _impl->img_surface->w;
-    int height = _impl->img_surface->h;
-    return {(float)width, (float)height};
+    return _impl->img_size;
 }
 
 ZImageFormat ZImage::get_format() const
 {
-    ZPixelFormat pixel_frmt = ZPIXEL_FORMAT_RGBA;
-    SDL_PixelFormat *sdl_frmt = (_impl->img_surface ? _impl->img_surface->format : nullptr);
-    if (sdl_frmt) {
-        pixel_frmt = _pixel_frmt_from_sdl_frmt(sdl_frmt);
-    }
-    
-    ZImageFormat format = {
-        .bytes_per_pixel = 4,
-        .pixel_format = pixel_frmt
-    };
-    
-    return format;
+    return _impl->img_format;
 }
 
 ZDataRef ZImage::get_pixel_data() const
 {
-    ZImageFormat format = get_format();
-    SDL_Surface *surface = _impl->img_surface;
-    int width = surface->w;
-    int height = surface->h;
-    size_t num_components = width * height;
-    size_t pixel_buffer_sz = num_components * format.bytes_per_pixel;
-    
-    ZDataRef pixel_data = std::make_shared<ZData>(surface->pixels, pixel_buffer_sz);
-    return pixel_data;
+    return _impl->img_data;
 }
 
 #pragma mark - Internal
@@ -89,6 +99,17 @@ ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt)
     }
     
     return format;
+}
+
+ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat format)
+{
+    int width = surface->w;
+    int height = surface->h;
+    size_t num_components = width * height;
+    size_t pixel_buffer_sz = num_components * format.bytes_per_pixel;
+    
+    ZDataRef pixel_data = std::make_shared<ZData>(surface->pixels, pixel_buffer_sz);
+    return pixel_data;
 }
 
 END_ZGE_NAMESPACE

@@ -474,10 +474,17 @@
 		0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0C69589419F3532100208B27 /* text_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C69589219F3532100208B27 /* text_node.cpp */; };
+		0C69589519F3532100208B27 /* text_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C69589319F3532100208B27 /* text_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C69589819F3874700208B27 /* glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C69589619F3874700208B27 /* glyph.cpp */; };
+		0C69589919F3874700208B27 /* glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C69589719F3874700208B27 /* glyph.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA36B3819F206D0003543FE /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; };
 		0CA36B3919F206E3003543FE /* libfreetype.6.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0CA36B3D19F20B17003543FE /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA36B3B19F20B17003543FE /* font.cpp */; };
 		0CA36B3E19F20B17003543FE /* font.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA36B3C19F20B17003543FE /* font.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE0A6BD19F8C70A00AA119A /* describable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE0A6BC19F8C70A00AA119A /* describable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE0A6BF19F8C81900AA119A /* describable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A6BE19F8C81900AA119A /* describable.cpp */; };
+		0CE99E481A01EC36009DF9BB /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE99E471A01EC36009DF9BB /* types.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -951,6 +958,10 @@
 		0C688F9F18726E64002C38EF /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = geometry.h; path = src/graph/geometry.h; sourceTree = SOURCE_ROOT; };
 		0C688FA218727756002C38EF /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = material.cpp; path = src/graph/material.cpp; sourceTree = SOURCE_ROOT; };
 		0C688FA318727756002C38EF /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = material.h; path = src/graph/material.h; sourceTree = SOURCE_ROOT; };
+		0C69589219F3532100208B27 /* text_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = text_node.cpp; sourceTree = "<group>"; };
+		0C69589319F3532100208B27 /* text_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = text_node.h; sourceTree = "<group>"; };
+		0C69589619F3874700208B27 /* glyph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glyph.cpp; sourceTree = "<group>"; };
+		0C69589719F3874700208B27 /* glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glyph.h; sourceTree = "<group>"; };
 		0C7712F819177E4D0050C098 /* sound_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_private.h; sourceTree = "<group>"; };
 		0C7D3E0F19C57194003AC9E9 /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
 		0C7D3E1019C57194003AC9E9 /* cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
@@ -1040,9 +1051,12 @@
 		0CE0341819D1D6EC00CD7A19 /* camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera_controller.h; sourceTree = "<group>"; };
 		0CE0341B19D1D76800CD7A19 /* responder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = responder.cpp; sourceTree = "<group>"; };
 		0CE0341C19D1D76800CD7A19 /* responder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = responder.h; sourceTree = "<group>"; };
+		0CE0A6BC19F8C70A00AA119A /* describable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = describable.h; sourceTree = "<group>"; };
+		0CE0A6BE19F8C81900AA119A /* describable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = describable.cpp; sourceTree = "<group>"; };
 		0CE6989818C9AB8100D57528 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		0CE99A07191C99F50011DED6 /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
 		0CE99A08191C99F50011DED6 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
+		0CE99E471A01EC36009DF9BB /* types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = types.cpp; sourceTree = "<group>"; };
 		0CEC024B176D5DF90029DE82 /* node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node.cpp; path = src/graph/node.cpp; sourceTree = SOURCE_ROOT; };
 		0CEC024C176D5DF90029DE82 /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = src/graph/node.h; sourceTree = SOURCE_ROOT; };
 		0CEC024D176D5DF90029DE82 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene.cpp; path = src/graph/scene.cpp; sourceTree = SOURCE_ROOT; };
@@ -1894,6 +1908,7 @@
 				0C06349C19D26B5000832237 /* thread.h */,
 				0C06349B19D26B5000832237 /* thread.cpp */,
 				0C50D3BF16D208A900E43D7B /* types.h */,
+				0CE99E471A01EC36009DF9BB /* types.cpp */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1953,6 +1968,8 @@
 			children = (
 				0C0D7C6D18C410B100021CD6 /* data.h */,
 				0C0D7C6C18C410B100021CD6 /* data.cpp */,
+				0CE0A6BC19F8C70A00AA119A /* describable.h */,
+				0CE0A6BE19F8C81900AA119A /* describable.cpp */,
 				0C50D3D316D208A900E43D7B /* exception.h */,
 				0C50D3D216D208A900E43D7B /* exception.cpp */,
 				0C21E5EB18C2AC99009E508D /* glutil.h */,
@@ -2045,6 +2062,10 @@
 			children = (
 				0CA36B3C19F20B17003543FE /* font.h */,
 				0CA36B3B19F20B17003543FE /* font.cpp */,
+				0C69589719F3874700208B27 /* glyph.h */,
+				0C69589619F3874700208B27 /* glyph.cpp */,
+				0C69589319F3532100208B27 /* text_node.h */,
+				0C69589219F3532100208B27 /* text_node.cpp */,
 			);
 			path = text;
 			sourceTree = "<group>";
@@ -2172,6 +2193,7 @@
 				0C10FA0319D3C9C00010815F /* graphics_buffer.h in Headers */,
 				0C10FA0419D3C9C00010815F /* image.h in Headers */,
 				0C10FA0519D3C9C00010815F /* light.h in Headers */,
+				0C69589519F3532100208B27 /* text_node.h in Headers */,
 				0C10FA0619D3C9C00010815F /* opengl.h in Headers */,
 				0C10FA0719D3C9C00010815F /* render_context.h in Headers */,
 				0C10FA0819D3C9C00010815F /* render_manager.h in Headers */,
@@ -2233,6 +2255,7 @@
 				0C10FA5C19D3CA780010815F /* MathFunctions.h in Headers */,
 				0C10FA5D19D3CA780010815F /* Matrix.h in Headers */,
 				0C10FA5E19D3CA780010815F /* MatrixBase.h in Headers */,
+				0C69589919F3874700208B27 /* glyph.h in Headers */,
 				0C10FA5F19D3CA790010815F /* NestByValue.h in Headers */,
 				0C10FA6019D3CA790010815F /* NoAlias.h in Headers */,
 				0C10FA6119D3CA790010815F /* NumTraits.h in Headers */,
@@ -2522,6 +2545,7 @@
 				0C10FA1B19D3C9FE0010815F /* Eigen in Headers */,
 				0C10FA1C19D3C9FE0010815F /* Eigen2Support in Headers */,
 				0C10FA1D19D3C9FE0010815F /* Eigenvalues in Headers */,
+				0CE0A6BD19F8C70A00AA119A /* describable.h in Headers */,
 				0C10FA1E19D3C9FE0010815F /* Geometry in Headers */,
 				0C10FA1F19D3C9FE0010815F /* Householder in Headers */,
 				0C10FA2019D3C9FF0010815F /* IterativeLinearSolvers in Headers */,
@@ -2617,12 +2641,14 @@
 			files = (
 				0C10F97019D3C91D0010815F /* audio_asset.cpp in Sources */,
 				0C10F97219D3C91D0010815F /* audio_manager.cpp in Sources */,
+				0CE99E481A01EC36009DF9BB /* types.cpp in Sources */,
 				0C10F97519D3C91D0010815F /* sound.cpp in Sources */,
 				0C10F97719D3C91D0010815F /* 3dcamera.cpp in Sources */,
 				0C10F97919D3C91D0010815F /* camera_controller.cpp in Sources */,
 				0C10F97B19D3C91D0010815F /* cube.cpp in Sources */,
 				0C10F97D19D3C91D0010815F /* orthocamera.cpp in Sources */,
 				0C10F97F19D3C91D0010815F /* quad.cpp in Sources */,
+				0C69589419F3532100208B27 /* text_node.cpp in Sources */,
 				0C10F98119D3C91D0010815F /* sprite_node.cpp in Sources */,
 				0C10F98319D3C91D0010815F /* wave_audio_asset.cpp in Sources */,
 				0C10F98519D3C91D0010815F /* application.cpp in Sources */,
@@ -2638,6 +2664,7 @@
 				0C10F9A019D3C91D0010815F /* matrix.cpp in Sources */,
 				0C10F9A319D3C91D0010815F /* vector.cpp in Sources */,
 				0C10F9A519D3C91D0010815F /* action.cpp in Sources */,
+				0CE0A6BF19F8C81900AA119A /* describable.cpp in Sources */,
 				0C10F9A719D3C91D0010815F /* geometry.cpp in Sources */,
 				0C10F9A919D3C91D0010815F /* material.cpp in Sources */,
 				0C10F9AB19D3C91D0010815F /* model.cpp in Sources */,
@@ -2646,6 +2673,7 @@
 				0C10F9B119D3C91D0010815F /* event.cpp in Sources */,
 				0C10F9B319D3C91D0010815F /* input_manager.cpp in Sources */,
 				0C10F9B519D3C91D0010815F /* responder.cpp in Sources */,
+				0C69589819F3874700208B27 /* glyph.cpp in Sources */,
 				0C10F9B819D3C91D0010815F /* graphics_buffer.cpp in Sources */,
 				0C10F9BA19D3C91D0010815F /* image.cpp in Sources */,
 				0C10F9BC19D3C91D0010815F /* light.cpp in Sources */,

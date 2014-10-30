@@ -11,25 +11,37 @@
 #include <chrono>
 #include <cstdint>
 #include <zge/defines.h>
+#include <zge/describable.h>
 
 BEGIN_ZGE_NAMESPACE
 
 typedef std::chrono::time_point<std::chrono::system_clock> ZTime;
 typedef std::chrono::duration<double> ZTimeInterval;
 
-struct ZPoint2D {
+struct ZPoint2D : public ZDescribable {
     float x;
     float y;
+    
+    ZPoint2D(float x = 0.f, float y = 0.f);
+    
+    std::vector<std::string> get_description_attributes() const override;
 };
 
-struct ZSize2D {
+struct ZSize2D : public ZDescribable {
     float width;
     float height;
+    
+    ZSize2D(float width = 0.f, float height = 0.f);
+    
+    std::vector<std::string> get_description_attributes() const override;
 };
 
-struct ZRect {
+struct ZRect : public ZDescribable {
     ZPoint2D origin;
     ZSize2D size;
+    
+    ZRect(const ZPoint2D &origin, const ZSize2D &size);
+    ZRect(float x = 0.f, float y = 0.f, float width = 0.f, float height = 0.f);
     
     inline bool contains_rect(const ZRect &other) const
     {
@@ -44,16 +56,8 @@ struct ZRect {
         );
     }
     
-    std::array<float, 4 * 2> vertex_data() const
-    {
-        std::array<float, 4 * 2> vertex_data{{
-            origin.x, origin.y,
-            origin.x + size.width, origin.y,
-            origin.x, origin.y + size.height,
-            origin.x + size.width, origin.y + size.height
-        }};
-        return vertex_data;
-    }
+    std::array<float, 4 * 2> vertex_data() const;
+    std::vector<std::string> get_description_attributes() const override;
 };
 
 enum ZVertexAttributeIndex {
@@ -118,6 +122,8 @@ struct ZBufferUsage {
 };
 
 enum ZPixelFormat {
+    ZPIXEL_FORMAT_R,
+    ZPIXEL_FORMAT_RG,
     ZPIXEL_FORMAT_RGB,
     ZPIXEL_FORMAT_BGR,
     ZPIXEL_FORMAT_RGBA,
