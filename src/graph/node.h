@@ -55,6 +55,7 @@ public:
     /* Managing Sub-Nodes */
     virtual void add_child(ZNodeRef node);
     virtual bool remove_child(ZNodeRef node);
+    void remove_all_children();
     
     void remove_from_parent();
     std::vector<ZNodeRef> get_children();
@@ -78,6 +79,7 @@ protected:
 
 private:
     void _remove_child_uid(unsigned uid);
+    void _deorphan_child_node(ZNodeRef child);
     void _on_enter_internal();
     void _on_exit_internal();
 

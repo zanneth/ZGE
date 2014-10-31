@@ -211,6 +211,12 @@ GLenum ZGLUtil::gl_format_from_pixel_format(ZPixelFormat format)
 {
     GLenum gl_frmt = 0;
     switch (format) {
+        case ZPIXEL_FORMAT_R:
+            gl_frmt = GL_RED;
+            break;
+        case ZPIXEL_FORMAT_RG:
+            gl_frmt = GL_RG;
+            break;
         case ZPIXEL_FORMAT_RGB:
             gl_frmt = GL_RGB;
             break;

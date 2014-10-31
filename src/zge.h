@@ -22,7 +22,9 @@
 #include <zge/engine.h>
 #include <zge/event.h>
 #include <zge/exception.h>
+#include <zge/font.h>
 #include <zge/geometry.h>
+#include <zge/glyph.h>
 #include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
 #include <zge/image.h>
@@ -49,6 +51,7 @@
 #include <zge/shader_program.h>
 #include <zge/sound.h>
 #include <zge/sprite_node.h>
+#include <zge/text_node.h>
 #include <zge/texture.h>
 #include <zge/timer.h>
 #include <zge/thread.h>

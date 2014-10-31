@@ -14,8 +14,9 @@ BEGIN_ZGE_NAMESPACE
 
 class ZImage : ZNoncopyable {
 public:
-    ZImage(std::string path);
-    virtual ~ZImage();
+    ZImage(const std::string &path);
+    ZImage(ZDataRef image_data, ZSize2D size, ZImageFormat image_format);
+    ~ZImage();
     
     ZSize2D      get_size() const;
     ZImageFormat get_format() const;

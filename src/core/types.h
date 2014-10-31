@@ -11,6 +11,7 @@
 #include <chrono>
 #include <cstdint>
 #include <zge/defines.h>
+#include <zge/describable.h>
 
 BEGIN_ZGE_NAMESPACE
 
@@ -27,9 +28,19 @@ struct ZSize2D {
     float height;
 };
 
+struct ZEdgeInsets {
+    float top;
+    float left;
+    float bottom;
+    float right;
+};
+
 struct ZRect {
     ZPoint2D origin;
     ZSize2D size;
+    
+    ZRect(const ZPoint2D &origin, const ZSize2D &size);
+    ZRect(float x = 0.f, float y = 0.f, float width = 0.f, float height = 0.f);
     
     inline bool contains_rect(const ZRect &other) const
     {
@@ -44,16 +55,7 @@ struct ZRect {
         );
     }
     
-    std::array<float, 4 * 2> vertex_data() const
-    {
-        std::array<float, 4 * 2> vertex_data{{
-            origin.x, origin.y,
-            origin.x + size.width, origin.y,
-            origin.x, origin.y + size.height,
-            origin.x + size.width, origin.y + size.height
-        }};
-        return vertex_data;
-    }
+    std::array<float, 4 * 2> vertex_data() const;
 };
 
 enum ZVertexAttributeIndex {
@@ -118,6 +120,8 @@ struct ZBufferUsage {
 };
 
 enum ZPixelFormat {
+    ZPIXEL_FORMAT_R,
+    ZPIXEL_FORMAT_RG,
     ZPIXEL_FORMAT_RGB,
     ZPIXEL_FORMAT_BGR,
     ZPIXEL_FORMAT_RGBA,

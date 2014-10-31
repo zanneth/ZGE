@@ -78,10 +78,10 @@ void ZSpriteNode::set_rotation(float radians)
 ZRect ZSpriteNode::get_frame() const
 {
     ZVector origin = this->get_position();
-    return {
-        .origin = ZPoint2D{origin.get_x(), origin.get_y()},
-        .size = _size
-    };
+    return ZRect(
+        ZPoint2D{origin.get_x(), origin.get_y()},
+        _size
+    );
 }
 
 ZTextureRef ZSpriteNode::get_texture() const { return _texture; }

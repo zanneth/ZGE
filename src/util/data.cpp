@@ -16,6 +16,7 @@ BEGIN_ZGE_NAMESPACE
 
 ZData::ZData(const void *data, size_t length) :
     _length(length),
+    _capacity(length),
     _data(length > 0 ? new uint8_t[length] : nullptr)
 {
     if (data != nullptr) {
@@ -68,45 +69,13 @@ void ZData::_move(ZData &&mv)
     mv._length = 0;
 }
 
-#pragma mark - ZMutableData
-
-ZMutableData::ZMutableData(const void *data, size_t length) : ZData(data, length),
-    _capacity(length)
-{}
-
-ZMutableData::ZMutableData(const ZData &cp) : ZData(cp),
-    _capacity(cp.get_length())
-{}
-
-ZMutableData::ZMutableData(ZData &&mv) : ZData(mv),
-    _capacity(mv.get_length())
-{}
-
-ZMutableData& ZMutableData::operator=(const ZData &cp)
-{
-    if (this != &cp) {
-        ZData::operator=(cp);
-        _capacity = cp.get_length();
-    }
-    return *this;
-}
-
-ZMutableData& ZMutableData::operator=(ZData &&mv)
-{
-    if (this != &mv) {
-        ZData::operator=(std::move(mv));
-        _capacity = mv.get_length();
-    }
-    return *this;
-}
-
-void ZMutableData::set_data(const void *data, size_t length)
+void ZData::set_data(const void *data, size_t length)
 {
     clear_data();
     append_data(data, length);
 }
 
-void ZMutableData::append_data(const void *data, size_t length)
+void ZData::append_data(const void *data, size_t length)
 {
     if (_capacity < _length + length) {
         _realloc_data(_length + length + REALLOC_EXTRA);
@@ -116,12 +85,33 @@ void ZMutableData::append_data(const void *data, size_t length)
     _length += length;
 }
 
-void ZMutableData::clear_data()
+void ZData::clear_data()
 {
     _length = 0;
 }
 
-void ZMutableData::_realloc_data(size_t new_size)
+std::string ZData::get_class_name() const
+{
+    return "ZData";
+}
+
+std::vector<std::string> ZData::get_description_attributes() const
+{
+    std::vector<std::string> byte_strs;
+    char buf[8];
+    
+    for (unsigned long i = 0; i < _length; ++i) {
+        uint8_t byte = _data.get()[i];
+        std::sprintf(buf, "%02x", byte);
+        byte_strs.push_back(buf);
+    }
+    
+    return byte_strs;
+}
+
+#pragma mark - Internal
+
+void ZData::_realloc_data(size_t new_size)
 {
     uint8_t *new_data = new uint8_t[new_size];
     uint8_t *current_data = _data.get();

@@ -90,17 +90,24 @@ bool ZNode::remove_child(ZNodeRef node)
 {
     for (auto itr = _children.begin(); itr != _children.end(); ++itr) {
         if (**itr == *node) {
-            node->_scene    = nullptr;
-            node->_parent   = nullptr;
-            
             _children.erase(itr);
-            node->_on_exit_internal();
+            _deorphan_child_node(*itr);
             
             return true;
         }
     }
     
     return false;
+}
+
+void ZNode::remove_all_children()
+{
+    std::vector<ZNodeRef> children = _children;
+    _children.clear();
+    
+    for (ZNodeRef child : children) {
+        _deorphan_child_node(child);
+    }
 }
 
 void ZNode::remove_from_parent()
@@ -202,12 +209,18 @@ void ZNode::_remove_child_uid(unsigned uid)
     auto child = std::find_if(_children.begin(), _children.end(), [uid](ZNodeRef child) { return child->_uid == uid; });
     if (child != _children.end()) {
         ZNodeRef node = *child;
-        node->_scene  = nullptr;
-        node->_parent = nullptr;
-
         _children.erase(child);
-        node->_on_exit_internal();
+        _deorphan_child_node(node);
    }
+}
+
+void ZNode::_deorphan_child_node(ZNodeRef child)
+{
+    if (child) {
+        child->_scene = nullptr;
+        child->_parent = nullptr;
+        child->_on_exit_internal();
+    }
 }
 
 void ZNode::_on_enter_internal()
