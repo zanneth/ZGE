@@ -29,15 +29,15 @@ private:
 
 struct _ZFontImpl {
     std::string path;
-    size_t height;
-    FT_Face face;
+    float       size;
+    FT_Face     face;
 };
 
-ZFont::ZFont(const std::string &font_path, size_t height) :
+ZFont::ZFont(const std::string &font_path, float size) :
     _impl(new _ZFontImpl)
 {
     _impl->path = font_path;
-    _impl->height = height;
+    _impl->size = size;
     _impl->face = nullptr;
     
     ZFontLibrary *library = ZFontLibrary::instance();
@@ -51,12 +51,12 @@ ZFont::ZFont(const std::string &font_path, size_t height) :
         throw ex;
     }
     
-    FT_Set_Char_Size(face, height * 64, height * 64, 96, 96);
+    FT_Set_Char_Size(face, size * 64, size * 64, 96, 96);
     _impl->face = face;
 }
 
 ZFont::ZFont(const ZFont &cp) :
-    ZFont(cp.get_font_path(), cp.get_font_height())
+    ZFont(cp.get_font_path(), cp.get_font_size())
 {}
 
 ZFont::ZFont(ZFont &&mv) :
@@ -74,7 +74,41 @@ ZFont::~ZFont()
 
 std::string ZFont::get_font_path() const { return _impl->path; }
 
-size_t ZFont::get_font_height() const { return _impl->height; }
+float ZFont::get_font_size() const { return _impl->size; }
+
+float ZFont::get_line_height() const
+{
+    ZRect bounds = get_bounding_box();
+    float descender = get_descender();
+    
+    return float(bounds.size.height - descender);
+}
+
+ZRect ZFont::get_bounding_box() const
+{
+    FT_BBox ft_box = _impl->face->bbox;
+    
+    // convert to pixels by dividing each value by 64
+    ft_box.xMax /= 64;
+    ft_box.xMin /= 64;
+    ft_box.yMax /= 64;
+    ft_box.yMin /= 64;
+    
+    return ZRect(
+        ZPoint2D{0.0, 0.0},
+        ZSize2D{float(ft_box.xMax - ft_box.xMin), float(ft_box.yMax - ft_box.yMin)}
+    );
+}
+
+float ZFont::get_ascender() const
+{
+    return float(_impl->face->ascender / 64);
+}
+
+float ZFont::get_descender() const
+{
+    return float(_impl->face->descender / 64);
+}
 
 #pragma mark - API
 
@@ -109,9 +143,10 @@ ZGlyph ZFont::create_glyph(char character)
     ZDataRef bitmap_data = std::make_shared<ZData>(bitmap.buffer, bitmap_length);
     
     ZGlyph glyph = {
+        .character = character,
         .size = { float(width), float(height) },
-        .advance = ZSize2D(face->glyph->advance.x / 64.0, face->glyph->advance.y / 64.0),
-        .insets = ZEdgeInsets(bitmap_glyph->top, bitmap_glyph->left, 0.0, 0.0),
+        .advance = ZSize2D{face->glyph->advance.x / 64.f, face->glyph->advance.y / 64.f},
+        .insets = ZEdgeInsets{(float)bitmap_glyph->top, (float)bitmap_glyph->left, 0.f, 0.f},
         .bitmap = bitmap_data,
     };
     return glyph;

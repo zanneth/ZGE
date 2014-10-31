@@ -65,7 +65,9 @@ void ZTextNode::_render_glyphs()
         .pixel_format = ZPIXEL_FORMAT_RGBA
     };
     
+    const float line_height = _font->get_line_height();
     float last_glyph_max_x = 0.0;
+    
     for (const ZGlyph &glyph : glyphs) {
         size_t num_pixels = (size_t)glyph.size.width * (size_t)glyph.size.height;
         ZDataRef dst_pixbuf_data = std::make_shared<ZData>(nullptr, bytes_per_pixel * num_pixels);
@@ -92,9 +94,7 @@ void ZTextNode::_render_glyphs()
         ZSpriteNodeRef glyph_node = std::make_shared<ZSpriteNode>(texture);
         glyph_node->set_size(glyph.size);
         
-        std::cout << glyph.insets.get_description() << std::endl;
-        
-        ZVector position = {last_glyph_max_x + glyph.insets.left, glyph.insets.top};
+        ZVector position = {last_glyph_max_x + glyph.insets.left, line_height - glyph.insets.top};
         last_glyph_max_x = position.x() + glyph.advance.width;
         glyph_node->set_position(position);
         

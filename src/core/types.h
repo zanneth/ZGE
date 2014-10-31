@@ -18,36 +18,24 @@ BEGIN_ZGE_NAMESPACE
 typedef std::chrono::time_point<std::chrono::system_clock> ZTime;
 typedef std::chrono::duration<double> ZTimeInterval;
 
-struct ZPoint2D : public ZDescribable {
+struct ZPoint2D {
     float x;
     float y;
-    
-    ZPoint2D(float x = 0.f, float y = 0.f);
-    
-    std::vector<std::string> get_description_attributes() const override;
 };
 
-struct ZSize2D : public ZDescribable {
+struct ZSize2D {
     float width;
     float height;
-    
-    ZSize2D(float width = 0.f, float height = 0.f);
-    
-    std::vector<std::string> get_description_attributes() const override;
 };
 
-struct ZEdgeInsets : public ZDescribable {
+struct ZEdgeInsets {
     float top;
     float left;
     float bottom;
     float right;
-    
-    ZEdgeInsets(float top = 0.f, float left = 0.f, float bottom = 0.f, float right = 0.f);
-    
-    std::vector<std::string> get_description_attributes() const override;
 };
 
-struct ZRect : public ZDescribable {
+struct ZRect {
     ZPoint2D origin;
     ZSize2D size;
     
@@ -68,7 +56,6 @@ struct ZRect : public ZDescribable {
     }
     
     std::array<float, 4 * 2> vertex_data() const;
-    std::vector<std::string> get_description_attributes() const override;
 };
 
 enum ZVertexAttributeIndex {
