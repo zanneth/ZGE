@@ -14,12 +14,14 @@
 #include <memory>
 #include <vector>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZAudioManager : public ZSchedulable, ZNoncopyable {
 public:
     ZAudioManager();
     ~ZAudioManager();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZAudioManager);
     
     void add_sound(ZSoundRef sound);
     std::vector<ZSoundRef> get_active_sounds() const;
@@ -32,6 +34,6 @@ private:
     std::auto_ptr<struct _ZAudioManagerImpl> _impl;
 };
 
-typedef std::shared_ptr<ZAudioManager> ZAudioManagerRef;
+ZGE_DEFINE_SREF_TYPE(ZAudioManager);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

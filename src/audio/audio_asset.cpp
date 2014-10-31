@@ -7,9 +7,9 @@
 
 #include <zge/audio_asset.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZAudioAsset::~ZAudioAsset()
 {}
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

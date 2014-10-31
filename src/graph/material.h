@@ -12,7 +12,7 @@
 #include <zge/render_context.h>
 #include <zge/texture.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZMaterial {
 public:
@@ -27,13 +27,15 @@ public:
     virtual void finalize_draw(ZRenderContextRef context);
 };
 
-typedef std::shared_ptr<ZMaterial> ZMaterialRef;
+ZGE_DEFINE_SREF_TYPE(ZMaterial);
 
 class ZColorMaterial : public ZMaterial {
 public:
     ZColorMaterial();
     ZColorMaterial(const ZColorMaterial &cp) = default;
     ZColorMaterial(ZColorMaterial &&mv) = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZColorMaterial);
     
     ZColor get_color() const;
     void set_color(const ZColor &color);
@@ -46,13 +48,15 @@ private:
     ZColor _color;
 };
 
-typedef std::shared_ptr<ZColorMaterial> ZColorMaterialRef;
+ZGE_DEFINE_SREF_TYPE(ZColorMaterial);
 
 class ZTextureMaterial : public ZMaterial {
 public:
     ZTextureMaterial();
     ZTextureMaterial(const ZTextureMaterial &cp) = default;
     ZTextureMaterial(ZTextureMaterial &&mv) = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZTextureMaterial);
     
     ZTextureRef get_texture() const;
     void set_texture(ZTextureRef texture);
@@ -68,6 +72,6 @@ private:
     uint32_t _cached_texture_name;
 };
 
-typedef std::shared_ptr<ZTextureMaterial> ZTextureMaterialRef;
+ZGE_DEFINE_SREF_TYPE(ZTextureMaterial);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

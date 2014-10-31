@@ -12,7 +12,7 @@
 #include <zge/types.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZOrthoCamera : public ZCamera {
     ZRect _clipping_rect;
@@ -25,6 +25,8 @@ class ZOrthoCamera : public ZCamera {
     
 public:
     ZOrthoCamera();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZOrthoCamera);
     
     void open(ZRenderContextRef context) override;
     void close() override;
@@ -40,6 +42,6 @@ public:
     void  set_far_clip(float far_clip);
 };
 
-typedef std::shared_ptr<ZOrthoCamera> ZOrthoCameraRef;
+ZGE_DEFINE_SREF_TYPE(ZOrthoCamera);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

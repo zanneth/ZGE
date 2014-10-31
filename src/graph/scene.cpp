@@ -10,7 +10,7 @@
 #include <zge/logger.h>
 #include <typeinfo>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZScene::ZScene() : ZNode()
 {
@@ -33,4 +33,4 @@ void ZScene::_evict_scene(ZNode *curnode)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -7,7 +7,7 @@
 
 #include <zge/sprite_node.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZSpriteNode::ZSpriteNode(ZTextureRef texture) :
     _quad(new ZQuad)
@@ -89,4 +89,4 @@ ZColor ZSpriteNode::get_color() const { return _color; }
 ZSize2D ZSpriteNode::get_size() const { return _size; }
 float ZSpriteNode::get_rotation() const { return _rotation; }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -12,7 +12,7 @@
 #include <zge/defines.h>
 #include <zge/noncopyable.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct ZDisplayMode {
     bool windowed;
@@ -75,4 +75,4 @@ protected:
     bool _captures_input;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -11,7 +11,7 @@
 #include <zge/exception.h>
 #include <zge/run_loop.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZEngine* ZEngine::instance()
 {
@@ -85,4 +85,4 @@ void ZEngine::set_current_scene(ZSceneRef scene)
     _render_manager->set_scene(scene);
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

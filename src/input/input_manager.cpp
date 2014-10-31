@@ -13,7 +13,7 @@
 #include <algorithm>
 #include <SDL2/SDL.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZEvent _convert_sdl_event(const SDL_Event &sdl_event);
 ZKey _convert_sdl_key(SDL_Keycode sdl_keycode);
@@ -682,4 +682,4 @@ ZKey _convert_sdl_key(SDL_Keycode sdl_keycode)
     return key;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -10,7 +10,7 @@
 
 #define REALLOC_EXTRA 256
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 #pragma mark - ZData
 
@@ -123,4 +123,4 @@ void ZData::_realloc_data(size_t new_size)
     _capacity = new_size;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

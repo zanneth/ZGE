@@ -12,7 +12,7 @@
 #include <SDL2/SDL.h>
 #include <cstring>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct _ZWaveAudioAssetImpl {
     uint8_t *buffer;
@@ -89,4 +89,4 @@ ZAudioFormat ZWaveAudioAsset::get_audio_format() const
     return static_cast<ZAudioFormat>(_impl->spec.format);
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

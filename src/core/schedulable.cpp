@@ -9,7 +9,7 @@
 #include "schedulable.h"
 #include "run_loop.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZWorkSchedulable::ZWorkSchedulable(std::function<void()> work) :
     _work(work)
@@ -24,4 +24,4 @@ void ZWorkSchedulable::run(uint32_t dtime)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

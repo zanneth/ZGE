@@ -5,7 +5,7 @@
  * Date Created: 01/21/2014
  */
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 template <typename T>
 struct _ZObserver {
@@ -63,4 +63,4 @@ void ZObservable<T>::notify_observers(T object)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

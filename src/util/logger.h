@@ -13,13 +13,13 @@
 #include <string>
 #include <sstream>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZLogger : ZNoncopyable {
 public:
-    static void log(const char *format, ...) ZFORMATARG(1, 2);
+    static void log(const char *format, ...) ZGE_FORMATARG(1, 2);
     static void log(const std::string str);
-    static void log_error(const char *format, ...) ZFORMATARG(1, 2);
+    static void log_error(const char *format, ...) ZGE_FORMATARG(1, 2);
     static void log_error(const std::string str);
     
     template <typename T>
@@ -47,6 +47,6 @@ private:
     ~ZLogger();
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE
 
 #define zlog(...) zge::ZLogger::log(__VA_ARGS__)

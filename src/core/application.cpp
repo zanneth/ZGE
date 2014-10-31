@@ -14,7 +14,7 @@
 #include <ctime>
 #include <SDL2/SDL.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static ZApplication *__current_application = nullptr;
 
@@ -134,4 +134,4 @@ void ZApplication::handle_application_event(const ZEvent &event)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

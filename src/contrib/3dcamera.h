@@ -13,11 +13,13 @@
 #include <zge/vector.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class Z3DCamera : public ZCamera {
 public:
     Z3DCamera();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(Z3DCamera);
     
     void open(ZRenderContextRef context) override;
     bool is_open() const override;
@@ -65,6 +67,6 @@ protected:
     bool _modelview_dirty;
 };
 
-typedef std::shared_ptr<Z3DCamera> Z3DCameraRef;
+ZGE_DEFINE_SREF_TYPE(Z3DCamera);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

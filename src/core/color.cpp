@@ -7,7 +7,7 @@
 
 #include <zge/color.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 const ZColor ZColor::black = ZColor(0.0, 0.0, 0.0, 1.0);
 const ZColor ZColor::white = ZColor(1.0, 1.0, 1.0, 1.0);
@@ -33,4 +33,4 @@ ZColor ZColor::random_color(float alpha)
     return color;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

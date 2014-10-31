@@ -11,7 +11,7 @@
 #include <Eigen/Eigen>
 #include <ostream>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct ZMatrixImpl {
     Eigen::Matrix4f data;
@@ -299,4 +299,4 @@ std::string ZMatrix::get_description() const
     return stream.str();
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -10,7 +10,7 @@
 #include <zge/foundation.h>
 #include <zge/vector.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZNode;
 
@@ -24,6 +24,8 @@ public:
     ZAction(const ZAction &cp) = default;
     ZAction(ZAction &&mv) = default;
     virtual ~ZAction() = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZAction);
     
     ZTimeInterval get_duration() const;
     void set_duration(ZTimeInterval duration);
@@ -59,13 +61,15 @@ protected:
     bool            _finished;
 };
 
-typedef std::shared_ptr<ZAction> ZActionRef;
+ZGE_DEFINE_SREF_TYPE(ZAction);
 
 // -----------------------------------------------------------------------------
 
 class ZTranslationAction : public ZAction {
 public:
     ZTranslationAction(const ZVector &start = ZVector::zero, const ZVector &end = ZVector::zero);
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZTranslationAction);
     
     ZVector get_start_position() const;
     void set_start_position(const ZVector &start);
@@ -80,13 +84,15 @@ private:
     ZVector _end;
 };
 
-typedef std::shared_ptr<ZTranslationAction> ZTranslationActionRef;
+ZGE_DEFINE_SREF_TYPE(ZTranslationAction);
 
 // -----------------------------------------------------------------------------
 
 class ZRotationAction : public ZAction {
 public:
     ZRotationAction(float radians, ZVector axis = ZVector({0.0, 0.0, 1.0}));
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZRotationAction);
     
     float get_radians() const;
     void set_radians(float radians);
@@ -101,6 +107,6 @@ private:
     ZVector _axis;
 };
 
-typedef std::shared_ptr<ZRotationAction> ZRotationActionRef;
+ZGE_DEFINE_SREF_TYPE(ZRotationAction);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

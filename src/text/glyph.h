@@ -10,7 +10,7 @@
 #include <zge/foundation.h>
 #include <zge/data.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct ZGlyph {
     char        character;
@@ -20,4 +20,4 @@ struct ZGlyph {
     ZDataRef    bitmap;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

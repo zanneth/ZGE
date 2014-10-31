@@ -10,13 +10,15 @@
 #include <zge/foundation.h>
 #include <zge/data.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZImage : ZNoncopyable {
 public:
     ZImage(const std::string &path);
     ZImage(ZDataRef image_data, ZSize2D size, ZImageFormat image_format);
     ~ZImage();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZImage);
     
     ZSize2D      get_size() const;
     ZImageFormat get_format() const;
@@ -26,6 +28,6 @@ private:
     std::auto_ptr<struct _ZImageImpl> _impl;
 };
 
-typedef std::shared_ptr<ZImage> ZImageRef;
+ZGE_DEFINE_SREF_TYPE(ZImage);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

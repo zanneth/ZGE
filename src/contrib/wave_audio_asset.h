@@ -12,7 +12,7 @@
 #include <zge/audio_asset.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZWaveAudioAsset : public ZAudioAsset {
 public:
@@ -30,4 +30,4 @@ private:
     std::auto_ptr<struct _ZWaveAudioAssetImpl> _impl;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

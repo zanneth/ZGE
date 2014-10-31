@@ -14,7 +14,7 @@
 #include <zge/noncopyable.h>
 #include <zge/types.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZRenderContext;
 
@@ -24,6 +24,8 @@ class ZVertexArray : ZNoncopyable, public std::enable_shared_from_this<ZVertexAr
 public:
     ZVertexArray();
     ~ZVertexArray();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZVertexArray);
     
     void add_buffer(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index);
     void remove_buffer(ZVertexAttributeIndex index);
@@ -40,6 +42,6 @@ private:
     friend ZRenderContext;
 };
 
-typedef std::shared_ptr<ZVertexArray> ZVertexArrayRef;
+ZGE_DEFINE_SREF_TYPE(ZVertexArray);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

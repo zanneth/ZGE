@@ -13,7 +13,7 @@
 #include <zge/defines.h>
 #include <zge/vector.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZMatrix {
     std::auto_ptr<struct ZMatrixImpl> _impl;
@@ -87,4 +87,4 @@ public:
     std::string get_description() const;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

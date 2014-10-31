@@ -9,7 +9,7 @@
 
 #include <zge/defines.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 union ZColor {
     struct { float r, g, b, a; };
@@ -32,4 +32,4 @@ union ZColorb {
     uint8_t data[4];
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -11,11 +11,13 @@
 #include <zge/geometry.h>
 #include <zge/types.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZCube : public ZGeometry {
 public:
     ZCube(float scale = 1.0f);
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZCube);
     
     float get_scale() const;
     
@@ -29,6 +31,6 @@ private:
     float              _scale;
 };
 
-typedef std::shared_ptr<ZCube> ZCubeRef;
+ZGE_DEFINE_SREF_TYPE(ZCube);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

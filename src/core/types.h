@@ -13,7 +13,7 @@
 #include <zge/defines.h>
 #include <zge/describable.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 typedef std::chrono::time_point<std::chrono::system_clock> ZTime;
 typedef std::chrono::duration<double> ZTimeInterval;
@@ -133,4 +133,4 @@ struct ZImageFormat {
     ZPixelFormat pixel_format;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

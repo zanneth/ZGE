@@ -7,7 +7,7 @@
 
 #include <zge/orthocamera.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZOrthoCamera::ZOrthoCamera() :
     _clipping_rect({{-1.0, -1.0}, {2.0, 2.0}}),
@@ -59,4 +59,4 @@ void ZOrthoCamera::set_near_clip(float near_clip) { _near_clip = near_clip; }
 float ZOrthoCamera::get_far_clip() const { return _far_clip; }
 void ZOrthoCamera::set_far_clip(float far_clip) { _far_clip = far_clip; }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

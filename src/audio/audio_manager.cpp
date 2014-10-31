@@ -15,7 +15,7 @@
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #endif
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct _ZAudioManagerImpl {
     SDL_AudioDeviceID device_id;
@@ -121,4 +121,4 @@ void ZAudioManager::_callback(void *userdata, uint8_t *stream, int len)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -8,7 +8,7 @@
 
 #include "semaphore.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZSemaphore::ZSemaphore(int64_t value) :
     _value(value),
@@ -36,4 +36,4 @@ void ZSemaphore::wait()
     --_value;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

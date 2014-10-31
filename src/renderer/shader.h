@@ -13,7 +13,7 @@
 #include <zge/opengl.h>
 #include <zge/noncopyable.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 enum ZShaderType {
     ZVERTEX_SHADER,
@@ -55,4 +55,4 @@ protected:
     static GLenum _get_opengl_shader_type(const ZShaderType &type);
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

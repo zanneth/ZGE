@@ -16,7 +16,7 @@
 
 static unsigned __node_global_uid_count = 1;
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZNode::ZNode(ZGeometryRef geometry) :
     _uid(__node_global_uid_count++),
@@ -30,7 +30,7 @@ ZNode::ZNode(ZGeometryRef geometry) :
 
 ZNode::~ZNode()
 {
-#if (ZDEBUG)
+#if (ZGE_DEBUG)
     ZLogger::log("%s destroyed", get_description().c_str());
 #endif
 }
@@ -274,4 +274,4 @@ void ZNode::_teardown_lights(ZRenderContextRef context)
     _lights_used_for_draw.clear();
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

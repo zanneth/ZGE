@@ -8,7 +8,7 @@
 #include "types.h"
 #include <zge/util.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZRect::ZRect(const ZPoint2D &origin, const ZSize2D &size) :
     origin(origin),
@@ -31,4 +31,4 @@ std::array<float, 4 * 2> ZRect::vertex_data() const
     return vertex_data;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

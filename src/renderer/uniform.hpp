@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <cstring>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 template <typename T, unsigned count>
 ZUniform<T, count>::ZUniform(std::string name, GLint location, GLenum type) :
@@ -56,4 +56,4 @@ void ZUniform<T, count>::set_data(const void *data)
     notify_observers(shared_from_this());
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

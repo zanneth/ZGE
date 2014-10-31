@@ -8,7 +8,7 @@
 
 #include "responder.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static unsigned __responder_global_uid_count = 1;
 
@@ -33,4 +33,4 @@ void ZResponder::send_event(const ZEvent &event)
     _function(event);
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

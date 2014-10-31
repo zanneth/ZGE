@@ -12,7 +12,7 @@
 #include <zge/noncopyable.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct _ZSoundPlaybackState;
 
@@ -42,6 +42,6 @@ private:
     std::auto_ptr<_ZSoundPlaybackState> _playback_state;
 };
 
-typedef std::shared_ptr<ZSound> ZSoundRef;
+ZGE_DEFINE_SREF_TYPE(ZSound);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

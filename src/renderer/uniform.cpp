@@ -7,7 +7,7 @@
 
 #include <zge/uniform.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
     
 ZUniformBase::ZUniformBase(std::string name, GLint location, GLenum type) :
     _name(name),
@@ -24,4 +24,4 @@ GLenum ZUniformBase::get_type() const { return _type; }
 
 GLint ZUniformBase::_get_location() const { return _location; }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

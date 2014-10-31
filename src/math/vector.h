@@ -11,7 +11,7 @@
 #include <memory>
 #include <zge/defines.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZVector {
 private:
@@ -72,4 +72,4 @@ public:
     friend class ZMatrix;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

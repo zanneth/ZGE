@@ -8,7 +8,7 @@
 
 #include <zge/glutil.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 GLenum ZGLUtil::gl_value_type_from_component_type(ZComponentType component_type)
 {
@@ -235,4 +235,4 @@ GLenum ZGLUtil::gl_format_from_pixel_format(ZPixelFormat format)
     return gl_frmt;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

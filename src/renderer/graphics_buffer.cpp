@@ -11,7 +11,7 @@
 #include <zge/logger.h>
 #include <zge/opengl.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZGraphicsBuffer::ZGraphicsBuffer(ZBufferTarget target) :
     _buffer(ZUNALLOCATED_BUFFER),
@@ -37,7 +37,7 @@ ZGraphicsBuffer::~ZGraphicsBuffer()
         glDeleteBuffers(1, &_buffer);
     }
     
-#if (ZDEBUG)
+#if (ZGE_DEBUG)
     zlog("Buffer %p destroyed.", this);
 #endif
 }
@@ -113,4 +113,4 @@ void ZElementGraphicsBuffer::set_indices_type(ZComponentType type) { _indices_ty
 
 ZComponentType ZElementGraphicsBuffer::get_indices_type() const { return _indices_type; }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

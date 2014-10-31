@@ -11,11 +11,13 @@
 #include <zge/run_loop.h>
 #include <thread>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZThread : ZNoncopyable {
 public:
     ZThread();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZThread);
     
     ZRunloopRef get_runloop() const;
     std::thread::id get_id() const;
@@ -28,6 +30,6 @@ private:
     std::thread _thread;
 };
 
-typedef std::shared_ptr<ZThread> ZThreadRef;
+ZGE_DEFINE_SREF_TYPE(ZThread);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

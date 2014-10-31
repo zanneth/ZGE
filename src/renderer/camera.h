@@ -10,7 +10,7 @@
 #include <zge/foundation.h>
 #include <zge/render_context.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZCamera : ZNoncopyable {
 protected:
@@ -25,6 +25,6 @@ public:
     virtual void close() = 0;
 };
 
-typedef std::shared_ptr<ZCamera> ZCameraRef;
+ZGE_DEFINE_SREF_TYPE(ZCamera);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

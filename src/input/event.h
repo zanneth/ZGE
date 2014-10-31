@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 enum ZEventType {
     ZUNKNOWN_EVENT = 0,
@@ -269,4 +269,4 @@ private:
     std::string _mouse_buttons_description(ZMouseButtonFlags button_flags) const;
 };
  
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

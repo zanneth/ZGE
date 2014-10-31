@@ -11,7 +11,7 @@
 #include <zge/material.h>
 #include <zge/render_context.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 typedef std::shared_ptr<class ZGeometry> ZGeometryRef;
 
@@ -37,4 +37,4 @@ protected:
     std::vector<ZMaterialRef> _materials;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

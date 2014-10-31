@@ -18,7 +18,7 @@
 #include <zge/uniform.h>
 #include <zge/vertex_array.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 enum ZRenderMatrixType {
     ZRENDER_MATRIX_PROJECTION,
@@ -77,4 +77,4 @@ private:
     std::unique_ptr<struct ZRenderContextImpl> _impl;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

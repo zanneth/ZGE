@@ -13,7 +13,7 @@
 #include <zge/geometry.h>
 #include <zge/render_context.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZLight;
 class ZScene;
@@ -109,4 +109,4 @@ protected:
     friend class ZScene;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

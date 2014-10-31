@@ -9,7 +9,7 @@
 #include <sstream>
 #include <typeinfo>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 std::string ZDescribable::get_class_name() const
 {
@@ -35,4 +35,4 @@ std::string ZDescribable::get_description() const
     return stream.str();
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

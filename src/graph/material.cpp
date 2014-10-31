@@ -7,7 +7,7 @@
 
 #include "material.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZMaterial::~ZMaterial()
 {}
@@ -71,4 +71,4 @@ void ZTextureMaterial::finalize_draw(ZRenderContextRef context)
     context->unbind_texture();
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

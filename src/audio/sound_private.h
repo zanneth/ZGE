@@ -11,7 +11,7 @@
 #include <zge/defines.h>
 #include <zge/sound.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct _ZSoundPlaybackState {
     ZAudioAssetRef asset;
@@ -23,4 +23,4 @@ struct _ZSoundPlaybackState {
     uint32_t       current_repeated;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -7,7 +7,7 @@
  
 #include <zge/logger.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 void ZLogger::log(const char *format, ...)
 {
@@ -49,4 +49,4 @@ void ZLogger::_logv(const std::string str, std::ostream &output_stream)
     output_stream << str << std::endl;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

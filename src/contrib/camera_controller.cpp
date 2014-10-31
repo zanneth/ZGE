@@ -8,7 +8,7 @@
 #include "camera_controller.h"
 #include "vector.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZCameraController::ZCameraController(Z3DCameraRef camera) :
     ZResponder([this] (const ZEvent &e) { _receive_event(e); }),
@@ -73,4 +73,4 @@ void ZCameraController::_receive_event(const ZEvent &event)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

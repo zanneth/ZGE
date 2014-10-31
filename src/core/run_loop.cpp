@@ -13,7 +13,7 @@
 
 #define FRAMES_PER_SECOND 60
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZRunloop::ZRunloop() :
     _running(false)
@@ -98,4 +98,4 @@ void ZRunloop::_main()
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -15,7 +15,7 @@
 #include <lib3ds.h>
 #include <sstream>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 template<typename T, size_t S>
 std::array<T, S> __copy_vertex_data(T vertex[S]);
@@ -139,4 +139,4 @@ std::array<T, S> __copy_vertex_data(T vertex[S])
     return array;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

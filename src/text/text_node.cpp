@@ -11,7 +11,7 @@
 #include "sprite_node.h"
 #include "texture.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
     _text(text),
@@ -108,4 +108,4 @@ void ZTextNode::_render_glyphs()
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

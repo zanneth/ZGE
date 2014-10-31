@@ -12,7 +12,7 @@
 #include <zge/opengl.h>
 #include <zge/types.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZGLUtil {
 public:
@@ -24,4 +24,4 @@ public:
     static GLenum gl_format_from_pixel_format(ZPixelFormat format);
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

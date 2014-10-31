@@ -16,7 +16,7 @@
 #include <stdexcept>
 #include <vector>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static ZRenderContextRef __current_context = nullptr;
 
@@ -332,4 +332,4 @@ ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType type)
     return descriptor;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

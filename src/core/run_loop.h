@@ -13,7 +13,7 @@
 #include <zge/noncopyable.h>
 #include <vector>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZRunloop : ZNoncopyable {
 public:
@@ -45,6 +45,6 @@ private:
     std::mutex _mutex;
 };
 
-typedef std::shared_ptr<ZRunloop> ZRunloopRef;
+ZGE_DEFINE_SREF_TYPE(ZRunloop);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

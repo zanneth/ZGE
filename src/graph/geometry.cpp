@@ -9,7 +9,7 @@
 #include <zge/shader_program.h>
 #include <zge/uniform.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
     
 static void _update_material_data(ZRenderContextRef context, std::vector<ZMaterialRef> materials);
 
@@ -80,4 +80,4 @@ void _update_material_data(ZRenderContextRef context, std::vector<ZMaterialRef> 
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -17,7 +17,7 @@
 #include <zge/thread.h>
 #include <zge/types.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZRenderManager : public ZSchedulable,
                        public ZNoncopyable,
@@ -26,6 +26,8 @@ class ZRenderManager : public ZSchedulable,
 public:
     ZRenderManager();
     ~ZRenderManager();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZRenderManager);
     
     /* Accessors */
     ZDisplayRef get_current_display() const;
@@ -56,6 +58,6 @@ private:
     bool _initialized;
 };
 
-typedef std::shared_ptr<ZRenderManager> ZRenderManagerRef;
+ZGE_DEFINE_SREF_TYPE(ZRenderManager);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

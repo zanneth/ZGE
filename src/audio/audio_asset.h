@@ -11,7 +11,7 @@
 #include <zge/noncopyable.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 typedef uint16_t ZAudioFormat;
 
@@ -24,6 +24,6 @@ public:
     virtual ZAudioFormat get_audio_format() const = 0;
 };
 
-typedef std::shared_ptr<ZAudioAsset> ZAudioAssetRef;
+ZGE_DEFINE_SREF_TYPE(ZAudioAsset);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

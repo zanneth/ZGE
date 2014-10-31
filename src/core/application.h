@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZApplication : ZNoncopyable {
     std::vector<std::string> _arguments;
@@ -62,4 +62,4 @@ public:
     virtual void application_ready() {}
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

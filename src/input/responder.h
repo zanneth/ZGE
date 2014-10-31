@@ -11,7 +11,7 @@
 #include <zge/foundation.h>
 #include <zge/event.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 typedef std::shared_ptr<class ZResponder> ZResponderRef;
 typedef std::function<void(const ZEvent &event)> ZResponderFunction;
@@ -42,4 +42,4 @@ protected:
     unsigned            _uid;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

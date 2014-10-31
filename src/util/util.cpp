@@ -12,7 +12,7 @@
 #include <cmath>
 #include <sstream>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 inline float ZUtil::degrees_to_radians(float degrees)
 {
@@ -84,4 +84,4 @@ ZTime ZUtil::get_current_time()
     return std::chrono::system_clock::now();
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZDescribable {
 public:
@@ -22,4 +22,4 @@ public:
     virtual std::string get_description() const;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -9,7 +9,7 @@
 #include <chrono>
 #include <zge/run_loop.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZTimer::ZTimer(const ZTimerFunction &func) :
     _function(func),
@@ -68,4 +68,4 @@ void ZTimer::invalidate()
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

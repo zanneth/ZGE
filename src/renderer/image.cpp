@@ -9,7 +9,7 @@
 #include <zge/color.h>
 #include <SDL2/SDL_image.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt);
 static ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat format);
@@ -112,4 +112,4 @@ ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat format)
     return pixel_data;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

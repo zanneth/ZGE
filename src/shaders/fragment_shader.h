@@ -8,9 +8,9 @@
 #include <string>
 #include <zge/defines.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
-const std::string ZFragmentShaderSource = "#version 150\n" + ZHEREDOC
+const std::string ZFragmentShaderSource = "#version 150\n" + ZGE_HEREDOC
 (
                                                                       
 in vec3 frag_position;
@@ -74,4 +74,4 @@ void main()
 
 );
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

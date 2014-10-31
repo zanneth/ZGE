@@ -9,7 +9,7 @@
 #include <zge/vector_private.h>
 #include <zge/logger.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 const ZVector ZVector::zero = ZVector({0.0, 0.0, 0.0});
 
@@ -188,4 +188,4 @@ ZVector ZVector::normalized() const
     return v;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

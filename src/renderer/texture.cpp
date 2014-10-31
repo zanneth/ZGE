@@ -9,7 +9,7 @@
 #include <zge/opengl.h>
 #include <zge/glutil.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct _ZTextureImpl {
     GLuint name;
@@ -40,7 +40,7 @@ ZTexture::ZTexture(ZImageRef image) :
 
 ZTexture::~ZTexture()
 {
-#if (ZDEBUG)
+#if (ZGE_DEBUG)
     zlog("Texture %p destroyed.", this);
 #endif
     
@@ -66,4 +66,4 @@ uint32_t ZTexture::_get_texture_name() const
     return _impl->name;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

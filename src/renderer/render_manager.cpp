@@ -12,7 +12,7 @@
 #include <zge/node.h>
 #include <zge/scene.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZRenderManager::ZRenderManager() :
     _context(nullptr),
@@ -94,4 +94,4 @@ void ZRenderManager::_initialize_render_context()
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

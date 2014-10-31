@@ -14,7 +14,7 @@
 #include <zge/render_manager.h>
 #include <zge/types.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZEngine : ZNoncopyable {
 public:
@@ -47,4 +47,4 @@ private:
     ZEngine();
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

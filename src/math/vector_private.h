@@ -10,10 +10,10 @@
 #include <zge/defines.h>
 #include <Eigen/Eigen>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct ZVectorImpl {
     Eigen::Vector3f data;
 };
     
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

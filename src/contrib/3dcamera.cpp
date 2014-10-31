@@ -14,7 +14,7 @@
 #define DEFAULT_NEAR_CLIP   0.001f
 #define DEFAULT_FAR_CLIP    10000.0f
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 Z3DCamera::Z3DCamera() :
     _field_of_view(DEFAULT_FOV),
@@ -136,4 +136,4 @@ void Z3DCamera::_close_modelview()
     _current_context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

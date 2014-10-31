@@ -9,7 +9,7 @@
 
 #include <zge/defines.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZNoncopyable {
 protected:
@@ -21,4 +21,4 @@ private:
     const ZNoncopyable& operator=(const ZNoncopyable&)  = delete;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

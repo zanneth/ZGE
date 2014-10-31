@@ -17,7 +17,7 @@
 #include <memory>
 #include <queue>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
 
@@ -47,4 +47,4 @@ private:
     std::queue<ZResponderRef> _removal_queue;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

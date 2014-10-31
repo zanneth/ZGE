@@ -12,7 +12,7 @@
 #include <zge/node.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 enum ZLightType {
     ZLIGHT_TYPE_POINT,
@@ -22,6 +22,8 @@ enum ZLightType {
 class ZLight : public ZNode {
 public:
     ZLight(ZLightType type = ZLIGHT_TYPE_POINT);
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZLight);
     
     ZLightType get_type() const;
     void set_type(ZLightType type);
@@ -34,6 +36,6 @@ private:
     ZColor     _color;
 };
 
-typedef std::shared_ptr<ZLight> ZLightRef;
+ZGE_DEFINE_SREF_TYPE(ZLight);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

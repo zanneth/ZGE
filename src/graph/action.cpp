@@ -10,7 +10,7 @@
 #include <cfloat>
 #include <cmath>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static float __linear_timing_function(float time);
 
@@ -120,4 +120,4 @@ float __linear_timing_function(float time)
     return time;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -12,11 +12,13 @@
 #include <zge/types.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZQuad : public ZGeometry {
 public:
     ZQuad(ZRect rect = {{0.0, 0.0}, {1.0, 1.0}});
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZQuad);
     
     ZRect get_quad_rect() const;
     void set_quad_rect(const ZRect &rect);
@@ -35,6 +37,6 @@ private:
     ZRect              _texcoord_rect;
 };
 
-typedef std::shared_ptr<ZQuad> ZQuadRef;
+ZGE_DEFINE_SREF_TYPE(ZQuad);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

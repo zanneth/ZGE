@@ -7,7 +7,7 @@
 
 #include "thread.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZThread::ZThread() :
     _runloop(std::make_shared<ZRunloop>()),
@@ -32,4 +32,4 @@ void ZThread::detach()
     _thread.detach();
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

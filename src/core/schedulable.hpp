@@ -11,7 +11,7 @@
 #error "Do not include this file directly. Include schedulable.h instead.
 #endif
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 template<typename T>
 ZWeakSchedulable<T>::ZWeakSchedulable(std::weak_ptr<T> weak) :
@@ -32,4 +32,4 @@ void ZWeakSchedulable<T>::run(uint32_t dtime)
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

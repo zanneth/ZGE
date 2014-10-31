@@ -14,7 +14,7 @@
 #include <memory>
 #include <string>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZModel : public ZGeometry {
 protected:
@@ -32,6 +32,8 @@ public:
     ZModel(ZModel&&) = default;
     ~ZModel() = default;
     
+    ZGE_DEFINE_SREF_FUNCTIONS(ZModel);
+    
     ZGeometryRef copy() const override;
     
     /* Loading from 3DS Files */
@@ -44,6 +46,6 @@ public:
     void render(ZRenderContextRef context) override;
 };
 
-typedef std::shared_ptr<ZModel> ZModelRef;
+ZGE_DEFINE_SREF_TYPE(ZModel);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

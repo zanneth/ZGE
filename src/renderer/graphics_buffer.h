@@ -18,7 +18,7 @@
 #define ZUNALLOCATED_BUFFER -1
 #define ZUNBOUND_TARGET     -1
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct ZBufferAttribute {
     unsigned       components_per_vertex;  // components per vertex attribute (1, 2, 3, or 4)
@@ -40,6 +40,8 @@ public:
     
     ZGraphicsBuffer& operator=(ZGraphicsBuffer&&);
     
+    ZGE_DEFINE_SREF_FUNCTIONS(ZGraphicsBuffer);
+    
     ZBufferTarget get_target() const;
     
     void             add_attribute(ZBufferAttribute attribute);
@@ -56,7 +58,7 @@ private:
     friend class ZVertexArray;
 };
 
-typedef std::shared_ptr<ZGraphicsBuffer> ZGraphicsBufferRef;
+ZGE_DEFINE_SREF_TYPE(ZGraphicsBuffer);
 
 class ZElementGraphicsBuffer : public ZGraphicsBuffer {
     unsigned _elements_count;
@@ -65,6 +67,8 @@ class ZElementGraphicsBuffer : public ZGraphicsBuffer {
 public:
     ZElementGraphicsBuffer();
     
+    ZGE_DEFINE_SREF_FUNCTIONS(ZElementGraphicsBuffer);
+    
     void set_elements_count(unsigned count);
     unsigned get_elements_count() const;
     
@@ -72,6 +76,6 @@ public:
     ZComponentType get_indices_type() const;
 };
 
-typedef std::shared_ptr<ZElementGraphicsBuffer> ZElementGraphicsBufferRef;
+ZGE_DEFINE_SREF_TYPE(ZElementGraphicsBuffer);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

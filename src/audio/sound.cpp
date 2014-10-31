@@ -10,7 +10,7 @@
 #include <zge/audio_manager.h>
 #include <zge/engine.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZSound::ZSound(ZAudioAssetRef asset) :
     _playback_state(new _ZSoundPlaybackState)
@@ -54,4 +54,4 @@ void ZSound::set_repeat_count(int repeat_count) { _playback_state->repeat_count 
 ZAudioAssetRef ZSound::get_asset() const { return _playback_state->asset; }
 _ZSoundPlaybackState* ZSound::_get_playback_state() { return _playback_state.get(); }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

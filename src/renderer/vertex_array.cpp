@@ -13,7 +13,7 @@
 #include <zge/util.h>
 #include <set>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 struct ZVertexArrayImpl {
     GLuint vao;
@@ -36,7 +36,7 @@ ZVertexArray::~ZVertexArray()
 {
     glDeleteVertexArrays(1, &(_impl->vao));
     
-#if (ZDEBUG)
+#if (ZGE_DEBUG)
     zlog("Vertex array %p destroyed.", this);
 #endif
 }
@@ -116,4 +116,4 @@ void _zvertexarray_setup_vertex_attrib_pointer(ZGraphicsBufferRef buffer, ZVerte
     }
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

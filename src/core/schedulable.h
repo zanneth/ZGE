@@ -10,7 +10,7 @@
 #include <memory>
 #include <zge/foundation.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;
 class ZRunloop;
@@ -52,7 +52,7 @@ private:
     std::weak_ptr<T> _ref;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE
 
 #define __ZGE_ZSCHEDULABLE_IMPL_GUARD__
 #include <zge/schedulable.hpp>

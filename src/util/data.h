@@ -11,13 +11,15 @@
 #include <zge/describable.h>
 #include <memory>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZData : public ZDescribable {
 public:
     ZData(const void *data = nullptr, size_t length = 0);
     ZData(const ZData &cp);
     ZData(ZData &&mv);
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZData);
     
     ZData& operator=(const ZData &cp);
     ZData& operator=(ZData &&mv);
@@ -43,6 +45,6 @@ private:
     std::auto_ptr<uint8_t> _data;
 };
 
-typedef std::shared_ptr<ZData> ZDataRef;
+ZGE_DEFINE_SREF_TYPE(ZData);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

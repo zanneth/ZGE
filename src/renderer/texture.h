@@ -11,12 +11,14 @@
 #include <zge/foundation.h>
 #include <zge/image.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZTexture : ZNoncopyable {
 public:
     ZTexture(ZImageRef image);
     ~ZTexture();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZTexture);
     
     ZSize2D get_size() const;
     ZRect   get_texture_rect() const;
@@ -31,6 +33,6 @@ private:
     std::auto_ptr<struct _ZTextureImpl> _impl;
 };
 
-typedef std::shared_ptr<ZTexture> ZTextureRef;
+ZGE_DEFINE_SREF_TYPE(ZTexture);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

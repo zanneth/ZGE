@@ -7,7 +7,7 @@
 
 #include "light.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZLight::ZLight(ZLightType type) :
     _type(type),
@@ -24,4 +24,4 @@ ZColor ZLight::get_color() const { return _color; }
 
 void ZLight::set_color(const ZColor &color) { _color = color; }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

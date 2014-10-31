@@ -14,12 +14,14 @@
 #include <zge/quad.h>
 #include <zge/texture.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZSpriteNode : public ZNode, ZNoncopyable {
 public:
     ZSpriteNode(ZTextureRef texture = nullptr);
     ~ZSpriteNode() = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZSpriteNode);
     
     ZTextureRef get_texture() const;
     void set_texture(ZTextureRef texture);
@@ -48,6 +50,6 @@ private:
     float               _rotation;
 };
 
-typedef std::shared_ptr<ZSpriteNode> ZSpriteNodeRef;
+ZGE_DEFINE_SREF_TYPE(ZSpriteNode);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

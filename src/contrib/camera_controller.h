@@ -11,12 +11,14 @@
 #include <zge/3dcamera.h>
 #include <zge/responder.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZCameraController : public ZResponder {
 public:
     ZCameraController(Z3DCameraRef camera = nullptr);
     ~ZCameraController() = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZCameraController);
     
     Z3DCameraRef get_camera() const;
     void set_camera(Z3DCameraRef camera);
@@ -32,6 +34,6 @@ private:
     float _movement_speed;
 };
 
-typedef std::shared_ptr<ZCameraController> ZCameraControllerRef;
+ZGE_DEFINE_SREF_TYPE(ZCameraController);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

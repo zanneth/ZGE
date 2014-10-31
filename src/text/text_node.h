@@ -12,12 +12,14 @@
 #include <zge/glyph.h>
 #include <zge/node.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZTextNode : public ZNode {
 public:
     ZTextNode(const std::string &text = "", ZFontRef font = nullptr);
     ~ZTextNode();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZTextNode);
     
     std::string get_text() const;
     void set_text(const std::string &text);
@@ -34,6 +36,6 @@ private:
     std::vector<ZGlyph> _glyphs;
 };
 
-typedef std::shared_ptr<ZTextNode> ZTextNodeRef;
+ZGE_DEFINE_SREF_TYPE(ZTextNode);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

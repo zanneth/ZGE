@@ -10,7 +10,7 @@
 #include <zge/foundation.h>
 #include <zge/glyph.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZFont {
 public:
@@ -18,6 +18,8 @@ public:
     ZFont(const ZFont &cp);
     ZFont(ZFont &&mv);
     ~ZFont();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZFont);
     
     /// path to the font file
     std::string get_font_path() const;
@@ -47,6 +49,6 @@ private:
     std::unique_ptr<struct _ZFontImpl> _impl;
 };
 
-typedef std::shared_ptr<ZFont> ZFontRef;
+ZGE_DEFINE_SREF_TYPE(ZFont);
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

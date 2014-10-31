@@ -11,7 +11,7 @@
 #include <zge/foundation.h>
 #include <thread>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZSemaphore {
 public:
@@ -28,4 +28,4 @@ private:
     int64_t _max;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

@@ -9,7 +9,7 @@
 
 #include <zge/foundation.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZResourceBundle : ZNoncopyable {
 public:
@@ -27,4 +27,4 @@ private:
     char        _path_separator;
 };
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

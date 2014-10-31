@@ -8,7 +8,7 @@
 #include <zge/quad.h>
 #include <zge/graphics_buffer.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 ZQuad::ZQuad(ZRect rect) :
     _vertex_array(new ZVertexArray),
@@ -84,4 +84,4 @@ void ZQuad::render(ZRenderContextRef context)
     context->draw_array(ZRENDER_MODE_TRIANGLE_STRIP, _vertex_array, 0, 4);
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

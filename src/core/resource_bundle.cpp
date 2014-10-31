@@ -9,7 +9,7 @@
 #include <zge/util.h>
 #include <SDL2/SDL.h>
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static std::string _get_main_bundle_path(char *out_path_separator);
 
@@ -82,4 +82,4 @@ std::string _get_main_bundle_path(char *out_path_separator)
     return main_bundle_path;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

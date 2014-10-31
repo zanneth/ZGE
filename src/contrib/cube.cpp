@@ -7,7 +7,7 @@
 
 #include "cube.h"
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 static const float __cube_vertex_data[] = {
     // front
@@ -171,4 +171,4 @@ void ZCube::render(ZRenderContextRef context)
     context->draw_array(ZRENDER_MODE_TRIANGLES, _vertex_array, 0, num_triangles);
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE

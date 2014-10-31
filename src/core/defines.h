@@ -10,11 +10,21 @@
 #include <cstdint>
 #include <iostream>
 
-#define ZDEBUG 1
+#define ZGE_DEBUG 1
 
-#define ZHEREDOC(...) std::string(#__VA_ARGS__)
+#define ZGE_HEREDOC(...) std::string(#__VA_ARGS__)
 
-#define BEGIN_ZGE_NAMESPACE namespace zge {
-#define END_ZGE_NAMESPACE }
+#define ZGE_BEGIN_NAMESPACE namespace zge {
+#define ZGE_END_NAMESPACE }
 
-#define ZFORMATARG(FORMAT_ARG, VA_ARG) __attribute__((__format__(printf,FORMAT_ARG,VA_ARG)))
+#define ZGE_FORMATARG(FORMAT_ARG, VA_ARG) __attribute__((__format__(printf,FORMAT_ARG,VA_ARG)))
+
+#define ZGE_DEFINE_SREF_FUNCTIONS(CLASSNAME) \
+    template<typename ... Args> \
+    static std::shared_ptr<CLASSNAME> create(Args&& ... args) \
+    { \
+        return std::make_shared<CLASSNAME>(std::forward<Args>(args)...); \
+    }
+
+#define ZGE_DEFINE_SREF_TYPE(CLASSNAME) \
+    typedef std::shared_ptr<CLASSNAME> CLASSNAME##Ref;

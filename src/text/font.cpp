@@ -12,7 +12,7 @@
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 
-BEGIN_ZGE_NAMESPACE
+ZGE_BEGIN_NAMESPACE
 
 class ZFontLibrary {
 public:
@@ -188,4 +188,4 @@ FT_Library* ZFontLibrary::get_freetype_library()
     return &_freetype_library;
 }
 
-END_ZGE_NAMESPACE
+ZGE_END_NAMESPACE
