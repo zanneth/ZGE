@@ -21,7 +21,11 @@ ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
 }
 
 ZTextNode::~ZTextNode()
-{}
+{
+#if (ZDEBUG)
+    zlog("TextNode %p destroyed.", this);
+#endif
+}
 
 #pragma mark - Accessors
 
@@ -80,12 +84,14 @@ void ZTextNode::_render_glyphs()
             for (unsigned x = 0; x < width; ++x) {
                 size_t src_off = (y * width) + (width - x - 1);
                 size_t dst_off = 4 * ((y * width) + x);
+                uint8_t src_pixval = src_pixbuf[src_off];
                 
                 dst_pixbuf[dst_off + 0] =
                 dst_pixbuf[dst_off + 1] =
                 dst_pixbuf[dst_off + 2] =
-                    src_pixbuf[src_off];
-                dst_pixbuf[dst_off + 3] = 0xff;
+                    src_pixval;
+                
+                dst_pixbuf[dst_off + 3] = (src_pixval > 0 ? 0xff : 0x00);
             }
         }
         

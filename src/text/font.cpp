@@ -65,6 +65,10 @@ ZFont::ZFont(ZFont &&mv) :
 
 ZFont::~ZFont()
 {
+#if (ZDEBUG)
+    zlog("Font %p destroyed.", this);
+#endif
+    
     if (_impl) {
         FT_Done_Face(_impl->face);
     }
