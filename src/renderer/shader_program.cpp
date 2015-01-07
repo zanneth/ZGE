@@ -245,7 +245,9 @@ void ZShaderProgram::_uniform_modified(ZUniformRef uniform)
         case GL_FLOAT_MAT4:
             glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)data);
             break;
+#if !OPENGL_ES
         case GL_SAMPLER_1D:
+#endif
         case GL_SAMPLER_2D:
         case GL_SAMPLER_3D:
             glUniform1uiv(location, 1, (const GLuint *)data);
@@ -309,9 +311,11 @@ ZUniformRef _create_uniform(GLenum type, std::string name, GLuint index)
         case GL_FLOAT_MAT4:
             uniform = ZUniformRef(new ZUniform<GLfloat, 4*4>(name, index, GL_FLOAT_MAT4));
             break;
+#if !OPENGL_ES
         case GL_SAMPLER_1D:
             uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_1D));
             break;
+#endif
         case GL_SAMPLER_2D:
             uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_2D));
             break;

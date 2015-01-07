@@ -35,9 +35,11 @@ GLenum ZGLUtil::gl_value_type_from_component_type(ZComponentType component_type)
         case ZCOMPONENT_TYPE_FLOAT:
             gltype = GL_FLOAT;
             break;
+#if !OPENGL_ES
         case ZCOMPONENT_TYPE_DOUBLE:
             gltype = GL_DOUBLE;
             break;
+#endif
         case ZCOMPONENT_TYPE_UNKNOWN:
         default:
             break;
@@ -98,9 +100,11 @@ GLenum ZGLUtil::gl_target_from_buffer_target(ZBufferTarget target)
         case ZBUFFER_TARGET_PIXEL_UNPACK:
             gltype = GL_PIXEL_UNPACK_BUFFER;
             break;
+#if !OPENGL_ES
         case ZBUFFER_TARGET_TEXTURE:
             gltype = GL_TEXTURE_BUFFER;
             break;
+#endif
         case ZBUFFER_TARGET_TRANSFORM_FEEDBACK:
             gltype = GL_TRANSFORM_FEEDBACK_BUFFER;
             break;
@@ -197,9 +201,11 @@ size_t ZGLUtil::gl_host_size_for_component(ZComponentType component_type)
         case ZCOMPONENT_TYPE_FLOAT:
             size = sizeof(GLfloat);
             break;
+#if !OPENGL_ES
         case ZCOMPONENT_TYPE_DOUBLE:
             size = sizeof(GLdouble);
             break;
+#endif
         case ZCOMPONENT_TYPE_UNKNOWN:
         default:
             break;
@@ -223,12 +229,14 @@ GLenum ZGLUtil::gl_format_from_pixel_format(ZPixelFormat format)
         case ZPIXEL_FORMAT_RGBA:
             gl_frmt = GL_RGBA;
             break;
+#if !OPENGL_ES
         case ZPIXEL_FORMAT_BGR:
             gl_frmt = GL_BGR;
             break;
         case ZPIXEL_FORMAT_BGRA:
             gl_frmt = GL_BGRA;
             break;
+#endif
         default:
             break;
     }

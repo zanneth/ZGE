@@ -95,7 +95,13 @@ ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt)
     if (rmask == 0x0) {
         format = ZPIXEL_FORMAT_RGBA;
     } else if (rmask == 0xff0000) {
+#if OPENGL_ES
+        ZException e(ZASSERTION_EXCEPTION_CODE);
+        e.extra_info = "GLES: Unsupported pixel format";
+        throw e;
+#else
         format = ZPIXEL_FORMAT_BGRA;
+#endif
     }
     
     return format;
