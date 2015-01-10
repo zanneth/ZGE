@@ -10,7 +10,11 @@
 #include <zge/foundation.h>
 #include <zge/render_context.h>
 
+#ifdef __OBJC__
 @class EAGLContext;
+#else
+using EAGLContext = void;
+#endif
 
 ZGE_BEGIN_NAMESPACE
 

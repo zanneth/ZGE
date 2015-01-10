@@ -34,4 +34,3 @@
     class CLASSNAME;											\
     using CLASSNAME##Ref = std::shared_ptr<CLASSNAME>;			\
     using CLASSNAME##ConstRef = std::shared_ptr<const CLASSNAME>
-

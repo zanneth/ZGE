@@ -7,6 +7,10 @@
 
 #pragma once
 
+#if __has_include(<TargetConditionals.h>)
+#include <TargetConditionals.h>
+#endif
+
 #ifdef __APPLE__
 #if TARGET_OS_IPHONE
 #   include <OpenGLES/ES3/gl.h>
