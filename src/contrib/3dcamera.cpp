@@ -20,6 +20,8 @@ Z3DCamera::Z3DCamera() :
     _field_of_view(DEFAULT_FOV),
     _near_clip(DEFAULT_NEAR_CLIP),
     _far_clip(DEFAULT_FAR_CLIP),
+    _viewport(ZEngine::instance()->get_viewport_rect()),
+    _open(false),
     _projection_dirty(true),
     _modelview_dirty(true)
 {}
@@ -53,6 +55,8 @@ bool Z3DCamera::is_open() const
 
 #pragma mark - Accessors
 
+ZRect Z3DCamera::get_viewport_rect() const { return _viewport; }
+void Z3DCamera::set_viewport_rect(const ZRect &rect) { _viewport = rect; }
 float Z3DCamera::get_fov() const { return _field_of_view; }
 void Z3DCamera::set_fov(float degrees) { _field_of_view = degrees; _projection_dirty = true; }
 float Z3DCamera::get_near_clipping_distance() const { return _near_clip; }
@@ -90,9 +94,8 @@ void Z3DCamera::set_transform(const ZMatrix &transform)
 void Z3DCamera::_construct_projection()
 {
     if (_projection_dirty) {
-        ZRect viewport_rect = ZEngine::instance()->get_viewport_rect();
-        float viewport_width = viewport_rect.size.width;
-        float viewport_height = viewport_rect.size.height;
+        float viewport_width = _viewport.size.width;
+        float viewport_height = _viewport.size.height;
         float aspect = viewport_width / viewport_height;
         
         _projection_matrix = ZMatrix::perspective(_field_of_view, aspect, _near_clip, _far_clip);

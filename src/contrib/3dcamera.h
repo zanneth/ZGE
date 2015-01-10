@@ -25,6 +25,9 @@ public:
     bool is_open() const override;
     void close() override;
     
+    ZRect   get_viewport_rect() const;
+    void    set_viewport_rect(const ZRect &rect);
+    
     float   get_fov() const;
     void    set_fov(float degrees);
     
@@ -61,6 +64,7 @@ protected:
     ZMatrix _modelview_matrix;
     ZVector _look;
     ZVector _position;
+    ZRect   _viewport;
     
     bool _open;
     bool _projection_dirty;
