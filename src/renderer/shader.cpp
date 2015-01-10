@@ -18,6 +18,8 @@
 
 ZGE_BEGIN_NAMESPACE
 
+using ZDirectiveHandler = std::function<void(const std::string&, std::ostringstream&)>;
+
 ZShader::ZShader(const ZShaderType &type) :
     _type(type),
     _has_source(false),
@@ -157,8 +159,17 @@ void ZShader::_handle_preprocessor_directive(const std::string &directive,
                                              const std::string &input,
                                              std::ostringstream &source_buffer)
 {
-    if (directive == "zge_include") {
-        _include_directive_handler(input, source_buffer);
+    #define BIND_FUNC(FUNC_NAME) std::bind(&ZShader::FUNC_NAME, this, std::placeholders::_1, std::placeholders::_2)
+    
+    std::map<std::string, ZDirectiveHandler> directive_map = {
+        { "zge_include", BIND_FUNC(_include_directive_handler) },
+        { "zge_version", BIND_FUNC(_version_directive_handler) }
+    };
+    
+    try {
+        directive_map[directive](input, source_buffer);
+    } catch (const std::out_of_range &e) {
+        ZLogger::log_error("Warning: no matching pragma directive named %s", directive.c_str());
     }
 }
 
@@ -181,6 +192,14 @@ void ZShader::_include_directive_handler(const std::string &input, std::ostrings
             ZLogger::log_error("Error loading included shader source at path %s", source_path.c_str());
         }
     }
+}
+
+void ZShader::_version_directive_handler(const std::string &input, std::ostringstream &source_buffer)
+{
+#if !OPENGL_ES
+    std::string glsl_version = "#version " + input;
+    source_buffer << glsl_version << std::endl;
+#endif
 }
 
 ZGE_END_NAMESPACE

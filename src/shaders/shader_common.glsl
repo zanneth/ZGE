@@ -5,6 +5,8 @@
  * Date Created: 01/07/2015
  */
 
+#pragma zge_version 150
+
 #ifdef GL_ES
 
 precision mediump float;

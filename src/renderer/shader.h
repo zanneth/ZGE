@@ -47,6 +47,7 @@ private:
                                                const std::string &input,
                                                std::ostringstream &source_buffer);
     void        _include_directive_handler(const std::string &input, std::ostringstream &source_buffer);
+    void        _version_directive_handler(const std::string &input, std::ostringstream &source_buffer);
     
 private:
     ZShaderType _type;
