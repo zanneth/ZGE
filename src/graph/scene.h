@@ -12,6 +12,8 @@
 #include <zge/node.h>
 #include <memory>
 
+ZGE_FORWARD_DECLARE_SREF(ZRenderContext);
+
 ZGE_BEGIN_NAMESPACE
 
 class ZScene : public ZNode {
@@ -22,11 +24,17 @@ public:
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZScene);
     
+    void update() override;
+    void draw(ZRenderContextRef context);
+    
+    /* Friends */
+    friend class ZRenderManager;
+    
 private:
     void _evict_scene(ZNode *curnode);
     
-public:
-    friend class ZRenderManager;
+private:
+    bool _update_reentr;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZScene);

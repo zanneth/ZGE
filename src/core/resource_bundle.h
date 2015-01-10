@@ -16,11 +16,14 @@ public:
     ZResourceBundle(std::string path);
     
     static ZResourceBundle* get_main_bundle();
+    static ZResourceBundle* get_library_bundle();
     
     std::string get_bundle_path() const;
     std::string get_path_for_resource(std::string filename);
     std::string append_path_component(std::string path, std::string component);
     std::string append_path_components(std::string path, std::vector<std::string> components);
+    std::string get_basename(std::string path);
+    std::string get_dirname(std::string path);
     
 private:
     std::string _base_path;

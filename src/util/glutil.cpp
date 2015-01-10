@@ -243,4 +243,20 @@ GLenum ZGLUtil::gl_format_from_pixel_format(ZPixelFormat format)
     return gl_frmt;
 }
 
+GLenum ZGLUtil::gl_shader_type_from_shader_type(ZShaderType type)
+{
+    GLenum gltype = 0;
+    switch (type) {
+        case ZVERTEX_SHADER:
+            gltype = GL_VERTEX_SHADER;
+            break;
+        case ZFRAGMENT_SHADER:
+            gltype = GL_FRAGMENT_SHADER;
+            break;
+        default:
+            break;
+    }
+    return gltype;
+}
+
 ZGE_END_NAMESPACE

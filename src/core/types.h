@@ -140,4 +140,14 @@ struct ZImageFormat {
     ZPixelFormat pixel_format;
 };
 
+enum ZShaderType {
+    ZVERTEX_SHADER,
+    ZFRAGMENT_SHADER
+};
+
+enum ZLightType {
+    ZLIGHT_TYPE_POINT,
+    ZLIGHT_TYPE_AMBIENT
+};
+
 ZGE_END_NAMESPACE

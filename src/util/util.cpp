@@ -47,7 +47,7 @@ std::string ZUtil::format(const char *format, ...)
     return result;
 }
 
-std::string ZUtil::separate_components(const std::vector<std::string> &vec, std::string delimiter)
+std::string ZUtil::join_components(const std::vector<std::string> &vec, std::string delimiter)
 {
     std::ostringstream oss;
     unsigned idx = 0;

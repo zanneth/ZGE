@@ -28,19 +28,18 @@ enum ZRenderMatrixType {
     _ZRENDER_MATRIX_COUNT
 };
 
-typedef std::shared_ptr<class ZRenderContext> ZRenderContextRef;
-typedef std::shared_ptr<class ZLight> ZLightRef;
+ZGE_FORWARD_DECLARE_SREF(ZLight);
 
 class ZRenderContext : ZNoncopyable, public std::enable_shared_from_this<ZRenderContext> {
 public:
-    ZRenderContext(ZDisplayRef display);
+    ZRenderContext();
     virtual ~ZRenderContext();
     
-    ZDisplayRef       get_display() const;
-    ZShaderProgramRef get_shader_program() const;
+    ZGE_DEFINE_SREF_FUNCTIONS(ZRenderContext);
     
-    void make_current();
-    static ZRenderContextRef get_current_context();
+    virtual void make_current() = 0;
+    
+    void initialize_shaders();
     
     void push_matrix(ZRenderMatrixType type);
     void push_matrix(ZRenderMatrixType type, const ZMatrix &matrix); // convenience: pushes then multiplies
@@ -48,6 +47,7 @@ public:
     void load_identity(ZRenderMatrixType type);
     void pop_matrix(ZRenderMatrixType type);
     
+    ZShaderProgramRef get_shader_program() const;
     ZMatrix get_matrix(ZRenderMatrixType type) const;
     
     void bind_texture(ZTextureRef texture);
@@ -61,20 +61,29 @@ public:
     void enable_depth_testing();
     void disable_depth_testing();
     
+    void clear_buffers();
+    
     /* Drawing */
     void draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count);
     void draw_elements(ZRenderMode mode, ZVertexArrayRef varray);
     
 private:
-    void        _load_shaders();
+    void        _initialize_gl();
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
     void        _set_boolean_uniform(const std::string uniform_name, bool flag);
     
     friend ZVertexArray;
     
-private:
-    std::unique_ptr<struct ZRenderContextImpl> _impl;
+protected:
+    ZShaderProgramRef   _shader_program;
+    bool                _shaders_initialized;
+    std::stack<ZMatrix> _matrix_stacks[_ZRENDER_MATRIX_COUNT];
+    ZVertexArrayRef     _bound_vertex_array;
+    ZTextureRef         _bound_texture;
+    std::map<ZLightType, ZLightRef> _lights;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZRenderContext);
 
 ZGE_END_NAMESPACE

@@ -8,6 +8,7 @@
 #include <functional>
 #include <zge/render_manager.h>
 #include <zge/display.h>
+#include <zge/display_render_context.h>
 #include <zge/engine.h>
 #include <zge/node.h>
 #include <zge/scene.h>
@@ -61,7 +62,7 @@ void ZRenderManager::run(uint32_t dtime)
 {
     if (_context) {
         _context->make_current();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        _context->clear_buffers();
         
         if (_scene) {
             _scene->_update_internal();
@@ -83,13 +84,7 @@ void ZRenderManager::_initialize_render_context()
     }
     
     if (!_initialized) {
-        _context = std::make_shared<ZRenderContext>(_display);
-        
-        glClearColor(0.f, 0.f, 0.f, 1.f);
-        glEnable(GL_BLEND);
-        glEnable(GL_CULL_FACE);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        
+        _context = ZDisplayRenderContext::create(_display);
         _initialized = true;
     }
 }

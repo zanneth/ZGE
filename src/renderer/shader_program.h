@@ -18,21 +18,13 @@
 
 ZGE_BEGIN_NAMESPACE
 
-typedef std::shared_ptr<class ZShaderProgram> ZShaderProgramRef;
-
 class ZShaderProgram : public std::enable_shared_from_this<ZShaderProgram> {
-protected:
-    GLuint _program_handle;
-    std::vector<ZShaderRef> _shaders;
-    std::map<GLuint, std::string> _attrib_map;
-    std::map<std::string, ZUniformRef> _uniform_map;
-    bool _linked;
-    bool _uniforms_loaded;
-    
 public:
     ZShaderProgram();
     ZShaderProgram(const ZShaderProgram&) = delete;
     ~ZShaderProgram();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZShaderProgram);
     
     std::vector<ZShaderRef> get_attached_shaders() const { return _shaders; }
     bool is_linked() const { return _linked; }
@@ -51,6 +43,16 @@ public:
 private:
     void _load_uniforms();
     void _uniform_modified(ZUniformRef uniform);
+    
+protected:
+    GLuint _program_handle;
+    std::vector<ZShaderRef> _shaders;
+    std::map<GLuint, std::string> _attrib_map;
+    std::map<std::string, ZUniformRef> _uniform_map;
+    bool _linked;
+    bool _uniforms_loaded;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZShaderProgram);
 
 ZGE_END_NAMESPACE

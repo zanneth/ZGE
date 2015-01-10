@@ -22,7 +22,7 @@ public:
     static std::string format(const char *format, ...) ZGE_FORMATARG(1, 2);
     
     // return a string representing the components of `vec` separated by `delimiter`
-    static std::string separate_components(const std::vector<std::string> &vec, std::string delimiter);
+    static std::string join_components(const std::vector<std::string> &vec, std::string delimiter);
     
     // assertions with formatted error strings
     static void assert_true(bool expression, const char *format, ...) throw() ZGE_FORMATARG(2, 3);

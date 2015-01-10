@@ -58,8 +58,8 @@ public:
     void swap_buffer();
     
     /* Friends */
+    friend class ZDisplayRenderContext;
     friend class ZRenderManager;
-    friend class ZRenderContext;
     
 protected:
     void  _init_window();

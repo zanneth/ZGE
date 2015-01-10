@@ -8,6 +8,7 @@
 #include <zge/resource_bundle.h>
 #include <zge/util.h>
 #include <SDL2/SDL.h>
+#include <sstream>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -63,6 +64,29 @@ std::string ZResourceBundle::append_path_components(std::string path, std::vecto
         }
     }
     return path;
+}
+
+std::string ZResourceBundle::get_basename(std::string path)
+{
+    std::stringstream path_stream(path);
+    std::string path_component;
+    while (std::getline(path_stream, path_component, _path_separator));
+    return path_component;
+}
+
+std::string ZResourceBundle::get_dirname(std::string path)
+{
+    std::stringstream path_stream(path);
+    std::string path_component;
+    std::vector<std::string> dirname_components;
+    
+    while (std::getline(path_stream, path_component, _path_separator)) {
+        if (path_stream.good()) {
+            dirname_components.push_back(path_component);
+        }
+    }
+    
+    return ZUtil::join_components(dirname_components, std::string(&_path_separator));
 }
 
 #pragma mark - Internal

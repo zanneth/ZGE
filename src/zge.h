@@ -19,6 +19,7 @@
 #include <zge/data.h>
 #include <zge/defines.h>
 #include <zge/display.h>
+#include <zge/display_render_context.h>
 #include <zge/engine.h>
 #include <zge/event.h>
 #include <zge/exception.h>
@@ -61,3 +62,7 @@
 #include <zge/vector.h>
 #include <zge/vertex_array.h>
 #include <zge/wave_audio_asset.h>
+
+#if TARGET_OS_IPHONE
+#include <zge/eagl_render_context.h>
+#endif

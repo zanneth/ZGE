@@ -191,7 +191,7 @@ std::string ZEvent::_key_event_description() const
     
     std::string modifiers_string;
     if (modifier_strings.size() > 0) {
-        modifiers_string = ZUtil::separate_components(modifier_strings, ", ");
+        modifiers_string = ZUtil::join_components(modifier_strings, ", ");
     } else {
         modifiers_string = "(no modifiers)";
     }
@@ -302,7 +302,7 @@ std::string ZEvent::_mouse_buttons_description(ZMouseButtonFlags button_flags) c
     
     std::string buttons_string;
     if (button_strings.size() > 0) {
-        buttons_string = ZUtil::separate_components(button_strings, ", ");
+        buttons_string = ZUtil::join_components(button_strings, ", ");
     } else {
         buttons_string = "(no buttons)";
     }

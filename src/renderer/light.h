@@ -10,14 +10,10 @@
 #include <zge/defines.h>
 #include <zge/color.h>
 #include <zge/node.h>
+#include <zge/types.h>
 #include <memory>
 
 ZGE_BEGIN_NAMESPACE
-
-enum ZLightType {
-    ZLIGHT_TYPE_POINT,
-    ZLIGHT_TYPE_AMBIENT
-};
 
 class ZLight : public ZNode {
 public:

@@ -6,30 +6,16 @@
  */
 
 #include <zge/render_context.h>
-#include <zge/fragment_shader.h>
 #include <zge/glutil.h>
 #include <zge/light.h>
 #include <zge/logger.h>
-#include <zge/vertex_shader.h>
+#include <zge/resource_bundle.h>
 #include <zge/util.h>
 #include <SDL2/SDL.h>
 #include <stdexcept>
 #include <vector>
 
 ZGE_BEGIN_NAMESPACE
-
-static ZRenderContextRef __current_context = nullptr;
-
-struct ZRenderContextImpl {
-    SDL_GLContext          gl_context;
-    ZDisplayRef            display;
-    ZShaderProgramRef      shader_program;
-    bool                   shaders_loaded;
-    std::stack<ZMatrix>    matrix_stacks[_ZRENDER_MATRIX_COUNT];
-    ZVertexArrayRef        bound_vertex_array;
-    ZTextureRef            bound_texture;
-    std::map<ZLightType, ZLightRef> lights;
-};
 
 struct ZLightUniformDescriptor {
     std::string position_name;
@@ -51,66 +37,55 @@ static ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType ty
 
 #pragma mark -
 
-ZRenderContext::ZRenderContext(ZDisplayRef display) :
-    _impl(new ZRenderContextImpl)
+ZRenderContext::ZRenderContext() :
+    _shaders_initialized(false)
 {
-    _impl->display = display;
-    _impl->shaders_loaded = false;
-    
-    SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
-    _impl->gl_context = SDL_GL_CreateContext(sdl_window);
-    SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
-    SDL_GL_SetSwapInterval(1); // tell SDL to synchronize the buffer swap with the monitor's refresh rate.
-    
-    _impl->shader_program = std::make_shared<ZShaderProgram>();
-    _load_shaders();
-    
-    _impl->shader_program->use_program();
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
-        _impl->matrix_stacks[i].push(ZMatrix::identity());
-        _update_matrix_uniforms((ZRenderMatrixType)i);
+        _matrix_stacks[i].push(ZMatrix::identity());
     }
 }
 
 ZRenderContext::~ZRenderContext()
-{
-    if (_impl->gl_context != nullptr) {
-        SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
-        SDL_GL_MakeCurrent(sdl_window, nullptr);
-        SDL_GL_DeleteContext(_impl->gl_context);
-    }
-}
+{}
 
 #pragma mark - Accessors
 
-ZDisplayRef ZRenderContext::get_display() const { return _impl->display; }
-
-ZShaderProgramRef ZRenderContext::get_shader_program() const { return _impl->shader_program; }
+ZShaderProgramRef ZRenderContext::get_shader_program() const { return _shader_program; }
 
 #pragma mark - API
 
-void ZRenderContext::make_current()
+void ZRenderContext::initialize_shaders()
 {
-    if (__current_context != shared_from_this()) {
-        SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
-        SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
-        if (_impl->shaders_loaded) {
-            _impl->shader_program->use_program();
-        }
+    make_current();
+    _initialize_gl();
+    
+    if (!_shader_program) {
+        ZShaderProgramRef shader_program = ZShaderProgram::create();
         
-        __current_context = shared_from_this();
+        ZResourceBundle *res_bundle = ZResourceBundle::get_library_bundle();
+        std::string vert_shader_path = res_bundle->get_path_for_resource("vertex.vsh");
+        std::string frag_shader_path = res_bundle->get_path_for_resource("fragment.fsh");
+        shader_program->load_shader(vert_shader_path, ZVERTEX_SHADER);
+        shader_program->load_shader(frag_shader_path, ZFRAGMENT_SHADER);
+        
+        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_POSITION, "position");
+        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_NORMAL, "normal");
+        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_TEXCOORD0, "texcoord0");
+        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_COLOR, "color");
+        shader_program->link_program();
+        
+        _shader_program = shader_program;
+        
+        for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
+            _update_matrix_uniforms((ZRenderMatrixType)i);
+        }
     }
-}
-
-ZRenderContextRef ZRenderContext::get_current_context()
-{
-    return __current_context;
 }
 
 void ZRenderContext::push_matrix(ZRenderMatrixType type)
 {
-    ZMatrix top = _impl->matrix_stacks[type].top();
-    _impl->matrix_stacks[type].push(top);
+    ZMatrix top = _matrix_stacks[type].top();
+    _matrix_stacks[type].push(top);
 }
 
 void ZRenderContext::push_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
@@ -121,20 +96,20 @@ void ZRenderContext::push_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
 
 void ZRenderContext::multiply_matrix(ZRenderMatrixType type, const ZMatrix &matrix)
 {
-    _impl->matrix_stacks[type].top() *= matrix;
+    _matrix_stacks[type].top() *= matrix;
     _update_matrix_uniforms(type);
 }
 
 void ZRenderContext::load_identity(ZRenderMatrixType type)
 {
-    _impl->matrix_stacks[type].top() = ZMatrix::identity();
+    _matrix_stacks[type].top() = ZMatrix::identity();
     _update_matrix_uniforms(type);
 }
 
 void ZRenderContext::pop_matrix(ZRenderMatrixType type)
 {
-    if (_impl->matrix_stacks[type].size() > 1) {
-        _impl->matrix_stacks[type].pop();
+    if (_matrix_stacks[type].size() > 1) {
+        _matrix_stacks[type].pop();
         _update_matrix_uniforms(type);
     } else {
         load_identity(type);
@@ -143,14 +118,14 @@ void ZRenderContext::pop_matrix(ZRenderMatrixType type)
 
 ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
 {
-    return _impl->matrix_stacks[type].top();
+    return _matrix_stacks[type].top();
 }
 
 void ZRenderContext::bind_texture(ZTextureRef texture)
 {
     GLuint texture_name = texture->_get_texture_name();
     glBindTexture(GL_TEXTURE_2D, texture_name);
-    _impl->bound_texture = texture;
+    _bound_texture = texture;
     
     _set_boolean_uniform("material.textureExists", true);
 }
@@ -158,7 +133,7 @@ void ZRenderContext::bind_texture(ZTextureRef texture)
 void ZRenderContext::unbind_texture()
 {
     glBindTexture(GL_TEXTURE_2D, 0);
-    _impl->bound_texture = nullptr;
+    _bound_texture = nullptr;
     
     _set_boolean_uniform("material.textureExists", false);
 }
@@ -167,9 +142,9 @@ void ZRenderContext::add_light(ZLightRef light)
 {
     ZLightType type = light->get_type();
     ZLightUniformDescriptor uniform_descriptor = __uniform_descriptor_for_light_type(type);
-    ZShaderProgramRef shader_program = _impl->shader_program;
+    ZShaderProgramRef shader_program = _shader_program;
     
-    _impl->lights[type] = light;
+    _lights[type] = light;
     
     // flip lights flag if not set already
     _set_boolean_uniform(uniform_descriptor.exists_name, true);
@@ -193,7 +168,7 @@ void ZRenderContext::add_lights(const std::vector<ZLightRef> &lights)
 void ZRenderContext::remove_lights(const std::vector<ZLightRef> &lights)
 {
     std::vector<ZLightType> light_types_to_clear;
-    for (const auto &kv : _impl->lights) {
+    for (const auto &kv : _lights) {
         ZLightRef stored_light = kv.second;
         if (std::find(lights.begin(), lights.end(), stored_light) != lights.end()) {
             ZLightType light_type = kv.first;
@@ -205,19 +180,19 @@ void ZRenderContext::remove_lights(const std::vector<ZLightRef> &lights)
     }
     
     for (ZLightType type_to_clear : light_types_to_clear) {
-        _impl->lights.erase(type_to_clear);
+        _lights.erase(type_to_clear);
     }
 }
 
 void ZRenderContext::clear_lights()
 {
-    for (const auto &kv : _impl->lights) {
+    for (const auto &kv : _lights) {
         ZLightType light_type = kv.first;
         ZLightUniformDescriptor uniform_descriptor = __uniform_descriptor_for_light_type(light_type);
         _set_boolean_uniform(uniform_descriptor.exists_name, false);
     }
     
-    _impl->lights.clear();
+    _lights.clear();
 }
 
 void ZRenderContext::enable_depth_testing()
@@ -232,10 +207,15 @@ void ZRenderContext::disable_depth_testing()
     glDisable(GL_DEPTH_TEST);
 }
 
+void ZRenderContext::clear_buffers()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
 {
     varray->_bind();
-    _impl->bound_vertex_array = varray;
+    _bound_vertex_array = varray;
     
     GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
     glDrawArrays(glmode, first_idx, (GLsizei)count);
@@ -244,7 +224,7 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
 void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
 {
     varray->_bind();
-    _impl->bound_vertex_array = varray;
+    _bound_vertex_array = varray;
     
     ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
     if (element_buffer.get()) {
@@ -259,20 +239,12 @@ void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
 
 #pragma mark - Internal
 
-void ZRenderContext::_load_shaders()
+void ZRenderContext::_initialize_gl()
 {
-    ZShaderProgramRef shader_program = _impl->shader_program;
-    if (shader_program && !_impl->shaders_loaded) {
-        shader_program->load_shader_source(ZVertexShaderSource, ZVERTEX_SHADER);
-        shader_program->load_shader_source(ZFragmentShaderSource, ZFRAGMENT_SHADER);
-        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_POSITION, "position");
-        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_NORMAL, "normal");
-        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_TEXCOORD0, "texcoord0");
-        shader_program->bind_attribute_index(ZVERTEX_ATTRIB_COLOR, "color");
-        shader_program->link_program();
-        
-        _impl->shaders_loaded = true;
-    }
+    glClearColor(0.f, 0.f, 0.f, 1.f);
+    glEnable(GL_BLEND);
+    glEnable(GL_CULL_FACE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 ZUniformRef ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
@@ -283,9 +255,9 @@ ZUniformRef ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
     };
     ZUniformRef uniform = nullptr;
     
-    if (_impl->shaders_loaded) {
+    if (_shader_program) {
         std::string uniform_name = uniform_mapping[type];
-        uniform = _impl->shader_program->get_uniform(uniform_name);
+        uniform = _shader_program->get_uniform(uniform_name);
     }
     
     return uniform;
@@ -293,9 +265,11 @@ ZUniformRef ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
 
 void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
 {
+    _shader_program->use_program();
+    
     ZUniformRef uniform = _get_matrix_uniform(type);
-    if (uniform.get()) {
-        const ZMatrix &matrix = _impl->matrix_stacks[type].top();
+    if (uniform) {
+        const ZMatrix &matrix = _matrix_stacks[type].top();
         uniform->set_data(matrix.get_data());
     } else {
         ZLogger::log_error("Could not get uniform for matrix type %d.", type);
@@ -304,7 +278,7 @@ void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
 
 void ZRenderContext::_set_boolean_uniform(const std::string uniform_name, bool flag)
 {
-    ZUniformRef uniform = _impl->shader_program->get_uniform(uniform_name);
+    ZUniformRef uniform = _shader_program->get_uniform(uniform_name);
     int uniform_data = (flag ? 1 : 0);
     uniform->set_data(&uniform_data);
 }

@@ -68,7 +68,7 @@ bool ZShaderProgram::load_shader(const std::string &path, ZShaderType type)
 {
     bool success = true;
     
-    ZShaderRef shader = ZShaderRef(new ZShader(type));
+    ZShaderRef shader = ZShader::create(type);
     success &= shader->load_source_file(path);
     success &= shader->compile();
     success &= attach_shader(shader);
@@ -80,7 +80,7 @@ bool ZShaderProgram::load_shader_source(const std::string &source, ZShaderType t
 {
     bool success = true;
     
-    ZShaderRef shader = ZShaderRef(new ZShader(type));
+    ZShaderRef shader = ZShader::create(type);
     success &= shader->load_source(source);
     success &= shader->compile();
     success &= attach_shader(shader);

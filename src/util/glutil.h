@@ -22,6 +22,7 @@ public:
     static GLenum gl_usage_from_buffer_usage(ZBufferUsage usage);
     static size_t gl_host_size_for_component(ZComponentType component_type);
     static GLenum gl_format_from_pixel_format(ZPixelFormat format);
+    static GLenum gl_shader_type_from_shader_type(ZShaderType type);
 };
 
 ZGE_END_NAMESPACE

@@ -12,7 +12,8 @@
 
 ZGE_BEGIN_NAMESPACE
 
-ZScene::ZScene() : ZNode()
+ZScene::ZScene() :
+    _update_reentr(false)
 {
     _scene = this;
     set_position({0.0, 0.0, 0.0});
@@ -21,6 +22,23 @@ ZScene::ZScene() : ZNode()
 ZScene::~ZScene()
 {
     _evict_scene(this);
+}
+
+void ZScene::update()
+{
+    if (!_update_reentr) {
+        _update_reentr = true;
+        _update_internal();
+        _update_reentr = false;
+    }
+}
+
+void ZScene::draw(ZRenderContextRef context)
+{
+    if (context) {
+        context->make_current();
+        _draw(context);
+    }
 }
 
 #pragma mark - Private
