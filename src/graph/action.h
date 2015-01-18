@@ -100,11 +100,15 @@ public:
     ZVector get_rotation_axis() const;
     void set_rotation_axis(const ZVector &axis);
     
+    ZVector get_anchor_point() const;
+    void set_anchor_point(const ZVector &anchor_point);
+    
     void apply_progress(std::shared_ptr<ZNode> node, float normalized_progress) override;
     
 private:
     float _radians;
     ZVector _axis;
+    ZVector _anchor_point;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZRotationAction);

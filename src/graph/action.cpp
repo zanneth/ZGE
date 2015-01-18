@@ -98,18 +98,30 @@ void ZTranslationAction::apply_progress(std::shared_ptr<ZNode> node, float progr
 
 ZRotationAction::ZRotationAction(float radians, ZVector axis) :
     _radians(radians),
-    _axis(axis)
+    _axis(axis),
+    _anchor_point(ZVector::zero)
 {}
 
 float ZRotationAction::get_radians() const { return _radians; }
 void ZRotationAction::set_radians(float radians) { _radians = radians; }
 ZVector ZRotationAction::get_rotation_axis() const { return _axis; }
 void ZRotationAction::set_rotation_axis(const ZVector &axis) { _axis = axis; }
+ZVector ZRotationAction::get_anchor_point() const { return _anchor_point; }
+void ZRotationAction::set_anchor_point(const ZVector &anchor_point) { _anchor_point = anchor_point; }
 
 void ZRotationAction::apply_progress(std::shared_ptr<ZNode> node, float normalized_progress)
 {
     float new_radians = normalized_progress * _radians;
-    ZMatrix transform = ZMatrix::rotation(new_radians, _axis.x(), _axis.y(), _axis.z());
+    ZMatrix transform(ZMatrix::identity());
+    
+    if (_anchor_point == ZVector::zero) {
+        transform = ZMatrix::rotation(new_radians, _axis.x(), _axis.y(), _axis.z());
+    } else {
+        transform = transform.translate(_anchor_point)
+                             .rotate(new_radians, _axis.x(), _axis.y(), _axis.z())
+                             .translate(-_anchor_point);
+    }
+    
     node->set_transform(transform);
 }
 
