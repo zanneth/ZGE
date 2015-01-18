@@ -82,10 +82,7 @@ float ZFont::get_font_size() const { return _impl->size; }
 
 float ZFont::get_line_height() const
 {
-    ZRect bounds = get_bounding_box();
-    float descender = get_descender();
-    
-    return float(bounds.size.height - descender);
+    return float(_impl->face->height / 64);
 }
 
 ZRect ZFont::get_bounding_box() const

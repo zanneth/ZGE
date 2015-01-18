@@ -7,6 +7,7 @@
 
 #include <zge/image.h>
 #include <zge/color.h>
+#include <zge/logger.h>
 #include <SDL2/SDL_image.h>
 
 ZGE_BEGIN_NAMESPACE
@@ -96,9 +97,9 @@ ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt)
         format = ZPIXEL_FORMAT_RGBA;
     } else if (rmask == 0xff0000) {
 #if OPENGL_ES
-        ZException e(ZASSERTION_EXCEPTION_CODE);
-        e.extra_info = "GLES: Unsupported pixel format";
-        throw e;
+        // this probably isn't the right thing to do...
+        ZLogger::log_error("WARNING: Unsupported pixel format for GLES: %u", rmask);
+        format = ZPIXEL_FORMAT_RGBA;
 #else
         format = ZPIXEL_FORMAT_BGRA;
 #endif

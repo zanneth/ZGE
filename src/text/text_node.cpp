@@ -15,7 +15,8 @@ ZGE_BEGIN_NAMESPACE
 
 ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
     _text(text),
-    _font(font)
+    _font(font),
+    _text_color(ZColor::white)
 {
     _render_glyphs();
 }
@@ -33,6 +34,8 @@ std::string ZTextNode::get_text() const { return _text; }
 
 ZFontRef ZTextNode::get_font() const { return _font; }
 
+ZColor ZTextNode::get_text_color() const { return _text_color; }
+
 void ZTextNode::set_text(const std::string &text)
 {
     _text = text;
@@ -45,6 +48,12 @@ void ZTextNode::set_font(ZFontRef font)
     _render_glyphs();
 }
 
+void ZTextNode::set_text_color(const ZColor &color)
+{
+    _text_color = color;
+    _render_glyphs();
+}
+
 #pragma mark - Internal
 
 void ZTextNode::_render_glyphs()
@@ -54,6 +63,12 @@ void ZTextNode::_render_glyphs()
     }
     
     remove_all_children();
+    
+    ZSpriteNodeRef square = ZSpriteNode::create();
+    square->set_color(ZColor::white);
+    square->set_size(ZSize2D{10.0, 10.0});
+    square->set_position({0.0, 0.0});
+    add_child(square);
     
     // create glyphs using provided font
     std::vector<ZGlyph> glyphs;
@@ -99,6 +114,7 @@ void ZTextNode::_render_glyphs()
         ZTextureRef texture = std::make_shared<ZTexture>(texture_image);
         ZSpriteNodeRef glyph_node = std::make_shared<ZSpriteNode>(texture);
         glyph_node->set_size(glyph.size);
+        glyph_node->set_color(_text_color);
         
         ZVector position = {last_glyph_max_x + glyph.insets.left, line_height - glyph.insets.top};
         last_glyph_max_x = position.x() + glyph.advance.width;

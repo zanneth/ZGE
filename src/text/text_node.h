@@ -27,12 +27,16 @@ public:
     ZFontRef get_font() const;
     void set_font(ZFontRef font);
     
+    ZColor get_text_color() const;
+    void set_text_color(const ZColor &color);
+    
 private:
     void _render_glyphs();
     
 private:
     std::string _text;
     ZFontRef    _font;
+    ZColor      _text_color;
     std::vector<ZGlyph> _glyphs;
 };
 
