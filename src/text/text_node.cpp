@@ -64,12 +64,6 @@ void ZTextNode::_render_glyphs()
     
     remove_all_children();
     
-    ZSpriteNodeRef square = ZSpriteNode::create();
-    square->set_color(ZColor::white);
-    square->set_size(ZSize2D{10.0, 10.0});
-    square->set_position({0.0, 0.0});
-    add_child(square);
-    
     // create glyphs using provided font
     std::vector<ZGlyph> glyphs;
     for (const char &character : _text) {
