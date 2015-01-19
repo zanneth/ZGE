@@ -10,6 +10,7 @@
 #include <initializer_list>
 #include <memory>
 #include <zge/defines.h>
+#include <zge/types.h>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -20,6 +21,7 @@ private:
 public:
     ZVector(std::initializer_list<float> list = {});
     ZVector(const ZVector&);
+    ZVector(const ZPoint2D&);
     ZVector(ZVector&&);
     ~ZVector();
     

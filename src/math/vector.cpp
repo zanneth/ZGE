@@ -29,6 +29,13 @@ ZVector::ZVector(const ZVector &cp) :
     _impl(new ZVectorImpl{cp._impl->data})
 {}
 
+ZVector::ZVector(const ZPoint2D &point) :
+    _impl(new ZVectorImpl)
+{
+    _impl->data.x() = point.x;
+    _impl->data.y() = point.y;
+}
+
 ZVector::ZVector(ZVector &&mv) :
     _impl(mv._impl.release())
 {}

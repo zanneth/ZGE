@@ -16,21 +16,15 @@
 
 ZGE_BEGIN_NAMESPACE
 
-typedef std::shared_ptr<class ZTimer> ZTimerRef;
+ZGE_FORWARD_DECLARE_SREF(ZTimer);
 typedef std::function<void(ZTimerRef)> ZTimerFunction;
-    
+
 class ZTimer : public ZSchedulable, ZNoncopyable, public std::enable_shared_from_this<ZTimer> {
-protected:
-    ZTimerFunction _function;
-    ZTimeInterval _interval;
-    bool _repeats;
-    
-    ZTime _time_scheduled;
-    ZTime _time_last_fired;
-    
 public:
     ZTimer(const ZTimerFunction &func = [](ZTimerRef){});
     virtual ~ZTimer();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZTimer);
     
     // Sets the function to be called when the timer fires.
     void set_function(const ZTimerFunction &function);
@@ -52,6 +46,16 @@ public:
     /* Overrides */
     void run(uint32_t dtime) override;
     void on_schedule() override;
+    
+private:
+    ZTimerFunction _function;
+    ZTimeInterval  _interval;
+    ZTime          _time_scheduled;
+    ZTime          _time_last_fired;
+    bool           _repeats;
+    bool           _valid;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZTimer);
 
 ZGE_END_NAMESPACE

@@ -29,11 +29,7 @@ ZNode::ZNode(ZGeometryRef geometry) :
 {}
 
 ZNode::~ZNode()
-{
-#if (ZGE_DEBUG)
-    ZLogger::log("%s destroyed", get_description().c_str());
-#endif
-}
+{}
 
 #pragma mark - Operators
 

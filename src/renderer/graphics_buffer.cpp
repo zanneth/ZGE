@@ -36,10 +36,6 @@ ZGraphicsBuffer::~ZGraphicsBuffer()
     if (_buffer != ZUNALLOCATED_BUFFER) {
         glDeleteBuffers(1, &_buffer);
     }
-    
-#if (ZGE_DEBUG)
-    zlog("Buffer %p destroyed.", this);
-#endif
 }
 
 #pragma mark - Accessors

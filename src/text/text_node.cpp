@@ -22,11 +22,7 @@ ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
 }
 
 ZTextNode::~ZTextNode()
-{
-#if (ZDEBUG)
-    zlog("TextNode %p destroyed.", this);
-#endif
-}
+{}
 
 #pragma mark - Accessors
 
@@ -54,6 +50,21 @@ void ZTextNode::set_text_color(const ZColor &color)
     _render_glyphs();
 }
 
+#pragma mark - API
+
+ZRect ZTextNode::get_bounding_box() const
+{
+    ZRect box;
+    
+    for (ZSpriteNodeRef glyph_node : _glyph_nodes) {
+        ZRect frame = glyph_node->get_frame();
+        box.size.width = std::max(box.size.width, frame.origin.x + frame.size.width);
+        box.size.height = std::max(box.size.height, frame.origin.y + frame.size.height);
+    }
+    
+    return box;
+}
+
 #pragma mark - Internal
 
 void ZTextNode::_render_glyphs()
@@ -63,6 +74,7 @@ void ZTextNode::_render_glyphs()
     }
     
     remove_all_children();
+    _glyph_nodes.clear();
     
     // create glyphs using provided font
     std::vector<ZGlyph> glyphs;
@@ -115,6 +127,7 @@ void ZTextNode::_render_glyphs()
         glyph_node->set_position(position);
         
         add_child(glyph_node);
+        _glyph_nodes.push_back(glyph_node);
     }
 }
 

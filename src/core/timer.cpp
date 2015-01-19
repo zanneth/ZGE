@@ -13,7 +13,8 @@ ZGE_BEGIN_NAMESPACE
 
 ZTimer::ZTimer(const ZTimerFunction &func) :
     _function(func),
-    _repeats(false)
+    _repeats(false),
+    _valid(false)
 {}
 
 ZTimer::~ZTimer()
@@ -33,16 +34,18 @@ void ZTimer::set_repeats(bool repeats) { _repeats = repeats; }
 
 void ZTimer::run(uint32_t dtime)
 {
-    using namespace std::chrono;
-    
-    ZTime time = ZUtil::get_current_time();
-    ZTimeInterval time_delta = time - _time_last_fired;
-    
-    if (time_delta >= _interval) {
-        fire();
+    if (_valid) {
+        using namespace std::chrono;
         
-        if (!_repeats) {
-            invalidate();
+        ZTime time = ZUtil::get_current_time();
+        ZTimeInterval time_delta = time - _time_last_fired;
+        
+        if (time_delta >= _interval) {
+            fire();
+            
+            if (!_repeats) {
+                invalidate();
+            }
         }
     }
 }
@@ -50,6 +53,7 @@ void ZTimer::run(uint32_t dtime)
 void ZTimer::on_schedule()
 {
     _time_scheduled = ZUtil::get_current_time();
+    _valid = true;
 }
 
 #pragma mark - API Functions
@@ -66,6 +70,8 @@ void ZTimer::invalidate()
         ZSchedulableRef scheduled = shared_from_this();
         _run_loop->unschedule(scheduled);
     }
+    
+    _valid = false;
 }
 
 ZGE_END_NAMESPACE

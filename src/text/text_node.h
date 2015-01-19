@@ -14,6 +14,8 @@
 
 ZGE_BEGIN_NAMESPACE
 
+ZGE_FORWARD_DECLARE_SREF(ZSpriteNode);
+
 class ZTextNode : public ZNode {
 public:
     ZTextNode(const std::string &text = "", ZFontRef font = nullptr);
@@ -30,6 +32,8 @@ public:
     ZColor get_text_color() const;
     void set_text_color(const ZColor &color);
     
+    ZRect get_bounding_box() const;
+    
 private:
     void _render_glyphs();
     
@@ -37,7 +41,7 @@ private:
     std::string _text;
     ZFontRef    _font;
     ZColor      _text_color;
-    std::vector<ZGlyph> _glyphs;
+    std::vector<ZSpriteNodeRef> _glyph_nodes;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZTextNode);

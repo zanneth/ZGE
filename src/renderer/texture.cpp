@@ -40,10 +40,6 @@ ZTexture::ZTexture(ZImageRef image) :
 
 ZTexture::~ZTexture()
 {
-#if (ZGE_DEBUG)
-    zlog("Texture %p destroyed.", this);
-#endif
-    
     glDeleteTextures(1, &(_impl->name));
 }
 

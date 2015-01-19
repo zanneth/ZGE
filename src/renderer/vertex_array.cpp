@@ -35,10 +35,6 @@ ZVertexArray::ZVertexArray() :
 ZVertexArray::~ZVertexArray()
 {
     glDeleteVertexArrays(1, &(_impl->vao));
-    
-#if (ZGE_DEBUG)
-    zlog("Vertex array %p destroyed.", this);
-#endif
 }
 
 #pragma mark - API
