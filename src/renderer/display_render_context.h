@@ -12,6 +12,8 @@
 
 ZGE_BEGIN_NAMESPACE
 
+ZGE_FORWARD_DECLARE_SREF(ZDisplay);
+
 class ZDisplayRenderContext : public ZRenderContext {
 public:
     ZDisplayRenderContext(ZDisplayRef display);

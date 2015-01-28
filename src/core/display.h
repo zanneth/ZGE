@@ -19,6 +19,7 @@ struct ZDisplayMode {
     unsigned width;
     unsigned height;
     float refresh_rate;
+    float scale;
     std::string window_title;
     
 public:
@@ -27,6 +28,7 @@ public:
         width(1024),
         height(768),
         refresh_rate(1.0f / 60.0f),
+        scale(1.0),
         window_title("Application") {}
 };
 

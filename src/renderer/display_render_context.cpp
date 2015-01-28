@@ -6,6 +6,7 @@
  */
 
 #include <zge/display_render_context.h>
+#include <zge/display.h>
 #include <SDL2/SDL.h>
 
 ZGE_BEGIN_NAMESPACE
@@ -20,11 +21,19 @@ ZDisplayRenderContext::ZDisplayRenderContext(ZDisplayRef display) :
 {
     _impl->display = display;
     
+    // setup backing context
     SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
     _impl->gl_context = SDL_GL_CreateContext(sdl_window);
     SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
     SDL_GL_SetSwapInterval(1); // tell SDL to synchronize the buffer swap with the monitor's refresh rate.
     
+    // setup viewport
+    ZDisplayMode display_mode = _impl->display->get_display_mode();
+    ZRect viewport = ZRect{0.0, 0.0, float(display_mode.width), float(display_mode.height)};
+    set_viewport(viewport);
+    set_render_scale(display_mode.scale);
+    
+    // initialize shaders
     initialize_shaders();
 }
 

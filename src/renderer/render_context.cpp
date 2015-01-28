@@ -38,6 +38,7 @@ static ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType ty
 #pragma mark -
 
 ZRenderContext::ZRenderContext() :
+    _render_scale(1.0),
     _shaders_initialized(false)
 {
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
@@ -119,6 +120,28 @@ void ZRenderContext::pop_matrix(ZRenderMatrixType type)
 ZMatrix ZRenderContext::get_matrix(ZRenderMatrixType type) const
 {
     return _matrix_stacks[type].top();
+}
+
+ZRect ZRenderContext::get_viewport() const
+{
+    return _viewport;
+}
+
+void ZRenderContext::set_viewport(const ZRect &viewport)
+{
+    _viewport = viewport;
+    _update_viewport();
+}
+
+float ZRenderContext::get_render_scale() const
+{
+    return _render_scale;
+}
+
+void ZRenderContext::set_render_scale(float scale)
+{
+    _render_scale = scale;
+    _update_viewport();
 }
 
 void ZRenderContext::bind_texture(ZTextureRef texture)
@@ -245,6 +268,14 @@ void ZRenderContext::_initialize_gl()
     glEnable(GL_BLEND);
     glEnable(GL_CULL_FACE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void ZRenderContext::_update_viewport()
+{
+    glViewport(_viewport.origin.x,
+               _viewport.origin.y,
+               _viewport.size.width * _render_scale,
+               _viewport.size.height * _render_scale);
 }
 
 ZUniformRef ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)

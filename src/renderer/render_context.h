@@ -7,16 +7,14 @@
 
 #pragma once
 
-#include <memory>
-#include <stack>
-#include <zge/defines.h>
-#include <zge/display.h>
+#include <zge/foundation.h>
 #include <zge/matrix.h>
-#include <zge/noncopyable.h>
 #include <zge/shader_program.h>
 #include <zge/texture.h>
 #include <zge/uniform.h>
 #include <zge/vertex_array.h>
+#include <memory>
+#include <stack>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -50,6 +48,12 @@ public:
     ZShaderProgramRef get_shader_program() const;
     ZMatrix get_matrix(ZRenderMatrixType type) const;
     
+    ZRect get_viewport() const;
+    void  set_viewport(const ZRect &viewport);
+    
+    float get_render_scale() const;
+    void  set_render_scale(float scale);
+    
     void bind_texture(ZTextureRef texture);
     void unbind_texture();
     
@@ -69,6 +73,7 @@ public:
     
 private:
     void        _initialize_gl();
+    void        _update_viewport();
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
     void        _set_boolean_uniform(const std::string uniform_name, bool flag);
@@ -76,6 +81,8 @@ private:
     friend ZVertexArray;
     
 protected:
+    ZRect               _viewport;
+    float               _render_scale;
     ZShaderProgramRef   _shader_program;
     bool                _shaders_initialized;
     std::stack<ZMatrix> _matrix_stacks[_ZRENDER_MATRIX_COUNT];
