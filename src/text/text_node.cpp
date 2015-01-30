@@ -130,7 +130,7 @@ void ZTextNode::_render_glyphs()
                 dst_pixbuf[dst_off + 2] =
                     src_pixval;
                 
-                dst_pixbuf[dst_off + 3] = (src_pixval > 0 ? 0xff : 0x00);
+                dst_pixbuf[dst_off + 3] = (src_pixval > 128 ? 0xff : 0x00);
             }
         }
         
