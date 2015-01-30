@@ -13,7 +13,7 @@
 ZGE_BEGIN_NAMESPACE
 
 struct ZGlyph {
-    char          character;
+    wchar_t       character;
     ZSize2D       size;
     ZSize2D       advance;
     ZEdgeInsets   insets;

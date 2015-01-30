@@ -43,7 +43,7 @@ public:
     float get_descender() const;
     
     /// create a glyph from a specified character
-    ZGlyph create_glyph(char character);
+    ZGlyph create_glyph(wchar_t character);
     
 private:
     std::unique_ptr<struct _ZFontImpl> _impl;

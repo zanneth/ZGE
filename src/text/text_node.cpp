@@ -10,14 +10,25 @@
 #include "quad.h"
 #include "sprite_node.h"
 #include "texture.h"
+#include <codecvt>
 
 ZGE_BEGIN_NAMESPACE
 
-ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
+ZTextNode::ZTextNode(const std::wstring &text, ZFontRef font) :
     _text(text),
     _font(font),
     _text_color(ZColor::white)
 {
+    _render_glyphs();
+}
+
+ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
+    _font(font),
+    _text_color(ZColor::white)
+{
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    _text = converter.from_bytes(text);
+    
     _render_glyphs();
 }
 
@@ -26,15 +37,22 @@ ZTextNode::~ZTextNode()
 
 #pragma mark - Accessors
 
-std::string ZTextNode::get_text() const { return _text; }
+std::wstring ZTextNode::get_text() const { return _text; }
 
 ZFontRef ZTextNode::get_font() const { return _font; }
 
 ZColor ZTextNode::get_text_color() const { return _text_color; }
 
-void ZTextNode::set_text(const std::string &text)
+void ZTextNode::set_text(const std::wstring &text)
 {
     _text = text;
+    _render_glyphs();
+}
+
+void ZTextNode::set_text(const std::string &text)
+{
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    _text = converter.from_bytes(text);
     _render_glyphs();
 }
 
@@ -78,7 +96,7 @@ void ZTextNode::_render_glyphs()
     
     // create glyphs using provided font
     std::vector<ZGlyph> glyphs;
-    for (const char &character : _text) {
+    for (const auto &character : _text) {
         ZGlyph glyph = _font->create_glyph(character);
         glyphs.push_back(glyph);
     }

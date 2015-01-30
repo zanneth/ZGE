@@ -109,7 +109,7 @@ float ZFont::get_descender() const
 
 #pragma mark - API
 
-ZGlyph ZFont::create_glyph(char character)
+ZGlyph ZFont::create_glyph(wchar_t character)
 {
     FT_Error error = 0;
     FT_Face face = _impl->face;

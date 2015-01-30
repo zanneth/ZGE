@@ -18,12 +18,14 @@ ZGE_FORWARD_DECLARE_SREF(ZSpriteNode);
 
 class ZTextNode : public ZNode {
 public:
-    ZTextNode(const std::string &text = "", ZFontRef font = nullptr);
+    ZTextNode(const std::wstring &text = L"", ZFontRef font = nullptr);
+    ZTextNode(const std::string &text, ZFontRef font = nullptr);
     ~ZTextNode();
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZTextNode);
     
-    std::string get_text() const;
+    std::wstring get_text() const;
+    void set_text(const std::wstring &text);
     void set_text(const std::string &text);
     
     ZFontRef get_font() const;
@@ -38,9 +40,9 @@ private:
     void _render_glyphs();
     
 private:
-    std::string _text;
-    ZFontRef    _font;
-    ZColor      _text_color;
+    std::wstring _text;
+    ZFontRef     _font;
+    ZColor       _text_color;
     std::vector<ZSpriteNodeRef> _glyph_nodes;
 };
 
