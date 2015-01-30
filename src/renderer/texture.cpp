@@ -38,6 +38,10 @@ ZTexture::ZTexture(ZImageRef image) :
     _impl->coordinate_rect = {{0.0, 0.0}, {1.0, 1.0}};
 }
 
+ZTexture::ZTexture(const std::string &texture_path) :
+    ZTexture(ZImage::create(texture_path))
+{}
+
 ZTexture::~ZTexture()
 {
     glDeleteTextures(1, &(_impl->name));

@@ -19,7 +19,6 @@ ZGE_BEGIN_NAMESPACE
 class ZSpriteNode : public ZNode, ZNoncopyable {
 public:
     ZSpriteNode(ZTextureRef texture = nullptr);
-    ~ZSpriteNode() = default;
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZSpriteNode);
     

@@ -146,6 +146,8 @@ ZGlyph ZFont::create_glyph(wchar_t character)
         .insets = ZEdgeInsets{(float)bitmap_glyph->top, (float)bitmap_glyph->left, 0.f, 0.f},
         .bitmap = bitmap_data,
     };
+    
+    FT_Done_Glyph(freetype_glyph);
     return glyph;
 }
 

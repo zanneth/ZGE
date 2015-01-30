@@ -16,6 +16,7 @@ ZGE_BEGIN_NAMESPACE
 class ZTexture : ZNoncopyable {
 public:
     ZTexture(ZImageRef image);
+    ZTexture(const std::string &texture_path);
     ~ZTexture();
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZTexture);
