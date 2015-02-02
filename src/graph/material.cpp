@@ -42,7 +42,9 @@ const void* ZColorMaterial::get_contents_data() const
 ZTextureMaterial::ZTextureMaterial(ZTextureRef texture) :
     _texture(texture)
 {
-    _cached_texture_name = _texture->_get_texture_name();
+    if (_texture) {
+        _cached_texture_name = _texture->_get_texture_name();
+    }
 }
 
 ZTextureRef ZTextureMaterial::get_texture() const { return _texture; }
