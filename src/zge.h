@@ -30,6 +30,7 @@
 #include <zge/input_manager.h>
 #include <zge/image.h>
 #include <zge/light.h>
+#include <zge/line.h>
 #include <zge/logger.h>
 #include <zge/material.h>
 #include <zge/matrix.h>

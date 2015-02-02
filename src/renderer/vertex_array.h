@@ -19,8 +19,6 @@ ZGE_BEGIN_NAMESPACE
 class ZRenderContext;
 
 class ZVertexArray : ZNoncopyable, public std::enable_shared_from_this<ZVertexArray> {
-    std::auto_ptr<struct ZVertexArrayImpl> _impl;
-    
 public:
     ZVertexArray();
     ~ZVertexArray();
@@ -40,6 +38,9 @@ public:
 private:
     void _bind();
     friend ZRenderContext;
+    
+private:
+    std::auto_ptr<struct ZVertexArrayImpl> _impl;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZVertexArray);

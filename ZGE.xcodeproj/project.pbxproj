@@ -962,6 +962,10 @@
 		0C69589519F3532100208B27 /* text_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C69589319F3532100208B27 /* text_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C69589819F3874700208B27 /* glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C69589619F3874700208B27 /* glyph.cpp */; };
 		0C69589919F3874700208B27 /* glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C69589719F3874700208B27 /* glyph.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C71922E1A80070900A2073A /* line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C71922C1A80070900A2073A /* line.cpp */; };
+		0C71922F1A80070900A2073A /* line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C71922C1A80070900A2073A /* line.cpp */; };
+		0C7192301A80070900A2073A /* line.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C71922D1A80070900A2073A /* line.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C7192311A80070900A2073A /* line.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C71922D1A80070900A2073A /* line.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA36B3819F206D0003543FE /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; };
 		0CA36B3919F206E3003543FE /* libfreetype.6.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0CA36B3D19F20B17003543FE /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA36B3B19F20B17003543FE /* font.cpp */; };
@@ -1490,6 +1494,8 @@
 		0C69589319F3532100208B27 /* text_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = text_node.h; sourceTree = "<group>"; };
 		0C69589619F3874700208B27 /* glyph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glyph.cpp; sourceTree = "<group>"; };
 		0C69589719F3874700208B27 /* glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glyph.h; sourceTree = "<group>"; };
+		0C71922C1A80070900A2073A /* line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = line.cpp; sourceTree = "<group>"; };
+		0C71922D1A80070900A2073A /* line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = line.h; sourceTree = "<group>"; };
 		0C7712F819177E4D0050C098 /* sound_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound_private.h; sourceTree = "<group>"; };
 		0C7D3E0F19C57194003AC9E9 /* cube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
 		0C7D3E1019C57194003AC9E9 /* cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
@@ -2423,6 +2429,8 @@
 				0CE0341719D1D6EC00CD7A19 /* camera_controller.cpp */,
 				0C7D3E1019C57194003AC9E9 /* cube.h */,
 				0C7D3E0F19C57194003AC9E9 /* cube.cpp */,
+				0C71922D1A80070900A2073A /* line.h */,
+				0C71922C1A80070900A2073A /* line.cpp */,
 				0C898C71191722B600CF3009 /* orthocamera.h */,
 				0C898C70191722B600CF3009 /* orthocamera.cpp */,
 				0C898C7919172F2900CF3009 /* quad.h */,
@@ -2793,6 +2801,7 @@
 				0C10FA3919D3CA730010815F /* Complex.h in Headers */,
 				0C10FA3A19D3CA730010815F /* MathFunctions.h in Headers */,
 				0C10FA3B19D3CA730010815F /* PacketMath.h in Headers */,
+				0C7192301A80070900A2073A /* line.h in Headers */,
 				0C10FA3C19D3CA730010815F /* Array.h in Headers */,
 				0C10FA3D19D3CA740010815F /* ArrayBase.h in Headers */,
 				0C10FA3E19D3CA740010815F /* ArrayWrapper.h in Headers */,
@@ -3449,6 +3458,7 @@
 				0C42CB5D1A5CE3E800AA2566 /* SparseLU_pruneL.h in Headers */,
 				0C42CB5E1A5CE3E800AA2566 /* SparseLU_relax_snode.h in Headers */,
 				0C42CB5F1A5CE3E800AA2566 /* SparseLU_Structs.h in Headers */,
+				0C7192311A80070900A2073A /* line.h in Headers */,
 				0C42CB601A5CE3E800AA2566 /* SparseLU_SupernodalMatrix.h in Headers */,
 				0C42CB611A5CE3E800AA2566 /* SparseLU_Utils.h in Headers */,
 				0C42CB621A5CE3E800AA2566 /* SparseLUImpl.h in Headers */,
@@ -3700,6 +3710,7 @@
 				0CE0A6BF19F8C81900AA119A /* describable.cpp in Sources */,
 				0C10F9A719D3C91D0010815F /* geometry.cpp in Sources */,
 				0C10F9A919D3C91D0010815F /* material.cpp in Sources */,
+				0C71922E1A80070900A2073A /* line.cpp in Sources */,
 				0C10F9AB19D3C91D0010815F /* model.cpp in Sources */,
 				0C10F9AD19D3C91D0010815F /* node.cpp in Sources */,
 				0C10F9AF19D3C91D0010815F /* scene.cpp in Sources */,
@@ -3754,6 +3765,7 @@
 				0C42CA0C1A5CE3E800AA2566 /* semaphore.cpp in Sources */,
 				0C42CA0D1A5CE3E800AA2566 /* schedulable.cpp in Sources */,
 				0C42CA0E1A5CE3E800AA2566 /* timer.cpp in Sources */,
+				0C71922F1A80070900A2073A /* line.cpp in Sources */,
 				0C42CA0F1A5CE3E800AA2566 /* thread.cpp in Sources */,
 				0C42CA101A5CE3E800AA2566 /* matrix.cpp in Sources */,
 				0C42CA111A5CE3E800AA2566 /* vector.cpp in Sources */,

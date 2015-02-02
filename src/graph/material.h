@@ -31,7 +31,7 @@ ZGE_DEFINE_SREF_TYPE(ZMaterial);
 
 class ZColorMaterial : public ZMaterial {
 public:
-    ZColorMaterial();
+    ZColorMaterial(const ZColor &col = ZColor::white);
     ZColorMaterial(const ZColorMaterial &cp) = default;
     ZColorMaterial(ZColorMaterial &&mv) = default;
     
@@ -52,7 +52,7 @@ ZGE_DEFINE_SREF_TYPE(ZColorMaterial);
 
 class ZTextureMaterial : public ZMaterial {
 public:
-    ZTextureMaterial();
+    ZTextureMaterial(ZTextureRef texture = nullptr);
     ZTextureMaterial(const ZTextureMaterial &cp) = default;
     ZTextureMaterial(ZTextureMaterial &&mv) = default;
     

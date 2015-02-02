@@ -18,13 +18,15 @@ ZGE_BEGIN_NAMESPACE
 class ZLight;
 class ZScene;
 
-typedef std::shared_ptr<class ZNode> ZNodeRef;
+ZGE_FORWARD_DECLARE_SREF(ZNode);
 
 class ZNode : public std::enable_shared_from_this<ZNode> {
 public:
     ZNode(ZGeometryRef geometry = nullptr);
     ZNode(const ZNode&) = default;
     virtual ~ZNode();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZNode);
     
     /* Operators */
     bool operator==(const ZNode &other);
@@ -108,5 +110,7 @@ protected:
     
     friend class ZScene;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZNode);
 
 ZGE_END_NAMESPACE

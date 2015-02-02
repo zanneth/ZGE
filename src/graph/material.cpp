@@ -20,8 +20,8 @@ void ZMaterial::finalize_draw(ZRenderContextRef context)
 
 #pragma mark - ZColorMaterial
 
-ZColorMaterial::ZColorMaterial() :
-    _color(ZColor::white)
+ZColorMaterial::ZColorMaterial(const ZColor &col) :
+    _color(col)
 {}
 
 ZColor ZColorMaterial::get_color() const { return _color; }
@@ -39,8 +39,11 @@ const void* ZColorMaterial::get_contents_data() const
 
 #pragma mark - ZTextureMaterial
 
-ZTextureMaterial::ZTextureMaterial()
-{}
+ZTextureMaterial::ZTextureMaterial(ZTextureRef texture) :
+    _texture(texture)
+{
+    _cached_texture_name = _texture->_get_texture_name();
+}
 
 ZTextureRef ZTextureMaterial::get_texture() const { return _texture; }
 void ZTextureMaterial::set_texture(ZTextureRef texture)

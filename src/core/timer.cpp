@@ -38,7 +38,13 @@ void ZTimer::run(uint32_t dtime)
         using namespace std::chrono;
         
         ZTime time = ZUtil::get_current_time();
-        ZTimeInterval time_delta = time - _time_last_fired;
+        ZTimeInterval time_delta;
+        
+        if (_time_last_fired == ZTime()) {
+            time_delta = time - _time_scheduled;
+        } else {
+            time_delta = time - _time_last_fired;
+        }
         
         if (time_delta >= _interval) {
             fire();
