@@ -20,7 +20,6 @@ Z3DCamera::Z3DCamera() :
     _field_of_view(DEFAULT_FOV),
     _near_clip(DEFAULT_NEAR_CLIP),
     _far_clip(DEFAULT_FAR_CLIP),
-    _viewport(ZEngine::instance()->get_viewport_rect()),
     _open(false),
     _projection_dirty(true),
     _modelview_dirty(true)
@@ -56,7 +55,7 @@ bool Z3DCamera::is_open() const
 #pragma mark - Accessors
 
 ZRect Z3DCamera::get_viewport_rect() const { return _viewport; }
-void Z3DCamera::set_viewport_rect(const ZRect &rect) { _viewport = rect; }
+void Z3DCamera::set_viewport_rect(const ZRect &rect) { _viewport = rect; _projection_dirty = true; }
 float Z3DCamera::get_fov() const { return _field_of_view; }
 void Z3DCamera::set_fov(float degrees) { _field_of_view = degrees; _projection_dirty = true; }
 float Z3DCamera::get_near_clipping_distance() const { return _near_clip; }

@@ -62,8 +62,8 @@ public:
     void remove_lights(const std::vector<ZLightRef> &lights);
     void clear_lights();
     
-    void enable_depth_testing();
-    void disable_depth_testing();
+    bool depth_testing_is_enabled() const;
+    void set_depth_testing_enabled(bool enabled);
     
     void clear_buffers();
     
@@ -85,6 +85,7 @@ protected:
     float               _render_scale;
     ZShaderProgramRef   _shader_program;
     bool                _shaders_initialized;
+    bool                _depth_testing_enabled;
     std::stack<ZMatrix> _matrix_stacks[_ZRENDER_MATRIX_COUNT];
     ZVertexArrayRef     _bound_vertex_array;
     ZTextureRef         _bound_texture;

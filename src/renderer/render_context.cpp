@@ -39,7 +39,8 @@ static ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType ty
 
 ZRenderContext::ZRenderContext() :
     _render_scale(1.0),
-    _shaders_initialized(false)
+    _shaders_initialized(false),
+    _depth_testing_enabled(false)
 {
     for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
         _matrix_stacks[i].push(ZMatrix::identity());
@@ -218,16 +219,24 @@ void ZRenderContext::clear_lights()
     _lights.clear();
 }
 
-void ZRenderContext::enable_depth_testing()
+bool ZRenderContext::depth_testing_is_enabled() const
 {
-    make_current();
-    glEnable(GL_DEPTH_TEST);
+    return _depth_testing_enabled;
 }
 
-void ZRenderContext::disable_depth_testing()
+void ZRenderContext::set_depth_testing_enabled(bool enabled)
 {
-    make_current();
-    glDisable(GL_DEPTH_TEST);
+    if (_depth_testing_enabled != enabled) {
+        _depth_testing_enabled = enabled;
+        
+        make_current();
+        if (enabled) {
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LEQUAL);
+        } else {
+            glDisable(GL_DEPTH_TEST);
+        }
+    }
 }
 
 void ZRenderContext::clear_buffers()

@@ -9,11 +9,12 @@
 #include <zge/color.h>
 #include <zge/logger.h>
 #include <SDL2/SDL_image.h>
+#include <algorithm>
 
 ZGE_BEGIN_NAMESPACE
 
 static ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt);
-static ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat format);
+static ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat orig_format, ZImageFormat dest_format);
 
 struct _ZImageImpl {
     SDL_Surface *img_surface;
@@ -46,11 +47,17 @@ ZImage::ZImage(const std::string &path) :
         .bytes_per_pixel = 4,
         .pixel_format = pixel_frmt
     };
-    _impl->img_format = format;
-    _impl->img_size = ZSize2D{float(surface->w), float(surface->h)};
     
-    // store image data from surface
-    _impl->img_data = _pixel_data_from_sdl_surface(surface, format);
+    ZImageFormat dest_img_format = format;
+#if OPENGL_ES
+    // OpenGL ES does not support BGRA pixel formats. we need to convert
+    dest_img_format.pixel_format = ZPIXEL_FORMAT_RGBA;
+#endif
+    
+    // store image data from surface, converting if necessary
+    _impl->img_data = _pixel_data_from_sdl_surface(surface, format, dest_img_format);
+    _impl->img_size = ZSize2D{float(surface->w), float(surface->h)};
+    _impl->img_format = dest_img_format;
 }
 
 ZImage::ZImage(ZDataRef image_data, ZSize2D size, ZImageFormat image_format) :
@@ -96,26 +103,47 @@ ZPixelFormat _pixel_frmt_from_sdl_frmt(SDL_PixelFormat *sdl_frmt)
     if (rmask == 0x0) {
         format = ZPIXEL_FORMAT_RGBA;
     } else if (rmask == 0xff0000) {
-#if OPENGL_ES
-        // this probably isn't the right thing to do...
-        ZLogger::log_error("WARNING: Unsupported pixel format for GLES: %u", rmask);
-        format = ZPIXEL_FORMAT_RGBA;
-#else
         format = ZPIXEL_FORMAT_BGRA;
-#endif
     }
     
     return format;
 }
 
-ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat format)
+ZDataRef _pixel_data_from_sdl_surface(SDL_Surface *surface, ZImageFormat orig_format, ZImageFormat dest_format)
 {
+    ZDataRef pixel_data;
+    
     int width = surface->w;
     int height = surface->h;
     size_t num_components = width * height;
-    size_t pixel_buffer_sz = num_components * format.bytes_per_pixel;
+    uint8_t bytes_per_pixel = orig_format.bytes_per_pixel;
+    size_t pixel_buffer_sz = num_components * bytes_per_pixel;
     
-    ZDataRef pixel_data = std::make_shared<ZData>(surface->pixels, pixel_buffer_sz);
+    if (orig_format.pixel_format == dest_format.pixel_format) {
+        pixel_data = ZData::create(surface->pixels, pixel_buffer_sz);
+    } else {
+        pixel_data = ZData::create(nullptr, pixel_buffer_sz);
+        const uint8_t *src_buffer = (const uint8_t *)surface->pixels;
+        
+        for (unsigned long i = 0; i < pixel_buffer_sz; i += bytes_per_pixel) {
+            uint8_t pixel_cmps[bytes_per_pixel];
+            std::copy(src_buffer + i, src_buffer + i + bytes_per_pixel, pixel_cmps);
+            
+            if ((orig_format.pixel_format == ZPIXEL_FORMAT_RGBA && dest_format.pixel_format == ZPIXEL_FORMAT_BGRA) ||
+                (orig_format.pixel_format == ZPIXEL_FORMAT_BGRA && dest_format.pixel_format == ZPIXEL_FORMAT_RGBA)) {
+                (*pixel_data)[i + 0] = pixel_cmps[2];
+                (*pixel_data)[i + 1] = pixel_cmps[1];
+                (*pixel_data)[i + 2] = pixel_cmps[0];
+                (*pixel_data)[i + 3] = pixel_cmps[3];
+            } else {
+                size_t bytes_to_copy = std::min(bytes_per_pixel, dest_format.bytes_per_pixel);
+                for (unsigned j = 0; j < bytes_to_copy; ++j) {
+                    (*pixel_data)[i + j] = pixel_cmps[j];
+                }
+            }
+        }
+    }
+    
     return pixel_data;
 }
 

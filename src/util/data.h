@@ -24,6 +24,9 @@ public:
     ZData& operator=(const ZData &cp);
     ZData& operator=(ZData &&mv);
     
+    uint8_t& operator[](unsigned long off);
+    uint8_t operator[](unsigned long off) const;
+    
     const void* get_data() const;
     size_t get_length() const;
     

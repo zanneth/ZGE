@@ -50,6 +50,16 @@ ZData& ZData::operator=(ZData &&mv)
     return *this;
 }
 
+uint8_t& ZData::operator[](unsigned long off)
+{
+    return *(_data.get() + off);
+}
+
+uint8_t ZData::operator[](unsigned long off) const
+{
+    return _data.get()[off];
+}
+
 const void* ZData::get_data() const
 {
     return _data.get();

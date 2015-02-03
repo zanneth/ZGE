@@ -128,11 +128,8 @@ enum ZPixelFormat {
     ZPIXEL_FORMAT_RG,
     ZPIXEL_FORMAT_RGB,
     ZPIXEL_FORMAT_RGBA,
-    
-#if !OPENGL_ES
     ZPIXEL_FORMAT_BGR,
     ZPIXEL_FORMAT_BGRA,
-#endif
 };
 
 struct ZImageFormat {
