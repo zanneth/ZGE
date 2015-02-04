@@ -16,34 +16,25 @@
 
 ZGE_BEGIN_NAMESPACE
 
-static ZApplication *__current_application = nullptr;
-
 ZApplication::ZApplication(int argc, const char **argv) :
+    _main_runloop(ZRunloop::create()),
     _show_cursor(true)
 {
-    set_arguments(argc, argv);
-    _main_runloop._on_main_thread = true;
+    for (int i = 0; i < argc; ++i) {
+        std::string str = argv[i];
+        _arguments.push_back(str);
+    }
+    
+    _main_runloop->_on_main_thread = true;
 }
 
 ZApplication::~ZApplication()
 {}
 
-#pragma mark - Getting the Application Instance
-
-ZApplication* ZApplication::get_current_application()
-{
-    return __current_application;
-}
-
 #pragma mark - Running
 
 void ZApplication::run()
 {
-    if (__current_application != nullptr) {
-        delete __current_application;
-    }
-    __current_application = this;
-        
     // initialize SDL
     int sdl_result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     if (sdl_result < 0) {
@@ -62,20 +53,12 @@ void ZApplication::run()
     application_ready();
     
     // start main run loop (doesn't return)
-    start_main_runloop();
+    _main_runloop->run();
 }
 
 #pragma mark - Accessors
 
 std::vector<std::string> ZApplication::get_arguments() { return _arguments; }
-
-void ZApplication::set_arguments(int argc, const char **argv)
-{
-    for (int i = 0; i < argc; ++i) {
-        std::string str = argv[i];
-        _arguments.push_back(str);
-    }
-}
 
 bool ZApplication::shows_cursor() const { return _show_cursor; }
 
@@ -90,14 +73,9 @@ void ZApplication::set_use_relative_cursor(bool use_relative)
 
 #pragma mark - Run Loop
 
-ZRunloop* ZApplication::get_main_runloop()
+ZRunloopRef ZApplication::get_main_runloop()
 {
-    return &_main_runloop;
-}
-
-void ZApplication::start_main_runloop()
-{
-    _main_runloop.run();
+    return _main_runloop;
 }
 
 #pragma mark - Utility Functions
@@ -109,7 +87,7 @@ ZTimeInterval ZApplication::get_time_running()
 
 void ZApplication::exit()
 {
-    _main_runloop.stop();
+    _main_runloop->stop();
 }
 
 #pragma mark - Handling Events

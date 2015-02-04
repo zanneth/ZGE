@@ -20,9 +20,6 @@ ZRenderManager::ZRenderManager() :
     _initialized(false)
 {}
 
-ZRenderManager::~ZRenderManager()
-{}
-
 #pragma mark - Creating a Display
 
 ZDisplayRef ZRenderManager::create_display(const zge::ZDisplayMode &mode)

@@ -24,6 +24,11 @@ ZRunloop::~ZRunloop()
     _running = false;
 }
 
+#pragma mark - Accessors
+
+bool ZRunloop::is_running() const { return _running; }
+bool ZRunloop::is_on_main_thread() const { return _on_main_thread; }
+
 #pragma mark - Starting the Run Loop
 
 void ZRunloop::run()

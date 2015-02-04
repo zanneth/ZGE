@@ -25,24 +25,23 @@ class ZRenderManager : public ZSchedulable,
 {
 public:
     ZRenderManager();
-    ~ZRenderManager();
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZRenderManager);
-    
-    /* Accessors */
-    ZDisplayRef get_current_display() const;
-    ZRenderContextRef get_context() const;
-    
-    ZSceneRef get_scene() const;
-    void set_scene(ZSceneRef scene);
-    
-    /* API */
     
     /// Creates a new display and sets as current.
     ZDisplayRef create_display(const ZDisplayMode &mode);
     
-    /// Starts the render manager.
-    void start();
+    /// Returns the display that is being managed by this render manager.
+    ZDisplayRef get_current_display() const;
+    
+    /// Returns the render context being used by this render manager.
+    ZRenderContextRef get_context() const;
+    
+    /// Returns the current scene being rendered.
+    ZSceneRef get_scene() const;
+    
+    /// Sets the scene that should be rendered.
+    void set_scene(ZSceneRef scene);
     
     /* Schedulable Overrides */
     void run(uint32_t dtime) override;

@@ -23,8 +23,13 @@ public:
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZAudioManager);
     
+    /// Add a sound object to the active queue and play immediately.
     void add_sound(ZSoundRef sound);
+    
+    /// Returns an array of sounds in the active queue.
     std::vector<ZSoundRef> get_active_sounds() const;
+    
+    /// Schedulable override.
     void run(uint32_t dtime) override;
     
 private:

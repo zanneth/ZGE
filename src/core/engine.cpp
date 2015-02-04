@@ -6,7 +6,6 @@
  */
  
 #include <zge/engine.h>
-#include <zge/application.h>
 #include <zge/display.h>
 #include <zge/exception.h>
 #include <zge/run_loop.h>
@@ -16,37 +15,56 @@ ZGE_BEGIN_NAMESPACE
 ZEngine::ZEngine() :
     _input_manager(new ZInputManager),
     _render_manager(new ZRenderManager),
-    _audio_manager(new ZAudioManager)
+    _audio_manager(new ZAudioManager),
+    _application(nullptr),
+    _application_responder(nullptr)
 {}
+
+ZEngine::~ZEngine()
+{
+    _input_manager->remove_responder(_application_responder);
+}
 
 #pragma mark - Initialization
 
-void ZEngine::initialize()
+void ZEngine::initialize(ZRunloopRef runloop)
 {
-    ZApplication *app = ZApplication::get_current_application();
-    if (!app) {
-        ZException e(ZENGINE_EXCEPTION_CODE);
-        e.extra_info = "Main run loop not available. Engine initialization failed.";
-        throw e;
+    if (!runloop) {
+        ZException ex(ZASSERTION_EXCEPTION_CODE);
+        ex.extra_info = "A runloop must be provided to the initialize routine.";
+        throw ex;
     }
     
-    ZRunloop *loop = app->get_main_runloop();
-    loop->schedule(_input_manager);
-    loop->schedule(_render_manager);
-    loop->schedule(_audio_manager);
-    
-    // engine always adds application as the first responder
-    _application_responder = _input_manager->add_responder([](const ZEvent &event) {
-        if (event.type == ZAPPLICATION_EVENT) {
-            ZApplication *app = ZApplication::get_current_application();
-            if (app) {
-                app->handle_application_event(event);
-            }
-        }
-    });
+    runloop->schedule(_input_manager);
+    runloop->schedule(_render_manager);
+    runloop->schedule(_audio_manager);
 }
 
 #pragma mark - Accessors
+
+ZApplication* ZEngine::get_application() const
+{
+    return _application;
+}
+
+void ZEngine::set_application(ZApplication *application)
+{
+    _application = application;
+    
+    if (_application_responder) {
+        _input_manager->remove_responder(_application_responder);
+        _application_responder = nullptr;
+    }
+    
+    if (application) {
+        _application_responder = _input_manager->add_responder([application](const ZEvent &event) {
+            if (event.type == ZAPPLICATION_EVENT) {
+                application->handle_application_event(event);
+            }
+        });
+        _input_manager->promote_first_responder(_application_responder);
+    }
+}
 
 ZInputManagerRef ZEngine::get_input_manager() { return _input_manager; }
 ZRenderManagerRef ZEngine::get_render_manager() { return _render_manager; }

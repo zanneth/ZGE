@@ -19,12 +19,12 @@
 
 ZGE_BEGIN_NAMESPACE
 
-typedef std::shared_ptr<class ZInputManager> ZInputManagerRef;
-
 class ZInputManager : public ZSchedulable, ZNoncopyable {
 public:
-    ZInputManager()     = default;
-    ~ZInputManager()    = default;
+    ZInputManager()  = default;
+    ~ZInputManager() = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZInputManager);
     
     /* Adding/Removing Responders */
     void add_responder(ZResponderRef responder);
@@ -46,5 +46,7 @@ private:
     std::list<ZResponderRef> _responder_chain;
     std::queue<ZResponderRef> _removal_queue;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZInputManager);
 
 ZGE_END_NAMESPACE

@@ -18,39 +18,42 @@
 ZGE_BEGIN_NAMESPACE
 
 class ZApplication : ZNoncopyable {
-    std::vector<std::string> _arguments;
-    bool _show_cursor;
-    bool _use_relative_cursor;
-    
-    ZRunloop _main_runloop;
-    ZTime _time_start;
-    
 public:
     ZApplication(int argc, const char **argv);
     virtual ~ZApplication();
     
-    /* Getting the Application Instance */
-    static ZApplication* get_current_application();
-    
-    /* Running */
+    /// Initializes the application and starts the main runloop. (Does not return.)
     void run();
     
-    /* Accessors */
+    /// Return an array of program arguments provided to the app.
     std::vector<std::string> get_arguments();
-    void set_arguments(int argc, const char **argv);
     
+    /// Returns true if the mouse cursor is allowed to be shown when this
+    /// application is active.
     bool shows_cursor() const;
+    
+    /// Sets whether or not the cursor should be allowed to be visible when this
+    /// application is active.
     void set_shows_cursor(bool cursor);
     
+    /// Returns true if the mouse cursor should behave 'relatively', meaning
+    /// movements should be tracked as deltas instead of absolute positioning on
+    /// the screen.
     bool get_use_relative_cursor() const;
+    
+    /// Sets whether or not the cursor should behave relatively. When true, the
+    /// application will treat cursor movement differentially rather than
+    /// tracking absolute positioning.
     void set_use_relative_cursor(bool use_relative);
     
-    /* Accessing the Main Run Loop */
-    ZRunloop* get_main_runloop();
-    void start_main_runloop();
+    /// Returns the main runloop for the application.
+    ZRunloopRef get_main_runloop();
     
-    /* Utility Functions */
+    /// Returns the amount of time that this application has been running.
     ZTimeInterval get_time_running();
+    
+    /// Asks the main runloop to stop and relinquishes control flow from the
+    /// application.
     void exit();
     
     /* Handling Events */
@@ -60,6 +63,13 @@ public:
     
     /* Callbacks */
     virtual void application_ready() {}
+    
+private:
+    std::vector<std::string> _arguments;
+    ZRunloopRef _main_runloop;
+    bool        _show_cursor;
+    bool        _use_relative_cursor;
+    ZTime       _time_start;
 };
 
 ZGE_END_NAMESPACE

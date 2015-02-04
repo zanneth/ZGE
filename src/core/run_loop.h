@@ -20,9 +20,11 @@ public:
     ZRunloop();
     ~ZRunloop();
     
+    ZGE_DEFINE_SREF_FUNCTIONS(ZRunloop);
+    
     /* Accessors */
-    bool is_running() { return _running; }
-    bool is_on_main_thread() { return _on_main_thread; }
+    bool is_running() const;
+    bool is_on_main_thread() const;
     
     /* Starting/Stopping the Run Loop */
     void run();
