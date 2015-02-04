@@ -12,6 +12,7 @@
 #include <zge/camera.h>
 #include <zge/geometry.h>
 #include <zge/render_context.h>
+#include <zge/renderable.h>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -20,7 +21,9 @@ class ZScene;
 
 ZGE_FORWARD_DECLARE_SREF(ZNode);
 
-class ZNode : public std::enable_shared_from_this<ZNode> {
+class ZNode : public ZRenderable,
+              public std::enable_shared_from_this<ZNode>
+{
 public:
     ZNode(ZGeometryRef geometry = nullptr);
     ZNode(const ZNode&) = default;
@@ -74,6 +77,9 @@ public:
     virtual void on_enter() {}
     virtual void on_exit() {}
     virtual void update() {}
+    
+    /* Renderable */
+    void render(ZRenderContextRef context);
     
 protected:
     virtual void _draw(ZRenderContextRef context);

@@ -958,6 +958,8 @@
 		0C42CCA21A5D041900AA2566 /* display_render_context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C42CC9F1A5D041900AA2566 /* display_render_context.cpp */; };
 		0C42CCA31A5D041900AA2566 /* display_render_context.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C42CCA01A5D041900AA2566 /* display_render_context.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CCA41A5D041900AA2566 /* display_render_context.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C42CCA01A5D041900AA2566 /* display_render_context.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C59F75F1A828A8700D2BA8A /* renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C59F75E1A828A8700D2BA8A /* renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C59F7601A828A8700D2BA8A /* renderable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C59F75E1A828A8700D2BA8A /* renderable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C69589419F3532100208B27 /* text_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C69589219F3532100208B27 /* text_node.cpp */; };
 		0C69589519F3532100208B27 /* text_node.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C69589319F3532100208B27 /* text_node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C69589819F3874700208B27 /* glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C69589619F3874700208B27 /* glyph.cpp */; };
@@ -1479,6 +1481,7 @@
 		0C50D3D516D208A900E43D7B /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		0C50D3D816D208A900E43D7B /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		0C50D3D916D208A900E43D7B /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		0C59F75E1A828A8700D2BA8A /* renderable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = renderable.h; sourceTree = "<group>"; };
 		0C5D324A1761C82A0013ACFF /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
 		0C5D324B1761C82A0013ACFF /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		0C5E3D79159ED53B0062242E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = README; sourceTree = "<group>"; };
@@ -2514,6 +2517,7 @@
 				0C7D3E1A19C67376003AC9E9 /* light.h */,
 				0C7D3E1919C67376003AC9E9 /* light.cpp */,
 				0C064489177029CC004AAA20 /* opengl.h */,
+				0C59F75E1A828A8700D2BA8A /* renderable.h */,
 				0C4B4AF41749A83500FD4B53 /* render_context.h */,
 				0C4B4AF31749A83500FD4B53 /* render_context.cpp */,
 				0C2B01AA176D5FE300522671 /* render_manager.h */,
@@ -3071,6 +3075,7 @@
 				0C10FB4319D3CABD0010815F /* SDL_events.h in Headers */,
 				0C10FB4419D3CABE0010815F /* SDL_gamecontroller.h in Headers */,
 				0C10FB4519D3CABE0010815F /* SDL_gesture.h in Headers */,
+				0C59F75F1A828A8700D2BA8A /* renderable.h in Headers */,
 				0C10FB4619D3CABF0010815F /* SDL_haptic.h in Headers */,
 				0C10FB4719D3CABF0010815F /* SDL_hints.h in Headers */,
 				0C10FB4819D3CAC00010815F /* SDL_joystick.h in Headers */,
@@ -3188,6 +3193,7 @@
 				0C42CA4F1A5CE3E800AA2566 /* types.h in Headers */,
 				0C42CA501A5CE3E800AA2566 /* matrix.h in Headers */,
 				0C42CA511A5CE3E800AA2566 /* vector.h in Headers */,
+				0C59F7601A828A8700D2BA8A /* renderable.h in Headers */,
 				0C42CA521A5CE3E800AA2566 /* action.h in Headers */,
 				0C42CA531A5CE3E800AA2566 /* geometry.h in Headers */,
 				0C42CA541A5CE3E800AA2566 /* material.h in Headers */,

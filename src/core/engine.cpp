@@ -16,6 +16,7 @@ ZEngine::ZEngine() :
     _input_manager(new ZInputManager),
     _render_manager(new ZRenderManager),
     _audio_manager(new ZAudioManager),
+    _scene(nullptr),
     _application(nullptr),
     _application_responder(nullptr)
 {}
@@ -89,12 +90,21 @@ ZRect ZEngine::get_viewport_rect() const
 
 ZSceneRef ZEngine::get_current_scene() const
 {
-    return _render_manager->get_scene();
+    return _scene;
 }
 
 void ZEngine::set_current_scene(ZSceneRef scene)
 {
-    _render_manager->set_scene(scene);
+    if (_scene) {
+        _scene->on_exit();
+    }
+    
+    _scene = scene;
+    _render_manager->set_renderable(scene);
+    
+    if (_scene) {
+        _scene->on_enter();
+    }
 }
 
 ZGE_END_NAMESPACE

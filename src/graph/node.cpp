@@ -136,6 +136,12 @@ void ZNode::remove_all_actions()
     _actions.clear();
 }
 
+void ZNode::render(ZRenderContextRef context)
+{
+    _update_internal();
+    _draw(context);
+}
+
 #pragma mark - Description
 
 std::string ZNode::get_description()

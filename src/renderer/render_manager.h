@@ -12,7 +12,7 @@
 #include <zge/display.h>
 #include <zge/noncopyable.h>
 #include <zge/render_context.h>
-#include <zge/scene.h>
+#include <zge/renderable.h>
 #include <zge/schedulable.h>
 #include <zge/thread.h>
 #include <zge/types.h>
@@ -37,11 +37,11 @@ public:
     /// Returns the render context being used by this render manager.
     ZRenderContextRef get_context() const;
     
-    /// Returns the current scene being rendered.
-    ZSceneRef get_scene() const;
+    /// Returns the current renderable object being used.
+    ZRenderableRef get_renderable() const;
     
-    /// Sets the scene that should be rendered.
-    void set_scene(ZSceneRef scene);
+    /// Sets the object to be rendered.
+    void set_renderable(ZRenderableRef renderable);
     
     /* Schedulable Overrides */
     void run(uint32_t dtime) override;
@@ -50,11 +50,10 @@ private:
     void _initialize_render_context();
     
 private:
-    ZDisplayRef _display;
-    ZRenderContextRef _context;
-    ZSceneRef _scene;
-    ZThreadRef _thread;
-    bool _initialized;
+    ZDisplayRef         _display;
+    ZRenderContextRef   _context;
+    ZRenderableRef      _renderable;
+    bool                _initialized;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZRenderManager);

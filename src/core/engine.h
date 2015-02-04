@@ -13,6 +13,7 @@
 #include <zge/input_manager.h>
 #include <zge/noncopyable.h>
 #include <zge/render_manager.h>
+#include <zge/scene.h>
 #include <zge/types.h>
 
 ZGE_BEGIN_NAMESPACE
@@ -52,16 +53,17 @@ public:
     /// Returns the rectangle representing render manager's current display.
     ZRect get_viewport_rect() const;
     
-    // Convenience: returns the render manager's current scene property.
+    /// Returns the scene currently being rendered by the engine.
     ZSceneRef get_current_scene() const;
     
-    // Convenience: sets the render manager's current scene.
+    // Sets the scene to be rendered by the engine.
     void set_current_scene(ZSceneRef scene);
     
 private:
     ZInputManagerRef  _input_manager;
     ZRenderManagerRef _render_manager;
     ZAudioManagerRef  _audio_manager;
+    ZSceneRef         _scene;
     
     ZApplication     *_application;
     ZResponderRef     _application_responder;

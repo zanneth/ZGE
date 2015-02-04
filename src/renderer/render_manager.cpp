@@ -11,12 +11,13 @@
 #include <zge/display_render_context.h>
 #include <zge/engine.h>
 #include <zge/node.h>
-#include <zge/scene.h>
 
 ZGE_BEGIN_NAMESPACE
 
 ZRenderManager::ZRenderManager() :
+    _display(nullptr),
     _context(nullptr),
+    _renderable(nullptr),
     _initialized(false)
 {}
 
@@ -38,20 +39,9 @@ ZDisplayRef ZRenderManager::get_current_display() const { return _display; }
 
 ZRenderContextRef ZRenderManager::get_context() const { return _context; }
 
-ZSceneRef ZRenderManager::get_scene() const { return _scene; }
+ZRenderableRef ZRenderManager::get_renderable() const { return _renderable; }
 
-void ZRenderManager::set_scene(ZSceneRef scene)
-{
-    if (_scene) {
-        _scene->on_exit();
-    }
-    
-    _scene = scene;
-    
-    if (_scene) {
-        _scene->on_enter();
-    }
-}
+void ZRenderManager::set_renderable(ZRenderableRef renderable) { _renderable = renderable; }
 
 #pragma mark - Overrides
 
@@ -61,9 +51,8 @@ void ZRenderManager::run(uint32_t dtime)
         _context->make_current();
         _context->clear_buffers();
         
-        if (_scene) {
-            _scene->_update_internal();
-            _scene->_draw(_context);
+        if (_renderable) {
+            _renderable->render(_context);
         }
     }
     
