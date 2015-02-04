@@ -50,8 +50,6 @@ public:
     
     /* Accessors */
     bool is_initialized() { return _initialized; }
-    bool captures_input() const { return _captures_input; }
-    void set_captures_input(bool capture);
     
     ZDisplayMode get_display_mode() { return _display_mode; }
     void set_display_mode(const ZDisplayMode &mode);

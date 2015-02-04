@@ -13,12 +13,6 @@
 
 ZGE_BEGIN_NAMESPACE
 
-ZEngine* ZEngine::instance()
-{
-    static ZEngine __engine;
-    return &__engine;
-}
-
 ZEngine::ZEngine() :
     _input_manager(new ZInputManager),
     _render_manager(new ZRenderManager),

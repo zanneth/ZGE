@@ -18,7 +18,9 @@ ZGE_BEGIN_NAMESPACE
 
 class ZEngine : ZNoncopyable {
 public:
-    static ZEngine* instance();
+    ZEngine();
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZEngine);
     
     /* Accessors */
     ZInputManagerRef    get_input_manager();
@@ -41,10 +43,8 @@ private:
     ZAudioManagerRef  _audio_manager;
     
     ZResponderRef     _application_responder;
-    
-private:
-    // singleton
-    ZEngine();
 };
+
+ZGE_DEFINE_SREF_TYPE(ZEngine);
 
 ZGE_END_NAMESPACE

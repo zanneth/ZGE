@@ -20,7 +20,6 @@ class ZSound : public std::enable_shared_from_this<ZSound>, ZNoncopyable {
 public:
     ZSound(ZAudioAssetRef asset);
     
-    void play();
     void pause();
     void stop();
     

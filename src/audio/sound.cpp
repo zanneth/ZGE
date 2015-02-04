@@ -26,13 +26,6 @@ ZSound::ZSound(ZAudioAssetRef asset) :
 
 #pragma mark - API
 
-void ZSound::play()
-{
-    ZEngine *engine = ZEngine::instance();
-    ZAudioManagerRef audio_manager = engine->get_audio_manager();
-    audio_manager->add_sound(shared_from_this());
-}
-
 void ZSound::pause()
 {
     _playback_state->playing = false;
