@@ -17,56 +17,44 @@ ZEngine::ZEngine() :
     _render_manager(new ZRenderManager),
     _audio_manager(new ZAudioManager),
     _scene(nullptr),
+    _initialized(false),
     _application(nullptr),
-    _application_responder(nullptr)
+    _root_responder(nullptr)
 {}
 
 ZEngine::~ZEngine()
 {
-    _input_manager->remove_responder(_application_responder);
+    if (_root_responder) {
+        _input_manager->remove_responder(_root_responder);
+    }
 }
 
 #pragma mark - Initialization
 
 void ZEngine::initialize(ZRunloopRef runloop)
 {
-    if (!runloop) {
-        ZException ex(ZASSERTION_EXCEPTION_CODE);
-        ex.extra_info = "A runloop must be provided to the initialize routine.";
-        throw ex;
+    if (!_initialized) {
+        if (!runloop) {
+            ZException ex(ZASSERTION_EXCEPTION_CODE);
+            ex.extra_info = "A runloop must be provided to the initialize routine.";
+            throw ex;
+        }
+        
+        runloop->schedule(_input_manager);
+        runloop->schedule(_render_manager);
+        runloop->schedule(_audio_manager);
+        
+        _root_responder = ZResponder::create(std::bind(&ZEngine::_handle_input_event, this, std::placeholders::_1));
+        _input_manager->add_responder(_root_responder);
+        
+        _initialized = true;
     }
-    
-    runloop->schedule(_input_manager);
-    runloop->schedule(_render_manager);
-    runloop->schedule(_audio_manager);
 }
 
 #pragma mark - Accessors
 
-ZApplication* ZEngine::get_application() const
-{
-    return _application;
-}
-
-void ZEngine::set_application(ZApplication *application)
-{
-    _application = application;
-    
-    if (_application_responder) {
-        _input_manager->remove_responder(_application_responder);
-        _application_responder = nullptr;
-    }
-    
-    if (application) {
-        _application_responder = _input_manager->add_responder([application](const ZEvent &event) {
-            if (event.type == ZAPPLICATION_EVENT) {
-                application->handle_application_event(event);
-            }
-        });
-        _input_manager->promote_first_responder(_application_responder);
-    }
-}
-
+ZApplication* ZEngine::get_application() const { return _application; }
+void ZEngine::set_application(ZApplication *application) { _application = application; }
 ZInputManagerRef ZEngine::get_input_manager() { return _input_manager; }
 ZRenderManagerRef ZEngine::get_render_manager() { return _render_manager; }
 ZAudioManagerRef ZEngine::get_audio_manager() { return _audio_manager; }
@@ -104,6 +92,17 @@ void ZEngine::set_current_scene(ZSceneRef scene)
     
     if (_scene) {
         _scene->on_enter();
+    }
+}
+
+#pragma mark - Internal
+
+void ZEngine::_handle_input_event(const ZEvent &event)
+{
+    if (event.type == ZAPPLICATION_EVENT && _application != nullptr) {
+        _application->handle_application_event(event);
+    } else if (_scene) {
+        _scene->handle_input_event(event);
     }
 }
 

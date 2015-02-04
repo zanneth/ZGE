@@ -12,10 +12,8 @@
 ZGE_BEGIN_NAMESPACE
 
 ZEvent::ZEvent() :
-    timestamp(0),
     type(ZUNKNOWN_EVENT),
-    context(nullptr),
-    is_repeat(false)
+    context(nullptr)
 {}
 
 ZEvent::ZEvent(const ZEvent &copy)
@@ -23,7 +21,6 @@ ZEvent::ZEvent(const ZEvent &copy)
     timestamp = copy.timestamp;
     type = copy.type;
     context = copy.context;
-    is_repeat = copy.is_repeat;
     
     switch (type) {
         case ZMOUSE_DOWN_EVENT:
@@ -55,12 +52,10 @@ std::string ZEvent::get_description() const
         "\ttimestamp: %d\n"
         "\ttype: %s\n"
         "\tcontext: 0x%x\n"
-        "\tis_repeat: %s\n"
         "\tdetails:\n\t\t%s\n"
         ">"
     ;
     std::string type_str = _type_description();
-    const char *is_repeat_str = is_repeat ? "true" : "false";
     
     std::string details_str;
     switch (type) {
@@ -90,7 +85,7 @@ std::string ZEvent::get_description() const
     std::regex details_re("\n");
     details_str = std::regex_replace(details_str, details_re, "\n\t\t");
     
-    std::string description = ZUtil::format(format, this, timestamp, type_str.c_str(), context.get(), is_repeat_str, details_str.c_str());
+    std::string description = ZUtil::format(format, this, timestamp, type_str.c_str(), context.get(), details_str.c_str());
     return description;
 }
 

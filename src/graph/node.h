@@ -10,6 +10,7 @@
 #include <zge/foundation.h>
 #include <zge/action.h>
 #include <zge/camera.h>
+#include <zge/event.h>
 #include <zge/geometry.h>
 #include <zge/render_context.h>
 #include <zge/renderable.h>
@@ -77,6 +78,7 @@ public:
     virtual void on_enter() {}
     virtual void on_exit() {}
     virtual void update() {}
+    virtual void handle_input_event(const ZEvent &event) {}
     
     /* Renderable */
     void render(ZRenderContextRef context);
@@ -84,6 +86,7 @@ public:
 protected:
     virtual void _draw(ZRenderContextRef context);
     virtual void _update_internal();
+    virtual void _handle_input_event_internal(const ZEvent &event);
 
 private:
     void _remove_child_uid(unsigned uid);

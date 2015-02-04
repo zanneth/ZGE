@@ -60,13 +60,17 @@ public:
     void set_current_scene(ZSceneRef scene);
     
 private:
+    void _handle_input_event(const ZEvent &event);
+    
+private:
     ZInputManagerRef  _input_manager;
     ZRenderManagerRef _render_manager;
     ZAudioManagerRef  _audio_manager;
     ZSceneRef         _scene;
+    bool              _initialized;
     
     ZApplication     *_application;
-    ZResponderRef     _application_responder;
+    ZResponderRef     _root_responder;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZEngine);

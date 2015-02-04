@@ -244,10 +244,9 @@ enum ZApplicationEvent {
 };
 
 struct ZEvent {
-    uint32_t                timestamp;      // the time when the event was created
+    ZTime                   timestamp;      // the time when the event was created
     ZEventType              type;           // the type of event
     std::shared_ptr<void>   context;        // an arbitrary context. if the event was spawned by the input manager, this would be a pointer to the responder
-    bool                    is_repeat;      // a repeat of a previous event (e.g. key held down)
     
     union {
         ZKeyEvent           key_event;

@@ -13,7 +13,6 @@
 
 ZGE_BEGIN_NAMESPACE
 
-typedef std::shared_ptr<class ZResponder> ZResponderRef;
 typedef std::function<void(const ZEvent &event)> ZResponderFunction;
 
 class ZResponder : ZNoncopyable {
@@ -22,6 +21,8 @@ public:
     ZResponder(const ZResponder&)   = default;
     ZResponder(ZResponder&&)        = default;
     virtual ~ZResponder()           = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZResponder);
 
     /* Accessors */
     ZResponderFunction get_function() { return _function; }
@@ -41,5 +42,7 @@ protected:
     bool                _swallows_events;
     unsigned            _uid;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZResponder);
 
 ZGE_END_NAMESPACE

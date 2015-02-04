@@ -204,6 +204,16 @@ void ZNode::_update_internal()
     _actions.erase(new_end, _actions.end());
 }
 
+void ZNode::_handle_input_event_internal(const ZEvent &event)
+{
+    handle_input_event(event);
+    
+    // send event to children
+    for (ZNodeRef child : _children) {
+        child->_handle_input_event_internal(event);
+    }
+}
+
 #pragma mark - Internal
 
 void ZNode::_remove_child_uid(unsigned uid)

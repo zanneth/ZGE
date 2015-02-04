@@ -25,6 +25,7 @@ public:
     ZGE_DEFINE_SREF_FUNCTIONS(ZScene);
     
     void update() override;
+    void handle_input_event(const ZEvent &event) override;
     void draw(ZRenderContextRef context);
     
     /* Friends */
@@ -35,6 +36,7 @@ private:
     
 private:
     bool _update_reentr;
+    bool _handle_input_reentr;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZScene);

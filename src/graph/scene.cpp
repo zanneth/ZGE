@@ -13,10 +13,11 @@
 ZGE_BEGIN_NAMESPACE
 
 ZScene::ZScene() :
-    _update_reentr(false)
+    _update_reentr(false),
+    _handle_input_reentr(false)
 {
     _scene = this;
-    set_position({0.0, 0.0, 0.0});
+    set_position(ZVector::zero);
 }
 
 ZScene::~ZScene()
@@ -30,6 +31,15 @@ void ZScene::update()
         _update_reentr = true;
         _update_internal();
         _update_reentr = false;
+    }
+}
+
+void ZScene::handle_input_event(const ZEvent &event)
+{
+    if (!_handle_input_reentr) {
+        _handle_input_reentr = true;
+        _handle_input_event_internal(event);
+        _handle_input_reentr = false;
     }
 }
 
