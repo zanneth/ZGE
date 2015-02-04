@@ -121,7 +121,7 @@ void ZTextNode::_render_glyphs()
         
         for (unsigned y = 0; y < height; ++y) {
             for (unsigned x = 0; x < width; ++x) {
-                size_t src_off = (y * width) + (width - x - 1);
+                size_t src_off = (y * width) + x;
                 size_t dst_off = 4 * ((y * width) + x);
                 uint8_t src_pixval = src_pixbuf[src_off];
                 
