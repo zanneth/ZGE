@@ -54,8 +54,6 @@ struct ZRect {
             )
         );
     }
-    
-    std::array<float, 4 * 2> vertex_data() const;
 };
 
 enum ZVertexAttributeIndex {

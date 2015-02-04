@@ -68,9 +68,14 @@ void ZQuad::set_texcoord_rect(const ZRect &texcoord_rect)
 {
     _texcoord_rect = texcoord_rect;
     
-    std::array<float, 4 * 2> texcoord_data = _texcoord_rect.vertex_data();
+    float texcoord_data[4 * 2] = {
+        texcoord_rect.origin.x + texcoord_rect.size.width, texcoord_rect.origin.y,
+        texcoord_rect.origin.x, texcoord_rect.origin.y,
+        texcoord_rect.origin.x + texcoord_rect.size.width, texcoord_rect.origin.y + texcoord_rect.size.height,
+        texcoord_rect.origin.x, texcoord_rect.origin.y + texcoord_rect.size.height,
+    };
     ZBufferUsage usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
-    _texcoord_vbo->load_data(texcoord_data.data(), 4 * 2 * sizeof(float), usage);
+    _texcoord_vbo->load_data(texcoord_data, 4 * 2 * sizeof(float), usage);
 }
 
 ZGeometryRef ZQuad::copy() const

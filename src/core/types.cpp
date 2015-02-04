@@ -20,15 +20,4 @@ ZRect::ZRect(float x, float y, float width, float height) :
     size{width, height}
 {}
 
-std::array<float, 4 * 2> ZRect::vertex_data() const
-{
-    std::array<float, 4 * 2> vertex_data{{
-        origin.x, origin.y,
-        origin.x + size.width, origin.y,
-        origin.x, origin.y + size.height,
-        origin.x + size.width, origin.y + size.height
-    }};
-    return vertex_data;
-}
-
 ZGE_END_NAMESPACE
