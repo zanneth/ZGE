@@ -60,7 +60,7 @@ struct ZPolar2D {
     float r;
     float theta;
     
-    ZPolar2D(float radius, float angle);
+    ZPolar2D(float radius = 0.0, float angle = 0.0);
     ZPolar2D(const ZPoint2D &cartesian);
     ZPoint2D cartesian() const;
 };
