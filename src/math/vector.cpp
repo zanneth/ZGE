@@ -8,6 +8,8 @@
 #include <zge/vector.h>
 #include <zge/vector_private.h>
 #include <zge/logger.h>
+#include <algorithm>
+#include <cmath>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -193,6 +195,16 @@ ZVector ZVector::normalized() const
     ZVector v;
     v._impl->data = _impl->data.normalized();
     return v;
+}
+
+ZVector ZVector::integral() const
+{
+    ZVector integral = {
+        std::rint(get_x()),
+        std::rint(get_y()),
+        std::rint(get_z())
+    };
+    return integral;
 }
 
 ZGE_END_NAMESPACE

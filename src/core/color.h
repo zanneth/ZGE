@@ -16,6 +16,7 @@ union ZColor {
     float data[4];
     
     ZColor(float r = 0.0, float g = 0.0, float b = 0.0, float a = 0.0);
+    ZColor(const ZColor &cp, float alpha);
     
     static ZColor random_color(float alpha = 1.0);
     

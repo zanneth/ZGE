@@ -23,6 +23,13 @@ ZColor::ZColor(float r, float g, float b, float a) :
     a(a)
 {}
 
+ZColor::ZColor(const ZColor &cp, float alpha) :
+    r(cp.r),
+    g(cp.g),
+    b(cp.b),
+    a(alpha)
+{}
+
 ZColor ZColor::random_color(float alpha)
 {
     ZColor color;

@@ -28,6 +28,9 @@ public:
     ZColor get_color() const;
     void set_color(const ZColor &color);
     
+    float get_alpha() const;
+    void set_alpha(float alpha);
+    
     ZSize2D get_size() const;
     void set_size(const ZSize2D size);
     
@@ -46,6 +49,7 @@ private:
     ZColor              _color;
     ZQuadRef            _quad;
     ZSize2D             _size;
+    float               _alpha;
     float               _rotation;
 };
 

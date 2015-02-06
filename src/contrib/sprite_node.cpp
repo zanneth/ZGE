@@ -10,7 +10,14 @@
 ZGE_BEGIN_NAMESPACE
 
 ZSpriteNode::ZSpriteNode(ZTextureRef texture) :
-    _quad(new ZQuad)
+    _texture_material(nullptr),
+    _color_material(nullptr),
+    _texture(nullptr),
+    _color(ZColor::white),
+    _quad(new ZQuad),
+    _size({0.0, 0.0}),
+    _alpha(1.0),
+    _rotation(0.0)
 {
     set_geometry(_quad);
     set_texture(texture);
@@ -39,12 +46,21 @@ void ZSpriteNode::set_color(const ZColor &color)
 {
     _color = color;
     
-    if (!_color_material.get()) {
+    if (!_color_material) {
         _color_material = ZColorMaterialRef(new ZColorMaterial);
         _quad->add_material(_color_material);
     }
     
-    _color_material->set_color(_color);
+    _color_material->set_color(ZColor(_color, _alpha));
+}
+
+void ZSpriteNode::set_alpha(float alpha)
+{
+    _alpha = alpha;
+    
+    if (_color_material) {
+        _color_material->set_color(ZColor(_color, _alpha));
+    }
 }
 
 void ZSpriteNode::set_size(const ZSize2D size)
@@ -87,6 +103,7 @@ ZRect ZSpriteNode::get_frame() const
 ZTextureRef ZSpriteNode::get_texture() const { return _texture; }
 ZColor ZSpriteNode::get_color() const { return _color; }
 ZSize2D ZSpriteNode::get_size() const { return _size; }
+float ZSpriteNode::get_alpha() const { return _alpha; }
 float ZSpriteNode::get_rotation() const { return _rotation; }
 
 ZGE_END_NAMESPACE

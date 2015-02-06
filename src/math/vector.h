@@ -40,6 +40,7 @@ public:
     // accessors
     float& x();
     float get_x() const;
+    
     float& y();
     float get_y() const;
     float& z();
@@ -70,6 +71,9 @@ public:
     
     /// returns a normalized version of the vector.
     ZVector normalized() const;
+    
+    /// returns the integral version of the vector.
+    ZVector integral() const;
     
     friend class ZMatrix;
 };

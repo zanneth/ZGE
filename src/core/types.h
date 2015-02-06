@@ -56,6 +56,15 @@ struct ZRect {
     }
 };
 
+struct ZPolar2D {
+    float r;
+    float theta;
+    
+    ZPolar2D(float radius, float angle);
+    ZPolar2D(const ZPoint2D &cartesian);
+    ZPoint2D cartesian() const;
+};
+
 enum ZVertexAttributeIndex {
     ZVERTEX_ATTRIB_UNDEFINED = -1,
     ZVERTEX_ATTRIB_POSITION = 0,
