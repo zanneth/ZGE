@@ -34,7 +34,9 @@ public:
     ZColor get_text_color() const;
     void set_text_color(const ZColor &color);
     
-    ZRect get_bounding_box() const;
+    /* Layout */
+    ZRect get_bounds() const override;
+    void set_bounds(const ZRect &bounds) override;
     
 private:
     void _render_glyphs();

@@ -142,6 +142,18 @@ void ZNode::render(ZRenderContextRef context)
     _draw(context);
 }
 
+ZRect ZNode::get_bounds() const
+{
+    ZVector position = get_position();
+    return ZRect({position.get_x(), position.get_y()}, {0.0, 0.0});
+}
+
+void ZNode::set_bounds(const ZRect &bounds)
+{
+    ZVector position = bounds.origin;
+    set_position(position);
+}
+
 #pragma mark - Description
 
 std::string ZNode::get_description()
@@ -154,25 +166,27 @@ std::string ZNode::get_description()
 
 void ZNode::_draw(ZRenderContextRef context)
 {
-    _prepare_camera(context);
-    _prepare_lights(context);
-    
-    context->push_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
-    
-    for (ZNodeRef child : _children) {
-        child->_draw(context);
+    if (context) {
+        _prepare_camera(context);
+        _prepare_lights(context);
+        
+        context->push_matrix(ZRENDER_MATRIX_MODELVIEW, (_pos_transform * _transform));
+        
+        if (_geometry && should_draw(context)) {
+            _geometry->prepare_render(context);
+            _geometry->render(context);
+            _geometry->finalize_render(context);
+        }
+        
+        for (ZNodeRef child : _children) {
+            child->_draw(context);
+        }
+        
+        context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
+        
+        _teardown_camera(context);
+        _teardown_lights(context);
     }
-    
-    if (_geometry) {
-        _geometry->prepare_render(context);
-        _geometry->render(context);
-        _geometry->finalize_render(context);
-    }
-    
-    context->pop_matrix(ZRENDER_MATRIX_MODELVIEW);
-    
-    _teardown_camera(context);
-    _teardown_lights(context);
 }
 
 void ZNode::_update_internal()

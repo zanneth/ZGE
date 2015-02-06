@@ -70,17 +70,22 @@ void ZTextNode::set_text_color(const ZColor &color)
 
 #pragma mark - API
 
-ZRect ZTextNode::get_bounding_box() const
+ZRect ZTextNode::get_bounds() const
 {
     ZRect box;
     
     for (ZSpriteNodeRef glyph_node : _glyph_nodes) {
-        ZRect frame = glyph_node->get_frame();
+        ZRect frame = glyph_node->get_bounds();
         box.size.width = std::max(box.size.width, frame.origin.x + frame.size.width);
         box.size.height = std::max(box.size.height, frame.origin.y + frame.size.height);
     }
     
     return box;
+}
+
+void ZTextNode::set_bounds(const ZRect &bounds)
+{
+    set_position(bounds.origin);
 }
 
 #pragma mark - Internal

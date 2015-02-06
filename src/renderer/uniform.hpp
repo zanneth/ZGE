@@ -52,6 +52,8 @@ const void* ZUniform<T, count>::get_data(size_t *out_length) const
 template <typename T, unsigned count>
 void ZUniform<T, count>::set_data(const void *data)
 {
+    // FIXME: don't use observers here. instead, mark a dirty bit and context should
+    // update all dirty uniforms.
     memcpy(_values, data, count * sizeof(T));
     notify_observers(shared_from_this());
 }

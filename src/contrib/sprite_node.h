@@ -40,7 +40,15 @@ public:
     float get_rotation() const;
     void set_rotation(float radians);
     
-    ZRect get_frame() const;
+    /* Node Overrides */
+    bool should_draw(ZRenderContextRef context) override;
+    
+    /* Layout Overrides */
+    ZRect get_bounds() const override;
+    void set_bounds(const ZRect &bounds) override;
+    
+private:
+    void _update_material_color();
     
 private:
     ZTextureMaterialRef _texture_material;

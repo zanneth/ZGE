@@ -12,6 +12,7 @@
 #include <zge/camera.h>
 #include <zge/event.h>
 #include <zge/geometry.h>
+#include <zge/layout.h>
 #include <zge/render_context.h>
 #include <zge/renderable.h>
 
@@ -23,6 +24,7 @@ class ZScene;
 ZGE_FORWARD_DECLARE_SREF(ZNode);
 
 class ZNode : public ZRenderable,
+              public ZLayoutComponent,
               public std::enable_shared_from_this<ZNode>
 {
 public:
@@ -79,9 +81,14 @@ public:
     virtual void on_exit() {}
     virtual void update() {}
     virtual void handle_input_event(const ZEvent &event) {}
+    virtual bool should_draw(ZRenderContextRef context) { return true; }
     
     /* Renderable */
-    void render(ZRenderContextRef context);
+    void render(ZRenderContextRef context) override;
+    
+    /* Layout */
+    virtual ZRect get_bounds() const override;
+    virtual void set_bounds(const ZRect &bounds) override;
     
 protected:
     virtual void _draw(ZRenderContextRef context);

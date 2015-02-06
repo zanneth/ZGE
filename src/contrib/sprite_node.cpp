@@ -51,16 +51,13 @@ void ZSpriteNode::set_color(const ZColor &color)
         _quad->add_material(_color_material);
     }
     
-    _color_material->set_color(ZColor(_color, _alpha));
+    _update_material_color();
 }
 
 void ZSpriteNode::set_alpha(float alpha)
 {
     _alpha = alpha;
-    
-    if (_color_material) {
-        _color_material->set_color(ZColor(_color, _alpha));
-    }
+    _update_material_color();
 }
 
 void ZSpriteNode::set_size(const ZSize2D size)
@@ -91,7 +88,7 @@ void ZSpriteNode::set_rotation(float radians)
     _rotation = radians;
 }
 
-ZRect ZSpriteNode::get_frame() const
+ZRect ZSpriteNode::get_bounds() const
 {
     ZVector origin = this->get_position();
     return ZRect(
@@ -100,10 +97,33 @@ ZRect ZSpriteNode::get_frame() const
     );
 }
 
+void ZSpriteNode::set_bounds(const ZRect &bounds)
+{
+    set_position(bounds.origin);
+    set_size(bounds.size);
+}
+
 ZTextureRef ZSpriteNode::get_texture() const { return _texture; }
 ZColor ZSpriteNode::get_color() const { return _color; }
 ZSize2D ZSpriteNode::get_size() const { return _size; }
 float ZSpriteNode::get_alpha() const { return _alpha; }
 float ZSpriteNode::get_rotation() const { return _rotation; }
+
+bool ZSpriteNode::should_draw(ZRenderContextRef context)
+{
+    bool visible = (_alpha > 0.0 && _color.a > 0.0);
+    return visible;
+}
+
+#pragma mark - Internal
+
+void ZSpriteNode::_update_material_color()
+{
+    if (_color_material) {
+        ZColor material_col = _color;
+        material_col.a = std::min(material_col.a, _alpha);
+        _color_material->set_color(material_col);
+    }
+}
 
 ZGE_END_NAMESPACE

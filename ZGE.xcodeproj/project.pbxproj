@@ -472,6 +472,10 @@
 		0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0C1C6E981A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
+		0C1C6E991A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
+		0C1C6E9A1A8455A8005710AA /* layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1C6E971A8455A8005710AA /* layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C1C6E9B1A8455A8005710AA /* layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1C6E971A8455A8005710AA /* layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42C9FA1A5CE3E800AA2566 /* audio_asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D2A919176D9300CDBEEE /* audio_asset.cpp */; };
 		0C42C9FB1A5CE3E800AA2566 /* audio_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1D2981917664800CDBEEE /* audio_manager.cpp */; };
 		0C42C9FC1A5CE3E800AA2566 /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE99E471A01EC36009DF9BB /* types.cpp */; };
@@ -983,6 +987,10 @@
 		0CE70AA71A611EF800663A32 /* resource_bundle_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0CE70AA61A611EF800663A32 /* resource_bundle_osx.mm */; };
 		0CE70AA81A611EF800663A32 /* resource_bundle_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0CE70AA61A611EF800663A32 /* resource_bundle_osx.mm */; };
 		0CE99E481A01EC36009DF9BB /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE99E471A01EC36009DF9BB /* types.cpp */; };
+		0CE9FF971A845832001B19EE /* box_layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9FF951A845832001B19EE /* box_layout.cpp */; };
+		0CE9FF981A845832001B19EE /* box_layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE9FF951A845832001B19EE /* box_layout.cpp */; };
+		0CE9FF991A845832001B19EE /* box_layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE9FF961A845832001B19EE /* box_layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CE9FF9A1A845832001B19EE /* box_layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE9FF961A845832001B19EE /* box_layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1355,6 +1363,8 @@
 		0C10F95619D3C8800010815F /* ZGE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZGE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C10F95919D3C8800010815F /* OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		0C10FB7A19D3CB540010815F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		0C1C6E961A8455A8005710AA /* layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = layout.cpp; path = src/graph/layout.cpp; sourceTree = SOURCE_ROOT; };
+		0C1C6E971A8455A8005710AA /* layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = layout.h; path = src/graph/layout.h; sourceTree = SOURCE_ROOT; };
 		0C1F28B817C1C3FF00CA03C4 /* vertex_array.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_array.cpp; sourceTree = "<group>"; };
 		0C1F28B917C1C3FF00CA03C4 /* vertex_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vertex_array.h; sourceTree = "<group>"; };
 		0C21E5E918C2AC80009E508D /* glutil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = glutil.cpp; sourceTree = "<group>"; };
@@ -1598,6 +1608,8 @@
 		0CE99A07191C99F50011DED6 /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
 		0CE99A08191C99F50011DED6 /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
 		0CE99E471A01EC36009DF9BB /* types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = types.cpp; sourceTree = "<group>"; };
+		0CE9FF951A845832001B19EE /* box_layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box_layout.cpp; sourceTree = "<group>"; };
+		0CE9FF961A845832001B19EE /* box_layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box_layout.h; sourceTree = "<group>"; };
 		0CEC024B176D5DF90029DE82 /* node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node.cpp; path = src/graph/node.cpp; sourceTree = SOURCE_ROOT; };
 		0CEC024C176D5DF90029DE82 /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = node.h; path = src/graph/node.h; sourceTree = SOURCE_ROOT; };
 		0CEC024D176D5DF90029DE82 /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scene.cpp; path = src/graph/scene.cpp; sourceTree = SOURCE_ROOT; };
@@ -2432,6 +2444,8 @@
 				0CE0341719D1D6EC00CD7A19 /* camera_controller.cpp */,
 				0C7D3E1019C57194003AC9E9 /* cube.h */,
 				0C7D3E0F19C57194003AC9E9 /* cube.cpp */,
+				0CE9FF961A845832001B19EE /* box_layout.h */,
+				0CE9FF951A845832001B19EE /* box_layout.cpp */,
 				0C71922D1A80070900A2073A /* line.h */,
 				0C71922C1A80070900A2073A /* line.cpp */,
 				0C898C71191722B600CF3009 /* orthocamera.h */,
@@ -2489,6 +2503,8 @@
 				0C89D4421931424400F1D9DB /* action.cpp */,
 				0C688F9F18726E64002C38EF /* geometry.h */,
 				0C688F9E18726E64002C38EF /* geometry.cpp */,
+				0C1C6E971A8455A8005710AA /* layout.h */,
+				0C1C6E961A8455A8005710AA /* layout.cpp */,
 				0C688FA318727756002C38EF /* material.h */,
 				0C688FA218727756002C38EF /* material.cpp */,
 				0C688F9718726A65002C38EF /* model.h */,
@@ -2834,6 +2850,7 @@
 				0C10FA5419D3CA770010815F /* Functors.h in Headers */,
 				0C10FA5519D3CA770010815F /* Fuzzy.h in Headers */,
 				0C10FA5619D3CA770010815F /* GeneralProduct.h in Headers */,
+				0CE9FF991A845832001B19EE /* box_layout.h in Headers */,
 				0C10FA5719D3CA770010815F /* GenericPacketMath.h in Headers */,
 				0C10FA5819D3CA780010815F /* GlobalFunctions.h in Headers */,
 				0C10FA5919D3CA780010815F /* IO.h in Headers */,
@@ -2897,6 +2914,7 @@
 				0C10FA9219D3CA830010815F /* MKL_support.h in Headers */,
 				0C10FA9319D3CA830010815F /* NonMPL2.h in Headers */,
 				0C10FA9419D3CA830010815F /* ReenableStupidWarnings.h in Headers */,
+				0C1C6E9A1A8455A8005710AA /* layout.h in Headers */,
 				0C10FA9519D3CA830010815F /* StaticAssert.h in Headers */,
 				0C10FA9619D3CA840010815F /* XprHelper.h in Headers */,
 				0C10FA9719D3CA840010815F /* VectorBlock.h in Headers */,
@@ -3373,6 +3391,7 @@
 				0C42CB031A5CE3E800AA2566 /* Geometry_SSE.h in Headers */,
 				0C42CB041A5CE3E800AA2566 /* EulerAngles.h in Headers */,
 				0C42CB051A5CE3E800AA2566 /* Homogeneous.h in Headers */,
+				0C1C6E9B1A8455A8005710AA /* layout.h in Headers */,
 				0C42CB061A5CE3E800AA2566 /* Hyperplane.h in Headers */,
 				0C42CB071A5CE3E800AA2566 /* OrthoMethods.h in Headers */,
 				0C42CB081A5CE3E800AA2566 /* ParametrizedLine.h in Headers */,
@@ -3432,6 +3451,7 @@
 				0C42CB3D1A5CE3E800AA2566 /* SparseBlock.h in Headers */,
 				0C42CB3E1A5CE3E800AA2566 /* SparseColEtree.h in Headers */,
 				0C42CB3F1A5CE3E800AA2566 /* SparseCwiseBinaryOp.h in Headers */,
+				0CE9FF9A1A845832001B19EE /* box_layout.h in Headers */,
 				0C42CB401A5CE3E800AA2566 /* SparseCwiseUnaryOp.h in Headers */,
 				0C42CB411A5CE3E800AA2566 /* SparseDenseProduct.h in Headers */,
 				0C42CB421A5CE3E800AA2566 /* SparseDiagonalProduct.h in Headers */,
@@ -3708,6 +3728,7 @@
 				0C10F99619D3C91D0010815F /* semaphore.cpp in Sources */,
 				0C10F99919D3C91D0010815F /* schedulable.cpp in Sources */,
 				0C42CCA11A5D041900AA2566 /* display_render_context.cpp in Sources */,
+				0CE9FF971A845832001B19EE /* box_layout.cpp in Sources */,
 				0C10F99B19D3C91D0010815F /* timer.cpp in Sources */,
 				0C10F99D19D3C91D0010815F /* thread.cpp in Sources */,
 				0C10F9A019D3C91D0010815F /* matrix.cpp in Sources */,
@@ -3717,6 +3738,7 @@
 				0C10F9A719D3C91D0010815F /* geometry.cpp in Sources */,
 				0C10F9A919D3C91D0010815F /* material.cpp in Sources */,
 				0C71922E1A80070900A2073A /* line.cpp in Sources */,
+				0C1C6E981A8455A8005710AA /* layout.cpp in Sources */,
 				0C10F9AB19D3C91D0010815F /* model.cpp in Sources */,
 				0C10F9AD19D3C91D0010815F /* node.cpp in Sources */,
 				0C10F9AF19D3C91D0010815F /* scene.cpp in Sources */,
@@ -3771,6 +3793,7 @@
 				0C42CA0C1A5CE3E800AA2566 /* semaphore.cpp in Sources */,
 				0C42CA0D1A5CE3E800AA2566 /* schedulable.cpp in Sources */,
 				0C42CA0E1A5CE3E800AA2566 /* timer.cpp in Sources */,
+				0CE9FF981A845832001B19EE /* box_layout.cpp in Sources */,
 				0C71922F1A80070900A2073A /* line.cpp in Sources */,
 				0C42CA0F1A5CE3E800AA2566 /* thread.cpp in Sources */,
 				0C42CA101A5CE3E800AA2566 /* matrix.cpp in Sources */,
@@ -3797,6 +3820,7 @@
 				0C42CA241A5CE3E800AA2566 /* texture.cpp in Sources */,
 				0C42CA251A5CE3E800AA2566 /* uniform.cpp in Sources */,
 				0C42CA261A5CE3E800AA2566 /* vertex_array.cpp in Sources */,
+				0C1C6E991A8455A8005710AA /* layout.cpp in Sources */,
 				0C42CA271A5CE3E800AA2566 /* data.cpp in Sources */,
 				0C42CA281A5CE3E800AA2566 /* exception.cpp in Sources */,
 				0C42CA291A5CE3E800AA2566 /* glutil.cpp in Sources */,

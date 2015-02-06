@@ -11,6 +11,7 @@
 #include <zge/application.h>
 #include <zge/audio_asset.h>
 #include <zge/audio_manager.h>
+#include <zge/box_layout.h>
 #include <zge/3dcamera.h>
 #include <zge/camera.h>
 #include <zge/camera_controller.h>
@@ -29,6 +30,7 @@
 #include <zge/graphics_buffer.h>
 #include <zge/input_manager.h>
 #include <zge/image.h>
+#include <zge/layout.h>
 #include <zge/light.h>
 #include <zge/line.h>
 #include <zge/logger.h>

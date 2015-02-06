@@ -60,11 +60,7 @@ mat3 zge_inverse(mat3 m)
 
 void main()
 {
-    vec4 pixel = vec4(1.0);
-    
-    if (material.color != vec4(0.0)) {
-        pixel = material.color;
-    }
+    vec4 pixel = material.color;
     
     if (material.textureExists == 1) {
         vec4 texel = texture(material.texture, frag_texcoord0);
