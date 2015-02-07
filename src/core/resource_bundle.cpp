@@ -35,6 +35,11 @@ std::string ZResourceBundle::get_bundle_path() const
     return _base_path;
 }
 
+void ZResourceBundle::set_bundle_path(const std::string &path)
+{
+    _base_path = path;
+}
+
 std::string ZResourceBundle::get_path_for_resource(std::string filename)
 {
     return append_path_component(_base_path, filename);
