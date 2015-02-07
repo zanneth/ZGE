@@ -9,7 +9,7 @@
 
 #ifdef GL_ES
 
-precision mediump float;
+precision highp float;
 
 #define VSH_INPUT_ATTR attribute
 #define FSH_INPUT_ATTR varying
