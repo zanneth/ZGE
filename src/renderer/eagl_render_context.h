@@ -18,16 +18,25 @@ using EAGLContext = void;
 
 ZGE_BEGIN_NAMESPACE
 
+enum ZEAGLRenderingAPI {
+    ZEAGL_RENDERING_API_OPENGLES1,
+    ZEAGL_RENDERING_API_OPENGLES2,
+    ZEAGL_RENDERING_API_OPENGLES3
+};
+
 class ZEAGLRenderContext : public ZRenderContext {
 public:
-    ZEAGLRenderContext();
+    ZEAGLRenderContext(ZEAGLRenderingAPI api = ZEAGL_RENDERING_API_OPENGLES3);
     ~ZEAGLRenderContext();
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZEAGLRenderContext);
     
     EAGLContext* get_eagl_context() const;
     void make_current() override;
-    
+
+private:
+    unsigned _eagl_api_from_zrendering_api(ZEAGLRenderingAPI zapi);
+
 private:
     EAGLContext *_eagl_context;
 };

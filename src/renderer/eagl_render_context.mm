@@ -11,9 +11,10 @@
 
 ZGE_BEGIN_NAMESPACE
 
-ZEAGLRenderContext::ZEAGLRenderContext()
+ZEAGLRenderContext::ZEAGLRenderContext(ZEAGLRenderingAPI api)
 {
-    _eagl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    NSUInteger eagl_api = _eagl_api_from_zrendering_api(api);
+    _eagl_context = [[EAGLContext alloc] initWithAPI:(EAGLRenderingAPI)eagl_api];
     initialize_shaders();
 }
 
@@ -32,6 +33,27 @@ EAGLContext* ZEAGLRenderContext::get_eagl_context() const
 void ZEAGLRenderContext::make_current()
 {
     [EAGLContext setCurrentContext:_eagl_context];
+}
+
+#pragma mark - Internal
+
+unsigned ZEAGLRenderContext::_eagl_api_from_zrendering_api(ZEAGLRenderingAPI zapi)
+{
+    NSUInteger api = kEAGLRenderingAPIOpenGLES1;
+    switch (zapi) {
+        case ZEAGL_RENDERING_API_OPENGLES1:
+            api = kEAGLRenderingAPIOpenGLES1;
+            break;
+        case ZEAGL_RENDERING_API_OPENGLES2:
+            api = kEAGLRenderingAPIOpenGLES2;
+            break;
+        case ZEAGL_RENDERING_API_OPENGLES3:
+            api = kEAGLRenderingAPIOpenGLES3;
+            break;
+        default:
+            break;
+    }
+    return api;
 }
 
 ZGE_END_NAMESPACE
