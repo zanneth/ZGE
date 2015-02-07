@@ -27,6 +27,7 @@ enum ZEAGLRenderingAPI {
 class ZEAGLRenderContext : public ZRenderContext {
 public:
     ZEAGLRenderContext(ZEAGLRenderingAPI api = ZEAGL_RENDERING_API_OPENGLES3);
+    ZEAGLRenderContext(EAGLContext *context);
     ~ZEAGLRenderContext();
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZEAGLRenderContext);

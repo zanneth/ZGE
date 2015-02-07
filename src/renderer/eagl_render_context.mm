@@ -18,6 +18,12 @@ ZEAGLRenderContext::ZEAGLRenderContext(ZEAGLRenderingAPI api)
     initialize_shaders();
 }
 
+ZEAGLRenderContext::ZEAGLRenderContext(EAGLContext *context) :
+    _eagl_context(context)
+{
+    initialize_shaders();
+}
+
 ZEAGLRenderContext::~ZEAGLRenderContext()
 {
     if ([EAGLContext currentContext] == _eagl_context) {
