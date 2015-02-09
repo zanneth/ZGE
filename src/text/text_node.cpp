@@ -92,7 +92,7 @@ void ZTextNode::set_bounds(const ZRect &bounds)
 
 void ZTextNode::_render_glyphs()
 {
-    if (!_font) {
+    if (!_font || _rendered_text == _text) {
         return;
     }
     
@@ -152,6 +152,8 @@ void ZTextNode::_render_glyphs()
         add_child(glyph_node);
         _glyph_nodes.push_back(glyph_node);
     }
+    
+    _rendered_text = _text;
 }
 
 ZGE_END_NAMESPACE

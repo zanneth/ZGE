@@ -43,6 +43,7 @@ private:
     
 private:
     std::wstring _text;
+    std::wstring _rendered_text;
     ZFontRef     _font;
     ZColor       _text_color;
     std::vector<ZSpriteNodeRef> _glyph_nodes;
