@@ -276,6 +276,7 @@ void ZRenderContext::_initialize_gl()
     glClearColor(0.f, 0.f, 0.f, 1.f);
     glEnable(GL_BLEND);
     glEnable(GL_CULL_FACE);
+    glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
 #if !OPENGL_ES
