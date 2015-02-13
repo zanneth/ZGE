@@ -37,6 +37,7 @@ public:
     
 private:
     void _bind();
+    void _unbind();
     friend ZRenderContext;
     
 private:

@@ -98,6 +98,11 @@ void ZVertexArray::_bind()
     }
 }
 
+void ZVertexArray::_unbind()
+{
+    glBindVertexArray(0);
+}
+
 #pragma mark - Internal
 
 void _zvertexarray_setup_vertex_attrib_pointer(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index)

@@ -251,6 +251,9 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
     
     GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
     glDrawArrays(glmode, first_idx, (GLsizei)count);
+    
+    varray->_unbind();
+    _bound_vertex_array = nullptr;
 }
 
 void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
@@ -267,6 +270,9 @@ void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
     } else {
         zlog("%s failed. No elements buffer was provided in vertex array %p.", __FUNCTION__, varray.get());
     }
+    
+    varray->_unbind();
+    _bound_vertex_array = nullptr;
 }
 
 #pragma mark - Internal

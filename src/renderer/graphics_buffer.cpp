@@ -68,6 +68,8 @@ void ZGraphicsBuffer::load_data(const void *data, size_t length, ZBufferUsage us
     GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
     GLenum glusage = ZGLUtil::gl_usage_from_buffer_usage(usage);
     glBufferData(target, (GLsizeiptr)length, (const GLvoid *)data, glusage);
+    
+    _unbind();
 }
 
 #pragma mark - Private
