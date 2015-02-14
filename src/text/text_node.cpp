@@ -59,12 +59,14 @@ void ZTextNode::set_text(const std::string &text)
 void ZTextNode::set_font(ZFontRef font)
 {
     _font = font;
+    _rendered_text = L"";
     _render_glyphs();
 }
 
 void ZTextNode::set_text_color(const ZColor &color)
 {
     _text_color = color;
+    _rendered_text = L"";
     _render_glyphs();
 }
 
