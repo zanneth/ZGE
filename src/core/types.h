@@ -54,6 +54,14 @@ struct ZRect {
             )
         );
     }
+    
+    inline bool contains_point(const ZPoint2D &pt) const
+    {
+        return (
+            origin.x >= pt.x && pt.x <= size.width &&
+            origin.y >= pt.y && pt.y <= size.height
+        );
+    }
 };
 
 struct ZPolar2D {
