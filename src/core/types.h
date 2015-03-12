@@ -58,8 +58,8 @@ struct ZRect {
     inline bool contains_point(const ZPoint2D &pt) const
     {
         return (
-            origin.x >= pt.x && pt.x <= size.width &&
-            origin.y >= pt.y && pt.y <= size.height
+            pt.x >= origin.x && pt.x <= origin.x + size.width &&
+            pt.y >= origin.y && pt.y <= origin.y + size.height
         );
     }
 };
