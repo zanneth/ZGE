@@ -32,7 +32,7 @@ public:
     void set_alpha(float alpha);
     
     ZSize2D get_size() const;
-    void set_size(const ZSize2D size);
+    void set_size(const ZSize2D &size);
     
     ZRect get_texture_rect() const;
     void set_texture_rect(const ZRect &texture_rect);

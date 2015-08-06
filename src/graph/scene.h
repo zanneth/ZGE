@@ -28,9 +28,6 @@ public:
     void handle_input_event(const ZEvent &event) override;
     void draw(ZRenderContextRef context);
     
-    /* Friends */
-    friend class ZRenderManager;
-    
 private:
     void _evict_scene(ZNode *curnode);
     

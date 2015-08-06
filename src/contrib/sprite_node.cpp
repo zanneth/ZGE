@@ -60,7 +60,7 @@ void ZSpriteNode::set_alpha(float alpha)
     _update_material_color();
 }
 
-void ZSpriteNode::set_size(const ZSize2D size)
+void ZSpriteNode::set_size(const ZSize2D &size)
 {
     _size = size;
     _quad->set_quad_rect({{0.0, 0.0}, size});
