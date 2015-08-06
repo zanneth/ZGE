@@ -29,10 +29,6 @@ struct ZBufferAttribute {
 };
 
 class ZGraphicsBuffer : ZNoncopyable {
-    uint32_t _buffer;
-    ZBufferTarget _target;
-    std::vector<ZBufferAttribute> _attributes;
-
 public:
     ZGraphicsBuffer(ZBufferTarget target = ZBUFFER_TARGET_ARRAY);
     ZGraphicsBuffer(ZGraphicsBuffer&&);
@@ -56,14 +52,16 @@ private:
     void _move(ZGraphicsBuffer &&mv);
     
     friend class ZVertexArray;
+    
+private:
+    uint32_t                        _buffer;
+    ZBufferTarget                   _target;
+    std::vector<ZBufferAttribute>   _attributes;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZGraphicsBuffer);
 
 class ZElementGraphicsBuffer : public ZGraphicsBuffer {
-    unsigned _elements_count;
-    ZComponentType _indices_type;
-    
 public:
     ZElementGraphicsBuffer();
     
@@ -74,6 +72,10 @@ public:
     
     void set_indices_type(ZComponentType type);
     ZComponentType get_indices_type() const;
+    
+private:
+    unsigned        _elements_count;
+    ZComponentType  _indices_type;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZElementGraphicsBuffer);

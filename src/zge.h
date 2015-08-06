@@ -42,6 +42,7 @@
 #include <zge/observable.h>
 #include <zge/opengl.h>
 #include <zge/orthocamera.h>
+#include <zge/plane.h>
 #include <zge/quad.h>
 #include <zge/render_context.h>
 #include <zge/render_manager.h>

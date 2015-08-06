@@ -972,6 +972,9 @@
 		0C71922F1A80070900A2073A /* line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C71922C1A80070900A2073A /* line.cpp */; };
 		0C7192301A80070900A2073A /* line.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C71922D1A80070900A2073A /* line.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C7192311A80070900A2073A /* line.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C71922D1A80070900A2073A /* line.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C91834E1B731BB200ED9A83 /* plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C91834C1B731BB200ED9A83 /* plane.cpp */; };
+		0C91834F1B731BB200ED9A83 /* plane.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C91834D1B731BB200ED9A83 /* plane.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C9183501B73273300ED9A83 /* plane.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C91834D1B731BB200ED9A83 /* plane.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA36B3819F206D0003543FE /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; };
 		0CA36B3919F206E3003543FE /* libfreetype.6.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0CA36B3D19F20B17003543FE /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA36B3B19F20B17003543FE /* font.cpp */; };
@@ -1527,6 +1530,8 @@
 		0C898C7919172F2900CF3009 /* quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quad.h; sourceTree = "<group>"; };
 		0C89D4421931424400F1D9DB /* action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = action.cpp; path = src/graph/action.cpp; sourceTree = SOURCE_ROOT; };
 		0C89D4431931424400F1D9DB /* action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = action.h; path = src/graph/action.h; sourceTree = SOURCE_ROOT; };
+		0C91834C1B731BB200ED9A83 /* plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plane.cpp; sourceTree = "<group>"; };
+		0C91834D1B731BB200ED9A83 /* plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plane.h; sourceTree = "<group>"; };
 		0C977FB0173752B60071E8E6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		0C977FB2173752CD0071E8E6 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		0CA262661863F71A003E8D37 /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
@@ -2450,6 +2455,8 @@
 				0C71922C1A80070900A2073A /* line.cpp */,
 				0C898C71191722B600CF3009 /* orthocamera.h */,
 				0C898C70191722B600CF3009 /* orthocamera.cpp */,
+				0C91834D1B731BB200ED9A83 /* plane.h */,
+				0C91834C1B731BB200ED9A83 /* plane.cpp */,
 				0C898C7919172F2900CF3009 /* quad.h */,
 				0C898C7819172F2900CF3009 /* quad.cpp */,
 				0CDE862919311B0F00C787FD /* sprite_node.h */,
@@ -2926,6 +2933,7 @@
 				0C10FA9D19D3CA850010815F /* AlignedBox.h in Headers */,
 				0C10FA9E19D3CA850010815F /* All.h in Headers */,
 				0C10FA9F19D3CA860010815F /* AngleAxis.h in Headers */,
+				0C91834F1B731BB200ED9A83 /* plane.h in Headers */,
 				0C10FAA019D3CA860010815F /* Hyperplane.h in Headers */,
 				0C10FAA119D3CA860010815F /* ParametrizedLine.h in Headers */,
 				0C10FAA219D3CA860010815F /* Quaternion.h in Headers */,
@@ -3406,6 +3414,7 @@
 				0C42CB101A5CE3E800AA2566 /* BlockHouseholder.h in Headers */,
 				0C42CB111A5CE3E800AA2566 /* Householder.h in Headers */,
 				0C42CB121A5CE3E800AA2566 /* HouseholderSequence.h in Headers */,
+				0C9183501B73273300ED9A83 /* plane.h in Headers */,
 				0C42CB131A5CE3E800AA2566 /* BasicPreconditioners.h in Headers */,
 				0C42CB141A5CE3E800AA2566 /* BiCGSTAB.h in Headers */,
 				0C42CB151A5CE3E800AA2566 /* ConjugateGradient.h in Headers */,
@@ -3739,6 +3748,7 @@
 				0C10F9A919D3C91D0010815F /* material.cpp in Sources */,
 				0C71922E1A80070900A2073A /* line.cpp in Sources */,
 				0C1C6E981A8455A8005710AA /* layout.cpp in Sources */,
+				0C91834E1B731BB200ED9A83 /* plane.cpp in Sources */,
 				0C10F9AB19D3C91D0010815F /* model.cpp in Sources */,
 				0C10F9AD19D3C91D0010815F /* node.cpp in Sources */,
 				0C10F9AF19D3C91D0010815F /* scene.cpp in Sources */,

@@ -37,6 +37,12 @@ void ZLine::add_point(const ZVector &pt)
     _reload_vbo();
 }
 
+void ZLine::add_points(const std::vector<ZVector> &pts)
+{
+    _points.insert(_points.end(), pts.begin(), pts.end());
+    _reload_vbo();
+}
+
 void ZLine::clear_points()
 {
     _points.clear();

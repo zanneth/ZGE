@@ -22,6 +22,7 @@ public:
     ZGE_DEFINE_SREF_FUNCTIONS(ZLine);
     
     void add_point(const ZVector &pt);
+    void add_points(const std::vector<ZVector> &pts);
     void clear_points();
     
     ZGeometryRef copy() const override;

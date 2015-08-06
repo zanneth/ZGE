@@ -13,7 +13,7 @@
 
 ZGE_BEGIN_NAMESPACE
 
-typedef std::shared_ptr<class ZGeometry> ZGeometryRef;
+ZGE_FORWARD_DECLARE_SREF(ZGeometry);
 
 class ZGeometry {
 public:
@@ -21,6 +21,8 @@ public:
     ZGeometry(const ZGeometry &cp) = default;
     ZGeometry(ZGeometry &&mv) = default;
     virtual ~ZGeometry() = default;
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZGeometry);
     
     virtual ZGeometryRef copy() const;
     
@@ -36,5 +38,7 @@ public:
 protected:
     std::vector<ZMaterialRef> _materials;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZGeometry);
 
 ZGE_END_NAMESPACE
