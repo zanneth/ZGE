@@ -54,7 +54,6 @@ ZAudioManager::~ZAudioManager()
 
 void ZAudioManager::add_sound(ZSoundRef sound)
 {
-    zlog("Adding sound %p as active", sound.get());
     _impl->active_sounds.push_back(sound);
 }
 
@@ -82,7 +81,6 @@ void ZAudioManager::run(uint32_t dtime)
                 playback_state->current_offset = 0;
                 playback_state->current_repeated++;
             } else {
-                zlog("Finished playing sound %p", sound.get());
                 playback_state->stopped = true;
             }
         }
