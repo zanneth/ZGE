@@ -1,5 +1,5 @@
 //
-//  math.h
+//  constants.h
 //  ZGE
 //
 //  Created by Charles Magahern on 8/9/15.

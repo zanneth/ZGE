@@ -16,6 +16,7 @@
 #include <zge/camera.h>
 #include <zge/camera_controller.h>
 #include <zge/color.h>
+#include <zge/constants.h>
 #include <zge/cube.h>
 #include <zge/data.h>
 #include <zge/defines.h>
@@ -35,7 +36,6 @@
 #include <zge/line.h>
 #include <zge/logger.h>
 #include <zge/material.h>
-#include <zge/math.h>
 #include <zge/matrix.h>
 #include <zge/model.h>
 #include <zge/node.h>
