@@ -979,6 +979,8 @@
 		0CA36B3919F206E3003543FE /* libfreetype.6.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0CA36B3719F206D0003543FE /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0CA36B3D19F20B17003543FE /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA36B3B19F20B17003543FE /* font.cpp */; };
 		0CA36B3E19F20B17003543FE /* font.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA36B3C19F20B17003543FE /* font.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CDEB0731B77F23000E4032A /* math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDEB0721B77F23000E4032A /* math.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CDEB0741B77F23000E4032A /* math.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDEB0721B77F23000E4032A /* math.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CE0A6BD19F8C70A00AA119A /* describable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CE0A6BC19F8C70A00AA119A /* describable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CE0A6BF19F8C81900AA119A /* describable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CE0A6BE19F8C81900AA119A /* describable.cpp */; };
 		0CE70A9E1A5E2C4800663A32 /* vertex.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0CE70A9D1A5E2C4800663A32 /* vertex.vsh */; };
@@ -1599,6 +1601,7 @@
 		0CD633A8188F8E360061D259 /* observable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = observable.h; sourceTree = "<group>"; };
 		0CDE862819311B0F00C787FD /* sprite_node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_node.cpp; sourceTree = "<group>"; };
 		0CDE862919311B0F00C787FD /* sprite_node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite_node.h; sourceTree = "<group>"; };
+		0CDEB0721B77F23000E4032A /* math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = math.h; sourceTree = "<group>"; };
 		0CE0341719D1D6EC00CD7A19 /* camera_controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera_controller.cpp; sourceTree = "<group>"; };
 		0CE0341819D1D6EC00CD7A19 /* camera_controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera_controller.h; sourceTree = "<group>"; };
 		0CE0341B19D1D76800CD7A19 /* responder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = responder.cpp; sourceTree = "<group>"; };
@@ -2671,6 +2674,7 @@
 		0CC464B6186109B400C6AF22 /* math */ = {
 			isa = PBXGroup;
 			children = (
+				0CDEB0721B77F23000E4032A /* math.h */,
 				0C62280F18610B6F00DA3182 /* matrix.h */,
 				0C62280E18610B6F00DA3182 /* matrix.cpp */,
 				0CA262671863F71A003E8D37 /* vector.h */,
@@ -2786,6 +2790,7 @@
 				0C10F9F119D3C9BF0010815F /* schedulable.h in Headers */,
 				0C10F9F219D3C9BF0010815F /* schedulable.hpp in Headers */,
 				0C10F9F319D3C9BF0010815F /* timer.h in Headers */,
+				0CDEB0731B77F23000E4032A /* math.h in Headers */,
 				0C10F9F419D3C9BF0010815F /* thread.h in Headers */,
 				0C10F9F519D3C9BF0010815F /* types.h in Headers */,
 				0C10F9F619D3C9BF0010815F /* matrix.h in Headers */,
@@ -3531,6 +3536,7 @@
 				0C42CB821A5CE3E800AA2566 /* SDL_error.h in Headers */,
 				0C42CB831A5CE3E800AA2566 /* SDL_events.h in Headers */,
 				0C42CB841A5CE3E800AA2566 /* SDL_gamecontroller.h in Headers */,
+				0CDEB0741B77F23000E4032A /* math.h in Headers */,
 				0C42CB851A5CE3E800AA2566 /* SDL_gesture.h in Headers */,
 				0C42CB861A5CE3E800AA2566 /* SDL_haptic.h in Headers */,
 				0C42CB871A5CE3E800AA2566 /* SDL_hints.h in Headers */,

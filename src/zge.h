@@ -35,6 +35,7 @@
 #include <zge/line.h>
 #include <zge/logger.h>
 #include <zge/material.h>
+#include <zge/math.h>
 #include <zge/matrix.h>
 #include <zge/model.h>
 #include <zge/node.h>

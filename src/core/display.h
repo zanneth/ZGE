@@ -34,7 +34,7 @@ public:
 
 typedef std::shared_ptr<class ZDisplay> ZDisplayRef;
 
-class ZDisplay : public ZNoncopyable, public std::enable_shared_from_this<ZDisplay> {
+class ZDisplay : public ZNoncopyable {
 protected: // Only a render manager can create displays
     ZDisplay() = default;
     ZDisplay(const ZDisplayMode &display_mode);

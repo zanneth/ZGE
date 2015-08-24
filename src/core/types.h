@@ -21,11 +21,31 @@ typedef std::chrono::duration<double> ZTimeInterval;
 struct ZPoint2D {
     float x;
     float y;
+    
+    bool operator==(const ZPoint2D &rhs) const
+    {
+        return (x == rhs.x && y == rhs.y);
+    }
+    
+    bool operator!=(const ZPoint2D &rhs) const
+    {
+        return !operator==(rhs);
+    }
 };
 
 struct ZSize2D {
     float width;
     float height;
+    
+    bool operator==(const ZSize2D &rhs) const
+    {
+        return (width == rhs.width && height == rhs.height);
+    }
+    
+    bool operator!=(const ZSize2D &rhs) const
+    {
+        return !operator==(rhs);
+    }
 };
 
 struct ZEdgeInsets {
