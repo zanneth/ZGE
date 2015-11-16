@@ -50,13 +50,9 @@ void ZRenderManager::set_renderable(ZRenderableRef renderable) { _renderable = r
 
 void ZRenderManager::run(uint32_t dtime)
 {
-    if (_context) {
-        _context->make_current();
-        _context->clear_buffers();
-        
-        if (_renderable) {
-            _renderable->render(_context);
-        }
+    if (_context && _renderable) {
+        _context->prepare_render();
+        _renderable->render(_context);
     }
     
     if (_display) {

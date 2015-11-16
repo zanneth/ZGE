@@ -82,6 +82,9 @@ public:
     /// Allocates a new elements buffer.
     ZElementGraphicsBufferRef create_elements_buffer();
     
+    /// Allocates a shader program.
+    ZShaderProgramRef create_shader_program();
+    
     /// Allocates a shader.
     ZShaderRef create_shader(ZShaderType type);
     
@@ -135,8 +138,8 @@ public:
     
     // -------------------------------------------------------------------------
     
-    /// Clear all graphics and depth buffers.
-    void clear_buffers();
+    /// Prepares the context for rendering.
+    void prepare_render();
     
     /// Draw elements using a vertex array.
     void draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count);
@@ -146,13 +149,15 @@ public:
     
 private:
     void        _initialize_gl();
+    void        _clear_buffers();
     void        _update_viewport();
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
     void        _set_boolean_uniform(const std::string uniform_name, bool flag);
     void        _setup_vertex_attrib_ptr(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index);
-    
-    friend ZVertexArray;
+    void        _use_shader_program(ZShaderProgramRef program);
+    void        _update_dirty_uniforms();
+    void        _update_uniform_data(ZUniformRef uniform);
     
 protected:
     ZRect               _viewport;

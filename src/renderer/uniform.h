@@ -13,43 +13,50 @@
 #include <vector>
 #include <zge/defines.h>
 #include <zge/observable.h>
-#include <zge/opengl.h>
 
 ZGE_BEGIN_NAMESPACE
 
-typedef std::shared_ptr<class ZUniformBase> ZUniformRef;
-
-class ZUniformBase : public ZObservable<ZUniformRef>, public std::enable_shared_from_this<ZUniformBase> {
-    std::string _name;
-    GLint _location;
-    GLenum _type;
-    
+class ZUniformBase {
 public:
-    ZUniformBase(std::string name, GLint location, GLenum type);
+    ZUniformBase(std::string name, int32_t location, uint32_t type);
     virtual ~ZUniformBase();
     
     std::string get_name() const;
-    GLenum get_type() const;
+    int32_t     get_location() const;
+    uint32_t    get_type() const;
+    
+    bool        is_dirty() const;
+    void        set_dirty(bool dirty);
+    
     virtual const void* get_data(size_t *out_length) const = 0;
     virtual void set_data(const void *data) = 0;
     
 protected:
-    GLint _get_location() const;
-    friend class ZShaderProgram;
+    std::string _name;
+    int32_t     _location;
+    uint32_t    _type;
+    bool        _dirty;
 };
+
+using ZUniformRef = std::shared_ptr<ZUniformBase>;
+using ZUniformWeakRef = std::weak_ptr<ZUniformBase>;
+using ZUniformConstRef = std::shared_ptr<const ZUniformBase>;
+
+// -----------------------------------------------------------------------------
 
 template <typename T, unsigned count>
 class ZUniform : public ZUniformBase {
-    T _values[count];
-    
 public:
-    ZUniform(std::string name, GLint location, GLenum type);
+    ZUniform(std::string name, int32_t location, uint32_t type);
     ZUniform(const ZUniform &cp);
     ZUniform(ZUniform&&);
     ~ZUniform();
     
     const void* get_data(size_t *out_length) const override;
     void set_data(const void *data) override;
+    
+private:
+    T _values[count];
 };
 
 ZGE_END_NAMESPACE

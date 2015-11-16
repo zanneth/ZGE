@@ -10,6 +10,7 @@
 #include <zge/light.h>
 #include <zge/logger.h>
 #include <zge/resource_bundle.h>
+#include <zge/uniform.h>
 #include <zge/util.h>
 #include <SDL2/SDL.h>
 #include <stdexcept>
@@ -33,6 +34,7 @@ const std::string ZLightUniformDescriptor::base_exists_name = "exists";
 
 #pragma mark -
 
+static ZUniformRef __create_uniform(GLenum type, std::string name, GLuint index);
 static ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType type);
 
 ZRenderContext* ZRenderContext::__current_context = nullptr;
@@ -99,6 +101,75 @@ ZElementGraphicsBufferRef ZRenderContext::create_elements_buffer()
     return ZElementGraphicsBufferRef(new ZElementGraphicsBuffer(buffer_name, deleter));
 }
 
+ZShaderProgramRef ZRenderContext::create_shader_program()
+{
+    uint32_t handle = glCreateProgram();
+    
+    auto deleter = [](uint32_t handle) {
+        glDeleteProgram(handle);
+    };
+    auto attach = [](uint32_t handle, uint32_t shader) {
+        glAttachShader(handle, shader);
+    };
+    auto detach = [](uint32_t handle, uint32_t shader) {
+        glDetachShader(handle, shader);
+    };
+    auto link = [](uint32_t handle, std::map<uint32_t, std::string> attributes) {
+        ZShaderProgramLinkResult result;
+        
+        for (const auto &attrib_pair : attributes) {
+            glBindAttribLocation(handle, attrib_pair.first, attrib_pair.second.c_str());
+        }
+        
+        glLinkProgram(handle);
+        
+        GLint status;
+        glGetProgramiv(handle, GL_LINK_STATUS, &status);
+        if (status == GL_TRUE) {
+            // load uniforms
+            std::vector<ZUniformRef> uniforms;
+            GLint uniforms_count = 0;
+            glGetProgramiv(handle, GL_ACTIVE_UNIFORMS, &uniforms_count);
+            
+            const unsigned name_buf_size = 128;
+            char uniform_name_buf[name_buf_size];
+            for (unsigned i = 0; i < uniforms_count; ++i) {
+                GLenum type;
+                GLint location;
+                
+                glGetActiveUniform(handle, i, name_buf_size, NULL, NULL, &type, uniform_name_buf);
+                location = glGetUniformLocation(handle, uniform_name_buf);
+                
+                std::string name = uniform_name_buf;
+                ZUniformRef uniform = __create_uniform(type, name, location);
+                uniforms.push_back(uniform);
+            }
+            
+            result.success = true;
+            result.uniforms = uniforms;
+        } else {
+            GLint errlen;
+            glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &errlen);
+            
+            std::vector<char> errdata(errlen);
+            glGetProgramInfoLog(handle, errlen, 0, errdata.data());
+            
+            result.success = false;
+            result.error = errdata.data();
+        }
+        
+        return result;
+    };
+    
+    ZShaderProgramCallbacks callbacks = {
+        .destroy = deleter,
+        .attach = attach,
+        .detach = detach,
+        .link = link
+    };
+    return ZShaderProgramRef(new ZShaderProgram(handle, callbacks));
+}
+
 ZShaderRef ZRenderContext::create_shader(ZShaderType type)
 {
     ZShaderRef shader = nullptr;
@@ -158,7 +229,7 @@ void ZRenderContext::initialize_shaders()
     _initialize_gl();
     
     if (!_shader_program) {
-        ZShaderProgramRef shader_program = ZShaderProgram::create();
+        ZShaderProgramRef shader_program = create_shader_program();
         
         ZResourceBundle *res_bundle = ZResourceBundle::get_library_bundle();
         std::string vert_shader_path = res_bundle->get_path_for_resource("vertex.vsh");
@@ -172,6 +243,7 @@ void ZRenderContext::initialize_shaders()
         shader_program->bind_attribute_index(ZVERTEX_ATTRIB_COLOR, "color");
         shader_program->link_program();
         
+        _use_shader_program(shader_program);
         _shader_program = shader_program;
         
         for (unsigned i = 0; i < _ZRENDER_MATRIX_COUNT; ++i) {
@@ -367,13 +439,18 @@ void ZRenderContext::clear_lights()
     _lights.clear();
 }
 
-void ZRenderContext::clear_buffers()
+void ZRenderContext::prepare_render()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if (__current_context != this) {
+        make_current();
+    }
+    
+    _clear_buffers();
 }
 
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
 {
+    _update_dirty_uniforms();
     bind_vertex_array(varray);
     
     // flush any pending data
@@ -398,6 +475,7 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
 
 void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
 {
+    _update_dirty_uniforms();
     bind_vertex_array(varray);
     
     ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
@@ -420,12 +498,16 @@ void ZRenderContext::_initialize_gl()
     glClearColor(0.f, 0.f, 0.f, 1.f);
     glEnable(GL_BLEND);
     glEnable(GL_CULL_FACE);
-    glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 #if !OPENGL_ES
     glEnable(GL_MULTISAMPLE);
 #endif
+}
+
+void ZRenderContext::_clear_buffers()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void ZRenderContext::_update_viewport()
@@ -454,8 +536,6 @@ ZUniformRef ZRenderContext::_get_matrix_uniform(ZRenderMatrixType type)
 
 void ZRenderContext::_update_matrix_uniforms(ZRenderMatrixType type)
 {
-    _shader_program->use_program();
-    
     ZUniformRef uniform = _get_matrix_uniform(type);
     if (uniform) {
         const ZMatrix &matrix = _matrix_stacks[type].top();
@@ -482,6 +562,161 @@ void ZRenderContext::_setup_vertex_attrib_ptr(ZGraphicsBufferRef buffer, ZVertex
         GLenum value_type = ZGLUtil::gl_value_type_from_component_type(attribute.component_type);
         glVertexAttribPointer(index, attribute.components_per_vertex, value_type, normalized_val, (GLsizei)attribute.stride, (const GLvoid *)attribute.offset);
     }
+}
+
+void ZRenderContext::_use_shader_program(ZShaderProgramRef program)
+{
+    if (program->is_linked()) {
+        uint32_t handle = program->get_program_handle();
+        glUseProgram(handle);
+    }
+}
+
+void ZRenderContext::_update_dirty_uniforms()
+{
+    const std::vector<ZUniformRef> dirty_uniforms = _shader_program->get_dirty_uniforms();
+    for (ZUniformRef uniform : dirty_uniforms) {
+        _update_uniform_data(uniform);
+    }
+}
+
+void ZRenderContext::_update_uniform_data(ZUniformRef uniform)
+{
+    GLenum type = uniform->get_type();
+    GLint location = uniform->get_location();
+    size_t length = 0;
+    const void *data = uniform->get_data(&length);
+    
+    switch (type) {
+        case GL_FLOAT:
+            glUniform1fv(location, 1, (const GLfloat *)data);
+            break;
+        case GL_FLOAT_VEC2:
+            glUniform2fv(location, 1, (const GLfloat *)data);
+            break;
+        case GL_FLOAT_VEC3:
+            glUniform3fv(location, 1, (const GLfloat *)data);
+            break;
+        case GL_FLOAT_VEC4:
+            glUniform4fv(location, 1, (const GLfloat *)data);
+            break;
+        case GL_INT:
+            glUniform1iv(location, 1, (const GLint *)data);
+            break;
+        case GL_INT_VEC2:
+            glUniform2iv(location, 1, (const GLint *)data);
+            break;
+        case GL_INT_VEC3:
+            glUniform3iv(location, 1, (const GLint *)data);
+            break;
+        case GL_INT_VEC4:
+            glUniform4iv(location, 1, (const GLint *)data);
+            break;
+        case GL_UNSIGNED_INT:
+            glUniform1uiv(location, 1, (const GLuint *)data);
+            break;
+        case GL_UNSIGNED_INT_VEC2:
+            glUniform2uiv(location, 1, (const GLuint *)data);
+            break;
+        case GL_UNSIGNED_INT_VEC3:
+            glUniform3uiv(location, 1, (const GLuint *)data);
+            break;
+        case GL_UNSIGNED_INT_VEC4:
+            glUniform4uiv(location, 1, (const GLuint *)data);
+            break;
+        case GL_FLOAT_MAT2:
+            glUniformMatrix2fv(location, 1, GL_FALSE, (const GLfloat *)data);
+            break;
+        case GL_FLOAT_MAT3:
+            glUniformMatrix3fv(location, 1, GL_FALSE, (const GLfloat *)data);
+            break;
+        case GL_FLOAT_MAT4:
+            glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat *)data);
+            break;
+#if !OPENGL_ES
+        case GL_SAMPLER_1D:
+#endif
+        case GL_SAMPLER_2D:
+        case GL_SAMPLER_3D:
+            glUniform1uiv(location, 1, (const GLuint *)data);
+            break;
+        default: {
+            ZException e(ZNOT_IMPLEMENTED_EXCEPTION_CODE);
+            e.extra_info = ZUtil::format("Uniform of type %ld has no API implementation.", (long)type);
+            throw e;
+            break;
+        }
+    }
+    
+    uniform->set_dirty(false);
+}
+
+ZUniformRef __create_uniform(GLenum type, std::string name, GLuint index)
+{
+    ZUniformRef uniform = nullptr;
+    
+    switch (type) {
+        case GL_FLOAT:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 1>(name, index, GL_FLOAT));
+            break;
+        case GL_FLOAT_VEC2:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 2>(name, index, GL_FLOAT_VEC2));
+            break;
+        case GL_FLOAT_VEC3:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 3>(name, index, GL_FLOAT_VEC3));
+            break;
+        case GL_FLOAT_VEC4:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 4>(name, index, GL_FLOAT_VEC4));
+            break;
+        case GL_INT:
+            uniform = ZUniformRef(new ZUniform<GLint, 1>(name, index, GL_INT));
+            break;
+        case GL_INT_VEC2:
+            uniform = ZUniformRef(new ZUniform<GLint, 2>(name, index, GL_INT_VEC2));
+            break;
+        case GL_INT_VEC3:
+            uniform = ZUniformRef(new ZUniform<GLint, 3>(name, index, GL_INT_VEC3));
+            break;
+        case GL_INT_VEC4:
+            uniform = ZUniformRef(new ZUniform<GLint, 4>(name, index, GL_INT_VEC4));
+            break;
+        case GL_UNSIGNED_INT:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_UNSIGNED_INT));
+            break;
+        case GL_UNSIGNED_INT_VEC2:
+            uniform = ZUniformRef(new ZUniform<GLuint, 2>(name, index, GL_UNSIGNED_INT_VEC2));
+            break;
+        case GL_UNSIGNED_INT_VEC3:
+            uniform = ZUniformRef(new ZUniform<GLuint, 3>(name, index, GL_UNSIGNED_INT_VEC3));
+            break;
+        case GL_UNSIGNED_INT_VEC4:
+            uniform = ZUniformRef(new ZUniform<GLuint, 4>(name, index, GL_UNSIGNED_INT_VEC4));
+            break;
+        case GL_FLOAT_MAT2:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 2*2>(name, index, GL_FLOAT_MAT2));
+            break;
+        case GL_FLOAT_MAT3:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 3*3>(name, index, GL_FLOAT_MAT3));
+            break;
+        case GL_FLOAT_MAT4:
+            uniform = ZUniformRef(new ZUniform<GLfloat, 4*4>(name, index, GL_FLOAT_MAT4));
+            break;
+#if !OPENGL_ES
+        case GL_SAMPLER_1D:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_1D));
+            break;
+#endif
+        case GL_SAMPLER_2D:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_2D));
+            break;
+        case GL_SAMPLER_3D:
+            uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_3D));
+            break;
+        default:
+            break;
+    }
+    
+    return uniform;
 }
 
 ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType type)
