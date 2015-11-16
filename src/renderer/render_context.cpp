@@ -99,6 +99,59 @@ ZElementGraphicsBufferRef ZRenderContext::create_elements_buffer()
     return ZElementGraphicsBufferRef(new ZElementGraphicsBuffer(buffer_name, deleter));
 }
 
+ZShaderRef ZRenderContext::create_shader(ZShaderType type)
+{
+    ZShaderRef shader = nullptr;
+    GLenum gltype = ZGLUtil::gl_shader_type_from_shader_type(type);
+    
+    if (gltype != 0) {
+        uint32_t handle = glCreateShader(gltype);
+        
+        auto deleter = [](uint32_t handle){
+            glDeleteShader(handle);
+        };
+        auto load = [](uint32_t handle, const std::string &src) {
+            const char *src_str = src.c_str();
+            glShaderSource(handle, 1, &src_str, nullptr);
+        };
+        auto compile = [](uint32_t handle) {
+            ZShaderCompilationResult result;
+            glCompileShader(handle);
+            
+            GLint status = GL_FALSE;
+            glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
+            if (status == GL_TRUE) {
+                result.success = true;
+            } else {
+                GLint errlen;
+                glGetShaderiv(handle, GL_INFO_LOG_LENGTH, &errlen);
+                
+                std::vector<char> errdata(errlen);
+                glGetShaderInfoLog(handle, errlen, 0, errdata.data());
+                
+                result.success = false;
+                result.error = errdata.data();
+            }
+            
+            return result;
+        };
+        
+        ZShaderCallbacks callbacks = {
+            .destroy = deleter,
+            .load_source = load,
+            .compile = compile
+        };
+        
+        shader = ZShaderRef(new ZShader(handle, type, callbacks));
+    } else {
+        ZException exception(ZENGINE_EXCEPTION_CODE);
+        exception.description = "Attempted to create a shader of an unsupported type.";
+        throw exception;
+    }
+    
+    return shader;
+}
+
 void ZRenderContext::initialize_shaders()
 {
     make_current();

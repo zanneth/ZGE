@@ -10,6 +10,7 @@
 #include <zge/foundation.h>
 #include <zge/graphics_buffer.h>
 #include <zge/matrix.h>
+#include <zge/shader.h>
 #include <zge/shader_program.h>
 #include <zge/texture.h>
 #include <zge/thread.h>
@@ -80,6 +81,9 @@ public:
     
     /// Allocates a new elements buffer.
     ZElementGraphicsBufferRef create_elements_buffer();
+    
+    /// Allocates a shader.
+    ZShaderRef create_shader(ZShaderType type);
     
     // -------------------------------------------------------------------------
     

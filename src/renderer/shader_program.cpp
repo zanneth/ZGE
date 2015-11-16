@@ -9,6 +9,7 @@
 #include <zge/exception.h>
 #include <zge/opengl.h>
 #include <zge/logger.h>
+#include <zge/render_context.h>
 #include <zge/util.h>
 
 ZGE_BEGIN_NAMESPACE
@@ -37,7 +38,7 @@ bool ZShaderProgram::attach_shader(ZShaderRef shader)
     bool success = false;
     
     if (shader != nullptr && shader->is_compiled()) {
-        glAttachShader(_program_handle, shader->_get_shader_handle());
+        glAttachShader(_program_handle, shader->get_handle());
         _shaders.push_back(shader);
         
         success = true;
@@ -54,7 +55,7 @@ bool ZShaderProgram::detach_shader(ZShaderRef shader)
     bool success = false;
     
     if (shader != nullptr) {
-        glDetachShader(_program_handle, shader->_get_shader_handle());
+        glDetachShader(_program_handle, shader->get_handle());
         _shaders.erase(std::remove(_shaders.begin(), _shaders.end(), shader), _shaders.end());
         success = true;
     } else {
@@ -68,7 +69,10 @@ bool ZShaderProgram::load_shader(const std::string &path, ZShaderType type)
 {
     bool success = true;
     
-    ZShaderRef shader = ZShader::create(type);
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
+    zassert(ctx, "invalid context");
+    
+    ZShaderRef shader = ctx->create_shader(type);
     success &= shader->load_source_file(path);
     success &= shader->compile();
     success &= attach_shader(shader);
@@ -80,7 +84,10 @@ bool ZShaderProgram::load_shader_source(const std::string &source, ZShaderType t
 {
     bool success = true;
     
-    ZShaderRef shader = ZShader::create(type);
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
+    zassert(ctx, "invalid context");
+    
+    ZShaderRef shader = ctx->create_shader(type);
     success &= shader->load_source(source);
     success &= shader->compile();
     success &= attach_shader(shader);

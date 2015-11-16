@@ -13,31 +13,23 @@
 #include <sstream>
 #include <zge/exception.h>
 #include <zge/logger.h>
-#include <zge/glutil.h>
 #include <zge/resource_bundle.h>
 
 ZGE_BEGIN_NAMESPACE
 
 using ZDirectiveHandler = std::function<void(const std::string&, std::ostringstream&)>;
 
-ZShader::ZShader(const ZShaderType &type) :
+ZShader::ZShader(uint32_t handle, const ZShaderType &type, const ZShaderCallbacks &callbacks) :
+    _shader_handle(handle),
+    _callbacks(callbacks),
     _type(type),
     _has_source(false),
     _compiled(false)
-{
-    GLenum gltype = ZGLUtil::gl_shader_type_from_shader_type(type);
-    if (gltype != 0) {
-        _shader_handle = glCreateShader(gltype);
-    } else {
-        ZException exception(ZENGINE_EXCEPTION_CODE);
-        exception.description = "Attempted to create a shader of an unsupported type.";
-        throw exception;
-    }
-}
+{}
 
 ZShader::~ZShader()
 {
-    glDeleteShader(_shader_handle);
+    _callbacks.destroy(_shader_handle);
 }
 
 #pragma mark - API
@@ -47,8 +39,7 @@ bool ZShader::load_source_file(const std::string path)
     _shader_source_path = path;
     
     std::string shader_src = _load_and_preprocess_source_file(path);
-    const char *shader_cstr = shader_src.c_str();
-    glShaderSource(_shader_handle, 1, &shader_cstr, nullptr);
+    _callbacks.load_source(_shader_handle, shader_src);
     
     _has_source = true;
     return true;
@@ -66,8 +57,7 @@ bool ZShader::load_source(const std::string source)
     }
     
     std::string preprocessed_source = source_buffer.str();
-    const char *shader_cstr = preprocessed_source.c_str();
-    glShaderSource(_shader_handle, 1, &shader_cstr, nullptr);
+    _callbacks.load_source(_shader_handle, preprocessed_source);
     
     _has_source = true;
     return true;
@@ -80,44 +70,24 @@ bool ZShader::compile()
         return false;
     }
     
-    bool success = false;
-    glCompileShader(_shader_handle);
-    
-    // check if there's an error and log it
-    GLint status = GL_FALSE;
-    glGetShaderiv(_shader_handle, GL_COMPILE_STATUS, &status);
-    if (status == GL_TRUE) {
-        success = true;
-    } else {
-        GLint errlen;
-        glGetShaderiv(_shader_handle, GL_INFO_LOG_LENGTH, &errlen);
-        
-        char *errstr = new char[errlen];
-        glGetShaderInfoLog(_shader_handle, errlen, 0, errstr);
-        ZLogger::log_error("%s", errstr);
-        delete[] errstr;
-        
-        success = false;
+    ZShaderCompilationResult result = _callbacks.compile(_shader_handle);
+    if (!result.success) {
+        zlog("SHADER COMPILATION ERROR: %s", result.error.c_str());
     }
     
-    _compiled = success;
-    return success;
+    _compiled = result.success;
+    return result.success;
 }
 
 #pragma mark - Accessors
 
 ZShaderType ZShader::get_type() const { return _type; }
 
+uint32_t ZShader::get_handle() const { return _shader_handle; }
+
 bool ZShader::has_source() const { return _has_source; }
 
 bool ZShader::is_compiled() const { return _compiled; }
-
-#pragma mark - Private
-
-GLuint ZShader::_get_shader_handle() const
-{
-    return _shader_handle;
-}
 
 #pragma mark - Internal
 
