@@ -61,7 +61,8 @@ void ZDisplayRenderContext::make_current()
     if (shader_program) {
         shader_program->use_program();
     }
+    
+    __current_context = this;
 }
 
 ZGE_END_NAMESPACE
-

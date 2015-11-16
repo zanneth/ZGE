@@ -22,11 +22,15 @@ std::array<T, S> __copy_vertex_data(T vertex[S]);
 
 ZModel::ZModel(std::string filename) :
     _faces_count(0),
-    _vertices_count(0),
-    _vertex_array(new ZVertexArray),
-    _vertex_vbo(new ZGraphicsBuffer),
-    _normal_vbo(new ZGraphicsBuffer)
+    _vertices_count(0)
 {
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
+    zassert(ctx, "invalid context");
+    
+    _vertex_array = ctx->create_vertex_array();
+    _vertex_vbo = ctx->create_graphics_buffer();
+    _normal_vbo = ctx->create_graphics_buffer();
+    
     ZBufferAttribute vertex_attrib = {
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,

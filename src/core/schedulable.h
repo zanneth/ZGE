@@ -16,35 +16,54 @@ typedef std::shared_ptr<class ZSchedulable> ZSchedulableRef;
 class ZRunloop;
 
 class ZSchedulable {
-protected:
-    ZTime _last_update;
-    ZRunloop *_run_loop = nullptr; // weak
-    
 public:
-    virtual ~ZSchedulable() {}
+    ZSchedulable();
+    virtual ~ZSchedulable() = default;
+    
+    // Run
     virtual void run(uint32_t dtime) = 0;
     
     // Callbacks from the runloop.
     virtual void on_schedule() {}
     virtual void on_unschedule() {}
     
+    // Accessors
+    bool unschedule_after_run() const;
+    void set_unschedule_after_run(bool unschedule_after_run);
+    
     friend class ZRunloop;
+    
+protected:
+    bool  _unschedule_after_run;
+    ZTime _last_update;
+    ZRunloop *_run_loop = nullptr; // weak
 };
+
+// -----------------------------------------------------------------------------
 
 class ZWorkSchedulable : public ZSchedulable, public std::enable_shared_from_this<ZWorkSchedulable> {
 public:
-    ZWorkSchedulable(std::function<void()> work);
+    ZWorkSchedulable(std::function<void(uint32_t)> work);
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZWorkSchedulable);
+    
     void run(uint32_t dtime) override;
     
 private:
-    std::function<void()> _work;
+    std::function<void(uint32_t)> _work;
 };
+
+ZGE_DEFINE_SREF_TYPE(ZWorkSchedulable);
+
+// -----------------------------------------------------------------------------
 
 template<typename T>
 class ZWeakSchedulable : public ZSchedulable {
 public:
     ZWeakSchedulable(std::weak_ptr<T> weak);
     ZWeakSchedulable(std::shared_ptr<T> shared);
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZWeakSchedulable);
     
     void run(uint32_t dtime) override;
     

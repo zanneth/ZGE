@@ -35,6 +35,8 @@ const std::string ZLightUniformDescriptor::base_exists_name = "exists";
 
 static ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType type);
 
+ZRenderContext* ZRenderContext::__current_context = nullptr;
+
 #pragma mark -
 
 ZRenderContext::ZRenderContext() :
@@ -50,11 +52,52 @@ ZRenderContext::ZRenderContext() :
 ZRenderContext::~ZRenderContext()
 {}
 
+ZRenderContext* ZRenderContext::get_current_context()
+{
+    return __current_context;
+}
+
 #pragma mark - Accessors
 
 ZShaderProgramRef ZRenderContext::get_shader_program() const { return _shader_program; }
 
 #pragma mark - API
+
+ZVertexArrayRef ZRenderContext::create_vertex_array()
+{
+    GLuint vao;
+    glGenVertexArrays(1, &vao);
+    
+    auto deleter = [this](uint32_t vao){
+        glDeleteVertexArrays(1, &vao);
+    };
+    
+    return ZVertexArrayRef(new ZVertexArray(vao, deleter));
+}
+
+ZGraphicsBufferRef ZRenderContext::create_graphics_buffer(ZBufferTarget target)
+{
+    GLuint buffer_name;
+    glGenBuffers(1, &buffer_name);
+    
+    auto deleter = [this](uint32_t buffer_name){
+        glDeleteBuffers(1, &buffer_name);
+    };
+
+    return ZGraphicsBufferRef(new ZGraphicsBuffer(buffer_name, target, deleter));
+}
+
+ZElementGraphicsBufferRef ZRenderContext::create_elements_buffer()
+{
+    GLuint buffer_name;
+    glGenBuffers(1, &buffer_name);
+    
+    auto deleter = [this](uint32_t buffer_name){
+        glDeleteBuffers(1, &buffer_name);
+    };
+    
+    return ZElementGraphicsBufferRef(new ZElementGraphicsBuffer(buffer_name, deleter));
+}
 
 void ZRenderContext::initialize_shaders()
 {
@@ -145,6 +188,27 @@ void ZRenderContext::set_render_scale(float scale)
     _update_viewport();
 }
 
+bool ZRenderContext::depth_testing_is_enabled() const
+{
+    return _depth_testing_enabled;
+}
+
+void ZRenderContext::set_depth_testing_enabled(bool enabled)
+{
+    if (_depth_testing_enabled != enabled) {
+        _depth_testing_enabled = enabled;
+        
+        make_current();
+        
+        if (enabled) {
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LEQUAL);
+        } else {
+            glDisable(GL_DEPTH_TEST);
+        }
+    }
+}
+
 void ZRenderContext::bind_texture(ZTextureRef texture)
 {
     GLuint texture_name = texture->_get_texture_name();
@@ -160,6 +224,37 @@ void ZRenderContext::unbind_texture()
     _bound_texture = nullptr;
     
     _set_boolean_uniform("material.textureExists", false);
+}
+
+void ZRenderContext::bind_vertex_array(ZVertexArrayRef varray)
+{
+    GLuint vao = (GLuint)varray->get_vao_name();
+    glBindVertexArray(vao);
+    
+    const ZVertexBuffersArray &buffers = varray->get_buffers();
+    
+    for (unsigned i = 0; i < ZVERTEX_ATTRIB_COUNT; ++i) {
+        ZVertexAttributeIndex index = (ZVertexAttributeIndex)i;
+        ZGraphicsBufferRef buffer = buffers[index];
+        if (buffer) {
+            GLenum gltarget = ZGLUtil::gl_target_from_buffer_target(buffer->get_target());
+            glBindBuffer(gltarget, buffer->get_name());
+            _setup_vertex_attrib_ptr(buffer, index);
+        }
+    }
+    
+    ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
+    if (element_buffer) {
+        GLenum elmtarget = ZGLUtil::gl_target_from_buffer_target(element_buffer->get_target());
+        glBindBuffer(elmtarget, element_buffer->get_name());
+    }
+    
+    _bound_vertex_array = varray;
+}
+
+void ZRenderContext::unbind_vertex_array()
+{
+    glBindVertexArray(0);
 }
 
 void ZRenderContext::add_light(ZLightRef light)
@@ -219,26 +314,6 @@ void ZRenderContext::clear_lights()
     _lights.clear();
 }
 
-bool ZRenderContext::depth_testing_is_enabled() const
-{
-    return _depth_testing_enabled;
-}
-
-void ZRenderContext::set_depth_testing_enabled(bool enabled)
-{
-    if (_depth_testing_enabled != enabled) {
-        _depth_testing_enabled = enabled;
-        
-        make_current();
-        if (enabled) {
-            glEnable(GL_DEPTH_TEST);
-            glDepthFunc(GL_LEQUAL);
-        } else {
-            glDisable(GL_DEPTH_TEST);
-        }
-    }
-}
-
 void ZRenderContext::clear_buffers()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -246,20 +321,31 @@ void ZRenderContext::clear_buffers()
 
 void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsigned first_idx, size_t count)
 {
-    varray->_bind();
-    _bound_vertex_array = varray;
+    bind_vertex_array(varray);
+    
+    // flush any pending data
+    auto buffers = varray->get_buffers();
+    for (ZGraphicsBufferRef buffer : buffers) {
+        if (buffer && buffer->get_pending_buffer().data.get_length() > 0) {
+            const ZPendingGraphicsBuffer &pending_buf = buffer->get_pending_buffer();
+            const GLenum target = ZGLUtil::gl_target_from_buffer_target(buffer->get_target());
+            const GLenum glusage = ZGLUtil::gl_usage_from_buffer_usage(pending_buf.usage);
+            glBindBuffer(target, buffer->get_name());
+            glBufferData(target, (GLsizeiptr)pending_buf.data.get_length(), (const GLvoid *)pending_buf.data.get_data(), glusage);
+            
+            buffer->clear_pending_buffer();
+        }
+    }
     
     GLenum glmode = ZGLUtil::gl_draw_mode_from_render_mode(mode);
     glDrawArrays(glmode, first_idx, (GLsizei)count);
     
-    varray->_unbind();
-    _bound_vertex_array = nullptr;
+    unbind_vertex_array();
 }
 
 void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
 {
-    varray->_bind();
-    _bound_vertex_array = varray;
+    bind_vertex_array(varray);
     
     ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
     if (element_buffer.get()) {
@@ -271,8 +357,7 @@ void ZRenderContext::draw_elements(ZRenderMode mode, ZVertexArrayRef varray)
         zlog("%s failed. No elements buffer was provided in vertex array %p.", __FUNCTION__, varray.get());
     }
     
-    varray->_unbind();
-    _bound_vertex_array = nullptr;
+    unbind_vertex_array();
 }
 
 #pragma mark - Internal
@@ -284,7 +369,7 @@ void ZRenderContext::_initialize_gl()
     glEnable(GL_CULL_FACE);
     glEnable(GL_TEXTURE_2D);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
+
 #if !OPENGL_ES
     glEnable(GL_MULTISAMPLE);
 #endif
@@ -332,6 +417,18 @@ void ZRenderContext::_set_boolean_uniform(const std::string uniform_name, bool f
     ZUniformRef uniform = _shader_program->get_uniform(uniform_name);
     int uniform_data = (flag ? 1 : 0);
     uniform->set_data(&uniform_data);
+}
+
+void ZRenderContext::_setup_vertex_attrib_ptr(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index)
+{
+    glEnableVertexAttribArray(index);
+    
+    std::vector<ZBufferAttribute> attributes = buffer->get_attributes();
+    for (const ZBufferAttribute &attribute : attributes) {
+        GLboolean normalized_val = attribute.normalized ? GL_TRUE : GL_FALSE;
+        GLenum value_type = ZGLUtil::gl_value_type_from_component_type(attribute.component_type);
+        glVertexAttribPointer(index, attribute.components_per_vertex, value_type, normalized_val, (GLsizei)attribute.stride, (const GLvoid *)attribute.offset);
+    }
 }
 
 ZLightUniformDescriptor __uniform_descriptor_for_light_type(ZLightType type)

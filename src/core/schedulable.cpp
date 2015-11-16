@@ -11,17 +11,23 @@
 
 ZGE_BEGIN_NAMESPACE
 
-ZWorkSchedulable::ZWorkSchedulable(std::function<void()> work) :
+ZSchedulable::ZSchedulable() :
+    _unschedule_after_run(false)
+{}
+
+bool ZSchedulable::unschedule_after_run() const { return _unschedule_after_run; }
+
+void ZSchedulable::set_unschedule_after_run(bool unschedule_after_run) { _unschedule_after_run = unschedule_after_run; }
+
+#pragma mark - ZWorkSchedulable
+
+ZWorkSchedulable::ZWorkSchedulable(std::function<void(uint32_t)> work) :
     _work(work)
 {}
 
 void ZWorkSchedulable::run(uint32_t dtime)
 {
-    _work();
-    
-    if (_run_loop) {
-        _run_loop->unschedule(shared_from_this());
-    }
+    _work(dtime);
 }
 
 ZGE_END_NAMESPACE

@@ -6,6 +6,7 @@
  */
 
 #include "cube.h"
+#include <zge/render_context.h>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -110,11 +111,15 @@ static const float __cube_normals_data[] = {
 };
 
 ZCube::ZCube(float scale) :
-    _vertex_array(std::make_shared<ZVertexArray>()),
-    _vbo(std::make_shared<ZGraphicsBuffer>()),
-    _normals_vbo(std::make_shared<ZGraphicsBuffer>()),
     _scale(scale)
 {
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
+    zassert(ctx, "invalid context");
+    
+    _vertex_array = ctx->create_vertex_array();
+    _vbo = ctx->create_graphics_buffer();
+    _normals_vbo = ctx->create_graphics_buffer();
+    
     const ZBufferUsage static_draw_usage = {ZBUFFER_USAGE_FREQUENCY_STATIC, ZBUFFER_USAGE_NATURE_DRAW};
     
     // setup vbo

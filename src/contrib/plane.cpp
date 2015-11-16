@@ -18,10 +18,14 @@ class ZStrokeGeometry : public ZGeometry {
 public:
     ZStrokeGeometry(const ZSize2D &bounds_sz, float stroke_w) :
         _bounds_sz(bounds_sz),
-        _stroke_w(stroke_w),
-        _varray(ZVertexArray::create()),
-        _vbo(ZGraphicsBuffer::create())
+        _stroke_w(stroke_w)
     {
+        ZRenderContext *ctx = ZRenderContext::get_current_context();
+        zassert(ctx, "invalid context");
+        
+        _varray = ctx->create_vertex_array();
+        _vbo = ctx->create_graphics_buffer();
+        
         ZBufferAttribute attr = {
             .components_per_vertex = 3,
             .component_type = ZCOMPONENT_TYPE_FLOAT,

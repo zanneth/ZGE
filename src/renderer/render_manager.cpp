@@ -21,6 +21,9 @@ ZRenderManager::ZRenderManager() :
     _initialized(false)
 {}
 
+ZRenderManager::~ZRenderManager()
+{}
+
 #pragma mark - Creating a Display
 
 ZDisplayRef ZRenderManager::create_display(const zge::ZDisplayMode &mode)
@@ -43,7 +46,7 @@ ZRenderableRef ZRenderManager::get_renderable() const { return _renderable; }
 
 void ZRenderManager::set_renderable(ZRenderableRef renderable) { _renderable = renderable; }
 
-#pragma mark - Overrides
+#pragma mark - ZSchedulable
 
 void ZRenderManager::run(uint32_t dtime)
 {
@@ -61,16 +64,11 @@ void ZRenderManager::run(uint32_t dtime)
     }
 }
 
-#pragma mark - Internal
-
 void ZRenderManager::_initialize_render_context()
 {
-    if (!_display) {
-        return;
-    }
-    
-    if (!_initialized) {
+    if (_display && !_initialized) {
         _context = ZDisplayRenderContext::create(_display);
+        _context->make_current();
         _initialized = true;
     }
 }

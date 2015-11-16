@@ -92,6 +92,10 @@ void ZRunloop::_main()
             
             schedulable->run(millseconds);
             schedulable->_last_update = time;
+            
+            if (schedulable->unschedule_after_run()) {
+                unschedule(schedulable);
+            }
         }
         
         ZTime loop_end_time = ZUtil::get_current_time();
