@@ -6,6 +6,7 @@
  */
 
 #include <zge/render_context.h>
+#include <zge/opengl.h>
 #include <zge/glutil.h>
 #include <zge/light.h>
 #include <zge/logger.h>

@@ -8,7 +8,6 @@
 #include <zge/vertex_array.h>
 #include <zge/glutil.h>
 #include <zge/logger.h>
-#include <zge/opengl.h>
 #include <zge/render_context.h>
 #include <zge/util.h>
 #include <set>

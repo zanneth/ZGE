@@ -6,7 +6,6 @@
  */
 
 #include <zge/texture.h>
-#include <zge/opengl.h>
 #include <zge/glutil.h>
 
 ZGE_BEGIN_NAMESPACE
