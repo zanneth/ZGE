@@ -39,6 +39,7 @@ EAGLContext* ZEAGLRenderContext::get_eagl_context() const
 void ZEAGLRenderContext::make_current()
 {
     [EAGLContext setCurrentContext:_eagl_context];
+    __current_context = this;
 }
 
 #pragma mark - Internal

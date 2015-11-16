@@ -13,32 +13,20 @@
 
 ZGE_BEGIN_NAMESPACE
 
-ZGraphicsBuffer::ZGraphicsBuffer(ZBufferTarget target) :
-    _buffer(ZUNALLOCATED_BUFFER),
-    _target(target)
-{
-    glGenBuffers(1, &_buffer);
-}
-
-ZGraphicsBuffer::ZGraphicsBuffer(ZGraphicsBuffer &&mv)
-{
-    _move(std::move(mv));
-}
-
-ZGraphicsBuffer& ZGraphicsBuffer::operator=(ZGraphicsBuffer &&mv)
-{
-    _move(std::move(mv));
-    return *this;
-}
+ZGraphicsBuffer::ZGraphicsBuffer(uint32_t buffer_name, ZBufferTarget target, const std::function<void(uint32_t)> &deleter) :
+    _buffer(buffer_name),
+    _target(target),
+    _deleter(deleter)
+{}
 
 ZGraphicsBuffer::~ZGraphicsBuffer()
 {
-    if (_buffer != ZUNALLOCATED_BUFFER) {
-        glDeleteBuffers(1, &_buffer);
-    }
+    _deleter(_buffer);
 }
 
 #pragma mark - Accessors
+
+uint32_t ZGraphicsBuffer::get_name() const { return _buffer; }
 
 ZBufferTarget ZGraphicsBuffer::get_target() const { return _target; }
 
@@ -61,44 +49,32 @@ void ZGraphicsBuffer::clear_attributes()
 
 #pragma mark - Loading Data
 
-void ZGraphicsBuffer::load_data(const void *data, size_t length, ZBufferUsage usage)
+void ZGraphicsBuffer::load_data(const ZData &data, ZBufferUsage usage)
 {
-    _bind();
-    
-    GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
-    GLenum glusage = ZGLUtil::gl_usage_from_buffer_usage(usage);
-    glBufferData(target, (GLsizeiptr)length, (const GLvoid *)data, glusage);
-    
-    _unbind();
+    _pending_buffer.data = data;
+    _pending_buffer.usage = usage;
 }
 
-#pragma mark - Private
-
-void ZGraphicsBuffer::_bind()
+void ZGraphicsBuffer::load_data(const void *bytes, size_t length, ZBufferUsage usage)
 {
-    GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
-    glBindBuffer(target, _buffer);
+    _pending_buffer.data = ZData(bytes, length);
+    _pending_buffer.usage = usage;
 }
 
-void ZGraphicsBuffer::_unbind()
+const ZPendingGraphicsBuffer& ZGraphicsBuffer::get_pending_buffer() const
 {
-    GLenum target = ZGLUtil::gl_target_from_buffer_target(_target);
-    glBindBuffer(target, 0);
+    return _pending_buffer;
 }
 
-void ZGraphicsBuffer::_move(ZGraphicsBuffer &&mv)
+void ZGraphicsBuffer::clear_pending_buffer()
 {
-    _buffer = mv._buffer;
-    _target = mv._target;
-    _attributes = std::move(mv._attributes);
-    
-    mv._buffer = ZUNALLOCATED_BUFFER;
-    mv._target = (ZBufferTarget)ZUNBOUND_TARGET;
+    _pending_buffer = ZPendingGraphicsBuffer();
 }
 
 #pragma mark - ZElementGraphicsBuffer
 
-ZElementGraphicsBuffer::ZElementGraphicsBuffer() : ZGraphicsBuffer(ZBUFFER_TARGET_ELEMENT_ARRAY),
+ZElementGraphicsBuffer::ZElementGraphicsBuffer(uint32_t buffer_name, const std::function<void(uint32_t)> &deleter) :
+    ZGraphicsBuffer(buffer_name, ZBUFFER_TARGET_ELEMENT_ARRAY, deleter),
     _elements_count(0),
     _indices_type(ZCOMPONENT_TYPE_UNSIGNED_INT)
 {}

@@ -9,6 +9,7 @@
 
 #include <zge/foundation.h>
 #include <zge/render_context.h>
+#include <zge/thread.h>
 
 ZGE_BEGIN_NAMESPACE
 

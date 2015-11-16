@@ -27,10 +27,12 @@
     }
 
 #define ZGE_DEFINE_SREF_TYPE(CLASSNAME) \
-    typedef std::shared_ptr<CLASSNAME> CLASSNAME##Ref; \
-    typedef std::shared_ptr<const CLASSNAME> CLASSNAME##ConstRef;
+    using CLASSNAME##Ref = std::shared_ptr<CLASSNAME>; \
+    using CLASSNAME##WeakRef = std::weak_ptr<CLASSNAME>; \
+    using CLASSNAME##ConstRef = std::shared_ptr<const CLASSNAME>;
 
 #define ZGE_FORWARD_DECLARE_SREF(CLASSNAME)						\
     class CLASSNAME;											\
     using CLASSNAME##Ref = std::shared_ptr<CLASSNAME>;			\
+    using CLASSNAME##WeakRef = std::weak_ptr<CLASSNAME>;        \
     using CLASSNAME##ConstRef = std::shared_ptr<const CLASSNAME>

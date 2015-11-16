@@ -6,6 +6,7 @@
  */
 
 #include "line.h"
+#include <zge/render_context.h>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -14,10 +15,14 @@ ZLine::ZLine(std::initializer_list<ZVector> points) :
 {}
 
 ZLine::ZLine(const std::vector<ZVector> points) :
-    _vertex_array(ZVertexArray::create()),
-    _vbo(ZGraphicsBuffer::create()),
     _points(points)
 {
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
+    zassert(ctx, "invalid context");
+    
+    _vertex_array = ctx->create_vertex_array();
+    _vbo = ctx->create_graphics_buffer();
+    
     ZBufferAttribute attr = {
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,

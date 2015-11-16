@@ -43,7 +43,7 @@ ZTextureMaterial::ZTextureMaterial(ZTextureRef texture) :
     _texture(texture)
 {
     if (_texture) {
-        _cached_texture_name = _texture->_get_texture_name();
+        _cached_texture_name = _texture->get_texture_name();
     }
 }
 
@@ -51,7 +51,7 @@ ZTextureRef ZTextureMaterial::get_texture() const { return _texture; }
 void ZTextureMaterial::set_texture(ZTextureRef texture)
 {
     _texture = texture;
-    _cached_texture_name = _texture->_get_texture_name();
+    _cached_texture_name = _texture->get_texture_name();
 }
 
 std::string ZTextureMaterial::get_shader_name() const

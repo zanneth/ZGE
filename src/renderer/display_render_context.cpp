@@ -56,12 +56,7 @@ void ZDisplayRenderContext::make_current()
 {
     SDL_Window *sdl_window = static_cast<SDL_Window *>(_impl->display->_get_sdl_window());
     SDL_GL_MakeCurrent(sdl_window, _impl->gl_context);
-    
-    ZShaderProgramRef shader_program = get_shader_program();
-    if (shader_program) {
-        shader_program->use_program();
-    }
+    __current_context = this;
 }
 
 ZGE_END_NAMESPACE
-

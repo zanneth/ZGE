@@ -109,6 +109,7 @@ void ZTextNode::_render_glyphs()
     }
     
     // create textures and nodes for glyph
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
     const size_t bytes_per_pixel = 4;
     const ZImageFormat format = {
         .bytes_per_pixel = bytes_per_pixel,
@@ -142,7 +143,7 @@ void ZTextNode::_render_glyphs()
         }
         
         ZImageRef texture_image = std::make_shared<ZImage>(dst_pixbuf_data, glyph.size, format);
-        ZTextureRef texture = std::make_shared<ZTexture>(texture_image);
+        ZTextureRef texture = ctx->create_texture(texture_image);
         ZSpriteNodeRef glyph_node = std::make_shared<ZSpriteNode>(texture);
         glyph_node->set_size(glyph.size);
         glyph_node->set_color(_text_color);

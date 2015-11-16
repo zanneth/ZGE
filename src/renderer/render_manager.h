@@ -19,12 +19,10 @@
 
 ZGE_BEGIN_NAMESPACE
 
-class ZRenderManager : public ZSchedulable,
-                       public ZNoncopyable,
-                       public std::enable_shared_from_this<ZRenderManager>
-{
+class ZRenderManager : public ZNoncopyable, public ZSchedulable {
 public:
     ZRenderManager();
+    ~ZRenderManager();
     
     ZGE_DEFINE_SREF_FUNCTIONS(ZRenderManager);
     
@@ -43,11 +41,12 @@ public:
     /// Sets the object to be rendered.
     void set_renderable(ZRenderableRef renderable);
     
-    /* Schedulable Overrides */
+    /// Schedulable override.
     void run(uint32_t dtime) override;
     
 private:
     void _initialize_render_context();
+    void _run(uint32_t dtime);
     
 private:
     ZDisplayRef         _display;

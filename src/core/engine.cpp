@@ -44,6 +44,7 @@ void ZEngine::initialize(ZRunloopRef runloop)
         runloop->schedule(_render_manager);
         runloop->schedule(_audio_manager);
         
+        // setup root responder on input manager
         _root_responder = ZResponder::create(std::bind(&ZEngine::_handle_input_event, this, std::placeholders::_1));
         _input_manager->add_responder(_root_responder);
         

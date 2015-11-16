@@ -7,16 +7,21 @@
 
 #include <zge/quad.h>
 #include <zge/graphics_buffer.h>
+#include <zge/render_context.h>
 
 ZGE_BEGIN_NAMESPACE
 
 ZQuad::ZQuad(ZRect rect) :
-    _vertex_array(new ZVertexArray),
-    _vbo(new ZGraphicsBuffer),
-    _texcoord_vbo(new ZGraphicsBuffer),
     _quad_rect(rect),
     _texcoord_rect({{0.0, 0.0}, {1.0, 1.0}})
 {
+    ZRenderContext *ctx = ZRenderContext::get_current_context();
+    zassert(ctx, "invalid context");
+    
+    _vertex_array = ctx->create_vertex_array();
+    _vbo = ctx->create_graphics_buffer();
+    _texcoord_vbo = ctx->create_graphics_buffer();
+    
     ZBufferAttribute attr = {
         .components_per_vertex = 3,
         .component_type = ZCOMPONENT_TYPE_FLOAT,

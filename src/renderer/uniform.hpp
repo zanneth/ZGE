@@ -11,7 +11,7 @@
 ZGE_BEGIN_NAMESPACE
 
 template <typename T, unsigned count>
-ZUniform<T, count>::ZUniform(std::string name, GLint location, GLenum type) :
+ZUniform<T, count>::ZUniform(std::string name, int32_t location, uint32_t type) :
     ZUniformBase(name, location, type)
 {
     bzero(_values, count * sizeof(T));
@@ -52,10 +52,8 @@ const void* ZUniform<T, count>::get_data(size_t *out_length) const
 template <typename T, unsigned count>
 void ZUniform<T, count>::set_data(const void *data)
 {
-    // FIXME: don't use observers here. instead, mark a dirty bit and context should
-    // update all dirty uniforms.
     memcpy(_values, data, count * sizeof(T));
-    notify_observers(shared_from_this());
+    _dirty = true;
 }
 
 ZGE_END_NAMESPACE
