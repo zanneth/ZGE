@@ -88,6 +88,12 @@ public:
     /// Allocates a shader.
     ZShaderRef create_shader(ZShaderType type);
     
+    /// Allocates a texture object.
+    ZTextureRef create_texture(ZImageRef image);
+    
+    /// Allocates a texture object, reading image data from disk first.
+    ZTextureRef create_texture(const std::string &path);
+    
     // -------------------------------------------------------------------------
     
     /// Returns the viewport used during rendering.

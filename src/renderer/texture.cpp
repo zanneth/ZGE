@@ -11,62 +11,33 @@
 
 ZGE_BEGIN_NAMESPACE
 
-struct _ZTextureImpl {
-    GLuint name;
-    ZSize2D size;
-    ZRect coordinate_rect;
-};
-
-ZTexture::ZTexture(ZImageRef image) :
-    _impl(new _ZTextureImpl)
-{
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    
-    ZSize2D img_size = image->get_size();
-    ZDataRef img_data = image->get_pixel_data();
-    ZImageFormat img_format = image->get_format();
-    GLenum gl_format = ZGLUtil::gl_format_from_pixel_format(img_format.pixel_format);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_size.width, img_size.height, 0, gl_format, GL_UNSIGNED_BYTE, img_data->get_data());
-    glBindTexture(GL_TEXTURE_2D, 0);
-    
-    _impl->name = texture;
-    _impl->size = img_size;
-    _impl->coordinate_rect = {{0.0, 0.0}, {1.0, 1.0}};
-}
-
-ZTexture::ZTexture(const std::string &texture_path) :
-    ZTexture(ZImage::create(texture_path))
+ZTexture::ZTexture(uint32_t name, ZImageRef image, const std::function<void(uint32_t)> &deleter) :
+    _name(name),
+    _deleter(deleter),
+    _size(image->get_size()),
+    _coordinate_rect({{0.0, 0.0}, {1.0, 1.0}})
 {}
 
 ZTexture::~ZTexture()
 {
-    glDeleteTextures(1, &(_impl->name));
+    _deleter(_name);
 }
 
 #pragma mark -
 
+uint32_t ZTexture::get_texture_name() const
+{
+    return _name;
+}
+
 ZSize2D ZTexture::get_size() const
 {
-    return _impl->size;
+    return _size;
 }
 
 ZRect ZTexture::get_texture_rect() const
 {
-    return _impl->coordinate_rect;
-}
-
-#pragma mark - Private
-
-uint32_t ZTexture::_get_texture_name() const
-{
-    return _impl->name;
+    return _coordinate_rect;
 }
 
 ZGE_END_NAMESPACE

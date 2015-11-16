@@ -70,7 +70,7 @@ ZVertexArrayRef ZRenderContext::create_vertex_array()
     GLuint vao;
     glGenVertexArrays(1, &vao);
     
-    auto deleter = [this](uint32_t vao){
+    auto deleter = [this](uint32_t vao) {
         glDeleteVertexArrays(1, &vao);
     };
     
@@ -82,7 +82,7 @@ ZGraphicsBufferRef ZRenderContext::create_graphics_buffer(ZBufferTarget target)
     GLuint buffer_name;
     glGenBuffers(1, &buffer_name);
     
-    auto deleter = [this](uint32_t buffer_name){
+    auto deleter = [this](uint32_t buffer_name) {
         glDeleteBuffers(1, &buffer_name);
     };
 
@@ -94,7 +94,7 @@ ZElementGraphicsBufferRef ZRenderContext::create_elements_buffer()
     GLuint buffer_name;
     glGenBuffers(1, &buffer_name);
     
-    auto deleter = [this](uint32_t buffer_name){
+    auto deleter = [this](uint32_t buffer_name) {
         glDeleteBuffers(1, &buffer_name);
     };
     
@@ -178,7 +178,7 @@ ZShaderRef ZRenderContext::create_shader(ZShaderType type)
     if (gltype != 0) {
         uint32_t handle = glCreateShader(gltype);
         
-        auto deleter = [](uint32_t handle){
+        auto deleter = [](uint32_t handle) {
             glDeleteShader(handle);
         };
         auto load = [](uint32_t handle, const std::string &src) {
@@ -221,6 +221,36 @@ ZShaderRef ZRenderContext::create_shader(ZShaderType type)
     }
     
     return shader;
+}
+
+ZTextureRef ZRenderContext::create_texture(ZImageRef image)
+{
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    
+    ZSize2D img_size = image->get_size();
+    ZDataRef img_data = image->get_pixel_data();
+    ZImageFormat img_format = image->get_format();
+    GLenum gl_format = ZGLUtil::gl_format_from_pixel_format(img_format.pixel_format);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_size.width, img_size.height, 0, gl_format, GL_UNSIGNED_BYTE, img_data->get_data());
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    auto deleter = [](uint32_t tex_name) {
+        glDeleteTextures(1, &tex_name);
+    };
+    
+    return ZTextureRef(new ZTexture(texture, image, deleter));
+}
+
+ZTextureRef ZRenderContext::create_texture(const std::string &path)
+{
+    return create_texture(ZImage::create(path));
 }
 
 void ZRenderContext::initialize_shaders()
@@ -336,7 +366,7 @@ void ZRenderContext::set_depth_testing_enabled(bool enabled)
 
 void ZRenderContext::bind_texture(ZTextureRef texture)
 {
-    GLuint texture_name = texture->_get_texture_name();
+    GLuint texture_name = texture->get_texture_name();
     glBindTexture(GL_TEXTURE_2D, texture_name);
     _bound_texture = texture;
     
