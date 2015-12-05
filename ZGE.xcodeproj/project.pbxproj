@@ -471,6 +471,8 @@
 		0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		0C14B94D1C1292C600BDC892 /* zprelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C14B94C1C1292C600BDC892 /* zprelude.framework */; };
+		0C14B94E1C1292CF00BDC892 /* zprelude.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C14B94C1C1292C600BDC892 /* zprelude.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C1C6E981A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
 		0C1C6E991A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
 		0C1C6E9A1A8455A8005710AA /* layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1C6E971A8455A8005710AA /* layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1005,6 +1007,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0C14B94E1C1292CF00BDC892 /* zprelude.framework in CopyFiles */,
 				0CA36B3919F206E3003543FE /* libfreetype.6.dylib in CopyFiles */,
 				0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */,
 				0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */,
@@ -1368,6 +1371,7 @@
 		0C10F95619D3C8800010815F /* ZGE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZGE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C10F95919D3C8800010815F /* OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		0C10FB7A19D3CB540010815F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
+		0C14B94C1C1292C600BDC892 /* zprelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = zprelude.framework; path = "../../../Library/Developer/Xcode/DerivedData/ZGEDevelopment-ejpmgkubuadiavcruovwbmwslzqh/Build/Products/Debug/zprelude.framework"; sourceTree = "<group>"; };
 		0C1C6E961A8455A8005710AA /* layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = layout.cpp; path = src/graph/layout.cpp; sourceTree = SOURCE_ROOT; };
 		0C1C6E971A8455A8005710AA /* layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = layout.h; path = src/graph/layout.h; sourceTree = SOURCE_ROOT; };
 		0C1F28B817C1C3FF00CA03C4 /* vertex_array.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_array.cpp; sourceTree = "<group>"; };
@@ -1643,6 +1647,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C14B94D1C1292C600BDC892 /* zprelude.framework in Frameworks */,
 				0C10FB7B19D3CB540010815F /* OpenGL.framework in Frameworks */,
 				0C10FB7719D3CB4B0010815F /* lib3ds-2.0.dylib in Frameworks */,
 				0CA36B3819F206D0003543FE /* libfreetype.6.dylib in Frameworks */,
@@ -2736,6 +2741,7 @@
 		563B6EC214B2FD8500004C6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C14B94C1C1292C600BDC892 /* zprelude.framework */,
 				0C42CC0B1A5CFD7C00AA2566 /* QuartzCore.framework */,
 				0C42CC051A5CFCEA00AA2566 /* Foundation.framework */,
 				0C42CC031A5CFCE100AA2566 /* AudioToolbox.framework */,
