@@ -143,9 +143,12 @@ ZMatrix ZMatrix::operator/(const float scalar) const
 
 ZMatrix ZMatrix::identity()
 {
-    ZMatrix identity;
-    identity._impl->data = Eigen::Matrix4f::Identity();
-    return identity;
+    static ZMatrix __identity;
+    static std::once_flag __once;
+    std::call_once(__once, [] {
+        __identity._impl->data = Eigen::Matrix4f::Identity();
+    });
+    return __identity;
 }
 
 ZMatrix ZMatrix::translation(float tx, float ty, float tz)

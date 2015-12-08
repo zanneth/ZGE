@@ -7,11 +7,13 @@
  
 #pragma once
 
-#include <cstdint>
 #include <zge/defines.h>
 #include <zge/schedulable.h>
 #include <zge/noncopyable.h>
+#include <cstdint>
+#include <chrono>
 #include <vector>
+#include <zprelude/zprelude.h>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -38,13 +40,17 @@ public:
     friend class ZApplication;
 
 private:
+    void _run();
     void _main();
     
 private:
     std::vector<ZSchedulableRef> _schedulables;
-    bool _running;
-    bool _on_main_thread;
-    std::mutex _mutex;
+    zrunloop    *_runloop;
+    ztimer      *_timer;
+    std::mutex   _mutex;
+    
+    bool         _on_main_thread;
+    bool         _running;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZRunloop);

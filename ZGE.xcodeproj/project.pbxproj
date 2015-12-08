@@ -473,6 +473,10 @@
 		0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C14B94D1C1292C600BDC892 /* zprelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C14B94C1C1292C600BDC892 /* zprelude.framework */; };
 		0C14B94E1C1292CF00BDC892 /* zprelude.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C14B94C1C1292C600BDC892 /* zprelude.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0C14B9511C16B90A00BDC892 /* perf_monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C14B94F1C16B90A00BDC892 /* perf_monitor.cpp */; };
+		0C14B9521C16B90A00BDC892 /* perf_monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C14B94F1C16B90A00BDC892 /* perf_monitor.cpp */; };
+		0C14B9531C16B90A00BDC892 /* perf_monitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C14B9501C16B90A00BDC892 /* perf_monitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C14B9541C16B90A00BDC892 /* perf_monitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C14B9501C16B90A00BDC892 /* perf_monitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C1C6E981A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
 		0C1C6E991A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
 		0C1C6E9A1A8455A8005710AA /* layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1C6E971A8455A8005710AA /* layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1372,6 +1376,8 @@
 		0C10F95919D3C8800010815F /* OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OSX-Info.plist"; sourceTree = "<group>"; };
 		0C10FB7A19D3CB540010815F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		0C14B94C1C1292C600BDC892 /* zprelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = zprelude.framework; path = "../../../Library/Developer/Xcode/DerivedData/ZGEDevelopment-ejpmgkubuadiavcruovwbmwslzqh/Build/Products/Debug/zprelude.framework"; sourceTree = "<group>"; };
+		0C14B94F1C16B90A00BDC892 /* perf_monitor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = perf_monitor.cpp; sourceTree = "<group>"; };
+		0C14B9501C16B90A00BDC892 /* perf_monitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = perf_monitor.h; sourceTree = "<group>"; };
 		0C1C6E961A8455A8005710AA /* layout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = layout.cpp; path = src/graph/layout.cpp; sourceTree = SOURCE_ROOT; };
 		0C1C6E971A8455A8005710AA /* layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = layout.h; path = src/graph/layout.h; sourceTree = SOURCE_ROOT; };
 		0C1F28B817C1C3FF00CA03C4 /* vertex_array.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vertex_array.cpp; sourceTree = "<group>"; };
@@ -2581,6 +2587,8 @@
 				0C21E5E918C2AC80009E508D /* glutil.cpp */,
 				0C50D3D516D208A900E43D7B /* logger.h */,
 				0C50D3D416D208A900E43D7B /* logger.cpp */,
+				0C14B9501C16B90A00BDC892 /* perf_monitor.h */,
+				0C14B94F1C16B90A00BDC892 /* perf_monitor.cpp */,
 				0C50D3D916D208A900E43D7B /* util.h */,
 				0C50D3D816D208A900E43D7B /* util.cpp */,
 			);
@@ -2866,6 +2874,7 @@
 				0C10FA5219D3CA770010815F /* Flagged.h in Headers */,
 				0C10FA5319D3CA770010815F /* ForceAlignedAccess.h in Headers */,
 				0C10FA5419D3CA770010815F /* Functors.h in Headers */,
+				0C14B9531C16B90A00BDC892 /* perf_monitor.h in Headers */,
 				0C10FA5519D3CA770010815F /* Fuzzy.h in Headers */,
 				0C10FA5619D3CA770010815F /* GeneralProduct.h in Headers */,
 				0CE9FF991A845832001B19EE /* box_layout.h in Headers */,
@@ -3516,6 +3525,7 @@
 				0C42CB681A5CE3E800AA2566 /* StdVector.h in Headers */,
 				0C42CB691A5CE3E800AA2566 /* SuperLUSupport.h in Headers */,
 				0C42CB6A1A5CE3E800AA2566 /* JacobiSVD.h in Headers */,
+				0C14B9541C16B90A00BDC892 /* perf_monitor.h in Headers */,
 				0C42CB6B1A5CE3E800AA2566 /* JacobiSVD_MKL.h in Headers */,
 				0C42CB6C1A5CE3E800AA2566 /* UpperBidiagonalization.h in Headers */,
 				0C42CB6D1A5CE3E800AA2566 /* UmfPackSupport.h in Headers */,
@@ -3769,6 +3779,7 @@
 				0C10F9B319D3C91D0010815F /* input_manager.cpp in Sources */,
 				0C10F9B519D3C91D0010815F /* responder.cpp in Sources */,
 				0C69589819F3874700208B27 /* glyph.cpp in Sources */,
+				0C14B9511C16B90A00BDC892 /* perf_monitor.cpp in Sources */,
 				0C10F9BA19D3C91D0010815F /* image.cpp in Sources */,
 				0C10F9BC19D3C91D0010815F /* light.cpp in Sources */,
 				0C10F9BF19D3C91D0010815F /* render_context.cpp in Sources */,
@@ -3833,6 +3844,7 @@
 				0C42CA1A1A5CE3E800AA2566 /* input_manager.cpp in Sources */,
 				0C42CA1B1A5CE3E800AA2566 /* responder.cpp in Sources */,
 				0C42CA1C1A5CE3E800AA2566 /* glyph.cpp in Sources */,
+				0C14B9521C16B90A00BDC892 /* perf_monitor.cpp in Sources */,
 				0C42CA1E1A5CE3E800AA2566 /* image.cpp in Sources */,
 				0C42CA1F1A5CE3E800AA2566 /* light.cpp in Sources */,
 				0C42CA201A5CE3E800AA2566 /* render_context.cpp in Sources */,
