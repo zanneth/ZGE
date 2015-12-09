@@ -59,7 +59,7 @@ void ZRenderManager::run(uint32_t dtime)
         _display->update(dtime);
     }
     
-    _last_frame_drawn = now;
+    _last_frame_drawn = ZUtil::get_current_time();
 }
 
 void ZRenderManager::_initialize_render_context()
