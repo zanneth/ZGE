@@ -11,7 +11,6 @@
 #include <zge/defines.h>
 #include <zge/display.h>
 #include <zge/noncopyable.h>
-#include <zge/perf_monitor.h>
 #include <zge/render_context.h>
 #include <zge/renderable.h>
 #include <zge/schedulable.h>
@@ -53,7 +52,7 @@ private:
     ZDisplayRef         _display;
     ZRenderContextRef   _context;
     ZRenderableRef      _renderable;
-    ZPerformanceMonitor _perf_monitor;
+    ZTime               _last_frame_drawn;
     bool                _initialized;
 };
 

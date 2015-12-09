@@ -50,8 +50,6 @@ void ZRenderManager::set_renderable(ZRenderableRef renderable) { _renderable = r
 
 void ZRenderManager::run(uint32_t dtime)
 {
-    _perf_monitor.log_event(ZPERF_EVENT_FRAME_BEGAN);
-    
     if (_context && _renderable) {
         _context->prepare_render();
         _renderable->render(_context);
@@ -61,7 +59,7 @@ void ZRenderManager::run(uint32_t dtime)
         _display->update(dtime);
     }
     
-    _perf_monitor.log_event(ZPERF_EVENT_FRAME_ENDED);
+    _last_frame_drawn = now;
 }
 
 void ZRenderManager::_initialize_render_context()
