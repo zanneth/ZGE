@@ -41,6 +41,9 @@ public:
     /// Sets the object to be rendered.
     void set_renderable(ZRenderableRef renderable);
     
+    /// Returns the most recently calculated frames per second metric.
+    float get_current_frames_per_second() const;
+    
     /// Schedulable override.
     void run(uint32_t dtime) override;
     
@@ -53,6 +56,7 @@ private:
     ZRenderContextRef   _context;
     ZRenderableRef      _renderable;
     ZTime               _last_frame_drawn;
+    float               _current_fps;
     bool                _initialized;
 };
 

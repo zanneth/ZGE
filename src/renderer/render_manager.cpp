@@ -18,6 +18,7 @@ ZRenderManager::ZRenderManager() :
     _display(nullptr),
     _context(nullptr),
     _renderable(nullptr),
+    _current_fps(0.0),
     _initialized(false)
 {}
 
@@ -46,6 +47,8 @@ ZRenderableRef ZRenderManager::get_renderable() const { return _renderable; }
 
 void ZRenderManager::set_renderable(ZRenderableRef renderable) { _renderable = renderable; }
 
+float ZRenderManager::get_current_frames_per_second() const { return _current_fps; }
+
 #pragma mark - ZSchedulable
 
 void ZRenderManager::run(uint32_t dtime)
@@ -59,6 +62,9 @@ void ZRenderManager::run(uint32_t dtime)
         _display->update(dtime);
     }
     
+    ZTime now = ZUtil::get_current_time();
+    ZTimeInterval dur = now - _last_frame_drawn;
+    _current_fps = (1.0 / dur.count());
     _last_frame_drawn = ZUtil::get_current_time();
 }
 
