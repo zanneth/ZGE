@@ -70,8 +70,6 @@ void ZRunloop::stop()
 
 void ZRunloop::schedule(ZSchedulableRef schedulable)
 {
-    std::lock_guard<std::mutex> lock(_mutex);
-    
     schedulable->_run_loop = this;
     schedulable->on_schedule();
     
@@ -80,8 +78,6 @@ void ZRunloop::schedule(ZSchedulableRef schedulable)
 
 void ZRunloop::unschedule(ZSchedulableRef schedulable)
 {
-    std::lock_guard<std::mutex> lock(_mutex);
-    
     auto itr = std::find(_schedulables.begin(), _schedulables.end(), schedulable);
     if (itr != _schedulables.end()) {
         schedulable->on_unschedule();
@@ -96,14 +92,8 @@ void ZRunloop::unschedule(ZSchedulableRef schedulable)
 void ZRunloop::_run()
 {
     using namespace std::chrono;
-    std::vector<ZSchedulableRef> schedulables;
     
-    {
-        std::lock_guard<std::mutex> lock(_mutex);
-        schedulables = _schedulables;
-    }
-    
-    for (ZSchedulableRef schedulable : schedulables) {
+    for (ZSchedulableRef schedulable : _schedulables) {
         ZTime time = ZUtil::get_current_time();
         ZTime last_update = schedulable->_last_update;
         ZTimeInterval dtime = time - last_update;

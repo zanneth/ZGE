@@ -47,7 +47,6 @@ private:
     std::vector<ZSchedulableRef> _schedulables;
     zrunloop    *_runloop;
     ztimer      *_timer;
-    std::mutex   _mutex;
     
     bool         _on_main_thread;
     bool         _running;
