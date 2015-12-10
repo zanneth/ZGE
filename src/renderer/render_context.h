@@ -13,7 +13,6 @@
 #include <zge/shader.h>
 #include <zge/shader_program.h>
 #include <zge/texture.h>
-#include <zge/thread.h>
 #include <zge/types.h>
 #include <zge/uniform.h>
 #include <zge/vertex_array.h>

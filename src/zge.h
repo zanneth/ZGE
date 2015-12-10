@@ -50,7 +50,6 @@
 #include <zge/resource_bundle.h>
 #include <zge/responder.h>
 #include <zge/run_loop.h>
-#include <zge/semaphore.h>
 #include <zge/scene.h>
 #include <zge/schedulable.h>
 #include <zge/shader.h>
@@ -60,7 +59,6 @@
 #include <zge/text_node.h>
 #include <zge/texture.h>
 #include <zge/timer.h>
-#include <zge/thread.h>
 #include <zge/types.h>
 #include <zge/uniform.h>
 #include <zge/util.h>

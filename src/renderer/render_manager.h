@@ -14,7 +14,6 @@
 #include <zge/render_context.h>
 #include <zge/renderable.h>
 #include <zge/schedulable.h>
-#include <zge/thread.h>
 #include <zge/types.h>
 
 ZGE_BEGIN_NAMESPACE

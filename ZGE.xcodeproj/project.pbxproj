@@ -23,10 +23,8 @@
 		0C10F98C19D3C91D0010815F /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AD16D208A900E43D7B /* engine.cpp */; };
 		0C10F99219D3C91D0010815F /* resource_bundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C82C32D191C87FB006E0295 /* resource_bundle.cpp */; };
 		0C10F99419D3C91D0010815F /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3BC16D208A900E43D7B /* run_loop.cpp */; };
-		0C10F99619D3C91D0010815F /* semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0634A419D2809A00832237 /* semaphore.cpp */; };
 		0C10F99919D3C91D0010815F /* schedulable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0634A219D27E8700832237 /* schedulable.cpp */; };
 		0C10F99B19D3C91D0010815F /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCD2F59176128AC00F497CF /* timer.cpp */; };
-		0C10F99D19D3C91D0010815F /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C06349B19D26B5000832237 /* thread.cpp */; };
 		0C10F9A019D3C91D0010815F /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C62280E18610B6F00DA3182 /* matrix.cpp */; };
 		0C10F9A319D3C91D0010815F /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA262661863F71A003E8D37 /* vector.cpp */; };
 		0C10F9A519D3C91D0010815F /* action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C89D4421931424400F1D9DB /* action.cpp */; };
@@ -75,11 +73,9 @@
 		0C10F9ED19D3C9BE0010815F /* observable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0CD633A7188F8E360061D259 /* observable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9EE19D3C9BE0010815F /* resource_bundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C82C32E191C87FB006E0295 /* resource_bundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9EF19D3C9BE0010815F /* run_loop.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BD16D208A900E43D7B /* run_loop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C10F9F019D3C9BF0010815F /* semaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0634A519D2809A00832237 /* semaphore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9F119D3C9BF0010815F /* schedulable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BE16D208A900E43D7B /* schedulable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9F219D3C9BF0010815F /* schedulable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C06349F19D26DE100832237 /* schedulable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9F319D3C9BF0010815F /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCD2F5A176128AC00F497CF /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C10F9F419D3C9BF0010815F /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C06349C19D26B5000832237 /* thread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9F519D3C9BF0010815F /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BF16D208A900E43D7B /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9F619D3C9BF0010815F /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C62280F18610B6F00DA3182 /* matrix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C10F9F719D3C9BF0010815F /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA262671863F71A003E8D37 /* vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -495,10 +491,8 @@
 		0C42CA091A5CE3E800AA2566 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3AD16D208A900E43D7B /* engine.cpp */; };
 		0C42CA0A1A5CE3E800AA2566 /* resource_bundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C82C32D191C87FB006E0295 /* resource_bundle.cpp */; };
 		0C42CA0B1A5CE3E800AA2566 /* run_loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C50D3BC16D208A900E43D7B /* run_loop.cpp */; };
-		0C42CA0C1A5CE3E800AA2566 /* semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0634A419D2809A00832237 /* semaphore.cpp */; };
 		0C42CA0D1A5CE3E800AA2566 /* schedulable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C0634A219D27E8700832237 /* schedulable.cpp */; };
 		0C42CA0E1A5CE3E800AA2566 /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCD2F59176128AC00F497CF /* timer.cpp */; };
-		0C42CA0F1A5CE3E800AA2566 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C06349B19D26B5000832237 /* thread.cpp */; };
 		0C42CA101A5CE3E800AA2566 /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C62280E18610B6F00DA3182 /* matrix.cpp */; };
 		0C42CA111A5CE3E800AA2566 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA262661863F71A003E8D37 /* vector.cpp */; };
 		0C42CA121A5CE3E800AA2566 /* action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C89D4421931424400F1D9DB /* action.cpp */; };
@@ -549,11 +543,9 @@
 		0C42CA471A5CE3E800AA2566 /* observable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0CD633A7188F8E360061D259 /* observable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA481A5CE3E800AA2566 /* resource_bundle.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C82C32E191C87FB006E0295 /* resource_bundle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA491A5CE3E800AA2566 /* run_loop.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BD16D208A900E43D7B /* run_loop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C42CA4A1A5CE3E800AA2566 /* semaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0634A519D2809A00832237 /* semaphore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA4B1A5CE3E800AA2566 /* schedulable.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BE16D208A900E43D7B /* schedulable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA4C1A5CE3E800AA2566 /* schedulable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0C06349F19D26DE100832237 /* schedulable.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA4D1A5CE3E800AA2566 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCD2F5A176128AC00F497CF /* timer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C42CA4E1A5CE3E800AA2566 /* thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C06349C19D26B5000832237 /* thread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA4F1A5CE3E800AA2566 /* types.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C50D3BF16D208A900E43D7B /* types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA501A5CE3E800AA2566 /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C62280F18610B6F00DA3182 /* matrix.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C42CA511A5CE3E800AA2566 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CA262671863F71A003E8D37 /* vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1031,12 +1023,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C06349B19D26B5000832237 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread.cpp; sourceTree = "<group>"; };
-		0C06349C19D26B5000832237 /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
 		0C06349F19D26DE100832237 /* schedulable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = schedulable.hpp; sourceTree = "<group>"; };
 		0C0634A219D27E8700832237 /* schedulable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = schedulable.cpp; sourceTree = "<group>"; };
-		0C0634A419D2809A00832237 /* semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = semaphore.cpp; sourceTree = "<group>"; };
-		0C0634A519D2809A00832237 /* semaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = semaphore.h; sourceTree = "<group>"; };
 		0C064489177029CC004AAA20 /* opengl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
 		0C07BD7317C0496A00C38084 /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
 		0C07BD7417C0496A00C38084 /* color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color.h; sourceTree = "<group>"; };
@@ -2496,15 +2484,11 @@
 				0CE70AA61A611EF800663A32 /* resource_bundle_osx.mm */,
 				0C50D3BD16D208A900E43D7B /* run_loop.h */,
 				0C50D3BC16D208A900E43D7B /* run_loop.cpp */,
-				0C0634A519D2809A00832237 /* semaphore.h */,
-				0C0634A419D2809A00832237 /* semaphore.cpp */,
 				0C50D3BE16D208A900E43D7B /* schedulable.h */,
 				0C06349F19D26DE100832237 /* schedulable.hpp */,
 				0C0634A219D27E8700832237 /* schedulable.cpp */,
 				0CCD2F5A176128AC00F497CF /* timer.h */,
 				0CCD2F59176128AC00F497CF /* timer.cpp */,
-				0C06349C19D26B5000832237 /* thread.h */,
-				0C06349B19D26B5000832237 /* thread.cpp */,
 				0C50D3BF16D208A900E43D7B /* types.h */,
 				0CE99E471A01EC36009DF9BB /* types.cpp */,
 			);
@@ -2792,12 +2776,10 @@
 				0C10F9ED19D3C9BE0010815F /* observable.hpp in Headers */,
 				0C10F9EE19D3C9BE0010815F /* resource_bundle.h in Headers */,
 				0C10F9EF19D3C9BE0010815F /* run_loop.h in Headers */,
-				0C10F9F019D3C9BF0010815F /* semaphore.h in Headers */,
 				0C10F9F119D3C9BF0010815F /* schedulable.h in Headers */,
 				0C10F9F219D3C9BF0010815F /* schedulable.hpp in Headers */,
 				0C10F9F319D3C9BF0010815F /* timer.h in Headers */,
 				0CDEB0731B77F23000E4032A /* constants.h in Headers */,
-				0C10F9F419D3C9BF0010815F /* thread.h in Headers */,
 				0C10F9F519D3C9BF0010815F /* types.h in Headers */,
 				0C10F9F619D3C9BF0010815F /* matrix.h in Headers */,
 				0C10F9F719D3C9BF0010815F /* vector.h in Headers */,
@@ -3222,11 +3204,9 @@
 				0C42CA471A5CE3E800AA2566 /* observable.hpp in Headers */,
 				0C42CA481A5CE3E800AA2566 /* resource_bundle.h in Headers */,
 				0C42CA491A5CE3E800AA2566 /* run_loop.h in Headers */,
-				0C42CA4A1A5CE3E800AA2566 /* semaphore.h in Headers */,
 				0C42CA4B1A5CE3E800AA2566 /* schedulable.h in Headers */,
 				0C42CA4C1A5CE3E800AA2566 /* schedulable.hpp in Headers */,
 				0C42CA4D1A5CE3E800AA2566 /* timer.h in Headers */,
-				0C42CA4E1A5CE3E800AA2566 /* thread.h in Headers */,
 				0C42CA4F1A5CE3E800AA2566 /* types.h in Headers */,
 				0C42CA501A5CE3E800AA2566 /* matrix.h in Headers */,
 				0C42CA511A5CE3E800AA2566 /* vector.h in Headers */,
@@ -3746,12 +3726,10 @@
 				0C10F98C19D3C91D0010815F /* engine.cpp in Sources */,
 				0C10F99219D3C91D0010815F /* resource_bundle.cpp in Sources */,
 				0C10F99419D3C91D0010815F /* run_loop.cpp in Sources */,
-				0C10F99619D3C91D0010815F /* semaphore.cpp in Sources */,
 				0C10F99919D3C91D0010815F /* schedulable.cpp in Sources */,
 				0C42CCA11A5D041900AA2566 /* display_render_context.cpp in Sources */,
 				0CE9FF971A845832001B19EE /* box_layout.cpp in Sources */,
 				0C10F99B19D3C91D0010815F /* timer.cpp in Sources */,
-				0C10F99D19D3C91D0010815F /* thread.cpp in Sources */,
 				0CD4858E1BF8633600AD5659 /* graphics_buffer.cpp in Sources */,
 				0C10F9A019D3C91D0010815F /* matrix.cpp in Sources */,
 				0C10F9A319D3C91D0010815F /* vector.cpp in Sources */,
@@ -3812,13 +3790,11 @@
 				0C42CA091A5CE3E800AA2566 /* engine.cpp in Sources */,
 				0C42CA0A1A5CE3E800AA2566 /* resource_bundle.cpp in Sources */,
 				0C42CA0B1A5CE3E800AA2566 /* run_loop.cpp in Sources */,
-				0C42CA0C1A5CE3E800AA2566 /* semaphore.cpp in Sources */,
 				0C42CA0D1A5CE3E800AA2566 /* schedulable.cpp in Sources */,
 				0C42CA0E1A5CE3E800AA2566 /* timer.cpp in Sources */,
 				0CE9FF981A845832001B19EE /* box_layout.cpp in Sources */,
 				0CD4858F1BF8633600AD5659 /* graphics_buffer.cpp in Sources */,
 				0C71922F1A80070900A2073A /* line.cpp in Sources */,
-				0C42CA0F1A5CE3E800AA2566 /* thread.cpp in Sources */,
 				0C42CA101A5CE3E800AA2566 /* matrix.cpp in Sources */,
 				0C42CA111A5CE3E800AA2566 /* vector.cpp in Sources */,
 				0C42CA121A5CE3E800AA2566 /* action.cpp in Sources */,
