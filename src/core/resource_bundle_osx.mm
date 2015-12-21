@@ -11,7 +11,7 @@
 
 ZGE_BEGIN_NAMESPACE
 
-ZResourceBundle* ZResourceBundle::get_library_bundle()
+const ZResourceBundle* ZResourceBundle::get_library_bundle()
 {
     NSBundle *frmwk_bundle = [NSBundle bundleWithIdentifier:@"com.zanneth.ZGE"];
     std::string base_path = [[frmwk_bundle resourcePath] UTF8String];

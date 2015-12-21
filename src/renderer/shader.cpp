@@ -150,7 +150,7 @@ void ZShader::_include_directive_handler(const std::string &input, std::ostrings
     
     bool is_match = std::regex_search(input, include_match, include_syntax_re);
     if (is_match && include_match.size() >= 1) {
-        ZResourceBundle *res_bundle = ZResourceBundle::get_main_bundle();
+        const ZResourceBundle *res_bundle = ZResourceBundle::get_main_bundle();
         std::string source_filename = include_match[1];
         std::string source_dirname = res_bundle->get_dirname(_shader_source_path);
         std::string source_path = res_bundle->append_path_component(source_dirname, source_filename);

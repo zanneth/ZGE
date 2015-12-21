@@ -20,7 +20,7 @@ ZResourceBundle::ZResourceBundle(std::string path) :
 
 #pragma mark -
 
-ZResourceBundle* ZResourceBundle::get_main_bundle()
+const ZResourceBundle* ZResourceBundle::get_main_bundle()
 {
     char path_separator = '\0';
     std::string main_bundle_path = _get_main_bundle_path(&path_separator);
@@ -40,12 +40,12 @@ void ZResourceBundle::set_bundle_path(const std::string &path)
     _base_path = path;
 }
 
-std::string ZResourceBundle::get_path_for_resource(std::string filename)
+std::string ZResourceBundle::get_path_for_resource(std::string filename) const
 {
     return append_path_component(_base_path, filename);
 }
 
-std::string ZResourceBundle::append_path_component(std::string path, std::string component)
+std::string ZResourceBundle::append_path_component(std::string path, std::string component) const
 {
     std::string result;
     size_t len = path.size();
@@ -59,7 +59,7 @@ std::string ZResourceBundle::append_path_component(std::string path, std::string
     return result;
 }
 
-std::string ZResourceBundle::append_path_components(std::string path, std::vector<std::string> components)
+std::string ZResourceBundle::append_path_components(std::string path, std::vector<std::string> components) const
 {
     for (std::string component : components) {
         if (path.back() != _path_separator) {
@@ -71,7 +71,7 @@ std::string ZResourceBundle::append_path_components(std::string path, std::vecto
     return path;
 }
 
-std::string ZResourceBundle::get_basename(std::string path)
+std::string ZResourceBundle::get_basename(std::string path) const
 {
     std::stringstream path_stream(path);
     std::string path_component;
@@ -79,7 +79,7 @@ std::string ZResourceBundle::get_basename(std::string path)
     return path_component;
 }
 
-std::string ZResourceBundle::get_dirname(std::string path)
+std::string ZResourceBundle::get_dirname(std::string path) const
 {
     std::stringstream path_stream(path);
     std::string path_component;

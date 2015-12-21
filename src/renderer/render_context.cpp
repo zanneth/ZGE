@@ -262,7 +262,7 @@ void ZRenderContext::initialize_shaders()
     if (!_shader_program) {
         ZShaderProgramRef shader_program = create_shader_program();
         
-        ZResourceBundle *res_bundle = ZResourceBundle::get_library_bundle();
+        const ZResourceBundle *res_bundle = ZResourceBundle::get_library_bundle();
         std::string vert_shader_path = res_bundle->get_path_for_resource("vertex.vsh");
         std::string frag_shader_path = res_bundle->get_path_for_resource("fragment.fsh");
         shader_program->load_shader(vert_shader_path, ZVERTEX_SHADER);
