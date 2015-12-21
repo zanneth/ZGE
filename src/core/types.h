@@ -182,4 +182,10 @@ enum ZLightType {
     ZLIGHT_TYPE_AMBIENT
 };
 
+enum ZLineBreakMode {
+    ZLINE_BREAK_NONE = 0,
+    ZLINE_BREAK_WORD,
+    ZLINE_BREAK_CHAR
+};
+
 ZGE_END_NAMESPACE

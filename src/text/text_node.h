@@ -34,18 +34,27 @@ public:
     ZColor get_text_color() const;
     void set_text_color(const ZColor &color);
     
+    ZLineBreakMode get_line_break_mode() const;
+    void set_line_break_mode(ZLineBreakMode mode);
+    
+    float get_line_height() const;
+    void set_line_height(float height);
+    
     /* Layout */
     ZRect get_bounds() const override;
     void set_bounds(const ZRect &bounds) override;
     
 private:
-    void _render_glyphs();
+    void _render_glyphs(bool force = false);
     
 private:
-    std::wstring _text;
-    std::wstring _rendered_text;
-    ZFontRef     _font;
-    ZColor       _text_color;
+    std::wstring                _text;
+    std::wstring                _rendered_text;
+    ZFontRef                    _font;
+    ZColor                      _text_color;
+    ZSize2D                     _size;
+    ZLineBreakMode              _line_break_mode;
+    float                       _line_height;
     std::vector<ZSpriteNodeRef> _glyph_nodes;
 };
 
