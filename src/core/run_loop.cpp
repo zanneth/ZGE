@@ -16,20 +16,12 @@
 ZGE_BEGIN_NAMESPACE
 
 ZRunloop::ZRunloop() :
-    _runloop(zrunloop_create()),
-    _timer(nullptr),
     _on_main_thread(false),
     _running(false)
 {}
 
 ZRunloop::~ZRunloop()
 {
-    zrelease(_runloop);
-    
-    if (_timer) {
-        zrelease(_timer);
-    }
-    
     _running = false;
 }
 
@@ -42,28 +34,13 @@ bool ZRunloop::is_on_main_thread() const { return _on_main_thread; }
 
 void ZRunloop::run()
 {
-    if (!_timer) {
-        ZTimeInterval fps_interval(1.0 / (double)FRAMES_PER_SECOND);
-        zcallbackfcn callback = [](void *context) {
-            ZRunloop *rl = static_cast<ZRunloop *>(context);
-            rl->_run();
-        };
-        _timer = ztimer_create(callback, this);
-        ztimer_set_fire_time(_timer, zabsolutetime_get_current());
-        ztimer_set_interval_ms(_timer, std::chrono::duration_cast<std::chrono::milliseconds>(fps_interval).count());
-        ztimer_set_repeats(_timer, true);
-        
-        zrunloop_add_timer(_runloop, _timer);
-    }
-    
     _running = true;
-    zrunloop_run(_runloop);
+    _main();
 }
 
 void ZRunloop::stop()
 {
     _running = false;
-    zrunloop_stop(_runloop);
 }
 
 #pragma mark - Managing schedulables in the Run Loop
@@ -89,21 +66,34 @@ void ZRunloop::unschedule(ZSchedulableRef schedulable)
 
 #pragma mark - Private Methods
 
-void ZRunloop::_run()
+void ZRunloop::_main()
 {
     using namespace std::chrono;
+    const ZTimeInterval fps_interval(1.0 / (double)FRAMES_PER_SECOND);
+    const std::vector<ZSchedulableRef> schedulables = _schedulables;
     
-    for (ZSchedulableRef schedulable : _schedulables) {
-        ZTime time = ZUtil::get_current_time();
-        ZTime last_update = schedulable->_last_update;
-        ZTimeInterval dtime = time - last_update;
-        uint32_t millseconds = (uint32_t)duration_cast<milliseconds>(dtime).count();
+    while (_running) {
+        ZTime loop_start_time = ZUtil::get_current_time();
         
-        schedulable->run(millseconds);
-        schedulable->_last_update = time;
+        for (ZSchedulableRef schedulable : _schedulables) {
+            ZTime time = ZUtil::get_current_time();
+            ZTime last_update = schedulable->_last_update;
+            ZTimeInterval dtime = time - last_update;
+            uint32_t ms = (uint32_t)duration_cast<milliseconds>(dtime).count();
+            
+            schedulable->run(ms);
+            schedulable->_last_update = time;
+            
+            if (schedulable->unschedule_after_run()) {
+                unschedule(schedulable);
+            }
+        }
         
-        if (schedulable->unschedule_after_run()) {
-            unschedule(schedulable);
+        ZTime loop_end_time = ZUtil::get_current_time();
+        milliseconds loop_duration = duration_cast<milliseconds>(loop_end_time - loop_start_time);
+        
+        if (fps_interval > loop_duration) {
+            std::this_thread::sleep_for(fps_interval - loop_duration);
         }
     }
 }

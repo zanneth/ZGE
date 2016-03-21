@@ -13,7 +13,6 @@
 #include <cstdint>
 #include <chrono>
 #include <vector>
-#include <zprelude/zprelude.h>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -40,16 +39,12 @@ public:
     friend class ZApplication;
 
 private:
-    void _run();
     void _main();
     
 private:
     std::vector<ZSchedulableRef> _schedulables;
-    zrunloop    *_runloop;
-    ztimer      *_timer;
-    
-    bool         _on_main_thread;
-    bool         _running;
+    bool _on_main_thread;
+    bool _running;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZRunloop);
