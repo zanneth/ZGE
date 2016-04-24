@@ -50,7 +50,7 @@ public:
     void add_attribute(ZBufferAttribute attribute);
     
     /// Returns all attributes associated with this buffer.
-    std::vector<ZBufferAttribute> get_attributes() const;
+    const std::vector<ZBufferAttribute>& get_attributes() const;
     
     /// Clears all stored attributes with this buffer.
     void clear_attributes();

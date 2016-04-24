@@ -365,7 +365,7 @@ void ZRenderContext::set_depth_testing_enabled(bool enabled)
     }
 }
 
-void ZRenderContext::bind_texture(ZTextureRef texture)
+void ZRenderContext::bind_texture(const ZTextureRef &texture)
 {
     GLuint texture_name = texture->get_texture_name();
     glBindTexture(GL_TEXTURE_2D, texture_name);
@@ -382,7 +382,7 @@ void ZRenderContext::unbind_texture()
     _set_boolean_uniform("material.textureExists", false);
 }
 
-void ZRenderContext::bind_vertex_array(ZVertexArrayRef varray)
+void ZRenderContext::bind_vertex_array(const ZVertexArrayRef &varray)
 {
     GLuint vao = (GLuint)varray->get_vao_name();
     glBindVertexArray(vao);
@@ -399,7 +399,7 @@ void ZRenderContext::bind_vertex_array(ZVertexArrayRef varray)
         }
     }
     
-    ZElementGraphicsBufferRef element_buffer = varray->get_element_buffer();
+    const ZElementGraphicsBufferRef &element_buffer = varray->get_element_buffer();
     if (element_buffer) {
         GLenum elmtarget = ZGLUtil::gl_target_from_buffer_target(element_buffer->get_target());
         glBindBuffer(elmtarget, element_buffer->get_name());
@@ -485,8 +485,8 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
     bind_vertex_array(varray);
     
     // flush any pending data
-    auto buffers = varray->get_buffers();
-    for (ZGraphicsBufferRef buffer : buffers) {
+    const ZVertexBuffersArray &buffers = varray->get_buffers();
+    for (const ZGraphicsBufferRef &buffer : buffers) {
         if (buffer && buffer->get_pending_buffer().data.get_length() > 0) {
             const ZPendingGraphicsBuffer &pending_buf = buffer->get_pending_buffer();
             const GLenum target = ZGLUtil::gl_target_from_buffer_target(buffer->get_target());
@@ -583,11 +583,11 @@ void ZRenderContext::_set_boolean_uniform(const std::string uniform_name, bool f
     uniform->set_data(&uniform_data);
 }
 
-void ZRenderContext::_setup_vertex_attrib_ptr(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index)
+void ZRenderContext::_setup_vertex_attrib_ptr(const ZGraphicsBufferRef &buffer, ZVertexAttributeIndex index)
 {
     glEnableVertexAttribArray(index);
     
-    std::vector<ZBufferAttribute> attributes = buffer->get_attributes();
+    const std::vector<ZBufferAttribute> &attributes = buffer->get_attributes();
     for (const ZBufferAttribute &attribute : attributes) {
         GLboolean normalized_val = attribute.normalized ? GL_TRUE : GL_FALSE;
         GLenum value_type = ZGLUtil::gl_value_type_from_component_type(attribute.component_type);
@@ -595,7 +595,7 @@ void ZRenderContext::_setup_vertex_attrib_ptr(ZGraphicsBufferRef buffer, ZVertex
     }
 }
 
-void ZRenderContext::_use_shader_program(ZShaderProgramRef program)
+void ZRenderContext::_use_shader_program(const ZShaderProgramRef &program)
 {
     if (program->is_linked()) {
         uint32_t handle = program->get_program_handle();
@@ -605,13 +605,13 @@ void ZRenderContext::_use_shader_program(ZShaderProgramRef program)
 
 void ZRenderContext::_update_dirty_uniforms()
 {
-    const std::vector<ZUniformRef> dirty_uniforms = _shader_program->get_dirty_uniforms();
-    for (ZUniformRef uniform : dirty_uniforms) {
+    const std::vector<ZUniformRef> &dirty_uniforms = _shader_program->get_dirty_uniforms();
+    for (const ZUniformRef &uniform : dirty_uniforms) {
         _update_uniform_data(uniform);
     }
 }
 
-void ZRenderContext::_update_uniform_data(ZUniformRef uniform)
+void ZRenderContext::_update_uniform_data(const ZUniformRef &uniform)
 {
     GLenum type = uniform->get_type();
     GLint location = uniform->get_location();

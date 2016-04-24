@@ -52,7 +52,7 @@ uint32_t ZVertexArray::get_vao_name() const
     return _vao;
 }
 
-ZGraphicsBufferRef ZVertexArray::get_buffer(ZVertexAttributeIndex index) const
+const ZGraphicsBufferRef& ZVertexArray::get_buffer(ZVertexAttributeIndex index) const
 {
     zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to access buffer at unknown attribute index %zd", index);
     return _buffers[index];
@@ -68,7 +68,7 @@ void ZVertexArray::set_element_buffer(ZElementGraphicsBufferRef element_buffer)
     _element_buffer = element_buffer;
 }
 
-ZElementGraphicsBufferRef ZVertexArray::get_element_buffer() const
+const ZElementGraphicsBufferRef& ZVertexArray::get_element_buffer() const
 {
     return _element_buffer;
 }

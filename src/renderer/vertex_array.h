@@ -29,11 +29,11 @@ public:
     
     uint32_t get_vao_name() const;
     
-    ZGraphicsBufferRef get_buffer(ZVertexAttributeIndex index) const;
+    const ZGraphicsBufferRef& get_buffer(ZVertexAttributeIndex index) const;
     const ZVertexBuffersArray& get_buffers() const;
     
     void set_element_buffer(ZElementGraphicsBufferRef element_buffer);
-    ZElementGraphicsBufferRef get_element_buffer() const;
+    const ZElementGraphicsBufferRef& get_element_buffer() const;
     
 protected:
     /// Only ZRenderContext can create vertex arrays.

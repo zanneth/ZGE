@@ -467,7 +467,6 @@
 		0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F612175F026F00BF6EC9 /* lib3ds-2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C46F613175F026F00BF6EC9 /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0C10FB8419D3CE790010815F /* libSDL_image-1.2.0.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C07D5C4199730A20020B332 /* libSDL_image-1.2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		0C14B94E1C1292CF00BDC892 /* zprelude.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0C14B94C1C1292C600BDC892 /* zprelude.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0C1C6E981A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
 		0C1C6E991A8455A8005710AA /* layout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C1C6E961A8455A8005710AA /* layout.cpp */; };
 		0C1C6E9A1A8455A8005710AA /* layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1C6E971A8455A8005710AA /* layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -998,7 +997,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0C14B94E1C1292CF00BDC892 /* zprelude.framework in CopyFiles */,
 				0CA36B3919F206E3003543FE /* libfreetype.6.dylib in CopyFiles */,
 				0C10FB8219D3CE790010815F /* lib3ds-2.0.dylib in CopyFiles */,
 				0C10FB8319D3CE790010815F /* libSDL2-2.0.0.dylib in CopyFiles */,

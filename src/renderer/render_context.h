@@ -116,13 +116,13 @@ public:
     // -------------------------------------------------------------------------
     
     /// Bind a texture to this context.
-    void bind_texture(ZTextureRef texture);
+    void bind_texture(const ZTextureRef &texture);
     
     /// Unbind the current texture from this context.
     void unbind_texture();
     
     /// Bind a vertex array to this context.
-    void bind_vertex_array(ZVertexArrayRef varray);
+    void bind_vertex_array(const ZVertexArrayRef &varray);
     
     /// Unbind the current vertex array from this context.
     void unbind_vertex_array();
@@ -159,10 +159,10 @@ private:
     ZUniformRef _get_matrix_uniform(ZRenderMatrixType type);
     void        _update_matrix_uniforms(ZRenderMatrixType type);
     void        _set_boolean_uniform(const std::string uniform_name, bool flag);
-    void        _setup_vertex_attrib_ptr(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index);
-    void        _use_shader_program(ZShaderProgramRef program);
+    void        _setup_vertex_attrib_ptr(const ZGraphicsBufferRef &buffer, ZVertexAttributeIndex index);
+    void        _use_shader_program(const ZShaderProgramRef &program);
     void        _update_dirty_uniforms();
-    void        _update_uniform_data(ZUniformRef uniform);
+    void        _update_uniform_data(const ZUniformRef &uniform);
     
 protected:
     ZRect               _viewport;

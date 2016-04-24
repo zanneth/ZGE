@@ -36,7 +36,7 @@ void ZGraphicsBuffer::add_attribute(ZBufferAttribute attribute)
     _attributes.push_back(attribute);
 }
 
-std::vector<ZBufferAttribute> ZGraphicsBuffer::get_attributes() const
+const std::vector<ZBufferAttribute>& ZGraphicsBuffer::get_attributes() const
 {
     return _attributes;
 }
