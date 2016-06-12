@@ -15,11 +15,10 @@
 ZGE_BEGIN_NAMESPACE
 
 struct ZDisplayMode {
-    bool windowed;
-    unsigned width;
-    unsigned height;
-    float refresh_rate;
-    float scale;
+    bool        windowed;
+    unsigned    width;
+    unsigned    height;
+    float       scale;
     std::string window_title;
     
 public:
@@ -27,7 +26,6 @@ public:
         windowed(true),
         width(1024),
         height(768),
-        refresh_rate(1.0f / 60.0f),
         scale(1.0),
         window_title("Application") {}
 };
@@ -71,7 +69,6 @@ private:
 protected:
     bool _initialized;
     ZDisplayMode _display_mode;
-    uint32_t _last_render;
     bool _captures_input;
 };
 

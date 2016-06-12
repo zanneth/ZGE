@@ -45,11 +45,7 @@ void ZDisplay::initialize()
 
 void ZDisplay::update(uint32_t dtime)
 {
-    _last_render += dtime;
-    if (_last_render >= _display_mode.refresh_rate * 1000.0) {
-        _last_render = 0;
-        swap_buffer();
-    }
+    swap_buffer();
 }
 
 void ZDisplay::resize(int width, int height)
