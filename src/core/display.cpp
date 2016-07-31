@@ -96,12 +96,21 @@ void ZDisplay::_init_window()
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
     
+    int width = 0;
+    int height = 0;
+    if (!_display_mode.windowed) {
+        SDL_DisplayMode sdl_displaymode;
+        SDL_GetDesktopDisplayMode(0, &sdl_displaymode);
+        width = sdl_displaymode.w;
+        height = sdl_displaymode.h;
+    }
+    
     // create the window
     _impl->window = SDL_CreateWindow(_display_mode.window_title.c_str(),
                                SDL_WINDOWPOS_UNDEFINED,
                                SDL_WINDOWPOS_UNDEFINED,
-                               _display_mode.width,
-                               _display_mode.height,
+                               width,
+                               height,
                                sdlflags);
     if (_impl->window == nullptr) {
         ZLogger::log_error("Could not create SDL window.");
