@@ -28,8 +28,15 @@ ZDisplayRenderContext::ZDisplayRenderContext(ZDisplayRef display) :
     SDL_GL_SetSwapInterval(1); // tell SDL to synchronize the buffer swap with the monitor's refresh rate.
     
     // setup viewport
+    ZRect viewport;
     ZDisplayMode display_mode = _impl->display->get_display_mode();
-    ZRect viewport = ZRect{0.0, 0.0, float(display_mode.width), float(display_mode.height)};
+    if (display_mode.windowed) {
+        viewport = ZRect{0.0, 0.0, float(display_mode.width), float(display_mode.height)};
+    } else {
+        SDL_DisplayMode sdl_displaymode;
+        SDL_GetDesktopDisplayMode(0, &sdl_displaymode);
+        viewport = ZRect(0.0, 0.0, float(sdl_displaymode.w), float(sdl_displaymode.h));
+    }
     set_viewport(viewport);
     set_render_scale(display_mode.scale);
     
