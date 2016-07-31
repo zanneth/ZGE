@@ -67,17 +67,17 @@ void ZInputManager::demote_responder(ZResponderRef responder)
 
 void ZInputManager::run(uint32_t dtime)
 {
+    // remove responders
+    while (!_removal_queue.empty()) {
+        _remove_responder_internal(_removal_queue.front());
+        _removal_queue.pop();
+    }
+    
     SDL_Event sdl_event;
     while (SDL_PollEvent(&sdl_event)) {
         ZEvent event = _convert_sdl_event(sdl_event);
         event.timestamp = ZUtil::get_current_time();
         push_event(event);
-    }
-    
-    // remove responders
-    while (!_removal_queue.empty()) {
-        _remove_responder_internal(_removal_queue.front());
-        _removal_queue.pop();
     }
 }
 
