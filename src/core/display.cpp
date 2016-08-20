@@ -98,7 +98,10 @@ void ZDisplay::_init_window()
     
     int width = 0;
     int height = 0;
-    if (!_display_mode.windowed) {
+    if (_display_mode.windowed) {
+        width = _display_mode.width;
+        height = _display_mode.height;
+    } else {
         SDL_DisplayMode sdl_displaymode;
         SDL_GetDesktopDisplayMode(0, &sdl_displaymode);
         width = sdl_displaymode.w;
