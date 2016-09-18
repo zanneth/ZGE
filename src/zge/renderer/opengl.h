@@ -20,5 +20,8 @@
 #   include <OpenGL/gltypes.h>
 #endif
 #else
-#   include <GL/gl3.h>
+#   define GL_GLEXT_PROTOTYPES
+#   include <GL/gl.h>
+#   include <GL/glu.h>
+#   include <GL/glut.h>
 #endif

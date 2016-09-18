@@ -6,6 +6,7 @@
  */
 
 #include "layout.h"
+#include <algorithm>
 
 ZGE_BEGIN_NAMESPACE
 

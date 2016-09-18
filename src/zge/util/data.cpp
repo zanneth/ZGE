@@ -7,6 +7,7 @@
 
 #include <zge/util/data.h>
 #include <algorithm>
+#include <cstring>
 
 #define REALLOC_EXTRA 256
 
@@ -72,8 +73,8 @@ size_t ZData::get_length() const
 
 void ZData::_move(ZData &&mv)
 {
-    // auto_ptr transfers ownership
-    _data = mv._data;
+    // unique_ptr transfers ownership
+    _data.reset(mv._data.get());
     
     _length = mv._length;
     mv._length = 0;
@@ -129,7 +130,7 @@ void ZData::_realloc_data(size_t new_size)
         memcpy(new_data, current_data, std::min(_length, new_size));
     }
     
-    _data = std::auto_ptr<uint8_t>(new_data);
+    _data = std::unique_ptr<uint8_t>(new_data);
     _capacity = new_size;
 }
 

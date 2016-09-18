@@ -9,6 +9,8 @@
 #include <zge/math/vector.h>
 #include <zge/math/vector_private.h>
 #include <Eigen/Eigen>
+#include <initializer_list>
+#include <mutex>
 #include <ostream>
 
 ZGE_BEGIN_NAMESPACE

@@ -5,7 +5,7 @@
 # LIB3DS_LIBRARY     - full path to the lib3ds library
 # LIB3DS_FOUND       - TRUE if lib3ds was found
 
-FIND_PATH(LIB3DS_INCLUDE_DIR lib3ds.h
+FIND_PATH(LIB3DS_INCLUDE_DIR lib3ds/file.h
     /usr/include
     /usr/local/include
     $ENV{INCLUDE}

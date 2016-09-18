@@ -10,8 +10,8 @@
 #include "quad.h"
 #include "sprite_node.h"
 #include "texture.h"
-#include <codecvt>
 #include <limits>
+#include <locale>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -51,15 +51,13 @@ ZTextNode::ZTextNode(const std::wstring &text, ZFontRef font) :
 }
 
 ZTextNode::ZTextNode(const std::string &text, ZFontRef font) :
+    _text(text.begin(), text.end()),
     _font(font),
     _text_color(ZColor::white),
     _size({std::numeric_limits<float>::max(), std::numeric_limits<float>::max()}),
     _line_break_mode(ZLINE_BREAK_NONE),
     _line_height(0.0)
 {
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    _text = converter.from_bytes(text);
-    
     _render_glyphs();
 }
 
@@ -82,8 +80,7 @@ void ZTextNode::set_text(const std::wstring &text)
 
 void ZTextNode::set_text(const std::string &text)
 {
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    _text = converter.from_bytes(text);
+    _text = std::wstring(text.begin(), text.end());
     _render_glyphs();
 }
 

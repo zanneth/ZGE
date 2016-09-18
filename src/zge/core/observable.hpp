@@ -5,7 +5,12 @@
  * Date Created: 01/21/2014
  */
 
+#include <algorithm>
+#include <atomic>
+
 ZGE_BEGIN_NAMESPACE
+
+static std::atomic<unsigned> __uid_counter(0);
 
 template <typename T>
 struct _ZObserver {
@@ -29,7 +34,7 @@ template <typename T>
 ZObserver* ZObservable<T>::add_observer(ZObserverFunc<T> observer_func)
 {
     ZObserverRef<T> observer = ZObserverRef<T>(new _ZObserver<T>({
-        .uid = arc4random(),
+        .uid = ++__uid_counter,
         .func = observer_func
     }));
     _impl->observers.push_back(observer);

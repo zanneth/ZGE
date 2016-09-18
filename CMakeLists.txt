@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.0)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
@@ -8,7 +8,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-project(ZGE CXX)
+project(ZGE C CXX)
 
 file(GLOB_RECURSE SOURCES "src/zge/*.cpp")
 file(GLOB_RECURSE HEADERS "src/zge/*.h")
@@ -26,38 +26,26 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/zge/shaders)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/zge/text)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/zge/util)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/lib3ds)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/freetype2)
-
 target_include_directories(zge
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
-check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-
-if(COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-elseif(COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-else()
-    message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-endif()
+set(CMAKE_CXX_COMPILER "clang++")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # OpenGL
-find_package(OpenGL)
+find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 target_link_libraries(zge ${OPENGL_LIBRARIES})
 
 # SDL
-set(SDL2_LIBRARY "/usr/local/lib/libSDL2.dylib")
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(zge ${SDL2_LIBRARY})
 
 # SDL_Image
-find_package(SDL_image REQUIRED)
+PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 include_directories(${SDL_IMAGE_INCLUDE_DIRS})
 target_link_libraries(zge ${SDL_IMAGE_LIBRARIES})
 
@@ -70,6 +58,10 @@ target_link_libraries(zge ${LIB3DS_LIBRARY})
 find_package(Freetype REQUIRED)
 include_directories(${FREETYPE_INCLUDE_DIR_freetype2})
 target_link_libraries(zge ${FREETYPE_LIBRARIES})
+
+# Eigen
+find_package(Eigen REQUIRED)
+include_directories(${EIGEN_INCLUDE_DIRS})
 
 install (FILES ${HEADERS}
    DESTINATION include/zge

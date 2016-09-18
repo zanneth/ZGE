@@ -10,6 +10,7 @@
 #include <zge/util/logger.h>
 #include <zge/audio/sound_private.h>
 #include <SDL2/SDL.h>
+#include <algorithm>
 
 #ifndef MIN
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))

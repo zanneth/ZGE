@@ -12,7 +12,9 @@
 #include <zge/util/util.h>
 #include <array>
 #include <cassert>
-#include <lib3ds.h>
+#include <lib3ds/mesh.h>
+#include <lib3ds/node.h>
+#include <lib3ds/file.h>
 #include <sstream>
 
 ZGE_BEGIN_NAMESPACE
@@ -66,14 +68,14 @@ ZGeometryRef ZModel::copy() const
 
 void ZModel::load_file(std::string filename)
 {
-    Lib3dsFile *model_file = lib3ds_file_open(filename.c_str());
+    Lib3dsFile *model_file = lib3ds_file_load(filename.c_str());
     if (!model_file) {
         ZException e(ZFILE_EXCEPTION_CODE);
         e.extra_info = "Unable to load file " + filename;
         throw e;
     }
     
-    if (model_file->nmeshes == 0) {
+    if (model_file->meshes == nullptr) {
         ZException e(ZENGINE_EXCEPTION_CODE);
         e.extra_info = "Model file " + filename + " contains no meshes.";
         throw e;
@@ -88,19 +90,19 @@ void ZModel::load_file(std::string filename)
     std::vector<std::array<float, 3>> normals;
     
     // copy data for each mesh from model file
-    for (unsigned i = 0; i < model_file->nmeshes; ++i) {
-        Lib3dsMesh *mesh = model_file->meshes[i];
-        size_t mesh_faces_count = mesh->nfaces;
-        size_t mesh_vertices_count = mesh->nvertices;
+    Lib3dsMesh *mesh = model_file->meshes;
+    do {
+        size_t mesh_faces_count = mesh->faces;
+        size_t mesh_vertices_count = mesh->points;
         
         float (*calculated_normals)[3] = new float[mesh_faces_count * 3][3];
-        lib3ds_mesh_calculate_vertex_normals(mesh, calculated_normals);
+        lib3ds_mesh_calculate_normals(mesh, calculated_normals);
         
         unsigned cur_normals_idx = 0;
         for (unsigned j = 0; j < mesh_faces_count; ++j) {
-            Lib3dsFace *face = &mesh->faces[j];
+            Lib3dsFace *face = &mesh->faceL[j];
             for (unsigned k = 0; k < 3; ++k) {
-                vertices.push_back(__copy_vertex_data<float, 3>(mesh->vertices[face->index[k]]));
+                vertices.push_back(__copy_vertex_data<float, 3>(mesh->pointL[face->points[k]].pos));
                 normals.push_back(__copy_vertex_data<float, 3>(calculated_normals[cur_normals_idx++]));
             }
         }
@@ -108,7 +110,7 @@ void ZModel::load_file(std::string filename)
         total_faces += mesh_faces_count;
         total_vertices += mesh_vertices_count;
         delete [] calculated_normals;
-    }
+    } while ((mesh = mesh->next));
     
     // load data into each VBO
     #define VEC_ARR_DATA_SZ(vec) (vec.size() * 3 * sizeof(decltype(vec)::value_type::value_type))

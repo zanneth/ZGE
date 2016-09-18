@@ -45,7 +45,7 @@ private:
 private:
     size_t _length;
     size_t _capacity;
-    std::auto_ptr<uint8_t> _data;
+    std::unique_ptr<uint8_t> _data;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZData);

@@ -6,6 +6,7 @@
  */
 
 #include <zge/core/color.h>
+#include <random>
 
 ZGE_BEGIN_NAMESPACE
 
@@ -33,9 +34,10 @@ ZColor::ZColor(const ZColor &cp, float alpha) :
 ZColor ZColor::random_color(float alpha)
 {
     ZColor color;
-    color.r = (float)arc4random() / (float)UINT32_MAX;
-    color.g = (float)arc4random() / (float)UINT32_MAX;
-    color.b = (float)arc4random() / (float)UINT32_MAX;
+    std::random_device rd;
+    color.r = (float)rd() / (float)UINT32_MAX;
+    color.g = (float)rd() / (float)UINT32_MAX;
+    color.b = (float)rd() / (float)UINT32_MAX;
     color.a = alpha;
     return color;
 }
