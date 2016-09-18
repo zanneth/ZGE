@@ -178,8 +178,8 @@ void ZTextNode::_render_glyphs(bool force)
     for (const ZGlyph &glyph : glyphs) {
         size_t num_pixels = (size_t)glyph.size.width * (size_t)glyph.size.height;
         ZDataRef dst_pixbuf_data = std::make_shared<ZData>(nullptr, bytes_per_pixel * num_pixels);
-        uint8_t *src_pixbuf = (uint8_t *)glyph.bitmap->get_data();
-        uint8_t *dst_pixbuf = (uint8_t *)dst_pixbuf_data->get_data();
+        uint8_t *src_pixbuf = (uint8_t *)glyph.bitmap->get_bytes();
+        uint8_t *dst_pixbuf = (uint8_t *)dst_pixbuf_data->get_bytes();
         size_t width = (size_t)glyph.size.width;
         size_t height = (size_t)glyph.size.height;
         

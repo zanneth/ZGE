@@ -609,10 +609,10 @@
 		0C91834E1B731BB200ED9A83 /* plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C91834C1B731BB200ED9A83 /* plane.cpp */; };
 		0C9183501B73273300ED9A83 /* plane.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C91834D1B731BB200ED9A83 /* plane.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CA36B3D19F20B17003543FE /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CA36B3B19F20B17003543FE /* font.cpp */; };
-		0CB816851D8E532D00F90A92 /* lib3ds-2.0.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB816841D8E532D00F90A92 /* lib3ds-2.0.0.0.dylib */; };
 		0CB816871D8E533E00F90A92 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB816861D8E533E00F90A92 /* libSDL2-2.0.0.dylib */; };
 		0CB816891D8E534C00F90A92 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB816881D8E534C00F90A92 /* libfreetype.6.dylib */; };
 		0CB8168B1D8E536000F90A92 /* libSDL_image-1.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB8168A1D8E536000F90A92 /* libSDL_image-1.2.0.dylib */; };
+		0CB8168D1D8E7C5100F90A92 /* lib3ds-1.3.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB8168C1D8E7C5100F90A92 /* lib3ds-1.3.0.0.dylib */; };
 		0CD4858E1BF8633600AD5659 /* graphics_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CD4858D1BF8633600AD5659 /* graphics_buffer.cpp */; };
 		0CD4858F1BF8633600AD5659 /* graphics_buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CD4858D1BF8633600AD5659 /* graphics_buffer.cpp */; };
 		0CDEB0741B77F23000E4032A /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDEB0721B77F23000E4032A /* constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1364,6 +1364,7 @@
 		0CB816861D8E533E00F90A92 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../../../usr/local/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		0CB816881D8E534C00F90A92 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = ../../../../../../usr/local/Cellar/freetype/2.7/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
 		0CB8168A1D8E536000F90A92 /* libSDL_image-1.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL_image-1.2.0.dylib"; path = "../../../../../../usr/local/Cellar/sdl_image/1.2.12_3/lib/libSDL_image-1.2.0.dylib"; sourceTree = "<group>"; };
+		0CB8168C1D8E7C5100F90A92 /* lib3ds-1.3.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "lib3ds-1.3.0.0.dylib"; path = "../../../../../../usr/local/Cellar/lib3ds/1.3.0/lib/lib3ds-1.3.0.0.dylib"; sourceTree = "<group>"; };
 		0CCD2F59176128AC00F497CF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = timer.cpp; sourceTree = "<group>"; };
 		0CCD2F5A176128AC00F497CF /* timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		0CD4858D1BF8633600AD5659 /* graphics_buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graphics_buffer.cpp; sourceTree = "<group>"; };
@@ -1412,10 +1413,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CB8168D1D8E7C5100F90A92 /* lib3ds-1.3.0.0.dylib in Frameworks */,
 				0CB8168B1D8E536000F90A92 /* libSDL_image-1.2.0.dylib in Frameworks */,
 				0CB816891D8E534C00F90A92 /* libfreetype.6.dylib in Frameworks */,
 				0CB816871D8E533E00F90A92 /* libSDL2-2.0.0.dylib in Frameworks */,
-				0CB816851D8E532D00F90A92 /* lib3ds-2.0.0.0.dylib in Frameworks */,
 				0C10FB7B19D3CB540010815F /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2486,6 +2487,7 @@
 		563B6EC214B2FD8500004C6A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CB8168C1D8E7C5100F90A92 /* lib3ds-1.3.0.0.dylib */,
 				0CB8168A1D8E536000F90A92 /* libSDL_image-1.2.0.dylib */,
 				0CB816881D8E534C00F90A92 /* libfreetype.6.dylib */,
 				0CB816861D8E533E00F90A92 /* libSDL2-2.0.0.dylib */,
@@ -3211,6 +3213,9 @@
 					"$(SRCROOT)/include",
 					"$(SRCROOT)/include/freetype2",
 					"$(SRCROOT)/src",
+					/usr/local/include,
+					/usr/local/include/eigen3,
+					/usr/local/include/freetype2,
 				);
 				INFOPLIST_FILE = "support/OSX-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3220,6 +3225,7 @@
 					/usr/local/lib,
 					/usr/local/Cellar/freetype/2.7/lib,
 					/usr/local/Cellar/sdl_image/1.2.12_3/lib,
+					/usr/local/Cellar/lib3ds/1.3.0/lib,
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = ZGE;
@@ -3264,6 +3270,9 @@
 					"$(SRCROOT)/include",
 					"$(SRCROOT)/include/freetype2",
 					"$(SRCROOT)/src",
+					/usr/local/include,
+					/usr/local/include/eigen3,
+					/usr/local/include/freetype2,
 				);
 				INFOPLIST_FILE = "support/OSX-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3273,6 +3282,7 @@
 					/usr/local/lib,
 					/usr/local/Cellar/freetype/2.7/lib,
 					/usr/local/Cellar/sdl_image/1.2.12_3/lib,
+					/usr/local/Cellar/lib3ds/1.3.0/lib,
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = ZGE;

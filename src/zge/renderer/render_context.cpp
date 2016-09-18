@@ -247,7 +247,7 @@ ZTextureRef ZRenderContext::create_texture(ZImageRef image)
     ZDataRef img_data = image->get_pixel_data();
     ZImageFormat img_format = image->get_format();
     GLenum gl_format = ZGLUtil::gl_format_from_pixel_format(img_format.pixel_format);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_size.width, img_size.height, 0, gl_format, GL_UNSIGNED_BYTE, img_data->get_data());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img_size.width, img_size.height, 0, gl_format, GL_UNSIGNED_BYTE, img_data->get_bytes());
     glBindTexture(GL_TEXTURE_2D, 0);
     
     auto deleter = [](uint32_t tex_name) {
@@ -496,7 +496,7 @@ void ZRenderContext::draw_array(ZRenderMode mode, ZVertexArrayRef varray, unsign
             const GLenum target = ZGLUtil::gl_target_from_buffer_target(buffer->get_target());
             const GLenum glusage = ZGLUtil::gl_usage_from_buffer_usage(pending_buf.usage);
             glBindBuffer(target, buffer->get_name());
-            glBufferData(target, (GLsizeiptr)pending_buf.data.get_length(), (const GLvoid *)pending_buf.data.get_data(), glusage);
+            glBufferData(target, (GLsizeiptr)pending_buf.data.get_length(), (const GLvoid *)pending_buf.data.get_bytes(), glusage);
             
             buffer->clear_pending_buffer();
         }

@@ -13,21 +13,31 @@
 
 ZGE_BEGIN_NAMESPACE
 
-#pragma mark - ZData
+ZData::ZData() :
+    _length(0),
+    _capacity(0),
+    _data(nullptr),
+    _copied(false)
+{}
 
-ZData::ZData(const void *data, size_t length) :
+ZData::ZData(const void *data, size_t length, bool copy) :
     _length(length),
     _capacity(length),
-    _data(length > 0 ? new uint8_t[length] : nullptr)
+    _data(length > 0 && copy ? new uint8_t[length] : nullptr),
+    _copied(copy)
 {
-    if (data != nullptr) {
-        memcpy(_data.get(), data, length);
+    if (copy) {
+        if (data != nullptr) {
+            memcpy(_data, data, length);
+        } else {
+            memset(_data, 0, length);
+        }
     } else {
-        memset(_data.get(), 0, length);
+        _data = (uint8_t *)data;
     }
 }
 
-ZData::ZData(const ZData &cp) : ZData(cp._data.get(), cp._length)
+ZData::ZData(const ZData &cp) : ZData(cp._data, cp._length, true)
 {}
 
 ZData::ZData(ZData &&mv)
@@ -35,10 +45,27 @@ ZData::ZData(ZData &&mv)
     _move(std::move(mv));
 }
 
+ZData::~ZData()
+{
+    if (_copied) {
+        delete[] _data;
+    }
+}
+
 ZData& ZData::operator=(const ZData &cp)
 {
     if (this != &cp) {
-        memcpy(_data.get(), cp._data.get(), cp._length);
+        if (_data && _copied) {
+            delete[] _data;
+        }
+        
+        size_t cap = cp._length;
+        _data = new uint8_t[cap];
+        _length = cap;
+        _capacity = cap;
+        _copied = true;
+        
+        memcpy(_data, cp._data, cp._length);
     }
     return *this;
 }
@@ -51,19 +78,49 @@ ZData& ZData::operator=(ZData &&mv)
     return *this;
 }
 
+
 uint8_t& ZData::operator[](unsigned long off)
 {
-    return *(_data.get() + off);
+    return *(_data + off);
 }
 
 uint8_t ZData::operator[](unsigned long off) const
 {
-    return _data.get()[off];
+    return _data[off];
 }
 
-const void* ZData::get_data() const
+bool ZData::operator==(const ZData &rhs) const
 {
-    return _data.get();
+    if (rhs.get_length() != get_length()) return false;
+    return (memcmp(_data, rhs._data, get_length()) == 0);
+}
+
+bool ZData::operator!=(const ZData &rhs) const
+{
+    return !(*this == rhs);
+}
+
+int ZData::compare(const ZData &rhs) const
+{
+    size_t rhs_len = rhs.get_length();
+    const void *rhs_bytes = rhs.get_bytes();
+    
+    size_t len = std::min(_length, rhs_len);
+    int cmp = memcmp(_data, rhs_bytes, len);
+    if (cmp == 0 && _length != rhs_len) {
+        cmp = (_length > rhs_len) ? 1 : -1;
+    }
+    return cmp;
+}
+
+ZData::operator bool() const
+{
+    return (_length > 0);
+}
+
+const void* ZData::get_bytes() const
+{
+    return _data;
 }
 
 size_t ZData::get_length() const
@@ -71,67 +128,95 @@ size_t ZData::get_length() const
     return _length;
 }
 
-void ZData::_move(ZData &&mv)
+std::ostream& operator<<(std::ostream &stream, const ZData &data)
 {
-    // unique_ptr transfers ownership
-    _data.reset(mv._data.get());
+    const char *bytes = reinterpret_cast<const char *>(data.get_bytes());
+    stream.write(bytes, data.get_length());
+    return stream;
+}
+
+std::istream& operator>>(std::istream &stream, ZData &data)
+{
+    const size_t chunksz = 1024;
+    std::vector<char> buffer;
+    size_t bytes_read = 0;
     
-    _length = mv._length;
-    mv._length = 0;
-}
-
-void ZData::set_data(const void *data, size_t length)
-{
-    clear_data();
-    append_data(data, length);
-}
-
-void ZData::append_data(const void *data, size_t length)
-{
-    if (_capacity < _length + length) {
-        _realloc_data(_length + length + REALLOC_EXTRA);
+    while (stream.good()) {
+        size_t cur_buff_sz = buffer.size();
+        buffer.resize(cur_buff_sz + chunksz);
+        
+        auto beginitr = buffer.begin() + cur_buff_sz;
+        char *begin = &*beginitr;
+        stream.read(begin, chunksz);
+        
+        bytes_read += stream.gcount();
     }
     
-    memcpy(_data.get() + _length, data, length);
+    data.append_bytes(buffer.data(), bytes_read);
+    return stream;
+}
+
+void ZData::set_bytes(const void *data, size_t length)
+{
+    clear();
+    append_bytes(data, length);
+}
+
+void ZData::append_bytes(const void *data, size_t length)
+{
+    _ensure_capacity(_length + length);
+    
+    uint8_t *cur_byte_ptr = _data;
+    if (cur_byte_ptr != nullptr) {
+        memcpy(cur_byte_ptr + _length, data, length);
+    }
+    
     _length += length;
 }
 
-void ZData::clear_data()
+void ZData::append(const ZData &data)
+{
+    if (data.get_length() > 0) {
+        append_bytes(data.get_bytes(), data.get_length());
+    }
+}
+
+
+void ZData::clear()
 {
     _length = 0;
 }
 
-std::string ZData::get_class_name() const
-{
-    return "ZData";
-}
-
-std::vector<std::string> ZData::get_description_attributes() const
-{
-    std::vector<std::string> byte_strs;
-    char buf[8];
-    
-    for (unsigned long i = 0; i < _length; ++i) {
-        uint8_t byte = _data.get()[i];
-        std::sprintf(buf, "%02x", byte);
-        byte_strs.push_back(buf);
-    }
-    
-    return byte_strs;
-}
-
 #pragma mark - Internal
 
-void ZData::_realloc_data(size_t new_size)
+void ZData::_move(ZData &&mv)
 {
-    uint8_t *new_data = new uint8_t[new_size];
-    uint8_t *current_data = _data.get();
-    if (current_data != nullptr) {
-        memcpy(new_data, current_data, std::min(_length, new_size));
+    _data = mv._data;
+    mv._data = nullptr;
+    
+    _length = mv._length;
+    mv._length = 0;
+    
+    _capacity = mv._capacity;
+    mv._capacity = 0;
+    
+    _copied = mv._copied;
+}
+
+void ZData::_ensure_capacity(size_t new_size)
+{
+    if (_capacity >= new_size) {
+        // TODO: Consider shrinking here if newSize is sufficiently smaller.
+        return;
     }
     
-    _data = std::unique_ptr<uint8_t>(new_data);
-    _capacity = new_size;
+    size_t new_capacity = new_size + REALLOC_EXTRA;
+    uint8_t *new_data = new uint8_t[new_capacity];
+    memcpy(new_data, _data, _length);
+    
+    _data = new_data;
+    _capacity = new_capacity;
+    _copied = true;
 }
 
 ZGE_END_NAMESPACE
