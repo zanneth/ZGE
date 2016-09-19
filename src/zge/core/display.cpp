@@ -116,7 +116,7 @@ void ZDisplay::_init_window()
                                height,
                                sdlflags);
     if (_impl->window == nullptr) {
-        ZLogger::log_error("Could not create SDL window.");
+        ZLogger::log_error("Could not create SDL window. %s", SDL_GetError());
     }
 }
 
