@@ -24,7 +24,8 @@ std::array<T, S> __copy_vertex_data(T vertex[S]);
 
 ZModel::ZModel(std::string filename) :
     _faces_count(0),
-    _vertices_count(0)
+    _vertices_count(0),
+    _render_mode(ZRENDER_MODE_TRIANGLE_STRIP)
 {
     ZRenderContext *ctx = ZRenderContext::get_current_context();
     zassert(ctx, "invalid context");
@@ -124,6 +125,12 @@ void ZModel::load_file(std::string filename)
     lib3ds_file_free(model_file);
 }
 
+#pragma mark - Accessors
+
+std::string ZModel::get_name() const { return _name; }
+ZRenderMode ZModel::get_render_mode() const { return _render_mode; }
+void ZModel::set_render_mode(ZRenderMode mode) { _render_mode = mode; }
+
 #pragma mark - Drawing
 
 void ZModel::render(ZRenderContextRef context)
@@ -131,7 +138,7 @@ void ZModel::render(ZRenderContextRef context)
     ZGeometry::render(context);
     
     context->set_depth_testing_enabled(true);
-    context->draw_array(ZRENDER_MODE_TRIANGLES, _vertex_array, 0, _faces_count * 3);
+    context->draw_array(_render_mode, _vertex_array, 0, _faces_count * 3);
     context->set_depth_testing_enabled(false);
 }
 
