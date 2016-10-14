@@ -125,6 +125,24 @@ void ZRotationAction::apply_progress(std::shared_ptr<ZNode> node, float normaliz
     node->set_transform(transform);
 }
 
+#pragma mark - ZSequenceAction
+
+ZSequenceAction::ZSequenceAction(const std::vector<ZActionRef> &actions) :
+    _actions(actions)
+{}
+
+const std::vector<ZActionRef>& ZSequenceAction::get_actions() const { return _actions; }
+void ZSequenceAction::set_actions(const std::vector<ZActionRef> &actions) { _actions = actions; }
+void ZSequenceAction::append_action(ZActionRef action) { _actions.push_back(action); }
+
+void ZSequenceAction::apply_progress(std::shared_ptr<ZNode> node, float normalized_progress)
+{
+    const size_t actions_count = _actions.size();
+    float cur_action_progress = fmodf(normalized_progress * float(actions_count), 1.0f);
+    ZActionRef cur_action = _actions[long(normalized_progress * float(actions_count)) % actions_count];
+    cur_action->apply_progress(node, cur_action_progress);
+}
+
 #pragma mark - Timing Functions
 
 float __linear_timing_function(float time)

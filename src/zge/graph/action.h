@@ -113,4 +113,24 @@ private:
 
 ZGE_DEFINE_SREF_TYPE(ZRotationAction);
 
+// -----------------------------------------------------------------------------
+
+class ZSequenceAction : public ZAction {
+public:
+    ZSequenceAction(const std::vector<ZActionRef> &actions = {});
+    
+    ZGE_DEFINE_SREF_FUNCTIONS(ZSequenceAction);
+    
+    const std::vector<ZActionRef>& get_actions() const;
+    void set_actions(const std::vector<ZActionRef> &actions);
+    void append_action(ZActionRef action);
+    
+    void apply_progress(std::shared_ptr<ZNode> node, float normalized_progress) override;
+    
+private:
+    std::vector<ZActionRef> _actions;
+};
+
+ZGE_DEFINE_SREF_TYPE(ZSequenceAction);
+
 ZGE_END_NAMESPACE
