@@ -45,9 +45,9 @@ include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(zge ${SDL2_LIBRARY})
 
 # SDL_Image
-PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
-include_directories(${SDL2IMAGE_INCLUDE_DIRS})
-target_link_libraries(zge ${SDL2IMAGE_LIBRARIES})
+find_package(SDL2_image REQUIRED)
+include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
+target_link_libraries(zge ${SDL2_IMAGE_LIBRARIES})
 
 # lib3ds
 find_package(Lib3ds REQUIRED)
