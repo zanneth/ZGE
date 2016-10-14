@@ -38,7 +38,7 @@ public:
     _ZSoundPlaybackState* _get_playback_state();
     
 private:
-    std::auto_ptr<_ZSoundPlaybackState> _playback_state;
+    std::unique_ptr<_ZSoundPlaybackState> _playback_state;
 };
 
 ZGE_DEFINE_SREF_TYPE(ZSound);

@@ -25,7 +25,7 @@ std::array<T, S> __copy_vertex_data(T vertex[S]);
 ZModel::ZModel(std::string filename) :
     _faces_count(0),
     _vertices_count(0),
-    _render_mode(ZRENDER_MODE_TRIANGLE_STRIP)
+    _render_mode(ZRENDER_MODE_TRIANGLES)
 {
     ZRenderContext *ctx = ZRenderContext::get_current_context();
     zassert(ctx, "invalid context");
