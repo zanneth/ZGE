@@ -647,6 +647,7 @@ void ZRenderContext::_update_uniform_data(const ZUniformRef &uniform)
         case GL_INT_VEC4:
             glUniform4iv(location, 1, (const GLint *)data);
             break;
+#if !OPENGL_ES2
         case GL_UNSIGNED_INT:
             glUniform1uiv(location, 1, (const GLuint *)data);
             break;
@@ -659,6 +660,7 @@ void ZRenderContext::_update_uniform_data(const ZUniformRef &uniform)
         case GL_UNSIGNED_INT_VEC4:
             glUniform4uiv(location, 1, (const GLuint *)data);
             break;
+#endif
         case GL_FLOAT_MAT2:
             glUniformMatrix2fv(location, 1, GL_FALSE, (const GLfloat *)data);
             break;
@@ -671,10 +673,18 @@ void ZRenderContext::_update_uniform_data(const ZUniformRef &uniform)
 #if !OPENGL_ES
         case GL_SAMPLER_1D:
 #endif
-        case GL_SAMPLER_2D:
+#if !OPENGL_ES2
         case GL_SAMPLER_3D:
+#endif
+        case GL_SAMPLER_2D: {
+#if !OPENGL_ES2
             glUniform1uiv(location, 1, (const GLuint *)data);
+#else
+            GLint sampler = (GLint)*(GLuint *)data;
+            glUniform1i(location, sampler);
+#endif
             break;
+        }
         default: {
             ZException e(ZNOT_IMPLEMENTED_EXCEPTION_CODE);
             e.extra_info = ZUtil::format("Uniform of type %ld has no API implementation.", (long)type);
@@ -718,6 +728,7 @@ ZUniformRef __create_uniform(GLenum type, std::string name, GLuint index)
         case GL_UNSIGNED_INT:
             uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_UNSIGNED_INT));
             break;
+#if !OPENGL_ES2
         case GL_UNSIGNED_INT_VEC2:
             uniform = ZUniformRef(new ZUniform<GLuint, 2>(name, index, GL_UNSIGNED_INT_VEC2));
             break;
@@ -727,6 +738,7 @@ ZUniformRef __create_uniform(GLenum type, std::string name, GLuint index)
         case GL_UNSIGNED_INT_VEC4:
             uniform = ZUniformRef(new ZUniform<GLuint, 4>(name, index, GL_UNSIGNED_INT_VEC4));
             break;
+#endif
         case GL_FLOAT_MAT2:
             uniform = ZUniformRef(new ZUniform<GLfloat, 2*2>(name, index, GL_FLOAT_MAT2));
             break;
@@ -744,9 +756,11 @@ ZUniformRef __create_uniform(GLenum type, std::string name, GLuint index)
         case GL_SAMPLER_2D:
             uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_2D));
             break;
+#if !OPENGL_ES2
         case GL_SAMPLER_3D:
             uniform = ZUniformRef(new ZUniform<GLuint, 1>(name, index, GL_SAMPLER_3D));
             break;
+#endif
         default:
             break;
     }

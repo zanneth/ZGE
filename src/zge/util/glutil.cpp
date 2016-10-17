@@ -85,32 +85,34 @@ GLenum ZGLUtil::gl_target_from_buffer_target(ZBufferTarget target)
         case ZBUFFER_TARGET_ARRAY:
             gltype = GL_ARRAY_BUFFER;
             break;
-        case ZBUFFER_TARGET_COPY_READ:
-            gltype = GL_COPY_READ_BUFFER;
-            break;
-        case ZBUFFER_TARGET_COPY_WRITE:
-            gltype = GL_COPY_WRITE_BUFFER;
-            break;
         case ZBUFFER_TARGET_ELEMENT_ARRAY:
             gltype = GL_ELEMENT_ARRAY_BUFFER;
             break;
+#if !OPENGL_ES2
         case ZBUFFER_TARGET_PIXEL_PACK:
             gltype = GL_PIXEL_PACK_BUFFER;
             break;
         case ZBUFFER_TARGET_PIXEL_UNPACK:
             gltype = GL_PIXEL_UNPACK_BUFFER;
             break;
-#if !OPENGL_ES
-        case ZBUFFER_TARGET_TEXTURE:
-            gltype = GL_TEXTURE_BUFFER;
+        case ZBUFFER_TARGET_COPY_READ:
+            gltype = GL_COPY_READ_BUFFER;
             break;
-#endif
+        case ZBUFFER_TARGET_COPY_WRITE:
+            gltype = GL_COPY_WRITE_BUFFER;
+            break;
         case ZBUFFER_TARGET_TRANSFORM_FEEDBACK:
             gltype = GL_TRANSFORM_FEEDBACK_BUFFER;
             break;
         case ZBUFFER_TARGET_UNIFORM:
             gltype = GL_UNIFORM_BUFFER;
             break;
+#endif
+#if !OPENGL_ES
+        case ZBUFFER_TARGET_TEXTURE:
+            gltype = GL_TEXTURE_BUFFER;
+            break;
+#endif
         default:
             break;
     }
@@ -126,45 +128,51 @@ GLenum ZGLUtil::gl_usage_from_buffer_usage(ZBufferUsage usage)
     switch (frequency) {
         case ZBUFFER_USAGE_FREQUENCY_DYNAMIC:
             switch (nature) {
-                case ZBUFFER_USAGE_NATURE_COPY:
-                    gltype = GL_DYNAMIC_COPY;
-                    break;
                 case ZBUFFER_USAGE_NATURE_DRAW:
                     gltype = GL_DYNAMIC_DRAW;
+                    break;
+#if !OPENGL_ES2
+                case ZBUFFER_USAGE_NATURE_COPY:
+                    gltype = GL_DYNAMIC_COPY;
                     break;
                 case ZBUFFER_USAGE_NATURE_READ:
                     gltype = GL_DYNAMIC_READ;
                     break;
+#endif
                 default:
                     break;
             }
             break;
         case ZBUFFER_USAGE_FREQUENCY_STATIC:
             switch (nature) {
-                case ZBUFFER_USAGE_NATURE_COPY:
-                    gltype = GL_STATIC_COPY;
-                    break;
                 case ZBUFFER_USAGE_NATURE_DRAW:
                     gltype = GL_STATIC_DRAW;
+                    break;
+#if !OPENGL_ES2
+                case ZBUFFER_USAGE_NATURE_COPY:
+                    gltype = GL_STATIC_COPY;
                     break;
                 case ZBUFFER_USAGE_NATURE_READ:
                     gltype = GL_STATIC_READ;
                     break;
+#endif
                 default:
                     break;
             }
             break;
         case ZBUFFER_USAGE_FREQUENCY_STREAM:
             switch (nature) {
-                case ZBUFFER_USAGE_NATURE_COPY:
-                    gltype = GL_STREAM_COPY;
-                    break;
                 case ZBUFFER_USAGE_NATURE_DRAW:
                     gltype = GL_STREAM_DRAW;
+                    break;
+#if !OPENGL_ES2
+                case ZBUFFER_USAGE_NATURE_COPY:
+                    gltype = GL_STREAM_COPY;
                     break;
                 case ZBUFFER_USAGE_NATURE_READ:
                     gltype = GL_STREAM_READ;
                     break;
+#endif
                 default:
                     break;
             }
@@ -217,18 +225,20 @@ GLenum ZGLUtil::gl_format_from_pixel_format(ZPixelFormat format)
 {
     GLenum gl_frmt = 0;
     switch (format) {
-        case ZPIXEL_FORMAT_R:
-            gl_frmt = GL_RED;
-            break;
-        case ZPIXEL_FORMAT_RG:
-            gl_frmt = GL_RG;
-            break;
         case ZPIXEL_FORMAT_RGB:
             gl_frmt = GL_RGB;
             break;
         case ZPIXEL_FORMAT_RGBA:
             gl_frmt = GL_RGBA;
             break;
+#if !OPENGL_ES2
+        case ZPIXEL_FORMAT_R:
+            gl_frmt = GL_RED;
+            break;
+        case ZPIXEL_FORMAT_RG:
+            gl_frmt = GL_RG;
+            break;
+#endif
 #if !OPENGL_ES
         case ZPIXEL_FORMAT_BGR:
             gl_frmt = GL_BGR;
