@@ -16,6 +16,7 @@
 #include <zge/core/types.h>
 #include <zge/renderer/uniform.h>
 #include <zge/renderer/vertex_array.h>
+#include <zge/renderer/openglext.h>
 #include <memory>
 #include <stack>
 
@@ -165,6 +166,7 @@ private:
     void        _update_uniform_data(const ZUniformRef &uniform);
     
 protected:
+    ZOpenGLExtensions   _glext;
     ZRect               _viewport;
     float               _render_scale;
     ZShaderProgramRef   _shader_program;

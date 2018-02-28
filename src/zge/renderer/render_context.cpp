@@ -76,11 +76,20 @@ ZShaderProgramRef ZRenderContext::get_shader_program() const { return _shader_pr
 
 ZVertexArrayRef ZRenderContext::create_vertex_array()
 {
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
+    ZOGLGenVArrayFunctionPtr gen_function = _glext.get_varray_gen_function();
+    ZOGLDeleteVArrayFunctionPtr del_function = _glext.get_varray_delete_function();
     
-    auto deleter = [this](uint32_t vao) {
-        glDeleteVertexArrays(1, &vao);
+    if (!gen_function || !del_function) {
+        ZException error(ZOPENGL_EXT_UNAVAILABLE_CODE);
+        error.description = "vertex array functions not available";
+        throw error;
+    }
+    
+    GLuint vao;
+    gen_function(1, &vao);
+    
+    auto deleter = [this, del_function](uint32_t vao) {
+        del_function(1, &vao);
     };
     
     return ZVertexArrayRef(new ZVertexArray(vao, deleter));
@@ -388,8 +397,15 @@ void ZRenderContext::unbind_texture()
 
 void ZRenderContext::bind_vertex_array(const ZVertexArrayRef &varray)
 {
+    ZOGLBindVArrayFunctionPtr bind_function = _glext.get_varray_bind_function();
+    if (!bind_function) {
+        ZException error(ZOPENGL_EXT_UNAVAILABLE_CODE);
+        error.description = "vertex array functions not available";
+        throw error;
+    }
+    
     GLuint vao = (GLuint)varray->get_vao_name();
-    glBindVertexArray(vao);
+    bind_function(vao);
     
     const ZVertexBuffersArray &buffers = varray->get_buffers();
     
@@ -414,7 +430,14 @@ void ZRenderContext::bind_vertex_array(const ZVertexArrayRef &varray)
 
 void ZRenderContext::unbind_vertex_array()
 {
-    glBindVertexArray(0);
+    ZOGLBindVArrayFunctionPtr bind_function = _glext.get_varray_bind_function();
+    if (!bind_function) {
+        ZException error(ZOPENGL_EXT_UNAVAILABLE_CODE);
+        error.description = "vertex array functions not available";
+        throw error;
+    }
+    
+    bind_function(0);
 }
 
 void ZRenderContext::add_light(ZLightRef light)

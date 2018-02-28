@@ -24,11 +24,7 @@
 #   include <GLES2/gl2.h>
 #   include <GLES2/gl2ext.h>
 #   include <GLES2/gl2platform.h>
-#if OPENGL_ES2
-#   define glGenVertexArrays glGenVertexArraysOES
-#   define glDeleteVertexArrays glDeleteVertexArraysOES
-#   define glBindVertexArray glBindVertexArrayOES
-#endif
+#   include <EGL/egl.h>
 #else
 #   define GL_GLEXT_PROTOTYPES
 #   include <GL/gl.h>

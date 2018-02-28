@@ -21,7 +21,8 @@ enum {
     ZENGINE_EXCEPTION_CODE               = 400,
     ZMATHEMATIC_EXCEPTION_CODE           = 500,
     ZFILE_EXCEPTION_CODE                 = 600,
-    ZASSERTION_EXCEPTION_CODE            = 700
+    ZASSERTION_EXCEPTION_CODE            = 700,
+    ZOPENGL_EXT_UNAVAILABLE_CODE         = 800
 };
 
 struct ZException : public std::exception {

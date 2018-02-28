@@ -40,6 +40,9 @@ ZException::ZException(int code_) :
         case ZASSERTION_EXCEPTION_CODE:
             description = "Assertion failure.";
             break;
+        case ZOPENGL_EXT_UNAVAILABLE_CODE:
+            description = "A required OpenGL extension is not available on this platform.";
+            break;
         default:
             break;
     }
