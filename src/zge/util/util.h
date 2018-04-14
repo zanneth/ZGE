@@ -25,7 +25,7 @@ public:
     static std::string join_components(const std::vector<std::string> &vec, std::string delimiter);
     
     // assertions with formatted error strings
-    static void assert_true(bool expression, const char *format, ...) throw() ZGE_FORMATARG(2, 3);
+    static void assert_true(bool expression, const char *format, ...) throw(ZException) ZGE_FORMATARG(2, 3);
     
     // return the current time
     static ZTime get_current_time();

@@ -63,7 +63,7 @@ std::string ZUtil::join_components(const std::vector<std::string> &vec, std::str
     return oss.str();
 }
 
-void ZUtil::assert_true(bool expression, const char *format, ...) throw()
+void ZUtil::assert_true(bool expression, const char *format, ...) throw(ZException)
 {
     if (!expression) {
         char error_message[512];

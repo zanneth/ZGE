@@ -28,13 +28,13 @@ ZVertexArray::~ZVertexArray()
 
 void ZVertexArray::add_buffer(ZGraphicsBufferRef buffer, ZVertexAttributeIndex index)
 {
-    zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to add buffer for unknown attribute index %zd", index);
+    zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to add buffer for unknown attribute index %d", index);
     _buffers[index] = buffer;
 }
 
 void ZVertexArray::remove_buffer(ZVertexAttributeIndex index)
 {
-    zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to remove buffer for unknown attribute index %zd", index);
+    zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to remove buffer for unknown attribute index %d", index);
     _buffers[index] = nullptr;
     _defined_attributes.erase(index);
 }
@@ -54,7 +54,7 @@ uint32_t ZVertexArray::get_vao_name() const
 
 const ZGraphicsBufferRef& ZVertexArray::get_buffer(ZVertexAttributeIndex index) const
 {
-    zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to access buffer at unknown attribute index %zd", index);
+    zassert(index < ZVERTEX_ATTRIB_COUNT, "Attempted to access buffer at unknown attribute index %d", index);
     return _buffers[index];
 }
 
